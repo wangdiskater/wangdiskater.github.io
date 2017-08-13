@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html class="full-height">
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="//cdn.bootcss.com/bulma/0.4.1/css/bulma.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+  
+  <title>08-14 code style | 路要坚持</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="开始最近真的生活有点混乱，还是身体比较要紧。这周看了《中国有嘻哈》MCJIN离开了。但是他的精神有点触动到我。人到了一定的年纪就会忘记自己的梦想。为了家庭为了其他的东西而活着。最初的梦想就慢慢的不见了。但是回到嘻哈的视野里。他说他自己好像找回了16岁的自己。那股子对嘻哈的热情又回来了，虽然中途变了好多。但是回到这个地方，和年轻热rapper在一起又重回了斗志。人生就是这样—-为了梦想，永远年轻。前">
+<meta name="keywords" content="规范">
+<meta property="og:type" content="article">
+<meta property="og:title" content="08-14 code style">
+<meta property="og:url" content="http://yoursite.com/2017/08/14/08-14-code-style/index.html">
+<meta property="og:site_name" content="路要坚持">
+<meta property="og:description" content="开始最近真的生活有点混乱，还是身体比较要紧。这周看了《中国有嘻哈》MCJIN离开了。但是他的精神有点触动到我。人到了一定的年纪就会忘记自己的梦想。为了家庭为了其他的东西而活着。最初的梦想就慢慢的不见了。但是回到嘻哈的视野里。他说他自己好像找回了16岁的自己。那股子对嘻哈的热情又回来了，虽然中途变了好多。但是回到这个地方，和年轻热rapper在一起又重回了斗志。人生就是这样—-为了梦想，永远年轻。前">
+<meta property="og:updated_time" content="2017-08-13T17:35:04.221Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="08-14 code style">
+<meta name="twitter:description" content="开始最近真的生活有点混乱，还是身体比较要紧。这周看了《中国有嘻哈》MCJIN离开了。但是他的精神有点触动到我。人到了一定的年纪就会忘记自己的梦想。为了家庭为了其他的东西而活着。最初的梦想就慢慢的不见了。但是回到嘻哈的视野里。他说他自己好像找回了16岁的自己。那股子对嘻哈的热情又回来了，虽然中途变了好多。但是回到这个地方，和年轻热rapper在一起又重回了斗志。人生就是这样—-为了梦想，永远年轻。前">
+  
+    <link rel="alternate" href="/" title="路要坚持" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/common.css">
+<link rel="stylesheet" href="/css/nav.css">
+<link rel="stylesheet" href="/css/layout.css">
+  
+
+</head>
+
+<body>
+  <header id="navbar" class="overflow-hidden">
+  <div class="container">
+    <nav class="nav">
+         <div class="nav-left">
+            <a href="/" class="nav-item" style="font-size: 20px;">
+              <span class="logo">王邸</span>'s Blog
+            </a>
+         </div>
+        <div class="nav-center is-hidden position-relative" id="search_container">
+            <div class="nav-item full-width full-height">
+                <i class="fa fa-search has-padding" aria-hidden="true"></i>
+                <input type="text" id="search_input" class="search-input full-height full-width" placeholder="Search post" autofocus>
+                <i id="close_search" class="fa fa-times" aria-hidden="true"></i>
+            </div>
+            <div id="search_result"></div>
+        </div>
+        <div class="nav-right nav-menu">
+            <a class="nav-item" id="search">
+                <i class="fa fa-search" aria-hidden="true"></i>
+            </a>
+            
+            <a class="nav-item" href="/">
+                Home
+            </a>
+            
+            <a class="nav-item" href="/works">
+                My Works
+            </a>
+            
+            <a class="nav-item" href="/about">
+                About
+            </a>
+            
+        </div>
+        <span class="nav-toggle" id="navMenuDropdown">
+            <span></span>
+            <span></span>
+            <span></span>
+        </span>
+        <div class="navbar-menu position-absolute full-width content-box is-hidden-desktop is-flex flex-column center" style="top: 100%;">
+            
+            <a class="nav-item flex-1" href="/">
+                Home
+            </a>
+            
+            <a class="nav-item flex-1" href="/works">
+                My Works
+            </a>
+            
+            <a class="nav-item flex-1" href="/about">
+                About
+            </a>
+            
+        </div>
+    </nav>
+  </div>
+</header>
+
+  <div id="main-wrap" class="position-relative" style="margin-top: 55px;">
+      <div class="main-inner-content">
+          <!--博文页面-->
+
+<style>
+    .header-box {
+        height: 370px;
+        filter: blur(10px);
+        background-size: cover;
+        background-color: lightsteelblue;
+    }
+
+    .post-box {
+        padding: 15px;
+        padding-top: 60px;
+        min-height: 80vh;
+        margin-top: -200px;
+        border-radius: 4px;
+        background-color: rgba(255,255,255,.8);
+    }
+
+    .post-avatar {
+        height: 30px;
+        width: 30px;
+        border-radius: 50%;
+    }
+
+    .flow-chart {
+        text-align: center;
+    }
+
+    img[alt="post-cover"] {
+        display: none;
+    }
+</style>
+<header>
+    <div id="header_box" class="header-box"></div>
+</header>
+<section>
+    <div class="container post-box">
+        <div class="content post-title is-flex center flex-column" style="margin-bottom: 70px; overflow: auto;">
+            <h1 class="has-text-centered" style="padding-bottom: 10px; border-bottom: 3px solid #fff">
+                <strong>08-14 code style</strong>
+            </h1>
+            
+            <div class="is-flex align-center">
+                <img class="post-avatar" src="">
+                <span style="padding:0 10px;"> <span class="sub-title">By</span> 王邸</span>
+                <span class="post-date sub-title">at: 2017-08-14</span>
+            </div>
+            
+                <div>
+                    
+                         <a class="tag is-post-tag" href="/tags/规范/">规范</a>
+                    
+                </div>
+            
+        </div>
+        <div class="content" style="overflow: auto">
+            <h2 id="开始"><a href="#开始" class="headerlink" title="开始"></a>开始</h2><p>最近真的生活有点混乱，还是身体比较要紧。这周看了《中国有嘻哈》MCJIN离开了。但是他的精神有点触动到我。人到了一定的年纪就会忘记自己的梦想。为了家庭为了其他的东西而活着。最初的梦想就慢慢的不见了。但是回到嘻哈的视野里。他说他自己好像找回了16岁的自己。那股子对嘻哈的热情又回来了，虽然中途变了好多。但是回到这个地方，和年轻热rapper在一起又重回了斗志。人生就是这样—-<strong>为了梦想，永远年轻。前端加油</strong></p>
+<h2 id="规范"><a href="#规范" class="headerlink" title="规范"></a>规范</h2><p>这周也没有特别多的事情，做的也是code style，没有freestyle和new style。哈哈哈 直接进入正题吧</p>
+<p>================================================================================</p>
+<h1 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h1><ol>
+<li>添加适当的空行</li>
+<li>文档头部注释<br>良好的注释是非常重要的。请留出时间来描述组件（component）的工作方式、局限性和构建它们的方法。不要让你的团队其它成员来猜测一段不通用或不明显的代码的目的。<br>HTML、CSS、Javascript 使用同样格式的文件注释<br>注释的风格应当简洁，并在代码库中保持统一<br>控制每行长度在合理的范围内，比如80个字符<br>注释的大小写应当与普通句子相同，并且使用一致的文本缩进<br>对于较长的注释，务必书写完整的句子；对于一般性注解，可以书写简洁的短语</li>
+</ol>
+<pre><code>&lt;!-- (如果是 HTML 就加上这个)
+
+/**
+ * ===========================================================
+ *  文件标题
+ * ===========================================================
+ *
+ *  从这里开始写这个文件的简要说明。
+ *
+ *  当需要进行更细致的解释说明、提供文档文本时，较长的说明文本就很
+ *  有用了。这种长长的说明文本，可以包括示例 HTML、链接 等等其他你
+ *  认为重要或者有用的东西。
+ *
+ * ===========================================================
+ *
+ * @author (作者)
+ * @create (创建时间)
+ *
+ * @update (修改时间) (修改者)
+ *   1. (修改内容)
+ * @update (修改时间) (修改者)
+ *   ...
+ *
+ * @todo: 这个“‘需做’陈述”描述了一个接下来要去做的小工作。这种文本，
+ *       如果超长了的话，应该在80个半角字符（如英文）或40个全角字符
+ *       （如中文）后便换行，并且保持对齐。
+ */
+--&gt;
+</code></pre><p>================================================================================</p>
+<h1 id="HTML"><a href="#HTML" class="headerlink" title="HTML"></a>HTML</h1><ol>
+<li>文档类型  &lt;!DOCTYPE html&gt;</li>
+<li>语言属性：强烈建议为 html 根元素指定 lang 属性，从而为文档设置正确的语言。这将有助于语音合成工具确定其所应该采用的发音，有助于翻译工具确定其翻译时所应遵守的规则等等。&lt; html lang=”zh-CN”&gt;</li>
+<li>字符编码 &lt; meta charset=”UTF-8” &gt;</li>
+<li>兼容模式  &lt; meta http-equiv=”X-UA-Compatible” content=”IE=Edge”&gt;</li>
+<li>视觉区域<br>视觉区域（viewport）指的是浏览器（包括桌面浏览器和移动浏览器）显示页面的区域。它不包含浏览器地址栏、按钮这样的东西，只是浏览区域。为了让页面适应拥有不同大小视觉区域的浏览器，需要在 &lt; head&gt; 元素中添加视觉区域 &lt; meta&gt; 元素</li>
+</ol>
+<p>&lt; meta name=”viewport” content=”width=device-width, initial-scale=1.0”&gt;<br>其中，width=device-width 用以将视觉区域的宽度会被设成与设备宽度相同的值，从而保证媒体查询的 min-width 和 max-width 特性拥有预期的效果。initial-scale=1.0 用以将页面的默认缩放级别设成100%。</p>
+<ol>
+<li>标签规则<br>标签名统一使用小写，不要用大写<br>不要在自闭（self-closing）元素的尾部添加斜线 –HTML5 规范 表示可选<br>不要省略可选的结束标签（closing tag）（例如，&lt; /li&gt;或&lt; /body&gt;）<br>除非必要，不要使用字符实体<br>尽量遵循 HTML 标准和语义，但是不要以牺牲实用性为代价。任何时候都要尽量使用最少的标签并保持最小的复杂度。</li>
+</ol>
+<p><strong>以上标签为了显示我在开头加了一个空格，实际是没有的</strong></p>
+<p>7.属性</p>
+<ol>
+<li><p>属性顺序<br>class<br>id,name<br>data-<em><br>src,for,type,href<br>title,alt<br>aria-</em>,role</p>
+</li>
+<li><p>布尔属性值在声明时不赋值H5的规范</p>
+</li>
+</ol>
+<p>================================================================================</p>
+<h1 id="CSS"><a href="#CSS" class="headerlink" title="CSS"></a>CSS</h1><p>1.声明规则（注意空格）</p>
+<ol>
+<li>选择器每个独占一行，多个选择器多行用“，”</li>
+<li>左花括号前一个空格</li>
+<li>右花括号}独占一行</li>
+<li>声明独占一行;结尾</li>
+<li>属性的“：”后面有一个空格</li>
+</ol>
+<pre><code>.selector,
+.selector-secondary,
+.selector[type=&quot;text&quot;] {
+  padding: 15px;
+}
+</code></pre><p>注意：单行声明左花括号右边和右花括号左边都要多至少一个空格，而且需要<strong>控制相同属性才写到一行哦！！！</strong></p>
+<pre><code>.icon         { background-position: 0 0; }
+.icon-home    { background-position: 0 -20px; }
+.icon-account { background-position: 0 -40px; }
+</code></pre><p>2.声明顺序</p>
+<ol>
+<li>相关属性声明应该放在一起，并按照下面排列<br>1) Positioning 定位<br>2) Box model  模型<br>3) Visual  视图<br>4) Typographic  文本</li>
+</ol>
+<p>例子：</p>
+<pre><code>.declaration-order {
+   /* Positioning */
+   position: absolute;
+   top: 0;
+   right: 0;
+   bottom: 0;
+   left: 0;
+   z-index: 100;
+
+   /* Box-model */
+   display: block;
+   float: right;
+   width: 100px;
+   height: 100px;
+
+   /* Visual */
+   background-color: #f5f5f5;
+   border: 1px solid #e5e5e5;
+   border-radius: 3px;
+
+   /* Typography */
+   font: normal 13px &quot;Helvetica Neue&quot;, sans-serif;
+   line-height: 1.5;
+   color: #333;
+   text-align: center;
+
+   /* Misc */
+   opacity: 1;
+ }
+</code></pre><p>3.简写属性形式</p>
+<ol>
+<li>padding</li>
+<li>margin</li>
+<li>font</li>
+<li>background</li>
+<li>border</li>
+<li>border-radius</li>
+</ol>
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Shorthand_properties" target="_blank" rel="external">传送门:缩写秘籍</a>这篇文章介绍了每个顺序，比较容易忽视的是border顺序和border-radius的顺序。<br>border的顺序是：1px(width) solid(style) #f00(color)<br>border-radius顺序是： 左上角是1，右上角是2。右下角是3 左下角是4。设置属性和margin<br>padding一样。</p>
+<p>font的属性值比较多，简写情况比较少见。主要用font-size 和 font-weight</p>
+<p>4.Class的命名</p>
+<ol>
+<li>使用小写的命名方式</li>
+<li>使用”-“来连接</li>
+<li>子组件要以父组件命名为基础 选择器&gt; 两边都要空格哦</li>
+<li><strong>描述内容的性质，不要描述表现形式（presentational）</strong></li>
+<li>类名尽量少写</li>
+</ol>
+<p>5.带前缀的属性<br>当使用特定厂商的带有前缀的属性时，通过缩进的方式，让每个属性的值在垂直方向对齐，这样便于多行编辑。</p>
+<pre><code>.selector {
+  -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.15);
+          box-shadow: 0 1px 2px rgba(0,0,0,.15);
+}
+</code></pre><p>================================================================================</p>
+<h1 id="JS"><a href="#JS" class="headerlink" title="JS"></a>JS</h1><p>================================================================================</p>
+<h1 id="SVN提交"><a href="#SVN提交" class="headerlink" title="SVN提交"></a>SVN提交</h1><pre><code>1.标题
+  1.Change list:
+  2.Release
+
+2.每一点格式
+  1.Add: (target) - (detail)
+  2.Update: (target) - (detail)
+  3.Delete: (target) - (detail)
+  4.Rename: (from) to (target)
+  5.Fixed: (target) - (bugs)
+  6.(etc..)
+</code></pre><p>注意：开始空两空格，每一小点的”:”之后有一个空格。每一点认为可以更详细的编写，可以以层级显示编写，最后编写结束不要剩下多余的空行。例子如下：</p>
+<pre><code>Change list!
+  1.Add: &quot;mock&quot; data laye r !!
+  2.Update: project structure !
+    1.Rename: &quot;arrial&quot; to &quot;arrival&quot;
+    2.Rename: &quot;photo&quot; to &quot;cert&quot;
+    3.Rename: &quot;home/nickName&quot; to &quot;home/nickname&quot;
+    4.Rename: &quot;cart/choseCertificate&quot; to &quot;cart/certType&quot;
+    5.Rename: &quot;map/choseCity&quot; to &quot;map/cityList&quot;
+    6.Update: &quot;router.js&quot;
+  3.Update: &quot;theme/&quot; !
+    1.Update: default font size 14px to 12px !
+    3.Update: .media, .panel
+    4.Update: .mint-searchbar
+    5.Add: a[href=&quot;javascript:;&quot;]
+    6.Add: .tag-red
+  4.Update: &quot;service/index.js&quot;
+    1.Move: mock datas to &quot;mock/&quot;
+    2.Rename: &quot;serviceDetailInfo&quot; to &quot;goodsInfo&quot;
+    3.Rename: &quot;commentDetailInfo&quot; to &quot;reviewList&quot;
+    4.Rename: &quot;licenseLibList&quot; to &quot;certList&quot;
+    5.Rename: &quot;personalInfo&quot; to &quot;ucenterInfo&quot;
+    6.Add: getShopList()
+  5.Rebuild: &quot;arrival/shopList&quot;
+
+Release 0.2.0:
+  1.Add: &quot;mock/images&quot; !
+  2.Move: some images from &quot;assets/&quot; to &quot;mock/images&quot; !
+  3.Move &amp; Rebuild: &quot;subsites/index.vue&quot; - from &quot;enter/index.vue&quot;
+  4.Rebuild: &quot;subsites/home/index.vue&quot; !
+</code></pre><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>今天看了《数学之美》感觉到了一个很重要的一点。外国人都喜欢用机器来解决问题。而我们中国人却比较踏实肯干。自己动手丰衣足食。也许我也要换一种思维了。对了，还有这周的鸡汤也写在这把：还是要好好的给自己一点压力，克制自己的惰性和玩性，就像高三那样，不断的为着一个亮光前进。内心不能放松，大学就是一个最好的教训。</p>
+
+        </div>
+        <div class="post-reply">
+            
+                <!-- 来必力City版安装代码 -->
+                <div id="lv-container" data-id="city" data-uid="MTAyMC8yOTE4Ni81NzUz">
+                    <script type="text/javascript">
+                        (function(d, s) {
+                            var j, e = d.getElementsByTagName(s)[0];
+
+                            if (typeof LivereTower === 'function') { return; }
+
+                            j = d.createElement(s);
+                            j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+                            j.async = true;
+
+                            e.parentNode.insertBefore(j, e);
+                        })(document, 'script');
+                    </script>
+                    <noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+                </div>
+                <!-- City版安装代码已完成 -->
+            
+            
+        </div>
+    </div>
+</section>
+<script>
+    // 获取第一张图, 用以当封面背景图
+    var img = document.querySelectorAll('img')[1]
+
+    if (img) {
+        var header_box = document.querySelector('#header_box')
+        header_box.style.backgroundImage = 'url('+ img.src +')'
+    }
+</script>
+      </div>
+  </div>
+  <style>
+  #footer {
+    min-height: 10vh;
+    background: black;
+    color: #fff;
+  }
+
+  #footer a {
+    color: #e1e1e1;
+  }
+</style>
+<footer id="footer" class="has-text-centered is-flex center">
+  <div class="container has-padding">
+    <div>
+      <div>
+        <!--请您保留作者署名, 主题制作来之不易-->
+        Theme by <a href="http://haojen.github.io/">Haojen Ma</a>
+        <br>
+        Copyright © 王邸 2017
+        <br>
+        Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="/js/search_core.js"></script>
+<script src="/js/script.js"></script>
+
+</body>
+</html>

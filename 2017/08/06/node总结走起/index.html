@@ -1,7 +1,10 @@
 <!DOCTYPE html>
-<html>
+<html class="full-height">
 <head>
   <meta charset="utf-8">
+  <link rel="stylesheet" href="//cdn.bootcss.com/bulma/0.4.1/css/bulma.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
   
   <title>node总结走起 | 路要坚持</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -17,7 +20,7 @@
 <meta name="twitter:title" content="node总结走起">
 <meta name="twitter:description" content="总结这一周过的一般般吧。也许刚开始起步就是那么安静的。还是那句话：不以物喜不以己悲。上升到一种状态就很好了。这一周在公司也没有特别重的开发项目。主要还是以学习为主。但是学习了一些和工作无关的东西，所以不是很好。自己动脑想想也就知道。这不是一个好的开始。一定要站在公司角度想想。这周做了什么呢？看标题啊node！！！！这周其实做了挺多东西的。主要还是做了Node + vue + mysql/mongo">
   
-    <link rel="alternate" href="/atom.xml" title="路要坚持" type="application/atom+xml">
+    <link rel="alternate" href="/" title="路要坚持" type="application/atom+xml">
   
   
     <link rel="icon" href="/favicon.png">
@@ -25,68 +28,132 @@
   
     <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
   
-  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/common.css">
+<link rel="stylesheet" href="/css/nav.css">
+<link rel="stylesheet" href="/css/layout.css">
   
 
 </head>
 
 <body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">路要坚持</a>
-      </h1>
-      
-    </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"></a>
-        
-          <a class="main-nav-link" href="/">Home</a>
-        
-          <a class="main-nav-link" href="/archives">Archives</a>
-        
-      </nav>
-      <nav id="sub-nav">
-        
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
-        
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
-      </div>
-    </div>
+  <header id="navbar" class="overflow-hidden">
+  <div class="container">
+    <nav class="nav">
+         <div class="nav-left">
+            <a href="/" class="nav-item" style="font-size: 20px;">
+              <span class="logo">王邸</span>'s Blog
+            </a>
+         </div>
+        <div class="nav-center is-hidden position-relative" id="search_container">
+            <div class="nav-item full-width full-height">
+                <i class="fa fa-search has-padding" aria-hidden="true"></i>
+                <input type="text" id="search_input" class="search-input full-height full-width" placeholder="Search post" autofocus>
+                <i id="close_search" class="fa fa-times" aria-hidden="true"></i>
+            </div>
+            <div id="search_result"></div>
+        </div>
+        <div class="nav-right nav-menu">
+            <a class="nav-item" id="search">
+                <i class="fa fa-search" aria-hidden="true"></i>
+            </a>
+            
+            <a class="nav-item" href="/">
+                Home
+            </a>
+            
+            <a class="nav-item" href="/works">
+                My Works
+            </a>
+            
+            <a class="nav-item" href="/about">
+                About
+            </a>
+            
+        </div>
+        <span class="nav-toggle" id="navMenuDropdown">
+            <span></span>
+            <span></span>
+            <span></span>
+        </span>
+        <div class="navbar-menu position-absolute full-width content-box is-hidden-desktop is-flex flex-column center" style="top: 100%;">
+            
+            <a class="nav-item flex-1" href="/">
+                Home
+            </a>
+            
+            <a class="nav-item flex-1" href="/works">
+                My Works
+            </a>
+            
+            <a class="nav-item flex-1" href="/about">
+                About
+            </a>
+            
+        </div>
+    </nav>
   </div>
 </header>
-      <div class="outer">
-        <section id="main"><article id="post-node总结走起" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/08/06/node总结走起/" class="article-date">
-  <time datetime="2017-08-06T15:26:35.000Z" itemprop="datePublished">2017-08-06</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="article-title" itemprop="name">
-      node总结走起
-    </h1>
-  
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>这一周过的一般般吧。也许刚开始起步就是那么安静的。还是那句话：不以物喜不以己悲。上升到一种状态就很好了。这一周在公司也没有特别重的开发项目。主要还是以学习为主。但是学习了一些和工作无关的东西，所以不是很好。自己动脑想想也就知道。这不是一个好的开始。一定要站在公司角度想想。这周做了什么呢？看标题啊<strong>node！！！！</strong>这周其实做了挺多东西的。主要还是做了Node + vue + mysql/mongodb，在宿舍走了一波老路node + koa 微信公众号的开发。除了技术上的，其实对时间管理还是已经慢慢开始使用了。这是一个我非常喜欢的。这样过的才有价值了兄弟。</p>
+  <div id="main-wrap" class="position-relative" style="margin-top: 55px;">
+      <div class="main-inner-content">
+          <!--博文页面-->
+
+<style>
+    .header-box {
+        height: 370px;
+        filter: blur(10px);
+        background-size: cover;
+        background-color: lightsteelblue;
+    }
+
+    .post-box {
+        padding: 15px;
+        padding-top: 60px;
+        min-height: 80vh;
+        margin-top: -200px;
+        border-radius: 4px;
+        background-color: rgba(255,255,255,.8);
+    }
+
+    .post-avatar {
+        height: 30px;
+        width: 30px;
+        border-radius: 50%;
+    }
+
+    .flow-chart {
+        text-align: center;
+    }
+
+    img[alt="post-cover"] {
+        display: none;
+    }
+</style>
+<header>
+    <div id="header_box" class="header-box"></div>
+</header>
+<section>
+    <div class="container post-box">
+        <div class="content post-title is-flex center flex-column" style="margin-bottom: 70px; overflow: auto;">
+            <h1 class="has-text-centered" style="padding-bottom: 10px; border-bottom: 3px solid #fff">
+                <strong>node总结走起</strong>
+            </h1>
+            
+            <div class="is-flex align-center">
+                <img class="post-avatar" src="">
+                <span style="padding:0 10px;"> <span class="sub-title">By</span> 王邸</span>
+                <span class="post-date sub-title">at: 2017-08-06</span>
+            </div>
+            
+                <div>
+                    
+                         <a class="tag is-post-tag" href="/tags/走咧/">走咧</a>
+                    
+                </div>
+            
+        </div>
+        <div class="content" style="overflow: auto">
+            <h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>这一周过的一般般吧。也许刚开始起步就是那么安静的。还是那句话：不以物喜不以己悲。上升到一种状态就很好了。这一周在公司也没有特别重的开发项目。主要还是以学习为主。但是学习了一些和工作无关的东西，所以不是很好。自己动脑想想也就知道。这不是一个好的开始。一定要站在公司角度想想。这周做了什么呢？看标题啊<strong>node！！！！</strong>这周其实做了挺多东西的。主要还是做了Node + vue + mysql/mongodb，在宿舍走了一波老路node + koa 微信公众号的开发。除了技术上的，其实对时间管理还是已经慢慢开始使用了。这是一个我非常喜欢的。这样过的才有价值了兄弟。</p>
 <h2 id="VUE-node-mongodb-mysql"><a href="#VUE-node-mongodb-mysql" class="headerlink" title="VUE+node+mongodb/mysql"></a>VUE+node+mongodb/mysql</h2><p>使用了VUE + vue-resource + mongodb，地址<a href="http://blog.csdn.net/qq_26598303/article/details/53468399" target="_blank" rel="external">传送门</a>,这个地址就是整个任务具体流程。我也就是走通了一遍。并没有什么特别大的问题。之前自学node.js的开发指南时候就是这样的一个类似的demo。使用的是bootrap+express+mongodb。这个小项目目的是走通和数据库的连接数据流程。了解现在常用的库等等</p>
 <h3 id="VUE"><a href="#VUE" class="headerlink" title="VUE"></a>VUE</h3><p>VUE没什么好说的都没有写vue-router可以搞点事情</p>
 <h3 id="node"><a href="#node" class="headerlink" title="node"></a>node</h3><p>这里使用了<strong>express</strong>框架<a href="http://www.expressjs.com.cn/" target="_blank" rel="external">中文文档</a>,node博大精深。还是需要很多知识支撑的。作为一个入流的前端node的知识需要学习的。其他的一些body-parser、fs、mongoose、path的库看看官网知道用这些来做什么就好的。有些已经集成在node里了有些还是package。</p>
@@ -97,134 +164,71 @@
 <h3 id="ngrok"><a href="#ngrok" class="headerlink" title="ngrok"></a>ngrok</h3><p>这是内网映射的一个功能。把本地的服务印刷到公网上</p>
 <h3 id="各种包"><a href="#各种包" class="headerlink" title="各种包"></a>各种包</h3><p>这里主要说bluebird把所有的对象包装成promise对象。</p>
 
-      
+        </div>
+        <div class="post-reply">
+            
+                <!-- 来必力City版安装代码 -->
+                <div id="lv-container" data-id="city" data-uid="MTAyMC8yOTE4Ni81NzUz">
+                    <script type="text/javascript">
+                        (function(d, s) {
+                            var j, e = d.getElementsByTagName(s)[0];
+
+                            if (typeof LivereTower === 'function') { return; }
+
+                            j = d.createElement(s);
+                            j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+                            j.async = true;
+
+                            e.parentNode.insertBefore(j, e);
+                        })(document, 'script');
+                    </script>
+                    <noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+                </div>
+                <!-- City版安装代码已完成 -->
+            
+            
+        </div>
     </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/08/06/node总结走起/" data-id="cj6ayyam40002h0v2v70p1yfn" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/走咧/">走咧</a></li></ul>
-
-    </footer>
-  </div>
-  
-    
-<nav id="article-nav">
-  
-    <a href="/2017/08/14/hello-world/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          Hello World
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2017/07/30/总结（技术和鸡汤）/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">总结（技术和鸡汤）</div>
-    </a>
-  
-</nav>
-
-  
-</article>
-
 </section>
-        
-          <aside id="sidebar">
-  
-    
+<script>
+    // 获取第一张图, 用以当封面背景图
+    var img = document.querySelectorAll('img')[1]
 
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tags</h3>
-    <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/走咧/">走咧</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tag Cloud</h3>
-    <div class="widget tagcloud">
-      <a href="/tags/走咧/" style="font-size: 10px;">走咧</a>
-    </div>
-  </div>
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/2017/08/14/hello-world/">Hello World</a>
-          </li>
-        
-          <li>
-            <a href="/2017/08/06/node总结走起/">node总结走起</a>
-          </li>
-        
-          <li>
-            <a href="/2017/07/30/总结（技术和鸡汤）/">总结（技术和鸡汤）</a>
-          </li>
-        
-          <li>
-            <a href="/2017/07/23/come-back/">我回来了</a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
-
-  
-</aside>
-        
+    if (img) {
+        var header_box = document.querySelector('#header_box')
+        header_box.style.backgroundImage = 'url('+ img.src +')'
+    }
+</script>
       </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      &copy; 2017 王邸<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+  </div>
+  <style>
+  #footer {
+    min-height: 10vh;
+    background: black;
+    color: #fff;
+  }
+
+  #footer a {
+    color: #e1e1e1;
+  }
+</style>
+<footer id="footer" class="has-text-centered is-flex center">
+  <div class="container has-padding">
+    <div>
+      <div>
+        <!--请您保留作者署名, 主题制作来之不易-->
+        Theme by <a href="http://haojen.github.io/">Haojen Ma</a>
+        <br>
+        Copyright © 王邸 2017
+        <br>
+        Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      </div>
     </div>
   </div>
 </footer>
-    </div>
-    <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-</nav>
-    
 
-<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-
-
-  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
-  <script src="/fancybox/jquery.fancybox.pack.js"></script>
-
-
+<script src="/js/search_core.js"></script>
 <script src="/js/script.js"></script>
 
-  </div>
 </body>
 </html>
