@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html class="full-height">
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="//cdn.bootcss.com/bulma/0.4.1/css/bulma.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+  
+  <title>JAVA基础50题小结 | 路要坚持</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="开头为了去培训，最近在写JAVA基础的50题。这些题目不算太难，有一些思路总结一下，涉及到一些JAVA的知识。使用输入输出等等。那我们就开始吧！ 50题精选古典问题：有一对兔子，从出生后第3个月起每个月都生一对兔子，小兔子长到第三个月后每个月又生一对兔子，假如兔子都不死，问每个月的兔子对数为多少？答： 这个问题看起来很复杂 但是把每个月兔子数写出来就很容易发现规律 1 1 2 3 5 8 13 2">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JAVA基础50题小结">
+<meta property="og:url" content="http://yoursite.com/2019/06/09/JAVA基础50题小结/index.html">
+<meta property="og:site_name" content="路要坚持">
+<meta property="og:description" content="开头为了去培训，最近在写JAVA基础的50题。这些题目不算太难，有一些思路总结一下，涉及到一些JAVA的知识。使用输入输出等等。那我们就开始吧！ 50题精选古典问题：有一对兔子，从出生后第3个月起每个月都生一对兔子，小兔子长到第三个月后每个月又生一对兔子，假如兔子都不死，问每个月的兔子对数为多少？答： 这个问题看起来很复杂 但是把每个月兔子数写出来就很容易发现规律 1 1 2 3 5 8 13 2">
+<meta property="og:updated_time" content="2019-06-17T03:58:29.372Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JAVA基础50题小结">
+<meta name="twitter:description" content="开头为了去培训，最近在写JAVA基础的50题。这些题目不算太难，有一些思路总结一下，涉及到一些JAVA的知识。使用输入输出等等。那我们就开始吧！ 50题精选古典问题：有一对兔子，从出生后第3个月起每个月都生一对兔子，小兔子长到第三个月后每个月又生一对兔子，假如兔子都不死，问每个月的兔子对数为多少？答： 这个问题看起来很复杂 但是把每个月兔子数写出来就很容易发现规律 1 1 2 3 5 8 13 2">
+  
+    <link rel="alternate" href="/" title="路要坚持" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/common.css">
+<link rel="stylesheet" href="/css/nav.css">
+<link rel="stylesheet" href="/css/layout.css">
+  
+
+</head>
+
+<body>
+  <header id="navbar" class="overflow-hidden">
+  <div class="container">
+    <nav class="nav">
+         <div class="nav-left">
+            <a href="/" class="nav-item" style="font-size: 20px;">
+              <span class="logo">王邸</span>'s Blog
+            </a>
+         </div>
+        <div class="nav-center is-hidden position-relative" id="search_container">
+            <div class="nav-item full-width full-height">
+                <i class="fa fa-search has-padding" aria-hidden="true"></i>
+                <input type="text" id="search_input" class="search-input full-height full-width" placeholder="Search post" autofocus>
+                <i id="close_search" class="fa fa-times" aria-hidden="true"></i>
+            </div>
+            <div id="search_result"></div>
+        </div>
+        <div class="nav-right nav-menu">
+            <a class="nav-item" id="search">
+                <i class="fa fa-search" aria-hidden="true"></i>
+            </a>
+            
+            <a class="nav-item" href="/">
+                Home
+            </a>
+            
+            <a class="nav-item" href="/works">
+                My Works
+            </a>
+            
+            <a class="nav-item" href="/about">
+                About
+            </a>
+            
+        </div>
+        <span class="nav-toggle" id="navMenuDropdown">
+            <span></span>
+            <span></span>
+            <span></span>
+        </span>
+        <div class="navbar-menu position-absolute full-width content-box is-hidden-desktop is-flex flex-column center" style="top: 100%;">
+            
+            <a class="nav-item flex-1" href="/">
+                Home
+            </a>
+            
+            <a class="nav-item flex-1" href="/works">
+                My Works
+            </a>
+            
+            <a class="nav-item flex-1" href="/about">
+                About
+            </a>
+            
+        </div>
+    </nav>
+  </div>
+</header>
+
+  <div id="main-wrap" class="position-relative" style="margin-top: 55px;">
+      <div class="main-inner-content">
+          <!--博文页面-->
+
+<style>
+    .header-box {
+        height: 370px;
+        filter: blur(10px);
+        background-size: cover;
+        background-color: lightsteelblue;
+    }
+
+    .post-box {
+        padding: 15px;
+        padding-top: 60px;
+        min-height: 80vh;
+        margin-top: -200px;
+        border-radius: 4px;
+        background-color: rgba(255,255,255,.8);
+    }
+
+    .post-avatar {
+        height: 30px;
+        width: 30px;
+        border-radius: 50%;
+    }
+
+    .flow-chart {
+        text-align: center;
+    }
+
+    img[alt="post-cover"] {
+        display: none;
+    }
+</style>
+<header>
+    <div id="header_box" class="header-box"></div>
+</header>
+<section>
+    <div class="container post-box">
+        <div class="content post-title is-flex center flex-column" style="margin-bottom: 70px; overflow: auto;">
+            <h1 class="has-text-centered" style="padding-bottom: 10px; border-bottom: 3px solid #fff">
+                <strong>JAVA基础50题小结</strong>
+            </h1>
+            
+            <div class="is-flex align-center">
+                <img class="post-avatar" src="https://q2.qlogo.cn/headimg_dl?bs=996057150&dst_uin=996057150&dst_uin=996057150&;dst_uin=996057150&spec=100&url_enc=0&referer=bu_interface&term_type=PC">
+                <span style="padding:0 10px;"> <span class="sub-title">By</span> 王邸</span>
+                <span class="post-date sub-title">at: 2019-06-09</span>
+            </div>
+            
+                <div>
+                    
+                </div>
+            
+        </div>
+        <div class="content" style="overflow: auto">
+            <h2 id="开头"><a href="#开头" class="headerlink" title="开头"></a>开头</h2><p>为了去培训，最近在写JAVA基础的50题。这些题目不算太难，有一些思路总结一下，涉及到一些JAVA的知识。使用输入输出等等。那我们就开始吧！</p>
+<h3 id="50题精选"><a href="#50题精选" class="headerlink" title="50题精选"></a>50题精选</h3><p>古典问题：有一对兔子，从出生后第3个月起每个月都生一对兔子，小兔子长到第三个月后每个月又生一对兔子，假如兔子都不死，问每个月的兔子对数为多少？<br>答： 这个问题看起来很复杂 但是把每个月兔子数写出来就很容易发现规律 1 1 2 3 5 8 13 21….从第三个月开始每个月都是前两个月兔子的加和。这里就用递归来实现就好；</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">public class prog1 &#123;</div><div class="line"></div><div class="line">  public static void main(String[] args) &#123;</div><div class="line">    int n = 10;</div><div class="line">    int sum = rabbits(n);</div><div class="line">    System.out.println(n + &quot;个月一共有：&quot; + sum + &quot;只兔子&quot;);</div><div class="line"></div><div class="line">  &#125;</div><div class="line">  private static int rabbits(int n) &#123;</div><div class="line">    if (n==1 || n==2) &#123;   //先判断出口</div><div class="line">      return 1;</div><div class="line">    &#125;</div><div class="line">    else &#123;</div><div class="line">      return rabbits(n-1)+rabbits(n-2);</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>题目：输入三个整数x,y,z，请把这三个数由小到大输出。<br>自己写起来就比较难受，题目参考答案直接交换两个数这就变得很简单了<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">private static String sort(int x,int y,int z)&#123;</div><div class="line">    String s = null;</div><div class="line">    if(x&gt;y)&#123;</div><div class="line">      int t = x;</div><div class="line">      x = y;</div><div class="line">      y = t;</div><div class="line">    &#125;</div><div class="line">    if(x&gt;z)&#123;</div><div class="line">      int t = x;</div><div class="line">      x = z;</div><div class="line">      z = t;</div><div class="line">    &#125;</div><div class="line">    if(y&gt;z)&#123;</div><div class="line">      int t = z;</div><div class="line">      z = y;</div><div class="line">      y = t;</div><div class="line">    &#125;</div><div class="line">    s = x+&quot; &quot;+y+&quot; &quot;+z;</div><div class="line">    return s;</div><div class="line">  &#125;</div></pre></td></tr></table></figure></p>
+<p>题目：两个乒乓球队进行比赛，各出三人。甲队为a,b,c三人，乙队为x,y,z三人。已抽签决定比赛名单。有人向队员打听比赛的名单。a说他不和x比，c说他不和x,z比，请编程序找出三队赛手的名单。<br>思路：这一题是一个简单的条件找答案的问题。三层循环找到符合条件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">public class prog18 &#123;</div><div class="line"></div><div class="line">  public static void main(String[] args) &#123;</div><div class="line">      char arr1[] = new char[] &#123;&apos;x&apos;,&apos;y&apos;,&apos;z&apos;&#125;;</div><div class="line">      // i,j,k用来表示a,b,c三个人；</div><div class="line">      for(int i=0; i&lt;arr1.length; i++) &#123;</div><div class="line">        for(int j=0; j&lt;arr1.length; j++) &#123;</div><div class="line">          for(int k=0; k&lt;arr1.length; k++) &#123;</div><div class="line">            if(i!=j&amp;&amp;j!=k&amp;&amp;k!=i) &#123;  // 防止重复比赛</div><div class="line">              if(arr1[i]!=&apos;x&apos; &amp;&amp; arr1[k]!=&apos;x&apos;&amp;&amp; arr1[k]!=&apos;z&apos;) &#123;</div><div class="line">                System.out.println(&quot;a和&quot; + arr1[i] + &quot;，b和&quot; + arr1[j] + &quot;，c和&quot; + arr1[k] + &quot;进行比赛&quot;);</div><div class="line">              &#125;</div><div class="line">            &#125;</div><div class="line">          &#125;</div><div class="line">        &#125;</div><div class="line">      &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>题目：打印出如下图案（菱形<br>&nbsp;&nbsp;&nbsp;&nbsp;*<br>&nbsp;&nbsp;***<br>&nbsp;*****<br>*******<br>&nbsp;*****<br>&nbsp;&nbsp;***<br>&nbsp;&nbsp;&nbsp;&nbsp;*<br>思路就是：把上半部分和下半部分别输出i，j分别表示行和列 ，上四行一次输出。下三行依次输出。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">public class prog19 &#123;</div><div class="line"></div><div class="line">  public static void main(String[] args) &#123;</div><div class="line">    for(int i=0; i &lt; 4; i++) &#123;</div><div class="line">      for(int j=0; j &lt; 8; j++) &#123;</div><div class="line">        if(j &lt; 3-i) &#123;</div><div class="line">          System.out.print(&quot; &quot;);</div><div class="line">        &#125;else if(j&gt;=3-i &amp;&amp; j&lt;=i+3) &#123;</div><div class="line">          System.out.print(&quot;*&quot;);</div><div class="line">        &#125;</div><div class="line">      &#125;</div><div class="line">      System.out.println(&quot;&quot;);//换行</div><div class="line">    &#125;</div><div class="line">    for(int i=1;i&lt;4;i++) &#123;</div><div class="line">      for(int j=0;j&lt;8;j++) &#123;</div><div class="line">        if(j&lt;i) &#123;</div><div class="line">          System.out.print(&quot; &quot;);</div><div class="line">        &#125;else if(j&gt;=i &amp;&amp; j&lt;=6-i) &#123;</div><div class="line">          System.out.print(&quot;*&quot;);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">      &#125;</div><div class="line">      System.out.println(&quot;&quot;);  //换行</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>题目：打印出杨辉三角形（要求打印出10行如下图）<br>思路：通过分析得出杨辉三角的一个规律：<br>第n行就有n个数，第一个和第n个数都是为1的，如果我们用i表示行数；j表示列数<br>arr[i][j]=arr[i-1][j]+arr[i-1][j-1]</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div></pre></td><td class="code"><pre><div class="line">public class prog33 &#123;</div><div class="line"></div><div class="line">  public static void main(String[] args) &#123;</div><div class="line"></div><div class="line">    int n = 10;</div><div class="line">    int arr[][] = new int[n][n];</div><div class="line">    CreateNum(arr);</div><div class="line">    ShowNum(arr);</div><div class="line">    //findNum();</div><div class="line">  &#125;</div><div class="line">  private static void CreateNum(int arr[][]) &#123;</div><div class="line"></div><div class="line">    for(int i = 0; i &lt; arr.length; i++) &#123;</div><div class="line">      for(int j = 0;j &lt;= i; j++) &#123;</div><div class="line">        if(j == i || j == 0) &#123;//判断每行两端的数</div><div class="line">          arr[i][j] = 1;</div><div class="line">        &#125; else &#123;</div><div class="line">          arr[i][j] = arr[i-1][j]+arr[i-1][j-1];</div><div class="line">        &#125;</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  private static void ShowNum(int arr[][]) &#123;</div><div class="line">    for(int i = 0;i &lt; arr.length;i++) &#123;</div><div class="line"></div><div class="line">      int k = i;    //输出空格</div><div class="line">      while(k&lt;arr.length) &#123;</div><div class="line">        System.out.print(&quot; &quot;);</div><div class="line">        k++;</div><div class="line">      &#125;</div><div class="line"></div><div class="line">      for(int j = 0;j&lt;arr[i].length;j++) &#123;</div><div class="line">        if(arr[i][j]!=0) &#123;</div><div class="line">          System.out.print(arr[i][j]+&quot; &quot;);</div><div class="line">        &#125;</div><div class="line">      &#125;</div><div class="line">      System.out.println();</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>题目：有n个人围成一圈，顺序排号。从第一个人开始报数（从1到3报数），凡报到3的人退出圈子，问最后留下的是原来第几号的那位。<br>思路：递归判断最后一个人,用下标代表一个人的位置实现不行。需要设置一个变量来进行判断第几个人<br>发现自己理解错了因为要循环报数 所以不能直接迭代 要一直循环数组到数组就剩下一个人<br>需要设置几个标志：<br>isIn[n] :表示这个人是否还是圈子里面<br>flag: 表示报数 报到3就把isIn变成false 重新置0在<br>index: 表示下标。当扫描完一遍从新把index置0<br>count:记录圈子里还有多少个人<br>循环就是<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">while(count&gt;1)&#123;</div><div class="line">  if(isIn(index))&#123;</div><div class="line">    flag++;</div><div class="line">    if(flag == 3)&#123;</div><div class="line">      isIn[index] = false;</div><div class="line">      count--;</div><div class="line">      flag = 0;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">  index++;</div><div class="line">  if(index == arr.length)&#123;</div><div class="line">    index = 0;//重新开始查找</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>整个题目代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line">import java.util.Scanner;</div><div class="line">public class prog37 &#123;</div><div class="line"></div><div class="line">  public static void main(String[] args) &#123;</div><div class="line">    Scanner scan = new Scanner(System.in);</div><div class="line">    System.out.println(&quot;请输入人数： &quot;);</div><div class="line">    int m = scan.nextInt();</div><div class="line"></div><div class="line">    scan.close();</div><div class="line">    boolean isIn[]  = new boolean[m]; //表示在数组里面</div><div class="line">    for(int i = 0; i &lt; m; i++) &#123;</div><div class="line">      isIn[i] = true;</div><div class="line">    &#125;</div><div class="line">    int count = m;     //圈内人数</div><div class="line">    int flag = 0;      //表示报号</div><div class="line">    int index = 0;     //下标</div><div class="line">    while(count &gt; 1) &#123;</div><div class="line">      if(isIn[index]) &#123;</div><div class="line">        flag++;</div><div class="line">        if(flag == 3) &#123;</div><div class="line">          isIn[index] = false;</div><div class="line">          flag = 0;</div><div class="line">          count--;</div><div class="line">        &#125;</div><div class="line">      &#125;</div><div class="line">      index++;</div><div class="line">      if(index == m) &#123;   //最后又加了一次</div><div class="line">        index = 0;</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">    for(int j=0;j&lt;m;j++) &#123;</div><div class="line">      if(isIn[j]) &#123;</div><div class="line">        System.out.print(&quot;数为&quot;+(j+1));</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>题目：有五个学生，每个学生有3门课的成绩，从键盘输入以上数据（包括学生号，姓名，三门课成绩），<br>计算出平均成绩，将原有的数据和计算出的平均分数存放在磁盘文件”stud”中。<br>思路： 创建一个类把数据存在里面<br>主要是用了两个没用过的类<br>BufferedReader buf = new BufferedReader(new InputStreamReader(System.in));<br>FileWriter fw = new FileWriter(“E://test//stud.txt”,true);  // 内容写入文件末尾处<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div></pre></td><td class="code"><pre><div class="line">import java.io.*;</div><div class="line">class Student&#123;</div><div class="line">  private String name;</div><div class="line">  private String Id;</div><div class="line">  private int[] grade;</div><div class="line">  private int average;</div><div class="line">  public String getName() &#123;</div><div class="line">    return name;</div><div class="line">  &#125;</div><div class="line">  public void setName(String name) &#123;</div><div class="line">    this.name = name;</div><div class="line">  &#125;</div><div class="line">  public String getId() &#123;</div><div class="line">    return Id;</div><div class="line">  &#125;</div><div class="line">  public void setId(String id) &#123;</div><div class="line">    Id = id;</div><div class="line">  &#125;</div><div class="line">  public int[] getGrade() &#123;</div><div class="line">    return grade;</div><div class="line">  &#125;</div><div class="line">  public int getGradeEle(int i) &#123;</div><div class="line">    return grade[i];</div><div class="line">  &#125;</div><div class="line">  public void setGrade(int[] grade) &#123;</div><div class="line">    this.grade = grade;</div><div class="line">  &#125;</div><div class="line">  public int getAverage() &#123;</div><div class="line">    return average;</div><div class="line">  &#125;</div><div class="line">  public void setAverage(int average) &#123;</div><div class="line">    this.average = average;</div><div class="line">  &#125;</div><div class="line">  public void getInfo() &#123;</div><div class="line">    System.out.println(&quot;姓名：&quot;+this.name+&quot;学号：&quot;+this.Id+&quot;平均分：&quot;+this.average);</div><div class="line">  &#125;</div><div class="line"></div><div class="line"></div><div class="line">&#125;</div><div class="line">public class prog50 &#123;</div><div class="line"></div><div class="line">  public static void main(String[] args) throws Exception&#123;</div><div class="line">    prog50 stud = new prog50();</div><div class="line">    Student s1 = new Student();</div><div class="line">    Student s2 = new Student();</div><div class="line">    Student s3 = new Student();</div><div class="line">    Student s4 = new Student();</div><div class="line">    Student s5 = new Student();</div><div class="line">    stud.input(s1);</div><div class="line">    stud.output(s1);</div><div class="line">    stud.input(s2);</div><div class="line">    stud.output(s2);</div><div class="line">    stud.input(s3);</div><div class="line">    stud.output(s3);</div><div class="line">    stud.input(s4);</div><div class="line">    stud.output(s4);</div><div class="line">    stud.input(s5);</div><div class="line">    stud.output(s5);</div><div class="line">    System.out.print(&quot;输入完成&quot;);</div><div class="line"></div><div class="line">  &#125;</div><div class="line">  private void input(Student s) throws Exception&#123;</div><div class="line">    BufferedReader buf = new BufferedReader(new InputStreamReader(System.in));</div><div class="line">    boolean flag = true;// 标志位</div><div class="line">    while(flag) &#123;</div><div class="line"></div><div class="line">      System.out.println(&quot;输入你的名字&quot;);</div><div class="line">      String str1 = buf.readLine();</div><div class="line">      s.setName(str1);</div><div class="line"></div><div class="line">      System.out.println(&quot;输入你的学号&quot;);</div><div class="line">      String str2 = buf.readLine();</div><div class="line">      s.setId(str2);</div><div class="line"></div><div class="line">      int sum = 0;</div><div class="line">      int countArr[] = new int[3];</div><div class="line">      for(int i = 0;i &lt; 3 ; i++) &#123;</div><div class="line">        System.out.println(&quot;输入你的第&quot;+(i+1)+&quot;科成绩&quot;);</div><div class="line">        String s3 = buf.readLine();</div><div class="line">        sum += Integer.valueOf(s3);</div><div class="line">          countArr[i]= Integer.valueOf(s3);</div><div class="line">      &#125;</div><div class="line">      s.setGrade(countArr);</div><div class="line">      s.setAverage(sum/3);</div><div class="line"></div><div class="line">      flag = false;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">  private void output(Student s1) throws Exception&#123;</div><div class="line">    FileWriter fw = new FileWriter(&quot;E://test//stud.txt&quot;,true);  // 内容写入文件末尾处</div><div class="line">    BufferedWriter bw = new BufferedWriter(fw);</div><div class="line">    bw.write(&quot;Id.  &quot;+&quot;Name  &quot;+&quot;第一科成绩  &quot;+&quot;第二课成绩  &quot;+&quot;第三科成绩  &quot;+&quot;三科平均分  &quot;);</div><div class="line">    bw.newLine();</div><div class="line">    bw.write(s1.getId()+&quot;  &quot;+s1.getName()+&quot;  &quot;+s1.getGradeEle(0)+&quot;  &quot;+s1.getGradeEle(1)+&quot;  &quot;+s1.getGradeEle(2)+&quot;  &quot;+s1.getAverage());</div><div class="line">    bw.newLine();</div><div class="line">    bw.close();</div><div class="line">  &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>题目：输入两个正整数m和n，求其最大公约数和最小公倍数。<br>思路：求最大公因数有三种每种分别实现以下：相减法穷举法和辗除法<br>      最小公倍数：两个数相乘除以最大公因数即为最小公倍数<br>总结： 相减法和辗除法原理并不清楚。而穷举法比较像之前中学数学求公因数的方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div></pre></td><td class="code"><pre><div class="line">public class prog6 &#123;</div><div class="line">  public static void main(String[] args) &#123;</div><div class="line">    int a= 99;</div><div class="line">    int b= 33;</div><div class="line">    findCommon1(a,b);</div><div class="line">    findCommon2(a,b);</div><div class="line">    findCommon3(a,b);</div><div class="line">    findCommonMulti(a,b,findCommon3(a,b));</div><div class="line"></div><div class="line"></div><div class="line">  &#125;</div><div class="line">  //方法一：相减法</div><div class="line">  //if a&gt;b a=a-b   if b&gt;a b = b-a  if a=b 求出结果</div><div class="line">  private static void findCommon1(int a,int b) &#123;</div><div class="line">    while(a!=b) &#123;</div><div class="line">      if(a&gt;b) &#123;</div><div class="line">        a = a-b;</div><div class="line">      &#125; else if(a&lt;b) &#123;</div><div class="line">        b = b-a;</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">    if(a == b) &#123;</div><div class="line">      System.out.println(&quot;最大公因数：&quot;+ a);</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">  //方法二:穷举法</div><div class="line">  //思路：1.选出a，b中最小的一个数字放到c中  2.分别用a，b对c求余数，即看是否能被c整除</div><div class="line">    //      3.直到a，b同时都能被c整除，c是最大公因数 4.如不能整除，c-- (c的值减一) 继续从第二步开始执行</div><div class="line"></div><div class="line">  private static void findCommon2(int a,int b) &#123;</div><div class="line">    int c = (a&gt;b)?b:a;</div><div class="line">    while(a%c != 0 || b%c !=0) &#123;</div><div class="line">      c--;</div><div class="line">    &#125;</div><div class="line">    if(a%c == 0 &amp;&amp; b%c ==0) &#123;</div><div class="line">      System.out.println(&quot;最大公因数：&quot;+ c);</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">  //方法三：辗除法</div><div class="line">  //思路；1.将两整数求余 a%b = c    2.如果c = 0;则b为最大公约数</div><div class="line">    //      3.如果c != 0,则 a = b；b = c；继续从1开始执行4.也就是说该循环的是否继续的判断条件就是c是否为0</div><div class="line"></div><div class="line">  private static int findCommon3(int a, int b) &#123;</div><div class="line">    int c = a%b;</div><div class="line">    while(c!=0) &#123;</div><div class="line">      a=b;</div><div class="line">      b=c;</div><div class="line">      c=a%b;</div><div class="line">    &#125;</div><div class="line">    System.out.println(&quot;最大公因数：&quot;+ b);</div><div class="line">    return b;</div><div class="line">  &#125;</div><div class="line">  private static void findCommonMulti(int a,int b,int c) &#123;</div><div class="line">    System.out.println(&quot;最小公倍数：&quot;+ (a*b)/c);</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>题目：一个数如果恰好等于它的因子之和，这个数就称为”完数”。例如6=1＋2＋3.编程找出1000以内的所有完数。<br>思路：一开始思路错了以为是：先找出因数然后再+1，后来才知道原来是对完数的定义错了<br>完数的定义是所有的约数除去自身之外的所有的数的和。<br>例如：28 = 1X2X2X7  2,2,7是因数 。 但是完数要的是所有能被整除的数有 1,2,4,7,14<br>先求出所有能被整除的数放在数组，然后再加和<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">private static void findPerfect(int n) &#123;</div><div class="line">  //先找因数</div><div class="line">  int arr[] = new int[100];//存放因数</div><div class="line">  int index = 0;</div><div class="line">  int num =  n;           //保存n用于比较</div><div class="line">  int sum = 0;</div><div class="line">  String s = &quot;&quot;;</div><div class="line">  for(int i=1; i &lt; n/2+1; i++) &#123;     // 这里只用扫描一半约数的范围除了自身以外其他均小于等于一半;</div><div class="line">    if(n%i == 0) &#123;               // 求质因数这里是for循环为了就是怕错过相同的因数例如4 = 2*2;</div><div class="line">      arr[index++] = i;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  for(int k=0; k&lt;index; k++) &#123;</div><div class="line">    sum += arr[k];</div><div class="line">    if(k == 0) &#123;</div><div class="line">      s += arr[k];</div><div class="line">    &#125; else &#123;</div><div class="line">      s += &quot;+&quot; + arr[k];</div><div class="line">    &#125;</div><div class="line"></div><div class="line">  &#125;</div><div class="line"></div><div class="line">  if(sum == num) &#123;</div><div class="line">    System.out.println(&quot;完数：&quot;+num + &quot;=&quot; + s);</div><div class="line">  &#125;</div><div class="line"></div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>马上就要去武汉学习了。希望能成为自己想成为的样子。写代码要坚持!总会有好结果的</p>
+
+        </div>
+        <div class="post-reply">
+            
+                <!-- 来必力City版安装代码 -->
+                <div id="lv-container" data-id="city" data-uid="MTAyMC8yOTE4Ni81NzUz">
+                    <script type="text/javascript">
+                        (function(d, s) {
+                            var j, e = d.getElementsByTagName(s)[0];
+
+                            if (typeof LivereTower === 'function') { return; }
+
+                            j = d.createElement(s);
+                            j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+                            j.async = true;
+
+                            e.parentNode.insertBefore(j, e);
+                        })(document, 'script');
+                    </script>
+                    <noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+                </div>
+                <!-- City版安装代码已完成 -->
+            
+            
+        </div>
+    </div>
+</section>
+<script>
+    // 获取第一张图, 用以当封面背景图
+    var img = document.querySelectorAll('img')[1]
+
+    if (img) {
+        var header_box = document.querySelector('#header_box')
+        header_box.style.backgroundImage = 'url('+ img.src +')'
+    }
+</script>
+      </div>
+  </div>
+  <style>
+  #footer {
+    min-height: 10vh;
+    background: black;
+    color: #fff;
+  }
+
+  #footer a {
+    color: #e1e1e1;
+  }
+</style>
+<footer id="footer" class="has-text-centered is-flex center">
+  <div class="container has-padding">
+    <div>
+      <div>
+        <!--请您保留作者署名, 主题制作来之不易-->
+        主题来自 <a href="http://haojen.github.io/">Haojen Ma</a>
+        <br>
+        Copyright © 王邸 2019
+        <!--
+          Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+        -->
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="/js/search_core.js"></script>
+<script src="/js/script.js"></script>
+
+</body>
+</html>
