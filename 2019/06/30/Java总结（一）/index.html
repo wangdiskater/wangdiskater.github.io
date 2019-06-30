@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html class="full-height">
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="//cdn.bootcss.com/bulma/0.4.1/css/bulma.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+  
+  <title>Java总结（一） | 路要坚持</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="1.把第三章的客户题写完了；放在第一行代码HomeWork中2.总结本周学习的内容： 星期一赋值运算符：基本运算符 =拓展赋值运算符： += -= 等a=b=101.赋值表达式是有值的  a+b  b=10; //它的值等于赋值运算符右边表达式的值；2.赋值运算符从右向左结合的； 但是算数运算符是从左到右结合的；  a += 20; –&amp;gt; a = a + 20;  不能写a = 20 + a">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java总结（一）">
+<meta property="og:url" content="http://yoursite.com/2019/06/30/Java总结（一）/index.html">
+<meta property="og:site_name" content="路要坚持">
+<meta property="og:description" content="1.把第三章的客户题写完了；放在第一行代码HomeWork中2.总结本周学习的内容： 星期一赋值运算符：基本运算符 =拓展赋值运算符： += -= 等a=b=101.赋值表达式是有值的  a+b  b=10; //它的值等于赋值运算符右边表达式的值；2.赋值运算符从右向左结合的； 但是算数运算符是从左到右结合的；  a += 20; –&amp;gt; a = a + 20;  不能写a = 20 + a">
+<meta property="og:updated_time" content="2019-06-30T15:43:01.849Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java总结（一）">
+<meta name="twitter:description" content="1.把第三章的客户题写完了；放在第一行代码HomeWork中2.总结本周学习的内容： 星期一赋值运算符：基本运算符 =拓展赋值运算符： += -= 等a=b=101.赋值表达式是有值的  a+b  b=10; //它的值等于赋值运算符右边表达式的值；2.赋值运算符从右向左结合的； 但是算数运算符是从左到右结合的；  a += 20; –&amp;gt; a = a + 20;  不能写a = 20 + a">
+  
+    <link rel="alternate" href="/" title="路要坚持" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/common.css">
+<link rel="stylesheet" href="/css/nav.css">
+<link rel="stylesheet" href="/css/layout.css">
+  
+
+</head>
+
+<body>
+  <header id="navbar" class="overflow-hidden">
+  <div class="container">
+    <nav class="nav">
+         <div class="nav-left">
+            <a href="/" class="nav-item" style="font-size: 20px;">
+              <span class="logo">王邸</span>'s Blog
+            </a>
+         </div>
+        <div class="nav-center is-hidden position-relative" id="search_container">
+            <div class="nav-item full-width full-height">
+                <i class="fa fa-search has-padding" aria-hidden="true"></i>
+                <input type="text" id="search_input" class="search-input full-height full-width" placeholder="Search post" autofocus>
+                <i id="close_search" class="fa fa-times" aria-hidden="true"></i>
+            </div>
+            <div id="search_result"></div>
+        </div>
+        <div class="nav-right nav-menu">
+            <a class="nav-item" id="search">
+                <i class="fa fa-search" aria-hidden="true"></i>
+            </a>
+            
+            <a class="nav-item" href="/">
+                Home
+            </a>
+            
+            <a class="nav-item" href="/works">
+                My Works
+            </a>
+            
+            <a class="nav-item" href="/about">
+                About
+            </a>
+            
+        </div>
+        <span class="nav-toggle" id="navMenuDropdown">
+            <span></span>
+            <span></span>
+            <span></span>
+        </span>
+        <div class="navbar-menu position-absolute full-width content-box is-hidden-desktop is-flex flex-column center" style="top: 100%;">
+            
+            <a class="nav-item flex-1" href="/">
+                Home
+            </a>
+            
+            <a class="nav-item flex-1" href="/works">
+                My Works
+            </a>
+            
+            <a class="nav-item flex-1" href="/about">
+                About
+            </a>
+            
+        </div>
+    </nav>
+  </div>
+</header>
+
+  <div id="main-wrap" class="position-relative" style="margin-top: 55px;">
+      <div class="main-inner-content">
+          <!--博文页面-->
+
+<style>
+    .header-box {
+        height: 370px;
+        filter: blur(10px);
+        background-size: cover;
+        background-color: lightsteelblue;
+    }
+
+    .post-box {
+        padding: 15px;
+        padding-top: 60px;
+        min-height: 80vh;
+        margin-top: -200px;
+        border-radius: 4px;
+        background-color: rgba(255,255,255,.8);
+    }
+
+    .post-avatar {
+        height: 30px;
+        width: 30px;
+        border-radius: 50%;
+    }
+
+    .flow-chart {
+        text-align: center;
+    }
+
+    img[alt="post-cover"] {
+        display: none;
+    }
+</style>
+<header>
+    <div id="header_box" class="header-box"></div>
+</header>
+<section>
+    <div class="container post-box">
+        <div class="content post-title is-flex center flex-column" style="margin-bottom: 70px; overflow: auto;">
+            <h1 class="has-text-centered" style="padding-bottom: 10px; border-bottom: 3px solid #fff">
+                <strong>Java总结（一）</strong>
+            </h1>
+            
+            <div class="is-flex align-center">
+                <img class="post-avatar" src="https://q2.qlogo.cn/headimg_dl?bs=996057150&dst_uin=996057150&dst_uin=996057150&;dst_uin=996057150&spec=100&url_enc=0&referer=bu_interface&term_type=PC">
+                <span style="padding:0 10px;"> <span class="sub-title">By</span> 王邸</span>
+                <span class="post-date sub-title">at: 2019-06-30</span>
+            </div>
+            
+                <div>
+                    
+                </div>
+            
+        </div>
+        <div class="content" style="overflow: auto">
+            <p>1.把第三章的客户题写完了；放在第一行代码HomeWork中<br>2.总结本周学习的内容：</p>
+<h2 id="星期一"><a href="#星期一" class="headerlink" title="星期一"></a>星期一</h2><h3 id="赋值运算符："><a href="#赋值运算符：" class="headerlink" title="赋值运算符："></a>赋值运算符：</h3><p>基本运算符 =<br>拓展赋值运算符： += -= 等<br>a=b=10<br>1.赋值表达式是有值的<br>  a+b<br>  b=10; //它的值等于赋值运算符右边表达式的值；<br>2.赋值运算符从右向左结合的； 但是算数运算符是从左到右结合的；<br>  a += 20; –&gt; a = a + 20;  不能写a = 20 + a;<br>  左边一定要放在左边；a -= b –&gt; a = a-b; 只改变a的值；</p>
+<p>注意事项：<br>    扩展的赋值运算符隐含了强制类型转换；<br>    btye b1 = 10;<br>    btye b2 = 20;<br>    //b1 = b1 + b2;  //会报错<br>    b1 += b2;  –&gt;（byte）(b1+b2);<br>    System.out.println(b1); //不会报错</p>
+<h3 id="关系运算符："><a href="#关系运算符：" class="headerlink" title="关系运算符："></a>关系运算符：</h3><p>   == ！= &lt; &gt; &lt;= &gt;= instanceof</p>
+<p>注意事项：<br>    instanceof 运算符不能用于基本数据类型;用于判断两个类是否相同<br>    比较运算符结果是布尔型 true or  false;<br>    比较运算符不要写成赋值运算符，特别在if的判断中;</p>
+<h3 id="逻辑运算符："><a href="#逻辑运算符：" class="headerlink" title="逻辑运算符："></a>逻辑运算符：</h3><p>&amp;&amp;:第一个是false，第二个表达式就不会被计算<br>||：第一个是true, 第二个表达式也不会计算；</p>
+<p>在以后开发中，我们可以&amp; ，| 还是&amp;&amp; ||<br>   使用&amp;&amp; || 节约时间 方便编码；</p>
+<h3 id="位运算-难-："><a href="#位运算-难-：" class="headerlink" title="位运算(难)："></a>位运算(<strong><em>难</em></strong>)：</h3><p>&lt;&lt; &gt;&gt; &gt;&gt;&gt; （无符号右移） &amp; | ^ ~</p>
+<p>按位与： &amp;  同时为1 结果为1；<br>按位或： |  同时为0 结果为0 否则为1<br>按位异或： ^ 不同为1 其余为0<br>按位取反： ~  单目运算符</p>
+<p>注意事项：<br>    位运算只能用于整数和char(char类型可以看成无符号的整数)；<br>    位运算的效率是最高的</p>
+<p>一些用位运算题目：</p>
+<h4 id="1-对2的n次幂取余-都可以转成位运算"><a href="#1-对2的n次幂取余-都可以转成位运算" class="headerlink" title="1.对2的n次幂取余 都可以转成位运算"></a>1.对2的n次幂取余 都可以转成位运算</h4><p>a%64 == a&amp;（a-1）;<br>2^n:<br>    1101 1101<br>%   0100 0000</p>
+<p>可以转换成：<br>    1101 1101<br>&amp;   0011 1111</p>
+<h4 id="2-判断一个数是否是2的n次幂？"><a href="#2-判断一个数是否是2的n次幂？" class="headerlink" title="2.判断一个数是否是2的n次幂？"></a>2.判断一个数是否是2的n次幂？</h4><p>  2^n :因子都是2；<br>  时间复杂度：log n;</p>
+<p>能否在常量时间复杂度内，判断一个数是否是2^n;<br>  2^n的存储特点：只有一个1 ，后面全部0；<br>  a &amp; (a-1) == 0;</p>
+<p>  0100 0000<br>&amp; 0011 1111<br>  0000 0000</p>
+<h4 id="3-两个整数变量的交换"><a href="#3-两个整数变量的交换" class="headerlink" title="3.两个整数变量的交换"></a>3.两个整数变量的交换</h4><p>int a = 4;<br>int b = 3;<br>a = a ^ b;  //  a = 4 ^ 3 ,b = 3<br>b = a ^ b;  //  a = 4 ^ 3 ,b = 4^3^3= 4<br>a = a ^ b;  //  a = 4 ^ 3 ^ 4 = 3 ,b = 4</p>
+<h4 id="4-有一堆数字，都是成对出现了。只有一个是单独出现的。找出那个单独的整数"><a href="#4-有一堆数字，都是成对出现了。只有一个是单独出现的。找出那个单独的整数" class="headerlink" title="4.有一堆数字，都是成对出现了。只有一个是单独出现的。找出那个单独的整数"></a>4.有一堆数字，都是成对出现了。只有一个是单独出现的。找出那个单独的整数</h4><p>  可以不是排序的<br>  1,1,2,2,a,a+1,a+1,a+2,a+2….</p>
+<p>  0 ^ 1 ^ 1 ^ 2 ^ 2 ….</p>
+<p>因为a^a = 0<br>0 ^ <em> = </em> 所以能直接找出单独的数。<br>但是这里有个问题，如果a = 0能否找出?<br>如果最后的结果是0是有两种答案：<br>1）没有单独的数<br>2）单独的数就是0</p>
+<p>&lt;&lt; 左移： 低位补0 高位丢失<br>&gt;&gt; 右移： 高位补符号位 低位丢弃<br>&gt;&gt;&gt;无符号右移：高位补0 低位丢弃</p>
+<p>注意事项：<br>    左移：左移N个单位，相当乘以2^n;<br>    右移：右移n个单位，相当于除以2^n;<br>    对于移位运算符来说，当操作数超出字长时；实际移动n mod 字长<br>    int a = 64<br>    a&gt;&gt; 32 = a</p>
+<h2 id="星期二"><a href="#星期二" class="headerlink" title="星期二"></a>星期二</h2><h3 id="switch"><a href="#switch" class="headerlink" title="switch"></a>switch</h3><p>  switch表示这是switch语句<br>  表达式的取值：byte, short, int, char<br>    JDK5以后可以是：枚举<br>    JDK7以后可以是：String<br>  case后面跟的是要和表达式进行比较的值<br>  语句体部分可以是一条或多条语句<br>  break表示中断，结束的意思，可以结束switch语句<br>  default语句表示所有情况都不匹配的时候，就执行该处的内容，和if语句的else相似。</p>
+<p>注意事项:<br>  a. case后面只能是常量，不能是变量，而且，多个case后面的值不能出现相同的<br>  b. default可以省略吗?<br>    可以省略。一般不建议。除非判断的值是固定的。(单选题)<br>  c. break可以省略吗?<br>    可以省略，一般不建议。否则结果可能不是你想要的 (case穿越)<br>  d. default的位置一定要在最后吗?<br>    可以出现在switch语句任意位置。<br>  e. switch语句的结束条件<br>    遇到break<br>    执行到程序的末尾</p>
+<p>使用场景<br>  a. if语句是通用的。<br>  b. case只有几种常量的情况, 对于常量还有一些限制。(比较单一)<br>    byte, short, int, char, enum, String</p>
+<h3 id="循环语句"><a href="#循环语句" class="headerlink" title="循环语句"></a>循环语句</h3><p>死循环：<br>// for(;;);<br>// System.out.println(“我爱学JAVA!”); 无法访问的语句</p>
+<p>// while(true);<br>// System.out.println(“我爱学JAVA!”); 无法访问的语句</p>
+<p>循环的题目：<br>请统计1-1000之间同时满足如下条件的数据有多少个：<br>  对3整除余2<br>  对5整除余3<br>  对7整除余2</p>
+<p>分析：</p>
+<ol>
+<li>定义统计变量 count = 0;</li>
+<li><p>循环：1 ~ 1000;<br>判断这个数是够满足：<br> 对3整除余2<br> 对5整除余3<br> 对7整除余2<br>满足：输出这个数,count++</p>
+</li>
+<li><p>输出count</p>
+</li>
+</ol>
+<p>小学生的痛苦：<br>  求满足这个条件最小正整数：<br>    对3整除余2<br>    对5整除余3<br>    对7整除余2</p>
+<p>（注意这个思路）<br>  a. 假设s满足条件, 下一个满足条件的数是多少？<br>    下一个数：s + 105n (n = 1,2,3,4…)也满足条件<br>  b. 构建一个数满足这个条件<br>    3 <em> 5 = 15<br>      15 % 7 == 1<br>    3 </em> 7 = 21<br>      21 % 5 == 1<br>    5 * 7 =35<br>      35 % 3 == 2<br>    p = 15a + 21b + 35c (a,b,c为余数)<br>      p % 7 == a<br>      p % 5 == b<br>      p % 3 == 2c<br>      a = 2, b = 3, c=1<br>    p = 30 + 63 + 35 = 128;<br>    p - 105 =23;</p>
+<p>while语句和for语句的区别：</p>
+<ol>
+<li>变量的作用范围</li>
+<li>使用场景<br>for更适合循环次数确定情况。<br>while更适合循环次数不明确的情况。</li>
+</ol>
+<h3 id="跳转控制语句："><a href="#跳转控制语句：" class="headerlink" title="跳转控制语句："></a>跳转控制语句：</h3><p>  break: 中断<br>  continue: 继续<br>  return: 返回</p>
+<p>break<br>使用场景：<br>  a. switch语句<br>  b. 循环语句</p>
+<p>  break会跳出离他最近的外层循环。<br>  如果想跳出多层循环怎么办呢？</p>
+<p>标签:<br>  格式<br>    标签名: 要标识的语句</p>
+<p>  标签可以标识任意语句<br>标签害人不浅看下面的代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">class TagDemo &#123;</div><div class="line">  public static void main(String[] args) &#123;</div><div class="line">    https://www.cskaoyan.com</div><div class="line">    System.out.println(&quot;我爱中华!&quot;);</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>编译能通过而且运行不会报错问题就是：<br>https:被当成了标签<br>//www.cskaoyan.com被当成了注释</p>
+<h3 id="方法（上）："><a href="#方法（上）：" class="headerlink" title="方法（上）："></a>方法（上）：</h3><p>  概述：完成特定功能的代码块。<br>    类比：数学中的函数<br>    在其他语言里面都有函数(function)的定义<br>    函数在Java中被称为方法 (method)</p>
+<p>  格式：<br>    修饰符 返回值类型 方法名(参数类型 参数名1, 参数类型 参数名2…) {<br>      函数体;<br>      return 返回值;<br>    }</p>
+<p>  方法格式解释<br>    修饰符 比较多，后面会详细介绍。目前 public static<br>    返回值类型 用于限定返回值的数据类型<br>    方法名 标识符，为了方便我们调用方法<br>    参数类型 限定调用方法时传入参数的数据类型<br>    参数名 是一个变量，接收调用方法时传入的参数<br>    方法体 完成功能的代码<br>    return 结束方法以及返回方法指定类型的值<br>    返回值 程序被return带回的结果，返回给调用者</p>
+<p>  如何写一个方法：<br>    a. 明确功能<br>    b. 返回值类型<br>    c. 参数列表</p>
+<p>  练习：求两个数据之和<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">/*</div><div class="line">  功能：求两个数据的和</div><div class="line">  返回值类型：int</div><div class="line">  参数列表： int int</div><div class="line">*/</div></pre></td></tr></table></figure></p>
+<p>  返回值类型不为void方法的调用：<br>    a. 单独调用<br>    b. 输出调用<br>    c. 赋值调用</p>
+<p>注意事项：<br>  方法不调用不执行。</p>
+<h2 id="星期三："><a href="#星期三：" class="headerlink" title="星期三："></a>星期三：</h2><h3 id="方法-下"><a href="#方法-下" class="headerlink" title="方法(下)"></a>方法(下)</h3><p>包：同一个包下面能够有两个名字相同的类吗？<br>  同一个类下面能有两个名字相同的方法吗？<br>    可以。方法的重载。</p>
+<p>方法重载：<br>  a. 在同一个类<br>  b. 方法名字相同<br>  c. 参数列表不同(参数类型, 参数个数, 参数顺序)</p>
+<p>术语：方法的签名(signature) 方法名 + 参数列表<br>  同一个类中方法名字可以相同，但是方法的签名不能相同</p>
+<p>问题：方法的签名为什么与返回值类型无关？<br>  单独调用时，就不能区分到底使用哪个方法。</p>
+<p>问题2：求两个数据的和。参数类型分别为两个byte类型，两个short类型，两个int类型，两个long类型，并在main方法中进行测试。</p>
+<p>问题： 如果传入的参数类型不同会怎么样,如下代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">public int add(int a, int b) &#123;</div><div class="line">  return a+b;</div><div class="line">&#125;</div><div class="line">public double add(double a, double b) &#123;</div><div class="line">  reuturn a+b;</div><div class="line">&#125;</div><div class="line">add(10,10.111);</div></pre></td></tr></table></figure></p>
+<p>  A 编译不通过<br>  B 运行报错<br>  C 可以运行</p>
+<p>建议：<br>  如果方法实现一样，但是数据类型兼容。就没有必要使用方法的重载。<br>  他会默认选择大的范围进行调用</p>
+<h3 id="数组："><a href="#数组：" class="headerlink" title="数组："></a>数组：</h3><p>数组的初始化：<br>  就是为数组中的数组元素分配内存空间，并为每个数组元素赋初值。</p>
+<p>动态初始化：<br>  由程序员指定长度，系统决定初始值。<br>  格式：<br>    数据类型[] 数组名 = new 数据类型[数组的长度];<br>  举例：<br>    int[] arr = new int[3];</p>
+<p>解释：<br>  [I@15db9742<br>  [: 一维数组<br>  I: 数组元素是int类型<br>  @: 表示分隔符<br>  15db9742：16进制的数, 内存地址的映射</p>
+<p>java的内存分配<br>  栈：局部变量, 执行方法<br>  堆：new出来的东西 (对象)<br>  方法区<br>  本地方法栈<br>  程序计数器：字节码的行号指示器</p>
+<p>怎么引用数组中的元素值呢？<br>  索引(从0开始编号)<br>  数组名[索引]</p>
+<p>堆上的数据都会有默认初始值<br>  向堆申请空间的时候，都会把这片内存空间清0<br>  默认值：<br>    byte    0<br>    short   0<br>    int     0<br>    long    0L<br>    float   0.0f<br>    double    0.0<br>    boolean   false<br>    char    \u0000<br>    引用数据  null</p>
+<p>注意事项：<br>  如果数组索引超出范围，会报 java.lang.ArrayIndexOutOfBoundsException.</p>
+<p>空常量：null<br>  可以给所有的引用数据类型赋值<br>空指针异常：<br>  java.lang.NullPointerException</p>
+<h2 id="星期四："><a href="#星期四：" class="headerlink" title="星期四："></a>星期四：</h2><h3 id="参数传递"><a href="#参数传递" class="headerlink" title="参数传递"></a>参数传递</h3><p>结论：<br>  a. Java中只有值传递。<br>  b. 基本数据类型传递参数的时候相当于c语言中值传递。<br>  c. 引用数据类型传递参数的时候相当于c语言中地址传递。</p>
+<p>需要注意以下问题：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">int[] arr1 = &#123;1, 2, 3&#125;;</div><div class="line">int[] arr2 = &#123;4, 5, 6&#125;;</div><div class="line">System.out.println(Arrays.toString(arr1)); //[1, 2, 3]</div><div class="line">System.out.println(Arrays.toString(arr2)); //[4, 5, 6]</div><div class="line">change(arr1, arr2);</div><div class="line">System.out.println(Arrays.toString(arr1)); //[1, 2, 3]</div><div class="line">System.out.println(Arrays.toString(arr2)); //[4, 5, 6]</div><div class="line">public static void change(int[] arr1, int[] arr2) &#123;</div><div class="line">  int[] temp = arr1;</div><div class="line">  arr1 = arr2;</div><div class="line">  arr2 = temp;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>这里并不会交换数组。不要死记硬背说应用类型会修改。这里只是在调用change函数时，<br>把两个数组位置变化。并没有影响main函数中的值。所以打印出来自然就不会变了</p>
+<h3 id="递归"><a href="#递归" class="headerlink" title="递归"></a>递归</h3><p>  方法定义中调用方法本身的现象<br>  java.lang.StackOverflowError：死递归, 递归太深了</p>
+<p>递归和循环在某些情况下可以相互转换。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">class RecursionDemo3 &#123;</div><div class="line">  public static void main(String[] args) &#123;</div><div class="line">    System.out.println(factorial(4));</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  /*public static long factorial(int n) &#123;</div><div class="line">    long result = 1;</div><div class="line">    for(int i = 2; i &lt;= n; i++) &#123;</div><div class="line">      result *= i;</div><div class="line">    &#125;</div><div class="line">    return result;</div><div class="line">  &#125;*/</div><div class="line"></div><div class="line">  public static long factorial(int n) &#123;</div><div class="line">    if(n == 1) return 1;</div><div class="line">    return n * factorial(n-1);</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="递归经典问题-难"><a href="#递归经典问题-难" class="headerlink" title="递归经典问题(难)"></a>递归经典问题(<strong><em>难</em></strong>)</h3><p><strong>汉诺塔问题</strong>：<br>汉诺塔是根据一个传说形成的数学问题：</p>
+<p>有三根杆子A，B，C。A杆上有 N 个 (N&gt;1) 穿孔圆盘，盘的尺寸由下到上依次变小。要求按下列规则将所有圆盘移至 C 杆：</p>
+<p>每次只能移动一个圆盘；<br>大盘不能叠在小盘上面。<br>提示：可将圆盘临时置于 B 杆，也可将从 A 杆移出的圆盘重新移回 A 杆，但都必须遵循上述两条规则。</p>
+<p>问：最少要移动多少次？如何移？</p>
+<p>分析：<br>n=1:<br>  A –&gt; C<br>  count = 1</p>
+<p>n=2:<br>  A –&gt; B<br>  A –&gt; C<br>  B –&gt; C<br>  count = 3</p>
+<p>n=3:<br>  A –&gt; C<br>  A –&gt; B<br>  C –&gt; B<br>  A –&gt; C<br>  B –&gt; A<br>  B –&gt; C<br>  A –&gt; C<br>  count=7;</p>
+<p>分析：<br>  假设移动n个圆盘最小需要count(n)次。<br>  count(1) = 1;<br>  count(n) = 2* count(n-1) + 1 （n &gt; 1）; // 两个count(n-1)次 一次是把上面n-1个移动到B 第二次是把n-1个从B移动到C</p>
+<p>  h(1) = 1;<br>  h(n) = 2h(n-1) + 1;<br>  h(n) + 1 = 2 (h(n-1) + 1);<br>  h(n) + 1 = 2 * 2^(n-1) = 2^n;<br>  h(n) = 2^n - 1;</p>
+<p><strong>结论：从以上可以看出，递归解决的不是计算移动多少次的问题。而是要去解决如何去移动的问题</strong></p>
+<p>  如何移？<br>  定义一个函数表示把n个盘子从begin,通过middle,移动到end上面。<br>  返回值类型: void<br>  参数列表：int n, char begin, char middle, char end</p>
+<p>  递推公式：<br>    把n-1盘子从begin,经过end,移动到middle<br>    把最大的盘子从begin移动到end.<br>    把n-1盘子从middle,经过begin,移动到end</p>
+<p>可以使用递归的条件：</p>
+<ol>
+<li>大问题可以分解成子问题。</li>
+<li>子问题的解决方法和大问题一模一样，只是数据规模不一样。</li>
+<li>有终止条件。</li>
+</ol>
+<p>使用递归需要注意事项：</p>
+<ol>
+<li>StackOverflowError</li>
+<li>警惕重复计算的问题</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">import java.util.Scanner;</div><div class="line">class RecursionDemo5 &#123;</div><div class="line">  public static void main(String[] args) &#123;</div><div class="line">    System.out.println(&quot;请输入盘子的个数：&quot;);</div><div class="line">    Scanner sc = new Scanner(System.in);</div><div class="line">    int n = sc.nextInt();</div><div class="line"></div><div class="line">    /*long count = count(n);</div><div class="line">    System.out.println(&quot;count=&quot; + count);*/</div><div class="line">    hanoi(n, &apos;A&apos;, &apos;B&apos;, &apos;C&apos;);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  public static long count(int n) &#123;  //移动多少次，使用递归效率低下</div><div class="line">    /*if(n==1) return 1;</div><div class="line">    return 2 * count(n-1) + 1;*/</div><div class="line">    return (long)Math.pow(2, n) - 1;</div><div class="line">  &#125;</div><div class="line">  // 定义一个函数表示把n个盘子从begin,通过middle,移动到end上面</div><div class="line">  public static void hanoi(int n, char begin, char middle, char end) &#123;</div><div class="line">    if(n == 1) &#123;</div><div class="line">      System.out.println(begin + &quot; --&gt; &quot; + end);</div><div class="line">      return ;</div><div class="line">    &#125;</div><div class="line">    hanoi(n-1, begin, end, middle);</div><div class="line">    System.out.println(begin + &quot; --&gt; &quot; + end);</div><div class="line">    hanoi(n-1, middle, begin, end);</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>计算n条直线最多能把平面分成多少部分？</strong><br>分析：<br>  第一条线:可以分成两个平面<br>  之后一个焦点将分多两个平面<br>  两个焦点分出多3个平面；<br>  之后多产生的n个焦点就多出n+1个平面<br>  第n条线时将在原来的基础上多产生n-1个焦点，即在原来的基础上多产生n个面，所以递推公式为：<br>  f(n) = f(n-1) + n;</p>
+<p>  f(1) = 2;<br>  f(n) = f(n-1) + n;</p>
+<p>  f(n) = f(n-1) + n<br>     = f(n-2) + n-1 + n<br>     = f(n-3) + n-2 + n<br>     = f(1) + 2 + 3 + … + n = n(n+1)/2 + 1;</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">import java.util.Scanner;</div><div class="line">class RecursionDemo6 &#123;</div><div class="line">  public static void main(String[] args) &#123;</div><div class="line">    System.out.println(&quot;请输入直线的条数：&quot;);</div><div class="line">    Scanner sc = new Scanner(System.in);</div><div class="line">    int n = sc.nextInt();</div><div class="line"></div><div class="line">    System.out.println(f(n));</div><div class="line"></div><div class="line">  &#125;</div><div class="line"></div><div class="line">  public static int f(int n) &#123;</div><div class="line">    /*if(n == 1) return 2;</div><div class="line">    return f(n-1) + n;*/</div><div class="line">    return n * (n+1) / 2 + 1;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>约瑟夫环</strong><br>  有n个人站成一个环,每个一个人,干掉一个人,直到只有一个人。<br>  问编号为几的人会活下来？</p>
+<p>  返回值类型: int<br>  参数列表: int</p>
+<p>分析：<br>  joseph(1) = 1<br>  joseph(2) = 1 = 2 <em> 1 - 1 = 1;<br>  joseph(3) = 3 = 2 </em> 1 + 1 = 3<br>  joseph(4) = 1 = 2 <em> 1 - 1 = 1<br>  joseph(5) = 3 = 2 </em> 1 + 1 = 3<br>  joseph(6) = 2 * 3 - 1 = 5</p>
+<p>  递推公式：<br>  joseph(1) = 1;<br>  joseph(2n) = 2 <em> joseph(n) - 1;<br>  joseph(2n+1) = 2 </em> joseph(n) + 1;</p>
+<p>  解释：<br>  这和网上看到n和n-1的关系式子不一样。网上的是：<br>  f(N,M) = (f(N-1,M) + M) % N;<br>  N表示N个人，M表示叫到M的人出列；<br>  正着推就是：<br>  N个人当叫到M的人出列时，就会重新开始报数，这样就变成N-1个人的游戏。所有的没出列的人的下标都会减M。<br>  反过来说，<br>  当N-1个人参加时，要变成N个人的比赛，就要加上M，就是之前往前走的下标。但是可能会出现溢出情况。所以要对N取余数</p>
+<p>  而老师给的递推式：<br>  先来看偶数的情况：<br>  1,2,3,4,5,6 = 》 1,3,5（剩下三个人）<br>  而我们知道只有三个人时：<br>  1,2,3 =》 3 最后幸存的就是3 对应上面 1 3 5 最后活着的就是 5。<br>  这里就有关系就是 f(6) = f(3)<em>2 - 1 即 5 = 3</em>2 -1；</p>
+<p>  再来看奇数的情况：<br>  1,2,3,4,5,6,7 =》 1,3,5,7 =》 3,5,7<br>  这里我要说明的是，1,3,5,7并不是第一轮剩下的人，因为奇数个的情况，所以第一轮结束1一定会死<br>  而最后一个数一定会活着。<br>  这里3,5,7 就相当于上面的 1,2,3=》3<br>  那么最后活着的就是7<br>  f(7) = f(3)<em>2 + 1 即 7 = 3</em>2 +1</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">import java.util.Scanner;</div><div class="line">class RecursionDemo7 &#123;</div><div class="line">  public static void main(String[] args) &#123;</div><div class="line"></div><div class="line"></div><div class="line">  &#125;</div><div class="line"></div><div class="line">  public static int joseph(int n) &#123;</div><div class="line">    if(n == 1) return 1;</div><div class="line">    if (n % 2 == 0) &#123;  //偶数的情况</div><div class="line">      return 2 * joseph(n / 2) - 1;</div><div class="line">    &#125;</div><div class="line">    return 2 * joseph(n / 2) + 1;  //奇数的情况</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="星期五"><a href="#星期五" class="headerlink" title="星期五"></a>星期五</h2><h3 id="面向对象部分"><a href="#面向对象部分" class="headerlink" title="面向对象部分"></a>面向对象部分</h3><p>变量<br>成员变量和局部变量的区别<br>  a.在内存中位置不同<br>    局部变量: 栈<br>    成员变量：堆<br>  b.初始化值不同<br>    局部变量: 没有默认值, 没有初始化，就不能使用。<br>    成员变量：有默认值。<br>      byte, short, int, long  0<br>      float, double     0.0<br>      char          ‘\u0000’<br>      boolean         false<br>      引用类型        null<br>  c.在类中位置不同<br>    局部变量: 方法内存或者方法声明上<br>    成员变量：类中,方法外<br>  d.生命周期不同<br>    局部变量: 随着方法的入栈而开始，随着方法的出栈而消亡<br>    成员变量：随着对象的创建而开始, 随着对象的死亡而消亡</p>
+<p>  匿名对象：<br>    就是没有名字的对象。<br>    是对象的一种简化表示形式<br>  匿名对象的两种使用情况<br>    对象仅仅使用一次的时候<br>    作为实际参数传递</p>
+<p>封装：<br>封装(encapsulation)<br>  封装是一种信息隐藏技术。</p>
+<p>  好处：<br>    a. 隐藏类的实现细节,实现了信息的隐藏及安全性；<br>    b. 提高了程序的模块化，且易于维护；<br>    c. 保证了数据的安全和系统的严密性;<br>    d. 将类的设计者和类的使用者分开。</p>
+<p>  封装的技术包括：包, 类, 方法, 访问权限修饰符。</p>
+<p>private:<br>  私有的。是一种访问权限修饰符。<br>  被private修饰的成员变量或者成员方法只能在本类进行访问.</p>
+<p>  最常见的用法：<br>    把成员变量用private修饰<br>    然后提供getXxx()/setXxx()方法   getter &amp; setter</p>
+<p>构造方法：<br>  作用：给对象的数据进行初始化<br>  格式：<br>    方法名与类名相同<br>    没有返回值类型<br>  注意事项：<br>    a. 如果没写构造方法,系统会提供无参构造方法(默认的构造方法)。<br>    b. 如果提供了构造方法, 系统将不再提供无参的构造方法。(建议: 自己写一个无参的构造方法)<br>    c. 构造方法也是可以重载的</p>
+<h2 id="星期六"><a href="#星期六" class="headerlink" title="星期六"></a>星期六</h2><h3 id="static"><a href="#static" class="headerlink" title="static:"></a>static:</h3><p>  静态的, 可以修饰成员<br>  特点：<br>    随着类的加载而加载<br>    优先于对象存在<br>    被类的所有对象共享<br>      这也是我们判断是否使用静态关键字的条件<br>    可以通过类名调用(推荐使用类名调用, 不要用对象名调用)</p>
+<p>  静态的成员是类所有<br>  非静态成员是对象所有</p>
+<p>注意事项：<br>  在静态方法中是没有 this 关键字的<br>  静态方法只能访问静态的成员<br>  非静态的方法可以访问静态的成员也可以访问非静态的成员。</p>
+<h3 id="成员变量和静态变量区别"><a href="#成员变量和静态变量区别" class="headerlink" title="成员变量和静态变量区别"></a>成员变量和静态变量区别</h3><p>  a.所属不同<br>  成员变量：对象<br>    静态变量：类<br>  b.内存中位置不同：<br>    成员变量：堆<br>    静态变量：方法区<br>  c.生命周期不同：<br>    成员变量：随着对象的创建而开始, 随着对象的死亡而消失<br>    静态变量：随着类的加载而开始, 随着类的卸载而消失<br>  d.调用方法不同：<br>    成员变量：只能通过对象调用<br>    静态变量：可以通过对象调用，也可以用类名调用(推荐使用类名调用)</p>
+<h3 id="帮助文档"><a href="#帮助文档" class="headerlink" title="帮助文档"></a>帮助文档</h3><h4 id="以Scanner为例"><a href="#以Scanner为例" class="headerlink" title="以Scanner为例:"></a>以Scanner为例:</h4><p>包：java.util<br>  如果不再java.lang包下，就需要导包<br>类的层次结构：public final class Scanner extends Object implements Iterator<string><br>  继承关系<br>简单的概述：<br>   一个可以使用正则表达式来解析基本类型和字符串的简单文本扫描器。<br>版本信息：<br>  1.5（JDK的发展历史）<br>构造方法：<br>  创建对象<br>方法：查看简要信息以及详细信息<br>  String nextLine()</string></p>
+<h4 id="制作帮助文档："><a href="#制作帮助文档：" class="headerlink" title="制作帮助文档："></a>制作帮助文档：</h4><p>首先你要写好一个工具类：<br>公共类的名字必须和文件的名字一致<br>一个文件里面最多只能有一个公共类<br>默认只解析 public 和 protected 的文档注释信息<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line">这是一个基本的数学工具类, 提供简单的加减乘除运算</div><div class="line">@author Henson_z</div><div class="line">@version v1.0</div><div class="line">*/</div><div class="line">public class MyMath &#123;</div><div class="line">  /**</div><div class="line">    将构造方法私有化, 外界不能创建对象</div><div class="line">  */</div><div class="line">  private MyMath()&#123;</div><div class="line"></div><div class="line">  &#125;</div><div class="line">  /**</div><div class="line">  求两个数之和</div><div class="line">  */</div><div class="line">  public static int add(int a, int b) &#123;</div><div class="line">    return a + b;</div><div class="line">  &#125;</div><div class="line">  /**</div><div class="line">  求两个数之差</div><div class="line">  */</div><div class="line">  public static int minus(int a, int b) &#123;</div><div class="line">    return a - b;</div><div class="line">  &#125;</div><div class="line">  /**</div><div class="line">  求两个数之积</div><div class="line">  */</div><div class="line">  public static long multiply(int a, int b) &#123;</div><div class="line">    return a * b;</div><div class="line">  &#125;</div><div class="line">  /**</div><div class="line">  求两个数之商</div><div class="line">  */</div><div class="line">  public static double divide(int a, int b) &#123;</div><div class="line">    return 1.0 * a / b;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>然后到命令行输入：</p>
+<p>  javadoc -d 目录 -author -version MyMath.java</p>
+<h2 id="markdown一些使用格式问题"><a href="#markdown一些使用格式问题" class="headerlink" title="markdown一些使用格式问题"></a>markdown一些使用格式问题</h2><p>表示大于号小于号不能直接写要<br>大于&amp; gt;小于号是&amp; lt;<br>把空格去掉：<br>大于&gt;小于号&lt;</p>
+<h2 id="总结最后"><a href="#总结最后" class="headerlink" title="总结最后"></a>总结最后</h2><p>这是一天的内容，感觉还是很多的，还有一些东西需要消化。知道不是很难但是需要踏实的去运用。而不是瞎几把死记硬背。<br>纸上得来终觉浅，绝知此事要躬行。加油吧</p>
+
+        </div>
+        <div class="post-reply">
+            
+                <!-- 来必力City版安装代码 -->
+                <div id="lv-container" data-id="city" data-uid="MTAyMC8yOTE4Ni81NzUz">
+                    <script type="text/javascript">
+                        (function(d, s) {
+                            var j, e = d.getElementsByTagName(s)[0];
+
+                            if (typeof LivereTower === 'function') { return; }
+
+                            j = d.createElement(s);
+                            j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+                            j.async = true;
+
+                            e.parentNode.insertBefore(j, e);
+                        })(document, 'script');
+                    </script>
+                    <noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+                </div>
+                <!-- City版安装代码已完成 -->
+            
+            
+        </div>
+    </div>
+</section>
+<script>
+    // 获取第一张图, 用以当封面背景图
+    var img = document.querySelectorAll('img')[1]
+
+    if (img) {
+        var header_box = document.querySelector('#header_box')
+        header_box.style.backgroundImage = 'url('+ img.src +')'
+    }
+</script>
+      </div>
+  </div>
+  <style>
+  #footer {
+    min-height: 10vh;
+    background: black;
+    color: #fff;
+  }
+
+  #footer a {
+    color: #e1e1e1;
+  }
+</style>
+<footer id="footer" class="has-text-centered is-flex center">
+  <div class="container has-padding">
+    <div>
+      <div>
+        <!--请您保留作者署名, 主题制作来之不易-->
+        主题来自 <a href="http://haojen.github.io/">Haojen Ma</a>
+        <br>
+        Copyright © 王邸 2019
+        <!--
+          Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+        -->
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="/js/search_core.js"></script>
+<script src="/js/script.js"></script>
+
+</body>
+</html>
