@@ -14,7 +14,7 @@
 <meta property="og:url" content="http://yoursite.com/2019/06/30/Java总结（一）/index.html">
 <meta property="og:site_name" content="路要坚持">
 <meta property="og:description" content="1.把第三章的客户题写完了；放在第一行代码HomeWork中2.总结本周学习的内容： 星期一赋值运算符：基本运算符 =拓展赋值运算符： += -= 等a=b=101.赋值表达式是有值的  a+b  b=10; //它的值等于赋值运算符右边表达式的值；2.赋值运算符从右向左结合的； 但是算数运算符是从左到右结合的；  a += 20; –&amp;gt; a = a + 20;  不能写a = 20 + a">
-<meta property="og:updated_time" content="2019-06-30T15:43:01.849Z">
+<meta property="og:updated_time" content="2019-07-01T01:20:17.226Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java总结（一）">
 <meta name="twitter:description" content="1.把第三章的客户题写完了；放在第一行代码HomeWork中2.总结本周学习的内容： 星期一赋值运算符：基本运算符 =拓展赋值运算符： += -= 等a=b=101.赋值表达式是有值的  a+b  b=10; //它的值等于赋值运算符右边表达式的值；2.赋值运算符从右向左结合的； 但是算数运算符是从左到右结合的；  a += 20; –&amp;gt; a = a + 20;  不能写a = 20 + a">
@@ -161,15 +161,15 @@
 <p>按位与： &amp;  同时为1 结果为1；<br>按位或： |  同时为0 结果为0 否则为1<br>按位异或： ^ 不同为1 其余为0<br>按位取反： ~  单目运算符</p>
 <p>注意事项：<br>    位运算只能用于整数和char(char类型可以看成无符号的整数)；<br>    位运算的效率是最高的</p>
 <p>一些用位运算题目：</p>
-<h4 id="1-对2的n次幂取余-都可以转成位运算"><a href="#1-对2的n次幂取余-都可以转成位运算" class="headerlink" title="1.对2的n次幂取余 都可以转成位运算"></a>1.对2的n次幂取余 都可以转成位运算</h4><p>a%64 == a&amp;（a-1）;<br>2^n:<br>    1101 1101<br>%   0100 0000</p>
-<p>可以转换成：<br>    1101 1101<br>&amp;   0011 1111</p>
+<h4 id="1-对2的n次幂取余-都可以转成位运算"><a href="#1-对2的n次幂取余-都可以转成位运算" class="headerlink" title="1.对2的n次幂取余 都可以转成位运算"></a>1.对2的n次幂取余 都可以转成位运算</h4><p>a%64 == a&amp;（2^n-1）;<br>2^n:<br>    1101 1101<br>%<br>    0100 0000</p>
+<p>可以转换成：<br>    1101 1101<br>&amp;<br>    0011 1111</p>
 <h4 id="2-判断一个数是否是2的n次幂？"><a href="#2-判断一个数是否是2的n次幂？" class="headerlink" title="2.判断一个数是否是2的n次幂？"></a>2.判断一个数是否是2的n次幂？</h4><p>  2^n :因子都是2；<br>  时间复杂度：log n;</p>
 <p>能否在常量时间复杂度内，判断一个数是否是2^n;<br>  2^n的存储特点：只有一个1 ，后面全部0；<br>  a &amp; (a-1) == 0;</p>
 <p>  0100 0000<br>&amp; 0011 1111<br>  0000 0000</p>
 <h4 id="3-两个整数变量的交换"><a href="#3-两个整数变量的交换" class="headerlink" title="3.两个整数变量的交换"></a>3.两个整数变量的交换</h4><p>int a = 4;<br>int b = 3;<br>a = a ^ b;  //  a = 4 ^ 3 ,b = 3<br>b = a ^ b;  //  a = 4 ^ 3 ,b = 4^3^3= 4<br>a = a ^ b;  //  a = 4 ^ 3 ^ 4 = 3 ,b = 4</p>
 <h4 id="4-有一堆数字，都是成对出现了。只有一个是单独出现的。找出那个单独的整数"><a href="#4-有一堆数字，都是成对出现了。只有一个是单独出现的。找出那个单独的整数" class="headerlink" title="4.有一堆数字，都是成对出现了。只有一个是单独出现的。找出那个单独的整数"></a>4.有一堆数字，都是成对出现了。只有一个是单独出现的。找出那个单独的整数</h4><p>  可以不是排序的<br>  1,1,2,2,a,a+1,a+1,a+2,a+2….</p>
 <p>  0 ^ 1 ^ 1 ^ 2 ^ 2 ….</p>
-<p>因为a^a = 0<br>0 ^ <em> = </em> 所以能直接找出单独的数。<br>但是这里有个问题，如果a = 0能否找出?<br>如果最后的结果是0是有两种答案：<br>1）没有单独的数<br>2）单独的数就是0</p>
+<p>因为a^a = 0<br>0 ^ 任何数 = 任何数 所以能直接找出单独的数。<br>但是这里有个问题，如果a = 0能否找出?<br>如果最后的结果是0是有两种答案：<br>1）没有单独的数<br>2）单独的数就是0</p>
 <p>&lt;&lt; 左移： 低位补0 高位丢失<br>&gt;&gt; 右移： 高位补符号位 低位丢弃<br>&gt;&gt;&gt;无符号右移：高位补0 低位丢弃</p>
 <p>注意事项：<br>    左移：左移N个单位，相当乘以2^n;<br>    右移：右移n个单位，相当于除以2^n;<br>    对于移位运算符来说，当操作数超出字长时；实际移动n mod 字长<br>    int a = 64<br>    a&gt;&gt; 32 = a</p>
 <h2 id="星期二"><a href="#星期二" class="headerlink" title="星期二"></a>星期二</h2><h3 id="switch"><a href="#switch" class="headerlink" title="switch"></a>switch</h3><p>  switch表示这是switch语句<br>  表达式的取值：byte, short, int, char<br>    JDK5以后可以是：枚举<br>    JDK7以后可以是：String<br>  case后面跟的是要和表达式进行比较的值<br>  语句体部分可以是一条或多条语句<br>  break表示中断，结束的意思，可以结束switch语句<br>  default语句表示所有情况都不匹配的时候，就执行该处的内容，和if语句的else相似。</p>
@@ -187,7 +187,7 @@
 </li>
 </ol>
 <p>小学生的痛苦：<br>  求满足这个条件最小正整数：<br>    对3整除余2<br>    对5整除余3<br>    对7整除余2</p>
-<p>（注意这个思路）<br>  a. 假设s满足条件, 下一个满足条件的数是多少？<br>    下一个数：s + 105n (n = 1,2,3,4…)也满足条件<br>  b. 构建一个数满足这个条件<br>    3 <em> 5 = 15<br>      15 % 7 == 1<br>    3 </em> 7 = 21<br>      21 % 5 == 1<br>    5 * 7 =35<br>      35 % 3 == 2<br>    p = 15a + 21b + 35c (a,b,c为余数)<br>      p % 7 == a<br>      p % 5 == b<br>      p % 3 == 2c<br>      a = 2, b = 3, c=1<br>    p = 30 + 63 + 35 = 128;<br>    p - 105 =23;</p>
+<p>（注意这个思路）<br>  a. 假设s满足条件, 下一个满足条件的数是多少？<br>    下一个数：s + 105n (n = 1,2,3,4…)也满足条件<br>  b. 构建一个数满足这个条件<br>    3 X 5 = 15<br>      15 % 7 == 1<br>    3 X 7 = 21<br>      21 % 5 == 1<br>    5 X 7 =35<br>      35 % 3 == 2<br>    p = 15a + 21b + 35c (a,b,c为余数)<br>      p % 7 == a<br>      p % 5 == b<br>      p % 3 == 2c<br>      a = 2, b = 3, c=1<br>    p = 30 + 63 + 35 = 128;<br>    p - 105 =23;</p>
 <p>while语句和for语句的区别：</p>
 <ol>
 <li>变量的作用范围</li>
@@ -206,13 +206,14 @@
 <p>  练习：求两个数据之和<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">/*</div><div class="line">  功能：求两个数据的和</div><div class="line">  返回值类型：int</div><div class="line">  参数列表： int int</div><div class="line">*/</div></pre></td></tr></table></figure></p>
 <p>  返回值类型不为void方法的调用：<br>    a. 单独调用<br>    b. 输出调用<br>    c. 赋值调用</p>
 <p>注意事项：<br>  方法不调用不执行。</p>
-<h2 id="星期三："><a href="#星期三：" class="headerlink" title="星期三："></a>星期三：</h2><h3 id="方法-下"><a href="#方法-下" class="headerlink" title="方法(下)"></a>方法(下)</h3><p>包：同一个包下面能够有两个名字相同的类吗？<br>  同一个类下面能有两个名字相同的方法吗？<br>    可以。方法的重载。</p>
+<h2 id="星期三："><a href="#星期三：" class="headerlink" title="星期三："></a>星期三：</h2><h3 id="方法-下"><a href="#方法-下" class="headerlink" title="方法(下)"></a>方法(下)</h3><p>包：同一个包下面能够有两个名字相同的类吗？<br>    不能<br>同一个类下面能有两个名字相同的方法吗？<br>    可以。方法的重载。</p>
 <p>方法重载：<br>  a. 在同一个类<br>  b. 方法名字相同<br>  c. 参数列表不同(参数类型, 参数个数, 参数顺序)</p>
 <p>术语：方法的签名(signature) 方法名 + 参数列表<br>  同一个类中方法名字可以相同，但是方法的签名不能相同</p>
 <p>问题：方法的签名为什么与返回值类型无关？<br>  单独调用时，就不能区分到底使用哪个方法。</p>
 <p>问题2：求两个数据的和。参数类型分别为两个byte类型，两个short类型，两个int类型，两个long类型，并在main方法中进行测试。</p>
 <p>问题： 如果传入的参数类型不同会怎么样,如下代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">public int add(int a, int b) &#123;</div><div class="line">  return a+b;</div><div class="line">&#125;</div><div class="line">public double add(double a, double b) &#123;</div><div class="line">  reuturn a+b;</div><div class="line">&#125;</div><div class="line">add(10,10.111);</div></pre></td></tr></table></figure></p>
 <p>  A 编译不通过<br>  B 运行报错<br>  C 可以运行</p>
+<p>答案：C 结果是double类型</p>
 <p>建议：<br>  如果方法实现一样，但是数据类型兼容。就没有必要使用方法的重载。<br>  他会默认选择大的范围进行调用</p>
 <h3 id="数组："><a href="#数组：" class="headerlink" title="数组："></a>数组：</h3><p>数组的初始化：<br>  就是为数组中的数组元素分配内存空间，并为每个数组元素赋初值。</p>
 <p>动态初始化：<br>  由程序员指定长度，系统决定初始值。<br>  格式：<br>    数据类型[] 数组名 = new 数据类型[数组的长度];<br>  举例：<br>    int[] arr = new int[3];</p>
@@ -224,7 +225,7 @@
 <p>空常量：null<br>  可以给所有的引用数据类型赋值<br>空指针异常：<br>  java.lang.NullPointerException</p>
 <h2 id="星期四："><a href="#星期四：" class="headerlink" title="星期四："></a>星期四：</h2><h3 id="参数传递"><a href="#参数传递" class="headerlink" title="参数传递"></a>参数传递</h3><p>结论：<br>  a. Java中只有值传递。<br>  b. 基本数据类型传递参数的时候相当于c语言中值传递。<br>  c. 引用数据类型传递参数的时候相当于c语言中地址传递。</p>
 <p>需要注意以下问题：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">int[] arr1 = &#123;1, 2, 3&#125;;</div><div class="line">int[] arr2 = &#123;4, 5, 6&#125;;</div><div class="line">System.out.println(Arrays.toString(arr1)); //[1, 2, 3]</div><div class="line">System.out.println(Arrays.toString(arr2)); //[4, 5, 6]</div><div class="line">change(arr1, arr2);</div><div class="line">System.out.println(Arrays.toString(arr1)); //[1, 2, 3]</div><div class="line">System.out.println(Arrays.toString(arr2)); //[4, 5, 6]</div><div class="line">public static void change(int[] arr1, int[] arr2) &#123;</div><div class="line">  int[] temp = arr1;</div><div class="line">  arr1 = arr2;</div><div class="line">  arr2 = temp;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>这里并不会交换数组。不要死记硬背说应用类型会修改。这里只是在调用change函数时，<br>把两个数组位置变化。并没有影响main函数中的值。所以打印出来自然就不会变了</p>
+<p>这里并不会交换数组。不要死记硬背说引用类型会修改。这里只是在调用change函数时，<br>把两个数组位置变化。并没有影响main函数中的值。所以打印出来自然就不会变了</p>
 <h3 id="递归"><a href="#递归" class="headerlink" title="递归"></a>递归</h3><p>  方法定义中调用方法本身的现象<br>  java.lang.StackOverflowError：死递归, 递归太深了</p>
 <p>递归和循环在某些情况下可以相互转换。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">class RecursionDemo3 &#123;</div><div class="line">  public static void main(String[] args) &#123;</div><div class="line">    System.out.println(factorial(4));</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  /*public static long factorial(int n) &#123;</div><div class="line">    long result = 1;</div><div class="line">    for(int i = 2; i &lt;= n; i++) &#123;</div><div class="line">      result *= i;</div><div class="line">    &#125;</div><div class="line">    return result;</div><div class="line">  &#125;*/</div><div class="line"></div><div class="line">  public static long factorial(int n) &#123;</div><div class="line">    if(n == 1) return 1;</div><div class="line">    return n * factorial(n-1);</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <h3 id="递归经典问题-难"><a href="#递归经典问题-难" class="headerlink" title="递归经典问题(难)"></a>递归经典问题(<strong><em>难</em></strong>)</h3><p><strong>汉诺塔问题</strong>：<br>汉诺塔是根据一个传说形成的数学问题：</p>
@@ -280,7 +281,7 @@
 <p>然后到命令行输入：</p>
 <p>  javadoc -d 目录 -author -version MyMath.java</p>
 <h2 id="markdown一些使用格式问题"><a href="#markdown一些使用格式问题" class="headerlink" title="markdown一些使用格式问题"></a>markdown一些使用格式问题</h2><p>表示大于号小于号不能直接写要<br>大于&amp; gt;小于号是&amp; lt;<br>把空格去掉：<br>大于&gt;小于号&lt;</p>
-<h2 id="总结最后"><a href="#总结最后" class="headerlink" title="总结最后"></a>总结最后</h2><p>这是一天的内容，感觉还是很多的，还有一些东西需要消化。知道不是很难但是需要踏实的去运用。而不是瞎几把死记硬背。<br>纸上得来终觉浅，绝知此事要躬行。加油吧</p>
+<h2 id="总结最后"><a href="#总结最后" class="headerlink" title="总结最后"></a>总结最后</h2><p>这是一周的内容，感觉还是很多的，还有一些东西需要消化。知道不是很难但是需要踏实的去运用。而不是瞎几把死记硬背。<br>纸上得来终觉浅，绝知此事要躬行。加油吧</p>
 
         </div>
         <div class="post-reply">
@@ -339,7 +340,7 @@
         <br>
         Copyright © 王邸 2019
         <!--
-          Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+          Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
         -->
       </div>
     </div>
