@@ -14,7 +14,7 @@
 <meta property="og:url" content="http://yoursite.com/2019/06/30/Java总结（一）/index.html">
 <meta property="og:site_name" content="路要坚持">
 <meta property="og:description" content="1.把第三章的客户题写完了；放在第一行代码HomeWork中2.总结本周学习的内容： 星期一赋值运算符：基本运算符 =拓展赋值运算符： += -= 等a=b=101.赋值表达式是有值的  a+b  b=10; //它的值等于赋值运算符右边表达式的值；2.赋值运算符从右向左结合的； 但是算数运算符是从左到右结合的；  a += 20; –&amp;gt; a = a + 20;  不能写a = 20 + a">
-<meta property="og:updated_time" content="2019-07-01T01:20:17.226Z">
+<meta property="og:updated_time" content="2019-07-06T12:31:00.631Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java总结（一）">
 <meta name="twitter:description" content="1.把第三章的客户题写完了；放在第一行代码HomeWork中2.总结本周学习的内容： 星期一赋值运算符：基本运算符 =拓展赋值运算符： += -= 等a=b=101.赋值表达式是有值的  a+b  b=10; //它的值等于赋值运算符右边表达式的值；2.赋值运算符从右向左结合的； 但是算数运算符是从左到右结合的；  a += 20; –&amp;gt; a = a + 20;  不能写a = 20 + a">
@@ -217,7 +217,8 @@
 <p>建议：<br>  如果方法实现一样，但是数据类型兼容。就没有必要使用方法的重载。<br>  他会默认选择大的范围进行调用</p>
 <h3 id="数组："><a href="#数组：" class="headerlink" title="数组："></a>数组：</h3><p>数组的初始化：<br>  就是为数组中的数组元素分配内存空间，并为每个数组元素赋初值。</p>
 <p>动态初始化：<br>  由程序员指定长度，系统决定初始值。<br>  格式：<br>    数据类型[] 数组名 = new 数据类型[数组的长度];<br>  举例：<br>    int[] arr = new int[3];</p>
-<p>解释：<br>  [I@15db9742<br>  [: 一维数组<br>  I: 数组元素是int类型<br>  @: 表示分隔符<br>  15db9742：16进制的数, 内存地址的映射</p>
+<p>解释：<br>  [I@15db9742<br>  [: 一维数组<br>  I: 数组元素是int类型<br>  @: 表示分隔符<br>  15db9742：16进制的数, 内存地址的映射<br>实际是一个哈希值：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">public String toString() &#123;</div><div class="line">  return getClass().getName() + &quot;@&quot; + Integer.toHexString(hashCode());</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>打印一个对象时，默认调用toString()方法，可以看到其实就是把对象名转成哈希值然后转成16进制。</p>
 <p>java的内存分配<br>  栈：局部变量, 执行方法<br>  堆：new出来的东西 (对象)<br>  方法区<br>  本地方法栈<br>  程序计数器：字节码的行号指示器</p>
 <p>怎么引用数组中的元素值呢？<br>  索引(从0开始编号)<br>  数组名[索引]</p>
 <p>堆上的数据都会有默认初始值<br>  向堆申请空间的时候，都会把这片内存空间清0<br>  默认值：<br>    byte    0<br>    short   0<br>    int     0<br>    long    0L<br>    float   0.0f<br>    double    0.0<br>    boolean   false<br>    char    \u0000<br>    引用数据  null</p>
@@ -274,7 +275,7 @@
 <p>构造方法：<br>  作用：给对象的数据进行初始化<br>  格式：<br>    方法名与类名相同<br>    没有返回值类型<br>  注意事项：<br>    a. 如果没写构造方法,系统会提供无参构造方法(默认的构造方法)。<br>    b. 如果提供了构造方法, 系统将不再提供无参的构造方法。(建议: 自己写一个无参的构造方法)<br>    c. 构造方法也是可以重载的</p>
 <h2 id="星期六"><a href="#星期六" class="headerlink" title="星期六"></a>星期六</h2><h3 id="static"><a href="#static" class="headerlink" title="static:"></a>static:</h3><p>  静态的, 可以修饰成员<br>  特点：<br>    随着类的加载而加载<br>    优先于对象存在<br>    被类的所有对象共享<br>      这也是我们判断是否使用静态关键字的条件<br>    可以通过类名调用(推荐使用类名调用, 不要用对象名调用)</p>
 <p>  静态的成员是类所有<br>  非静态成员是对象所有</p>
-<p>注意事项：<br>  在静态方法中是没有 this 关键字的<br>  静态方法只能访问静态的成员<br>  非静态的方法可以访问静态的成员也可以访问非静态的成员。</p>
+<p>注意事项：<br>  在静态方法中是没有 this 关键字的<br>  静态方法只能访问静态的成员<br>  非静态的方法可以访问静态的成员也可以访问非静态的成员。<br>  但是静态方法只能访问静态成员。静态上下文只能访问静态的东西。<br>  比如：静态内部类就只能访问外部类静态的属性或者方法。</p>
 <h3 id="成员变量和静态变量区别"><a href="#成员变量和静态变量区别" class="headerlink" title="成员变量和静态变量区别"></a>成员变量和静态变量区别</h3><p>  a.所属不同<br>  成员变量：对象<br>    静态变量：类<br>  b.内存中位置不同：<br>    成员变量：堆<br>    静态变量：方法区<br>  c.生命周期不同：<br>    成员变量：随着对象的创建而开始, 随着对象的死亡而消失<br>    静态变量：随着类的加载而开始, 随着类的卸载而消失<br>  d.调用方法不同：<br>    成员变量：只能通过对象调用<br>    静态变量：可以通过对象调用，也可以用类名调用(推荐使用类名调用)</p>
 <h3 id="帮助文档"><a href="#帮助文档" class="headerlink" title="帮助文档"></a>帮助文档</h3><h4 id="以Scanner为例"><a href="#以Scanner为例" class="headerlink" title="以Scanner为例:"></a>以Scanner为例:</h4><p>包：java.util<br>  如果不再java.lang包下，就需要导包<br>类的层次结构：public final class Scanner extends Object implements Iterator<string><br>  继承关系<br>简单的概述：<br>   一个可以使用正则表达式来解析基本类型和字符串的简单文本扫描器。<br>版本信息：<br>  1.5（JDK的发展历史）<br>构造方法：<br>  创建对象<br>方法：查看简要信息以及详细信息<br>  String nextLine()</string></p>
 <h4 id="制作帮助文档："><a href="#制作帮助文档：" class="headerlink" title="制作帮助文档："></a>制作帮助文档：</h4><p>首先你要写好一个工具类：<br>公共类的名字必须和文件的名字一致<br>一个文件里面最多只能有一个公共类<br>默认只解析 public 和 protected 的文档注释信息<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line">这是一个基本的数学工具类, 提供简单的加减乘除运算</div><div class="line">@author Henson_z</div><div class="line">@version v1.0</div><div class="line">*/</div><div class="line">public class MyMath &#123;</div><div class="line">  /**</div><div class="line">    将构造方法私有化, 外界不能创建对象</div><div class="line">  */</div><div class="line">  private MyMath()&#123;</div><div class="line"></div><div class="line">  &#125;</div><div class="line">  /**</div><div class="line">  求两个数之和</div><div class="line">  */</div><div class="line">  public static int add(int a, int b) &#123;</div><div class="line">    return a + b;</div><div class="line">  &#125;</div><div class="line">  /**</div><div class="line">  求两个数之差</div><div class="line">  */</div><div class="line">  public static int minus(int a, int b) &#123;</div><div class="line">    return a - b;</div><div class="line">  &#125;</div><div class="line">  /**</div><div class="line">  求两个数之积</div><div class="line">  */</div><div class="line">  public static long multiply(int a, int b) &#123;</div><div class="line">    return a * b;</div><div class="line">  &#125;</div><div class="line">  /**</div><div class="line">  求两个数之商</div><div class="line">  */</div><div class="line">  public static double divide(int a, int b) &#123;</div><div class="line">    return 1.0 * a / b;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
@@ -340,7 +341,7 @@
         <br>
         Copyright © 王邸 2019
         <!--
-          Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+          Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
         -->
       </div>
     </div>

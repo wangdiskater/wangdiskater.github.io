@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html class="full-height">
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="//cdn.bootcss.com/bulma/0.4.1/css/bulma.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+  
+  <title>Java总结（二） | 路要坚持</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="总结时间：0701-0706 概述这周主要把面向对象的内容讲完了。很多东西虽然很熟悉但是却很多细节的处理很重要。是打好基础的关键。但是万变不离其中，离不开三大特性：继承，封装，多态。现在也只能字面意思上去理解到底这些东西是什么。这些东西的规律是什么，但是他为什么这样实现的？最初的构想是什么？等等问题，这不是老师能教你的，你自己需要去学习。上个礼拜简单的讲了什么是封装，但是封装远远没有private">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java总结（二）">
+<meta property="og:url" content="http://yoursite.com/2019/07/06/Java总结（二）/index.html">
+<meta property="og:site_name" content="路要坚持">
+<meta property="og:description" content="总结时间：0701-0706 概述这周主要把面向对象的内容讲完了。很多东西虽然很熟悉但是却很多细节的处理很重要。是打好基础的关键。但是万变不离其中，离不开三大特性：继承，封装，多态。现在也只能字面意思上去理解到底这些东西是什么。这些东西的规律是什么，但是他为什么这样实现的？最初的构想是什么？等等问题，这不是老师能教你的，你自己需要去学习。上个礼拜简单的讲了什么是封装，但是封装远远没有private">
+<meta property="og:updated_time" content="2019-07-07T02:57:02.696Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java总结（二）">
+<meta name="twitter:description" content="总结时间：0701-0706 概述这周主要把面向对象的内容讲完了。很多东西虽然很熟悉但是却很多细节的处理很重要。是打好基础的关键。但是万变不离其中，离不开三大特性：继承，封装，多态。现在也只能字面意思上去理解到底这些东西是什么。这些东西的规律是什么，但是他为什么这样实现的？最初的构想是什么？等等问题，这不是老师能教你的，你自己需要去学习。上个礼拜简单的讲了什么是封装，但是封装远远没有private">
+  
+    <link rel="alternate" href="/" title="路要坚持" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/common.css">
+<link rel="stylesheet" href="/css/nav.css">
+<link rel="stylesheet" href="/css/layout.css">
+  
+
+</head>
+
+<body>
+  <header id="navbar" class="overflow-hidden">
+  <div class="container">
+    <nav class="nav">
+         <div class="nav-left">
+            <a href="/" class="nav-item" style="font-size: 20px;">
+              <span class="logo">王邸</span>'s Blog
+            </a>
+         </div>
+        <div class="nav-center is-hidden position-relative" id="search_container">
+            <div class="nav-item full-width full-height">
+                <i class="fa fa-search has-padding" aria-hidden="true"></i>
+                <input type="text" id="search_input" class="search-input full-height full-width" placeholder="Search post" autofocus>
+                <i id="close_search" class="fa fa-times" aria-hidden="true"></i>
+            </div>
+            <div id="search_result"></div>
+        </div>
+        <div class="nav-right nav-menu">
+            <a class="nav-item" id="search">
+                <i class="fa fa-search" aria-hidden="true"></i>
+            </a>
+            
+            <a class="nav-item" href="/">
+                Home
+            </a>
+            
+            <a class="nav-item" href="/works">
+                My Works
+            </a>
+            
+            <a class="nav-item" href="/about">
+                About
+            </a>
+            
+        </div>
+        <span class="nav-toggle" id="navMenuDropdown">
+            <span></span>
+            <span></span>
+            <span></span>
+        </span>
+        <div class="navbar-menu position-absolute full-width content-box is-hidden-desktop is-flex flex-column center" style="top: 100%;">
+            
+            <a class="nav-item flex-1" href="/">
+                Home
+            </a>
+            
+            <a class="nav-item flex-1" href="/works">
+                My Works
+            </a>
+            
+            <a class="nav-item flex-1" href="/about">
+                About
+            </a>
+            
+        </div>
+    </nav>
+  </div>
+</header>
+
+  <div id="main-wrap" class="position-relative" style="margin-top: 55px;">
+      <div class="main-inner-content">
+          <!--博文页面-->
+
+<style>
+    .header-box {
+        height: 370px;
+        filter: blur(10px);
+        background-size: cover;
+        background-color: lightsteelblue;
+    }
+
+    .post-box {
+        padding: 15px;
+        padding-top: 60px;
+        min-height: 80vh;
+        margin-top: -200px;
+        border-radius: 4px;
+        background-color: rgba(255,255,255,.8);
+    }
+
+    .post-avatar {
+        height: 30px;
+        width: 30px;
+        border-radius: 50%;
+    }
+
+    .flow-chart {
+        text-align: center;
+    }
+
+    img[alt="post-cover"] {
+        display: none;
+    }
+</style>
+<header>
+    <div id="header_box" class="header-box"></div>
+</header>
+<section>
+    <div class="container post-box">
+        <div class="content post-title is-flex center flex-column" style="margin-bottom: 70px; overflow: auto;">
+            <h1 class="has-text-centered" style="padding-bottom: 10px; border-bottom: 3px solid #fff">
+                <strong>Java总结（二）</strong>
+            </h1>
+            
+            <div class="is-flex align-center">
+                <img class="post-avatar" src="https://q2.qlogo.cn/headimg_dl?bs=996057150&dst_uin=996057150&dst_uin=996057150&;dst_uin=996057150&spec=100&url_enc=0&referer=bu_interface&term_type=PC">
+                <span style="padding:0 10px;"> <span class="sub-title">By</span> 王邸</span>
+                <span class="post-date sub-title">at: 2019-07-06</span>
+            </div>
+            
+                <div>
+                    
+                </div>
+            
+        </div>
+        <div class="content" style="overflow: auto">
+            <p>总结<br>时间：0701-0706</p>
+<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>这周主要把面向对象的内容讲完了。很多东西虽然很熟悉但是却很多细节的处理很重要。是打好基础的关键。但是万变不离其中，离不开三大特性：继承，封装，多态。现在也只能字面意思上去理解到底这些东西是什么。这些东西的规律是什么，但是他为什么这样实现的？最初的构想是什么？等等问题，这不是老师能教你的，你自己需要去学习。上个礼拜简单的讲了什么是封装，但是封装远远没有private那么简单。接下来将总结一下本周的学习内容：</p>
+<h2 id="星期一"><a href="#星期一" class="headerlink" title="星期一"></a>星期一</h2><h3 id="代码块"><a href="#代码块" class="headerlink" title="代码块"></a>代码块</h3><p>用{}括起来的代码<br>分类：<br>局部代码块<br>  位置：方法里面(局部位置)<br>  作用：限制局部变量的生命周期，及早释放，提高内存利用率</p>
+<p>构造代码块(语法糖)：<br>  位置：类中方法外(成员位置)<br>  作用：多个构造方法方法中相同的代码存放到一起，每次调用构造都执行，并且在构造方法前执行<br>  相当于放在每个构造函数的首行</p>
+<p>静态代码块：<br>  位置: 成员位置 需要用static标识；<br>  作用：对类进行初始化, 在类加载的时候执行, 并且只执行一次</p>
+<p>  同步代码块(以后再讲)</p>
+<p>这里只需要搞清楚一个问题：这些代码块的执行顺序：<br>静态代码块 &gt;构造代码块(语法糖) &gt; 构造方法<br>先执行父类的,看下面例子：<br>先执行父类静态块，再执行子类静态块。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div></pre></td><td class="code"><pre><div class="line">  class Fu &#123;</div><div class="line">    static &#123;</div><div class="line">      System.out.println(&quot;静态代码块Fu&quot;);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    &#123;</div><div class="line">      System.out.println(&quot;构造代码块Fu&quot;);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public Fu() &#123;</div><div class="line">      System.out.println(&quot;构造方法Fu&quot;);</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  class Zi extends Fu &#123;</div><div class="line">    static &#123;</div><div class="line">      System.out.println(&quot;静态代码块Zi&quot;);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    &#123;</div><div class="line">      System.out.println(&quot;构造代码块Zi&quot;);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public Zi() &#123;</div><div class="line">      System.out.println(&quot;构造方法Zi&quot;);</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  class Test2 &#123;</div><div class="line">    public static void main(String[] args) &#123;</div><div class="line">      new Zi();</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  静态代码块Fu</div><div class="line">  静态代码块Zi</div><div class="line">  构造代码块fu</div><div class="line">  构造方法fu</div><div class="line">  构造代码块zi</div><div class="line">  构造方法zi</div><div class="line"></div><div class="line">先加载父类静态代码块然后加载子代静态代码块</div><div class="line">Java中如果有继承关系，对象的初始化是分层初始化</div><div class="line">  1. 父类按照层次依次加载，然后再加载子类</div><div class="line">  2. 成员变量是按照层次进行初始化的</div><div class="line">    先初始化父类中定义的数据，再初始化子类中定义的数据</div></pre></td></tr></table></figure>
+<h3 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h3><p>(1)把多个类中相同的成员给提取出来定义到一个独立的类中。然后让这多个类和该单独的类产生一个关系，使多个类中具备这个单独的类中定义的成员。<br>    这个关系叫继承。</p>
+<p>(2)Java中如何表示继承呢?格式是什么呢?<br>  A:用关键字extends表示<br>  B:格式：class 子类名 extends 父类名 {}</p>
+<p>(3)继承的好处：<br>  A: 提高了代码的复用性<br>  B: 提高了代码的维护性<br>  C: 让类与类产生了一个关系，是多态的前提</p>
+<p>(4)继承的弊端：<br>  A:让类的耦合性增强。这样某个类的改变，就会影响其他和该类相关的类。<br>    设计原则：低耦合，高内聚。<br>    耦合：类与类的关系<br>    内聚：自己完成某件事情的能力（责任）<br>  B:打破了封装性</p>
+<p>(5)Java中继承的特点<br>  A: Java只支持单继承，不支持多继承<br>  B: 但是支持多层继承   界门纲目科属种</p>
+<p>(6)继承的注意事项：<br>  A:子类不能继承父类的私有成员（私有成员是被子类隐式继承的，其实私有成员被继承了，但是在子类中不能访问。反射）<br>  B:子类不能继承父类的构造方法，但是可以通过super去访问<br>  C:不要为了部分功能而去继承。如下例子</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">class A &#123;</div><div class="line">  m1();</div><div class="line">  m2();</div><div class="line">  m3();</div><div class="line">  m4();</div><div class="line">&#125;</div><div class="line">我们现在需要一个类有以下功能：m1(), m2(), m3(), m5();</div><div class="line">class B extends A&#123; (不推荐)</div><div class="line">  m5();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>说到功能那就一定要写成接口来实现就好;</p>
+<p>(7)什么时候使用继承呢?<br>  A类和B类如果是: is a<br>  is a的关系：</p>
+<ul>
+<li>Person：<ul>
+<li>Student</li>
+<li>Teacher</li>
+</ul>
+</li>
+</ul>
+<p><strong>(8)Java继承中的成员关系</strong></p>
+<p>  A:成员变量<br>    a:子类的成员变量名称和父类中的成员变量名称不一样。<br>    b:子类的成员变量名称和父类中的成员变量名称一样，这个怎么访问呢?<br>      子类的方法访问变量的查找顺序(一层一层向外)：<br>      首先找子类的局部变量<br>      再找子类的成员变量<br>      再找父类的成员变量 …<br>    c.子类的成员变量隐藏了父类的成员变量？(就近原则)<br>      super关键字<br>        super是内存空间的标识</p>
+<p>  B:静态成员:<br>    a. 静态成员也会被继承<br>    b.如果出现同名的静态变量，那么父类中定义的静态成员只能通过类名访问。<br>    c.如果new一个对象 还是能super访问父类的静态成员的（我自己发现的）</p>
+<p>  C:构造方法<br>    a:子类的构造方法默认会去访问父类的无参构造方法<br>      目的：将在父类中定义的成员变量初始化。<br>    b:父类中如果没有无参构造方法，怎么办?<br>      子类通过super去明确调用父类带参构造<br>      子类通过this调用本身的其他构造，<strong>但是一定会有一个去访问了父类的构造</strong><br>      让父类提供无参构造<br>      this(…), super(…)只能在构造方法的第一条语句。</p>
+<p>  D:成员方法<br>    a:子类的成员方法和父类中的成员方法签名不一样。<br>      相当于两个不同的方法(我们来举个栗子);<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">public class demo2 &#123;</div><div class="line">    public static void main(String[] args) &#123;</div><div class="line">        Son son = new Son();</div><div class="line">        son.show(&quot;我传入了一个参数&quot;);</div><div class="line">        son.show();</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">class Father &#123;</div><div class="line">    public void show(String s)&#123;</div><div class="line">        System.out.println(&quot;我是父类的show方法：&quot; + s);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">class Son extends  Father &#123;</div><div class="line">    public void show() &#123;</div><div class="line">        System.out.println(&quot;我是子类的show方法我没有参数&quot;);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">我是父类的show方法我传入了一个参数</div><div class="line">我是子类的show方法我没有参数</div></pre></td></tr></table></figure></p>
+<p>b:子类的成员方法和父类中的成员方法签名一样，这个怎么访问呢?<br>  父类的方法被重写了，不能再访问父类的方法，此时方法被重写。<br>  通过子类对象访问一个方法的查找顺序：<br>  查找子类的成员方法<br>  再查找父类的成员方法<br>c:重写的成员方法返回值类型（引用类型兼容即可）：<br>  基本数据类型必须一致<br>  引用数据类型：父类的类型必须兼容子类的类型<br>d:其他注意事项：<br>  访问权限:子类的方法的访问权限必须大于等于父类的方法<br>  父类中的私有方法不能被重写</p>
+<p>E:静态方法<br>    a.静态的方法也可以被继承<br>    b.静态方法可以被”重写”, 但是不能添加Override</p>
+<p>(9)方法的重写：<br>  有子父类关系, 方法签名一样。<br>  返回值类型：<br>    基本类型：必须一致<br>    引用类型：父类兼容子类。<br>  访问权限：子类的访问权限必须大于等于父类的访问权限。<br>    Father f = new Son();<br>    f.show();  //多态性，编译看左边，运行看右边；</p>
+<p>(10)两个面试题：<br>  A:Override和Overload的区别?<br>    override: 子类重写父类的同名方法。要求子类的返回值类型要被父类兼容，方法名一样，参数列表一样（方法签名一样）子类的访问权限不能比父类的小。<br>    overload：在同一个类中，方法名一样，但是参数列表不一样。与返回值类型无关<br>      如果在子类中定义了一个和父类同名的方法，但是参数列表不一样就会构成重载。<br>      如果在子类中定义了一个和父类同名的方法，但是参数列表一样，但是返回值类型不兼容，会报错。<br>  B:this和super的区别和各自的作用?<br>    this<br>    this.成员变量 super.成员变量<br>    this(…)   super(…) //调用构造方法<br>    this.成员方法() super.成员方法()</p>
+<p>(11)数据初始化的面试题<br>  <strong>A:回顾：对象初始化过程</strong><br>    加载Student.class文件进内存<br>    在栈内存为s开辟空间<br>    在堆内存为学生对象开辟空间<br>    对学生对象的成员变量进行默认初始化<br>    对学生对象的成员变量进行显示初始化<br>    通过构造方法对学生对象的成员变量赋值<br>    学生对象初始化完毕，把对象地址赋值给s变量</p>
+<p>  B:子类对象的初始化过程（分层初始化：加载父类，然后加载子类）<br>  C:子父类的构造执行过程<br>    加载父类<br>    加载子类<br>    先对父类进行初始化: 父类显示初始化，父类的构造方法。<br>    对子类进行初始化：子类的显示初始化，子类的构造方法。<br>  看下面这个例子更好的理解：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">public class test3 &#123;</div><div class="line">  public static void main(String[] args) &#123;</div><div class="line">    new Z(); //先进行父类的初始化！！！！！</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">class X &#123;</div><div class="line">  Y b = new Y();   //第一步</div><div class="line">  int a = 10;</div><div class="line">  X() &#123;</div><div class="line">    System.out.print(&quot;X&quot;);  //然后初始化X</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">class Y &#123;</div><div class="line">  Y() &#123;</div><div class="line">    System.out.print(&quot;Y&quot;);  //从X过来第一次打印Y   第二次过来从Z</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">class Z extends X &#123;</div><div class="line">  Y y = new Y();   //第三步</div><div class="line">  Z() &#123;</div><div class="line">    // super();</div><div class="line">    System.out.print(&quot;Z&quot;); //最后一次打印</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">运行结果：</div><div class="line">Y X Y Z</div></pre></td></tr></table></figure></p>
+<h3 id="final"><a href="#final" class="headerlink" title="final"></a>final</h3><p>  (1)是最终的意思，可以修饰类，方法，变量。<br>  (2)特点：<br>  A:修饰类，表示这个类不能被继承（绝育手术）<br>  B:修饰变量，表示该变量使常量，它的值不能被修改<br>  基本数据类型：里面的值不能被修改<br>  引用数据类型：它的地址值不能被修改，指向同一个对象，但是对象的内容可以修改<br>  注意事项：<br>    被final的变量只能被赋值一次，即使值相同。<br>    注意final的默认初始化是无效的，所以可以通过构造方法初始化他，这样写并不会报错：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">class Son &#123;</div><div class="line">  final int a;</div><div class="line">  public Son() &#123;</div><div class="line">    a = 10;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>然而这样写，相当于赋值两次就会报错：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">class Son &#123;</div><div class="line">  final int a;</div><div class="line">  a = 10;  //就会报错。</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>  C:修饰方法，表示该方法不能被子类重写</p>
+<h2 id="第二天"><a href="#第二天" class="headerlink" title="第二天"></a>第二天</h2><h3 id="多态"><a href="#多态" class="headerlink" title="多态"></a>多态</h3><p>(1)同一个对象在不同时刻体现出来的不同状态。</p>
+<p>(2)多态的前提：<br>  A:有继承（实现）关系<br>  B:子类重写父类的方法<br>  C:父类的引用变量指向子类的对象<br>  多态的分类：<br>    a:具体类多态<br>      class Father{}<br>      class Son extends Father{}<br>      Father father = new Son();<br>    b:抽象类多态<br>      abstarct class Father{}<br>      class Son extends Father{}<br>      Father father = new Son();<br>    c:接口多态<br>      interface Father{}<br>      class Son implements Father{}<br>      Father father = new Son();</p>
+<p>(3)多态中的成员访问特点<br>  A:成员变量<br>    编译看左边，运行看左边<br>  B:静态变量：<br>    编译看左边，运行看左边<br>  C:成员方法<br>    编译看左边，运行看右边<br>  D:静态方法<br>    编译看左边，运行看左边</p>
+<p>(4)多态的好处：<br>  A:提高代码的维护性 (继承体现)<br>  B:提高代码的扩展性 (多态体现)</p>
+<p>(5)多态的弊端：<br>  破坏了封装性（继承）<br>  无法访问子类特有的功能</p>
+<p>(6)多态中的转型<br>  A:向上转型<br>    子类 –&gt; 父类（Java默认支持）<br>  B:向下转型<br>    父类 –&gt; 子类（可能会出现 ClassCastException）<br>看个例子：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">class A&#123;</div><div class="line">  public void show()&#123;</div><div class="line">    show2();</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  public void show2()&#123;</div><div class="line">    System.out.println(&quot;我&quot;);</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line">class B extends A &#123;</div><div class="line">  public void show2()&#123;</div><div class="line">    System.out.println(&quot;爱&quot;);</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line">class C extends B &#123;</div><div class="line">  public void show()&#123;</div><div class="line">    super.show();</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  public void show2()&#123;</div><div class="line">    System.out.println(&quot;你&quot;);</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line">public class Test1 &#123;</div><div class="line">  public static void main(String[] args) &#123;</div><div class="line">    A a = new B();</div><div class="line">    a.show();   //爱  成员函数 编译看左边 运行看右边 最终执行b的show2()方法</div><div class="line">    B b = new C();</div><div class="line">    b.show();   //你  最终执行c的show2()方法</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>还有一个例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">/*</div><div class="line">编译报错：</div><div class="line">  b</div><div class="line">运行报错：</div><div class="line">  e f</div><div class="line">*/</div><div class="line">class Animal&#123;&#125;</div><div class="line">class Dog extends Animal&#123;&#125;</div><div class="line">class Cat extends Animal&#123;&#125;</div><div class="line"></div><div class="line">public class Test3 &#123;</div><div class="line">  public static void main(String[] args) &#123;</div><div class="line">    Animal p0 = new Animal();</div><div class="line">    Dog p1 = new Dog ();</div><div class="line">    Cat p2 = new Cat ();</div><div class="line">    Animal p3 = new Dog ();</div><div class="line">    Animal p4 = new Cat ();</div><div class="line"></div><div class="line">    p0 = p1;          //a  默认向上转型</div><div class="line">    // p1 = p2;       //b  //编译报错 不兼容类型</div><div class="line">    p1 = (Dog)p3;     //c</div><div class="line">    p2 = (Cat)p4;     //d</div><div class="line">    // p1 = (Dog)p4;  //e  异常：java.lang.ClassCastException: Cat cannot be cast to Dog</div><div class="line">    // p2 = (Cat)p3;  //f  同理也是异常</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这个例子告诉我们不要乱用转型，学会使用instanceOf先判断是否是该对象的类或者子类然后再转型。</p>
+<h3 id="抽象类"><a href="#抽象类" class="headerlink" title="抽象类"></a>抽象类</h3><p>(1)概述：<br>  将类抽象    举例：动物<br>  将方法抽象 比如动物会怎么叫，你不知道，所以你不应该给一个具体的实现，而只要给一个声明就可以</p>
+<p>(2)抽象类的特点<br>  A:抽象类和抽象方法必须用关键字abstract修饰<br>  B:抽象类中不一定有抽象方法,但是有抽象方法的类一定是抽象类(但是接口也定义了抽象法方法)<br>  C:抽象类不能实例化 （存在的用途就是被子类继承）<br>  D:抽象类的子类<br>    a:是一个抽象类。可以重写抽象方法，也可以不重写。<br>    b:是一个具体类。一定要重写所有的抽象方法<br>(3)抽象类的成员特点：<br>  A:成员变量<br>    可以是变量，也可以是常量<br>  B:构造方法<br>    有构造方法<br>  C:成员方法<br>    可以是抽象方法，也可以是普通方法<br>(4)抽象类的几个小问题<br>  A:抽象类有构造方法，不能实例化，那么构造方法有什么用?<br>    给子类访问，对在抽象类中定义的成员变量进行初始化<br>  B:一个类如果没有抽象方法,却定义为了抽象类，有什么用?<br>    该类不能被实例化<br>  C:abstract 不能和哪些关键字共存<br>    final: 冲突<br>    private：冲突<br>    static：无意义</p>
+<h3 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h3><p>(1)在Java中，接口一般是用来表示扩展功能的。<br>(2)接口的特点：<br>  A:接口用关键字interface修饰<br>    interface 接口名 {} //一般大写<br>  B:类实现接口用implements修饰<br>    class 类名 implements 接口名 {}<br>  C:接口不能实例化<br>  D:接口的实现类<br>    a:是一个抽象类  可以重写抽象方法，也可以不重写。<br>    b:是一个具体类  一定要重写所有的抽象方法<br>  E:空的接口<br>    a:就是为了做标记的标记接口JAVA源码中经常看到<br>(3)接口的成员特点：<br>  A:成员变量<br>    只能是静态常量，默认用public static final修饰<br>  B:构造方法<br>    接口没有构造方法<br>  C:成员方法<br>    可以有抽象方法，默认用 public abstract修饰<br>    JDK8以后可以有<br>    默认方法：必修用default关键字修饰，默认用 public修饰<br>    静态方法：必修用static修饰，默认用public 修饰<br>(4)类与类,类与接口,接口与接口<br>  A:类与类   单继承<br>  B:类与接口  多实现<br>  C:接口与接口 多继承</p>
+<p>(5)抽象类和接口的区别<br>  A:成员区别<br>    抽象类：抽象方法，成员变量，静态成员等等<br>    接口：抽象方法，只能静态常量<br>  B:关系区别:<br>    类与类：  单继承<br>    类与接口：多实现<br>    接口与接口：多继承<br>  C:设计理念不同<br>    抽象类：和它的子类之间表现的是 is a的关系， 描述的是子类中共性<br>    接口：和它的子类之间表现的是 like a 的关系，描述的是扩展功能</p>
+<h3 id="形式参数和返回值的问题"><a href="#形式参数和返回值的问题" class="headerlink" title="形式参数和返回值的问题"></a>形式参数和返回值的问题</h3><p>(1)形式参数：<br>  类名：需要该类或者该类子类的对象<br>  抽象类名：需要该类的子类对象<br>  接口名：需要该接口的实现类对象<br>(2)返回值类型：<br>  类名：返回的是该类或者该类子类的对象<br>  抽象类名：返回的是该类的子类对象<br>  接口名：返回的是该接口的实现类的对象<br>(3)链式编程<br>  对象.方法1().方法2()…….方法n();</p>
+<h2 id="星期三-拉闸放假"><a href="#星期三-拉闸放假" class="headerlink" title="星期三(拉闸放假)"></a>星期三(拉闸放假)</h2><h2 id="星期四"><a href="#星期四" class="headerlink" title="星期四"></a>星期四</h2><h3 id="打包"><a href="#打包" class="headerlink" title="打包"></a>打包</h3><p>  命令：javac -d . xxx.java</p>
+<h3 id="导包"><a href="#导包" class="headerlink" title="导包"></a>导包</h3><p>(1)访问不同包的类<br>  a. 指定类的全限定名（例如java.util.Scanner）;<br>  b. 导包<br>(2)格式：<br>  import 包名.类名；<br>  静态导入：（导入静态方法，就好像导入的方法就定义在这个类中一样）<br>    import static 包名.类名.方法名<br>    要求该方法必须是静态的。<br>(3)面试题：package,import,class的顺序<br>  package &gt; import &gt; class<br>  一个  多个  多个(建议一个文件里面只有一个class)</p>
+<h3 id="权限修饰符"><a href="#权限修饰符" class="headerlink" title="权限修饰符"></a>权限修饰符</h3><p>(1)权限修饰符</p>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th style="text-align:center">本类</th>
+<th style="text-align:center">同一个包下</th>
+<th style="text-align:center">不同包下的子类</th>
+<th style="text-align:right">不同包下的无关类</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>private</td>
+<td style="text-align:center">Y</td>
+<td style="text-align:center">N</td>
+<td style="text-align:center">N</td>
+<td style="text-align:right">N</td>
+</tr>
+<tr>
+<td>默认</td>
+<td style="text-align:center">Y</td>
+<td style="text-align:center">Y</td>
+<td style="text-align:center">N</td>
+<td style="text-align:right">N</td>
+</tr>
+<tr>
+<td>protected</td>
+<td style="text-align:center">Y</td>
+<td style="text-align:center">Y</td>
+<td style="text-align:center">Y(注意)</td>
+<td style="text-align:right">N</td>
+</tr>
+<tr>
+<td>public</td>
+<td style="text-align:center">Y</td>
+<td style="text-align:center">Y</td>
+<td style="text-align:center">Y</td>
+<td style="text-align:right">Y</td>
+</tr>
+</tbody>
+</table>
+<p>  (2)这四种权限修饰符在任意时刻只能出现一种。</p>
+<h3 id="常见的修饰符"><a href="#常见的修饰符" class="headerlink" title="常见的修饰符"></a>常见的修饰符</h3><p>(1)分类：<br>  权限修饰符：private,默认,protected,public<br>  状态修饰符：static, final<br>  抽象修饰符：abstract<br>(2)常见的类及其组成的修饰<br>  普通类：默认  public  final abstract<br>  成员变量: private,  默认, protected,  public  static, final<br>  构造方法：private, 默认, protected,  public<br>  成员方法：private, 默认, protected,  public  static, final abstract</p>
+<h3 id="内部类（难）"><a href="#内部类（难）" class="headerlink" title="内部类（难）"></a>内部类（难）</h3><p><strong>我这里一定要强调。内部类这里的知识点有点小乱，需要捋一捋才能搞清楚。常用四种内部类<br>分成两个类：成员位置（成员内部类，静态内部类）,局部位置（局部内部类，匿名内部类）。对应着有三种访问：内部类访问外部类，外部类访问内部类，其他类访问内部类</strong><br>(1)把类定义在另一个类的内部，该类就被称为内部类。<br>  举例：把类B定义在类A中，类B就被称为内部类。 A称为外围类</p>
+<p>(2) 内部类的作用：<br>  a. 保护内部类<br>  b. 方便内部类和外部类的交互</p>
+<p>(3) 内部类的访问规则<br>  A:内部类可以直接访问外部类的成员，包括私有（内部类秘密捕获了一个外部类对象）<br>  B:外部类要想访问内部类成员，必须创建对象</p>
+<p>(4)内部类的分类<br>  A:成员位置（成员内部类，静态内部类）<br>  B:局部位置（局部内部类，匿名内部类）</p>
+<p>(5)成员内部类(外部类对象所有)<br>  a. 内部类怎么访问外部类？<br>    直接访问，并且访问外部类的私有成员<br>  b. 外部类怎么访问内部类？<br>    创建对象，并且可以访问内部类私有成员<br>  c. 其他类怎么访问内部类？<br>    创建对象<br>    格式：Outer.Inner inner = new Outer().new Inner()；<br>    受访问权限修饰符的限制。<br>  注意事项：反编译之后，发现内部类秘密捕获了外部类对象。</p>
+<p>(6)静态内部类（外部类所有）<br>  a. 内部类怎么访问外部类？<br>    直接访问，只能访问静态的成员，可以访问外部类私有的（必须是静态的因为在静态上下文中）<br>  b. 外部类怎么访问内部类？<br>    创建对象，并且可以访问内部类私有成员<br>  c. 其他类怎么访问内部类？<br>    创建对象<br>    格式：Outer.Inner inner = new Outer.Inner()；<br>    受访问权限修饰符的限制。</p>
+<p>(7)局部内部类(局部变量)<br>  a. 内部类怎么访问外部类？<br>    直接访问，并且可以访问私有的。<br>    访问外部类的局部变量：要求该局部变量不能改变。（放在常量池中）（通过画图了解和反编译了解）<br>  b. 外部类怎么访问内部类？<br>    只能在该方法中访问。<br>    创建对象，并且可以访问内部类私有成员<br>  c. 其他类怎么访问内部类？<br>    不能！</p>
+<p>  A:局部内部类访问局部变量必须是最终量或者是实际的最终量,为什么呢?<br>  因为局部变量使用完毕就消失，而堆内存的数据并不会立即消失。<br>  为了让该值还存在，就加final修饰。 –&gt; 常量池</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">反编译的源码：</div><div class="line">class Outer3$1Inner3</div><div class="line">&#123;</div><div class="line">  final int val$num1;</div><div class="line">  final Outer3 this$0;</div><div class="line">  Outer3$1Inner3()</div><div class="line">  &#123;</div><div class="line">    this$0 = final_outer3;</div><div class="line">    val$num1 = I.this;</div><div class="line">    super();</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>下面举个例子来说明：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">interface Sing &#123;</div><div class="line">  void sing();</div><div class="line">&#125;</div><div class="line"></div><div class="line">public class Outer4 &#123;</div><div class="line"></div><div class="line">  public Sing getSing() &#123;</div><div class="line">    int a = 10;</div><div class="line"></div><div class="line">    class Inner4 implements Sing &#123;</div><div class="line">      @Override</div><div class="line">      public void sing() &#123;</div><div class="line">        System.out.println(&quot;Inner4.sing()&quot; + a);</div><div class="line">      &#125;</div><div class="line"></div><div class="line">    &#125;</div><div class="line">    return new Inner4();</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  public static void main(String[] args) &#123;</div><div class="line">    Outer4 outer = new Outer4();</div><div class="line">    Sing sing = outer.getSing();</div><div class="line">    sing.sing();</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>这个例子说明了当outer调用完getSing()创建一个sing对象之后，却还能访问a的值。就说明a不是定义在getSing()函数中。而是一个常量</p>
+<h4 id="8-匿名内部类（必须掌握）"><a href="#8-匿名内部类（必须掌握）" class="headerlink" title="(8)匿名内部类（必须掌握）"></a>(8)匿名内部类（必须掌握）</h4><p>前提：<br>  存在一个类或者接口。<br>  类：可以是普通类, 也可以是抽象类, 但是不能最终类,因为最终类（final）不能有子类<br>    创建了该类的子类。<br>  接口：<br>    创建了该接口的子类</p>
+<p>格式：<br>  new 类名或者接口名() {重写方法;}</p>
+<p>本质：创建了一个继承了该类或者实现该接口的子类对象。匿名内部类可以实现的，局部内部类一定可以实现；</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div></pre></td><td class="code"><pre><div class="line">//定义一个接口</div><div class="line">interface Sing &#123;</div><div class="line">  void sing();</div><div class="line">&#125;</div><div class="line">//定义一个最终类，不能继承的</div><div class="line">final class Dance &#123;</div><div class="line">  public void dance() &#123;</div><div class="line"></div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">class Outer6 &#123;</div><div class="line"></div><div class="line">  //局部内部类写法</div><div class="line">  public Sing getSing() &#123;</div><div class="line">    class Inner6 implements Sing &#123;</div><div class="line">      @Override</div><div class="line">      public void sing() &#123;</div><div class="line">        System.out.println(&quot;sing, sing, sing...&quot;);</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">    return new Inner6();</div><div class="line"></div><div class="line">  //匿名内部类写法</div><div class="line">    return new Sing() &#123;</div><div class="line">      @Override</div><div class="line">      public void sing() &#123;</div><div class="line">        System.out.println(&quot;sing, sing, sing...&quot;);</div><div class="line">      &#125;</div><div class="line">    &#125;;//因为是语句所以要加分号</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  public Dance getDance() &#123;</div><div class="line">    return new Dance() &#123;</div><div class="line">      @Override</div><div class="line">      public void dance() &#123;</div><div class="line">        System.out.println(&quot;dance,dance,dance...&quot;);</div><div class="line">      &#125;</div><div class="line">    &#125;;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  public static void main(String[] args) &#123;</div><div class="line">    Outer6 outer  = new Outer6();</div><div class="line">    Sing sing = outer.getSing();</div><div class="line">    sing.sing();</div><div class="line">    Dance dance = outer.getDance(); //报错无法从最终类继承</div><div class="line">    dance.dance();</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>我要创建一个Sing, 发现它是一个接口, 需要它的子类, 子类还没有定义。然后对这个子类进行定义。</p>
+<p>再来看一个题目：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div></pre></td><td class="code"><pre><div class="line">按照要求，补齐代码</div><div class="line">interface Inter &#123; void show(); &#125;</div><div class="line">class Outer &#123; //补齐代码 &#125;</div><div class="line">class OuterDemo &#123;</div><div class="line">  public static void main(String[] args) &#123;</div><div class="line">      Outer.method().show();</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line">要求在控制台输出”HelloWorld”</div><div class="line"></div><div class="line">分析：</div><div class="line">  Outer.method(); 有个静态的method的方法。</div><div class="line">  Outer.method().show(); 这个方法的返回值是接口类型的对象</div><div class="line"></div><div class="line">interface Inter &#123;</div><div class="line">  void show();</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line">class Outer &#123;</div><div class="line">  /*补齐代码*/</div><div class="line"></div><div class="line">  //静态方法属于类 不需要创建对象</div><div class="line">  public static Inter method() &#123;</div><div class="line"></div><div class="line">    //局部内部类写法</div><div class="line">    class Inner implements Inter &#123;</div><div class="line">      @Override</div><div class="line">      public void show() &#123;</div><div class="line">        System.out.println(&quot;HelloWorld&quot;);</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    return  new Inner();  //这里创建了一个局部内部类</div><div class="line"></div><div class="line">    //匿名内部类写法</div><div class="line">    return new Inter() &#123;  //直接创建一个接口的子类</div><div class="line">      @Override</div><div class="line">      public void show() &#123;</div><div class="line">        System.out.println(&quot;HelloWorld&quot;);</div><div class="line">      &#125;</div><div class="line">    &#125;;</div><div class="line"></div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">class Test3 &#123;</div><div class="line">  public static void main(String[] args) &#123;</div><div class="line">    Outer.method().show();</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="星期五"><a href="#星期五" class="headerlink" title="星期五"></a>星期五</h2><h3 id="Object类"><a href="#Object类" class="headerlink" title="Object类"></a>Object类</h3><p>  概述：类 Object 是类层次结构的根类。每个类都使用 Object 作为超类。所有对象（包括数组）都实现这个类的方法。</p>
+<p>构造方法：<br>  Object()<br>  为什么子类会默认调用父类的无参构造方法。</p>
+<p>  因为object类是所有类的父类，而Object类只有无参构造方法。所以一定会默认调用父类的无参构造方法</p>
+<p>成员方法：<br>  protected  Object clone()<br>  boolean equals(Object obj)<br>  protected  void finalize()<br>  Class&lt;?&gt; getClass()<br>  int hashCode()<br>  String toString()</p>
+<h3 id="public-final-Class-getClass"><a href="#public-final-Class-getClass" class="headerlink" title="public final Class getClass():"></a>public final Class getClass():</h3><p>  子类不能被重写, 任何一个对象它的 getClass() 行为是一致。<br>  返回此 Object 的运行时类型。</p>
+<h3 id="Class-类类型"><a href="#Class-类类型" class="headerlink" title="Class: 类类型"></a>Class: 类类型</h3><p>  概述：Class 类的实例表示正在运行的 Java 应用程序中的类和接口。枚举是一种类，注解是一种接口。<br>  public String getName()：返回该对象的运行时类的全限定名。</p>
+<h3 id="public-int-hashCode"><a href="#public-int-hashCode" class="headerlink" title="public int hashCode()"></a>public int hashCode()</h3><p>返回该对象的哈希码值。<br>默认实现：这一般是通过将该对象的内部地址转换成一个整数来实现的</p>
+<p>hashcode()的常规协定：<br>1） 一致性. 如果一个对象进行比较的信息没有发生修改，那么在一次程序运行期间，它们的hash值要一致。<br>2) 相等性. 如果两个对象通过 equals 比较是相等的，那么它们的 hashcode 也要相等。<br>3) 哈希碰撞概率低. 如果两个对象不相等，那么它们的 hashcode 最好不相等，这个可以提高哈希表的性能。</p>
+<p>哈希函数很像之前数据结构的哈希查找的相关的内容。所以理解起来并不是很困难。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">public class hashCode &#123;</div><div class="line">    public static void main(String[] args) &#123;</div><div class="line">        String s = &quot;我感觉很难受&quot;;</div><div class="line">        int hash = hash(s);</div><div class="line">    &#125;</div><div class="line">    //加法哈希</div><div class="line">    public static int hash(String str) &#123;</div><div class="line">        int hash = str.length();</div><div class="line">        for (int i = 0; i &lt; str.length(); i++) &#123;</div><div class="line">            hash += str.charAt(i);  //字符运算默认转换成int</div><div class="line">        &#125;</div><div class="line">        return hash;</div><div class="line">    &#125;</div><div class="line">    //位运算哈希</div><div class="line">    public static int hash2(String str) &#123;</div><div class="line">        int hash = str.length();</div><div class="line">        for (int i = 0; i &lt; str.length(); i++) &#123;</div><div class="line">            hash = (hash&lt;&lt;4)^(hash&gt;&gt;28)^str.charAt(i);</div><div class="line">        &#125;</div><div class="line">        return hash;</div><div class="line">    &#125;</div><div class="line">    //乘法哈希</div><div class="line">    public static int hash3(String str) &#123;</div><div class="line">        int hash = str.length();</div><div class="line">        for (int i = 0; i &lt; str.length(); i++) &#123;</div><div class="line">            hash = hash*31+str.charAt(i);</div><div class="line">        &#125;</div><div class="line">        return hash;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="public-String-toString-（简历）"><a href="#public-String-toString-（简历）" class="headerlink" title="public String toString(): （简历）"></a>public String toString(): （简历）</h3><p>  返回该对象的字符串表示。结果应是一个简明但易于读懂的信息表达式。建议所有子类都重写此方法。<br>  默认实现：return getClass().getName() + “@” + Integer.toHexString(hashCode());</p>
+<p>注意事项：<br>  直接打印对象, 默认会调用该对象的 toString() 方法。</p>
+<h3 id="public-boolean-equals-Object-obj"><a href="#public-boolean-equals-Object-obj" class="headerlink" title="public boolean equals(Object obj):"></a>public boolean equals(Object obj):</h3><p>  指示其他某个对象是否与此对象”相等”。<br>  默认实现： return (this == obj); 判断两个对象的地址值是否相等 (是否是同一个对象)</p>
+<p>实体类：</p>
+<pre><code>一个对象对应一个实体。没有必要重写 Object 中的 equals();
+</code></pre><p>值类：</p>
+<pre><code>String, Point, 重写 equals 方法。
+Rectangle:
+关键域：length, width
+衍生域：area, perimeter
+无关域：color
+根据关键域进行比较
+</code></pre><p>equals方法常规协定：<br>    equals 方法在非空对象引用上实现相等关系：<br>        自反性：对于任何非空引用值 x，x.equals(x) 都应返回true。<br>        对称性：对于任何非空引用值 x 和 y，当且仅当 y.equals(x) 返回true时，x.equals(y)才应返回true。<br>        传递性：对于任何非空引用值 x、y 和 z，如果x.equals(y)返回 true，并且y.equals(z)返回 true，那么 x.equals(z) 应返回 true。<br>        一致性：对于任何非空引用值 x 和 y，多次调用 x.equals(y) 始终返回 true 或始终返回 false，前提是对象上 equals 比较中所用的信息没有被修改。<br>        非空性：对于任何非空引用值 x，x.equals(null) 都应返回 false。</p>
+<p><strong><em>注意事项：当此方法被重写时，通常有必要重写hashCode方法，在IDEA中使用alt+insert可以自动生成。通常改写是为了比较两个对象是否“相等”，这里的相等，并不是地址值相等。而是成员内容相等。或者用于判断深拷贝是否成功</em></strong></p>
+<p>instanceof:是 Java 的保留关键字。它的作用是测试它左边的对象是否是它右边的类的实例，返回 boolean 的数据类型。<br>    null instanceof 类名: 返回fasle;<br>    obj instanceof Object: 返回true, 子类能够内父类接受</p>
+<p>instanceof可以判断类和类的关系吗？或者对象和对象的？<br>只能判断对象是否是右边的类的实例或者是子类的实例。</p>
+<h3 id="protected-void-finalize-throws-Throwable"><a href="#protected-void-finalize-throws-Throwable" class="headerlink" title="protected void finalize() throws Throwable"></a>protected void finalize() throws Throwable</h3><p>概述：当垃圾回收器回收这个对象时，会自动调用此方法。子类重写 finalize 方法，以释放资源。<br>默认实现：什么都没做，空实现。</p>
+<p>finalize:</p>
+<ol>
+<li>可以自动调用, 该对象没有被回收。</li>
+<li>当垃圾回收器回收这个对象时，会自动调用此方法。</li>
+<li>释放资源最好不要放在 finalize() 里面。为什么？</li>
+</ol>
+<p>原因是：垃圾回收线程是一个优先级低的线程，当一个对象变成垃圾后，并不会马上被回收，因此资源得不到立刻释放。<br>怎么释放资源呢？<br>    try … catch … finally(异常处理)语句释放资源</p>
+<h3 id="protected-Object-clone-throws-CloneNotSupportedException"><a href="#protected-Object-clone-throws-CloneNotSupportedException" class="headerlink" title="protected Object clone() throws CloneNotSupportedException"></a>protected Object clone() throws CloneNotSupportedException</h3><pre><code>创建并返回此对象的一个&quot;副本&quot;.
+</code></pre><p>异常：CloneNotSupportedException。<br>解决方案：实现 Cloneable 接口<br>Cloneable(空接口, 标记接口):<br>    此类实现了 Cloneable 接口，以指示 Object.clone() 方法可以合法地对该类实例进行按字段复制。<br>如果在没有实现 Cloneable 接口的实例上调用 Object 的 clone 方法，则会导致抛出CloneNotSupportedException异常。<br>一个接口没有定义任何内容，叫做空接口，在Java中往往起标记作用。</p>
+<p>Java的默认实现是浅拷贝和深拷贝？<br>    浅拷贝<br>实现深拷贝的例子：</p>
+<p>首先先调用父类的clone()方法获取一个浅拷贝的对象，然后对里面的非基本数据类型的引用数据类型类型成员再clone新的对象赋给外层的成员变量。当然这个操作应该在那个引用数据类型对应的类里面进行编写的<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div></pre></td><td class="code"><pre><div class="line">/*</div><div class="line">  和在一个文件里面写</div><div class="line">  这里注意记得把初始化的数据要传过去</div><div class="line">*/</div><div class="line">import java.util.Objects;</div><div class="line"></div><div class="line">//第一层</div><div class="line">public class FirstLevel implements Cloneable&#123;</div><div class="line"></div><div class="line">    int i;</div><div class="line">    int j;</div><div class="line">    SecondLevel sec;</div><div class="line"></div><div class="line">    public FirstLevel() &#123;</div><div class="line"></div><div class="line">    &#125;</div><div class="line">    public FirstLevel(int i, int j, SecondLevel sec) &#123;</div><div class="line">        this.i = i;</div><div class="line">        this.j = j;</div><div class="line">        this.sec = sec;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    protected FirstLevel clone() throws CloneNotSupportedException &#123;</div><div class="line">        FirstLevel fl = (FirstLevel)super.clone();</div><div class="line"></div><div class="line">        //如果要克隆的对象本身没有sec</div><div class="line">        if(sec == null) &#123;</div><div class="line">            fl.sec = null;</div><div class="line"></div><div class="line">        &#125; else &#123;</div><div class="line"></div><div class="line">            SecondLevel secondLevel = new SecondLevel(fl.sec.j ,fl.sec.third);</div><div class="line"></div><div class="line">            SecondLevel clone = secondLevel.clone();</div><div class="line"></div><div class="line"></div><div class="line">            fl.sec = clone;</div><div class="line">        &#125;</div><div class="line">        return fl;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public boolean equals(Object o) &#123;</div><div class="line">        if (this == o) return true;</div><div class="line">        if (o == null || getClass() != o.getClass()) return false;</div><div class="line">        FirstLevel that = (FirstLevel) o;</div><div class="line">        return i == that.i &amp;&amp;</div><div class="line">                j == that.j &amp;&amp;</div><div class="line">                Objects.equals(sec, that.sec);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public int hashCode() &#123;</div><div class="line">        return Objects.hash(i, j, sec);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public static void main(String[] args) throws CloneNotSupportedException &#123;</div><div class="line">        ThirdLevel tl = new ThirdLevel(10);</div><div class="line">        SecondLevel sl = new SecondLevel(20,tl);</div><div class="line">        FirstLevel fl = new FirstLevel(30,40,sl);</div><div class="line"></div><div class="line">        FirstLevel fl2 = fl.clone();</div><div class="line">        System.out.println(fl == fl2);</div><div class="line">        System.out.println(fl.equals(fl2));</div><div class="line">        System.out.println(&quot;深拷贝成功&quot;);</div><div class="line"></div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div><div class="line">//第二层</div><div class="line">class SecondLevel implements Cloneable &#123;</div><div class="line">    double j;</div><div class="line">    ThirdLevel third;</div><div class="line">    //无参构造方法</div><div class="line">    public SecondLevel() &#123;</div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public SecondLevel(double j, ThirdLevel third) &#123;</div><div class="line">        this.j = j;</div><div class="line">        this.third = third;</div><div class="line">    &#125;</div><div class="line">    @Override</div><div class="line">    public boolean equals(Object o) &#123;</div><div class="line">        if (this == o) return true;</div><div class="line">        if (o == null || getClass() != o.getClass()) return false;</div><div class="line">        SecondLevel that = (SecondLevel) o;</div><div class="line">        return Double.compare(that.j, j) == 0 &amp;&amp;</div><div class="line">                Objects.equals(third, that.third);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public int hashCode() &#123;</div><div class="line">        return Objects.hash(j, third);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    protected SecondLevel clone() throws CloneNotSupportedException &#123;</div><div class="line">        SecondLevel sl = (SecondLevel)super.clone();</div><div class="line">        if(third == null) &#123;</div><div class="line">            sl.third = null;</div><div class="line">        &#125; else &#123;</div><div class="line">            //初始化third对象；</div><div class="line">            ThirdLevel tl = new ThirdLevel(third.k);</div><div class="line">            ThirdLevel clone = tl.clone();</div><div class="line">            sl.third = clone;</div><div class="line">        &#125;</div><div class="line">        return sl;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">//第三层</div><div class="line">class ThirdLevel implements Cloneable&#123;</div><div class="line">    int k;</div><div class="line">    //无参构造方法</div><div class="line">    public ThirdLevel() &#123;</div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public boolean equals(Object o) &#123;</div><div class="line">        if (this == o) return true;</div><div class="line">        if (o == null || getClass() != o.getClass()) return false;</div><div class="line">        ThirdLevel that = (ThirdLevel) o;</div><div class="line">        return k == that.k;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public int hashCode() &#123;</div><div class="line">        return Objects.hash(k);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public ThirdLevel(int k) &#123;</div><div class="line">        this.k = k;</div><div class="line">    &#125;</div><div class="line">    protected ThirdLevel clone() throws CloneNotSupportedException &#123;</div><div class="line">        ThirdLevel tl = (ThirdLevel)super.clone();</div><div class="line">        return tl;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="星期六"><a href="#星期六" class="headerlink" title="星期六"></a>星期六</h2><p>介绍了String的构造函数和一些常用的API</p>
+<h3 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数"></a>构造函数</h3><p>public String()<br>public String(byte[] bytes)<br>public String(byte[] bytes,int offset,int length)<br>public String(char[] value)<br>public String(char[] value,int offset,int count)<br>public String(String original)</p>
+<h3 id="判断功能："><a href="#判断功能：" class="headerlink" title="判断功能："></a>判断功能：</h3><p>boolean equals(Object obj)<br>boolean equalsIgnoreCase(String str)<br>boolean contains(String str)<br>    判断一个字符串是否包含另一个字符串<br>boolean startsWith(String str)<br>    判断字符串是否以给定的字符串开头<br>boolean endsWith(String str)<br>    判断字符串是否以给定的字符串结束<br>boolean isEmpty()<br>    判断一个字符串是否是空串</p>
+<h3 id="获取功能："><a href="#获取功能：" class="headerlink" title="获取功能："></a>获取功能：</h3><p>int length()<br>    获取字符的个数<br>char charAt(int index)<br>    获取指定索引的字符<br>int indexOf(int ch)<br>    判断字符在字符串中第一次出现的索引位置，如果该字符不存在返回负数。<br>int indexOf(String str)<br>    判断str在字符串中第一次出现的索引位置，如果该str不存在返回负数。<br>    返回的是第一个字符所在位置的索引<br>int indexOf(int ch,int fromIndex)<br>    从指定的索引位置开始，判断是否包含该字符<br>int indexOf(String str,int fromIndex)<br>    从指定的索引位置开始，判断是否包含该字符串str<br>int lastIndexOf(int ch)<br>int lastIndexOf(int ch, int fromIndex)<br>int lastIndexOf(String str)<br>int lastIndexOf(String str, int fromIndex)</p>
+<p>String substring(int start)<br>    截取子串, 从start开始，截取到最后<br>String substring(int start,int end) (包左不包右，包括start，不包括end)<br>     截取子串, 从start开始，截取到end。</p>
+<h3 id="转换功能："><a href="#转换功能：" class="headerlink" title="转换功能："></a>转换功能：</h3><p>  byte[] getBytes()<br>  char[] toCharArray()<br>  static String valueOf()<br>  String toLowerCase()<br>  String toUpperCase()<br>  String concat(String str)</p>
+<p>byte[] –&gt; String<br>    new String(byte[])<br>String –&gt; byte[]<br>    getBytes()<br>char[] –&gt; String<br>    new String(char[])<br>String –&gt; char[]<br>    toCharArray();</p>
+<p>任意类型 –&gt; String<br>    valueOf()</p>
+<h3 id="替换功能"><a href="#替换功能" class="headerlink" title="替换功能"></a>替换功能</h3><p>String replace(char old,char new)<br>    将所有的字符old转化成new<br>String replace(String old,String new)<br>    将所有的字符串old转化成new<br>String trim()<br>    修建字符串两边的空白字符</p>
+<h3 id="字符串分割："><a href="#字符串分割：" class="headerlink" title="字符串分割："></a>字符串分割：</h3><p>public String[] split(String regex)<br>    根据给定正则表达式的匹配拆分此字符串。</p>
+<h3 id="比较功能："><a href="#比较功能：" class="headerlink" title="比较功能："></a>比较功能：</h3><p>Comparable:(可以进行比较，表示对象的一种能力)<br>    int compareTo(T o)<br>    比较此对象与指定对象的顺序。<br>    如果该对象小于、等于或大于指定对象，则分别返回负整数、零或正整数。</p>
+<h3 id="markdown格式："><a href="#markdown格式：" class="headerlink" title="markdown格式："></a>markdown格式：</h3><p>表格使用竖杠| 分割，注意要上下都有空格才能显示正确；</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>这周的内容比较乱。但是总体还是把类和对象讲完了。脑海也有一个整体的概念。就是内部类的细节和深拷贝有一点难度以外。其他东西都很基础，必须要掌握。对象成员的继承关系，以及子类的初始化过程等等。</p>
+
+        </div>
+        <div class="post-reply">
+            
+                <!-- 来必力City版安装代码 -->
+                <div id="lv-container" data-id="city" data-uid="MTAyMC8yOTE4Ni81NzUz">
+                    <script type="text/javascript">
+                        (function(d, s) {
+                            var j, e = d.getElementsByTagName(s)[0];
+
+                            if (typeof LivereTower === 'function') { return; }
+
+                            j = d.createElement(s);
+                            j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+                            j.async = true;
+
+                            e.parentNode.insertBefore(j, e);
+                        })(document, 'script');
+                    </script>
+                    <noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+                </div>
+                <!-- City版安装代码已完成 -->
+            
+            
+        </div>
+    </div>
+</section>
+<script>
+    // 获取第一张图, 用以当封面背景图
+    var img = document.querySelectorAll('img')[1]
+
+    if (img) {
+        var header_box = document.querySelector('#header_box')
+        header_box.style.backgroundImage = 'url('+ img.src +')'
+    }
+</script>
+      </div>
+  </div>
+  <style>
+  #footer {
+    min-height: 10vh;
+    background: black;
+    color: #fff;
+  }
+
+  #footer a {
+    color: #e1e1e1;
+  }
+</style>
+<footer id="footer" class="has-text-centered is-flex center">
+  <div class="container has-padding">
+    <div>
+      <div>
+        <!--请您保留作者署名, 主题制作来之不易-->
+        主题来自 <a href="http://haojen.github.io/">Haojen Ma</a>
+        <br>
+        Copyright © 王邸 2019
+        <!--
+          Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+        -->
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="/js/search_core.js"></script>
+<script src="/js/script.js"></script>
+
+</body>
+</html>
