@@ -14,7 +14,7 @@
 <meta property="og:url" content="http://yoursite.com/2019/06/30/Java总结（一）/index.html">
 <meta property="og:site_name" content="路要坚持">
 <meta property="og:description" content="1.把第三章的客户题写完了；放在第一行代码HomeWork中2.总结本周学习的内容： 星期一赋值运算符：基本运算符 =拓展赋值运算符： += -= 等a=b=101.赋值表达式是有值的  a+b  b=10; //它的值等于赋值运算符右边表达式的值；2.赋值运算符从右向左结合的； 但是算数运算符是从左到右结合的；  a += 20; –&amp;gt; a = a + 20;  不能写a = 20 + a">
-<meta property="og:updated_time" content="2019-07-06T12:31:00.631Z">
+<meta property="og:updated_time" content="2019-07-22T01:14:14.629Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java总结（一）">
 <meta name="twitter:description" content="1.把第三章的客户题写完了；放在第一行代码HomeWork中2.总结本周学习的内容： 星期一赋值运算符：基本运算符 =拓展赋值运算符： += -= 等a=b=101.赋值表达式是有值的  a+b  b=10; //它的值等于赋值运算符右边表达式的值；2.赋值运算符从右向左结合的； 但是算数运算符是从左到右结合的；  a += 20; –&amp;gt; a = a + 20;  不能写a = 20 + a">
@@ -211,25 +211,65 @@
 <p>术语：方法的签名(signature) 方法名 + 参数列表<br>  同一个类中方法名字可以相同，但是方法的签名不能相同</p>
 <p>问题：方法的签名为什么与返回值类型无关？<br>  单独调用时，就不能区分到底使用哪个方法。</p>
 <p>问题2：求两个数据的和。参数类型分别为两个byte类型，两个short类型，两个int类型，两个long类型，并在main方法中进行测试。</p>
-<p>问题： 如果传入的参数类型不同会怎么样,如下代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">public int add(int a, int b) &#123;</div><div class="line">  return a+b;</div><div class="line">&#125;</div><div class="line">public double add(double a, double b) &#123;</div><div class="line">  reuturn a+b;</div><div class="line">&#125;</div><div class="line">add(10,10.111);</div></pre></td></tr></table></figure></p>
-<p>  A 编译不通过<br>  B 运行报错<br>  C 可以运行</p>
+<p>问题： 如果传入的参数类型不同会怎么样,如下代码：</p>
+<pre><code>public int add(int a, int b) {
+  return a+b;
+}
+public double add(double a, double b) {
+  reuturn a+b;
+}
+add(10,10.111);
+</code></pre><p>  A 编译不通过<br>  B 运行报错<br>  C 可以运行</p>
 <p>答案：C 结果是double类型</p>
 <p>建议：<br>  如果方法实现一样，但是数据类型兼容。就没有必要使用方法的重载。<br>  他会默认选择大的范围进行调用</p>
 <h3 id="数组："><a href="#数组：" class="headerlink" title="数组："></a>数组：</h3><p>数组的初始化：<br>  就是为数组中的数组元素分配内存空间，并为每个数组元素赋初值。</p>
 <p>动态初始化：<br>  由程序员指定长度，系统决定初始值。<br>  格式：<br>    数据类型[] 数组名 = new 数据类型[数组的长度];<br>  举例：<br>    int[] arr = new int[3];</p>
-<p>解释：<br>  [I@15db9742<br>  [: 一维数组<br>  I: 数组元素是int类型<br>  @: 表示分隔符<br>  15db9742：16进制的数, 内存地址的映射<br>实际是一个哈希值：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">public String toString() &#123;</div><div class="line">  return getClass().getName() + &quot;@&quot; + Integer.toHexString(hashCode());</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>打印一个对象时，默认调用toString()方法，可以看到其实就是把对象名转成哈希值然后转成16进制。</p>
+<p>解释：<br>  [I@15db9742<br>  [: 一维数组<br>  I: 数组元素是int类型<br>  @: 表示分隔符<br>  15db9742：16进制的数, 内存地址的映射<br>实际是一个哈希值：</p>
+<pre><code>public String toString() {
+  return getClass().getName() + &quot;@&quot; + Integer.toHexString(hashCode());
+}
+</code></pre><p>打印一个对象时，默认调用toString()方法，可以看到其实就是把对象名转成哈希值然后转成16进制。</p>
 <p>java的内存分配<br>  栈：局部变量, 执行方法<br>  堆：new出来的东西 (对象)<br>  方法区<br>  本地方法栈<br>  程序计数器：字节码的行号指示器</p>
 <p>怎么引用数组中的元素值呢？<br>  索引(从0开始编号)<br>  数组名[索引]</p>
 <p>堆上的数据都会有默认初始值<br>  向堆申请空间的时候，都会把这片内存空间清0<br>  默认值：<br>    byte    0<br>    short   0<br>    int     0<br>    long    0L<br>    float   0.0f<br>    double    0.0<br>    boolean   false<br>    char    \u0000<br>    引用数据  null</p>
 <p>注意事项：<br>  如果数组索引超出范围，会报 java.lang.ArrayIndexOutOfBoundsException.</p>
 <p>空常量：null<br>  可以给所有的引用数据类型赋值<br>空指针异常：<br>  java.lang.NullPointerException</p>
 <h2 id="星期四："><a href="#星期四：" class="headerlink" title="星期四："></a>星期四：</h2><h3 id="参数传递"><a href="#参数传递" class="headerlink" title="参数传递"></a>参数传递</h3><p>结论：<br>  a. Java中只有值传递。<br>  b. 基本数据类型传递参数的时候相当于c语言中值传递。<br>  c. 引用数据类型传递参数的时候相当于c语言中地址传递。</p>
-<p>需要注意以下问题：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">int[] arr1 = &#123;1, 2, 3&#125;;</div><div class="line">int[] arr2 = &#123;4, 5, 6&#125;;</div><div class="line">System.out.println(Arrays.toString(arr1)); //[1, 2, 3]</div><div class="line">System.out.println(Arrays.toString(arr2)); //[4, 5, 6]</div><div class="line">change(arr1, arr2);</div><div class="line">System.out.println(Arrays.toString(arr1)); //[1, 2, 3]</div><div class="line">System.out.println(Arrays.toString(arr2)); //[4, 5, 6]</div><div class="line">public static void change(int[] arr1, int[] arr2) &#123;</div><div class="line">  int[] temp = arr1;</div><div class="line">  arr1 = arr2;</div><div class="line">  arr2 = temp;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>这里并不会交换数组。不要死记硬背说引用类型会修改。这里只是在调用change函数时，<br>把两个数组位置变化。并没有影响main函数中的值。所以打印出来自然就不会变了</p>
+<p>需要注意以下问题：</p>
+<pre><code>int[] arr1 = {1, 2, 3};
+int[] arr2 = {4, 5, 6};
+System.out.println(Arrays.toString(arr1)); //[1, 2, 3]
+System.out.println(Arrays.toString(arr2)); //[4, 5, 6]
+change(arr1, arr2);
+System.out.println(Arrays.toString(arr1)); //[1, 2, 3]
+System.out.println(Arrays.toString(arr2)); //[4, 5, 6]
+public static void change(int[] arr1, int[] arr2) {
+  int[] temp = arr1;
+  arr1 = arr2;
+  arr2 = temp;
+}
+</code></pre><p>这里并不会交换数组。不要死记硬背说引用类型会修改。这里只是在调用change函数时，<br>把两个数组位置变化。并没有影响main函数中的值。所以打印出来自然就不会变了</p>
 <h3 id="递归"><a href="#递归" class="headerlink" title="递归"></a>递归</h3><p>  方法定义中调用方法本身的现象<br>  java.lang.StackOverflowError：死递归, 递归太深了</p>
-<p>递归和循环在某些情况下可以相互转换。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">class RecursionDemo3 &#123;</div><div class="line">  public static void main(String[] args) &#123;</div><div class="line">    System.out.println(factorial(4));</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  /*public static long factorial(int n) &#123;</div><div class="line">    long result = 1;</div><div class="line">    for(int i = 2; i &lt;= n; i++) &#123;</div><div class="line">      result *= i;</div><div class="line">    &#125;</div><div class="line">    return result;</div><div class="line">  &#125;*/</div><div class="line"></div><div class="line">  public static long factorial(int n) &#123;</div><div class="line">    if(n == 1) return 1;</div><div class="line">    return n * factorial(n-1);</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<h3 id="递归经典问题-难"><a href="#递归经典问题-难" class="headerlink" title="递归经典问题(难)"></a>递归经典问题(<strong><em>难</em></strong>)</h3><p><strong>汉诺塔问题</strong>：<br>汉诺塔是根据一个传说形成的数学问题：</p>
+<p>递归和循环在某些情况下可以相互转换。</p>
+<pre><code>class RecursionDemo3 {
+  public static void main(String[] args) {
+    System.out.println(factorial(4));
+  }
+
+  /*public static long factorial(int n) {
+    long result = 1;
+    for(int i = 2; i &lt;= n; i++) {
+      result *= i;
+    }
+    return result;
+  }*/
+
+  public static long factorial(int n) {
+    if(n == 1) return 1;
+    return n * factorial(n-1);
+  }
+}
+</code></pre><h3 id="递归经典问题-难"><a href="#递归经典问题-难" class="headerlink" title="递归经典问题(难)"></a>递归经典问题(<strong><em>难</em></strong>)</h3><p><strong>汉诺塔问题</strong>：<br>汉诺塔是根据一个传说形成的数学问题：</p>
 <p>有三根杆子A，B，C。A杆上有 N 个 (N&gt;1) 穿孔圆盘，盘的尺寸由下到上依次变小。要求按下列规则将所有圆盘移至 C 杆：</p>
 <p>每次只能移动一个圆盘；<br>大盘不能叠在小盘上面。<br>提示：可将圆盘临时置于 B 杆，也可将从 A 杆移出的圆盘重新移回 A 杆，但都必须遵循上述两条规则。</p>
 <p>问：最少要移动多少次？如何移？</p>
@@ -247,25 +287,69 @@
 <li>子问题的解决方法和大问题一模一样，只是数据规模不一样。</li>
 <li>有终止条件。</li>
 </ol>
-<p>使用递归需要注意事项：</p>
-<ol>
-<li>StackOverflowError</li>
-<li>警惕重复计算的问题</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">import java.util.Scanner;</div><div class="line">class RecursionDemo5 &#123;</div><div class="line">  public static void main(String[] args) &#123;</div><div class="line">    System.out.println(&quot;请输入盘子的个数：&quot;);</div><div class="line">    Scanner sc = new Scanner(System.in);</div><div class="line">    int n = sc.nextInt();</div><div class="line"></div><div class="line">    /*long count = count(n);</div><div class="line">    System.out.println(&quot;count=&quot; + count);*/</div><div class="line">    hanoi(n, &apos;A&apos;, &apos;B&apos;, &apos;C&apos;);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  public static long count(int n) &#123;  //移动多少次，使用递归效率低下</div><div class="line">    /*if(n==1) return 1;</div><div class="line">    return 2 * count(n-1) + 1;*/</div><div class="line">    return (long)Math.pow(2, n) - 1;</div><div class="line">  &#125;</div><div class="line">  // 定义一个函数表示把n个盘子从begin,通过middle,移动到end上面</div><div class="line">  public static void hanoi(int n, char begin, char middle, char end) &#123;</div><div class="line">    if(n == 1) &#123;</div><div class="line">      System.out.println(begin + &quot; --&gt; &quot; + end);</div><div class="line">      return ;</div><div class="line">    &#125;</div><div class="line">    hanoi(n-1, begin, end, middle);</div><div class="line">    System.out.println(begin + &quot; --&gt; &quot; + end);</div><div class="line">    hanoi(n-1, middle, begin, end);</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p><strong>计算n条直线最多能把平面分成多少部分？</strong><br>分析：<br>  第一条线:可以分成两个平面<br>  之后一个焦点将分多两个平面<br>  两个焦点分出多3个平面；<br>  之后多产生的n个焦点就多出n+1个平面<br>  第n条线时将在原来的基础上多产生n-1个焦点，即在原来的基础上多产生n个面，所以递推公式为：<br>  f(n) = f(n-1) + n;</p>
+<p>使用递归需要注意事项：<br>  a.StackOverflowError<br>  b.警惕重复计算的问题</p>
+<pre><code>class RecursionDemo5 {
+  public static void main(String[] args) {
+    System.out.println(&quot;请输入盘子的个数：&quot;);
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    /*long count = count(n);
+    System.out.println(&quot;count=&quot; + count);*/
+    hanoi(n, &apos;A&apos;, &apos;B&apos;, &apos;C&apos;);
+  }
+  public static long count(int n) {  //移动多少次，使用递归效率低下
+    /*if(n==1) return 1;
+    return 2 * count(n-1) + 1;*/
+    return (long)Math.pow(2, n) - 1;
+  }
+  // 定义一个函数表示把n个盘子从begin,通过middle,移动到end上面
+  public static void hanoi(int n, char begin, char middle, char end) {
+    if(n == 1) {
+      System.out.println(begin + &quot; --&gt; &quot; + end);
+      return ;
+    }
+    hanoi(n-1, begin, end, middle);
+    System.out.println(begin + &quot; --&gt; &quot; + end);
+    hanoi(n-1, middle, begin, end);
+  }
+}
+</code></pre><p><strong>计算n条直线最多能把平面分成多少部分？</strong><br>分析：<br>  第一条线:可以分成两个平面<br>  之后一个焦点将分多两个平面<br>  两个焦点分出多3个平面；<br>  之后多产生的n个焦点就多出n+1个平面<br>  第n条线时将在原来的基础上多产生n-1个焦点，即在原来的基础上多产生n个面，所以递推公式为：<br>  f(n) = f(n-1) + n;</p>
 <p>  f(1) = 2;<br>  f(n) = f(n-1) + n;</p>
 <p>  f(n) = f(n-1) + n<br>     = f(n-2) + n-1 + n<br>     = f(n-3) + n-2 + n<br>     = f(1) + 2 + 3 + … + n = n(n+1)/2 + 1;</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">import java.util.Scanner;</div><div class="line">class RecursionDemo6 &#123;</div><div class="line">  public static void main(String[] args) &#123;</div><div class="line">    System.out.println(&quot;请输入直线的条数：&quot;);</div><div class="line">    Scanner sc = new Scanner(System.in);</div><div class="line">    int n = sc.nextInt();</div><div class="line"></div><div class="line">    System.out.println(f(n));</div><div class="line"></div><div class="line">  &#125;</div><div class="line"></div><div class="line">  public static int f(int n) &#123;</div><div class="line">    /*if(n == 1) return 2;</div><div class="line">    return f(n-1) + n;*/</div><div class="line">    return n * (n+1) / 2 + 1;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p><strong>约瑟夫环</strong><br>  有n个人站成一个环,每个一个人,干掉一个人,直到只有一个人。<br>  问编号为几的人会活下来？</p>
+<pre><code>import java.util.Scanner;
+class RecursionDemo6 {
+  public static void main(String[] args) {
+    System.out.println(&quot;请输入直线的条数：&quot;);
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    System.out.println(f(n));
+  }
+  public static int f(int n) {
+    /*if(n == 1) return 2;
+    return f(n-1) + n;*/
+    return n * (n+1) / 2 + 1;
+  }
+}
+</code></pre><p><strong>约瑟夫环</strong><br>  有n个人站成一个环,每个一个人,干掉一个人,直到只有一个人。<br>  问编号为几的人会活下来？</p>
 <p>  返回值类型: int<br>  参数列表: int</p>
 <p>分析：<br>  joseph(1) = 1<br>  joseph(2) = 1 = 2 <em> 1 - 1 = 1;<br>  joseph(3) = 3 = 2 </em> 1 + 1 = 3<br>  joseph(4) = 1 = 2 <em> 1 - 1 = 1<br>  joseph(5) = 3 = 2 </em> 1 + 1 = 3<br>  joseph(6) = 2 * 3 - 1 = 5</p>
 <p>  递推公式：<br>  joseph(1) = 1;<br>  joseph(2n) = 2 <em> joseph(n) - 1;<br>  joseph(2n+1) = 2 </em> joseph(n) + 1;</p>
 <p>  解释：<br>  这和网上看到n和n-1的关系式子不一样。网上的是：<br>  f(N,M) = (f(N-1,M) + M) % N;<br>  N表示N个人，M表示叫到M的人出列；<br>  正着推就是：<br>  N个人当叫到M的人出列时，就会重新开始报数，这样就变成N-1个人的游戏。所有的没出列的人的下标都会减M。<br>  反过来说，<br>  当N-1个人参加时，要变成N个人的比赛，就要加上M，就是之前往前走的下标。但是可能会出现溢出情况。所以要对N取余数</p>
 <p>  而老师给的递推式：<br>  先来看偶数的情况：<br>  1,2,3,4,5,6 = 》 1,3,5（剩下三个人）<br>  而我们知道只有三个人时：<br>  1,2,3 =》 3 最后幸存的就是3 对应上面 1 3 5 最后活着的就是 5。<br>  这里就有关系就是 f(6) = f(3)<em>2 - 1 即 5 = 3</em>2 -1；</p>
-<p>  再来看奇数的情况：<br>  1,2,3,4,5,6,7 =》 1,3,5,7 =》 3,5,7<br>  这里我要说明的是，1,3,5,7并不是第一轮剩下的人，因为奇数个的情况，所以第一轮结束1一定会死<br>  而最后一个数一定会活着。<br>  这里3,5,7 就相当于上面的 1,2,3=》3<br>  那么最后活着的就是7<br>  f(7) = f(3)<em>2 + 1 即 7 = 3</em>2 +1</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">import java.util.Scanner;</div><div class="line">class RecursionDemo7 &#123;</div><div class="line">  public static void main(String[] args) &#123;</div><div class="line"></div><div class="line"></div><div class="line">  &#125;</div><div class="line"></div><div class="line">  public static int joseph(int n) &#123;</div><div class="line">    if(n == 1) return 1;</div><div class="line">    if (n % 2 == 0) &#123;  //偶数的情况</div><div class="line">      return 2 * joseph(n / 2) - 1;</div><div class="line">    &#125;</div><div class="line">    return 2 * joseph(n / 2) + 1;  //奇数的情况</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="星期五"><a href="#星期五" class="headerlink" title="星期五"></a>星期五</h2><h3 id="面向对象部分"><a href="#面向对象部分" class="headerlink" title="面向对象部分"></a>面向对象部分</h3><p>变量<br>成员变量和局部变量的区别<br>  a.在内存中位置不同<br>    局部变量: 栈<br>    成员变量：堆<br>  b.初始化值不同<br>    局部变量: 没有默认值, 没有初始化，就不能使用。<br>    成员变量：有默认值。<br>      byte, short, int, long  0<br>      float, double     0.0<br>      char          ‘\u0000’<br>      boolean         false<br>      引用类型        null<br>  c.在类中位置不同<br>    局部变量: 方法内存或者方法声明上<br>    成员变量：类中,方法外<br>  d.生命周期不同<br>    局部变量: 随着方法的入栈而开始，随着方法的出栈而消亡<br>    成员变量：随着对象的创建而开始, 随着对象的死亡而消亡</p>
+<p>  再来看奇数的情况：<br>  1,2,3,4,5,6,7 =》 1,3,5,7 =》 3,5,7<br>  这里我要说明的是，1,3,5,7并不是第一轮剩下的人，因为奇数个的情况，所以第一轮结束1一定会死,因为剩下最后一个奇数位置的人<br>  这里3,5,7 就相当于上面的 1,2,3=》3<br>  那么最后活着的就是7<br>  f(7) = f(3)<em>2 + 1 即 7 = 3</em>2 +1</p>
+<pre><code>import java.util.Scanner;
+class RecursionDemo7 {
+  public static void main(String[] args) {
+  }
+  public static int joseph(int n) {
+    if(n == 1) return 1;
+    if (n % 2 == 0) {  //偶数的情况
+      return 2 * joseph(n / 2) - 1;
+    }
+    return 2 * joseph(n / 2) + 1;  //奇数的情况
+  }
+}
+</code></pre><h2 id="星期五"><a href="#星期五" class="headerlink" title="星期五"></a>星期五</h2><h3 id="面向对象部分"><a href="#面向对象部分" class="headerlink" title="面向对象部分"></a>面向对象部分</h3><p>变量<br>成员变量和局部变量的区别<br>  a.在内存中位置不同<br>    局部变量: 栈<br>    成员变量：堆<br>  b.初始化值不同<br>    局部变量: 没有默认值, 没有初始化，就不能使用。<br>    成员变量：有默认值。<br>      byte, short, int, long  0<br>      float, double     0.0<br>      char          ‘\u0000’<br>      boolean         false<br>      引用类型        null<br>  c.在类中位置不同<br>    局部变量: 方法内存或者方法声明上<br>    成员变量：类中,方法外<br>  d.生命周期不同<br>    局部变量: 随着方法的入栈而开始，随着方法的出栈而消亡<br>    成员变量：随着对象的创建而开始, 随着对象的死亡而消亡</p>
 <p>  匿名对象：<br>    就是没有名字的对象。<br>    是对象的一种简化表示形式<br>  匿名对象的两种使用情况<br>    对象仅仅使用一次的时候<br>    作为实际参数传递</p>
 <p>封装：<br>封装(encapsulation)<br>  封装是一种信息隐藏技术。</p>
 <p>  好处：<br>    a. 隐藏类的实现细节,实现了信息的隐藏及安全性；<br>    b. 提高了程序的模块化，且易于维护；<br>    c. 保证了数据的安全和系统的严密性;<br>    d. 将类的设计者和类的使用者分开。</p>
@@ -278,10 +362,49 @@
 <p>注意事项：<br>  在静态方法中是没有 this 关键字的<br>  静态方法只能访问静态的成员<br>  非静态的方法可以访问静态的成员也可以访问非静态的成员。<br>  但是静态方法只能访问静态成员。静态上下文只能访问静态的东西。<br>  比如：静态内部类就只能访问外部类静态的属性或者方法。</p>
 <h3 id="成员变量和静态变量区别"><a href="#成员变量和静态变量区别" class="headerlink" title="成员变量和静态变量区别"></a>成员变量和静态变量区别</h3><p>  a.所属不同<br>  成员变量：对象<br>    静态变量：类<br>  b.内存中位置不同：<br>    成员变量：堆<br>    静态变量：方法区<br>  c.生命周期不同：<br>    成员变量：随着对象的创建而开始, 随着对象的死亡而消失<br>    静态变量：随着类的加载而开始, 随着类的卸载而消失<br>  d.调用方法不同：<br>    成员变量：只能通过对象调用<br>    静态变量：可以通过对象调用，也可以用类名调用(推荐使用类名调用)</p>
 <h3 id="帮助文档"><a href="#帮助文档" class="headerlink" title="帮助文档"></a>帮助文档</h3><h4 id="以Scanner为例"><a href="#以Scanner为例" class="headerlink" title="以Scanner为例:"></a>以Scanner为例:</h4><p>包：java.util<br>  如果不再java.lang包下，就需要导包<br>类的层次结构：public final class Scanner extends Object implements Iterator<string><br>  继承关系<br>简单的概述：<br>   一个可以使用正则表达式来解析基本类型和字符串的简单文本扫描器。<br>版本信息：<br>  1.5（JDK的发展历史）<br>构造方法：<br>  创建对象<br>方法：查看简要信息以及详细信息<br>  String nextLine()</string></p>
-<h4 id="制作帮助文档："><a href="#制作帮助文档：" class="headerlink" title="制作帮助文档："></a>制作帮助文档：</h4><p>首先你要写好一个工具类：<br>公共类的名字必须和文件的名字一致<br>一个文件里面最多只能有一个公共类<br>默认只解析 public 和 protected 的文档注释信息<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line">这是一个基本的数学工具类, 提供简单的加减乘除运算</div><div class="line">@author Henson_z</div><div class="line">@version v1.0</div><div class="line">*/</div><div class="line">public class MyMath &#123;</div><div class="line">  /**</div><div class="line">    将构造方法私有化, 外界不能创建对象</div><div class="line">  */</div><div class="line">  private MyMath()&#123;</div><div class="line"></div><div class="line">  &#125;</div><div class="line">  /**</div><div class="line">  求两个数之和</div><div class="line">  */</div><div class="line">  public static int add(int a, int b) &#123;</div><div class="line">    return a + b;</div><div class="line">  &#125;</div><div class="line">  /**</div><div class="line">  求两个数之差</div><div class="line">  */</div><div class="line">  public static int minus(int a, int b) &#123;</div><div class="line">    return a - b;</div><div class="line">  &#125;</div><div class="line">  /**</div><div class="line">  求两个数之积</div><div class="line">  */</div><div class="line">  public static long multiply(int a, int b) &#123;</div><div class="line">    return a * b;</div><div class="line">  &#125;</div><div class="line">  /**</div><div class="line">  求两个数之商</div><div class="line">  */</div><div class="line">  public static double divide(int a, int b) &#123;</div><div class="line">    return 1.0 * a / b;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>然后到命令行输入：</p>
-<p>  javadoc -d 目录 -author -version MyMath.java</p>
-<h2 id="markdown一些使用格式问题"><a href="#markdown一些使用格式问题" class="headerlink" title="markdown一些使用格式问题"></a>markdown一些使用格式问题</h2><p>表示大于号小于号不能直接写要<br>大于&amp; gt;小于号是&amp; lt;<br>把空格去掉：<br>大于&gt;小于号&lt;</p>
+<h4 id="制作帮助文档："><a href="#制作帮助文档：" class="headerlink" title="制作帮助文档："></a>制作帮助文档：</h4><p>首先你要写好一个工具类：<br>公共类的名字必须和文件的名字一致<br>一个文件里面最多只能有一个公共类<br>默认只解析 public 和 protected 的文档注释信息</p>
+<pre><code>/**
+这是一个基本的数学工具类, 提供简单的加减乘除运算
+@author Henson_z
+@version v1.0
+*/
+public class MyMath {
+  /**
+    将构造方法私有化, 外界不能创建对象
+  */
+  private MyMath(){
+
+  }
+  /**
+  求两个数之和
+  */
+  public static int add(int a, int b) {
+    return a + b;
+  }
+  /**
+  求两个数之差
+  */
+  public static int minus(int a, int b) {
+    return a - b;
+  }
+  /**
+  求两个数之积
+  */
+  public static long multiply(int a, int b) {
+    return a * b;
+  }
+  /**
+  求两个数之商
+  */
+  public static double divide(int a, int b) {
+    return 1.0 * a / b;
+  }
+}
+</code></pre><p>然后到命令行输入：</p>
+<pre><code>javadoc -d 目录 -author -version MyMath.java
+</code></pre><h2 id="markdown一些使用格式问题"><a href="#markdown一些使用格式问题" class="headerlink" title="markdown一些使用格式问题"></a>markdown一些使用格式问题</h2><p>表示大于号小于号不能直接写要</p>
+<pre><code>大于&amp;gt;小于号是&amp;lt;
+</code></pre><p>大于&gt;小于号&lt;</p>
 <h2 id="总结最后"><a href="#总结最后" class="headerlink" title="总结最后"></a>总结最后</h2><p>这是一周的内容，感觉还是很多的，还有一些东西需要消化。知道不是很难但是需要踏实的去运用。而不是瞎几把死记硬背。<br>纸上得来终觉浅，绝知此事要躬行。加油吧</p>
 
         </div>
