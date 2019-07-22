@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html class="full-height">
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="//cdn.bootcss.com/bulma/0.4.1/css/bulma.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+  
+  <title>Java总结（四）下 | 路要坚持</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="接上一篇，这一篇介绍的主要内容是堆，二分法以及set集合的知识，以及一些还没学习的知识 星期五7.19堆就是一个完全二叉树，分为大顶堆小顶堆，注意二叉搜索树不一定是完全二叉树哦； 建堆public class Heap {     //属性     private int[] elements;     private int size;      //构造方法     public Heap()">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java总结（四）下">
+<meta property="og:url" content="http://yoursite.com/2019/07/21/Java总结（四）下/index.html">
+<meta property="og:site_name" content="路要坚持">
+<meta property="og:description" content="接上一篇，这一篇介绍的主要内容是堆，二分法以及set集合的知识，以及一些还没学习的知识 星期五7.19堆就是一个完全二叉树，分为大顶堆小顶堆，注意二叉搜索树不一定是完全二叉树哦； 建堆public class Heap {     //属性     private int[] elements;     private int size;      //构造方法     public Heap()">
+<meta property="og:updated_time" content="2019-07-22T01:01:32.367Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java总结（四）下">
+<meta name="twitter:description" content="接上一篇，这一篇介绍的主要内容是堆，二分法以及set集合的知识，以及一些还没学习的知识 星期五7.19堆就是一个完全二叉树，分为大顶堆小顶堆，注意二叉搜索树不一定是完全二叉树哦； 建堆public class Heap {     //属性     private int[] elements;     private int size;      //构造方法     public Heap()">
+  
+    <link rel="alternate" href="/" title="路要坚持" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/common.css">
+<link rel="stylesheet" href="/css/nav.css">
+<link rel="stylesheet" href="/css/layout.css">
+  
+
+</head>
+
+<body>
+  <header id="navbar" class="overflow-hidden">
+  <div class="container">
+    <nav class="nav">
+         <div class="nav-left">
+            <a href="/" class="nav-item" style="font-size: 20px;">
+              <span class="logo">王邸</span>'s Blog
+            </a>
+         </div>
+        <div class="nav-center is-hidden position-relative" id="search_container">
+            <div class="nav-item full-width full-height">
+                <i class="fa fa-search has-padding" aria-hidden="true"></i>
+                <input type="text" id="search_input" class="search-input full-height full-width" placeholder="Search post" autofocus>
+                <i id="close_search" class="fa fa-times" aria-hidden="true"></i>
+            </div>
+            <div id="search_result"></div>
+        </div>
+        <div class="nav-right nav-menu">
+            <a class="nav-item" id="search">
+                <i class="fa fa-search" aria-hidden="true"></i>
+            </a>
+            
+            <a class="nav-item" href="/">
+                Home
+            </a>
+            
+            <a class="nav-item" href="/works">
+                My Works
+            </a>
+            
+            <a class="nav-item" href="/about">
+                About
+            </a>
+            
+        </div>
+        <span class="nav-toggle" id="navMenuDropdown">
+            <span></span>
+            <span></span>
+            <span></span>
+        </span>
+        <div class="navbar-menu position-absolute full-width content-box is-hidden-desktop is-flex flex-column center" style="top: 100%;">
+            
+            <a class="nav-item flex-1" href="/">
+                Home
+            </a>
+            
+            <a class="nav-item flex-1" href="/works">
+                My Works
+            </a>
+            
+            <a class="nav-item flex-1" href="/about">
+                About
+            </a>
+            
+        </div>
+    </nav>
+  </div>
+</header>
+
+  <div id="main-wrap" class="position-relative" style="margin-top: 55px;">
+      <div class="main-inner-content">
+          <!--博文页面-->
+
+<style>
+    .header-box {
+        height: 370px;
+        filter: blur(10px);
+        background-size: cover;
+        background-color: lightsteelblue;
+    }
+
+    .post-box {
+        padding: 15px;
+        padding-top: 60px;
+        min-height: 80vh;
+        margin-top: -200px;
+        border-radius: 4px;
+        background-color: rgba(255,255,255,.8);
+    }
+
+    .post-avatar {
+        height: 30px;
+        width: 30px;
+        border-radius: 50%;
+    }
+
+    .flow-chart {
+        text-align: center;
+    }
+
+    img[alt="post-cover"] {
+        display: none;
+    }
+</style>
+<header>
+    <div id="header_box" class="header-box"></div>
+</header>
+<section>
+    <div class="container post-box">
+        <div class="content post-title is-flex center flex-column" style="margin-bottom: 70px; overflow: auto;">
+            <h1 class="has-text-centered" style="padding-bottom: 10px; border-bottom: 3px solid #fff">
+                <strong>Java总结（四）下</strong>
+            </h1>
+            
+            <div class="is-flex align-center">
+                <img class="post-avatar" src="https://q2.qlogo.cn/headimg_dl?bs=996057150&dst_uin=996057150&dst_uin=996057150&;dst_uin=996057150&spec=100&url_enc=0&referer=bu_interface&term_type=PC">
+                <span style="padding:0 10px;"> <span class="sub-title">By</span> 王邸</span>
+                <span class="post-date sub-title">at: 2019-07-21</span>
+            </div>
+            
+                <div>
+                    
+                </div>
+            
+        </div>
+        <div class="content" style="overflow: auto">
+            <p>接上一篇，这一篇介绍的主要内容是堆，二分法以及set集合的知识，以及一些还没学习的知识</p>
+<h2 id="星期五7-19"><a href="#星期五7-19" class="headerlink" title="星期五7.19"></a>星期五7.19</h2><h3 id="堆"><a href="#堆" class="headerlink" title="堆"></a>堆</h3><p>就是一个完全二叉树，分为大顶堆小顶堆，注意二叉搜索树不一定是完全二叉树哦；</p>
+<h3 id="建堆"><a href="#建堆" class="headerlink" title="建堆"></a>建堆</h3><pre><code>public class Heap {
+    //属性
+    private int[] elements;
+    private int size;
+
+    //构造方法
+    public Heap(){
+        elements = new int[10]; //0的位置不存元素
+    }
+
+    //方法
+
+    /**
+     * 添加一个元素，先把元素放在末尾然后在判断是否需要往上移动
+     * 只用比较该结点和父亲结点，然后再和父亲的父亲比较
+     * 假设是大根堆
+     * @param value
+     * @return
+     */
+    public boolean add(int value) {
+        if(size &gt; elements.length){
+            return false;
+        }
+        size++;
+        elements[size] = value;
+        // 判断是否需要移动
+        int i = size;
+        //从下往上进行比较
+        while(i &gt; 1) {  //根节点是1 只有大于1才能比较根节点和子结点
+            int parent = i/2;
+            //短路与这个要放前面
+            if(parent &gt; 0 &amp;&amp; elements[i] &gt; elements[parent]) {
+                swap(elements,i,parent);
+            }
+            i = parent;
+        }
+        return true;
+    }
+
+    /**
+     * remove只能remove根节点，
+     * 然后和最后一个元素交换。再从新构造一个堆
+     * 这时候需要从上到下进行调整；先从交换的结点开始向下调整
+     * @return
+     */
+    public boolean remove() {
+        if(size == 0) return false;
+        //交换头节点和最后一个元素的结点
+        swap(elements,1,size); //这里size就是表示最后一个数
+        size--;//最后一个元素已经出局
+        //然后从上到下调整
+        //i的左孩子 2*i 右孩子2*i+1;
+        int i = 1;
+        while(i &lt; size) {
+            int left = 2*i;
+            int right = 2*i+1;
+            int maxIndex = i;
+            //先比较左边再比较右边 没有先后顺序
+            if(left &lt;= size &amp;&amp; elements[maxIndex] &lt; elements[left]) {
+                maxIndex = left;
+            }
+            if(right &lt;= size &amp;&amp; elements[maxIndex] &lt; elements[right]) {
+                maxIndex = right;
+            }
+            if(maxIndex == i) break; //不用调了
+            //交换元素
+            swap(elements,maxIndex,i);
+            i = maxIndex;
+        }
+        return true;
+    }
+
+    private void swap(int[] elements, int i, int j) {
+        int temp = elements[i];
+        elements[i] = elements[j];
+        elements[j] = temp;
+    }
+}
+</code></pre><p>堆的应用：<br>堆排序<br>  a.先进行建堆操作<br>    从第一个非叶子结点开始向下进行建堆操作，一直循环到根节点<br>  b.开始排序<br>    把根节点和最后一个无序元素交换<br>  c.重新构造成一个堆从上到下调整<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div></pre></td><td class="code"><pre><div class="line">public class HeapSort &#123;</div><div class="line"></div><div class="line">    public static void sort(int[] arr) &#123;</div><div class="line">        //首先进行建堆的过程</div><div class="line">        buildHeap(arr);</div><div class="line">        //开始排序，把第一个数和最后一个数交换然后再重新调整堆</div><div class="line">        System.out.println(Arrays.toString(arr));</div><div class="line"></div><div class="line">        int i = 0;</div><div class="line">        while(i &lt; arr.length-1)&#123; //最后一次就是两个元素比较吧</div><div class="line">            int temp = arr[0];</div><div class="line">            arr[0] = arr[arr.length-1-i];</div><div class="line">            arr[arr.length-1-i] = temp;</div><div class="line">            heapify(arr,0,arr.length-1-i);</div><div class="line">            System.out.println(Arrays.toString(arr));</div><div class="line">            i++;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * 建堆过程</div><div class="line">     * @param arr</div><div class="line">     */</div><div class="line">    private static void buildHeap(int[] arr) &#123;</div><div class="line">        // 建堆过程从第一个非叶子结点开始。因为下标从0开始</div><div class="line">        // 因为parent(i) = (i - 1)/2;</div><div class="line">        //所以第一个非叶子结点就是 (arr.len-2)/2</div><div class="line"></div><div class="line">        for (int i = (arr.length-2)/2; i &gt;=0; i--) &#123;</div><div class="line">            heapify(arr, i, arr.length);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * 校对是否是堆</div><div class="line">     * @param arr</div><div class="line">     * @param i</div><div class="line">     * @param length</div><div class="line">     */</div><div class="line">    private static void heapify(int[] arr, int i, int length) &#123;</div><div class="line">        while(i &lt; length) &#123;</div><div class="line">            int maxIndex = i;</div><div class="line">            int left = 2*i+1;</div><div class="line">            int right = 2*i+2;</div><div class="line">            if(left &lt; length &amp;&amp; arr[left] &gt; arr[maxIndex]) &#123; //left &lt; length防止下标越界 而且必须要放前面 不然下标越界</div><div class="line">              maxIndex = left;</div><div class="line">            &#125;</div><div class="line">            if(right &lt; length &amp;&amp; arr[right] &gt; arr[maxIndex]) &#123;</div><div class="line">                maxIndex = right;</div><div class="line">            &#125;</div><div class="line">            if(maxIndex == i) break;//如果不用换就break;</div><div class="line">            // 交换两个元素；</div><div class="line">            int temp = arr[i];</div><div class="line">            arr[i] = arr[maxIndex];</div><div class="line">            arr[maxIndex] = temp;</div><div class="line"></div><div class="line">            i = maxIndex;//对孩子也比较</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public static void main(String[] args) &#123;</div><div class="line">        int[] arr = &#123;5, 1, 2, 9, 0, 8, 7, 6, 4, 3&#125;;</div><div class="line">        System.out.println(Arrays.toString(arr));</div><div class="line">        System.out.println(&quot;------------------------------&quot;);</div><div class="line">        sort(arr);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="二分查找"><a href="#二分查找" class="headerlink" title="二分查找"></a>二分查找</h3><p>算法很简单但是变种却很有趣：<br>最原始的算法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">public static int search(int[] arr, int value) &#123;</div><div class="line">        // 循环</div><div class="line">        if (arr == null || arr.length == 0) return -1;</div><div class="line">        int low = 0;</div><div class="line">        int high = arr.length - 1;</div><div class="line">        while (low &lt;= high) &#123;</div><div class="line">            int mid = low + ((high - low) &gt;&gt; 1);</div><div class="line">            if (arr[mid] &lt; value) &#123;</div><div class="line">                low = mid + 1;</div><div class="line">            &#125; else if (arr[mid] &gt; value) &#123;</div><div class="line">                high = mid - 1;</div><div class="line">            &#125; else &#123;</div><div class="line">                return mid;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        return -1;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<h3 id="二分查找的变种"><a href="#二分查找的变种" class="headerlink" title="二分查找的变种"></a>二分查找的变种</h3><p>查找第一个相等的元素<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">就在while里面多加一个条件就好了</div><div class="line">while (low &lt;= high) &#123;</div><div class="line">    int mid = low + ((high - low) &gt;&gt; 1);</div><div class="line">    if (arr[mid] &lt; value) &#123;</div><div class="line">      low = mid + 1;</div><div class="line">    &#125; else if (arr[mid] &gt; value) &#123;</div><div class="line">      high = mid - 1;</div><div class="line">    &#125; else &#123;</div><div class="line">      if(mid == 0 || arr[mid-1] &lt; value) &#123;</div><div class="line">        return mid;</div><div class="line">      &#125;</div><div class="line">      high = mid-1; //其他情况把相等看成大于</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>查找最后一个相等的元素<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">while (low &lt;= high) &#123;</div><div class="line">   int mid = low + ((high - low) &gt;&gt; 1);</div><div class="line">   if (arr[mid] &lt; key) &#123;</div><div class="line">       low = mid + 1;</div><div class="line">   &#125; else if (arr[mid] &gt; key) &#123;</div><div class="line">       high = mid - 1;</div><div class="line">   &#125; else &#123;</div><div class="line">       if (mid == arr.length - 1 || arr[mid + 1] &gt; key) &#123;</div><div class="line">           return mid;</div><div class="line">       &#125;</div><div class="line">       low = mid + 1; //找到了但是不能证明是最后一个所以还要向后找</div><div class="line">   &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>查找最后一个小于等于的元素<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">while (low &lt;= high) &#123;</div><div class="line">    int mid = low + ((high - low) &gt;&gt; 1);</div><div class="line">    if (arr[mid] &lt;= key) &#123;</div><div class="line">        if (mid == arr.length - 1 || arr[mid + 1] &gt; key) &#123;  //如果是最后一个或者下一个数大于value，就确定是最后一个小于等于value的值</div><div class="line">            return mid;</div><div class="line">        &#125;</div><div class="line">        low = mid + 1;</div><div class="line">    &#125; else &#123;</div><div class="line">        high = mid - 1;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>查找第一个大于等于的元素<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">while (low &lt;= high) &#123;</div><div class="line">    int mid = low + ((high - low) &gt;&gt; 1);</div><div class="line">    if (arr[mid] &lt; key) &#123;</div><div class="line">        low = mid + 1;</div><div class="line">    &#125; else &#123;</div><div class="line">        if (mid == 0 || arr[mid - 1] &lt; key) &#123; //如果是第一个，或者前一个数小于value就能证明mid就是要找的数</div><div class="line">            return mid;</div><div class="line">        &#125;</div><div class="line">        high = mid - 1;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="星期六7-20"><a href="#星期六7-20" class="headerlink" title="星期六7.20"></a>星期六7.20</h2><p>Collection:<br>  |– List：可以包含重复元素的有序集合.<br>    |– ArrayList: 底层是数组, 增删慢, 查找快, 线程不安全, 效率高。<br>    |– LinkedList 底层是链表, 增删快, 查找慢, 线程不安全, 效率高。<br>    |– Vector 底层是数组, 增删慢, 查找块, 线程安全, 效率低。<br>  |– Set 不可以包含重复元素的集合(可以有序，也可以无序)<br>    |– HashSet 不保证迭代顺序, 底层是HashMap, 元素的唯一性依赖于存储对象的 equals(), hashCode();<br>      |– LinkedHashSet 迭代顺序和插入的顺序一致, 底层是HashMap和链表, HashMap保证元素的唯一性，链表保证迭代的有序性。<br>    |– TreeSet 元素是从小到大排序的。底层是TreeMap, TreeMap的底层是红黑树。如果构造方法没有传递比较器，就要求元素Comparable接口。</p>
+<h3 id="HashSet-存储是无序的"><a href="#HashSet-存储是无序的" class="headerlink" title="HashSet:存储是无序的"></a>HashSet:存储是无序的</h3><p>不保证 set 的迭代顺序<br>特别是它不保证该顺序恒久不变。<br>HashSet如何保证元素唯一性</p>
+<pre><code>底层数据结构是哈希表(元素是链表的数组)
+哈希表依赖于哈希值存储
+添加功能底层依赖两个方法：
+int hashCode()
+boolean equals(Object obj)
+</code></pre><p>所以在添加元素之后，修改了元素的属性值，contains就会找不到元素。而出现false;虽然属性名没有变但是属性变了也不行。看下面源码：contains方法调用了map的containsKey方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line">HashSet.java</div><div class="line">public boolean contains(Object o) &#123;</div><div class="line">    return map.containsKey(o);</div><div class="line">&#125;</div><div class="line"></div><div class="line">HashMap.java</div><div class="line">public boolean containsKey(Object key) &#123;</div><div class="line">    return getNode(hash(key), key) != null;</div><div class="line">&#125;</div><div class="line">static final int hash(Object key) &#123;</div><div class="line">    int h;</div><div class="line">    return (key == null) ? 0 : (h = key.hashCode()) ^ (h &gt;&gt;&gt; 16);</div><div class="line">&#125;</div><div class="line"></div><div class="line">public final int hashCode() &#123;</div><div class="line">    return Objects.hashCode(key) ^ Objects.hashCode(value);</div><div class="line">&#125;</div><div class="line"></div><div class="line">final Node&lt;K,V&gt; getNode(int hash, Object key) &#123;</div><div class="line">    Node&lt;K,V&gt;[] tab; Node&lt;K,V&gt; first, e; int n; K k;</div><div class="line">    if ((tab = table) != null &amp;&amp; (n = tab.length) &gt; 0 &amp;&amp;</div><div class="line">        (first = tab[(n - 1) &amp; hash]) != null) &#123;</div><div class="line">        if (first.hash == hash &amp;&amp; // always check first node</div><div class="line">            ((k = first.key) == key || (key != null &amp;&amp; key.equals(k))))</div><div class="line">            return first;</div><div class="line">        if ((e = first.next) != null) &#123;</div><div class="line">            if (first instanceof TreeNode)</div><div class="line">                return ((TreeNode&lt;K,V&gt;)first).getTreeNode(hash, key);</div><div class="line">            do &#123;</div><div class="line">                if (e.hash == hash &amp;&amp;</div><div class="line">                    ((k = e.key) == key || (key != null &amp;&amp; key.equals(k))))</div><div class="line">                    return e;</div><div class="line">            &#125; while ((e = e.next) != null);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    return null;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="TreeSet-这是有序的"><a href="#TreeSet-这是有序的" class="headerlink" title="TreeSet:这是有序的"></a>TreeSet:这是有序的</h3><p>使用元素的自然顺序对元素进行排序需要实现comparable接口</p>
+<p>或者根据创建 set 时提供的 Comparator 进行排序<br>具体取决于使用的构造方法。看下面例子：输入五个学生进行排序<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">public class HomeWork3 &#123;</div><div class="line">    public static void main(String[] args) &#123;</div></pre></td></tr></table></figure></p>
+<p>下面是实现了comparator的匿名内部类使用了lambda表达式<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"> // TreeSet&lt;ScutStudent&gt; set = new TreeSet&lt;&gt;((t1, t2) -&gt; t2.total - t1.total);</div><div class="line">//正常的匿名内部类写法应该是：</div><div class="line"> TreeSet&lt;ScutStudent&gt; set = new TreeSet&lt;&gt;(new Comparator&lt;ScutStudent&gt;() &#123;</div><div class="line">          @Override</div><div class="line">          public int compare(ScutStudent t1, ScutStudent t2) &#123;</div><div class="line">              return t2.total - t1.total;</div><div class="line">          &#125;</div><div class="line">      &#125;);</div></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">        TreeSet&lt;ScutStudent&gt; set = new TreeSet&lt;&gt;();</div><div class="line">        Scanner scan = new Scanner(System.in);</div><div class="line">        System.out.println(&quot;请输入五个学生的名字和各科成绩&quot;);</div><div class="line">        for (int i = 1; i &lt; 4; i++) &#123;</div><div class="line">            System.out.println(&quot;输入第 &quot;+ i +&quot; 学生的姓名&quot;);</div><div class="line">            String name = scan.nextLine();</div><div class="line">            System.out.println(&quot;输入第&quot;+ i +&quot;学生的语文成绩&quot;);</div><div class="line">            int chinese = Integer.valueOf(scan.nextLine());</div><div class="line">            System.out.println(&quot;输入第&quot;+ i +&quot;学生的数学成绩&quot;);</div><div class="line">            int math = Integer.valueOf(scan.nextLine());</div><div class="line">            System.out.println(&quot;输入第&quot;+ i +&quot;学生的英语成绩&quot;);</div><div class="line">            int english = Integer.valueOf(scan.nextLine());</div><div class="line">            ScutStudent ss = new ScutStudent(name,chinese,math,english);</div><div class="line">            set.add(ss);</div><div class="line">        &#125;</div><div class="line">        for (ScutStudent s : set) &#123;</div><div class="line">            System.out.println(s);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>继承了comparable接口写法：重写comparaTo方法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line">class ScutStudent implements Comparable&#123;</div><div class="line">    String name;</div><div class="line">    int chinese;</div><div class="line">    int math;</div><div class="line">    int english;</div><div class="line">    int total;</div><div class="line"></div><div class="line">    public ScutStudent() &#123;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public ScutStudent(String name, int chinese, int math, int english) &#123;</div><div class="line">        this.name = name;</div><div class="line">        this.chinese = chinese;</div><div class="line">        this.math = math;</div><div class="line">        this.english = english;</div><div class="line">        this.total = this.math + this.chinese + this.english;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public String toString() &#123;</div><div class="line">        return &quot;ScutStudent&#123;&quot; +</div><div class="line">                &quot;name=&apos;&quot; + name + &apos;\&apos;&apos; +</div><div class="line">                &quot;, chinese=&quot; + chinese +</div><div class="line">                &quot;, math=&quot; + math +</div><div class="line">                &quot;, english=&quot; + english +</div><div class="line">                &quot;, total=&quot; + total +</div><div class="line">                &apos;&#125;&apos;;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public int compareTo(Object o) &#123;</div><div class="line">        ScutStudent s = (ScutStudent)o;</div><div class="line">        return s.total - this.total;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="下午开会："><a href="#下午开会：" class="headerlink" title="下午开会："></a>下午开会：</h3><p>每天知道自己应做什么事情，时间管理，以下内容是否需要调整？<br>时间管理：<br>  例如星期三，星期六下午；<br>  要有自己思考的时间；<br>提前预习<br>  老师讲的自己总是不记得代码，自己去知道今天讲东西的思路，而不是copy书上代码；<br>  提前找题去做<br>上课<br>  认真互动<br>课后复习<br>  总结<br>作业<br>  中午能不能写一些代码？</p>
+<p>总结：<br>  bug总结：错题本<br>  项目总结；</p>
+<h3 id="冷门小总结"><a href="#冷门小总结" class="headerlink" title="冷门小总结"></a>冷门小总结</h3><p>1.如何判断string是一个数可以是一个小数</p>
+<pre><code>正则：
+^-?\\d+(\\.\\d+)?$
+ Pattern.compile(&quot;^-?\\d+(\\.\\d+)?$&quot;);
+ Pattern.mathes(&quot;^-?\\d+(\\.\\d+)?$&quot;);
+</code></pre><p>2.对于一些知识点的拓展<br>红黑树，广义平衡二叉树；<br>红黑树是每个节点都带有颜色属性的二叉查找树，颜色或红色或黑色。在二叉查找树强制一般要求以外，对于任何有效的红黑树我们增加了如下的额外要求:</p>
+<pre><code>性质1. 节点是红色或黑色。
+性质2. 根节点是黑色。
+性质3 每个红色节点的两个子节点都是黑色。(从每个叶子到根的所有路径上不能有两个连续的红色节点)
+性质4. 从任一节点到其每个叶子的所有路径都包含相同数目的黑色节点。
+</code></pre><p>3.动态规划：这个东西有点意思，之和部分状态有关，并不是所有的状态<br><a href="https://blog.csdn.net/sinat_34022298/article/details/77653693" target="_blank" rel="external">背包问题</a></p>
+<p>4.测试时间的问题<br><a href="https://www.cnblogs.com/jpfss/p/9674054.html" target="_blank" rel="external">测试时间</a></p>
+<pre><code>long startTime = System.nanoTime() //纳秒
+long startTime = System.currentTimeMillis(); //毫秒
+long endTime = System.currentTimeMillis();
+System.out.println(&quot;运行时间:&quot; + (endTime - startTime) + &quot;ms&quot;);
+</code></pre><p>5.注意IDEA里的绿色波浪线，可能有问题；</p>
+
+        </div>
+        <div class="post-reply">
+            
+                <!-- 来必力City版安装代码 -->
+                <div id="lv-container" data-id="city" data-uid="MTAyMC8yOTE4Ni81NzUz">
+                    <script type="text/javascript">
+                        (function(d, s) {
+                            var j, e = d.getElementsByTagName(s)[0];
+
+                            if (typeof LivereTower === 'function') { return; }
+
+                            j = d.createElement(s);
+                            j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+                            j.async = true;
+
+                            e.parentNode.insertBefore(j, e);
+                        })(document, 'script');
+                    </script>
+                    <noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+                </div>
+                <!-- City版安装代码已完成 -->
+            
+            
+        </div>
+    </div>
+</section>
+<script>
+    // 获取第一张图, 用以当封面背景图
+    var img = document.querySelectorAll('img')[1]
+
+    if (img) {
+        var header_box = document.querySelector('#header_box')
+        header_box.style.backgroundImage = 'url('+ img.src +')'
+    }
+</script>
+      </div>
+  </div>
+  <style>
+  #footer {
+    min-height: 10vh;
+    background: black;
+    color: #fff;
+  }
+
+  #footer a {
+    color: #e1e1e1;
+  }
+</style>
+<footer id="footer" class="has-text-centered is-flex center">
+  <div class="container has-padding">
+    <div>
+      <div>
+        <!--请您保留作者署名, 主题制作来之不易-->
+        主题来自 <a href="http://haojen.github.io/">Haojen Ma</a>
+        <br>
+        Copyright © 王邸 2019
+        <!--
+          Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+        -->
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="/js/search_core.js"></script>
+<script src="/js/script.js"></script>
+
+</body>
+</html>
