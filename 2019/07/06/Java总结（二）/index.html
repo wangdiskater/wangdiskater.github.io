@@ -14,7 +14,7 @@
 <meta property="og:url" content="http://yoursite.com/2019/07/06/Java总结（二）/index.html">
 <meta property="og:site_name" content="路要坚持">
 <meta property="og:description" content="总结时间：0701-0706 概述这周主要把面向对象的内容讲完了。很多东西虽然很熟悉但是却很多细节的处理很重要。是打好基础的关键。但是万变不离其中，离不开三大特性：继承，封装，多态。现在也只能字面意思上去理解到底这些东西是什么。这些东西的规律是什么，但是他为什么这样实现的？最初的构想是什么？等等问题，这不是老师能教你的，你自己需要去学习。上个礼拜简单的讲了什么是封装，但是封装远远没有private">
-<meta property="og:updated_time" content="2019-07-22T02:41:02.223Z">
+<meta property="og:updated_time" content="2019-07-24T14:48:48.693Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java总结（二）">
 <meta name="twitter:description" content="总结时间：0701-0706 概述这周主要把面向对象的内容讲完了。很多东西虽然很熟悉但是却很多细节的处理很重要。是打好基础的关键。但是万变不离其中，离不开三大特性：继承，封装，多态。现在也只能字面意思上去理解到底这些东西是什么。这些东西的规律是什么，但是他为什么这样实现的？最初的构想是什么？等等问题，这不是老师能教你的，你自己需要去学习。上个礼拜简单的讲了什么是封装，但是封装远远没有private">
@@ -156,7 +156,7 @@
 <p>构造代码块(语法糖)：<br>  位置：类中方法外(成员位置)<br>  作用：多个构造方法方法中相同的代码存放到一起，每次调用构造都执行，并且在构造方法前执行<br>  相当于放在每个构造函数的首行</p>
 <p>静态代码块：<br>  位置: 成员位置 需要用static标识；<br>  作用：对类进行初始化, 在类加载的时候执行, 并且只执行一次</p>
 <p>  同步代码块(以后再讲)</p>
-<p>这里只需要搞清楚一个问题：这些代码块的执行顺序：<br>静态代码块 &gt;构造代码块(语法糖) &gt; 构造方法<br>先执行父类的,看下面例子：<br>先执行父类静态块，再执行子类静态块。</p>
+<p>这里只需要搞清楚一个问题：这些代码块的执行顺序：<br>静态代码块 &gt;构造代码块(语法糖) &gt; 构造方法<br>先执行父类的,看下面例子：<br><strong>注意：先执行父类静态块，再执行子类静态块。</strong></p>
 <pre><code>class Fu {
   static {
     System.out.println(&quot;静态代码块Fu&quot;);
@@ -202,14 +202,23 @@ class Test2 {
 <li>父类按照层次依次加载，然后再加载子类</li>
 <li>成员变量是按照层次进行初始化的<br>先初始化父类中定义的数据，再初始化子类中定义的数据</li>
 </ol>
-<h3 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h3><p>(1)把多个类中相同的成员给提取出来定义到一个独立的类中。然后让这多个类和该单独的类产生一个关系，使多个类中具备这个单独的类中定义的成员。<br>    这个关系叫继承。</p>
+<h3 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h3><p>(1)把多个类中相同的成员给提取出来定义到一个独立的类中。然后让这多个类和该单独的类产生一个关系，使多个类中具备这个单独的类中定义的成员。<br>  这个关系叫继承。</p>
 <p>(2)Java中如何表示继承呢?格式是什么呢?<br>  A:用关键字extends表示<br>  B:格式：class 子类名 extends 父类名 {}</p>
 <p>(3)继承的好处：<br>  A: 提高了代码的复用性<br>  B: 提高了代码的维护性<br>  C: 让类与类产生了一个关系，是多态的前提</p>
 <p>(4)继承的弊端：<br>  A:让类的耦合性增强。这样某个类的改变，就会影响其他和该类相关的类。<br>    设计原则：低耦合，高内聚。<br>    耦合：类与类的关系<br>    内聚：自己完成某件事情的能力（责任）<br>  B:打破了封装性</p>
 <p>(5)Java中继承的特点<br>  A: Java只支持单继承，不支持多继承<br>  B: 但是支持多层继承   界门纲目科属种</p>
 <p>(6)继承的注意事项：<br>  A:子类不能继承父类的私有成员（私有成员是被子类隐式继承的，其实私有成员被继承了，但是在子类中不能访问。反射）<br>  B:子类不能继承父类的构造方法，但是可以通过super去访问<br>  C:不要为了部分功能而去继承。如下例子</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">class A &#123;</div><div class="line">  m1();</div><div class="line">  m2();</div><div class="line">  m3();</div><div class="line">  m4();</div><div class="line">&#125;</div><div class="line">我们现在需要一个类有以下功能：m1(), m2(), m3(), m5();</div><div class="line">class B extends A&#123; (不推荐)</div><div class="line">  m5();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>说到功能那就一定要写成接口来实现就好;</p>
+<pre><code>class A {
+  m1();
+  m2();
+  m3();
+  m4();
+}
+我们现在需要一个类有以下功能：m1(), m2(), m3(), m5();
+class B extends A{ (不推荐)
+  m5();
+}
+</code></pre><p>说到功能那就一定要写成接口来实现就好;</p>
 <p>(7)什么时候使用继承呢?<br>  A类和B类如果是: is a<br>  is a的关系：</p>
 <ul>
 <li>Person：<ul>
@@ -219,10 +228,30 @@ class Test2 {
 </li>
 </ul>
 <p><strong>(8)Java继承中的成员关系</strong></p>
-<p>  A:成员变量<br>    a:子类的成员变量名称和父类中的成员变量名称不一样。<br>    b:子类的成员变量名称和父类中的成员变量名称一样，这个怎么访问呢?<br>      子类的方法访问变量的查找顺序(一层一层向外)：<br>      首先找子类的局部变量<br>      再找子类的成员变量<br>      再找父类的成员变量 …<br>    c.子类的成员变量隐藏了父类的成员变量？(就近原则)<br>      super关键字<br>        super是内存空间的标识</p>
-<p>  B:静态成员:<br>    a. 静态成员也会被继承<br>    b.如果出现同名的静态变量，那么父类中定义的静态成员只能通过类名访问。<br>    c.如果new一个对象 还是能super访问父类的静态成员的（我自己发现的）</p>
-<p>  C:构造方法<br>    a:子类的构造方法默认会去访问父类的无参构造方法<br>      目的：将在父类中定义的成员变量初始化。<br>    b:父类中如果没有无参构造方法，怎么办?<br>      子类通过super去明确调用父类带参构造<br>      子类通过this调用本身的其他构造，<strong>但是一定会有一个去访问了父类的构造</strong><br>      让父类提供无参构造<br>      this(…), super(…)只能在构造方法的第一条语句。</p>
-<p>  D:成员方法<br>  a:子类的成员方法和父类中的成员方法签名不一样。<br>    相当于两个不同的方法(我们来举个栗子);</p>
+<p>  A:成员变量</p>
+<pre><code>a:子类的成员变量名称和父类中的成员变量名称不一样。
+b:子类的成员变量名称和父类中的成员变量名称一样，这个怎么访问呢?
+  子类的方法访问变量的查找顺序(一层一层向外)：
+  首先找子类的局部变量
+  再找子类的成员变量
+  再找父类的成员变量 ...
+c.子类的成员变量隐藏了父类的成员变量？(就近原则)
+  super关键字
+    super是内存空间的标识
+</code></pre><p>  B:静态成员:</p>
+<pre><code>a.静态成员也会被继承
+b.如果出现同名的静态变量，那么父类中定义的静态成员只能通过类名访问。
+c.如果new一个对象,还是能super访问父类的静态成员的（我自己发现的）
+</code></pre><p>  C:构造方法</p>
+<pre><code>a:子类的构造方法默认会去访问父类的无参构造方法
+  目的：将在父类中定义的成员变量初始化。
+b:父类中如果没有无参构造方法，怎么办?
+  1)子类通过super去明确调用父类带参构造
+  2)子类通过this调用本身的其他构造，**但是一定会有一个去访问了父类的构造**
+  3)让父类提供无参构造
+  this(...), super(...)只能在构造方法的第一条语句。
+</code></pre><p>  D:成员方法</p>
+<p>  a:子类的成员方法和父类中的成员方法签名不一样。<br>    相当于两个不同的方法(我们来举个栗子);</p>
 <pre><code>public class demo2 {
     public static void main(String[] args) {
         Son son = new Son();
@@ -243,10 +272,14 @@ class Son extends  Father {
 
 我是父类的show方法我传入了一个参数
 我是子类的show方法我没有参数
-</code></pre><p>b:子类的成员方法和父类中的成员方法签名一样，这个怎么访问呢?<br>  父类的方法被重写了，不能再访问父类的方法，此时方法被重写。<br>  通过子类对象访问一个方法的查找顺序：<br>  查找子类的成员方法<br>  再查找父类的成员方法<br>c:重写的成员方法返回值类型（引用类型兼容即可）：<br>  基本数据类型必须一致<br>  引用数据类型：父类的类型必须兼容子类的类型<br>d:其他注意事项：<br>  访问权限:子类的方法的访问权限必须大于等于父类的方法<br>  父类中的私有方法不能被重写</p>
-<p>E:静态方法<br>    a.静态的方法也可以被继承<br>    b.静态方法可以被”重写”, 但是不能添加Override</p>
+</code></pre><p>b:子类的成员方法和父类中的成员方法签名一样，这个怎么访问呢?<br>  父类的方法被重写了，不能再访问父类的方法，此时方法被重写。<br>  通过子类对象访问一个方法的查找顺序：</p>
+<pre><code>查找子类的成员方法
+再查找父类的成员方法
+</code></pre><p>c:重写的成员方法返回值类型（引用类型兼容即可）：<br>  基本数据类型必须一致<br>  <strong>引用数据类型：父类的类型必须兼容子类的类型</strong></p>
+<p>d:其他注意事项：<br>  访问权限:子类的方法的访问权限必须大于等于父类的方法<br>  父类中的私有方法不能被重写</p>
+<p>E:静态方法<br>  a.静态的方法也可以被继承<br>  b.静态方法可以被”重写”, 但是不能添加Override</p>
 <p>(9)方法的重写：<br>  有子父类关系, 方法签名一样。<br>  返回值类型：<br>    基本类型：必须一致<br>    引用类型：父类兼容子类。<br>  访问权限：子类的访问权限必须大于等于父类的访问权限。<br>    Father f = new Son();<br>    f.show();  //多态性，编译看左边，运行看右边；</p>
-<p>(10)两个面试题：<br>  A:Override和Overload的区别?<br>    override: 子类重写父类的同名方法。要求子类的返回值类型要被父类兼容，方法名一样，参数列表一样（方法签名一样）子类的访问权限不能比父类的小。<br>    overload：在同一个类中，方法名一样，但是参数列表不一样。与返回值类型无关<br>      如果在子类中定义了一个和父类同名的方法，但是参数列表不一样就会构成重载。<br>      如果在子类中定义了一个和父类同名的方法，但是参数列表一样，但是返回值类型不兼容，会报错。<br>  B:this和super的区别和各自的作用?<br>    this<br>    this.成员变量 super.成员变量<br>    this(…)   super(…) //调用构造方法<br>    this.成员方法() super.成员方法()</p>
+<p>(10)两个面试题：<br>  A:Override和Overload的区别?<br>    override: 子类重写父类的同名方法。要求子类的返回值类型要被父类兼容，方法名一样，参数列表一样（方法签名一样）子类的访问权限不能比父类的小。<br>    overload：在同一个类中，方法名一样，但是参数列表不一样。与返回值类型无关<br>      如果在子类中定义了一个和父类同名的方法，但是参数列表不一样就表示是不同的方法；<br>      如果在子类中定义了一个和父类同名的方法，但是参数列表一样，但是返回值类型不兼容，会报错。<br>  B:this和super的区别和各自的作用?<br>    this<br>    this.成员变量 super.成员变量<br>    this(…)   super(…) //调用构造方法<br>    this.成员方法() super.成员方法()</p>
 <p>(11)数据初始化的面试题<br>  <strong>A:回顾：对象初始化过程</strong><br>    加载Student.class文件进内存<br>    在栈内存为s开辟空间<br>    在堆内存为学生对象开辟空间<br>    对学生对象的成员变量进行默认初始化<br>    对学生对象的成员变量进行显示初始化<br>    通过构造方法对学生对象的成员变量赋值<br>    学生对象初始化完毕，把对象地址赋值给s变量</p>
 <p>  B:子类对象的初始化过程（分层初始化：加载父类，然后加载子类）<br>  C:子父类的构造执行过程<br>    加载父类<br>    加载子类<br>    先对父类进行初始化: 父类显示初始化，父类的构造方法。<br>    对子类进行初始化：子类的显示初始化，子类的构造方法。<br>  看下面这个例子更好的理解对象初始化过程：</p>
 <pre><code>public class test3 {
@@ -353,11 +386,14 @@ public class Test3 {
 </code></pre><p>这个例子告诉我们不要乱用转型，学会使用instanceOf先判断是否是该对象的类或者子类然后再转型。</p>
 <h3 id="抽象类"><a href="#抽象类" class="headerlink" title="抽象类"></a>抽象类</h3><p>(1)概述：<br>  将类抽象    举例：动物<br>  将方法抽象 比如动物会怎么叫，你不知道，所以你不应该给一个具体的实现，而只要给一个声明就可以</p>
 <p>(2)抽象类的特点<br>  A:抽象类和抽象方法必须用关键字abstract修饰<br>  B:抽象类中不一定有抽象方法,但是有抽象方法的类一定是抽象类(但是接口也定义了抽象法方法)<br>  C:抽象类不能实例化 （存在的用途就是被子类继承）<br>  D:抽象类的子类<br>    a:是一个抽象类。可以重写抽象方法，也可以不重写。<br>    b:是一个具体类。一定要重写所有的抽象方法<br>(3)抽象类的成员特点：<br>  A:成员变量<br>    可以是变量，也可以是常量<br>  B:构造方法<br>    有构造方法<br>  C:成员方法<br>    可以是抽象方法，也可以是普通方法<br>(4)抽象类的几个小问题<br>  A:抽象类有构造方法，不能实例化，那么构造方法有什么用?<br>    给子类访问，对在抽象类中定义的成员变量进行初始化<br>  B:一个类如果没有抽象方法,却定义为了抽象类，有什么用?<br>    该类不能被实例化<br>  C:abstract 不能和哪些关键字共存<br>    final: 冲突<br>    private：冲突<br>    static：无意义</p>
-<h3 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h3><p>(1)在Java中，接口一般是用来表示扩展功能的。<br>(2)接口的特点：<br>  A:接口用关键字interface修饰<br>    interface 接口名 {} //一般大写<br>  B:类实现接口用implements修饰<br>    class 类名 implements 接口名 {}<br>  C:接口不能实例化<br>  D:接口的实现类<br>    a:是一个抽象类  可以重写抽象方法，也可以不重写。<br>    b:是一个具体类  一定要重写所有的抽象方法<br>  E:空的接口<br>    a:就是为了做标记的标记接口JAVA源码中经常看到<br>(3)接口的成员特点：<br>  A:成员变量<br>    只能是静态常量，默认用public static final修饰<br>  B:构造方法<br>    接口没有构造方法<br>  C:成员方法<br>    可以有抽象方法，默认用 public abstract修饰<br>    JDK8以后可以有<br>    默认方法：必修用default关键字修饰，默认用 public修饰<br>    静态方法：必修用static修饰，默认用public 修饰<br>(4)类与类,类与接口,接口与接口<br>  A:类与类   单继承<br>  B:类与接口  多实现<br>  C:接口与接口 多继承</p>
+<h3 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h3><p>(1)在Java中，接口一般是用来表示扩展功能的。<br>(2)接口的特点：<br>  A:接口用关键字interface修饰<br>    interface 接口名 {} //接口名一般大写<br>  B:类实现接口用implements修饰<br>    class 类名 implements 接口名 {}<br>  C:接口不能实例化<br>  D:接口的实现类<br>    a:是一个抽象类  可以重写抽象方法，也可以不重写。<br>    b:是一个具体类  一定要重写所有的抽象方法，可以写成匿名对象，如果只有一个方法可以写lambda表达式<br>  E:空的接口<br>    a:就是为了做标记的标记接口JAVA源码中经常看到<br>(3)接口的成员特点：<br>  A:成员变量<br>    只能是静态常量，默认用public static final修饰<br>  B:构造方法<br>    接口没有构造方法<br>  C:成员方法<br>    可以有抽象方法，默认用 public abstract修饰<br>    <strong><em>注意：JDK8以后可以有</em></strong></p>
+<pre><code>默认方法：必修用default关键字修饰，默认用 public修饰
+静态方法：必修用static修饰，默认用public 修饰
+</code></pre><p>(4)类与类,类与接口,接口与接口<br>  A:类与类   单继承<br>  B:类与接口  多实现<br>  C:接口与接口 多继承</p>
 <p>(5)抽象类和接口的区别<br>  A:成员区别<br>    抽象类：抽象方法，成员变量，静态成员等等<br>    接口：抽象方法，只能静态常量<br>  B:关系区别:<br>    类与类：  单继承<br>    类与接口：多实现<br>    接口与接口：多继承<br>  C:设计理念不同<br>    抽象类：和它的子类之间表现的是 is a的关系， 描述的是子类中共性<br>    接口：和它的子类之间表现的是 like a 的关系，描述的是扩展功能</p>
 <h3 id="形式参数和返回值的问题"><a href="#形式参数和返回值的问题" class="headerlink" title="形式参数和返回值的问题"></a>形式参数和返回值的问题</h3><p>(1)形式参数：<br>  类名：需要该类或者该类子类的对象<br>  抽象类名：需要该类的子类对象<br>  接口名：需要该接口的实现类对象<br>(2)返回值类型：<br>  类名：返回的是该类或者该类子类的对象<br>  抽象类名：返回的是该类的子类对象<br>  接口名：返回的是该接口的实现类的对象<br>(3)链式编程<br>  对象.方法1().方法2()…….方法n();</p>
 <h2 id="星期三-拉闸放假"><a href="#星期三-拉闸放假" class="headerlink" title="星期三(拉闸放假)"></a>星期三(拉闸放假)</h2><h2 id="星期四"><a href="#星期四" class="headerlink" title="星期四"></a>星期四</h2><h3 id="打包"><a href="#打包" class="headerlink" title="打包"></a>打包</h3><p>  命令：javac -d . xxx.java</p>
-<h3 id="导包"><a href="#导包" class="headerlink" title="导包"></a>导包</h3><p>(1)访问不同包的类<br>  a. 指定类的全限定名（例如java.util.Scanner）;<br>  b. 导包<br>(2)格式：<br>  import 包名.类名；<br>  静态导入：（导入静态方法，就好像导入的方法就定义在这个类中一样）<br>    import static 包名.类名.方法名<br>    要求该方法必须是静态的。<br>(3)面试题：package,import,class的顺序<br>  package &gt; import &gt; class<br>  一个  多个  多个(建议一个文件里面只有一个class)</p>
+<h3 id="导包"><a href="#导包" class="headerlink" title="导包"></a>导包</h3><p>(1)访问不同包的类<br>  a. 指定类的全限定名（例如java.util.Scanner）;<br>  b. 导包<br>(2)格式：<br>  import 包名.类名；<br>  静态导入：（导入静态方法，就好像导入的方法就定义在这个类中一样）<br>    import static 包名.类名.方法名<br>    要求该方法必须是静态的。<br>(3)面试题：package,import,class的在JAVA文件中的顺序<br>  package &gt; import &gt; class<br>  一个  多个  多个(建议一个文件里面只有一个class)</p>
 <h3 id="权限修饰符"><a href="#权限修饰符" class="headerlink" title="权限修饰符"></a>权限修饰符</h3><p>(1)权限修饰符</p>
 <table>
 <thead>
@@ -406,14 +442,113 @@ public class Test3 {
 <p>(2) 内部类的作用：<br>  a. 保护内部类<br>  b. 方便内部类和外部类的交互</p>
 <p>(3) 内部类的访问规则<br>  A:内部类可以直接访问外部类的成员，包括私有（内部类秘密捕获了一个外部类对象）<br>  B:外部类要想访问内部类成员，必须创建对象</p>
 <p>(4)内部类的分类<br>  A:成员位置（成员内部类，静态内部类）<br>  B:局部位置（局部内部类，匿名内部类）</p>
-<p>(5)成员内部类(外部类对象所有)<br>  a. 内部类怎么访问外部类？<br>    直接访问，并且访问外部类的私有成员<br>  b. 外部类怎么访问内部类？<br>    创建对象，并且可以访问内部类私有成员<br>  c. 其他类怎么访问内部类？<br>    创建对象<br>    格式：Outer.Inner inner = new Outer().new Inner()；<br>    受访问权限修饰符的限制。<br>  注意事项：反编译之后，发现内部类秘密捕获了外部类对象。</p>
-<p>(6)静态内部类（外部类所有）<br>  a. 内部类怎么访问外部类？<br>    直接访问，只能访问静态的成员，可以访问外部类私有的（必须是静态的因为在静态上下文中）<br>  b. 外部类怎么访问内部类？<br>    创建对象，并且可以访问内部类私有成员<br>  c. 其他类怎么访问内部类？<br>    创建对象<br>    格式：Outer.Inner inner = new Outer.Inner()；<br>    受访问权限修饰符的限制。</p>
+<p>(5)成员内部类(外部类对象所有)<br>  a. 内部类怎么访问外部类？<br>    直接访问，并且访问外部类的私有成员<br>  b. 外部类怎么访问内部类？<br>    创建对象，并且可以访问内部类私有成员<br>  c. 其他类怎么访问内部类？<br>    创建对象<br>    格式：Outer.Inner inner = new Outer().new Inner()；<br>    受访问权限修饰符的限制。<br>  注意事项：反编译之后，发现内部类秘密捕获了外部类对象。<br>  成员内部类例子如下：</p>
+<pre><code>  // 成员内部类
+class Outer1 {
+  private int a = 10;
+  public int b = 20;
+  public void method() {
+    Inner1 inner = new Inner1();  //访问内部对象需要创建对象
+    System.out.println(inner.num1);
+    System.out.println(inner.num2);
+  }
+
+  class Inner1 {
+    // int a = 100;
+    // int b = 200;
+    private int num1 = 100;
+    public int num2 = 200;
+    public void show() {
+      System.out.println(a); //直接访问外部
+      System.out.println(b); //直接访问外部
+      // System.out.println(Outer1.a);无法从静态上下文中引用非静态 变量 a
+      // System.out.println(Outer1.b); 无法从静态上下文中引用非静态 变量 b
+      // System.out.println(Outer1.this.a);
+      // System.out.println(Outer1.this.b);
+    }
+  }
+  public static void main(String[] args) {
+    //成员内部类想访问外部类时要创建外部类对象
+    Outer1 outer = new Outer1();
+    Inner1 inner = outer.new Inner1();
+    inner.show();
+    outer.method();
+  }
+}
+</code></pre><p>(6)静态内部类（外部类所有）<br>  a. 内部类怎么访问外部类？<br>    直接访问，只能访问静态的成员，可以访问外部类私有的（必须是静态的因为在静态上下文中）<br>  b. 外部类怎么访问内部类？<br>    创建对象，并且可以访问内部类私有成员<br>  c. 其他类怎么访问内部类？<br>    创建对象<br>    格式：Outer.Inner inner = new Outer.Inner()；<br>    受访问权限修饰符的限制。<br>    静态内部类的例子：</p>
+<pre><code>class Outer2 {
+  private int a = 10;
+  public int b = 20;
+  private static int c = 30;
+  public static int d = 40;
+
+  public void method() {
+    //全部报错，无法获取静态上下文的成员
+    // System.out.println(Inner2.c);
+    // System.out.println(Inner2.c);
+    // System.out.println(Inner2.num1);
+    // System.out.println(Inner2.num2);
+    // Inner2.show();
+  }
+
+  public static void method2() {
+    //只有创建了对象才能在外部类使用
+    Inner2 inner2 = new Inner2();
+    System.out.println(inner2.c);
+    System.out.println(inner2.c);
+    System.out.println(inner2.num1);
+    System.out.println(inner2.num2);
+    inner2.show();
+  }
+
+  static class Inner2 {
+    // int a;
+    // int b;
+    int c = 300;
+    int d = 400;
+    private int num1 = 1;
+    public int num2 = 2;
+    public void show() {
+      // System.out.println(a);
+      // System.out.println(b);
+      System.out.println(c);
+      System.out.println(d);
+      // System.out.println(Outer2.this.c);
+      // System.out.println(Outer2.this.d);
+      System.out.println(Outer2.c);
+      System.out.println(Outer2.d);
+    }
+  }
+
+  public static void main(String[] args) {
+
+    //以下两种创建静态内部类都可以
+    System.out.println(&quot;创建内部类访问&quot;);
+
+    Inner2 inner = new Inner2();
+    inner.show();
+    Outer2.Inner2 inner2 = new Outer2.Inner2();
+    inner2.show();
+
+    System.out.println(inner.num1);
+    System.out.println(inner.num2);
+
+    System.out.println(&quot;创建外部类访问&quot;);
+    Outer2 outer2 = new Outer2();
+    outer2.method2();
+  }
+}
+</code></pre><p>写完例子我们就在想，静态内部类到底有什么用？<br>感觉用起来很蠢：</p>
+<pre><code>首先外部类是非静态的，所以外部类如果不创建内部类对象是访问不了内部类的成员的。
+然后我觉得既然可以直接创建内部类，那还要外部类包装干什么？
+和普通的成员内部类区别？
+</code></pre><p>  <a href="https://blog.csdn.net/nimeghbia/article/details/87871441" target="_blank" rel="external">内部静态类作用</a><br>  如果需要内部类需要创静态的成员，就要用到内部类。静态成员是类所有，但这是静态内部类的特性；</p>
 <p>(7)局部内部类(局部变量)<br>  a. 内部类怎么访问外部类？<br>    直接访问，并且可以访问私有的。<br>    访问外部类的局部变量：要求该局部变量不能改变。（放在常量池中）（通过画图了解和反编译了解）<br>  b. 外部类怎么访问内部类？<br>    只能在该方法中访问。<br>    创建对象，并且可以访问内部类私有成员<br>  c. 其他类怎么访问内部类？<br>    不能！</p>
-<p>  A:局部内部类访问局部变量必须是最终量或者是实际的最终量,为什么呢?<br>  因为局部变量使用完毕就消失，而堆内存的数据并不会立即消失。<br>  为了让该值还存在，就加final修饰。 –&gt; 常量池</p>
+<p>  A:局部内部类访问局部变量必须是最终量或者是实际的最终量（final）,为什么呢?<br>  因为局部变量使用完毕就消失，而堆内存的数据并不会立即消失。<br>  为了让该值还存在，就加final修饰。 –&gt; 常量池</p>
 <pre><code>反编译的源码：
 class Outer3$1Inner3
 {
-  final int val$num1;
+  final int val$num1;  //把这个值保存成了常量
   final Outer3 this$0;
   Outer3$1Inner3()
   {
@@ -447,7 +582,11 @@ public class Outer4 {
 <h4 id="8-匿名内部类（必须掌握）"><a href="#8-匿名内部类（必须掌握）" class="headerlink" title="(8)匿名内部类（必须掌握）"></a>(8)匿名内部类（必须掌握）</h4><p>前提：<br>  存在一个类或者接口。<br>  类：可以是普通类, 也可以是抽象类, 但是不能最终类,因为最终类（final）不能有子类<br>    创建了该类的子类。<br>  接口：<br>    创建了该接口的子类</p>
 <p>格式：<br>  new 类名或者接口名() {重写方法;}</p>
 <p>本质：创建了一个继承了该类或者实现该接口的子类对象。匿名内部类可以实现的，局部内部类一定可以实现；</p>
-<p>//定义一个接口<br>    interface Sing {<br>      void sing();<br>    }<br>//定义一个最终类，不能继承的</p>
+<p>//定义一个接口</p>
+<pre><code>interface Sing {
+  void sing();
+}
+</code></pre><p>//定义一个最终类，不能继承的</p>
 <pre><code>final class Dance {
   public void dance() {
   }
@@ -629,7 +768,7 @@ public class FirstLevel implements Cloneable{
             fl.sec = null;
 
         } else {
-
+            //记得传初始化的数值进去给他初始化！
             SecondLevel secondLevel = new SecondLevel(fl.sec.j ,fl.sec.third);
 
             SecondLevel clone = secondLevel.clone();

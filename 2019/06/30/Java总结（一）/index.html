@@ -14,7 +14,7 @@
 <meta property="og:url" content="http://yoursite.com/2019/06/30/Java总结（一）/index.html">
 <meta property="og:site_name" content="路要坚持">
 <meta property="og:description" content="1.把第三章的客户题写完了；放在第一行代码HomeWork中2.总结本周学习的内容： 星期一赋值运算符：基本运算符 =拓展赋值运算符： += -= 等a=b=101.赋值表达式是有值的  a+b  b=10; //它的值等于赋值运算符右边表达式的值；2.赋值运算符从右向左结合的； 但是算数运算符是从左到右结合的；  a += 20; –&amp;gt; a = a + 20;  不能写a = 20 + a">
-<meta property="og:updated_time" content="2019-07-22T01:14:14.629Z">
+<meta property="og:updated_time" content="2019-07-24T13:37:02.336Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java总结（一）">
 <meta name="twitter:description" content="1.把第三章的客户题写完了；放在第一行代码HomeWork中2.总结本周学习的内容： 星期一赋值运算符：基本运算符 =拓展赋值运算符： += -= 等a=b=101.赋值表达式是有值的  a+b  b=10; //它的值等于赋值运算符右边表达式的值；2.赋值运算符从右向左结合的； 但是算数运算符是从左到右结合的；  a += 20; –&amp;gt; a = a + 20;  不能写a = 20 + a">
@@ -175,16 +175,18 @@
 <h2 id="星期二"><a href="#星期二" class="headerlink" title="星期二"></a>星期二</h2><h3 id="switch"><a href="#switch" class="headerlink" title="switch"></a>switch</h3><p>  switch表示这是switch语句<br>  表达式的取值：byte, short, int, char<br>    JDK5以后可以是：枚举<br>    JDK7以后可以是：String<br>  case后面跟的是要和表达式进行比较的值<br>  语句体部分可以是一条或多条语句<br>  break表示中断，结束的意思，可以结束switch语句<br>  default语句表示所有情况都不匹配的时候，就执行该处的内容，和if语句的else相似。</p>
 <p>注意事项:<br>  a. case后面只能是常量，不能是变量，而且，多个case后面的值不能出现相同的<br>  b. default可以省略吗?<br>    可以省略。一般不建议。除非判断的值是固定的。(单选题)<br>  c. break可以省略吗?<br>    可以省略，一般不建议。否则结果可能不是你想要的 (case穿越)<br>  d. default的位置一定要在最后吗?<br>    可以出现在switch语句任意位置。<br>  e. switch语句的结束条件<br>    遇到break<br>    执行到程序的末尾</p>
 <p>使用场景<br>  a. if语句是通用的。<br>  b. case只有几种常量的情况, 对于常量还有一些限制。(比较单一)<br>    byte, short, int, char, enum, String</p>
-<h3 id="循环语句"><a href="#循环语句" class="headerlink" title="循环语句"></a>循环语句</h3><p>死循环：<br>// for(;;);<br>// System.out.println(“我爱学JAVA!”); 无法访问的语句</p>
-<p>// while(true);<br>// System.out.println(“我爱学JAVA!”); 无法访问的语句</p>
-<p>循环的题目：<br>请统计1-1000之间同时满足如下条件的数据有多少个：<br>  对3整除余2<br>  对5整除余3<br>  对7整除余2</p>
+<h3 id="循环语句"><a href="#循环语句" class="headerlink" title="循环语句"></a>循环语句</h3><p>死循环：</p>
+<pre><code>// for(;;);
+// System.out.println(&quot;我爱学JAVA!&quot;); 无法访问的语句
+
+// while(true);
+// System.out.println(&quot;我爱学JAVA!&quot;); 无法访问的语句
+</code></pre><p>循环的题目：<br>请统计1-1000之间同时满足如下条件的数据有多少个：<br>  对3整除余2<br>  对5整除余3<br>  对7整除余2</p>
 <p>分析：</p>
 <ol>
 <li>定义统计变量 count = 0;</li>
-<li><p>循环：1 ~ 1000;<br>判断这个数是够满足：<br> 对3整除余2<br> 对5整除余3<br> 对7整除余2<br>满足：输出这个数,count++</p>
-</li>
-<li><p>输出count</p>
-</li>
+<li>循环：1 ~ 1000;<br>判断这个数是够满足：<br> 对3整除余2<br> 对5整除余3<br> 对7整除余2<br>满足：输出这个数,count++</li>
+<li>输出count</li>
 </ol>
 <p>小学生的痛苦：<br>  求满足这个条件最小正整数：<br>    对3整除余2<br>    对5整除余3<br>    对7整除余2</p>
 <p>（注意这个思路）<br>  a. 假设s满足条件, 下一个满足条件的数是多少？<br>    下一个数：s + 105n (n = 1,2,3,4…)也满足条件<br>  b. 构建一个数满足这个条件<br>    3 X 5 = 15<br>      15 % 7 == 1<br>    3 X 7 = 21<br>      21 % 5 == 1<br>    5 X 7 =35<br>      35 % 3 == 2<br>    p = 15a + 21b + 35c (a,b,c为余数)<br>      p % 7 == a<br>      p % 5 == b<br>      p % 3 == 2c<br>      a = 2, b = 3, c=1<br>    p = 30 + 63 + 35 = 128;<br>    p - 105 =23;</p>
@@ -197,9 +199,17 @@
 <p>break<br>使用场景：<br>  a. switch语句<br>  b. 循环语句</p>
 <p>  break会跳出离他最近的外层循环。<br>  如果想跳出多层循环怎么办呢？</p>
 <p>标签:<br>  格式<br>    标签名: 要标识的语句</p>
-<p>  标签可以标识任意语句<br>标签害人不浅看下面的代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">class TagDemo &#123;</div><div class="line">  public static void main(String[] args) &#123;</div><div class="line">    https://www.cskaoyan.com</div><div class="line">    System.out.println(&quot;我爱中华!&quot;);</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>编译能通过而且运行不会报错问题就是：<br>https:被当成了标签<br>//www.cskaoyan.com被当成了注释</p>
-<h3 id="方法（上）："><a href="#方法（上）：" class="headerlink" title="方法（上）："></a>方法（上）：</h3><p>  概述：完成特定功能的代码块。<br>    类比：数学中的函数<br>    在其他语言里面都有函数(function)的定义<br>    函数在Java中被称为方法 (method)</p>
+<p>  标签可以标识任意语句<br>标签害人不浅看下面的代码</p>
+<pre><code>class TagDemo {
+  public static void main(String[] args) {
+    https://www.cskaoyan.com
+    System.out.println(&quot;我爱中华!&quot;);
+  }
+}
+</code></pre><p>编译能通过而且运行不会报错问题就是：</p>
+<pre><code>https:被当成了标签
+//www.cskaoyan.com被当成了注释
+</code></pre><h3 id="方法（上）："><a href="#方法（上）：" class="headerlink" title="方法（上）："></a>方法（上）：</h3><p>  概述：完成特定功能的代码块。<br>    类比：数学中的函数<br>    在其他语言里面都有函数(function)的定义<br>    函数在Java中被称为方法 (method)</p>
 <p>  格式：<br>    修饰符 返回值类型 方法名(参数类型 参数名1, 参数类型 参数名2…) {<br>      函数体;<br>      return 返回值;<br>    }</p>
 <p>  方法格式解释<br>    修饰符 比较多，后面会详细介绍。目前 public static<br>    返回值类型 用于限定返回值的数据类型<br>    方法名 标识符，为了方便我们调用方法<br>    参数类型 限定调用方法时传入参数的数据类型<br>    参数名 是一个变量，接收调用方法时传入的参数<br>    方法体 完成功能的代码<br>    return 结束方法以及返回方法指定类型的值<br>    返回值 程序被return带回的结果，返回给调用者</p>
 <p>  如何写一个方法：<br>    a. 明确功能<br>    b. 返回值类型<br>    c. 参数列表</p>
@@ -276,7 +286,7 @@ public static void change(int[] arr1, int[] arr2) {
 <p>分析：<br>n=1:<br>  A –&gt; C<br>  count = 1</p>
 <p>n=2:<br>  A –&gt; B<br>  A –&gt; C<br>  B –&gt; C<br>  count = 3</p>
 <p>n=3:<br>  A –&gt; C<br>  A –&gt; B<br>  C –&gt; B<br>  A –&gt; C<br>  B –&gt; A<br>  B –&gt; C<br>  A –&gt; C<br>  count=7;</p>
-<p>分析：<br>  假设移动n个圆盘最小需要count(n)次。<br>  count(1) = 1;<br>  count(n) = 2* count(n-1) + 1 （n &gt; 1）; // 两个count(n-1)次 一次是把上面n-1个移动到B 第二次是把n-1个从B移动到C</p>
+<p>分析：<br>  假设移动n个圆盘最小需要count(n)次，递归的公式：<br>  count(1) = 1;<br>  count(n) = 2* count(n-1) + 1 （n &gt; 1）; // 两个count(n-1)次 一次是把上面n-1个移动到B 第二次是把n-1个从B移动到C</p>
 <p>  h(1) = 1;<br>  h(n) = 2h(n-1) + 1;<br>  h(n) + 1 = 2 (h(n-1) + 1);<br>  h(n) + 1 = 2 * 2^(n-1) = 2^n;<br>  h(n) = 2^n - 1;</p>
 <p><strong>结论：从以上可以看出，递归解决的不是计算移动多少次的问题。而是要去解决如何去移动的问题</strong></p>
 <p>  如何移？<br>  定义一个函数表示把n个盘子从begin,通过middle,移动到end上面。<br>  返回值类型: void<br>  参数列表：int n, char begin, char middle, char end</p>
@@ -297,12 +307,18 @@ public static void change(int[] arr1, int[] arr2) {
     System.out.println(&quot;count=&quot; + count);*/
     hanoi(n, &apos;A&apos;, &apos;B&apos;, &apos;C&apos;);
   }
+
   public static long count(int n) {  //移动多少次，使用递归效率低下
+    //使用递归效率低下
     /*if(n==1) return 1;
     return 2 * count(n-1) + 1;*/
+
+    //可以直接通过得到的递归公式求出答案更快h(n) = 2^n - 1;
     return (long)Math.pow(2, n) - 1;
   }
-  // 定义一个函数表示把n个盘子从begin,通过middle,移动到end上面
+
+  //定义一个函数表示把n个盘子从begin,通过middle,移动到end上面
+  //递归要解决的不是最后的结果，而是过程是怎么算的
   public static void hanoi(int n, char begin, char middle, char end) {
     if(n == 1) {
       System.out.println(begin + &quot; --&gt; &quot; + end);
@@ -313,7 +329,7 @@ public static void change(int[] arr1, int[] arr2) {
     hanoi(n-1, middle, begin, end);
   }
 }
-</code></pre><p><strong>计算n条直线最多能把平面分成多少部分？</strong><br>分析：<br>  第一条线:可以分成两个平面<br>  之后一个焦点将分多两个平面<br>  两个焦点分出多3个平面；<br>  之后多产生的n个焦点就多出n+1个平面<br>  第n条线时将在原来的基础上多产生n-1个焦点，即在原来的基础上多产生n个面，所以递推公式为：<br>  f(n) = f(n-1) + n;</p>
+</code></pre><p><strong>计算n条直线最多能把平面分成多少部分？</strong><br>分析：<br>  第一条线:可以分成两个平面<br>  第二条线：出现一个交点将分多两个平面<br>  第三条线：多分出两个焦点 两个交点分出多3个平面；<br>  。。。。<br>  之后多产生的n个焦点就多出n+1个平面<br>  第n条线时将在原来的基础上多产生n-1个焦点，即在原来的基础上多产生n个面，所以递推公式为：<br>  f(n) = f(n-1) + n;</p>
 <p>  f(1) = 2;<br>  f(n) = f(n-1) + n;</p>
 <p>  f(n) = f(n-1) + n<br>     = f(n-2) + n-1 + n<br>     = f(n-3) + n-2 + n<br>     = f(1) + 2 + 3 + … + n = n(n+1)/2 + 1;</p>
 <pre><code>import java.util.Scanner;
@@ -335,13 +351,17 @@ class RecursionDemo6 {
 <p>分析：<br>  joseph(1) = 1<br>  joseph(2) = 1 = 2 <em> 1 - 1 = 1;<br>  joseph(3) = 3 = 2 </em> 1 + 1 = 3<br>  joseph(4) = 1 = 2 <em> 1 - 1 = 1<br>  joseph(5) = 3 = 2 </em> 1 + 1 = 3<br>  joseph(6) = 2 * 3 - 1 = 5</p>
 <p>  递推公式：<br>  joseph(1) = 1;<br>  joseph(2n) = 2 <em> joseph(n) - 1;<br>  joseph(2n+1) = 2 </em> joseph(n) + 1;</p>
 <p>  解释：<br>  这和网上看到n和n-1的关系式子不一样。网上的是：<br>  f(N,M) = (f(N-1,M) + M) % N;<br>  N表示N个人，M表示叫到M的人出列；<br>  正着推就是：<br>  N个人当叫到M的人出列时，就会重新开始报数，这样就变成N-1个人的游戏。所有的没出列的人的下标都会减M。<br>  反过来说，<br>  当N-1个人参加时，要变成N个人的比赛，就要加上M，就是之前往前走的下标。但是可能会出现溢出情况。所以要对N取余数</p>
-<p>  而老师给的递推式：<br>  先来看偶数的情况：<br>  1,2,3,4,5,6 = 》 1,3,5（剩下三个人）<br>  而我们知道只有三个人时：<br>  1,2,3 =》 3 最后幸存的就是3 对应上面 1 3 5 最后活着的就是 5。<br>  这里就有关系就是 f(6) = f(3)<em>2 - 1 即 5 = 3</em>2 -1；</p>
-<p>  再来看奇数的情况：<br>  1,2,3,4,5,6,7 =》 1,3,5,7 =》 3,5,7<br>  这里我要说明的是，1,3,5,7并不是第一轮剩下的人，因为奇数个的情况，所以第一轮结束1一定会死,因为剩下最后一个奇数位置的人<br>  这里3,5,7 就相当于上面的 1,2,3=》3<br>  那么最后活着的就是7<br>  f(7) = f(3)<em>2 + 1 即 7 = 3</em>2 +1</p>
+<p>  而老师给的递推式：<br>  先来看偶数的情况：第一轮结束：<br>  1,2,3,4,5,6 = 》 1,3,5（剩下三个人）<br>  而我们知道只有三个人时：<br>  1,2,3 =》 3 最后幸存的就是3 对应上面 1 3 5 最后活着的就是 5。<br>  1,3,5 =》 5<br>  这里就有关系就是 f(6) = f(3)<em>2 - 1 即 5 = 3</em>2 -1；</p>
+<p>  再来看奇数的情况：<br>  1,2,3,4,5,6,7 =》 1,3,5,7 =》 3,5,7 =》 7<br>  这里我要说明的是，1,3,5,7并不是第一轮剩下的人，因为奇数个的情况，所以第一轮结束1一定会死,因为剩下最后一个奇数位置的人，而在理解时候相当于在最后一个人和1之间还有一个人，这时一轮下来1就死了。接下去继续<br>  这里3,5,7 就相当于上面的 1,2,3=》3<br>  那么最后活着的就是7<br>  f(7) = f(3)<em>2 + 1 即 7 = 3</em>2 +1</p>
 <pre><code>import java.util.Scanner;
 class RecursionDemo7 {
   public static void main(String[] args) {
+    Scanner scan = new Scanner(System.in);
+    int n = scan.nextInt();
+    System.out.println(joseph(n));
   }
   public static int joseph(int n) {
+    if(n &lt;= 0) return 0; //会报错
     if(n == 1) return 1;
     if (n % 2 == 0) {  //偶数的情况
       return 2 * joseph(n / 2) - 1;
@@ -349,19 +369,48 @@ class RecursionDemo7 {
     return 2 * joseph(n / 2) + 1;  //奇数的情况
   }
 }
-</code></pre><h2 id="星期五"><a href="#星期五" class="headerlink" title="星期五"></a>星期五</h2><h3 id="面向对象部分"><a href="#面向对象部分" class="headerlink" title="面向对象部分"></a>面向对象部分</h3><p>变量<br>成员变量和局部变量的区别<br>  a.在内存中位置不同<br>    局部变量: 栈<br>    成员变量：堆<br>  b.初始化值不同<br>    局部变量: 没有默认值, 没有初始化，就不能使用。<br>    成员变量：有默认值。<br>      byte, short, int, long  0<br>      float, double     0.0<br>      char          ‘\u0000’<br>      boolean         false<br>      引用类型        null<br>  c.在类中位置不同<br>    局部变量: 方法内存或者方法声明上<br>    成员变量：类中,方法外<br>  d.生命周期不同<br>    局部变量: 随着方法的入栈而开始，随着方法的出栈而消亡<br>    成员变量：随着对象的创建而开始, 随着对象的死亡而消亡</p>
-<p>  匿名对象：<br>    就是没有名字的对象。<br>    是对象的一种简化表示形式<br>  匿名对象的两种使用情况<br>    对象仅仅使用一次的时候<br>    作为实际参数传递</p>
+</code></pre><h2 id="星期五"><a href="#星期五" class="headerlink" title="星期五"></a>星期五</h2><h3 id="面向对象部分"><a href="#面向对象部分" class="headerlink" title="面向对象部分"></a>面向对象部分</h3><p>变量<br>成员变量和局部变量的区别<br>  a.在内存中位置不同</p>
+<pre><code>局部变量: 栈
+成员变量：堆
+</code></pre><p>  b.初始化值不同</p>
+<pre><code>局部变量: 没有默认值, 没有初始化，就不能使用。
+成员变量：有默认值。
+  byte, short, int, long  0
+  float, double     0.0
+  char          &apos;\u0000&apos;
+  boolean         false
+  引用类型        null
+</code></pre><p>  c.在类中位置不同</p>
+<pre><code>局部变量: 方法内存或者方法声明上
+成员变量：类中,方法外
+</code></pre><p>  d.生命周期不同</p>
+<pre><code>局部变量: 随着方法的入栈而开始，随着方法的出栈而消亡
+成员变量：随着对象的创建而开始, 随着对象的死亡而消亡
+</code></pre><p>  匿名对象：<br>    就是没有名字的对象。<br>    是对象的一种简化表示形式<br>  匿名对象的两种使用情况<br>    对象仅仅使用一次的时候<br>    作为实际参数传递</p>
 <p>封装：<br>封装(encapsulation)<br>  封装是一种信息隐藏技术。</p>
-<p>  好处：<br>    a. 隐藏类的实现细节,实现了信息的隐藏及安全性；<br>    b. 提高了程序的模块化，且易于维护；<br>    c. 保证了数据的安全和系统的严密性;<br>    d. 将类的设计者和类的使用者分开。</p>
-<p>  封装的技术包括：包, 类, 方法, 访问权限修饰符。</p>
+<p>  好处：<br>    a. 隐藏类的实现细节,实现了信息的隐藏及安全性；<br>    b. 提高了程序的模块化，且易于维护；<br>    c. 保证了数据的安全和系统的严密性;<br>    d. 将类的设计者和类的使用者分开。<br>  封装的技术包括：包, 类, 方法, 访问权限修饰符。</p>
 <p>private:<br>  私有的。是一种访问权限修饰符。<br>  被private修饰的成员变量或者成员方法只能在本类进行访问.</p>
 <p>  最常见的用法：<br>    把成员变量用private修饰<br>    然后提供getXxx()/setXxx()方法   getter &amp; setter</p>
-<p>构造方法：<br>  作用：给对象的数据进行初始化<br>  格式：<br>    方法名与类名相同<br>    没有返回值类型<br>  注意事项：<br>    a. 如果没写构造方法,系统会提供无参构造方法(默认的构造方法)。<br>    b. 如果提供了构造方法, 系统将不再提供无参的构造方法。(建议: 自己写一个无参的构造方法)<br>    c. 构造方法也是可以重载的</p>
-<h2 id="星期六"><a href="#星期六" class="headerlink" title="星期六"></a>星期六</h2><h3 id="static"><a href="#static" class="headerlink" title="static:"></a>static:</h3><p>  静态的, 可以修饰成员<br>  特点：<br>    随着类的加载而加载<br>    优先于对象存在<br>    被类的所有对象共享<br>      这也是我们判断是否使用静态关键字的条件<br>    可以通过类名调用(推荐使用类名调用, 不要用对象名调用)</p>
+<p>构造方法：<br>  作用：给对象的数据进行初始化<br>  格式：<br>    方法名与类名相同<br>    没有返回值类型<br>  注意事项：</p>
+<pre><code>a. 如果没写构造方法,系统会提供无参构造方法(默认的构造方法)。
+b. 如果提供了构造方法, 系统将不再提供无参的构造方法。(建议: 自己写一个无参的构造方法)
+c. 构造方法也是可以重载的
+</code></pre><h2 id="星期六"><a href="#星期六" class="headerlink" title="星期六"></a>星期六</h2><h3 id="static"><a href="#static" class="headerlink" title="static:"></a>static:</h3><p>  静态的, 可以修饰成员<br>  特点：<br>    随着类的加载而加载<br>    优先于对象存在<br>    被类的所有对象共享<br>      这也是我们判断是否使用静态关键字的条件<br>    可以通过类名调用(推荐使用类名调用, 不要用对象名调用)</p>
 <p>  静态的成员是类所有<br>  非静态成员是对象所有</p>
-<p>注意事项：<br>  在静态方法中是没有 this 关键字的<br>  静态方法只能访问静态的成员<br>  非静态的方法可以访问静态的成员也可以访问非静态的成员。<br>  但是静态方法只能访问静态成员。静态上下文只能访问静态的东西。<br>  比如：静态内部类就只能访问外部类静态的属性或者方法。</p>
-<h3 id="成员变量和静态变量区别"><a href="#成员变量和静态变量区别" class="headerlink" title="成员变量和静态变量区别"></a>成员变量和静态变量区别</h3><p>  a.所属不同<br>  成员变量：对象<br>    静态变量：类<br>  b.内存中位置不同：<br>    成员变量：堆<br>    静态变量：方法区<br>  c.生命周期不同：<br>    成员变量：随着对象的创建而开始, 随着对象的死亡而消失<br>    静态变量：随着类的加载而开始, 随着类的卸载而消失<br>  d.调用方法不同：<br>    成员变量：只能通过对象调用<br>    静态变量：可以通过对象调用，也可以用类名调用(推荐使用类名调用)</p>
-<h3 id="帮助文档"><a href="#帮助文档" class="headerlink" title="帮助文档"></a>帮助文档</h3><h4 id="以Scanner为例"><a href="#以Scanner为例" class="headerlink" title="以Scanner为例:"></a>以Scanner为例:</h4><p>包：java.util<br>  如果不再java.lang包下，就需要导包<br>类的层次结构：public final class Scanner extends Object implements Iterator<string><br>  继承关系<br>简单的概述：<br>   一个可以使用正则表达式来解析基本类型和字符串的简单文本扫描器。<br>版本信息：<br>  1.5（JDK的发展历史）<br>构造方法：<br>  创建对象<br>方法：查看简要信息以及详细信息<br>  String nextLine()</string></p>
+<p>注意事项：<br>  在静态方法中是没有this关键字的<br>  静态方法只能访问静态的成员<br>  非静态的方法可以访问静态的成员也可以访问非静态的成员。<br>  但是静态方法只能访问静态成员。静态上下文只能访问静态的东西。<br>  比如：静态内部类就只能访问外部类静态的属性或者方法。</p>
+<h3 id="成员变量和静态变量区别"><a href="#成员变量和静态变量区别" class="headerlink" title="成员变量和静态变量区别"></a>成员变量和静态变量区别</h3><p>  a.所属不同</p>
+<pre><code>成员变量：对象
+静态变量：类
+</code></pre><p>  b.内存中位置不同：</p>
+<pre><code>成员变量：堆
+静态变量：方法区
+</code></pre><p>  c.生命周期不同：</p>
+<pre><code>成员变量：随着对象的创建而开始, 随着对象的死亡而消失
+静态变量：随着类的加载而开始, 随着类的卸载而消失
+</code></pre><p>  d.调用方法不同：</p>
+<pre><code>成员变量：只能通过对象调用
+静态变量：可以通过对象调用，也可以用类名调用(推荐使用类名调用)
+</code></pre><h3 id="帮助文档"><a href="#帮助文档" class="headerlink" title="帮助文档"></a>帮助文档</h3><h4 id="以Scanner为例"><a href="#以Scanner为例" class="headerlink" title="以Scanner为例:"></a>以Scanner为例:</h4><p>包：java.util<br>  如果不再java.lang包下，就需要导包<br>类的层次结构：public final class Scanner extends Object implements Iterator<string><br>  继承关系<br>简单的概述：<br>   一个可以使用正则表达式来解析基本类型和字符串的简单文本扫描器。<br>版本信息：<br>  1.5（JDK的发展历史）<br>构造方法：<br>  创建对象<br>方法：查看简要信息以及详细信息<br>  String nextLine()</string></p>
 <h4 id="制作帮助文档："><a href="#制作帮助文档：" class="headerlink" title="制作帮助文档："></a>制作帮助文档：</h4><p>首先你要写好一个工具类：<br>公共类的名字必须和文件的名字一致<br>一个文件里面最多只能有一个公共类<br>默认只解析 public 和 protected 的文档注释信息</p>
 <pre><code>/**
 这是一个基本的数学工具类, 提供简单的加减乘除运算
