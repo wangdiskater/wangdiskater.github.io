@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html class="full-height">
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="//cdn.bootcss.com/bulma/0.4.1/css/bulma.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+  
+  <title>Java总结（五）下 | 路要坚持</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="接着之前的银行转账问题来说，我们先搞不弄那么复杂，一步一步的来，先把问题简化，有三个账户A,B,C，每个账户上有1000大洋。现在实现： A -&amp;gt; C 转100块 B -&amp;gt; C 转200块 如果是单线程的程序肯定没有问题。但是银行肯定不会等你一个一个转账的。肯定要使用多线程的还解决问题。那么多线程就会出现线程安全的问题。这个情景是否会出现线程安全的问题？ 答：那是肯定的，线程安全的问题">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java总结（五）下">
+<meta property="og:url" content="http://yoursite.com/2019/07/28/Java总结（五）下/index.html">
+<meta property="og:site_name" content="路要坚持">
+<meta property="og:description" content="接着之前的银行转账问题来说，我们先搞不弄那么复杂，一步一步的来，先把问题简化，有三个账户A,B,C，每个账户上有1000大洋。现在实现： A -&amp;gt; C 转100块 B -&amp;gt; C 转200块 如果是单线程的程序肯定没有问题。但是银行肯定不会等你一个一个转账的。肯定要使用多线程的还解决问题。那么多线程就会出现线程安全的问题。这个情景是否会出现线程安全的问题？ 答：那是肯定的，线程安全的问题">
+<meta property="og:updated_time" content="2019-07-28T15:49:15.682Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java总结（五）下">
+<meta name="twitter:description" content="接着之前的银行转账问题来说，我们先搞不弄那么复杂，一步一步的来，先把问题简化，有三个账户A,B,C，每个账户上有1000大洋。现在实现： A -&amp;gt; C 转100块 B -&amp;gt; C 转200块 如果是单线程的程序肯定没有问题。但是银行肯定不会等你一个一个转账的。肯定要使用多线程的还解决问题。那么多线程就会出现线程安全的问题。这个情景是否会出现线程安全的问题？ 答：那是肯定的，线程安全的问题">
+  
+    <link rel="alternate" href="/" title="路要坚持" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/common.css">
+<link rel="stylesheet" href="/css/nav.css">
+<link rel="stylesheet" href="/css/layout.css">
+  
+
+</head>
+
+<body>
+  <header id="navbar" class="overflow-hidden">
+  <div class="container">
+    <nav class="nav">
+         <div class="nav-left">
+            <a href="/" class="nav-item" style="font-size: 20px;">
+              <span class="logo">王邸</span>'s Blog
+            </a>
+         </div>
+        <div class="nav-center is-hidden position-relative" id="search_container">
+            <div class="nav-item full-width full-height">
+                <i class="fa fa-search has-padding" aria-hidden="true"></i>
+                <input type="text" id="search_input" class="search-input full-height full-width" placeholder="Search post" autofocus>
+                <i id="close_search" class="fa fa-times" aria-hidden="true"></i>
+            </div>
+            <div id="search_result"></div>
+        </div>
+        <div class="nav-right nav-menu">
+            <a class="nav-item" id="search">
+                <i class="fa fa-search" aria-hidden="true"></i>
+            </a>
+            
+            <a class="nav-item" href="/">
+                Home
+            </a>
+            
+            <a class="nav-item" href="/works">
+                My Works
+            </a>
+            
+            <a class="nav-item" href="/about">
+                About
+            </a>
+            
+        </div>
+        <span class="nav-toggle" id="navMenuDropdown">
+            <span></span>
+            <span></span>
+            <span></span>
+        </span>
+        <div class="navbar-menu position-absolute full-width content-box is-hidden-desktop is-flex flex-column center" style="top: 100%;">
+            
+            <a class="nav-item flex-1" href="/">
+                Home
+            </a>
+            
+            <a class="nav-item flex-1" href="/works">
+                My Works
+            </a>
+            
+            <a class="nav-item flex-1" href="/about">
+                About
+            </a>
+            
+        </div>
+    </nav>
+  </div>
+</header>
+
+  <div id="main-wrap" class="position-relative" style="margin-top: 55px;">
+      <div class="main-inner-content">
+          <!--博文页面-->
+
+<style>
+    .header-box {
+        height: 370px;
+        filter: blur(10px);
+        background-size: cover;
+        background-color: lightsteelblue;
+    }
+
+    .post-box {
+        padding: 15px;
+        padding-top: 60px;
+        min-height: 80vh;
+        margin-top: -200px;
+        border-radius: 4px;
+        background-color: rgba(255,255,255,.8);
+    }
+
+    .post-avatar {
+        height: 30px;
+        width: 30px;
+        border-radius: 50%;
+    }
+
+    .flow-chart {
+        text-align: center;
+    }
+
+    img[alt="post-cover"] {
+        display: none;
+    }
+</style>
+<header>
+    <div id="header_box" class="header-box"></div>
+</header>
+<section>
+    <div class="container post-box">
+        <div class="content post-title is-flex center flex-column" style="margin-bottom: 70px; overflow: auto;">
+            <h1 class="has-text-centered" style="padding-bottom: 10px; border-bottom: 3px solid #fff">
+                <strong>Java总结（五）下</strong>
+            </h1>
+            
+            <div class="is-flex align-center">
+                <img class="post-avatar" src="https://q2.qlogo.cn/headimg_dl?bs=996057150&dst_uin=996057150&dst_uin=996057150&;dst_uin=996057150&spec=100&url_enc=0&referer=bu_interface&term_type=PC">
+                <span style="padding:0 10px;"> <span class="sub-title">By</span> 王邸</span>
+                <span class="post-date sub-title">at: 2019-07-28</span>
+            </div>
+            
+                <div>
+                    
+                </div>
+            
+        </div>
+        <div class="content" style="overflow: auto">
+            <p>接着之前的银行转账问题来说，我们先搞不弄那么复杂，一步一步的来，先把问题简化，有三个账户A,B,C，每个账户上有1000大洋。现在实现：</p>
+<pre><code>A -&gt; C 转100块
+B -&gt; C 转200块
+</code></pre><p>如果是单线程的程序肯定没有问题。但是银行肯定不会等你一个一个转账的。肯定要使用多线程的还解决问题。那么多线程就会出现线程安全的问题。这个情景是否会出现线程安全的问题？</p>
+<p>答：那是肯定的，线程安全的问题在多线程肯定会出现，这里出现的地方就是：</p>
+<pre><code>在转钱的时候，当A 和 C 同时向B转钱，因为转钱之前需要获取到B应该接收多少钱，在多线程的情况下就会出现A给B转钱的结果没有放回到内存，C去读取B的钱的时候就可能发生错误，读到的可能并不是A转完给B的结果。
+</code></pre><p>//首先先还原问题<br>Account.java</p>
+<pre><code>public class Account {
+  private int id; //表示资源的优先级为了拿资源的顺序都一样
+  private int balance;
+  private String username;
+  private String password;
+  public Account(int balance, String username) {
+      this.balance = balance;
+      this.username = username;
+  }
+  public Account(int id, int balance, String username) {
+      this.id = id;
+      this.balance = balance;
+      this.username = username;
+  }
+  //省略geter setter
+  //出问题的transfer方法
+  public void transfer(Account target, int amount) {
+    this.balance -= amount;
+    int value = target.balance; //把B的钱先拿出来，睡100毫秒再给他转账
+    try {
+        Thread.sleep(100);
+    } catch (InterruptedException e) {
+        e.printStackTrace();
+    }
+    value += amount;
+    target.balance = value;
+  }
+}
+</code></pre><p>main</p>
+<pre><code>Account accountA = new Account(1000,&quot;A&quot;);
+Account accountB = new Account(1000, &quot;B&quot;);
+Account accountC = new Account(1000, &quot;C&quot;);
+
+//创建两个进程
+new Thread(){
+    @Override
+    public void run() {
+        accountA.transfer(accountB,100);
+    }
+}.start();
+
+new Thread(){
+    @Override
+    public void run() {
+        accountC.transfer(accountB,200);
+    }
+}.start();
+
+Thread.sleep(2000); //为了给两个线程都执行完
+System.out.println(accountA.getBalance()); // 900
+System.out.println(accountB.getBalance()); // 1200
+System.out.println(accountC.getBalance()); // 800
+</code></pre><p>发现问题了。结果并不是：</p>
+<pre><code>900
+1300
+800
+</code></pre><h3 id="第一次的解决办法："><a href="#第一次的解决办法：" class="headerlink" title="第一次的解决办法："></a>第一次的解决办法：</h3><p>重写transfer 用 synchronized（）{}代码块 以字节码文件作为锁来使线程安全，</p>
+<p>修改后的transfer</p>
+<pre><code>public void transfer(Account target, int amount) {
+  synchronized(Account.class){
+    this.balance -= amount;
+    int value = target.balance; //把B的钱先拿出来，睡100毫秒再给他转账
+    try {
+        Thread.sleep(100);
+    } catch (InterruptedException e) {
+        e.printStackTrace();
+    }
+    value += amount;
+    target.balance = value;
+  }
+}
+</code></pre><p>实现是可以实现了，优<br>点是：只使用了一把锁，不会发生线程死锁的问题，<br>缺点：这就很蠢，直接对整个类都上锁一次只能执行一次。淘宝双11用这个肯定拉闸。和单线程有的一拼了。</p>
+<h3 id="第二次解决办法"><a href="#第二次解决办法" class="headerlink" title="第二次解决办法"></a>第二次解决办法</h3><p>第二种尝试就使用两个锁，也就是synchronized代码块就给this和target上锁</p>
+<pre><code>public void transfer(Account target, int amount) {
+  synchronized(this){
+    //这个延迟很致命，可能会产生死锁
+    try {
+      Thread.sleep(100);
+    } catch (InterruptedException e) {
+      e.printStackTrace();
+    }
+    synchronized (target){
+      this.balance -= amount;
+      int value = target.balance; //记录转钱的账户的金额
+      try {
+        Thread.sleep(100);
+      } catch (InterruptedException e) {
+        e.printStackTrace();
+      }
+      value += amount;
+      target.balance = value;
+    }
+  }
+}
+
+
+Thread.sleep(2000); //为了给两个线程都执行完
+System.out.println(accountA.getBalance()); // 900
+System.out.println(accountB.getBalance()); // 1300
+System.out.println(accountC.getBalance()); // 800
+</code></pre><p>终于解决了问题，但是这就引出了今天的重点 <strong>死锁问题</strong><br>如果两个synchronized之间有延迟的话。就可能出线死锁的问题。当两个进程同时给自己上锁，第一个休眠了，第二个就锁不了第一个。第二个休眠之后，第一个醒来也锁不上第二个。 两个就在互相等待出现死锁</p>
+<p>之前提到解决死锁的三个方法：</p>
+<pre><code>a. 一次性获取所有的资源
+b. 释放占有的资源（这个JAVA语言自己不能做到）
+c. 按照一定的顺序申请资源
+</code></pre><p>我们就使用ac来解决死锁问题：</p>
+<h3 id="解决死锁1：一次获取所有资源，"><a href="#解决死锁1：一次获取所有资源，" class="headerlink" title="解决死锁1：一次获取所有资源，"></a>解决死锁1：一次获取所有资源，</h3><p>思路：为了获取所有的资源，我们需要使用一个中间类，用一个集合获取所有的资源,而且获取资源也是一个同步的过程</p>
+<pre><code>//Apply
+public class Apply {
+  private static List&lt;Account&gt; list = new ArrayList&lt;&gt;();
+  //方法也要是同步的，这样才能一次进入一个
+  public synchronized static boolean apply(Account accountA, Account accountB) {
+    //如果里面有就要判断不能进入
+    if(list.contains(accountA) || list.contains(accountB)) {
+        return false;
+    }
+    list.add(accountA);
+    list.add(accountB);
+    return true;
+  }
+  //释放资源
+  public synchronized static void free(Account accountA, Account accountB) {
+    list.remove(accountA);
+    list.remove(accountB);
+  }
+}
+
+//transfer
+public void transfer(Account target, int amount) {
+  //先判断是否有人在申请全部资源,自己能否申请到
+  while(!Apply.apply(this,target));
+    Apply.apply(this,target); //一次性获取全部资源
+    synchronized(this){
+      try {
+        Thread.sleep(100);
+      } catch (InterruptedException e) {
+        e.printStackTrace();
+      }
+      synchronized (target){
+        this.balance -= amount;
+        //记录转钱的账户的金额
+        int value = target.balance;
+        try {
+          Thread.sleep(100);
+        } catch (InterruptedException e) {
+          e.printStackTrace();
+        }
+        value += amount;
+        target.balance = value;
+      }
+    }
+  //用完资源要free要不然还是会出现死锁
+  Apply.free(this, target);
+}
+
+//main
+new Thread(){
+    @Override
+    public void run() {
+        accountA.transfer(accountB,100);
+    }
+}.start();
+
+new Thread(){
+    @Override
+    public void run() {
+        accountB.transfer(accountA,200);
+    }
+}.start();
+
+Thread.sleep(3000); //为了给两个线程都执行完
+System.out.println(accountA.getBalance()); // 1100
+System.out.println(accountB.getBalance()); // 900
+</code></pre><p>可以是可以，但是在transfer之前有一句</p>
+<pre><code>while(!Apply.apply(this,target));
+</code></pre><p>如果有人在获取资源，他就获取不到就要一直在这等着，这里需要线程之间的通讯来解决，让其中一个thread告诉别人。</p>
+<h3 id="解决死锁2：按照一定顺序拿资源"><a href="#解决死锁2：按照一定顺序拿资源" class="headerlink" title="解决死锁2：按照一定顺序拿资源"></a>解决死锁2：按照一定顺序拿资源</h3><p>  按照一定的顺序获取资源，这个方法就很简单了。简单的说就是两层synchronized代码块进去的锁顺序是一样的，这就需要给对象设置一个ID<br>以确定两个对象拿资源的顺序都是一样的。这样就不会发生相互等待的情况，也是最人性化的。因为我们做一件事情有序，不就是每个人都按照顺序去做吗?</p>
+<pre><code>public void transfer(Account target, int amount) {
+   Account left = this;
+   Account right = target;
+   //默认为了left id 小于 right的id
+   //先拿小的资源，再拿大的资源
+   if(left.id - right.id &gt; 0){
+        left = target;
+        right = this;
+   }
+   synchronized(left){
+      try {
+        Thread.sleep(100);
+      } catch (InterruptedException e) {
+        e.printStackTrace();
+      }
+      synchronized (right){
+        this.balance -= amount;
+        int value = target.balance; //记录转钱的账户的金额
+        try {
+            Thread.sleep(100);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        value += amount;
+        target.balance = value;
+      }
+   }
+}
+</code></pre><p>这个方法还有几率发生死锁的，如果两个人id一样，那么id的判断就无效了。估计很少概率但是还是会发生，那么这样做就不行了</p>
+<h3 id="本周小知识："><a href="#本周小知识：" class="headerlink" title="本周小知识："></a>本周小知识：</h3><p>1复制文件File，总是找不到路径<br>原因：没有创建对应了路径：<br>所以需要先创建路径才能复制到对应的地方（mkdir）<br>创建路径之后又出现拒绝访问的情况，是创建路径错了<br>需要创建路径要准确。<br>只有在一个确定的路径才能进行读写操作。不然需要创建路径</p>
+<p>2.注意properties.store(OutputStream out, String comments) comments不能是中文因为：<br>“如果 comments 变量非 null，则首先将 ASCII # 字符、注释字符串和一个行分隔符写入输出流。因此，该 comments 可用作一个标识注释。”<br>comments这就是一注释,你要不想写注释进properties,传递个null好了</p>
+<h2 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h2><pre><code>每周都有很多东西JAVASE马上要结束了，所以加油吧
+</code></pre>
+        </div>
+        <div class="post-reply">
+            
+                <!-- 来必力City版安装代码 -->
+                <div id="lv-container" data-id="city" data-uid="MTAyMC8yOTE4Ni81NzUz">
+                    <script type="text/javascript">
+                        (function(d, s) {
+                            var j, e = d.getElementsByTagName(s)[0];
+
+                            if (typeof LivereTower === 'function') { return; }
+
+                            j = d.createElement(s);
+                            j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+                            j.async = true;
+
+                            e.parentNode.insertBefore(j, e);
+                        })(document, 'script');
+                    </script>
+                    <noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+                </div>
+                <!-- City版安装代码已完成 -->
+            
+            
+        </div>
+    </div>
+</section>
+<script>
+    // 获取第一张图, 用以当封面背景图
+    var img = document.querySelectorAll('img')[1]
+
+    if (img) {
+        var header_box = document.querySelector('#header_box')
+        header_box.style.backgroundImage = 'url('+ img.src +')'
+    }
+</script>
+      </div>
+  </div>
+  <style>
+  #footer {
+    min-height: 10vh;
+    background: black;
+    color: #fff;
+  }
+
+  #footer a {
+    color: #e1e1e1;
+  }
+</style>
+<footer id="footer" class="has-text-centered is-flex center">
+  <div class="container has-padding">
+    <div>
+      <div>
+        <!--请您保留作者署名, 主题制作来之不易-->
+        主题来自 <a href="http://haojen.github.io/">Haojen Ma</a>
+        <br>
+        Copyright © 王邸 2019
+        <!--
+          Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+        -->
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="/js/search_core.js"></script>
+<script src="/js/script.js"></script>
+
+</body>
+</html>

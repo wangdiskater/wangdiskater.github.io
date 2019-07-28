@@ -1,0 +1,1380 @@
+<!DOCTYPE html>
+<html class="full-height">
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="//cdn.bootcss.com/bulma/0.4.1/css/bulma.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+  
+  <title>Java总结（五）上 | 路要坚持</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="星期一（0722）Mappublic interface Map:  将键映射到值的对象。一个映射不能包含重复的键；每个键最多只能映射到一个值。方法：  增： V put(K key, V value) void putAll(Map&amp;lt;? extends K,? extends V&amp;gt; m)   删： V remove(Object key) void clear()   改： V pu">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java总结（五）上">
+<meta property="og:url" content="http://yoursite.com/2019/07/28/Java总结（五）上/index.html">
+<meta property="og:site_name" content="路要坚持">
+<meta property="og:description" content="星期一（0722）Mappublic interface Map:  将键映射到值的对象。一个映射不能包含重复的键；每个键最多只能映射到一个值。方法：  增： V put(K key, V value) void putAll(Map&amp;lt;? extends K,? extends V&amp;gt; m)   删： V remove(Object key) void clear()   改： V pu">
+<meta property="og:updated_time" content="2019-07-28T15:13:09.164Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java总结（五）上">
+<meta name="twitter:description" content="星期一（0722）Mappublic interface Map:  将键映射到值的对象。一个映射不能包含重复的键；每个键最多只能映射到一个值。方法：  增： V put(K key, V value) void putAll(Map&amp;lt;? extends K,? extends V&amp;gt; m)   删： V remove(Object key) void clear()   改： V pu">
+  
+    <link rel="alternate" href="/" title="路要坚持" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/common.css">
+<link rel="stylesheet" href="/css/nav.css">
+<link rel="stylesheet" href="/css/layout.css">
+  
+
+</head>
+
+<body>
+  <header id="navbar" class="overflow-hidden">
+  <div class="container">
+    <nav class="nav">
+         <div class="nav-left">
+            <a href="/" class="nav-item" style="font-size: 20px;">
+              <span class="logo">王邸</span>'s Blog
+            </a>
+         </div>
+        <div class="nav-center is-hidden position-relative" id="search_container">
+            <div class="nav-item full-width full-height">
+                <i class="fa fa-search has-padding" aria-hidden="true"></i>
+                <input type="text" id="search_input" class="search-input full-height full-width" placeholder="Search post" autofocus>
+                <i id="close_search" class="fa fa-times" aria-hidden="true"></i>
+            </div>
+            <div id="search_result"></div>
+        </div>
+        <div class="nav-right nav-menu">
+            <a class="nav-item" id="search">
+                <i class="fa fa-search" aria-hidden="true"></i>
+            </a>
+            
+            <a class="nav-item" href="/">
+                Home
+            </a>
+            
+            <a class="nav-item" href="/works">
+                My Works
+            </a>
+            
+            <a class="nav-item" href="/about">
+                About
+            </a>
+            
+        </div>
+        <span class="nav-toggle" id="navMenuDropdown">
+            <span></span>
+            <span></span>
+            <span></span>
+        </span>
+        <div class="navbar-menu position-absolute full-width content-box is-hidden-desktop is-flex flex-column center" style="top: 100%;">
+            
+            <a class="nav-item flex-1" href="/">
+                Home
+            </a>
+            
+            <a class="nav-item flex-1" href="/works">
+                My Works
+            </a>
+            
+            <a class="nav-item flex-1" href="/about">
+                About
+            </a>
+            
+        </div>
+    </nav>
+  </div>
+</header>
+
+  <div id="main-wrap" class="position-relative" style="margin-top: 55px;">
+      <div class="main-inner-content">
+          <!--博文页面-->
+
+<style>
+    .header-box {
+        height: 370px;
+        filter: blur(10px);
+        background-size: cover;
+        background-color: lightsteelblue;
+    }
+
+    .post-box {
+        padding: 15px;
+        padding-top: 60px;
+        min-height: 80vh;
+        margin-top: -200px;
+        border-radius: 4px;
+        background-color: rgba(255,255,255,.8);
+    }
+
+    .post-avatar {
+        height: 30px;
+        width: 30px;
+        border-radius: 50%;
+    }
+
+    .flow-chart {
+        text-align: center;
+    }
+
+    img[alt="post-cover"] {
+        display: none;
+    }
+</style>
+<header>
+    <div id="header_box" class="header-box"></div>
+</header>
+<section>
+    <div class="container post-box">
+        <div class="content post-title is-flex center flex-column" style="margin-bottom: 70px; overflow: auto;">
+            <h1 class="has-text-centered" style="padding-bottom: 10px; border-bottom: 3px solid #fff">
+                <strong>Java总结（五）上</strong>
+            </h1>
+            
+            <div class="is-flex align-center">
+                <img class="post-avatar" src="https://q2.qlogo.cn/headimg_dl?bs=996057150&dst_uin=996057150&dst_uin=996057150&;dst_uin=996057150&spec=100&url_enc=0&referer=bu_interface&term_type=PC">
+                <span style="padding:0 10px;"> <span class="sub-title">By</span> 王邸</span>
+                <span class="post-date sub-title">at: 2019-07-28</span>
+            </div>
+            
+                <div>
+                    
+                </div>
+            
+        </div>
+        <div class="content" style="overflow: auto">
+            <h2 id="星期一（0722）"><a href="#星期一（0722）" class="headerlink" title="星期一（0722）"></a>星期一（0722）</h2><h3 id="Map"><a href="#Map" class="headerlink" title="Map"></a>Map</h3><p>public interface Map:<br>  将键映射到值的对象。一个映射不能包含重复的键；每个键最多只能映射到一个值。<br>方法：<br>  增：</p>
+<pre><code>V put(K key, V value)
+void putAll(Map&lt;? extends K,? extends V&gt; m)
+</code></pre><p>  删：</p>
+<pre><code>V remove(Object key)
+void clear()
+</code></pre><p>  改：</p>
+<pre><code>V put(K key, V value)
+void putAll(Map&lt;? extends K,? extends V&gt; m)
+</code></pre><p>  查：</p>
+<pre><code>V get(Object key)
+boolean containsKey(Object key)
+boolean containsValue(Object value)
+</code></pre><p>  获取集合的属性：</p>
+<pre><code>int size();
+boolean isEmpty()
+</code></pre><p>  遍历：</p>
+<pre><code>方式1：Set&lt;Map.Entry&lt;K,V&gt;&gt; entrySet()
+Map.Entry&lt;K,V&gt; 键-值对
+    K getKey()
+    V getValue()
+    V setValue(V value)  返回原来的值
+方式2：Set&lt;K&gt; keySet() + V get(key)
+方式3：Collection&lt;V&gt; values()
+</code></pre><h3 id="HashMap"><a href="#HashMap" class="headerlink" title="HashMap"></a>HashMap</h3><p>注意事项：<br>    键的唯一性和存储键的equals() 和 hashCode()方法有关<br>    HashMap的键和值可以 null.</p>
+<h3 id="自己构造HashMap-MyHashMap-java"><a href="#自己构造HashMap-MyHashMap-java" class="headerlink" title="自己构造HashMap(MyHashMap.java)"></a>自己构造HashMap(MyHashMap.java)</h3><p>思路：<br>1.首先HashMap是键值对存储的，单纯的数组肯定是不行的。需要一个Node对象保存key 和 value。</p>
+<p>2.为了解决冲突容易所以使用拉链法（链地址法）来解决冲突。原理就是一个Table数组放每一个单链表的头指针。然后出现冲突，就把结点以头插法的形式插入到每一个Table[index]中。所以这里需要给每一个Node一个next属性</p>
+<p>3.关于加载因子和阈值，这两个指标其实表示的就是一个意思：</p>
+<pre><code>加载因子*Table长度 = 阈值
+</code></pre><p>表示的是这个Table的放元素的密度，加载因子默认值设置成0.75，作为Table是否需要扩容的指标。当扩容到最大值时，就必须把阈值设置成整个数组长度，不再扩容。此时加载因子就为1。关于扩容还想说的一点是，此时的的每个元素的index下标需要重新计算，然后放到对应的位置。这时候使用的就是头插法。而且会改变元素的位置。所以不能保证顺序。</p>
+<p>4.最关键的一点，关于每个Node应该放哪里的问题。我们hashMap是通过equals和hashCode确定每个Node应该放在哪里的。而且对于每个Node我们最好不要修改他的元素值。因为他一开始的位置就又hashCode计算好了。所以修改值会发现找不到的情况。这和List集合是不一样的。</p>
+<p>5.还有一点是，关于数组长度的问题，因为hashCode需要对数组长度取余。这样才能保证的出来的index在数组长度里面。我们最好把数组的长度设置成2^n，因为我们知道取余是一个非常复杂的操作。所以设置成2^n取余操作就能变成对2^n-1的相与的操作了。接下来的操作是如何把一个数转成比他大最近的二进制数</p>
+<p><strong>那我们就开始吧！默认不保存null值</strong><br>public class MyHashMap<k,v> {</k,v></p>
+<p>//属性</p>
+<pre><code>private static final int MAX_CAPACITY = 1 &lt;&lt; 30;//最大的长度是2^30次方一共31位
+private static final int DEFAULT_CAPACITY = 16;//默认最大长度，是2^n次方
+private static final double DEFAULT_LOAD_FACTOR = 0.75;//给一个默认的加载因子
+private Node&lt;K,V&gt;[] table;
+private int size;  //保存结点的个数
+private double loadFactor; //保存加载因子
+private int threshold;//设置阈值
+private static class &lt;K,V&gt; {
+  int hash;
+  Node&lt;K,V&gt; next;
+  K key;
+  V value;
+  //子类构造方法
+  public Node(int hash, Node&lt;K,V&gt; next, K key ,V  value)
+  this.hash = hash;
+  this.next = next;
+  this.key = key;
+  this.value = value;
+}
+</code></pre><p>//构造方法</p>
+<pre><code>public MyHashMap() {
+  this(DEFAULT_CAPACITY,DEFAULT_LOAD_FACTOR);
+}
+
+public MyHashMap(int capcity){
+  this.(capacity,DEFALUT_LOAD_FACTOR);
+}
+
+public MyHashMap(int initialCapacity,double loadFactor){
+  if(initialCapacity &lt;= 0 || initialCapacity &gt; MAX_CAPACITY) {
+    throw new IllegalArugmentException(&quot;initialCapacity=&quot; + intialCapacity);
+  }
+  if(Double.isNaN(loadFactor) || loadFactor &lt;=0) {
+    throw new IllegalArugmentException(&quot;loadFactor=&quot; + loadFactor);
+  }
+  //初始化tableLength 这个很炫酷
+  int length = tableLength(initialCapacity);
+  table = (Node&lt;K,V&gt;[])new Node[lenght];
+  this.loadFactor = loadFactor;
+  //不想再添加initialCapacity 个元素的时候扩容
+  threshold = initialCapactiry;
+}
+</code></pre><p>//求给定cap的大于等于的最小的2的n次幂的值作为长度<br>//思路：就把cap的所有位置都和1相或（|）这样数的二进制表示就会全部都变成了1然后再给这个数加一，就可以变成比这个数大的最近的2的n的值</p>
+<pre><code>private int tableLength(int cap) {
+  int n = cap-1;//避免cap就是2的n次方的情况
+  //从n最高位为1的地方开始和n无符号右移一位之后进行或，这样最高的两位就变成了1；
+  n = n | n &gt;&gt;&gt; 1;
+  n = n | n &gt;&gt;&gt; 2; //使得最高的四位都变成1；
+  n = n | n &gt;&gt;&gt; 4: //使得最高的八位变成1；
+  n = n | n &gt;&gt;&gt; 8; //使得最高的十六位变成1；
+  n = n | n &gt;&gt;&gt; 16;//使得这个大于0的数的变成比他大的数的最小的2^n-1的形式
+  return (n &lt; 0) ? 1 : (n &gt;= MAX_CAPACITY ? MAX_CAPACITY : n+1);
+}
+</code></pre><p>//方法:主要是增删改查；<br>//增加和修改：put(key,value)<br>//删除：delete<br>//查：contains(key) get(key)</p>
+<p>但是要先搞清楚一件事：<strong>如何获取hash的值</strong></p>
+<pre><code>public int hash(K key) {
+  int h;
+  //调用了对应类型的的求hashCode的方法
+  //最终的hashCode是C写的-&gt;public native int hashCode();
+  return key == null ? 0 : (h = key.hashCode())^(h &gt;&gt;&gt; 16);
+}
+
+public int indexFor(int hash , int lenght) {
+  //位运算的优先级是最低的所以加不加括号都行
+  return hash &amp; (lenght-1)
+}
+</code></pre><p>//查找</p>
+<pre><code>public V get(K key) {
+  int hash = hash(key); //获取这个key的哈希值
+  int index = indexFor(hash,table.length);
+  //对找到的单链表进行遍历
+  for(Node&lt;K,V&gt;node = table[index]，node != null; node = node.next) {
+    //判断hash值相同，而且key相同或者key的值相同，如果key是对象比较的就是对象的内容
+    if(hash == node.hash &amp;&amp; (node.key == key || node.key.equals(key))){
+      return node.value;
+    }
+  }
+  return null;
+}
+public V contiansKey(K key) {
+  return get(key) != null;
+}
+</code></pre><p>//增加或修改：</p>
+<pre><code>public V put(K key, V value) {
+  //默认不存储null
+  if(key == null) throw new NullPointerException;
+  int hash = hash(key);
+  int index = indexFor(hash,table.length);
+  V oldValue;
+  for(Node&lt;k,V&gt; node = table[index]; node != null ;node = node.next) {
+      //如果找到了里面有元素
+      if(hash == node.hash &amp;&amp; (key == node.key || key.equals(node.key))) {
+        //修改元素的值
+        oldValue = node.value;
+        node.value = value;
+        return oldValue;
+      }
+  }
+  //如果没有找到就有别的情况，需要通过函数判断来增加一个元素
+  addNode(hash, key, value, index);
+  return null;
+}
+
+
+public addNode(int hash ,int key, int value ,int index) {
+  //先判断是否满了，
+  if(threshold  == size) {
+    resize(table.length&lt;&lt;1); //扩充一倍看看能不能加
+    index = indexFor(hash,table.length);//重新计算index
+  }
+  Node&lt;K,V&gt; node = new Node&lt;&gt;(hash,key,value,table[index]);
+  //头插法插入
+  node.next = table[index];
+  table[index] = node;
+  size++;
+}
+
+//扩容
+public resize(int newLength) {
+  if(table.length = MAX_CAPACITY) {
+    //不能再扩容了只能修改阈值
+    threshold = MAX_CAPACITY;
+    return;
+  }
+
+  Node&lt;K,V&gt;[] newTable = (Node&lt;V,K&gt;[])new Node[newLength];
+  //修改阈值；
+  threshold = newLength * loadFactor;
+  //把旧的table上的元素迁移到新的table上
+  for(int i = 0; i &lt; table.length; i ++) {
+    Node&lt;K,V&gt; node = table[index];
+    if(node != null) {
+      do{
+        //获取他在新的table的位置
+        int index = indexFor(hash,newLength);
+        int temp = node;
+        node.next = newTable[index];
+        newTable[index] = node;
+        node = temp.next;
+      }
+      while(node != null)
+    }//if
+  }//for
+  table = newTable;
+}
+</code></pre><p>//删除元素</p>
+<pre><code>public V delete(K key) {
+  int hash = hash(key);
+  int index = indexFor(hash,table.length);
+  Node&lt;K,V&gt; pre = null;//保存他的前驱结点
+  V oldValue;
+  //找到这个元素
+  for(Node&lt;K,V&gt;node = table[index]; node!=null; node = node.next) {
+    //找到这个元素
+    if(hash == node.hash &amp;&amp;(key == node.key || key.equals(node.key))) {
+      //找到了
+      oldValue = node.value;
+      //说明就是头结点
+      if(pre == null) {
+        table[index] = node.next;
+      } else {
+        pre.next = node.next;
+      }
+      size--;
+      return oldValue;
+    }
+    pre = node;
+  }
+  return null;
+}
+</code></pre><p>}//public class MyHashMap</p>
+<p>hashMap不是很难。也就是存储null的判断需要麻烦一点。</p>
+<h3 id="HashMap应用（test1-java）"><a href="#HashMap应用（test1-java）" class="headerlink" title="HashMap应用（test1.java）"></a>HashMap应用（test1.java）</h3><p>为什么有HashMap的应用，他有一个最牛皮的特点就是，寻找一个数的时间复杂度是O(1) ，也就是寻找的上限是O(1)，而且他和数组不同的地方是，他可以通过key来寻找value而不仅仅是下标。就很方便。增删也很快。我们来看一个例子:体现出有多快<br>问题：给一个target 在数组中找是否存在不同的两个数相加得这个数，返回他的下标。</p>
+<pre><code>TwoSum:
+    int[] arr = {1, 2, 3, 4, 7}  int target = 9.
+    arr[1] + arr[4] = target
+    返回 {1, 4}
+</code></pre><p>正常的思路：遍历两遍，然后去找是否有这两个数，写法如下：</p>
+<pre><code>public static int[] find(int[] arr, int target) {
+  for (int i = 0; i &lt; arr.length - 1; i++) {
+      for (int j = i + 1; j &lt; arr.length; j++) {
+          if (arr[i] + arr[j] == target) {
+              return new int[] {i , j};
+          }
+      }
+  }
+  return new int[] {-1, -1};
+}
+</code></pre><p>很明显时间复杂度是O(n^2)。</p>
+<p><strong>用hashMap怎么做？</strong><br>分析： arr[i] + arr[j] == target 那么我们是否可以换一下</p>
+<pre><code>arr[i] == target - arr[j];
+</code></pre><p>这样不就可以了吗？key = arr[i], value = i;<br>然后遍历一次在hashMap寻找是否存在 target - arr[j] 的key值。那么j和value值就是结果。</p>
+<p>我们可以用两次循环来做这件事，时间复杂度上限为O(n);<br>第一次循环：存数<br>第二次循环：去找</p>
+<pre><code>public static int[] find(int[] arr, int target) {
+  HashMap&lt;Integer, Integer&gt; map = new HashMap&lt;&gt;();
+  for (int i = 0; i &lt; arr.length; i++) {
+      map.put(arr[i], i);
+  }
+  for (int i = 0; i &lt; arr.length; i++) {
+      int key = target - arr[i];
+      if (map.containsKey(key)) {
+          int value = map.get(key);
+          if (value != i) {
+              return new int[]{i, value};
+          }
+      }
+  }
+  return new int[] {-1, -1};
+}
+</code></pre><p>当然我们也可以优化一下，一次循环就搞定了。<br>一次循环，判断里面是否有我们需要的数：<br>    没有 ， 把数put进去<br>    有， 结果就拿到了</p>
+<pre><code>public static int[] find(int[] arr, int target) {
+  HashMap&lt;Integer, Integer&gt; map = new HashMap&lt;&gt;();
+  for(int i = 0; i &lt; arr.length, i ++) {
+      if(!map.containsKey(target - arr[i])) {
+        map.put(arr[i],i);
+      } else {
+        int j = get(target - arr[i])
+        return new int[]{i,j};
+      }
+  }
+
+
+  return new int[]{-1,-1};
+}
+</code></pre><h3 id="TreeMap"><a href="#TreeMap" class="headerlink" title="TreeMap"></a>TreeMap</h3><p>基于红黑树（Red-Black tree）的 NavigableMap 实现。<br>该映射根据其键的自然顺序进行排序，或者根据创建映射时提供的 Comparator 进行排序，具体取决于使用的构造方法.</p>
+<p>构造方法：<br>    TreeMap() 有序的符号表<br>    TreeMap(Comparator&lt;? super K&gt; comparator)</p>
+<p>方法：<br>     Map.Entry<k,v> ceilingEntry(K key<br>     K ceilingKey(K key)<br>     Map.Entry<k,v> floorEntry(K key)<br>     K floorKey(K key)<br>     Map.Entry<k,v> firstEntry()<br>     K firstKey()<br>     Map.Entry<k,v> lastEntry()<br>     K lastKey()<br>     SortedMap<k,v> subMap(K fromKey, K toKey)<br>     NavigableMap<k,v> subMap(K fromKey, boolean fromInclusive, K toKey, boolean toInclusive)</k,v></k,v></k,v></k,v></k,v></k,v></p>
+<p><strong>注意：如果总结完有时间就过来看看TreeMap底层怎么实现的，以及红黑树是怎么旋转的</strong></p>
+<h2 id="星期二（7-23）"><a href="#星期二（7-23）" class="headerlink" title="星期二（7.23）"></a>星期二（7.23）</h2><h3 id="File"><a href="#File" class="headerlink" title="File"></a>File</h3><pre><code>文件和目录路径名的抽象表示形式。
+</code></pre><p>属性：</p>
+<pre><code>static String pathSeparator
+与系统有关的路径分隔符，为了方便，它被表示为一个字符串。
+
+static char pathSeparatorChar
+与系统有关的路径分隔符。
+
+static String separator
+与系统有关的默认名称分隔符，为了方便，它被表示为一个字符串。
+
+static char separatorChar
+与系统有关的默认名称分隔符。
+</code></pre><p>构造方法：</p>
+<pre><code>File(String pathname)
+//后面这两种对于复制文件非常有用
+File(String parent, String child)
+File(File parent, String child),
+</code></pre><h3 id="一些常用的方法："><a href="#一些常用的方法：" class="headerlink" title="一些常用的方法："></a>一些常用的方法：</h3><p>创建功能：</p>
+<pre><code>public boolean createNewFile()
+public boolean mkdir()
+public boolean mkdirs()
+</code></pre><p>删除：</p>
+<pre><code>public boolean delete()
+</code></pre><p><strong>注意事项：delete不能删除非空的文件夹，只能把里面的文件删除了才能删除文件夹</strong></p>
+<p>重命名/剪切：</p>
+<pre><code>public boolean renameTo(File dest)
+</code></pre><p>重命名：调用的file的路径和dest的File路径相同名字不同就是重命名<br>剪切：调用的file对象和dest对象目录路径不同就是剪切。给个例子看看挺好玩的</p>
+<pre><code>// D:\\temp\\a.txt 剪切到 D:\\b.txt 并改了名字
+File file = new File(&quot;D:\\temp\\a.txt&quot;);
+File dest = new File(&quot;D:\\b.txt&quot;);
+System.out.println(file.renameTo(dest));
+</code></pre><p>判断功能：</p>
+<pre><code>public boolean exists()
+public boolean isFile()
+</code></pre><p>基本的获取功能：</p>
+<pre><code>public File getAbsoluteFile()
+public String getAbsolutePath()
+public String getPath()
+public String getName()  //常用
+public long length()
+public long lastModified()
+</code></pre><p><strong>高级获取功能（必须掌握）：</strong><br>    罗列当前文件夹下面所有的文件和子文件夹</p>
+<pre><code>public String[] list()
+public File[] listFiles()  //非常常用
+public File[] listFiles(FileFilter filter) //带过滤器的获取File数组
+public File[] listFiles(FilenameFilter filter)
+</code></pre><p><strong>注意事项： 必须是文件夹，并且有相应的相应的权限。</strong></p>
+<h3 id="字节流："><a href="#字节流：" class="headerlink" title="字节流："></a>字节流：</h3><pre><code>可以传入任何数据
+</code></pre><h3 id="字节输入流inputStream"><a href="#字节输入流inputStream" class="headerlink" title="字节输入流inputStream"></a>字节输入流inputStream</h3><p>此抽象类是表示字节输入流的所有类的超类。<br>需要定义 InputStream 子类的应用程序必须总是提供返回下一个输入字节的方法。</p>
+<p>InputStream的方法（所有子类都能用）：</p>
+<pre><code>void close()  关流, 释放资源
+abstract int read() // 读取一个字节
+int read(byte[] b) // 把读取的数据放入字节数组中
+int read(byte[] b, int off, int len) // 把读取的数据放入部分数组中
+</code></pre><p>###读取的方式（重点）：<br>1.按一个字节一个字节读取（注意读取的是<strong><em>int值</em></strong>）<br>2.用一个字节数组保存读取</p>
+<p>例子如下：<br>//这里使用了try… with…resource的语句</p>
+<pre><code>try(FileInputStream in = new FileInputStream(&quot;a.txt&quot;)) {
+
+  //一个字节一个字节读
+  int read；
+  while((read = in.read()) != -1) {
+    System.out.println(read);
+  }
+
+  //一个字节文件一个字节文件读
+  int len;
+  byte[] bytes = new byte[1024];//默认给1024
+  while((len = in.read(bytes)) != -1) {
+    //这里遍历并不是到arr.len而是读取的len,因为读取的数组重新读取后面的内容并不会被覆盖
+    for(int i = 0; i &lt; len; i++) {
+      System.out.println(bytes[i]);
+    }
+    //注意或者可以拼接成字符串输出
+    String s = new String(bytes,0,len);
+    System.out.println(s);
+  }
+}catch(IOException e) {
+  e.printStackTrace();
+}
+</code></pre><p><strong>注意事项：<br>如果读到文件末尾，返回-1</strong></p>
+<p>直接已知子类：</p>
+<pre><code>AudioInputStream
+ByteArrayInputStream
+FileInputStream （目前最常用！！）
+FilterInputStream
+InputStream
+ObjectInputStream
+PipedInputStream
+SequenceInputStream
+StringBufferInputStream
+</code></pre><h3 id="FileInputStream-子类"><a href="#FileInputStream-子类" class="headerlink" title="FileInputStream(子类)"></a>FileInputStream(子类)</h3><p>构造方法：<br>    FileInputStream(File file)<br>    FileInputStream(String name)</p>
+<h3 id="字节输出流"><a href="#字节输出流" class="headerlink" title="字节输出流"></a>字节输出流</h3><pre><code>public abstract class OutputStream extends Object
+</code></pre><p>方法：</p>
+<pre><code>void close()
+void flush()
+abstract void write(int b) 写入一个字节
+void write(byte[] b) 写入字节数组
+void write(byte[] b, int off, int len)  写入字节数组的一部分
+</code></pre><h3 id="字节流写入的方式（重点）"><a href="#字节流写入的方式（重点）" class="headerlink" title="字节流写入的方式（重点）"></a>字节流写入的方式（重点）</h3><p>1.一个字节一个字节写入（注意写入的是<strong><em>int值</em></strong>）<br>2.一个字节数组一个字节数组的写入；</p>
+<pre><code>try(FileOutputStream fos = new FileOutputStream(&quot;a.txt&quot;)){
+  //一个字节一个字节的写
+  fos.write(97);//a
+  //一个字节数组一个字节数组的写
+  byte[] bytes = {97, 98, 99, 100};
+  fos.write(bytes);
+}catch(IOException e) {
+  e.printStackTrace();
+}
+</code></pre><h3 id="FileOutputStream："><a href="#FileOutputStream：" class="headerlink" title="FileOutputStream："></a>FileOutputStream：</h3><p>构造方法：<br>    FileOutputStream(File file)<br>    FileOutputStream(String name)<br>    FileOutputStream(File file, boolean append)<br>    FileOutputStream(String name, boolean append)<br>    默认 append 是 false</p>
+<p>字节流的输入输出的过程：<br>步骤：</p>
+<pre><code>1. 创建流对象
+2. 读数据或者写数据
+3. 关流，释放资源
+</code></pre><h3 id="注意："><a href="#注意：" class="headerlink" title="注意："></a>注意：</h3><p>我上面写的读写字节流的时候并没有close()。因为使用了try…with…resource的语句，所以会自动的释放资源，不需要自己再去close;</p>
+<p>如何实现数据的换行<br>  Window：\r\n<br>  Linux: \n<br>  Mac: \r<br>  <strong>Java提供了一个统一的API进行换行</strong></p>
+<pre><code>字符流的：newLine() 和 readLine()方法
+</code></pre><p>  高级记事本能够自动识别不同平台的换行符，<br>  notepad是 Windows 自带的记事本，只能识别 \r\n</p>
+<h3 id="字节缓冲流"><a href="#字节缓冲流" class="headerlink" title="字节缓冲流"></a>字节缓冲流</h3><h3 id="字节缓冲输入流"><a href="#字节缓冲输入流" class="headerlink" title="字节缓冲输入流"></a>字节缓冲输入流</h3><p>BufferedInputStream:<br>读取字节流更快,是一个包装流，里面实际还是FileOutputStream在进行读入数据的操作</p>
+<pre><code>为另一个输入流添加一些功能，即缓冲输入以及支持 mark 和 reset 方法的能力。在创建 BufferedInputStream 时，会创建一个内部缓冲区数组。在读取或跳过流中的字节时，可根据需要从包含的输入流再次填充该内部缓冲区，一次填充多个字节。mark 操作记录输入流中的某个点，reset 操作使得在从包含的输入流中获取新字节之前，再次读取自最后一次 mark 操作后读取的所有字节。
+
+BufferedInputStream(InputStream in) 默认缓冲区  8K
+BufferedInputStream(InputStream in, int size) 指定大小的缓冲区
+</code></pre><h3 id="字节缓冲输出流"><a href="#字节缓冲输出流" class="headerlink" title="字节缓冲输出流"></a>字节缓冲输出流</h3><p>BufferedOutputStream:<br>构造方法:</p>
+<pre><code>BufferedOutputStream(OutputStream out) 默认大小 8K
+BufferedOutputStream(OutputStream out, int size)
+</code></pre><p>也是一个包装流，速度比FileOutputStream速度快很多；</p>
+<h3 id="四种方式写出数据比较复制效率"><a href="#四种方式写出数据比较复制效率" class="headerlink" title="四种方式写出数据比较复制效率"></a>四种方式写出数据比较复制效率</h3><p>数据源：D:\temp\lesson1.mp4<br>目的地：D:\temp\lesson2.mp4</p>
+<p>方式一：使用FileOutputSteam 一个字节一个字节的写<strong>时间太长，没心情等了</strong><br>方式二：使用FileOutputSteam 一个字节数组写入, 1353ms<br>方式三：使用BufferedOutputSteam 一个字节一个字节的写, 7453ms<br>方式四：使用BufferedOutputSteam 一个字节数组一个字节数组写入, 348ms</p>
+<p>练习：判断 D:\temp 下 所有以 .java 结尾的文件</p>
+<pre><code>public class Test1 {
+  public static void main(String[] args) {
+    File file = new File(&quot;D:\\temp&quot;);
+    File[] files = file.listFiles();
+    List&lt;File&gt; list = new ArrayList&lt;&gt;();
+
+    if (files != null) { // 如果不是一个路径就位null或者出现IO流的问题
+
+      for (File f : files) {
+        if (f.isFile() &amp;&amp; f.getName().endsWith(&quot;.java&quot;)) {
+          list.add(f);
+        }
+      }
+
+    }
+    // System.out.println(list);
+    for (File f : list) {
+        System.out.println(f);
+    }
+  }
+}
+</code></pre><h2 id="星期三-7-24"><a href="#星期三-7-24" class="headerlink" title="星期三(7.24)"></a>星期三(7.24)</h2><h3 id="编码格式"><a href="#编码格式" class="headerlink" title="编码格式"></a>编码格式</h3><p>编码表</p>
+<pre><code>由字符及其对应的数值组成的一张表
+</code></pre><p>常见编码表</p>
+<pre><code>ASCII/Unicode 字符集
+ISO-8859-1 &lt;-&gt;  Latin-1
+GB2312/GBK/GB18030(包含的中文字符的数量)
+BIG5   繁体中文
+UTF-8 变长的
+</code></pre><h3 id="字符流"><a href="#字符流" class="headerlink" title="字符流"></a>字符流</h3><p>由于字节流操作中文不是特别方便，所以，java就提供了字符流。为什么说不方便我们举个例子：</p>
+<pre><code>public static void main(String[] args) throws IOException {
+  FileInputStream in = new FileInputStream(&quot;a.txt&quot;);
+  byte[] bytes = new byte[3];
+  int len;
+  while ((len = in.read(bytes)) != -1) {
+    for (int i = 0; i &lt; len; i++) {
+        System.out.print((char)(bytes[i]));
+    }
+  }
+  in.close();
+}
+</code></pre><p>这个例子就能看出，如果是字符就没问题，如果是中文，一个中文是两个字节表示的。但是字节数组的长度就只有3。那么就有一个中文两个字节就被分开了。这样就不会正确读出中文字符，从而显示出来就乱码，然后就引入了字符，就很稳：</p>
+<pre><code>字符流 = 字节流 + 编码表
+</code></pre><p>使用字符流的时候，默认读入和写出都是使用的UTF-8的格式。UTF-8就是代替Unicode出现的。但是JAVA在里面是Unicode编码的。读取文件的格式和写出的格式可以不同。直接看例子</p>
+<pre><code>/*
+数据源：D:\temp\Demo.java
+目的地：D:\temp\Copy.java
+数据源和目标地的编码格式可以不同。因为在存在JAVA中的char[]数组就已经把编码格式默认转换成Unicode编码了。再从Unicode编码转换出去。所以可以不同
+ */
+
+public class CopyDemo1 {
+  public static void main(String[] args) throws IOException {
+    InputStreamReader in = new InputStreamReader(new FileInputStream(&quot;D:\\temp\\Demo.java&quot;), &quot;GBK&quot;);
+    OutputStreamWriter out = new OutputStreamWriter(new FileOutputStream(&quot;D:\\temp\\Copy.java&quot;), &quot;UTF-8&quot;);
+    char chars[] = new char[1024];
+    int len;
+    while ((len = in.read(chars)) != -1) {
+        out.write(chars, 0, len);
+    }
+    in.close();
+    out.close();
+  }
+}
+最后的运行结果并不会乱码
+</code></pre><h3 id="字符输入流Reader"><a href="#字符输入流Reader" class="headerlink" title="字符输入流Reader"></a>字符输入流Reader</h3><p>abstract class Reader:</p>
+<p>方法：</p>
+<pre><code>int read()  读取一个字符
+int read(char[] cbuf) 把读取的数据放入字符数组中
+abstract int read(char[] cbuf, int off, int len) 把读取的数据放入字符数组的一部分中
+</code></pre><h3 id="字符输出流Writer"><a href="#字符输出流Writer" class="headerlink" title="字符输出流Writer"></a>字符输出流Writer</h3><p>方法：</p>
+<pre><code>void write(int c) // 写一个字符
+void write(char[] cbuf) // 写一个字符数组
+abstract void write(char[] cbuf, int off, int len) // 写一个字符数组的一部分
+void write(String str)
+void write(String str, int off, int len)
+</code></pre><h3 id="转换流："><a href="#转换流：" class="headerlink" title="转换流："></a>转换流：</h3><p>转换流：字节流 –&gt; 字符流</p>
+<h3 id="InputStreamReader："><a href="#InputStreamReader：" class="headerlink" title="InputStreamReader："></a>InputStreamReader：</h3><p>概述：是字节流通向字符流的桥梁</p>
+<p>构造方法：<br><strong>注意只有转换流可以设置编码格式，默认编码格式就是UTF-8</strong></p>
+<pre><code>InputStreamReader(InputStream in) 默认编码表
+InputStreamReader(InputStream in, String charsetName) 指定编码表
+</code></pre><h3 id="OutputStreamWriter"><a href="#OutputStreamWriter" class="headerlink" title="OutputStreamWriter:"></a>OutputStreamWriter:</h3><p>概述：是字符流通向字节流的桥梁</p>
+<p>构造方法：</p>
+<pre><code>OutputStreamWriter(OutputStream out)
+    创建使用默认字符编码的 OutputStreamWriter。
+OutputStreamWriter(OutputStream out, Charset cs)
+    创建使用给定字符集的 OutputStreamWriter。
+OutputStreamWriter(OutputStream out, CharsetEncoder enc)
+    创建使用给定字符集编码器的 OutputStreamWriter。
+OutputStreamWriter(OutputStream out, String charsetName)
+    创建使用指定字符集的 OutputStreamWriter。
+</code></pre><h3 id="刷新缓冲区的时机："><a href="#刷新缓冲区的时机：" class="headerlink" title="刷新缓冲区的时机："></a>刷新缓冲区的时机：</h3><pre><code>a. 使用flush
+b. 缓冲区满了
+c. 关闭流的时候也会刷新缓冲区
+</code></pre><h3 id="flush-和close-的区别："><a href="#flush-和close-的区别：" class="headerlink" title="flush()和close()的区别："></a>flush()和close()的区别：</h3><pre><code>flush: 强制刷新缓冲区, flush之后还能写数据
+close: 关流，释放系统资源. close之后不能再写数据了
+</code></pre><h3 id="字符流-便捷流-："><a href="#字符流-便捷流-：" class="headerlink" title="字符流(便捷流)："></a>字符流(便捷流)：</h3><h3 id="FileReader"><a href="#FileReader" class="headerlink" title="FileReader"></a>FileReader</h3><pre><code>public class FileReader extends InputStreamReader
+</code></pre><p>用来读取字符文件的便捷类。此类的构造方法假定默认字符编码和默认字节缓冲区大小都是适当的。要自己指定这些值，可以先在 FileInputStream 上构造一个 InputStreamReader。<br>FileReader 用于读取字符流。要读取原始字节流，请考虑使用 FileInputStream。</p>
+<p>构造方法：</p>
+<pre><code>FileReader(File file) 能直接对文件操作，采用的是默认编码
+FileReader(String fileName)
+</code></pre><p><strong>注意可以直接对文件操作，就方便很多</strong></p>
+<h3 id="FileWriter"><a href="#FileWriter" class="headerlink" title="FileWriter"></a>FileWriter</h3><pre><code>public class FileWriter extends OutputStreamWriter
+</code></pre><p>用来写入字符文件的便捷类。此类的构造方法假定默认字符编码和默认字节缓冲区大小都是可接受的。要自己指定这些值，可以先在 FileOutputStream 上构造一个 OutputStreamWriter。</p>
+<p>构造方法：</p>
+<pre><code>FileWriter(File file) 能够直接对文件操作，采用的是默认编码
+FileWriter(File file, boolean append)
+FileWriter(String fileName)
+FileWriter(String fileName, boolean append)
+</code></pre><h3 id="复制文件"><a href="#复制文件" class="headerlink" title="复制文件"></a>复制文件</h3><pre><code>/*
+数据源：D:\temp\xx.jpg
+目的地：D:\temp\lyf.jpg
+
+注意事项：非文本数据不能用字符流处理
+ */
+ public static void main(String[] args) {
+   try(Reader reader = new FileReader(&quot;D:\\temp\\xx.jpg&quot;);Writer writer = new FileWriter(&quot;D:\\temp\\lyf.jpg&quot;)){
+         char[] chars = new char[1024];
+         int len;
+         while((len = reader.read(chars)) != -1) {
+            writer.writer(chars,0,len);
+         }
+    }catch(IOException e) {
+      e.printStackTrace();
+    }
+ }
+</code></pre><p><strong>这里就发现图片是乱码而且打不开</strong>因为除了字符外，其他数据类型都是二进制存储的和编码格式是没有任何关系的。所以不能使用字符流去处理任何非文本的文件。需要去处理的文件必须是文本的文件。</p>
+<h2 id="星期四（7-25）"><a href="#星期四（7-25）" class="headerlink" title="星期四（7.25）"></a>星期四（7.25）</h2><h3 id="字符缓冲流"><a href="#字符缓冲流" class="headerlink" title="字符缓冲流"></a>字符缓冲流</h3><h3 id="BufferedReader-缓冲字符输入流"><a href="#BufferedReader-缓冲字符输入流" class="headerlink" title="BufferedReader:缓冲字符输入流"></a>BufferedReader:缓冲字符输入流</h3><p>构造方法：</p>
+<pre><code>BufferedReader(Reader in) 默认大小的缓冲区(8K)
+BufferedReader(Reader in, int sz) 指定缓冲区大小
+</code></pre><p>方法：</p>
+<pre><code>String readLine()
+</code></pre><p>注意事项：不包含行终止符，如果读到流的末尾返回null</p>
+<h3 id="BufferedWriter-缓冲字符输出流"><a href="#BufferedWriter-缓冲字符输出流" class="headerlink" title="BufferedWriter:缓冲字符输出流"></a>BufferedWriter:缓冲字符输出流</h3><p>构造方法：</p>
+<pre><code>BufferedWriter(Writer out) 默认大小是8K
+BufferedWriter(Writer out, int sz)
+</code></pre><p>方法：</p>
+<pre><code>void newLine()  可以根据不同的操作系统写入不同的换行符
+</code></pre><h3 id="字节缓冲流拷贝-Copy"><a href="#字节缓冲流拷贝-Copy" class="headerlink" title="字节缓冲流拷贝 Copy"></a>字节缓冲流拷贝 Copy</h3><p>一个简单的字节缓冲流拷贝</p>
+<pre><code>public void main(String[] args) {
+  try(
+  BufferedReader BR = new BufferedReader(new FileReader(&quot;D:\\temp\\MyHashMap.java&quot;))
+  ){
+    BufferedWriter BW = new BufferedWriter(new FileWriter(&quot;D:\\temp\\MyHashMap.java&quot;));
+    String s;
+    while((s = BR.readLine()) != null) {
+      //三连
+      bw.write(s);
+      bw.newLine();
+      bw.flush();
+    }
+  }catch(IOException e) {
+    e.printStackTrace();
+  }
+}
+</code></pre><h3 id="一些其他的流"><a href="#一些其他的流" class="headerlink" title="一些其他的流"></a>一些其他的流</h3><p>这里总结一下规律，后面是InputStream都是属于是字节流的。只有Writer Reader是属于字符流；</p>
+<h3 id="DataInputStream-amp-amp-DataOutputStream"><a href="#DataInputStream-amp-amp-DataOutputStream" class="headerlink" title="DataInputStream &amp;&amp; DataOutputStream"></a>DataInputStream &amp;&amp; DataOutputStream</h3><p>能操作基本数据类型，但是我们看不懂，保存的都是二进制的</p>
+<p>构造方法：<br>  DataInputStream(InputStream in);<br>  DataOutputStream(OutputStream out);</p>
+<p><strong>注意事项：<br>    数据是按照什么顺序写的，就必须按照什么的顺序读</strong></p>
+<h3 id="装饰者模式-包装模式"><a href="#装饰者模式-包装模式" class="headerlink" title="装饰者模式(包装模式)"></a>装饰者模式(包装模式)</h3><p>把功能组合,而不是一个类单独把所有的功能全部写完<br>例如要实现<br>“1: content”<br>或<br>1:”content”</p>
+<p>我们不应该是只写一个类实现这两个功能，万一又搞点花的。那不是又要写，我们应该用两个类单独实现：<br>1：content<br>和<br>“content”<br>然后再把reader作为两个的成员变量。在初始化的时候传进来，就可以按照加工的顺序实现相应的效果；</p>
+<p>例如实现:”1:content”<br>我们有两个类<br>//实现了每行加序号</p>
+<pre><code>public class MyLineReader extends BufferedReader {
+    private int LineNumber;
+    private BufferedReader br;
+    public MyLineReader(BufferedReader reader) {
+        super(reader);
+        br = reader;
+    }
+
+    @Override
+    public String readLine() throws IOException {
+        // String s = super.readLine();
+        String s = br.readLine();
+        if (s != null) {
+            LineNumber++;
+            return LineNumber + &quot;: &quot; + s;
+        }
+        return null;
+    }
+
+    @Override
+    public void close() throws IOException {
+        br.close();
+    }
+}
+</code></pre><p>// 实现了添加引号写出</p>
+<pre><code>public class MyQuoteReader extends BufferedReader {
+  private BufferedReader br;
+  public MyQuoteReader (BufferedReader reader) {
+      super(reader);
+      br = reader;
+  }
+
+  @Override
+  public String readLine() throws IOException {
+      // String s = super.readLine();
+      String s = br.readLine();
+      if (s != null) {
+          return &quot;\&quot;&quot; + s + &quot;\&quot;&quot;;
+      }
+      return null;
+  }
+
+  @Override
+  public void close() throws IOException {
+      br.close();
+  }
+}
+</code></pre><p>//最后实现写出”1:content”<br>  先读入加序号，后加引号</p>
+<pre><code>public static void main(String[] args) {
+  MyLineReader mlr = new MyLineReader(new BufferedReader(new FileReader(&quot;a.txt&quot;)));
+  MyQueteReader mqr = new MyQueteReader(mlr);
+  String s;
+  s = mqr.readLine();
+}
+</code></pre><p><strong>注释：mqr.readLine()时候，会调用br.readLine();从而进入到mlr的readLine()方法，先添加上序号，然后再回到mqr的readLine()方法。然后加上引号；</strong></p>
+<h3 id="ObjectStream"><a href="#ObjectStream" class="headerlink" title="ObjectStream"></a>ObjectStream</h3><p>从名字就可以看出是以字节流来操作的；</p>
+<h3 id="ObjectOutputStream"><a href="#ObjectOutputStream" class="headerlink" title="ObjectOutputStream:"></a>ObjectOutputStream:</h3><pre><code>能够将对象持久化到磁盘或者网络等设备
+</code></pre><p>构造方法：</p>
+<pre><code>ObjectOutputStream(OutputStream out)
+</code></pre><p>方法：<br>    <strong>void writeObject(Object obj)</strong><br>    void writeByte(int val)<br>    void writeShort(int val)<br>    void writeInt(int val)<br>    void writeLong(long val)<br>    void writeFloat(float val)<br>    void writeDouble(double val)<br>    void writeChar(int val)<br>    void writeBoolean(boolean val)</p>
+<p><strong>注意事项：</strong>这里写入的基本数据类型是可以看懂的和dataOutputStream是不同的所以要注意；</p>
+<h3 id="ObjectInputStream"><a href="#ObjectInputStream" class="headerlink" title="ObjectInputStream:"></a>ObjectInputStream:</h3><pre><code>能够从磁盘或者网略等设备读取二进制，并将它还原成对象
+</code></pre><p>构造方法：<br>    ObjectInputStream(InputStream in)</p>
+<p>方法：<br>    <strong>Object readObject()</strong></p>
+<h3 id="序列化流"><a href="#序列化流" class="headerlink" title="序列化流"></a>序列化流</h3><p>序列化就是为了将对象持久化</p>
+<p>Serializable(标记接口):<br>    只有实现了这个接口类的对象才可以被序列化，才能把对象永久保存在磁盘上；看下面的例子：</p>
+<pre><code>public class Student implements Serializable {
+    private static final long serialVersionUID = -1L; //
+    private String name;
+    private transient int age;
+    // private String gender;
+    public Student() {
+    }
+    public Student(String name, int age) {
+        this.name = name;
+        this.age = age;
+        // this.gender = gender;
+    }
+}
+</code></pre><p>这个例子不仅实现了可序列化的接口，而且有一个serialVersionUID的属性</p>
+<pre><code>private static final long serialVersionUID = -1L;
+</code></pre><p>他表示的是这个类的ID，也就是这个类如果发生了变化，然后和已经存储的序列化文件中的类不一致时也能判断出来这是同一个类；</p>
+<p>例如我之前序列化的文件时候，没有  private String name;这个属性的。后来我因为需要添加了一个属性，同时也修改了里面的构造方法，所以我现在的类和序列化的不一样。当我从本地读出序列化文件时候：</p>
+<pre><code>ObjectInputStream OIS = new ObjectInputStream(new FileInputStream(&quot;objext.txt&quot;));
+</code></pre><p>如果我在序列化文件的时候没有加上</p>
+<pre><code>pravate static final long serialVersionUID = -1l；
+</code></pre><p>就会在读取的时候报错：</p>
+<pre><code>java.io.InvalidClassException: com.cskaoyan.pojo.Student; local class incompatible:
+</code></pre><p>这时候加上serivalVersionUID 再重新序列化一遍就好了</p>
+<h3 id="transient"><a href="#transient" class="headerlink" title="transient:"></a>transient:</h3><p>在例子中还看到了：</p>
+<pre><code>private transient int age;
+</code></pre><p>transient：修饰成员变量，表示该变量不会被持久化。也就是不会被持久化到文件中。应该是为了可能每次都要修改，所以没有放进去；就看上面的例子</p>
+<pre><code>public static void main(String[] args) throws IOException {
+  Student s = new Student(&quot;剑客阿飞&quot;, 16);
+  ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(&quot;object.txt&quot;));
+  oos.writeObject(s); // NotSerializableException: com.cskaoyan.pojo.Student
+  oos.close();
+
+  ObjectInputStream ois = new ObjectInputStream(new FileInputStream(&quot;object.txt&quot;));
+
+  try{
+      Object o = ois.readObject();
+      System.out.println(o);
+  }catch (ClassNotFoundException e) {
+      e.printStackTrace();
+  }
+  ois.close();
+}
+</code></pre><p>因为age没有序列化放在object.txt中，所以读出来的时候会得到：</p>
+<pre><code>{剑客阿飞，0};//就是age的默认值；
+</code></pre><p><strong><em>另外:通过序列化和反序列化可以实现拷贝对象(深拷贝)</em></strong></p>
+<h2 id="星期五（7-26）"><a href="#星期五（7-26）" class="headerlink" title="星期五（7.26）"></a>星期五（7.26）</h2><h3 id="打印流"><a href="#打印流" class="headerlink" title="打印流"></a>打印流</h3><pre><code>打印流都不能append
+打印字节流: PrintStream
+打印字符流：PrintWriter
+</code></pre><p>特点：</p>
+<pre><code>a. 只有输出流，没有对应的输入流
+b. 可以打印任意类型的数据,而且我们能看得懂和DataOutputStream不同
+c. 可以自动刷新, 只有特定的方法才能自动刷新(PrintWriter: println、printf、format)
+d. 字节流默认都能自动刷新，字符流只有特定的方法才能自动刷新(PrintWriter: println、printf、format)
+</code></pre><p>构造方法：</p>
+<pre><code>PrintStream(File file)
+PrintStream(String fileName)
+PrintStream(OutputStream out)
+PrintStream(OutputStream out, boolean autoFlush)
+</code></pre><p>方法：</p>
+<pre><code>print() : 参数：基本数据类型、char[]、Object
+println()
+println(): 参数：基本数据类型、char[]、Object
+</code></pre><h3 id="标准输出流（System-out）"><a href="#标准输出流（System-out）" class="headerlink" title="标准输出流（System.out）"></a>标准输出流（System.out）</h3><p>标准输出流：<br>    PrintStream: System.out, 默认向控制台输出数据</p>
+<pre><code>// 对标准输出流包装
+/*BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+bw.write(&quot;Hello, world!&quot;);
+bw.newLine();
+bw.close();*/
+
+// 标准输出流重定向
+System.setOut(new PrintStream(&quot;out.txt&quot;));
+System.out.println(&quot;Hello, world!&quot;);
+System.out.close();
+</code></pre><h3 id="标准输入流（System-in）"><a href="#标准输入流（System-in）" class="headerlink" title="标准输入流（System.in）"></a>标准输入流（System.in）</h3><p>标准输入流：<br>    InputStream: System.in 默认的标准输入设备：键盘</p>
+<pre><code>//包装标准输入流
+/*BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+String s = br.readLine();
+System.out.println(s);
+br.close();*/
+
+//重定向
+System.setIn(new FileInputStream(&quot;in.txt&quot;));
+Scanner scanner = new Scanner(System.in);
+System.out.println(scanner.nextLine());
+</code></pre><h3 id="标准错误流"><a href="#标准错误流" class="headerlink" title="标准错误流"></a>标准错误流</h3><pre><code>PrintStream: System.rrr, 默认输出设备控制台(颜色是红色的)
+</code></pre><h3 id="Properties类"><a href="#Properties类" class="headerlink" title="Properties类"></a>Properties类</h3><p>Hashtable<object, object=""><br>    |– Properties<br>    概述：Properties 类表示了一个持久的属性集。Properties 可保存在流中或从流中加载。属性列表中每个键及其对应值都是一个<strong>字符串</strong>。</object,></p>
+<p>构造方法：<br>    Properties()<br>    Properties(Properties defaults)</p>
+<p>方法：增删改查获取数组和hashMap一样虽然不是同一个子类<br>hashMap把hashTable重做了。</p>
+<h3 id="hashTable方法"><a href="#hashTable方法" class="headerlink" title="hashTable方法"></a>hashTable方法</h3><pre><code>void clear()   将此哈希表清空，使其不包含任何键。
+Object clone()   创建此哈希表的浅表副本。
+boolean contains(Object value)   测试此映射表中是否存在与指定值关联的键。
+boolean containsKey(Object key)   测试指定对象是否为此哈希表中的键。
+boolean containsValue(Object value)   如果此 Hashtable 将一个或多个键映射到此值，则返回 true。
+Enumeration&lt;V&gt; elements()   返回此哈希表中的值的枚举。
+Set&lt;Map.Entry&lt;K,V&gt;&gt; entrySet()   返回此映射中包含的键的 Set 视图。
+boolean equals(Object o)   按照 Map 接口的定义，比较指定 Object 与此 Map 是否相等。
+V get(Object key)   返回指定键所映射到的值，如果此映射不包含此键的映射，则返回 null. 更确切地讲，如果此映射包含满足 (key.equals(k)) 的从键 k 到值 v 的映射，则此方法返回 v；否则，返回 null。
+int hashCode()   按照 Map 接口的定义，返回此 Map 的哈希码值。
+boolean isEmpty()   测试此哈希表是否没有键映射到值。
+Enumeration&lt;K&gt; keys()   返回此哈希表中的键的枚举。
+Set&lt;K&gt; keySet()   返回此映射中包含的键的 Set 视图。
+V put(K key, V value)   将指定 key 映射到此哈希表中的指定 value。
+void putAll(Map&lt;? extends K,? extends V&gt; t)   将指定映射的所有映射关系复制到此哈希表中，这些映射关系将替换此哈希表拥有的、针对当前指定映射中所有键的所有映射关系。
+protected  void rehash()   增加此哈希表的容量并在内部对其进行重组，以便更有效地容纳和访问其元素。
+V remove(Object key)   从哈希表中移除该键及其相应的值。
+int size()   返回此哈希表中的键的数量。
+String toString()   返回此 Hashtable 对象的字符串表示形式，其形式为 ASCII 字符 &quot;, &quot; （逗号加空格）分隔开的、括在括号中的一组条目。
+Collection&lt;V&gt; values()   返回此映射中包含的键的 Collection 视图。
+</code></pre><h3 id="Porperties自己特有方法："><a href="#Porperties自己特有方法：" class="headerlink" title="Porperties自己特有方法："></a>Porperties自己特有方法：</h3><pre><code>String getProperty(String key)
+String getProperty(String key, String defaultValue)
+Object setProperty(String key, String value)
+Enumeration&lt;?&gt; propertyNames()  // 键
+Set&lt;String&gt; stringPropertyNames()
+</code></pre><h3 id="和流相关的一些方法："><a href="#和流相关的一些方法：" class="headerlink" title="和流相关的一些方法："></a>和流相关的一些方法：</h3><pre><code>//输出
+void store(Writer writer, String comments)
+void store(OutputStream out, String comments)
+void storeToXML(OutputStream os, String comment)
+//输入
+void load(InputStream inStream)
+void load(Reader reader)
+void loadFromXML(InputStream in)
+</code></pre><h3 id="线程"><a href="#线程" class="headerlink" title="线程"></a>线程</h3><p>1：要想说线程，首先必须得聊聊进程，因为线程是依赖于进程存在的。<br>2：那么，什么是进程呢?通过任务管理器我们就可以看到进程的存在。</p>
+<pre><code>给出一个概念：进程就是正在运行的程序，是系统进行资源分配和调用的独立单位。每一个进程都有它自己的内存空间和系统资源。
+</code></pre><p>3：多进程有什么意义呢?</p>
+<pre><code>单进程计算机只能做一件事情。而我们现在的计算机都可以一边玩游戏(游戏进程),一边听音乐(音乐进程)，所以我们常见的操作系统都是多进程操作系统。比如：Windows，Mac和Linux等，能在同一个时间段内执行多个任务。
+对于单核计算机来讲，游戏进程和音乐进程是同时运行的吗?不是。
+因为CPU在某个时间点上只能做一件事情，计算机是在游戏进程和音乐进程间做着频繁切换，且切换速度很快，所以，我们感觉游戏和音乐在同时进行，其实并不是同时执行的。
+多进程的作用不是提高执行速度，而是提高CPU的使用率。
+</code></pre><p>4：那么什么又是线程呢?</p>
+<pre><code>在一个进程内部又可以执行多个任务，而这每一个任务我们就可以看成是一个线程。线程是程序中单个顺序的控制流，是程序使用CPU的基本单位。
+</code></pre><p>5：多线程有什么意义呢？</p>
+<pre><code>多线程的作用不是提高执行速度，而是为了提高应用程序的使用率。
+而多线程却给了我们一个错觉：让我们认为多个线程是并发执行的。其实不是。
+因为多个线程共享同一个进程的资源(堆内存和方法区)，但是栈内存是独立的，一个线程一个栈。所以他们仍然是在抢CPU的资源执行。一个时间点上只有能有一个线程执行。而且谁抢到，这个不一定，所以，造成了线程运行的随机性。
+</code></pre><p>6：那么什么又是并发呢？</p>
+<pre><code>大家注意两个词汇的区别：并发和并行。
+前者是逻辑上同时发生，指在某一个时间内同时运行多个程序。
+后者是物理上同时发生，指在某一个时间点同时运行多个程序。
+那么，我们能不能实现真正意义上的并发呢，是可以的，多个CPU就可以实现，不过你得知道如何调度和控制它们。
+</code></pre><h3 id="JAVA程序的运行原理"><a href="#JAVA程序的运行原理" class="headerlink" title="JAVA程序的运行原理"></a>JAVA程序的运行原理</h3><p>Java命令会启动JVM，即启动了一个进程<br>(JVM 就是一个进程)<br>该进程会启动一个主线程，然后主线程调用某个类的main方法，所以main方法都是运行在主线程里。（之前我们写的基本都是单线程程序）</p>
+<p>思考 JVM是单线程还是多线程<br>几个JVM？ 每个Java进程 分配一jvm个实例<br>JVM是多线程的，至少会创建一个main线程<br>和 一个GC线程。<br>Java 字节码 解释器。管理内存。</p>
+<h3 id="如何实现多线程"><a href="#如何实现多线程" class="headerlink" title="如何实现多线程"></a>如何实现多线程</h3><h3 id="方法1："><a href="#方法1：" class="headerlink" title="方法1："></a>方法1：</h3><pre><code>a.继承thread类
+b.重写子类的run方法
+c.创建子类的对象
+d.启动线程start()
+</code></pre><p>//自己写一个类继承Thread类</p>
+<pre><code>public class MyThread extends Thread{
+  public MyThread() {
+      super();
+  }
+  public MyThread(String name) {
+      super(name);
+  }
+  @Override
+  public void run() {
+      // System.out.println(&quot;线程启动了&quot;);
+      for (int i = 1; i &lt;= 100; i++) {
+          System.out.println(getName() + &quot;: &quot; + i);
+      }
+  }
+}
+//然后在创建对象start线程
+public static void main(String[] args) {
+  MyThread mt = new MyThread();
+  mt.start();//启动
+}
+</code></pre><p>几个小问题：<br>为什么要重写run()方法？<br>    run()里面的代码是线程要执行的代码(任务)<br>启动线程使用的是那个方法？<br>    start()<br>同一个线程能不能多次启动？<br>    不能，如果启动多次会报 IllegalThreadStateException，线程运行完会自动死亡<br>run()和start()方法的区别<br>    run(): 封装的是线程要执行的代码, 执行调用run()方法是普通的方法调用，不会启动新线程。<br>    start(): 启动一个新线程，该线程会执行run()里面的代码</p>
+<h3 id="Thread"><a href="#Thread" class="headerlink" title="Thread"></a>Thread</h3><pre><code>public class Thread extends Object implements Runnable
+</code></pre><p>方法：<br>    long getId()<br>    String getName()<br>    void setName(String name)<br>    public static Thread currentThread() 获取当前线程<br>    int getPriority()<br>    void setPriority(int newPriority)</p>
+<h3 id="线程优先级"><a href="#线程优先级" class="headerlink" title="线程优先级"></a>线程优先级</h3><pre><code>public static final int MAX_PRIORITY 10
+public static final int MIN_PRIORITY 1
+public static final int NORM_PRIORITY 5
+</code></pre><p>构造方法：<br>    Thread(String name)<br>    Thread(Runnable target) 分配新的 Thread 对象。<br>    Thread(Runnable target, String name) 配新的 Thread 对象。</p>
+<p>问题：如何获取main方法所在线程的名字？<br>    Thread thread = Thread.currentThread();<br>    thread.getName() //main主线程</p>
+<p>线程调度模型：<br>    分时调度模型：平均分配<br>    抢占式调度模型：不公平（JAVA的线程调度模式）</p>
+<h3 id="方法二："><a href="#方法二：" class="headerlink" title="方法二："></a>方法二：</h3><pre><code>a.创建一个类，实现Runable接口
+b.重写run()方法
+c.创建对象
+c.创建thread对象，把之前创建的对象作为参数传递
+d.启动线程start();
+</code></pre><p>//方法二创建线程</p>
+<pre><code>//实现Runnable接口的类
+public class MyRunnable implements Runnable {
+  @Override
+  public void run() {
+    for (int i = 0; i &lt; 100; i++) {
+        System.out.println(Thread.currentThread().getName() + &quot;: &quot; + i);
+    }
+  }
+}
+public static void main(String[] args) {
+  Runnable mr = new MyRunnable();
+  Thread thread = new Thread(mr);
+  thread.start();
+}
+</code></pre><p>两个问题：<br>1.为什么可以有两种创建Thread的方法？<br>第一种方法，直接继承Thread类，重写了run方法，我们知道run方法是启动线程执行的方法。<br>在Thread类中的方法如下：</p>
+<pre><code>public void run() {
+  if (target != null) {
+      target.run();
+  }
+}
+</code></pre><p>看起来没什么用这个target 如果为null就是一个空函数，继承Thread类实现run方法来创建启动一个线程肯定没毛病。那么看看这个target到底是什么</p>
+<pre><code>/* What will be run. */
+private Runnable target;
+</code></pre><p> 然后我发现里里面有个init()方法是Thread构造函数中调用的方法：</p>
+<pre><code> public Thread(Runnable target) {
+    init(null, target, &quot;Thread-&quot; + nextThreadNum(), 0);
+}
+</code></pre><p>这个构造方法对应的就是方法二创建线程的过程，传入一个实现Runnable接口的子类对象。然后再来看看这个init怎么用的</p>
+<pre><code>  private void init(ThreadGroup g, Runnable target, String name,
+                  long stackSize, AccessControlContext acc,
+                  boolean inheritThreadLocals) {
+    if (name == null) {
+        throw new NullPointerException(&quot;name cannot be null&quot;);
+    }
+    this.name = name;
+    Thread parent = currentThread();
+    SecurityManager security = System.getSecurityManager();
+    if (g == null) {
+        /* Determine if it&apos;s an applet or not */
+        /* If there is a security manager, ask the security manager
+           what to do. */
+        if (security != null) {
+            g = security.getThreadGroup();
+        }
+
+        /* If the security doesn&apos;t have a strong opinion of the matter
+           use the parent thread group. */
+        if (g == null) {
+            g = parent.getThreadGroup();
+        }
+    }
+    /* checkAccess regardless of whether or not threadgroup is
+       explicitly passed in. */
+    g.checkAccess();
+    /*
+     * Do we have the required permissions?
+     */
+    if (security != null) {
+        if (isCCLOverridden(getClass())) {
+            security.checkPermission(SUBCLASS_IMPLEMENTATION_PERMISSION);
+        }
+    }
+    g.addUnstarted();
+    this.group = g;
+    this.daemon = parent.isDaemon();
+    this.priority = parent.getPriority();
+    if (security == null || isCCLOverridden(parent.getClass()))
+        this.contextClassLoader = parent.getContextClassLoader();
+    else
+        this.contextClassLoader = parent.contextClassLoader;
+    this.inheritedAccessControlContext =
+            acc != null ? acc : AccessController.getContext();
+    //这句才是重点
+    this.target = target;
+
+    setPriority(priority);
+    if (inheritThreadLocals &amp;&amp; parent.inheritableThreadLocals != null)
+        this.inheritableThreadLocals =
+            ThreadLocal.createInheritedMap(parent.inheritableThreadLocals);
+    /* Stash the specified stack size in case the VM cares */
+    this.stackSize = stackSize;
+    /* Set thread ID */
+    tid = nextThreadID();
+}
+</code></pre><p>其中有一句代码</p>
+<pre><code>this.target = target;
+</code></pre><p>就把创建的target传进来给了Thread对象。按照Thread方法可知，就能执行target.run()方法，那么也是可以启动线程的。所以两种方法都能run。</p>
+<p><strong>注意：</strong>这个线程初始化的代码我觉得非常重要。对于理解多线程是非常重要的，但是目前还有很多东西不了解。所以还有很多东西还要学习。</p>
+<p>2.哪种方法更好<br>很明显方法二更好</p>
+<p>方式一的缺陷<br>如果某个类已经有父类，则无法再继承Thread类</p>
+<p>方式二的优点<br>解决了单继承的局限性<br>还有一个优点，便于多线程共享数据<br><strong>将线程和任务解耦</strong><br>方法二的实现Runable的类就能看成是一个任务。这样就能把任务和线程分开，自己负责自己的领域</p>
+<h3 id="线程的控制"><a href="#线程的控制" class="headerlink" title="线程的控制"></a>线程的控制</h3><h3 id="线程休眠：使当前线程休眠"><a href="#线程休眠：使当前线程休眠" class="headerlink" title="线程休眠：使当前线程休眠"></a>线程休眠：使当前线程休眠</h3><pre><code>static void sleep(long millis)
+static void sleep(long millis, int nanos) 可以精确到纳秒级别
+</code></pre><h3 id="void-join"><a href="#void-join" class="headerlink" title="void join()"></a>void join()</h3><pre><code>当前线程等待调用join()方法的线程执行完毕再执行
+void join(long millis) 指定等待期限
+void join(long millis, int nanos)
+</code></pre><p>例子：学习在睡觉前执行</p>
+<pre><code>//JoinThread.java
+public class JoinThread extends Thread {
+  private Thread first;
+  public JoinThread(Thread t) {
+    super();
+    this.first = t;
+  }
+  public JoinThread(String name, Thread t) {
+    super(name);
+    this.first = t;
+  }
+  @Override
+  public void run() {
+    if(first != null) {
+      try{
+        first.join();//先执行
+      }catch(InterruptedException e) {
+        e.printStackTrace();
+      }
+    }
+  }
+}
+//demo
+public static void main(String[] args) {
+  Thread t1 = new JoinTread(&quot;学习&quot;，null);
+  Thread t2 = new JoinTread(&quot;睡觉&quot;，t1);
+  t1.start();
+  t2.start();
+}
+</code></pre><h3 id="yield"><a href="#yield" class="headerlink" title="yield"></a>yield</h3><p>放弃当前时间片，重新加入抢夺时间片的行列中</p>
+<pre><code>void join()  等待该线程终止。
+void join(long millis)  等待该线程终止的时间最长为 millis 毫秒。
+</code></pre><h3 id="setDamon"><a href="#setDamon" class="headerlink" title="setDamon"></a>setDamon</h3><pre><code>void setDaemon(boolean on)将该线程标记为守护线程或用户线程。
+</code></pre><p>守护线程就是。这个线程被标记为守护线程之后，他保护的线程死亡他也跟着死亡看例子</p>
+<pre><code>//DaemonThread.java
+public class DaemonThread extends Thread {
+  private Thread t;
+  public DaemonThread(Thread t) {
+      super();
+      this.t = t;
+  }
+  public DaemonThread(String name, Thread t) {
+      super(name);
+      this.t = t;
+  }
+  @Override
+  public void run() {
+    if (t != null) {
+        t.setDaemon(true);
+    }
+    for (int i = 0; i &lt; 100; i++) {
+      System.out.println(getName() + &quot;: &quot; + i);
+      try {
+          Thread.sleep(102);
+      } catch (InterruptedException e) {
+          e.printStackTrace();
+      }
+    }
+  }
+}
+//t2 为 t1的守卫线程
+public class DaemonDemo1 {
+  public static void main(String[] args) throws InterruptedException {
+    Thread t2 = new DaemonThread(&quot;Henson_z&quot;, null);
+    Thread t1 = new DaemonThread(&quot;刘亦菲&quot;, t2);
+    t1.start();
+    Thread.sleep(1000);//有延迟才能看得出t1停了 t2会停
+    t2.start();
+    System.out.println(&quot;main end&quot;);
+  }
+}
+</code></pre><p><strong><em>问题：这样做的目的是什么？为什么有这个daemon方法</em></strong></p>
+<h3 id="interrupt"><a href="#interrupt" class="headerlink" title="interrupt"></a>interrupt</h3><p>void interrupt() 中断线程。</p>
+<h3 id="线程的生命周期（必会）"><a href="#线程的生命周期（必会）" class="headerlink" title="线程的生命周期（必会）"></a>线程的生命周期（必会）</h3><p>新建</p>
+<pre><code>创建线程对象
+</code></pre><p>就绪  start() 之后  sleep()睡醒之后 yield()之后</p>
+<pre><code>有执行资格，等待cpu调度
+</code></pre><p>运行</p>
+<pre><code>取得执行权，开始执行
+</code></pre><p>阻塞：</p>
+<pre><code>无执行资格，无执行权
+</code></pre><p>死亡</p>
+<pre><code>执行完毕，等待垃圾回收
+</code></pre><h2 id="星期六（7-27）"><a href="#星期六（7-27）" class="headerlink" title="星期六（7.27）"></a>星期六（7.27）</h2><p>由一个问题引出的线程安全的问题<br>练习：某电影院正在上映《哪吒》，共有100张票。它有三个售票窗口正在售票<br>第一种创建线程的写法：</p>
+<pre><code>public class MyThread extends Thread {
+  private static int tickets = 100;//需要设置成静态的变量需要进程共享
+  public MyThread() {
+    super();
+  }
+  public MyThread(String name) {
+    super(name);
+  }
+  @Override
+  public void run() {
+    while(tickets &gt; 0) {
+      tickets--;
+      System.out.println(getName() + &quot;: 售出了一张票，还剩&quot; + tickets + &quot;张票&quot;);
+    }
+  }
+}
+//main
+Thread t1 = new MyThread(&quot;窗口1&quot;);
+Thread t2 = new MyThread(&quot;窗口2&quot;);
+Thread t3 = new MyThread(&quot;窗口3&quot;);
+
+t1.start();
+t2.start();
+t3.start();
+</code></pre><p>//第二种写法实现卖票</p>
+<pre><code>public class MyRunnable implements Runnable {
+  private int tickets = 100;
+  @Override
+  public void run() {
+    while(tickets &gt; 0) {
+      ticket--;
+      System.out.println(Thread.currentThread().getName() + &quot;: 售出了一张票，还剩&quot; + tickets + &quot;张&quot;);
+    }
+  }
+}
+
+//main
+public static void main(String[] args) {
+  Runnable runnable = new MyRunnable();
+  Thread t1 = new Thread(&quot;窗口1&quot;,runnable);
+  Thread t2 = new Thread(&quot;窗口2&quot;,runnable);
+  Thread t3 = new Thread(&quot;窗口3&quot;,runnable);
+  t1.start();
+  t2.start();
+  t3.start();
+}
+</code></pre><p>##两种方法比较，发现第二种方法不仅不需要设置静态的变量，而且他有一个很明显的优点，他实现了任务和线程的解耦，一个任务多个线程同时完成。而第一种方法，需要去创建三个独立的线程去共享数据，而且这个数据是静态的才能共享就很蠢。##</p>
+<p>注意：这里有可能看到控制台打印的内容不是按顺序的：</p>
+<pre><code>窗口3: 售出了一张票，还剩1张票
+窗口3: 售出了一张票，还剩0张票
+窗口1: 售出了一张票，还剩29张票
+窗口2: 售出了一张票，还剩30张票
+</code></pre><p><strong>但是</strong>这并不能代表出现了线程安全的问题，因为这是多线程的程序，编译器在执行的时候发生了<strong>指令重排序</strong>的功能。所以多线程的程序不能用debug来调试，因为指令执行顺序是未知的。只有出现了同时卖出了多张相同的票例如：</p>
+<pre><code>窗口3: 售出了一张票，还剩1张票
+窗口2: 售出了一张票，还剩1张票
+窗口1: 售出了一张票，还剩30张票
+窗口2: 售出了一张票，还剩30张票
+</code></pre><p>这才能证明发生了线程安全的问题。接下来就要去讨论下线程安全的问题；</p>
+<h3 id="线程安全"><a href="#线程安全" class="headerlink" title="线程安全"></a>线程安全</h3><h3 id="线程安全问题出现的原因"><a href="#线程安全问题出现的原因" class="headerlink" title="线程安全问题出现的原因"></a>线程安全问题出现的原因</h3><p>CPU缓存：可见性，一个线程修改了共享变量，另外的线程必须马上知道<br>编译器：指令重排序，为了更好利用CPU<br>CPU原子性操作：一组CPU指令，要么都被执行，要么都不执行不能中断。</p>
+<p>回到之前的问题：</p>
+<pre><code>实现多个线程抢电影票功能
+</code></pre><p>解决线程安全的办法：</p>
+<h3 id="方法1：同步代码块：（锁）"><a href="#方法1：同步代码块：（锁）" class="headerlink" title="方法1：同步代码块：（锁）"></a>方法1：同步代码块：（锁）</h3><p>Synchronized(对象){  （对象就是锁，同步代码块开始时，上锁）<br>   对象共享资源的操作<br>}   同步代码块结束时，释放锁</p>
+<pre><code>public class SyncDemo {
+  public static void main(String[] args) {
+    Runnable runnable = new Runnable() {
+      int tickets = 100;
+      Object lock = new Object();
+      @Override
+      public void run() {
+        //这样只能由一个进程执行run，上锁放在while外面其他人根本进不去循环
+        /*synchronized (lock) {
+          while (tickets &gt; 0) {
+            try {
+                Thread.sleep(99);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            tickets--;
+            System.out.println(Thread.currentThread().getName() + &quot;: 售出了一张票，还剩&quot; + tickets + &quot;张&quot;);
+          }
+        }*/
+        while (true) {
+          // 窗口一、窗口二
+          synchronized (lock) {
+            if (tickets &gt; 0) {
+              try {
+                  Thread.sleep(99);
+              } catch (InterruptedException e) {
+                  e.printStackTrace();
+              }
+              tickets--;
+              System.out.println(Thread.currentThread().getName() + &quot;: 售出了一张票，还剩&quot; + tickets + &quot;张&quot;);
+            } else {
+                break;
+            }
+          }
+        }
+      }
+    };
+    Thread t1 = new Thread(runnable, &quot;窗口一&quot;);
+    Thread t2 = new Thread(runnable, &quot;窗口二&quot;);
+    Thread t3 = new Thread(runnable, &quot;窗口三&quot;);
+    t1.start();
+    t2.start();
+    t3.start();
+  }
+}
+</code></pre><h3 id="注意事项："><a href="#注意事项：" class="headerlink" title="注意事项："></a>注意事项：</h3><p>比下面的注意事项重要的多，这里有一个问题就是为什么在size–前面加了一个100毫秒的延迟，这就是为了表示一下同步是只有一个进去的，如果不加会发现卖票的只有一个窗口，并没有其他窗口，这不是线程安全的问题。这是因为<strong>运算速度太快了根本没表现出来</strong>，这里加个延迟size–把这个程序的速度放慢，他们才会出现强占时间片的可能，因为速度太快，一个时间片就搞完了。那肯定是测试不出来的。或者把票改成10000张，也能看出效果。所以这里要注意。一定要有这种意识。</p>
+<p>注意事项：<br>    锁可以是任意对象<br>    不同线程的锁对象必须是同一个对象<br>    <strong>锁的释放对同一把锁的获取是可见的。</strong></p>
+<p>同步的总结：</p>
+<pre><code>同步：只有一个线程可以操作共享数据 (互斥的)
+优点：解决了多线程的安全性问题
+缺点：效率低
+</code></pre><h3 id="方法2：同步方法："><a href="#方法2：同步方法：" class="headerlink" title="方法2：同步方法："></a>方法2：同步方法：</h3><p>当同步代码块表示一个方法时，就可以把同步代码块升级成同步方法，也就是方法从第一句到最后一句都需要上锁<br>看这个例子：</p>
+<pre><code>public class Calc {
+  static int value;
+  private Object lock = new Object();
+  public void addOne() {
+    if(value % 2 == 0) {
+      // synchronized (lock) {
+      // synchronized (this) {
+      synchronized (Calc.class) {
+          value++;
+      }
+    } else {
+      add1();
+    }
+  }
+  private static synchronized void add1() { // 一进方法就上锁，结束方法时才释放锁
+    value++;
+  }
+  public int getValue() {
+    return value;
+  }
+}
+public class SyncDemo2 {
+  public static void main(String[] args) throws InterruptedException {
+    Calc calc = new Calc();
+    Runnable runnable = new Runnable() {
+      @Override
+      public void run() {
+        for (int i = 0; i &lt; 10000; i++) {
+           calc.addOne();
+        }
+      }
+    };
+    Thread t1 = new Thread(runnable);
+    Thread t2 = new Thread(runnable);
+    t1.start();
+    t2.start();
+    t1.join();
+    t2.join();
+    System.out.println(calc.getValue()); // 20000
+  }
+}
+</code></pre><p>这个例子就想说明以下问题：<br>1.同步方法的锁对象是什么呢？ this对象<br>2.同步静态方法锁对象是什么呢？  Class clazz = getClass();  字节码文件对象 Calc.class<br>3.这里addOne使用了两种方法来加，一个是在addOne 一个是add1 ,addOne在++的地方上了锁。add1是一个同步方法。<br>这里就在匹配使用通一把锁解决线程安全的问题；</p>
+<h3 id="方法3：Lock接口"><a href="#方法3：Lock接口" class="headerlink" title="方法3：Lock接口"></a>方法3：Lock接口</h3><p>ReentrantLock子类来实现，能够控制开锁和关锁的时间。<br>public class ReentrantLockextends Objectimplements Lock, Serializable</p>
+<pre><code>public class Calc {
+  int value;
+  Lock lock = new ReentrantLock();
+  public void addOne() {
+    lock.lock();
+    value++;
+    lock.unlock();
+  }
+  public int getValue() {
+    return value;
+  }
+}
+</code></pre><h3 id="同步产生的问题—死锁"><a href="#同步产生的问题—死锁" class="headerlink" title="同步产生的问题—死锁"></a>同步产生的问题—死锁</h3><p>模拟转账业务<br>A -&gt; B 转账<br>B- &gt; A 转账</p>
+<p>可能会发生死锁</p>
+<p>死锁问题：一组线程争夺资源的时候，可能出现相互等待的现象<br>在转账业务中出现死锁，相互之间等待获取对方的锁而一直无限等待下去</p>
+<pre><code>a. 一次性获取所有的资源
+b. 释放占有的资源
+c. 按照一定的顺序申请资源
+</code></pre><p>具体做法由下来解决；</p>
+
+        </div>
+        <div class="post-reply">
+            
+                <!-- 来必力City版安装代码 -->
+                <div id="lv-container" data-id="city" data-uid="MTAyMC8yOTE4Ni81NzUz">
+                    <script type="text/javascript">
+                        (function(d, s) {
+                            var j, e = d.getElementsByTagName(s)[0];
+
+                            if (typeof LivereTower === 'function') { return; }
+
+                            j = d.createElement(s);
+                            j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+                            j.async = true;
+
+                            e.parentNode.insertBefore(j, e);
+                        })(document, 'script');
+                    </script>
+                    <noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+                </div>
+                <!-- City版安装代码已完成 -->
+            
+            
+        </div>
+    </div>
+</section>
+<script>
+    // 获取第一张图, 用以当封面背景图
+    var img = document.querySelectorAll('img')[1]
+
+    if (img) {
+        var header_box = document.querySelector('#header_box')
+        header_box.style.backgroundImage = 'url('+ img.src +')'
+    }
+</script>
+      </div>
+  </div>
+  <style>
+  #footer {
+    min-height: 10vh;
+    background: black;
+    color: #fff;
+  }
+
+  #footer a {
+    color: #e1e1e1;
+  }
+</style>
+<footer id="footer" class="has-text-centered is-flex center">
+  <div class="container has-padding">
+    <div>
+      <div>
+        <!--请您保留作者署名, 主题制作来之不易-->
+        主题来自 <a href="http://haojen.github.io/">Haojen Ma</a>
+        <br>
+        Copyright © 王邸 2019
+        <!--
+          Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+        -->
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="/js/search_core.js"></script>
+<script src="/js/script.js"></script>
+
+</body>
+</html>

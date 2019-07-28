@@ -14,7 +14,7 @@
 <meta property="og:url" content="http://yoursite.com/2019/07/14/Java总结（三）上/index.html">
 <meta property="og:site_name" content="路要坚持">
 <meta property="og:description" content="星期一：StringBuffer：线程安全的可变字符序列。可以自动扩容 构造方法：StringBuffer()     创建空的字符序列，默认容量是16 StringBuffer(int capacity)     创建空的字符序列，容量为capacity. StringBuffer(String str)     字符串转成StringBuffer 成员方法：int capacity()">
-<meta property="og:updated_time" content="2019-07-14T13:10:52.144Z">
+<meta property="og:updated_time" content="2019-07-25T02:53:12.674Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java总结（三）上">
 <meta name="twitter:description" content="星期一：StringBuffer：线程安全的可变字符序列。可以自动扩容 构造方法：StringBuffer()     创建空的字符序列，默认容量是16 StringBuffer(int capacity)     创建空的字符序列，容量为capacity. StringBuffer(String str)     字符串转成StringBuffer 成员方法：int capacity()">
@@ -175,7 +175,7 @@ public String substring(int start,int end) 包左不包右
 </code></pre><p>同步：synchronized 线程安全, 但是效率低。(你走我不走，我走你不走)<br>异步：线程不安全，但是效率高（你走你的，我走我的）</p>
 <p>StringBuilder: 1.5<br>一个可变的字符序列。此类提供一个与 StringBuffer 兼容的 API，但不保证同步。<br>在单线程环境下，或者不会出现线程安全问题的多线程程序中，应该使用 StringBuilder.<br>构造方法和方法和StringBuffer一样。</p>
 <p>区别：String, StringBuffer, StringBuilder<br>String: 不可变的字符序列。<br>StringBuffer: 可变的字符序列，线程安全, 效率低。<br>StringBuilder: 可变的字符序列，线程不安全, 效率高</p>
-<h4 id="String-和-StringBuffer转化"><a href="#String-和-StringBuffer转化" class="headerlink" title="String 和 StringBuffer转化"></a>String 和 StringBuffer转化</h4><pre><code>String --&gt; StringBuffer
+<h4 id="String-和-StringBuffer-转化"><a href="#String-和-StringBuffer-转化" class="headerlink" title="String 和 StringBuffer 转化"></a>String 和 StringBuffer 转化</h4><pre><code>String --&gt; StringBuffer
     new StringBuffer(String)
 
 StringBuffer --&gt; String
@@ -183,13 +183,96 @@ StringBuffer --&gt; String
     new String(StringBuffer sb)
     sb.subString()
     String.ValueOf(sb)
-</code></pre><p>看下面的例子：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">public class StringBufferDemo6 &#123;</div><div class="line">    public static void main(String[] args) &#123;</div><div class="line">        String s1 = &quot;Hello&quot;;</div><div class="line">        String s2 = &quot;world&quot;;</div><div class="line">        change(s1, s2);</div><div class="line">        System.out.println(&quot;s1 = &quot; + s1);   // Hello</div><div class="line">        System.out.println(&quot;s2 = &quot; + s2);   // world</div><div class="line"></div><div class="line">        StringBuffer sb1 = new StringBuffer(&quot;Hello&quot;);</div><div class="line">        StringBuffer sb2 = new StringBuffer(&quot;world&quot;);</div><div class="line"></div><div class="line">        change(sb1, sb2);</div><div class="line">        System.out.println(&quot;sb1 = &quot; + sb1); // Hello</div><div class="line">        System.out.println(&quot;sb2 = &quot; + sb2); // worldworld</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public static void change(String s1, String s2) &#123;</div><div class="line">        s1 = s2;</div><div class="line">        s2 += s1;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public static void change(StringBuffer sb1, StringBuffer sb2) &#123;</div><div class="line">        sb1 = sb2;</div><div class="line">        sb2 = sb2.append(sb1);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">打印的结果：</div><div class="line">Hello</div><div class="line">world</div><div class="line">Hello</div><div class="line">worldworld</div></pre></td></tr></table></figure></p>
-<p>这里注意StringBuffer如果append放在main函数中操作，再打印出来，就会两个都一样StringBuffer。因为都指向同一个StringBuffer了；</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">StringBuffer sb1 = new StringBuffer(&quot;Hello&quot;);</div><div class="line">StringBuffer sb2 = new StringBuffer(&quot;world&quot;);</div><div class="line"></div><div class="line">sb1 = sb2;</div><div class="line">sb2 = sb2.append(sb1);</div><div class="line">System.out.println(&quot;sb1 = &quot; + sb1); // worldworld</div><div class="line">System.out.println(&quot;sb2 = &quot; + sb2); // worldworld</div></pre></td></tr></table></figure>
-<p>这里想要说明String是不可变的对象，所以传递时候可以当成是值传递，而这里的值就是他的地址值。而StringBuffer是在原来的对象进行更改</p>
-<p>看了一下StringBuffer源码append 会吧StringBuffer变成一个value的字符数组，然后应该通过底层加到第一个StringBuffer上 后面的东西就看不懂了，通过打断点能看到这些：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">//StringBuffer.java</div><div class="line"> public synchronized StringBuffer append(StringBuffer sb) &#123;</div><div class="line">    toStringCache = null;</div><div class="line">    super.append(sb); //进入下面AbstractStringBuilder</div><div class="line">    return this;</div><div class="line">&#125;</div><div class="line"></div><div class="line">//AbstractStringBuilder.java</div><div class="line">public AbstractStringBuilder append(StringBuffer sb) &#123;</div><div class="line">    if (sb == null)</div><div class="line">        return appendNull();</div><div class="line">    int len = sb.length();</div><div class="line">    ensureCapacityInternal(count + len);</div><div class="line">    sb.getChars(0, len, value, count);</div><div class="line">    count += len;</div><div class="line">    return this;</div><div class="line">&#125;</div><div class="line">最后回到StringBuffer.java</div><div class="line">toStringCache = [w,o,r,l,d];</div></pre></td></tr></table></figure>
-<h4 id="StringBuffer-和数组的区别"><a href="#StringBuffer-和数组的区别" class="headerlink" title="StringBuffer 和数组的区别"></a>StringBuffer 和数组的区别</h4><p>StringBuffer: 可扩容, 可以添加任意数据(都会转成对应的文本表现形式)<br>数组：长度固定，只能存储同一类型的数据。</p>
+</code></pre><p>看下面的例子：</p>
+<pre><code>public class StringBufferDemo6 {
+    public static void main(String[] args) {
+        String s1 = &quot;Hello&quot;;
+        String s2 = &quot;world&quot;;
+        change(s1, s2);
+        System.out.println(&quot;s1 = &quot; + s1);   // Hello
+        System.out.println(&quot;s2 = &quot; + s2);   // world
+
+        StringBuffer sb1 = new StringBuffer(&quot;Hello&quot;);
+        StringBuffer sb2 = new StringBuffer(&quot;world&quot;);
+
+        change(sb1, sb2);
+        System.out.println(&quot;sb1 = &quot; + sb1); // Hello
+        System.out.println(&quot;sb2 = &quot; + sb2); // worldworld
+    }
+
+    public static void change(String s1, String s2) {
+        s1 = s2;
+        s2 += s1;
+    }
+
+    public static void change(StringBuffer sb1, StringBuffer sb2) {
+        sb1 = sb2;
+        sb2 = sb2.append(sb1);
+    }
+}
+打印的结果：
+Hello
+world
+Hello
+worldworld
+</code></pre><p>这里注意StringBuffer如果append放在main函数中操作，再打印出来，就会两个都一样StringBuffer。因为都指向同一个StringBuffer了；</p>
+<pre><code>StringBuffer sb1 = new StringBuffer(&quot;Hello&quot;);
+StringBuffer sb2 = new StringBuffer(&quot;world&quot;);
+sb1 = sb2;
+sb2 = sb2.append(sb1);
+System.out.println(&quot;sb1 = &quot; + sb1); // worldworld
+System.out.println(&quot;sb2 = &quot; + sb2); // worldworld
+</code></pre><p>这里想要说明String是不可变的对象，所以传递时候可以当成是值传递，而这里的值就是他的地址值。而StringBuffer是在原来的对象进行更改</p>
+<p>看了一下StringBuffer源码append 会吧StringBuffer变成一个value的字符数组，<br>通过看源码打断点能看到这些：</p>
+<pre><code>//进入主函数
+public static void main(String[] args) {
+  StringBuffer sb = new StringBuffer(&quot;&quot;);
+  sb.append(&quot;你好旅行者&quot;);
+  System.out.println(sb.length());
+}
+
+//StringBuffer.java
+@Override
+public synchronized StringBuffer append(String str) {
+    toStringCache = null;
+    super.append(str);
+    return this;
+}
+
+//AbstractStringBuilder.java
+public AbstractStringBuilder append(String str) {
+    if (str == null)
+        return appendNull();
+    int len = str.length();
+    ensureCapacityInternal(count + len);
+    str.getChars(0, len, value, count);
+    count += len;
+    return this;
+}
+
+//确定容量是否足够
+private void ensureCapacityInternal(int minimumCapacity) {
+    // overflow-conscious code
+    if (minimumCapacity - value.length &gt; 0) {
+        value = Arrays.copyOf(value,
+                newCapacity(minimumCapacity));
+    }
+}
+
+public void getChars(int srcBegin, int srcEnd, char dst[], int dstBegin) {
+    if (srcBegin &lt; 0) {
+        throw new StringIndexOutOfBoundsException(srcBegin);
+    }
+    if (srcEnd &gt; value.length) {
+        throw new StringIndexOutOfBoundsException(srcEnd);
+    }
+    if (srcBegin &gt; srcEnd) {
+        throw new StringIndexOutOfBoundsException(srcEnd - srcBegin);
+    }
+    System.arraycopy(value, srcBegin, dst, dstBegin, srcEnd - srcBegin);
+    //把字符添加进value数组
+}
+</code></pre><h4 id="StringBuffer-和数组的区别"><a href="#StringBuffer-和数组的区别" class="headerlink" title="StringBuffer 和数组的区别"></a>StringBuffer 和数组的区别</h4><p>StringBuffer: 可扩容, 可以添加任意数据(都会转成对应的文本表现形式)<br>数组：长度固定，只能存储同一类型的数据。</p>
 <h3 id="Date"><a href="#Date" class="headerlink" title="Date:"></a>Date:</h3><pre><code>类 Date 表示特定的瞬间，精确到毫秒。
 它允许把日期解释为年、月、日、小时、分钟和秒值。它也允许格式化和解析日期字符串.
 </code></pre><h4 id="构造方法：-1"><a href="#构造方法：-1" class="headerlink" title="构造方法："></a>构造方法：</h4><pre><code>Date(): 表示创建对象的系统时间（精确到毫秒值）
@@ -198,27 +281,51 @@ Date(long date)
 <p>问题1：长整数为什么可以转换成Date.<br>    标准基准时间(epoch): 1970 年 1 月 1 日 00:00:00 GMT<br>    可以用长整数表示离基准时间的毫秒值。</p>
 <p>问题2：为什么时间选在 1970 年 1 月 1 日 00:00:00;<br>    用int表示秒值：    1902 ~ 1970 ~ 2038<br>    long表示毫秒值：<br>方法：<br>    long getTime() 返回自基准时间以来此 Date 对象表示的毫秒数。<br>    long setTime() 设置time的值</p>
 <p>日期的格式化和解析(dateFormat)：<br>    2019-07-08 14:56:00<br>    2019/07/08 14:56:00<br>    2019年07月08日 14:56:00</p>
-<h4 id="DateFormat类："><a href="#DateFormat类：" class="headerlink" title="DateFormat类："></a>DateFormat类：</h4><p>   public abstract class DateFormat</p>
-<p>格式化：日期 –&gt; 文本   Date –&gt; String<br>解析：  文本 –&gt; 日期   String –&gt; Date</p>
+<h4 id="DateFormat类："><a href="#DateFormat类：" class="headerlink" title="DateFormat类："></a>DateFormat类：</h4><pre><code>public abstract class DateFormat
+</code></pre><p>格式化：日期 –&gt; 文本   Date –&gt; String<br>解析：  文本 –&gt; 日期   String –&gt; Date</p>
 <p>成员方法：<br>     String format(Date date)<br>     Date parse(String source)</p>
 <p>SimpleDateFormat:<br>模式字母:<br>    y   年<br>    M   月<br>    d   日<br>    H   时<br>    m   分<br>    s   秒</p>
 <p>构造方法：<br>    SimpleDateFormat()<br>        给定一个默认模式(不推荐使用)<br>    SimpleDateFormat(String pattern)<br>        给定一个指定的模式</p>
-<p>注意事项：<br>    用什么模式格式化，就用该模式解析，否则会抛出ParseException<br>    看如下例子：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">public class DateDemo2 &#123;</div><div class="line">    public static void main(String[] args) throws ParseException &#123;</div><div class="line">        DateFormat df1 = new SimpleDateFormat(&quot;yyyy-MM-dd HH:mm:ss&quot;);</div><div class="line">        DateFormat df2 = new SimpleDateFormat(&quot;yyyy/MM/dd HH:mm:ss&quot;);</div><div class="line">        Date date1 = new Date();</div><div class="line">        String s = df1.format(date1);</div><div class="line">        Date date2 = df2.parse(s); //这里会报错，因为用了不同的模式来格式化和解析</div><div class="line">        //使用了df1进行格式化</div><div class="line">        //使用了df2来解析 报错</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>3.math</p>
-<p>  public final class Math<br>  概述：Math 类包含用于执行基本数学运算的方法，如初等指数、对数、平方根和三角函数。<br>  字段：E: 自然对数的底；PI: 圆周率</p>
+<p>注意事项：<br>    用什么模式格式化，就用该模式解析，否则会抛出ParseException<br>    看如下例子：</p>
+<pre><code>public class DateDemo2 {
+    public static void main(String[] args) throws ParseException {
+        DateFormat df1 = new SimpleDateFormat(&quot;yyyy-MM-dd HH:mm:ss&quot;);
+        DateFormat df2 = new SimpleDateFormat(&quot;yyyy/MM/dd HH:mm:ss&quot;);
+        Date date1 = new Date();
+        String s = df1.format(date1);
+        Date date2 = df2.parse(s); //这里会报错，因为用了不同的模式来格式化和解析
+        //使用了df1进行格式化
+        //使用了df2来解析 报错
+    }
+}
+</code></pre><p>3.math</p>
+<pre><code>public final class Math
+</code></pre><p>  概述：Math 类包含用于执行基本数学运算的方法，如初等指数、对数、平方根和三角函数。<br>  字段：E: 自然对数的底；PI: 圆周率</p>
 <p>  方法：<br>      工具类都是static方法，之前有介绍过，返回的都是浮点数的值；<br>      public static int abs(int a)<br>      public static double ceil(double a)<br>      public static double floor(double a)<br>      public static int max(int a,int b) min自学<br>      public static int round(float a)<br>      public static double pow(double a,double b)<br>      public static double random()<br>      public static double sqrt(double a)</p>
 <p>4.debug<br>  这是一门大学问。并不是简单的就说清楚的，这里写一些简单的IDEA自带的快捷键<br>  shift + F9 debug模式运行程序，或者点左边的小虫子；<br>  Frames: 代表栈帧 写的入栈的方法；<br>  step over: 快捷键 F8，跳出方法执行完<br>  step into 快捷键 F7，进入你自己写的方法<br>  force step into 快捷键 alt + shift + f7可以进入java写的方法；<br>  step out : 快捷键 shift + F8<br>  ctrl + F2：结束当前debug</p>
-<p>  其他还不怎么会用<br>  这里调试就遇到一个问题。<br>  两个StringBufferappend时候，使用IDEA进入append里面就出现问题了。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"> StringBuffer s1 = new StringBuffer(&quot;hello&quot;);</div><div class="line"> StringBuffer s2 = new StringBuffer(&quot;wowowowo&quot;);</div><div class="line"> s1 = s2;</div><div class="line"> s2 = s2.append(s1);</div><div class="line">// change(s1,s2);</div><div class="line"> System.out.println(&quot;s1: &quot; + s1);</div><div class="line"> System.out.println(&quot;s2: &quot; + s2);</div></pre></td></tr></table></figure></p>
-<p>正常应该打印出两个wowowowowowowowo<br>如果debug进入了append里面就会出问题。<br>打印出两个只有wowowowo；</p>
+<p>  其他还不怎么会用<br>  这里调试就遇到一个问题。<br>  两个StringBufferappend时候，使用IDEA进入append里面就出现问题了。</p>
+<pre><code> StringBuffer s1 = new StringBuffer(&quot;hello&quot;);
+ StringBuffer s2 = new StringBuffer(&quot;wowowowo&quot;);
+ s1 = s2;
+ s2 = s2.append(s1);
+// change(s1,s2);
+ System.out.println(&quot;s1: &quot; + s1);
+ System.out.println(&quot;s2: &quot; + s2);
+</code></pre><p>正常应该打印出两个wowowowowowowowo<br>如果debug进入了append里面就会出问题。<br>打印出两个只有wowowowo；</p>
 <p>最后还是老师厉害，找到了问题的原因。就是因为IDEA在debug模式下会调用toString方法。<br>而StringBuffer里面有个toStringCache的属性一开始是要置null的。后来因为IDEA默认调用了toString()</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">public synchronized String toString() &#123;</div><div class="line">    if (toStringCache == null) &#123;</div><div class="line">        toStringCache = Arrays.copyOfRange(value, 0, count);</div><div class="line">    &#125;</div><div class="line">    return new String(toStringCache, true);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>这就把toStringCache给修改了。</p>
+<pre><code>public synchronized String toString() {
+    if (toStringCache == null) {
+        toStringCache = Arrays.copyOfRange(value, 0, count);
+    }
+    return new String(toStringCache, true);
+}
+</code></pre><p>这就把toStringCache给修改了。</p>
 <h2 id="星期二："><a href="#星期二：" class="headerlink" title="星期二："></a>星期二：</h2><h3 id="1-异常"><a href="#1-异常" class="headerlink" title="1.异常"></a>1.异常</h3><p>异常的分类：<br>Throwable<br>  |–Error: (a. 天灾人祸) 虚拟机出现了问题<br>  |–Exception:<br>      |–编译期异常：(b. 出发之前应该检查的异常) 必须处理，否则编译不通过<br>      |–RuntimeException:(c. 运行过程中出现的异常) 可<br>          以处理，也可以不处理。出现这个问题，一般都是代码逻辑有问题，建议修改代码逻辑。</p>
 <p>JVM对异常的默认处理：<br>  a. 哪个线程出现了问题<br>  b. 异常的类型以及详细信息<br>  c. 调用栈信息<br>  d. 终止程序（这就是我们要自己处理异常的原因）</p>
 <p>如何自己处理异常：<br>a. try…catch…finally  自己处理<br>b. throws  抛给调用处处理</p>
 <p>try…catch…finally语句<br>try {<br>    要检查的代码<br>} catch (异常类型 对象名) {<br>    对异常的处理<br>} finally {<br>    释放资源<br>}<br>注意事项：<br>  a. try里面的代码越少越好,最好只放可能出现异常的代码<br>  b. try里面出现了异常，就不会执行try里面里面后序的代码<br>  c. ArithmeticException e 是局部变量, 作用范围是对应的catch语句。<br>  d. catch 捕获了异常，执行对应的处理，异常就不再存在了。</p>
 <p>问题：为什么e局部变量会有值？<br>  如果try里面出现了异常, JVM会把异常信息封装成对应类型的异常对象。<br>  然后和catch语句依次匹配，找到对应的异常类型，然后把它赋值给引用变量e。e的作用域就只有catch里面切记！</p>
-<p>多种异常的情况：<br>    a. 一个一个处理 写多个try…catch<br>    b. 一次性处理   写一个try…catch…catch…catch;<br>    c. JDK7 新特性<br>        把多个处理方式相同的catch语句，合成一个catch语句。<br>        catch(类型1 | 类型2 | 类型3… e)<br>注意事项：<br>  一个try语句中, 最多只会抛出一个异常，最多也只会执行一个catch语句<br>  如果异常没有兼容惯性，谁先谁后没关系，如果有兼容关系，那么父类应该方法在子类之后。要不然会执行父类的catch不执行子类catch;</p>
+<p>多种异常的情况：<br>    a. 一个一个处理 写多个try…catch<br>    b. 一次性处理   写一个try…catch…catch…catch;<br>    c. JDK7 新特性<br>        把多个处理方式相同的catch语句，合成一个catch语句。<br>        catch(类型1 | 类型2 | 类型3… e)<br>注意事项：<br>  一个try语句中, 最多只会抛出一个异常，最多也只会执行一个catch语句<br>  如果异常没有兼容关系，谁先谁后没关系，如果有兼容关系，那么父类应该方法在子类之后。要不然会执行父类的catch不执行子类catch;</p>
 <p>编译期异常和运行时异常：<br>Exception:<br>    |– 运行时异常: RuntimeException和其子类。<br>        可以显示处理，也可以不处理，<strong><em>一般出现运行时异常，都是代码逻辑有问题，推荐修改代码逻辑。</em></strong><br>    |– 编译期异常：其他类。无论运行时是否发生异常，都必须显示处理，否则无法通过编译。</p>
 <p>Throwable:<br>    概述：Throwable 类是 Java 语言中所有错误或异常的超类。只有当对象是此类（或其子类之一）的实例时，<br>    才能通过 Java 虚拟机或者 Java throw 语句抛出。<br>    类似地，只有此类或其子类之一才可以是 catch 子句中的参数类型。</p>
 <p>构造方法：<br>    Throwable():  构造一个将 null 作为其详细消息的新 throwable。<br>    Throwable(String message): 构造带指定详细消息的新 throwable。<br>成员方法：<br>     String getMessage() 返回此 throwable 的详细消息字符串。<br>     String toString():<br>        getClass().getName() + “: “ + getMessage();<br>     void printStackTrace()<br>     // void printStackTrace(PrintStream s) //日志文件</p>
@@ -229,15 +336,51 @@ Date(long date)
 <h3 id="我们到底该怎么处理异常："><a href="#我们到底该怎么处理异常：" class="headerlink" title="我们到底该怎么处理异常："></a>我们到底该怎么处理异常：</h3><p>原则：如果该方法知道如何处理，那用try…catch, 如果不知道怎么处理，就抛给它的调用者去处理。<br>区别：<br>    如果try…catch，后续代码会执行。<br>    如果throws,后续代码不会被执行。</p>
 <p>try语句的变形<br>    try…catch<br>    try…finally<br>    try…catch…finally<br>    try…catch…catch…<br>    try…catch…catch…finally</p>
 <p>finally语句：<br>特点：<br>    被finally控制的语句体无论出现异常还是没有出现异常，都会执行。<br>    特殊情况：在执行到finally之前jvm退出了. System.exit();<br>作用：<br>    释放系统资源<br>面试题：<br>final: 最终的<br>    类：不能被继承<br>    方法：不能被重写<br>    变量：常量<br>finally:<br>    try语句的子句。<br>    finally里面的语句, 无论出现异常还是不出现异常，都会被执行。<br>    用来释放资源。<br>finalize:<br>    Object中的方法。<br>    对象被回收前，该方法会被自动执行。用来释放资源。<br>    手动调用该方法，对象不会被回收。</p>
-<p>finally:<br>如果catch里面有return语句，请问finally的代码还会执行吗?如果会，请问结果是怎样的？<br>  finally语句会被执行<br>  第一次执行return语句，就已经生成了返回路径, 并把返回值保存起来了。<br>  后面在finally语句中修改变量，不会影响返回值。</p>
+<p>finally:<br>如果catch里面有return语句，请问finally的代码还会执行吗?如果会，请问结果是怎样的？<br>  <strong>finally语句会被执行</strong><br>  第一次执行return语句，就已经生成了返回路径, 并把返回值保存起来了。<br>  后面在finally语句中修改变量，不会影响返回值。</p>
 <p>如果finally中也有return语句。<br>    最终执行的是finally中语句。</p>
 <p>自定义异常：<br>    类名就代表异常的种类(信息)<br>    编译期异常：继承Exception<br>    运行时异常：继承RuntimeException</p>
-<p>一般都会用到自定义的异常，这里有个自定义异常学习一下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line">public class CommonException extends RuntimeException &#123;</div><div class="line"></div><div class="line">  private static final long serialVersionUID = -1466743861132712630L;</div><div class="line"></div><div class="line">  /** 默认业务异常 */</div><div class="line">  private int level = 1;</div><div class="line"></div><div class="line">  /** 异常编号 */</div><div class="line">  private short code = 100;</div><div class="line"></div><div class="line">  /** 异常信息 */</div><div class="line">  private List&lt;Object&gt; paramsList = new ArrayList&lt;Object&gt;();</div><div class="line"></div><div class="line">  /**</div><div class="line">   * 创建一个 &#123;@link CommonException&#125;。</div><div class="line">   *</div><div class="line">   * @param message</div><div class="line">   *            异常消息</div><div class="line">   */</div><div class="line">  public CommonException(String message) &#123;</div><div class="line">    super(message);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  /**</div><div class="line">   * 创建一个&#123;@link CommonException&#125;。</div><div class="line">   *</div><div class="line">   * @param code</div><div class="line">   *            错误代码</div><div class="line">   * @param message</div><div class="line">   *            异常消息</div><div class="line">   */</div><div class="line">  public CommonException(short code, String message) &#123;</div><div class="line">    super(message);</div><div class="line">    this.code = code;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>这里有几个知识点需要了解：<br>  1.序列化serialVersionUID，每个类都有自己的UID。可以看看这里：<br>  <a href="https://blog.csdn.net/qq_40670946/article/details/88106817" target="_blank" rel="external">序列化介绍</a><br>  2.把异常的信息放在ArrayList里面，这有点秀</p>
+<p>一般都会用到自定义的异常，这里有个自定义异常学习一下：</p>
+<pre><code>public class CommonException extends RuntimeException {
+
+  private static final long serialVersionUID = -1466743861132712630L;
+
+  /** 默认业务异常 */
+  private int level = 1;
+
+  /** 异常编号 */
+  private short code = 100;
+
+  /** 异常信息 */
+  private List&lt;Object&gt; paramsList = new ArrayList&lt;Object&gt;();
+
+  /**
+   * 创建一个 {@link CommonException}。
+   *
+   * @param message
+   *            异常消息
+   */
+  public CommonException(String message) {
+    super(message);
+  }
+
+  /**
+   * 创建一个{@link CommonException}。
+   *
+   * @param code
+   *            错误代码
+   * @param message
+   *            异常消息
+   */
+  public CommonException(short code, String message) {
+    super(message);
+    this.code = code;
+  }
+}
+</code></pre><p>这里有几个知识点需要了解：<br>  1.序列化serialVersionUID，每个类都有自己的UID。可以看看这里：<br>  <a href="https://blog.csdn.net/qq_40670946/article/details/88106817" target="_blank" rel="external">序列化介绍</a><br>  2.把异常的信息放在ArrayList里面，这有点秀</p>
 <p>异常注意的事项：(编译期异常)<br>    子类重写父类方法时，子类的方法必须抛出相同的异常或父类异常的子类。<br>    如果父类抛出了多个异常,子类重写父类时,只能抛出相同的异常或者是他的子集,子类不能抛出父类没有的异常<br>    如果被重写的方法没有异常抛出,那么子类的方法绝对不可以抛出异常,如果子类方法内有异常发生,那么子类只能try,不能throws</p>
 <pre><code>儿子不能比父亲更坏。一代只能比一代强。
 编译的时候，不检查运行时异常
-</code></pre><h3 id="collection"><a href="#collection" class="headerlink" title="collection"></a>collection</h3><p>容器：<br>  集合：<br>      长度是可变的，但是只能存储引用数据类型的数据。<br>      内置了许多方法，可以方便操作容器里面的元素。<br>  数组：<br>      a. 长度固定。<br>      b. 只能存储同一类型的数据。<br>      c. 没有内置方法，以便操作容器里面的元素</p>
+</code></pre><h3 id="Collection集合"><a href="#Collection集合" class="headerlink" title="Collection集合"></a>Collection集合</h3><p>容器：<br>  集合：<br>      长度是可变的，但是只能存储引用数据类型的数据。<br>      内置了许多方法，可以方便操作容器里面的元素。<br>  数组：<br>      a. 长度固定。<br>      b. 只能存储同一类型的数据。<br>      c. 没有内置方法，以便操作容器里面的元素</p>
 <p>public interface Collection: (JDK1.2)<br>  Collection 层次结构中的根接口。Collection 表示一组对象，这些对象也称为 collection 的元素。<br>  一些 collection 允许有重复的元素，而另一些则不允许。一些 collection 是有序的，而另一些则是无序的。</p>
 <p>方法：（返回值都是boolean类型）<br>增：</p>
 <pre><code>boolean add(Object e)
@@ -258,12 +401,47 @@ Object[] toArray()
 </code></pre><p>获取集合的属性：</p>
 <pre><code>boolean isEmpty()
 int size()
-</code></pre><p>集合遍历的两种方法：<br>Object[] toArray()<br>如下例子：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">// 如果元素是&quot;java&quot;， 就将它换成“javaSE”</div><div class="line">public static void main(String[] args) &#123;</div><div class="line">        Collection c = new ArrayList();</div><div class="line">        c.add(&quot;Hello&quot;);</div><div class="line">        c.add(&quot;world&quot;);</div><div class="line">        c.add(&quot;java&quot;);</div><div class="line">        Object[] objects = c.toArray();</div><div class="line"></div><div class="line">        // 改变objects里面的值，不会修改集合的值</div><div class="line">        for(int i = 0; i &lt; objects.length; i++) &#123;</div><div class="line">            String s = (String) objects[i];</div><div class="line">            if (&quot;java&quot;.equals(s)) &#123;</div><div class="line">                objects[i] = &quot;javaSE&quot;;</div><div class="line">            &#125;</div><div class="line">        &#125;</div></pre></td></tr></table></figure></p>
-<p>toArray()不改变集合的值</p>
+</code></pre><p>集合遍历的两种方法：<br>Object[] toArray()<br>如下例子：</p>
+<p>// 如果元素是”java”， 就将它换成“javaSE”<br>    public static void main(String[] args) {<br>            Collection c = new ArrayList();<br>            c.add(“Hello”);<br>            c.add(“world”);<br>            c.add(“java”);<br>            Object[] objects = c.toArray();</p>
+<pre><code>// 改变objects里面的值，不会修改集合的值
+for(int i = 0; i &lt; objects.length; i++) {
+    String s = (String) objects[i];
+    if (&quot;java&quot;.equals(s)) {
+        objects[i] = &quot;javaSE&quot;;
+    }
+}
+</code></pre><p><strong>注意事项：toArray()不改变集合的值</strong></p>
 <p><strong><em>Iterator iterator()</em></strong><br>iterator并没有修改集合元素的方法，set()方法在子类list才有</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">public static void main(String[] args) &#123;</div><div class="line">    Collection c = new ArrayList();</div><div class="line">    c.add(&quot;Hello&quot;);</div><div class="line">    c.add(&quot;world&quot;);</div><div class="line">    c.add(&quot;java&quot;);</div><div class="line">    //迭代器使用for循环</div><div class="line">    for(Iterator it = c.iterator();it.hasNext();) &#123;</div><div class="line">      String s = (String) it.next();</div><div class="line">      System.out.println(s);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>使用迭代器但是要使用子类的迭代器才有set()方法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"> @SuppressWarnings(&quot;unchecked&quot;)</div><div class="line"></div><div class="line">public class CollectionDemo3 &#123;</div><div class="line">    public static void main(String[] args) &#123;</div><div class="line">        List list = new ArrayList();</div><div class="line">        list.add(&quot;Hello&quot;);</div><div class="line">        list.add(&quot;world&quot;);</div><div class="line">        list.add(&quot;java&quot;);</div><div class="line"></div><div class="line">        for(ListIterator it = list.listIterator(); it.hasNext();) &#123;</div><div class="line">          String s = (String) it.next();</div><div class="line">          if(&quot;java&quot;.equals(s))&#123;</div><div class="line">            it.set(&quot;javaSE&quot;);</div><div class="line">          &#125;</div><div class="line">        &#125;</div><div class="line">        System.out.println(list);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<h4 id="public-interface-Iterator"><a href="#public-interface-Iterator" class="headerlink" title="public interface Iterator:"></a>public interface Iterator:</h4><pre><code>boolean hasNext()
+<pre><code>public static void main(String[] args) {
+    Collection c = new ArrayList();
+    c.add(&quot;Hello&quot;);
+    c.add(&quot;world&quot;);
+    c.add(&quot;java&quot;);
+    //迭代器使用for循环
+    for(Iterator it = c.iterator();it.hasNext();) {
+      String s = (String) it.next();
+      System.out.println(s);
+    }
+}
+</code></pre><p>使用迭代器但是要使用子类的迭代器才有set()方法</p>
+<p> @SuppressWarnings(“unchecked”)</p>
+<pre><code>public class CollectionDemo3 {
+    public static void main(String[] args) {
+        List list = new ArrayList();
+        list.add(&quot;Hello&quot;);
+        list.add(&quot;world&quot;);
+        list.add(&quot;java&quot;);
+
+        for(ListIterator it = list.listIterator(); it.hasNext();) {
+          String s = (String) it.next();
+          if(&quot;java&quot;.equals(s)){
+            it.set(&quot;javaSE&quot;);
+          }
+        }
+        System.out.println(list);
+    }
+}
+</code></pre><h4 id="public-interface-Iterator"><a href="#public-interface-Iterator" class="headerlink" title="public interface Iterator:"></a>public interface Iterator:</h4><pre><code>boolean hasNext()
 E next()
 void remove()
 </code></pre><h4 id="Iterator-iterator"><a href="#Iterator-iterator" class="headerlink" title="Iterator iterator()"></a>Iterator iterator()</h4><pre><code>public interface Iterator:
@@ -279,28 +457,75 @@ void remove()
 <h2 id="星期三："><a href="#星期三：" class="headerlink" title="星期三："></a>星期三：</h2><p>1.List:<br>就简单介绍了一下List的方法和listIterator迭代器的方法，这周的后面几天我会一步一步的实现</p>
 <h2 id="星期四："><a href="#星期四：" class="headerlink" title="星期四："></a>星期四：</h2><p>感觉今天讲的东西有点乱，所以需要来整理一下；</p>
 <p>今天先讲了以下内容：<br>一些时间复杂度的东西<br>O(1) O(logn) O(n) O(nlogn) O(n^2)</p>
-<h3 id="初识LinkedList"><a href="#初识LinkedList" class="headerlink" title="初识LinkedList"></a>初识LinkedList</h3><p>public class LinkedList implements List, Deque;<br>特点：<br>    底层是链表实现：增删快，查找慢<br>    线程不安全，效率高</p>
+<h3 id="初识LinkedList"><a href="#初识LinkedList" class="headerlink" title="初识LinkedList"></a>初识LinkedList</h3><pre><code>public class LinkedList implements List, Deque;
+</code></pre><p>特点：<br>    底层是链表实现：增删快，查找慢<br>    线程不安全，效率高</p>
 <p>构造方法：(链表天然支持无限扩容)<br>    LinkedList() 构造一个空列表。<br>    LinkedList(Collection c) 构造一个包含指定 collection 中的元素的List</p>
-<p>通过三个例子理解一下（重要）<br><strong><em>LinkedListDemo1、</em></strong><br>a. 求链表的长度<br>b. 从头开始遍历，遍历到中间位置即可<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">public static Node valueOfMid(Node head) &#123;</div><div class="line">    // 短路原则</div><div class="line">    if (head == null || head.next == null) return head;</div><div class="line">    int len = 0;</div><div class="line">    Node node = head;</div><div class="line">    while (node != null) &#123;</div><div class="line">        len++;</div><div class="line">        node = node.next;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    node = head;</div><div class="line">    int count = 1;</div><div class="line">    // 判断第一个节点是否小于中间的索引值</div><div class="line">    while (count &lt; (len + 1) / 2) &#123;</div><div class="line">        node = node.next;</div><div class="line">        count++;</div><div class="line">    &#125;</div><div class="line">    return node;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>count &lt; (len + 1) / 2) 能够稳定找到奇数和偶数中间那个数</p>
-<p><strong><em>LinkedListDemo2</em></strong><br>反转链表：<br>a:<br>    输入：null<br>    返回：null<br>b:<br>    输入：1 –&gt; null<br>    返回：1 –&gt; null<br>c:<br>    输入：1 –&gt; 2 –&gt; 3 –&gt; null<br>    返回：3 –&gt; 2 –&gt; 1 –&gt; null</p>
-<p>两种方法：<br>  方法一：正常的指针变换的思想<br>    指针翻转需要三个指针：<br>    设置一个pre一开始指向null<br>    null  head    nextNode<br>    pre   cursor  next<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">public static Node reverse(Node head) &#123;</div><div class="line">  if(head == null|| head.next ==null) &#123;</div><div class="line">    return head;</div><div class="line">  &#125;</div><div class="line">  Node pre = null;</div><div class="line">  Node curr = head;</div><div class="line">  while(curr != null)&#123;</div><div class="line">    //只能改变一个指针的方向。改变两个会找不到next的下一个</div><div class="line">    Node nextNode = head.next;</div><div class="line">    curr.next = pre;</div><div class="line">    pre = curr;</div><div class="line">    curr = nextNode;</div><div class="line">  &#125;</div><div class="line">  return pre;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>  方法二：迭代的思想<br>  n个反转= head 和后面n-1个反转; 后面反转完成，再修改head的值<br>  画图解释一下<br>  第一步：reverse(n)<br>  head(0) -&gt; 1 -&gt; 2 -&gt; 3 -&gt; 4 -&gt; null;</p>
+<p>通过三个例子理解一下（重要）<br><strong><em>LinkedListDemo1</em></strong>： 求链表中间节点<br>分析：<br>a. 求链表的长度<br>b. 从头开始遍历，遍历到中间位置即可</p>
+<pre><code>public static Node valueOfMid(Node head) {
+    // 短路原则
+    if (head == null || head.next == null) return head;
+    int len = 0;
+    Node node = head;
+    while (node != null) {
+        len++;
+        node = node.next;
+    }
+    node = head;
+    int count = 1;
+    // 判断第一个节点是否小于中间的索引值
+    while (count &lt; (len + 1) / 2) {
+        node = node.next;
+        count++;
+    }
+    return node;
+}
+</code></pre><p>count &lt; (len + 1) / 2) 能够稳定找到奇数和偶数中间那个数</p>
+<p><strong><em>LinkedListDemo2</em></strong>：反转链表<br>a:<br>    输入：null<br>    返回：null<br>b:<br>    输入：1 –&gt; null<br>    返回：1 –&gt; null<br>c:<br>    输入：1 –&gt; 2 –&gt; 3 –&gt; null<br>    返回：3 –&gt; 2 –&gt; 1 –&gt; null</p>
+<p>两种方法：<br>  方法一：正常的指针变换的思想<br>    指针翻转需要三个指针：<br>    设置一个pre一开始指向null<br>    null  head    nextNode<br>    pre   cursor  next</p>
+<pre><code>public static Node reverse(Node head) {
+  if(head == null|| head.next ==null) {
+    return head;
+  }
+  Node pre = null;
+  Node curr = head;
+  while(curr != null){
+    //只能改变一个指针的方向。改变两个会找不到next的下一个
+    Node nextNode = head.next;  //先找到下一个结点
+    curr.next = pre;
+    pre = curr;
+    curr = nextNode;
+  }
+  return pre;
+}
+</code></pre><p>  方法二：迭代的思想<br>  n个反转= head 和后面n-1个反转; 后面反转完成，再修改head的值<br>  画图解释一下<br>  第一步：reverse(n)<br>  head(0) -&gt; 1 -&gt; 2 -&gt; 3 -&gt; 4 -&gt; null;</p>
 <p>  第二步：后面n-1反转reverse(n-1)<br>  head(0) -&gt; 1 &lt;- 2 &lt;- 3 &lt;- 4<br>  1 -&gt; null</p>
 <p>  第三步：第一个反转：<br>  null &lt;- head(0) &lt;- 1 &lt;- 2 &lt;- 3 &lt;- 4</p>
-<p>  head = head.next.next; //使1指向head<br>  head.next = null;      //使head指向null<br>  return 最后一个结点；<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">public static Node reverse(Node head) &#123;</div><div class="line">      if (head == null || head.next == null) return head;</div><div class="line">      Node node = reverse(head.next);   //返回的是最后的结点，就是最终的头节点</div><div class="line">      head.next.next = head;</div><div class="line">      head.next = null;</div><div class="line">      return node;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p><strong><em>LinkedListDemo3</em></strong><br>判断一个链表是否存在环？以及入环的结点<br>两个方法：<br>  方法一：正常想法的放在集合里面遍历，当找到重复结点时，就是入环的结点：看一下复杂度：时间复杂度o(n) 空间复杂度O(n)<br>  具体步骤：</p>
-<ol>
-<li>用一个集合存储已经遍历过的节点</li>
-<li>每遍历一个新的节点, 首先判断是否在集合中存在？<br> 如果存在：return true<br> 如果不存在: 添加到集合。</li>
-<li>当指针指向null<br> return false;</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">public static Node getCircle(Node head) &#123;</div><div class="line">  Collection c = new ArrayList();</div><div class="line">  Node node = head;</div><div class="line">  while(node.next != null)&#123;</div><div class="line">    if(c.contains(node)) &#123;</div><div class="line">      return true;</div><div class="line">    &#125;</div><div class="line">    c.add(node);</div><div class="line">    node = node.next;</div><div class="line">  &#125;</div><div class="line">  return false;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>  方法二：快慢指针。<br>  设置两个指针一个指针快一个指针慢，如果两个指针能指向一个结点，那就证明有环<br>  那么如何找到那个入环的结点？</p>
+<p>  head = head.next.next; //使1指向head<br>  head.next = null;      //使head指向null<br>  return 最后一个结点；</p>
+<pre><code>public static Node reverse(Node head) {
+      if (head == null || head.next == null) return head;
+      Node node = reverse(head.next);   //返回的是最后的结点，就是最终的头节点
+      head.next.next = head;
+      head.next = null;
+      return node;
+}
+</code></pre><p><strong><em>LinkedListDemo3</em></strong>:<br>判断一个链表是否存在环？以及入环的结点<br>两个方法：<br>  方法一：正常想法的放在集合里面遍历，当找到重复结点时，就是入环的结点：看一下复杂度：时间复杂度o(n) 空间复杂度O(n)<br>  具体步骤：<br>  a. 用一个集合存储已经遍历过的节点<br>  b. 每遍历一个新的节点, 首先判断是否在集合中存在？<br>      如果存在：return true<br>      如果不存在: 添加到集合。<br>  c. 当指针指向null<br>      return false;</p>
+<pre><code>public static Node getCircle(Node head) {
+  Collection c = new ArrayList();
+  Node node = head;
+  while(node.next != null){
+    if(c.contains(node)) {
+      return node;
+    }
+    c.add(node);
+    node = node.next;
+  }
+  return null;
+}
+</code></pre><p>  方法二：快慢指针。<br>  设置两个指针一个指针快一个指针慢，如果两个指针能指向一个结点，那就证明有环<br>  那么如何找到那个入环的结点？</p>
 <p>  快慢指针做：这有点难<br>  首先需要假设几个变量；</p>
-<pre><code>从头走到入环地方需要走A步
-从入环的结点走到两个第一次相遇的结点要走X步
-我们还要知道环里面有k个结点
+<pre><code>从头走到入环地方需要走 A 步
+从入环的结点走到两个第一次相遇的结点要走 X 步
+我们假设环里面有 k 个结点
 </code></pre><p>  然后我们知道两个指针的速度1:2</p>
 <pre><code>slow = slow.next
 fast = fase.next.next
@@ -308,8 +533,28 @@ fast = fase.next.next
 <pre><code>2（a + x） = a + x + nk
 </code></pre><p>  n表示快的在里面走了n圈；<br>  得出一个结果</p>
 <pre><code>a = nk -x;
-</code></pre><p>  然后就能求出入环的结点；<br>  分为两个部分：<br>  1）两个在环中的一部分相遇<br>  2）把慢指针移动回到头，然后两个人速度都变成1<br>  通过式子a = nk -x;<br>  就知道慢指针走a步  快指针走nk-x步时候。两个人再次相遇。这时两个人相遇的结点就是入环的第一个结点，因为a就是头距离入环结点的距离<br>  时间复杂度o(n) 空间复杂度O(1)；<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">public static Node getCircle(Node head) &#123;</div><div class="line">  if(head == null || head.next ==null) return null;</div><div class="line">  Node fast = head.next.next;</div><div class="line">  Node slow = head.next;</div><div class="line">  //这里两个结点的比较用 == 就是为了比较地址</div><div class="line">  while(fast != null &amp;&amp;fast.null != null &amp;&amp; fast != slow) &#123;</div><div class="line">    fast = fast.next.next;</div><div class="line">    slow = slow.next;</div><div class="line">  &#125;</div><div class="line">  if(fast == null || fast.null == null) &#123;</div><div class="line">    return null;</div><div class="line">  &#125;</div><div class="line">  //说明有环而且已经相遇</div><div class="line">  slow = head; //把slow放回第一个结点，然后大家都走一步</div><div class="line">  while(fast != slow) &#123;</div><div class="line">    slow = slow.next;</div><div class="line">    fast = fast.next;</div><div class="line">  &#125;</div><div class="line">  return slow;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<h2 id="初识ArrayList"><a href="#初识ArrayList" class="headerlink" title="初识ArrayList"></a>初识ArrayList</h2><p>之后会解析源码和linkedlist一起；</p>
+</code></pre><p>  然后就能求出入环的结点；<br>  分为两个部分：<br>  1）两个在环中的一部分相遇<br>  2）把慢指针移动回到头，然后两个人速度都变成1<br>  通过式子a = nk -x;<br>  就知道慢指针走a步  快指针走nk-x步时候。两个人再次相遇。这时两个人相遇的结点就是入环的第一个结点，因为a就是头距离入环结点的距离<br>  时间复杂度o(n) 空间复杂度O(1)；</p>
+<pre><code>public static Node getCircle(Node head) {
+  if(head == null || head.next ==null) return null;
+  Node fast = head.next.next;
+  Node slow = head.next;
+  //这里两个结点的比较用 == 就是为了比较地址
+  while(fast != null &amp;&amp;fast.null != null &amp;&amp; fast != slow) {
+    fast = fast.next.next;
+    slow = slow.next;
+  }
+  if(fast == null || fast.null == null) {
+    return null;
+  }
+  //说明有环而且已经相遇
+  slow = head; //把slow放回第一个结点，然后大家都走一步
+  while(fast != slow) {
+    slow = slow.next;
+    fast = fast.next;
+  }
+  return slow;
+}
+</code></pre><h2 id="初识ArrayList"><a href="#初识ArrayList" class="headerlink" title="初识ArrayList"></a>初识ArrayList</h2><p>之后会解析源码和linkedlist一起；</p>
 <p><strong><em>注意去重的时候指针的问题，看下面例子：</em></strong><br>  输入：hello world java java hello<br>  输出：hello world java</p>
 <p>方法一：<br>和判断是否环类似的思想，新建一个集合，从旧的集合里面取出元素。如果集合里面没有这个元素就把这个元素放进集合中。否则不放。这种方法简单快捷；<br>    时间复杂度：O(n^2) 空间复杂度：O(n)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">public static List distinct(List list) &#123;</div><div class="line">    if (list == null) return null;</div><div class="line">    List newList = new ArrayList();</div><div class="line">    for (Iterator iterator = list.iterator(); iterator.hasNext(); ) &#123;</div><div class="line">        String s = (String) iterator.next();</div><div class="line">        if (!newList.contains(s)) &#123;</div><div class="line">            newList.add(s);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    return newList;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>方法二：直接设置两个指针对里面的元素进行操作，类似于简单选择排序。<strong>然后移动指针即可但是这里注意一个问题。remove完了之后。他会自动把后面的元素都前移。所以j指针还要j–否则将会跳过一个元素判断</strong>；<br>  时间复杂度：O(n^3) 空间复杂度：O(1)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">public static List distinct(List list) &#123;</div><div class="line">  if (list == null) return null;</div><div class="line">  // int size = list.size();</div><div class="line">  for(int i = 0; i &lt; list.size() - 1; i++) &#123;</div><div class="line">      String s = (String) list.get(i);</div><div class="line">      for (int j = i + 1; j &lt; list.size(); j++) &#123;</div><div class="line">          if (list.get(j).equals(s)) &#123;</div><div class="line">              list.remove(j);</div><div class="line">              j--; // caution ：这里必须要j-- 因为后一个元素已经移动了删除元素的位置，所以这个位置必须重新判断</div><div class="line">          &#125;</div><div class="line">      &#125;</div><div class="line">  &#125;</div><div class="line">  return list;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
@@ -317,7 +562,6 @@ fast = fase.next.next
 <h3 id="最后学习了泛型"><a href="#最后学习了泛型" class="headerlink" title="最后学习了泛型"></a>最后学习了泛型</h3><p>三种： 泛型类 泛型方法 泛型接口</p>
 <p>1.泛型类：</p>
 <pre><code>class Generic&lt;T&gt;{
-
 }
 </code></pre><p>Generic<string> g = new Generic&lt;&gt;();</string></p>
 <p>2.泛型方法<br>1）在普通类中</p>
@@ -393,18 +637,89 @@ class GenericClass&lt;T,U&gt; implements GenericInterFace(T)；
 <h3 id="实现的步骤（以ArrayList为例）；"><a href="#实现的步骤（以ArrayList为例）；" class="headerlink" title="实现的步骤（以ArrayList为例）；"></a>实现的步骤（以ArrayList为例）；</h3><p>1）先定义出List接口和iterator接口<br>2）然后写ArrayList<br>    1.属性<br>    2.构造方法<br>    3.重写List方法<br>3）实现iterator接口<br>    1.属性<br>    2.构造方法<br>    3.重写方法</p>
 <h3 id="List接口"><a href="#List接口" class="headerlink" title="List接口"></a>List接口</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">public interface MyList &#123;</div><div class="line">    boolean add(String s);</div><div class="line">    void add(int index, String s);</div><div class="line">    void clear();</div><div class="line">    boolean contains(String s);</div><div class="line">    String get(int index);</div><div class="line">    int indexOf(String s);</div><div class="line">    boolean isEmpty();</div><div class="line">    MyIterator iterator();</div><div class="line">    int lastIndexOf(String s);</div><div class="line">    String remove(int index);</div><div class="line">    boolean remove(String s);</div><div class="line">    String set(int index, String s);</div><div class="line">    int size();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <h3 id="ListIterator接口"><a href="#ListIterator接口" class="headerlink" title="ListIterator接口"></a>ListIterator接口</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">public interface MyIterator &#123;</div><div class="line">    void add(String s);</div><div class="line">    boolean hasNext();</div><div class="line">    boolean hasPrevious();</div><div class="line">    String next();</div><div class="line">    String previous();</div><div class="line">    int nextIndex();</div><div class="line">    int previousIndex();</div><div class="line">    void remove();</div><div class="line">    void set(String s);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="源码解析ArrayList"><a href="#源码解析ArrayList" class="headerlink" title="源码解析ArrayList"></a>源码解析ArrayList</h3><p>  1.属性<br>    分析：首先ArrayList是顺序存储的，而且是一个动态的数组，所以我们需要一个数组装元素elements[]，一个属性表示容量。还需要属性来表示长度（size）,<strong>为了处理并发修改异常还需要一个属性来记录在迭代器迭代时候，集合有没有修改元素modCount</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">//属性</div><div class="line">public static final int MAX_CAPACITY = Integer.MAX_VALUE - 8; //最大长度</div><div class="line">public static final int DEFAULT_CAPACITY = 10; //默认长度</div><div class="line">private int size;</div><div class="line">private String[] elements;</div><div class="line">private int modCount; // modification count 统计修改的次数</div></pre></td></tr></table></figure>
-<p>  2.构造方法<br>    分析：构造方法没有参数，就用默认容量还作为长度。或者用户会手动输入一个长度，对这个长度判断。是否超过最大长度<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">// 构造方法</div><div class="line">public MyArrayList() &#123;</div><div class="line">    elements = new String[DEFAULT_CAPACITY];</div><div class="line">&#125;</div><div class="line"></div><div class="line">public MyArrayList(int capacity) &#123;</div><div class="line">    if (capacity &lt; 0 || capacity &gt; MAX_CAPACITY) &#123;</div><div class="line">        throw new IllegalArgumentException(&quot;capacity=&quot; + capacity);</div><div class="line">    &#125;</div><div class="line">    elements = new String[capacity];</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>  3.方法<br>  这里有两点要说明：<br>  <strong>1.先挑软柿子捏，至于为什么等下告诉你</strong><br>  <strong>2.在写方法时不一定全部都要自己动手，可以调用本类其他方法，当然内部类（iterator）可以调用外部类来实现自己的功能。当然这些方法一般都是软柿子，一个大的功能由小功能组成的</strong></p>
+<h3 id="源码解析ArrayList"><a href="#源码解析ArrayList" class="headerlink" title="源码解析ArrayList"></a>源码解析ArrayList</h3><p>  1.属性<br>  分析：首先ArrayList是顺序存储的，而且是一个动态的数组，所以我们需要一个数组装元素elements[]，一个属性表示容量。还需要属性来表示长度（size）,<strong>为了处理并发修改异常还需要一个属性来记录在迭代器迭代时候，集合有没有修改元素modCount</strong></p>
+<pre><code>//属性
+public static final int MAX_CAPACITY = Integer.MAX_VALUE - 8; //最大长度
+public static final int DEFAULT_CAPACITY = 10; //默认长度
+private int size;
+private String[] elements;
+private int modCount; // modification count 统计修改的次数
+</code></pre><p>  2.构造方法<br>    分析：构造方法没有参数，就用默认容量还作为长度。或者用户会手动输入一个长度，对这个长度判断。是否超过最大长度</p>
+<pre><code>// 构造方法
+public MyArrayList() {
+    elements = new String[DEFAULT_CAPACITY];
+}
+
+public MyArrayList(int capacity) {
+    if (capacity &lt; 0 || capacity &gt; MAX_CAPACITY) {
+        throw new IllegalArgumentException(&quot;capacity=&quot; + capacity);
+    }
+    elements = new String[capacity];
+}
+</code></pre><p>  3.方法<br>  这里有两点要说明：<br>  <strong>1.先挑软柿子捏，至于为什么等下告诉你</strong><br>  <strong>2.在写方法时不一定全部都要自己动手，可以调用本类其他方法，当然内部类（iterator）可以调用外部类来实现自己的功能。当然这些方法一般都是软柿子，一个大的功能由小功能组成的</strong></p>
 <p>add(s)调用同名的兄弟解决<br>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * 在线性表末尾添加元素</div><div class="line"> * @param s 要添加的元素</div><div class="line"> * @return 添加成功返回true, 否则返回false</div><div class="line"> */</div><div class="line">@Override</div><div class="line">public boolean add(String s) &#123;</div><div class="line">    add(size, s);</div><div class="line">    return true;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>这个方法比较难了，主要难点在于<br>1.添加是否会使得数组本身就满了需要扩容<br>2.扩容的过程会不会出现大于集合最大长度的情况<br>3.扩容的最佳分配是什么（这里就默认扩容1.5倍）<br>4.同样需要进行modCount++ size++;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * 在指定的索引位置添加元素</div><div class="line"> * @param index 索引</div><div class="line"> * @param s 添加的元素</div><div class="line"> */</div><div class="line">@Override</div><div class="line">public void add(int index, String s) &#123;</div><div class="line">    checkIndexForAdd(index);</div><div class="line">    // 确保容量够大</div><div class="line">    int minCapacity = size + 1;</div><div class="line">    if (minCapacity &gt; elements.length) &#123;   //需要扩容</div><div class="line">        // 计算新数组的长度</div><div class="line">        int newLength = calculateCapacity(minCapacity);</div><div class="line">        // 扩容</div><div class="line">        grow(newLength);</div><div class="line">    &#125;</div><div class="line">    // 添加元素</div><div class="line">    for(int i = size; i &gt; index; i--) &#123;</div><div class="line">        elements[i] = elements[i-1];</div><div class="line">    &#125;</div><div class="line">    elements[index] = s;</div><div class="line">    size++;</div><div class="line">    modCount++;</div><div class="line">&#125;</div><div class="line"></div><div class="line">private void grow(int newLength) &#123;</div><div class="line">    String[] newArr = new String[newLength];</div><div class="line">    for(int i = 0; i &lt; size; i++) &#123;</div><div class="line">        newArr[i] = elements[i];</div><div class="line">    &#125;</div><div class="line">    // 将elements指向新的数组</div><div class="line">    elements = newArr;</div><div class="line">&#125;</div><div class="line"></div><div class="line">private int calculateCapacity(int minCapacity) &#123;</div><div class="line">    if (minCapacity &gt; MAX_CAPACITY || minCapacity &lt; 0) &#123;</div><div class="line">        throw new IllegalArgumentException();//不是ArrayStoreException异常</div><div class="line">    &#125;</div><div class="line">    // 一定能存下这么多数据</div><div class="line">    int len = elements.length + (elements.length &gt;&gt; 1); //扩容1.5倍</div><div class="line">    if (len &gt; MAX_CAPACITY || len &lt; 0) &#123;</div><div class="line">        len = MAX_CAPACITY;</div><div class="line">    &#125;</div><div class="line">    // 返回minCapacity和len的较大值</div><div class="line">    return len &gt; minCapacity ? len : minCapacity;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>检查index是否符合添加的条件注意可以在size位置添加的<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">private void checkIndexForAdd(int index) &#123;</div><div class="line">    if (index &lt; 0 || index &gt; size) &#123;</div><div class="line">        throw new IndexOutOfBoundsException(&quot;index=&quot; + index + &quot;, size=&quot; + size);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>注意清空操作算是修改链表长度的操作。需要modCount++<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * 清空线性表</div><div class="line"> */</div><div class="line">@Override</div><div class="line">public void clear() &#123;</div><div class="line">    // elements = null;</div><div class="line">    modCount++;</div><div class="line">    for(int i = 0; i &lt; size; i++) &#123;</div><div class="line">        elements[i] = null;</div><div class="line">    &#125;</div><div class="line">    size = 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>这个方法比较难了，主要难点在于<br>1.添加是否会使得数组本身就满了需要扩容<br>2.扩容的过程会不会出现大于集合最大长度的情况<br>3.扩容的最佳分配是什么（这里就默认扩容1.5倍）<br>4.同样需要进行modCount++ size++;</p>
+<pre><code>/**
+ * 在指定的索引位置添加元素
+ * @param index 索引
+ * @param s 添加的元素
+ */
+@Override
+public void add(int index, String s) {
+    checkIndexForAdd(index);
+    // 确保容量够大
+    int minCapacity = size + 1;
+    if (minCapacity &gt; elements.length) {   //需要扩容
+        // 计算新数组的长度
+        int newLength = calculateCapacity(minCapacity);
+        // 扩容
+        grow(newLength);
+    }
+    // 添加元素
+    for(int i = size; i &gt; index; i--) {
+        elements[i] = elements[i-1];
+    }
+    elements[index] = s;
+    size++;
+    modCount++;
+}
+
+private void grow(int newLength) {
+    String[] newArr = new String[newLength];
+    for(int i = 0; i &lt; size; i++) {
+        newArr[i] = elements[i];
+    }
+    // 将elements指向新的数组
+    elements = newArr;
+}
+
+private int calculateCapacity(int minCapacity) {
+    if (minCapacity &gt; MAX_CAPACITY || minCapacity &lt; 0) {
+        throw new IllegalArgumentException();//不是ArrayStoreException异常
+    }
+    // 一定能存下这么多数据
+    int len = elements.length + (elements.length &gt;&gt; 1); //扩容1.5倍
+    if (len &gt; MAX_CAPACITY || len &lt; 0) {
+        len = MAX_CAPACITY;
+    }
+    // 返回minCapacity和len的较大值
+    return len &gt; minCapacity ? len : minCapacity;
+}
+</code></pre><p>检查index是否符合添加的条件注意可以在size位置添加的</p>
+<pre><code>private void checkIndexForAdd(int index) {
+    if (index &lt; 0 || index &gt; size) {
+        throw new IndexOutOfBoundsException(&quot;index=&quot; + index + &quot;, size=&quot; + size);
+    }
+}
+</code></pre><p>注意清空操作算是修改链表长度的操作。需要modCount++<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * 清空线性表</div><div class="line"> */</div><div class="line">@Override</div><div class="line">public void clear() &#123;</div><div class="line">    // elements = null;</div><div class="line">    modCount++;</div><div class="line">    for(int i = 0; i &lt; size; i++) &#123;</div><div class="line">        elements[i] = null;</div><div class="line">    &#125;</div><div class="line">    size = 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>contains调用indexOf(s)解决<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * 判断元素是否在线性表中存在</div><div class="line"> * @param s 元素</div><div class="line"> * @return 如果存在返回true, 否则返回false</div><div class="line"> */</div><div class="line">@Override</div><div class="line">public boolean contains(String s) &#123;</div><div class="line">    int index = indexOf(s);</div><div class="line">    if (index == -1) &#123;</div><div class="line">        return false;</div><div class="line">    &#125;</div><div class="line">    return true;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>直接返回数组元素值就行，软柿子<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * 获取指定索引位置的值</div><div class="line"> * @param index 索引</div><div class="line"> * @return 值</div><div class="line"> */</div><div class="line">@Override</div><div class="line">public String get(int index) &#123;</div><div class="line">    checkIndex(index);</div><div class="line">    return elements[index];</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">private void checkIndex(int index) &#123;</div><div class="line">    if (index &lt; 0 || index &gt;= size) &#123;</div><div class="line">        throw new IndexOutOfBoundsException(&quot;index=&quot; + index + &quot;, size=&quot; + size);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>indexOf是很多兄弟都要用到，所以这个方法是否正确就很重要了，不能马虎<br>需要判断用户给的String是不是null来判断<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * 查找元素在线性表中第一次出现的位置</div><div class="line"> * @param s 查找的元素</div><div class="line"> * @return 第一次出现的位置，如果不存在返回-1.</div><div class="line"> */</div><div class="line">@Override</div><div class="line">public int indexOf(String s) &#123;</div><div class="line">    if (s == null) &#123;</div><div class="line">        for(int i = 0; i &lt; size; i++) &#123;</div><div class="line">            if (elements[i] == null) &#123;</div><div class="line">                return i;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125; else &#123;</div><div class="line">        for(int i = 0; i &lt; size; i++) &#123;</div><div class="line">            if (s.equals(elements[i])) &#123;</div><div class="line">                return i;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    return -1;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<pre><code>private void checkIndex(int index) {
+    if (index &lt; 0 || index &gt;= size) {
+        throw new IndexOutOfBoundsException(&quot;index=&quot; + index + &quot;, size=&quot; + size);
+    }
+}
+</code></pre><p>indexOf是很多兄弟都要用到，所以这个方法是否正确就很重要了，不能马虎<br>需要判断用户给的String是不是null来判断<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * 查找元素在线性表中第一次出现的位置</div><div class="line"> * 注意这里需要判断是不是null</div><div class="line"> * @param s 查找的元素</div><div class="line"> * @return 第一次出现的位置，如果不存在返回-1.</div><div class="line"> */</div><div class="line">@Override</div><div class="line">public int indexOf(String s) &#123;</div><div class="line">    if (s == null) &#123;</div><div class="line">        for(int i = 0; i &lt; size; i++) &#123;</div><div class="line">            if (elements[i] == null) &#123;</div><div class="line">                return i;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125; else &#123;</div><div class="line">        for(int i = 0; i &lt; size; i++) &#123;</div><div class="line">            if (s.equals(elements[i])) &#123;</div><div class="line">                return i;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    return -1;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>软柿子+1<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * 判空</div><div class="line"> */</div><div class="line">@Override</div><div class="line">public boolean isEmpty() &#123;</div><div class="line">    return size == 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>迭代器后面具体说<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">@Override</div><div class="line">public MyIterator iterator() &#123;</div><div class="line">    return new Itr(0) ;</div><div class="line">&#125;</div><div class="line"></div><div class="line">@Override</div><div class="line">public MyIterator iterator(int index) &#123;</div><div class="line">    checkIndexForAdd(index);</div><div class="line">    return new Itr(index);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>从后往前遍历也要判断一下用户传过来的null;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * 查找元素在线性表中最后出现的索引</div><div class="line"> * @param s 查找的锇元素</div><div class="line"> * @return 最后一次的索引，如果不存在返回-1</div><div class="line"> */</div><div class="line">@Override</div><div class="line">public int lastIndexOf(String s) &#123;</div><div class="line">    if (s == null) &#123;</div><div class="line">        for(int i = size - 1; i &gt;= 0; i--) &#123;</div><div class="line">            if (elements[i] == null) &#123;</div><div class="line">                return i;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125; else &#123;</div><div class="line">        for(int i = size - 1; i &gt;= 0; i--) &#123;</div><div class="line">            if (s.equals(elements[i])) &#123;</div><div class="line">                return i;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    return -1;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
@@ -414,24 +729,51 @@ class GenericClass&lt;T,U&gt; implements GenericInterFace(T)；
 <p>软柿子<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * 线性表存储元素的个数</div><div class="line"> * @return 线性表存储元素的个数</div><div class="line"> */</div><div class="line">@Override</div><div class="line">public int size() &#123;</div><div class="line">    return size;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>软柿子<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">@Override</div><div class="line">public String toString() &#123;</div><div class="line">    StringBuilder sb = new StringBuilder(&quot;[&quot;);</div><div class="line">    for (int i = 0; i &lt; size; i++) &#123;</div><div class="line">        sb.append(elements[i]);</div><div class="line">        if (i != size - 1) &#123;</div><div class="line">            sb.append(&quot;, &quot;);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    return sb.append(&quot;]&quot;).toString();</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>—————————–内部类———————————————</p>
-<p>接下来是内部类写迭代器也是老三样<br>  1.属性<br>  分析：首先需要cursor指向下一个元素，一个lastRet表示最近的访问的元素。还要校对是否出现并发修改异常设置一个exception<br>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">private int cursor; //后面元素的索引位置</div><div class="line">private int expModCount = modCount;</div><div class="line">private int lastRet = -1; // -1表示没有返回元素</div></pre></td></tr></table></figure></p>
-<p>  2.构造方法 两种一种带index 一种不带。默认就调用index = 0 就行了<br>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">public Itr(int index) &#123;</div><div class="line">    cursor = index;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>接下来是内部类写迭代器也是老三样<br>  1.属性<br>  分析：首先需要cursor指向下一个元素，一个lastRet表示最近的访问的元素。还要校对是否出现并发修改异常设置一个exception</p>
+<pre><code>private int cursor; //后面元素的索引位置
+private int expModCount = modCount;
+private int lastRet = -1; // -1表示没有返回元素
+</code></pre><p>  2.构造方法 两种一种带index 一种不带。默认就调用index = 0 就行了<br>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">public Itr(int index) &#123;</div><div class="line">    cursor = index;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>3.方法（<strong>注意看清楚操作的指针</strong>）<br>注意：先找软柿子捏</p>
-<p>add:这个方法需要注意几个地方<br>1.添加了新的元素可以调用父类的add方法<br>2.修改了集合长度记得expModCount = modCount<br>调用父类的add modCount++了为什么不是expModCount ++？<br>考虑到了添加是集合的情况，直接赋值也是一样的结果<br>3.要把lastRet给质空 ，因为元素之间的关系已经改变不能在操作刚返回的元素了；<br>4.cursor++ ，cursor不++就会指向你刚添加的元素，这样连续添加时候并不会按照你添加顺序添加进入集合，而是反向。所以需要cursor++;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">@Override</div><div class="line">public void add(String s) &#123;</div><div class="line">    checkConcurrentModification();</div><div class="line">    MyArrayList.this.add(cursor, s);</div><div class="line">    expModCount = modCount;</div><div class="line">    cursor++;       // caution</div><div class="line">    lastRet = -1;    // caution</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>add:这个方法需要注意几个地方<br>1.添加了新的元素可以调用父类的add方法<br>2.修改了集合长度记得expModCount = modCount<br>调用父类的add modCount ++了为什么不是 expModCount ++？<br>考虑到了添加是集合的情况，直接赋值也是一样的结果<br>3.要把lastRet给质空 ，因为元素之间的关系已经改变不能在操作刚返回的元素了；<br>4.cursor++ ，cursor不++就会指向你刚添加的元素，这样连续添加时候并不会按照你添加顺序添加进入集合，而是反向。所以需要cursor++;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">@Override</div><div class="line">public void add(String s) &#123;</div><div class="line">    checkConcurrentModification();</div><div class="line">    MyArrayList.this.add(cursor, s);</div><div class="line">    expModCount = modCount;</div><div class="line">    cursor++;       // caution</div><div class="line">    lastRet = -1;    // caution</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>//判断是否会出现并发修改异常<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">private void checkConcurrentModification() &#123;</div><div class="line">    if (expModCount != modCount) &#123;</div><div class="line">        throw new ConcurrentModificationException();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>软柿子<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">@Override</div><div class="line">public boolean hasNext() &#123;</div><div class="line">    return cursor &lt; size;</div><div class="line">&#125;</div><div class="line"></div><div class="line">@Override</div><div class="line">public boolean hasPrevious() &#123;</div><div class="line">    return cursor &gt; 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>核心方法：<br>1.首先判断是否有下一个元素<br>2.lastRet = cursor<br>3.cursor++<br>4.return elements[lastRet]<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">@Override</div><div class="line">public String next() &#123;</div><div class="line">    checkConcurrentModification();</div><div class="line">    if (!hasNext()) &#123;</div><div class="line">        throw new NoSuchElementException();</div><div class="line">    &#125;</div><div class="line">    lastRet = cursor;</div><div class="line">    return elements[cursor++];</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>核心方法<br>同上这里注意cursor–;<br>此时cursor和lastRet指向的同一个元素哦<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">@Override</div><div class="line">public String previous() &#123;</div><div class="line">    checkConcurrentModification();</div><div class="line">    if (!hasPrevious()) &#123;</div><div class="line">        throw new NoSuchElementException();</div><div class="line">    &#125;</div><div class="line">    lastRet = cursor - 1;</div><div class="line">    /*String retValue = elements[cursor - 1];</div><div class="line">    cursor--;</div><div class="line">    return retValue;*/</div><div class="line">    return elements[--cursor];</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>核心方法<br>这里注意cursor–;<br>此时cursor和lastRet指向的同一个元素哦<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">@Override</div><div class="line">public String previous() &#123;</div><div class="line">    checkConcurrentModification();</div><div class="line">    if (!hasPrevious()) &#123;</div><div class="line">        throw new NoSuchElementException();</div><div class="line">    &#125;</div><div class="line">    lastRet = cursor - 1;</div><div class="line">    /*String retValue = elements[cursor - 1];</div><div class="line">    cursor--;</div><div class="line">    return retValue;*/</div><div class="line">    return elements[--cursor];</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>软柿子<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">@Override</div><div class="line">public int nextIndex() &#123;</div><div class="line">    return cursor;</div><div class="line">&#125;</div><div class="line">@Override</div><div class="line">public int previousIndex() &#123;</div><div class="line">    return cursor - 1;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>remove最近返回的元素<br>注意事项：<br>1.这里判断lastRet是否存在不然抛出异常不该调用这个函数<br>2.expModCount = modCount 需要同步 增加和删除都需要<br>3.<strong>cursor = lastRet</strong>这个是为了不管正向遍历还是逆向遍历都能使得cursor位置不变；<br><em>首先看正向遍历：</em><br>|1|2|3|4|5|6|7|8|9|10|<br>假设正向遍历删除的是5  L表示last C 表示cursor<br>|1|2|3|4|5|6|7|8|9|10|<br>        L C<br>把5删掉之后因为集合删除会自动向前移动并排满，5的位置被6取代以此类推。那么cursor就会指向7，所以正向遍历必须cursor-1;</p>
-<p><em>看逆向遍历：</em><br>|1|2|3|4|5|6|7|8|9|10|<br>假设逆向遍历删除的是5  L表示last C 表示cursor<br>|1|2|3|4|5|6|7|8|9|10|<br>        C<br>        L<br>此时cursor和lastRet是指向同一个的这种情况就不用-1<br>所以综合两种情况把cursor = lastRet就行<br>4.lastRet置空因为修改了元素不想能够一直删除；</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">@Override</div><div class="line">public void remove() &#123;</div><div class="line">    checkConcurrentModification();</div><div class="line">    if (lastRet == -1) &#123;</div><div class="line">        throw new IllegalStateException();</div><div class="line">    &#125;</div><div class="line">    MyArrayList.this.remove(lastRet);</div><div class="line">    expModCount = modCount;  //修改完就要同步count</div><div class="line">    cursor = lastRet; // caution: 正向遍历和逆向遍历的结果一致</div><div class="line">    lastRet = -1;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>设置元素<br>这里需要注意的是：<br>lastRet也要置空只要元素有改变都应该置空<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">    @Override</div><div class="line">    public void set(String s) &#123;</div><div class="line">        // 判断迭代器是否有效</div><div class="line">        checkConcurrentModification();</div><div class="line">        if (lastRet == -1) &#123;</div><div class="line">            throw new IllegalStateException();</div><div class="line">        &#125;</div><div class="line">        elements[lastRet] = s;</div><div class="line">        lastRet = -1;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>remove最近返回的元素<br>注意事项：<br>1.这里判断lastRet是否存在不然抛出异常不该调用这个函数<br>2.expModCount = modCount 需要同步 增加和删除都需要<br>3.<strong>cursor = lastRet</strong>这个是为了不管正向遍历还是逆向遍历都能使得cursor位置不变；<br><em>首先看正向遍历：</em><br>|1|2|3|4|5|6|7|8|9|10|<br>假设正向遍历删除的是5  L表示last C 表示cursor<br>|1|2|3|4|5|6|7|8|9|10|</p>
+<p>L在4和5之间，C在5和6之间。</p>
+<p>把5删掉之后因为集合删除会自动向前移动并排满，5的位置被6取代以此类推。那么cursor就会指向值为7，所以正向遍历必须cursor-1;</p>
+<p><em>看逆向遍历：</em><br>|1|2|3|4|5|6|7|8|9|10|<br>假设逆向遍历删除的是5  L表示last C 表示cursor<br>|1|2|3|4|5|6|7|8|9|10|<br>        C<br>        L</p>
+<p>L,C都在4和5之间<br>此时cursor和lastRet是指向同一个的这种情况就不用-1<br>所以综合两种情况把cursor = lastRet就行</p>
+<p>4.lastRet置空因为修改了元素不想能够在进行其他的修改操作</p>
+<pre><code>@Override
+public void remove() {
+    checkConcurrentModification();
+    if (lastRet == -1) {
+        throw new IllegalStateException();
+    }
+    MyArrayList.this.remove(lastRet);
+    expModCount = modCount;  //修改完就要同步count
+    cursor = lastRet; // caution: 正向遍历和逆向遍历的结果一致
+    lastRet = -1;
+}
+</code></pre><p>设置元素<br>这里需要注意的是：<br>lastRet也要置空只要元素有改变都应该置空</p>
+<pre><code>@Override
+public void set(String s) {
+    // 判断迭代器是否有效
+    checkConcurrentModification();
+    if (lastRet == -1) {
+        throw new IllegalStateException();
+    }
+    elements[lastRet] = s;
+    lastRet = -1;
+}
+</code></pre><p>  }</p>
 <h3 id="ArrayList总结"><a href="#ArrayList总结" class="headerlink" title="ArrayList总结"></a>ArrayList总结</h3><p>1.难点在于ArrayList的扩容的机智<br>2.内部类的对指针的移动和判断并发修改异常</p>
 <h3 id="源码解析linkedList"><a href="#源码解析linkedList" class="headerlink" title="源码解析linkedList"></a>源码解析linkedList</h3><p>直接看源码：因为之前没看过，所以今天就来学习一下</p>
 <h3 id="List接口-1"><a href="#List接口-1" class="headerlink" title="List接口"></a>List接口</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">只看核心方法</div></pre></td></tr></table></figure>
-<h3 id="ListIterator接口-1"><a href="#ListIterator接口-1" class="headerlink" title="ListIterator接口"></a>ListIterator接口</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"></div></pre></td></tr></table></figure>
-<p>对于LinkedList来说应该没有什么难点，主要还是看迭代器里面的操作；因为是linkedList不需要考虑扩容的问题<br>先看看类名</p>
+<h3 id="ListIterator接口-1"><a href="#ListIterator接口-1" class="headerlink" title="ListIterator接口"></a>ListIterator接口</h3><p>对于LinkedList来说应该没有什么难点，主要还是看迭代器里面的操作；因为是linkedList不需要考虑扩容的问题<br>先看看类名</p>
 <pre><code>public class LinkedList&lt;E&gt;
 extends AbstractSequentialList&lt;E&gt;
 implements List&lt;E&gt;, Deque&lt;E&gt;, Cloneable, java.io.Serializable
@@ -520,7 +862,7 @@ implements List&lt;E&gt;, Deque&lt;E&gt;, Cloneable, java.io.Serializable
         <br>
         Copyright © 王邸 2019
         <!--
-          Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+          Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
         -->
       </div>
     </div>

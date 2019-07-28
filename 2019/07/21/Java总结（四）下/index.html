@@ -14,7 +14,7 @@
 <meta property="og:url" content="http://yoursite.com/2019/07/21/Java总结（四）下/index.html">
 <meta property="og:site_name" content="路要坚持">
 <meta property="og:description" content="接上一篇，这一篇介绍的主要内容是堆，二分法以及set集合的知识，以及一些还没学习的知识 星期五7.19堆就是一个完全二叉树，分为大顶堆小顶堆，注意二叉搜索树不一定是完全二叉树哦； 建堆public class Heap {     //属性     private int[] elements;     private int size;      //构造方法     public Heap()">
-<meta property="og:updated_time" content="2019-07-22T01:01:32.367Z">
+<meta property="og:updated_time" content="2019-07-27T06:32:25.762Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java总结（四）下">
 <meta name="twitter:description" content="接上一篇，这一篇介绍的主要内容是堆，二分法以及set集合的知识，以及一些还没学习的知识 星期五7.19堆就是一个完全二叉树，分为大顶堆小顶堆，注意二叉搜索树不一定是完全二叉树哦； 建堆public class Heap {     //属性     private int[] elements;     private int size;      //构造方法     public Heap()">
@@ -230,8 +230,76 @@
         elements[j] = temp;
     }
 }
-</code></pre><p>堆的应用：<br>堆排序<br>  a.先进行建堆操作<br>    从第一个非叶子结点开始向下进行建堆操作，一直循环到根节点<br>  b.开始排序<br>    把根节点和最后一个无序元素交换<br>  c.重新构造成一个堆从上到下调整<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div></pre></td><td class="code"><pre><div class="line">public class HeapSort &#123;</div><div class="line"></div><div class="line">    public static void sort(int[] arr) &#123;</div><div class="line">        //首先进行建堆的过程</div><div class="line">        buildHeap(arr);</div><div class="line">        //开始排序，把第一个数和最后一个数交换然后再重新调整堆</div><div class="line">        System.out.println(Arrays.toString(arr));</div><div class="line"></div><div class="line">        int i = 0;</div><div class="line">        while(i &lt; arr.length-1)&#123; //最后一次就是两个元素比较吧</div><div class="line">            int temp = arr[0];</div><div class="line">            arr[0] = arr[arr.length-1-i];</div><div class="line">            arr[arr.length-1-i] = temp;</div><div class="line">            heapify(arr,0,arr.length-1-i);</div><div class="line">            System.out.println(Arrays.toString(arr));</div><div class="line">            i++;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * 建堆过程</div><div class="line">     * @param arr</div><div class="line">     */</div><div class="line">    private static void buildHeap(int[] arr) &#123;</div><div class="line">        // 建堆过程从第一个非叶子结点开始。因为下标从0开始</div><div class="line">        // 因为parent(i) = (i - 1)/2;</div><div class="line">        //所以第一个非叶子结点就是 (arr.len-2)/2</div><div class="line"></div><div class="line">        for (int i = (arr.length-2)/2; i &gt;=0; i--) &#123;</div><div class="line">            heapify(arr, i, arr.length);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * 校对是否是堆</div><div class="line">     * @param arr</div><div class="line">     * @param i</div><div class="line">     * @param length</div><div class="line">     */</div><div class="line">    private static void heapify(int[] arr, int i, int length) &#123;</div><div class="line">        while(i &lt; length) &#123;</div><div class="line">            int maxIndex = i;</div><div class="line">            int left = 2*i+1;</div><div class="line">            int right = 2*i+2;</div><div class="line">            if(left &lt; length &amp;&amp; arr[left] &gt; arr[maxIndex]) &#123; //left &lt; length防止下标越界 而且必须要放前面 不然下标越界</div><div class="line">              maxIndex = left;</div><div class="line">            &#125;</div><div class="line">            if(right &lt; length &amp;&amp; arr[right] &gt; arr[maxIndex]) &#123;</div><div class="line">                maxIndex = right;</div><div class="line">            &#125;</div><div class="line">            if(maxIndex == i) break;//如果不用换就break;</div><div class="line">            // 交换两个元素；</div><div class="line">            int temp = arr[i];</div><div class="line">            arr[i] = arr[maxIndex];</div><div class="line">            arr[maxIndex] = temp;</div><div class="line"></div><div class="line">            i = maxIndex;//对孩子也比较</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public static void main(String[] args) &#123;</div><div class="line">        int[] arr = &#123;5, 1, 2, 9, 0, 8, 7, 6, 4, 3&#125;;</div><div class="line">        System.out.println(Arrays.toString(arr));</div><div class="line">        System.out.println(&quot;------------------------------&quot;);</div><div class="line">        sort(arr);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<h3 id="二分查找"><a href="#二分查找" class="headerlink" title="二分查找"></a>二分查找</h3><p>算法很简单但是变种却很有趣：<br>最原始的算法：</p>
+</code></pre><p>堆的应用：<br>堆排序<br>  a.先进行建堆操作<br>    从第一个非叶子结点开始向下进行建堆操作，一直循环到根节点<br>  b.开始排序<br>    把根节点和最后一个无序元素交换<br>  c.重新构造成一个堆从上到下调整</p>
+<pre><code>public class HeapSort {
+
+    public static void sort(int[] arr) {
+        //首先进行建堆的过程
+        buildHeap(arr);
+        //开始排序，把第一个数和最后一个数交换然后再重新调整堆
+        System.out.println(Arrays.toString(arr));
+
+        int i = 0;
+        while(i &lt; arr.length-1){ //最后一次就是两个元素比较吧
+            int temp = arr[0];
+            arr[0] = arr[arr.length-1-i];
+            arr[arr.length-1-i] = temp;
+            heapify(arr,0,arr.length-1-i);
+            System.out.println(Arrays.toString(arr));
+            i++;
+        }
+
+    }
+
+    /**
+     * 建堆过程
+     * @param arr
+     */
+    private static void buildHeap(int[] arr) {
+        // 建堆过程从第一个非叶子结点开始。因为下标从0开始
+        // 因为parent(i) = (i - 1)/2;
+        //所以第一个非叶子结点就是 (arr.len-2)/2
+
+        for (int i = (arr.length-2)/2; i &gt;=0; i--) {
+            heapify(arr, i, arr.length);
+        }
+    }
+
+    /**
+     * 校对是否是堆
+     * @param arr
+     * @param i
+     * @param length
+     */
+    private static void heapify(int[] arr, int i, int length) {
+        while(i &lt; length) {
+            int maxIndex = i;
+            int left = 2*i+1;
+            int right = 2*i+2;
+            if(left &lt; length &amp;&amp; arr[left] &gt; arr[maxIndex]) { //left &lt; length防止下标越界 而且必须要放前面 不然下标越界
+              maxIndex = left;
+            }
+            if(right &lt; length &amp;&amp; arr[right] &gt; arr[maxIndex]) {
+                maxIndex = right;
+            }
+            if(maxIndex == i) break;//如果不用换就break;
+            // 交换两个元素；
+            int temp = arr[i];
+            arr[i] = arr[maxIndex];
+            arr[maxIndex] = temp;
+
+            i = maxIndex;//对孩子也比较
+        }
+    }
+
+    public static void main(String[] args) {
+        int[] arr = {5, 1, 2, 9, 0, 8, 7, 6, 4, 3};
+        System.out.println(Arrays.toString(arr));
+        System.out.println(&quot;------------------------------&quot;);
+        sort(arr);
+    }
+}
+</code></pre><h3 id="二分查找"><a href="#二分查找" class="headerlink" title="二分查找"></a>二分查找</h3><p>算法很简单但是变种却很有趣：<br>最原始的算法：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">public static int search(int[] arr, int value) &#123;</div><div class="line">        // 循环</div><div class="line">        if (arr == null || arr.length == 0) return -1;</div><div class="line">        int low = 0;</div><div class="line">        int high = arr.length - 1;</div><div class="line">        while (low &lt;= high) &#123;</div><div class="line">            int mid = low + ((high - low) &gt;&gt; 1);</div><div class="line">            if (arr[mid] &lt; value) &#123;</div><div class="line">                low = mid + 1;</div><div class="line">            &#125; else if (arr[mid] &gt; value) &#123;</div><div class="line">                high = mid - 1;</div><div class="line">            &#125; else &#123;</div><div class="line">                return mid;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        return -1;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
 <h3 id="二分查找的变种"><a href="#二分查找的变种" class="headerlink" title="二分查找的变种"></a>二分查找的变种</h3><p>查找第一个相等的元素<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">就在while里面多加一个条件就好了</div><div class="line">while (low &lt;= high) &#123;</div><div class="line">    int mid = low + ((high - low) &gt;&gt; 1);</div><div class="line">    if (arr[mid] &lt; value) &#123;</div><div class="line">      low = mid + 1;</div><div class="line">    &#125; else if (arr[mid] &gt; value) &#123;</div><div class="line">      high = mid - 1;</div><div class="line">    &#125; else &#123;</div><div class="line">      if(mid == 0 || arr[mid-1] &lt; value) &#123;</div><div class="line">        return mid;</div><div class="line">      &#125;</div><div class="line">      high = mid-1; //其他情况把相等看成大于</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>查找最后一个相等的元素<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">while (low &lt;= high) &#123;</div><div class="line">   int mid = low + ((high - low) &gt;&gt; 1);</div><div class="line">   if (arr[mid] &lt; key) &#123;</div><div class="line">       low = mid + 1;</div><div class="line">   &#125; else if (arr[mid] &gt; key) &#123;</div><div class="line">       high = mid - 1;</div><div class="line">   &#125; else &#123;</div><div class="line">       if (mid == arr.length - 1 || arr[mid + 1] &gt; key) &#123;</div><div class="line">           return mid;</div><div class="line">       &#125;</div><div class="line">       low = mid + 1; //找到了但是不能证明是最后一个所以还要向后找</div><div class="line">   &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
@@ -245,13 +313,79 @@
 int hashCode()
 boolean equals(Object obj)
 </code></pre><p>所以在添加元素之后，修改了元素的属性值，contains就会找不到元素。而出现false;虽然属性名没有变但是属性变了也不行。看下面源码：contains方法调用了map的containsKey方法</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line">HashSet.java</div><div class="line">public boolean contains(Object o) &#123;</div><div class="line">    return map.containsKey(o);</div><div class="line">&#125;</div><div class="line"></div><div class="line">HashMap.java</div><div class="line">public boolean containsKey(Object key) &#123;</div><div class="line">    return getNode(hash(key), key) != null;</div><div class="line">&#125;</div><div class="line">static final int hash(Object key) &#123;</div><div class="line">    int h;</div><div class="line">    return (key == null) ? 0 : (h = key.hashCode()) ^ (h &gt;&gt;&gt; 16);</div><div class="line">&#125;</div><div class="line"></div><div class="line">public final int hashCode() &#123;</div><div class="line">    return Objects.hashCode(key) ^ Objects.hashCode(value);</div><div class="line">&#125;</div><div class="line"></div><div class="line">final Node&lt;K,V&gt; getNode(int hash, Object key) &#123;</div><div class="line">    Node&lt;K,V&gt;[] tab; Node&lt;K,V&gt; first, e; int n; K k;</div><div class="line">    if ((tab = table) != null &amp;&amp; (n = tab.length) &gt; 0 &amp;&amp;</div><div class="line">        (first = tab[(n - 1) &amp; hash]) != null) &#123;</div><div class="line">        if (first.hash == hash &amp;&amp; // always check first node</div><div class="line">            ((k = first.key) == key || (key != null &amp;&amp; key.equals(k))))</div><div class="line">            return first;</div><div class="line">        if ((e = first.next) != null) &#123;</div><div class="line">            if (first instanceof TreeNode)</div><div class="line">                return ((TreeNode&lt;K,V&gt;)first).getTreeNode(hash, key);</div><div class="line">            do &#123;</div><div class="line">                if (e.hash == hash &amp;&amp;</div><div class="line">                    ((k = e.key) == key || (key != null &amp;&amp; key.equals(k))))</div><div class="line">                    return e;</div><div class="line">            &#125; while ((e = e.next) != null);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    return null;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="TreeSet-这是有序的"><a href="#TreeSet-这是有序的" class="headerlink" title="TreeSet:这是有序的"></a>TreeSet:这是有序的</h3><p>使用元素的自然顺序对元素进行排序需要实现comparable接口</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line">//HashSet.java</div><div class="line">public boolean contains(Object o) &#123;</div><div class="line">    return map.containsKey(o);</div><div class="line">&#125;</div><div class="line"></div><div class="line">//HashMap.java</div><div class="line">public boolean containsKey(Object key) &#123;</div><div class="line">    return getNode(hash(key), key) != null;</div><div class="line">&#125;</div><div class="line">static final int hash(Object key) &#123;</div><div class="line">    int h;</div><div class="line">    return (key == null) ? 0 : (h = key.hashCode()) ^ (h &gt;&gt;&gt; 16);</div><div class="line">&#125;</div><div class="line"></div><div class="line">public final int hashCode() &#123;</div><div class="line">    return Objects.hashCode(key) ^ Objects.hashCode(value);</div><div class="line">&#125;</div><div class="line"></div><div class="line">final Node&lt;K,V&gt; getNode(int hash, Object key) &#123;</div><div class="line">    Node&lt;K,V&gt;[] tab; Node&lt;K,V&gt; first, e; int n; K k;</div><div class="line">    if ((tab = table) != null &amp;&amp; (n = tab.length) &gt; 0 &amp;&amp;</div><div class="line">        (first = tab[(n - 1) &amp; hash]) != null) &#123;</div><div class="line">        if (first.hash == hash &amp;&amp; // always check first node</div><div class="line">            ((k = first.key) == key || (key != null &amp;&amp; key.equals(k))))</div><div class="line">            return first;</div><div class="line">        if ((e = first.next) != null) &#123;</div><div class="line">            if (first instanceof TreeNode)</div><div class="line">                return ((TreeNode&lt;K,V&gt;)first).getTreeNode(hash, key);</div><div class="line">            do &#123;</div><div class="line">                if (e.hash == hash &amp;&amp;</div><div class="line">                    ((k = e.key) == key || (key != null &amp;&amp; key.equals(k))))</div><div class="line">                    return e;</div><div class="line">            &#125; while ((e = e.next) != null);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    return null;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="TreeSet-这是有序的（如何确定排序的规则？）"><a href="#TreeSet-这是有序的（如何确定排序的规则？）" class="headerlink" title="TreeSet:这是有序的（如何确定排序的规则？）"></a>TreeSet:这是有序的（如何确定排序的规则？）</h3><p>使用元素的自然顺序对元素进行排序需要实现comparable接口</p>
 <p>或者根据创建 set 时提供的 Comparator 进行排序<br>具体取决于使用的构造方法。看下面例子：输入五个学生进行排序<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">public class HomeWork3 &#123;</div><div class="line">    public static void main(String[] args) &#123;</div></pre></td></tr></table></figure></p>
-<p>下面是实现了comparator的匿名内部类使用了lambda表达式<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"> // TreeSet&lt;ScutStudent&gt; set = new TreeSet&lt;&gt;((t1, t2) -&gt; t2.total - t1.total);</div><div class="line">//正常的匿名内部类写法应该是：</div><div class="line"> TreeSet&lt;ScutStudent&gt; set = new TreeSet&lt;&gt;(new Comparator&lt;ScutStudent&gt;() &#123;</div><div class="line">          @Override</div><div class="line">          public int compare(ScutStudent t1, ScutStudent t2) &#123;</div><div class="line">              return t2.total - t1.total;</div><div class="line">          &#125;</div><div class="line">      &#125;);</div></pre></td></tr></table></figure></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">        TreeSet&lt;ScutStudent&gt; set = new TreeSet&lt;&gt;();</div><div class="line">        Scanner scan = new Scanner(System.in);</div><div class="line">        System.out.println(&quot;请输入五个学生的名字和各科成绩&quot;);</div><div class="line">        for (int i = 1; i &lt; 4; i++) &#123;</div><div class="line">            System.out.println(&quot;输入第 &quot;+ i +&quot; 学生的姓名&quot;);</div><div class="line">            String name = scan.nextLine();</div><div class="line">            System.out.println(&quot;输入第&quot;+ i +&quot;学生的语文成绩&quot;);</div><div class="line">            int chinese = Integer.valueOf(scan.nextLine());</div><div class="line">            System.out.println(&quot;输入第&quot;+ i +&quot;学生的数学成绩&quot;);</div><div class="line">            int math = Integer.valueOf(scan.nextLine());</div><div class="line">            System.out.println(&quot;输入第&quot;+ i +&quot;学生的英语成绩&quot;);</div><div class="line">            int english = Integer.valueOf(scan.nextLine());</div><div class="line">            ScutStudent ss = new ScutStudent(name,chinese,math,english);</div><div class="line">            set.add(ss);</div><div class="line">        &#125;</div><div class="line">        for (ScutStudent s : set) &#123;</div><div class="line">            System.out.println(s);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>继承了comparable接口写法：重写comparaTo方法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line">class ScutStudent implements Comparable&#123;</div><div class="line">    String name;</div><div class="line">    int chinese;</div><div class="line">    int math;</div><div class="line">    int english;</div><div class="line">    int total;</div><div class="line"></div><div class="line">    public ScutStudent() &#123;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public ScutStudent(String name, int chinese, int math, int english) &#123;</div><div class="line">        this.name = name;</div><div class="line">        this.chinese = chinese;</div><div class="line">        this.math = math;</div><div class="line">        this.english = english;</div><div class="line">        this.total = this.math + this.chinese + this.english;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public String toString() &#123;</div><div class="line">        return &quot;ScutStudent&#123;&quot; +</div><div class="line">                &quot;name=&apos;&quot; + name + &apos;\&apos;&apos; +</div><div class="line">                &quot;, chinese=&quot; + chinese +</div><div class="line">                &quot;, math=&quot; + math +</div><div class="line">                &quot;, english=&quot; + english +</div><div class="line">                &quot;, total=&quot; + total +</div><div class="line">                &apos;&#125;&apos;;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public int compareTo(Object o) &#123;</div><div class="line">        ScutStudent s = (ScutStudent)o;</div><div class="line">        return s.total - this.total;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<h3 id="下午开会："><a href="#下午开会：" class="headerlink" title="下午开会："></a>下午开会：</h3><p>每天知道自己应做什么事情，时间管理，以下内容是否需要调整？<br>时间管理：<br>  例如星期三，星期六下午；<br>  要有自己思考的时间；<br>提前预习<br>  老师讲的自己总是不记得代码，自己去知道今天讲东西的思路，而不是copy书上代码；<br>  提前找题去做<br>上课<br>  认真互动<br>课后复习<br>  总结<br>作业<br>  中午能不能写一些代码？</p>
+<p>下面是实现了comparator的匿名内部类<br>因为接口只用实现一个compare方法所以可以使用lambda表达式</p>
+<pre><code>// TreeSet&lt;ScutStudent&gt; set = new TreeSet&lt;&gt;((t1, t2) -&gt; t2.total - t1.total);
+</code></pre><p>正常的匿名内部类写法应该是：</p>
+<pre><code>TreeSet&lt;ScutStudent&gt; set = new TreeSet&lt;&gt;(new Comparator&lt;ScutStudent&gt;() {
+    @Override
+    //注意如果这里总分一样需要比较其他科目的分数
+    public int compare(ScutStudent t1, ScutStudent t2) {
+         // 客户往往给你的主要需求，需要自己分析次要需求,只要比较结果为0就应该继续比较
+        int n1 = t2.getTotalScore() - t1.getTotalScore();
+        int n2 = n1 != 0 ? n1 : t2.getChinese() - t1.getChinese();
+        int n3 = n2 != 0 ? n2 : t2.getMath() - t1.getMath();
+        int n4 = n3 != 0 ? n3 : t2.getEnglish() - t1.getEnglish();
+        int n5 = n4 != 0 ? n4 : t1.getName().compareTo(t2.getName());
+        return n5;
+    }
+});
+Scanner scan = new Scanner(System.in);
+System.out.println(&quot;请输入五个学生的名字和各科成绩&quot;);
+for (int i = 1; i &lt; 4; i++) {
+    System.out.println(&quot;输入第 &quot;+ i +&quot; 学生的姓名&quot;);
+    String name = scan.nextLine();
+    System.out.println(&quot;输入第&quot;+ i +&quot;学生的语文成绩&quot;);
+    int chinese = Integer.valueOf(scan.nextLine());
+    System.out.println(&quot;输入第&quot;+ i +&quot;学生的数学成绩&quot;);
+    int math = Integer.valueOf(scan.nextLine());
+    System.out.println(&quot;输入第&quot;+ i +&quot;学生的英语成绩&quot;);
+    int english = Integer.valueOf(scan.nextLine());
+    ScutStudent ss = new ScutStudent(name,chinese,math,english);
+    set.add(ss);
+}
+for (ScutStudent s : set) {
+    System.out.println(s);
+}
+</code></pre><p>继承了 comparable 接口写法：重写 comparaTo 方法</p>
+<pre><code>class ScutStudent implements Comparable{
+    String name;
+    int chinese;
+    int math;
+    int english;
+    int total;
+
+    public ScutStudent() {
+    }
+
+    public ScutStudent(String name, int chinese, int math, int english) {
+        this.name = name;
+        this.chinese = chinese;
+        this.math = math;
+        this.english = english;
+        this.total = this.math + this.chinese + this.english;
+    }
+
+    @Override
+    public String toString() {
+        return &quot;ScutStudent{&quot; +
+                &quot;name=&apos;&quot; + name + &apos;\&apos;&apos; +
+                &quot;, chinese=&quot; + chinese +
+                &quot;, math=&quot; + math +
+                &quot;, english=&quot; + english +
+                &quot;, total=&quot; + total +
+                &apos;}&apos;;
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        ScutStudent s = (ScutStudent)o;
+        return s.total - this.total;
+    }
+}
+</code></pre><h3 id="下午开会："><a href="#下午开会：" class="headerlink" title="下午开会："></a>下午开会：</h3><p>每天知道自己应做什么事情，时间管理，以下内容是否需要调整？<br>时间管理：<br>  例如星期三，星期六下午；<br>  要有自己思考的时间；<br>提前预习<br>  老师讲的自己总是不记得代码，自己去知道今天讲东西的思路，而不是copy书上代码；<br>  提前找题去做<br>上课<br>  认真互动<br>课后复习<br>  总结<br>作业<br>  中午能不能写一些代码？</p>
 <p>总结：<br>  bug总结：错题本<br>  项目总结；</p>
 <h3 id="冷门小总结"><a href="#冷门小总结" class="headerlink" title="冷门小总结"></a>冷门小总结</h3><p>1.如何判断string是一个数可以是一个小数</p>
 <pre><code>正则：
@@ -328,7 +462,7 @@ System.out.println(&quot;运行时间:&quot; + (endTime - startTime) + &quot;ms&
         <br>
         Copyright © 王邸 2019
         <!--
-          Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+          Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
         -->
       </div>
     </div>
