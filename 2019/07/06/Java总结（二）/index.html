@@ -14,7 +14,7 @@
 <meta property="og:url" content="http://yoursite.com/2019/07/06/Java总结（二）/index.html">
 <meta property="og:site_name" content="路要坚持">
 <meta property="og:description" content="总结时间：0701-0706 概述这周主要把面向对象的内容讲完了。很多东西虽然很熟悉但是却很多细节的处理很重要。是打好基础的关键。但是万变不离其中，离不开三大特性：继承，封装，多态。现在也只能字面意思上去理解到底这些东西是什么。这些东西的规律是什么，但是他为什么这样实现的？最初的构想是什么？等等问题，这不是老师能教你的，你自己需要去学习。上个礼拜简单的讲了什么是封装，但是封装远远没有private">
-<meta property="og:updated_time" content="2019-07-24T14:48:48.693Z">
+<meta property="og:updated_time" content="2019-07-31T11:11:17.826Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java总结（二）">
 <meta name="twitter:description" content="总结时间：0701-0706 概述这周主要把面向对象的内容讲完了。很多东西虽然很熟悉但是却很多细节的处理很重要。是打好基础的关键。但是万变不离其中，离不开三大特性：继承，封装，多态。现在也只能字面意思上去理解到底这些东西是什么。这些东西的规律是什么，但是他为什么这样实现的？最初的构想是什么？等等问题，这不是老师能教你的，你自己需要去学习。上个礼拜简单的讲了什么是封装，但是封装远远没有private">
@@ -155,7 +155,7 @@
 <h2 id="星期一"><a href="#星期一" class="headerlink" title="星期一"></a>星期一</h2><h3 id="代码块"><a href="#代码块" class="headerlink" title="代码块"></a>代码块</h3><p>用{}括起来的代码<br>分类：<br>局部代码块<br>  位置：方法里面(局部位置)<br>  作用：限制局部变量的生命周期，及早释放，提高内存利用率</p>
 <p>构造代码块(语法糖)：<br>  位置：类中方法外(成员位置)<br>  作用：多个构造方法方法中相同的代码存放到一起，每次调用构造都执行，并且在构造方法前执行<br>  相当于放在每个构造函数的首行</p>
 <p>静态代码块：<br>  位置: 成员位置 需要用static标识；<br>  作用：对类进行初始化, 在类加载的时候执行, 并且只执行一次</p>
-<p>  同步代码块(以后再讲)</p>
+<p>  同步代码块(以后再讲)synchronized:是为了线程安全出现的</p>
 <p>这里只需要搞清楚一个问题：这些代码块的执行顺序：<br>静态代码块 &gt;构造代码块(语法糖) &gt; 构造方法<br>先执行父类的,看下面例子：<br><strong>注意：先执行父类静态块，再执行子类静态块。</strong></p>
 <pre><code>class Fu {
   static {
@@ -238,6 +238,7 @@ b:子类的成员变量名称和父类中的成员变量名称一样，这个怎
 c.子类的成员变量隐藏了父类的成员变量？(就近原则)
   super关键字
     super是内存空间的标识
+  super.name //父亲的名字
 </code></pre><p>  B:静态成员:</p>
 <pre><code>a.静态成员也会被继承
 b.如果出现同名的静态变量，那么父类中定义的静态成员只能通过类名访问。
@@ -943,7 +944,7 @@ class ThirdLevel implements Cloneable{
         <br>
         Copyright © 王邸 2019
         <!--
-          Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+          Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
         -->
       </div>
     </div>

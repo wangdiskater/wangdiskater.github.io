@@ -8,16 +8,16 @@
   
   <title>Java总结（四）下 | 路要坚持</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="接上一篇，这一篇介绍的主要内容是堆，二分法以及set集合的知识，以及一些还没学习的知识 星期五7.19堆就是一个完全二叉树，分为大顶堆小顶堆，注意二叉搜索树不一定是完全二叉树哦； 建堆public class Heap {     //属性     private int[] elements;     private int size;      //构造方法     public Heap()">
+  <meta name="description" content="接上一篇，上一篇我们总结了：冒泡，插入，希尔，选择，快排，归并排序。这一篇介绍的主要内容是堆，二分法以及set集合的知识，以及一些还没学习的知识 星期五7.19堆就是一个完全二叉树，分为大顶堆小顶堆，注意二叉搜索树不一定是完全二叉树哦； 建堆public class Heap {     //属性     private int[] elements;     private int size;">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java总结（四）下">
 <meta property="og:url" content="http://yoursite.com/2019/07/21/Java总结（四）下/index.html">
 <meta property="og:site_name" content="路要坚持">
-<meta property="og:description" content="接上一篇，这一篇介绍的主要内容是堆，二分法以及set集合的知识，以及一些还没学习的知识 星期五7.19堆就是一个完全二叉树，分为大顶堆小顶堆，注意二叉搜索树不一定是完全二叉树哦； 建堆public class Heap {     //属性     private int[] elements;     private int size;      //构造方法     public Heap()">
-<meta property="og:updated_time" content="2019-07-27T06:32:25.762Z">
+<meta property="og:description" content="接上一篇，上一篇我们总结了：冒泡，插入，希尔，选择，快排，归并排序。这一篇介绍的主要内容是堆，二分法以及set集合的知识，以及一些还没学习的知识 星期五7.19堆就是一个完全二叉树，分为大顶堆小顶堆，注意二叉搜索树不一定是完全二叉树哦； 建堆public class Heap {     //属性     private int[] elements;     private int size;">
+<meta property="og:updated_time" content="2019-07-31T07:55:12.853Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java总结（四）下">
-<meta name="twitter:description" content="接上一篇，这一篇介绍的主要内容是堆，二分法以及set集合的知识，以及一些还没学习的知识 星期五7.19堆就是一个完全二叉树，分为大顶堆小顶堆，注意二叉搜索树不一定是完全二叉树哦； 建堆public class Heap {     //属性     private int[] elements;     private int size;      //构造方法     public Heap()">
+<meta name="twitter:description" content="接上一篇，上一篇我们总结了：冒泡，插入，希尔，选择，快排，归并排序。这一篇介绍的主要内容是堆，二分法以及set集合的知识，以及一些还没学习的知识 星期五7.19堆就是一个完全二叉树，分为大顶堆小顶堆，注意二叉搜索树不一定是完全二叉树哦； 建堆public class Heap {     //属性     private int[] elements;     private int size;">
   
     <link rel="alternate" href="/" title="路要坚持" type="application/atom+xml">
   
@@ -150,8 +150,8 @@
             
         </div>
         <div class="content" style="overflow: auto">
-            <p>接上一篇，这一篇介绍的主要内容是堆，二分法以及set集合的知识，以及一些还没学习的知识</p>
-<h2 id="星期五7-19"><a href="#星期五7-19" class="headerlink" title="星期五7.19"></a>星期五7.19</h2><h3 id="堆"><a href="#堆" class="headerlink" title="堆"></a>堆</h3><p>就是一个完全二叉树，分为大顶堆小顶堆，注意二叉搜索树不一定是完全二叉树哦；</p>
+            <p>接上一篇，上一篇我们总结了：冒泡，插入，希尔，选择，快排，归并排序。这一篇介绍的主要内容是堆，二分法以及set集合的知识，以及一些还没学习的知识</p>
+<h2 id="星期五7-19"><a href="#星期五7-19" class="headerlink" title="星期五7.19"></a>星期五7.19</h2><h3 id="堆"><a href="#堆" class="headerlink" title="堆"></a>堆</h3><p>就是一个完全二叉树，分为大顶堆小顶堆，<br>注意二叉搜索树不一定是完全二叉树哦；</p>
 <h3 id="建堆"><a href="#建堆" class="headerlink" title="建堆"></a>建堆</h3><pre><code>public class Heap {
     //属性
     private int[] elements;
@@ -193,7 +193,7 @@
 
     /**
      * remove只能remove根节点，
-     * 然后和最后一个元素交换。再从新构造一个堆
+     * 然后把最最后一个元素放到堆顶的位置。再从新构造一个堆
      * 这时候需要从上到下进行调整；先从交换的结点开始向下调整
      * @return
      */
@@ -223,12 +223,6 @@
         }
         return true;
     }
-
-    private void swap(int[] elements, int i, int j) {
-        int temp = elements[i];
-        elements[i] = elements[j];
-        elements[j] = temp;
-    }
 }
 </code></pre><p>堆的应用：<br>堆排序<br>  a.先进行建堆操作<br>    从第一个非叶子结点开始向下进行建堆操作，一直循环到根节点<br>  b.开始排序<br>    把根节点和最后一个无序元素交换<br>  c.重新构造成一个堆从上到下调整</p>
 <pre><code>public class HeapSort {
@@ -237,7 +231,6 @@
         //首先进行建堆的过程
         buildHeap(arr);
         //开始排序，把第一个数和最后一个数交换然后再重新调整堆
-        System.out.println(Arrays.toString(arr));
 
         int i = 0;
         while(i &lt; arr.length-1){ //最后一次就是两个元素比较吧
@@ -300,12 +293,80 @@
     }
 }
 </code></pre><h3 id="二分查找"><a href="#二分查找" class="headerlink" title="二分查找"></a>二分查找</h3><p>算法很简单但是变种却很有趣：<br>最原始的算法：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">public static int search(int[] arr, int value) &#123;</div><div class="line">        // 循环</div><div class="line">        if (arr == null || arr.length == 0) return -1;</div><div class="line">        int low = 0;</div><div class="line">        int high = arr.length - 1;</div><div class="line">        while (low &lt;= high) &#123;</div><div class="line">            int mid = low + ((high - low) &gt;&gt; 1);</div><div class="line">            if (arr[mid] &lt; value) &#123;</div><div class="line">                low = mid + 1;</div><div class="line">            &#125; else if (arr[mid] &gt; value) &#123;</div><div class="line">                high = mid - 1;</div><div class="line">            &#125; else &#123;</div><div class="line">                return mid;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        return -1;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
-<h3 id="二分查找的变种"><a href="#二分查找的变种" class="headerlink" title="二分查找的变种"></a>二分查找的变种</h3><p>查找第一个相等的元素<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">就在while里面多加一个条件就好了</div><div class="line">while (low &lt;= high) &#123;</div><div class="line">    int mid = low + ((high - low) &gt;&gt; 1);</div><div class="line">    if (arr[mid] &lt; value) &#123;</div><div class="line">      low = mid + 1;</div><div class="line">    &#125; else if (arr[mid] &gt; value) &#123;</div><div class="line">      high = mid - 1;</div><div class="line">    &#125; else &#123;</div><div class="line">      if(mid == 0 || arr[mid-1] &lt; value) &#123;</div><div class="line">        return mid;</div><div class="line">      &#125;</div><div class="line">      high = mid-1; //其他情况把相等看成大于</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>查找最后一个相等的元素<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">while (low &lt;= high) &#123;</div><div class="line">   int mid = low + ((high - low) &gt;&gt; 1);</div><div class="line">   if (arr[mid] &lt; key) &#123;</div><div class="line">       low = mid + 1;</div><div class="line">   &#125; else if (arr[mid] &gt; key) &#123;</div><div class="line">       high = mid - 1;</div><div class="line">   &#125; else &#123;</div><div class="line">       if (mid == arr.length - 1 || arr[mid + 1] &gt; key) &#123;</div><div class="line">           return mid;</div><div class="line">       &#125;</div><div class="line">       low = mid + 1; //找到了但是不能证明是最后一个所以还要向后找</div><div class="line">   &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>查找最后一个小于等于的元素<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">while (low &lt;= high) &#123;</div><div class="line">    int mid = low + ((high - low) &gt;&gt; 1);</div><div class="line">    if (arr[mid] &lt;= key) &#123;</div><div class="line">        if (mid == arr.length - 1 || arr[mid + 1] &gt; key) &#123;  //如果是最后一个或者下一个数大于value，就确定是最后一个小于等于value的值</div><div class="line">            return mid;</div><div class="line">        &#125;</div><div class="line">        low = mid + 1;</div><div class="line">    &#125; else &#123;</div><div class="line">        high = mid - 1;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>查找第一个大于等于的元素<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">while (low &lt;= high) &#123;</div><div class="line">    int mid = low + ((high - low) &gt;&gt; 1);</div><div class="line">    if (arr[mid] &lt; key) &#123;</div><div class="line">        low = mid + 1;</div><div class="line">    &#125; else &#123;</div><div class="line">        if (mid == 0 || arr[mid - 1] &lt; key) &#123; //如果是第一个，或者前一个数小于value就能证明mid就是要找的数</div><div class="line">            return mid;</div><div class="line">        &#125;</div><div class="line">        high = mid - 1;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<h2 id="星期六7-20"><a href="#星期六7-20" class="headerlink" title="星期六7.20"></a>星期六7.20</h2><p>Collection:<br>  |– List：可以包含重复元素的有序集合.<br>    |– ArrayList: 底层是数组, 增删慢, 查找快, 线程不安全, 效率高。<br>    |– LinkedList 底层是链表, 增删快, 查找慢, 线程不安全, 效率高。<br>    |– Vector 底层是数组, 增删慢, 查找块, 线程安全, 效率低。<br>  |– Set 不可以包含重复元素的集合(可以有序，也可以无序)<br>    |– HashSet 不保证迭代顺序, 底层是HashMap, 元素的唯一性依赖于存储对象的 equals(), hashCode();<br>      |– LinkedHashSet 迭代顺序和插入的顺序一致, 底层是HashMap和链表, HashMap保证元素的唯一性，链表保证迭代的有序性。<br>    |– TreeSet 元素是从小到大排序的。底层是TreeMap, TreeMap的底层是红黑树。如果构造方法没有传递比较器，就要求元素Comparable接口。</p>
+<pre><code>public static int search(int[] arr, int value) {
+    // 循环
+    if (arr == null || arr.length == 0) return -1;
+    int low = 0;
+    int high = arr.length - 1;
+    while (low &lt;= high) {
+        int mid = low + ((high - low) &gt;&gt; 1);
+        if (arr[mid] &lt; value) {
+            low = mid + 1;
+        } else if (arr[mid] &gt; value) {
+            high = mid - 1;
+        } else {
+            return mid;
+        }
+    }
+    return -1;
+}
+</code></pre><h3 id="二分查找的变种"><a href="#二分查找的变种" class="headerlink" title="二分查找的变种"></a>二分查找的变种</h3><p>查找第一个相等的元素</p>
+<p>就在while里面多加一个条件就好了</p>
+<pre><code>while (low &lt;= high) {
+    int mid = low + ((high - low) &gt;&gt; 1);
+    if (arr[mid] &lt; value) {
+      low = mid + 1;
+    } else if (arr[mid] &gt; value) {
+      high = mid - 1;
+    } else {
+      if(mid == 0 || arr[mid-1] &lt; value) {
+        return mid;
+      }
+      high = mid-1; //其他情况把相等看成大于
+    }
+}
+</code></pre><p>查找最后一个相等的元素<br>最后一个相等的元素有两种情况：第一种，这个数就是最后一个数，或者后面的数比他大</p>
+<pre><code>while (low &lt;= high) {
+   int mid = low + ((high - low) &gt;&gt; 1);
+   if (arr[mid] &lt; key) {
+       low = mid + 1;
+   } else if (arr[mid] &gt; key) {
+       high = mid - 1;
+   } else {
+       if (mid == arr.length - 1 || arr[mid + 1] &gt; key) {
+           return mid;
+       }
+       //找到这个数但是不是最后一个
+       low = mid + 1; //找到了但是不能证明是最后一个所以还要向后找
+   }
+}
+</code></pre><p>查找最后一个小于等于的元素<br>如果找到小于等于的数，然后去判断是否是最后一个：<br>要么是最后一个元素，要么后一个元素比他大</p>
+<pre><code>while (low &lt;= high) {
+    int mid = low + ((high - low) &gt;&gt; 1);
+    if (arr[mid] &lt;= key) {
+        if (mid == arr.length - 1 || arr[mid + 1] &gt; key) {  //如果是最后一个或者下一个数大于value，就确定是最后一个小于等于value的值
+            return mid;
+        }
+        low = mid + 1;
+    } else {
+        high = mid - 1;
+    }
+}
+
+查找第一个大于等于的元素
+
+while (low &lt;= high) {
+    int mid = low + ((high - low) &gt;&gt; 1);
+    if (arr[mid] &lt; key) {
+        low = mid + 1;
+    } else {
+        if (mid == 0 || arr[mid - 1] &lt; key) { //如果是第一个，或者前一个数小于value就能证明mid就是要找的数
+            return mid;
+        }
+        high = mid - 1;
+    }
+}
+</code></pre><h2 id="星期六7-20"><a href="#星期六7-20" class="headerlink" title="星期六7.20"></a>星期六7.20</h2><p>Collection:<br>  |– List：可以包含重复元素的有序集合.<br>    |– ArrayList: 底层是数组, 增删慢, 查找快, 线程不安全, 效率高。<br>    |– LinkedList 底层是链表, 增删快, 查找慢, 线程不安全, 效率高。<br>    |– Vector 底层是数组, 增删慢, 查找块, 线程安全, 效率低。<br>  |– Set 不可以包含重复元素的集合(可以有序，也可以无序)<br>    |– HashSet 不保证迭代顺序, 底层是HashMap, 元素的唯一性依赖于存储对象的 equals(), hashCode();<br>      |– LinkedHashSet 迭代顺序和插入的顺序一致, 底层是HashMap和链表, HashMap保证元素的唯一性，链表保证迭代的有序性。<br>    |– TreeSet 元素是从小到大排序的。底层是TreeMap, TreeMap的底层是红黑树。如果构造方法没有传递比较器，就要求元素Comparable接口。</p>
 <h3 id="HashSet-存储是无序的"><a href="#HashSet-存储是无序的" class="headerlink" title="HashSet:存储是无序的"></a>HashSet:存储是无序的</h3><p>不保证 set 的迭代顺序<br>特别是它不保证该顺序恒久不变。<br>HashSet如何保证元素唯一性</p>
 <pre><code>底层数据结构是哈希表(元素是链表的数组)
 哈希表依赖于哈希值存储
@@ -313,8 +374,44 @@
 int hashCode()
 boolean equals(Object obj)
 </code></pre><p>所以在添加元素之后，修改了元素的属性值，contains就会找不到元素。而出现false;虽然属性名没有变但是属性变了也不行。看下面源码：contains方法调用了map的containsKey方法</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line">//HashSet.java</div><div class="line">public boolean contains(Object o) &#123;</div><div class="line">    return map.containsKey(o);</div><div class="line">&#125;</div><div class="line"></div><div class="line">//HashMap.java</div><div class="line">public boolean containsKey(Object key) &#123;</div><div class="line">    return getNode(hash(key), key) != null;</div><div class="line">&#125;</div><div class="line">static final int hash(Object key) &#123;</div><div class="line">    int h;</div><div class="line">    return (key == null) ? 0 : (h = key.hashCode()) ^ (h &gt;&gt;&gt; 16);</div><div class="line">&#125;</div><div class="line"></div><div class="line">public final int hashCode() &#123;</div><div class="line">    return Objects.hashCode(key) ^ Objects.hashCode(value);</div><div class="line">&#125;</div><div class="line"></div><div class="line">final Node&lt;K,V&gt; getNode(int hash, Object key) &#123;</div><div class="line">    Node&lt;K,V&gt;[] tab; Node&lt;K,V&gt; first, e; int n; K k;</div><div class="line">    if ((tab = table) != null &amp;&amp; (n = tab.length) &gt; 0 &amp;&amp;</div><div class="line">        (first = tab[(n - 1) &amp; hash]) != null) &#123;</div><div class="line">        if (first.hash == hash &amp;&amp; // always check first node</div><div class="line">            ((k = first.key) == key || (key != null &amp;&amp; key.equals(k))))</div><div class="line">            return first;</div><div class="line">        if ((e = first.next) != null) &#123;</div><div class="line">            if (first instanceof TreeNode)</div><div class="line">                return ((TreeNode&lt;K,V&gt;)first).getTreeNode(hash, key);</div><div class="line">            do &#123;</div><div class="line">                if (e.hash == hash &amp;&amp;</div><div class="line">                    ((k = e.key) == key || (key != null &amp;&amp; key.equals(k))))</div><div class="line">                    return e;</div><div class="line">            &#125; while ((e = e.next) != null);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    return null;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="TreeSet-这是有序的（如何确定排序的规则？）"><a href="#TreeSet-这是有序的（如何确定排序的规则？）" class="headerlink" title="TreeSet:这是有序的（如何确定排序的规则？）"></a>TreeSet:这是有序的（如何确定排序的规则？）</h3><p>使用元素的自然顺序对元素进行排序需要实现comparable接口</p>
+<pre><code>//HashSet.java
+public boolean contains(Object o) {
+    return map.containsKey(o);
+}
+
+//HashMap.java
+public boolean containsKey(Object key) {
+    return getNode(hash(key), key) != null;
+}
+static final int hash(Object key) {
+    int h;
+    return (key == null) ? 0 : (h = key.hashCode()) ^ (h &gt;&gt;&gt; 16);
+}
+
+public final int hashCode() {
+    return Objects.hashCode(key) ^ Objects.hashCode(value);
+}
+
+final Node&lt;K,V&gt; getNode(int hash, Object key) {
+    Node&lt;K,V&gt;[] tab; Node&lt;K,V&gt; first, e; int n; K k;
+    if ((tab = table) != null &amp;&amp; (n = tab.length) &gt; 0 &amp;&amp;
+        (first = tab[(n - 1) &amp; hash]) != null) {
+        if (first.hash == hash &amp;&amp; // always check first node
+            ((k = first.key) == key || (key != null &amp;&amp; key.equals(k))))
+            return first;
+        if ((e = first.next) != null) {
+            if (first instanceof TreeNode)
+                return ((TreeNode&lt;K,V&gt;)first).getTreeNode(hash, key);
+            do {
+                if (e.hash == hash &amp;&amp;
+                    ((k = e.key) == key || (key != null &amp;&amp; key.equals(k))))
+                    return e;
+            } while ((e = e.next) != null);
+        }
+    }
+    return null;
+}
+</code></pre><h3 id="TreeSet-这是有序的（如何确定排序的规则？）"><a href="#TreeSet-这是有序的（如何确定排序的规则？）" class="headerlink" title="TreeSet:这是有序的（如何确定排序的规则？）"></a>TreeSet:这是有序的（如何确定排序的规则？）</h3><p>使用元素的自然顺序对元素进行排序需要实现comparable接口</p>
 <p>或者根据创建 set 时提供的 Comparator 进行排序<br>具体取决于使用的构造方法。看下面例子：输入五个学生进行排序<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">public class HomeWork3 &#123;</div><div class="line">    public static void main(String[] args) &#123;</div></pre></td></tr></table></figure></p>
 <p>下面是实现了comparator的匿名内部类<br>因为接口只用实现一个compare方法所以可以使用lambda表达式</p>
 <pre><code>// TreeSet&lt;ScutStudent&gt; set = new TreeSet&lt;&gt;((t1, t2) -&gt; t2.total - t1.total);
@@ -462,7 +559,7 @@ System.out.println(&quot;运行时间:&quot; + (endTime - startTime) + &quot;ms&
         <br>
         Copyright © 王邸 2019
         <!--
-          Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+          Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
         -->
       </div>
     </div>

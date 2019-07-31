@@ -8,16 +8,16 @@
   
   <title>Java总结（一） | 路要坚持</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="1.把第三章的客户题写完了；放在第一行代码HomeWork中2.总结本周学习的内容： 星期一赋值运算符：基本运算符 =拓展赋值运算符： += -= 等a=b=101.赋值表达式是有值的  a+b  b=10; //它的值等于赋值运算符右边表达式的值；2.赋值运算符从右向左结合的； 但是算数运算符是从左到右结合的；  a += 20; –&amp;gt; a = a + 20;  不能写a = 20 + a">
+  <meta name="description" content="1.把第三章的客户题写完了；放在第一行代码HomeWork中2.总结本周学习的内容： 前言我发现之前还有一部分的基础知识还没有中总结，直到复习的时候才发现。已经过去一个月了。但是前面的知识还是很重要的，所以，把所有的JAVASE的知识点补充完整很重要。今天还要考试，加油吧！ 预备知识标识符：概述：就是给类,接口,方法,变量等起名字时使用的字符序列组成规则： 英文大小写字母 数字 $和_ 注意事项：">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java总结（一）">
 <meta property="og:url" content="http://yoursite.com/2019/06/30/Java总结（一）/index.html">
 <meta property="og:site_name" content="路要坚持">
-<meta property="og:description" content="1.把第三章的客户题写完了；放在第一行代码HomeWork中2.总结本周学习的内容： 星期一赋值运算符：基本运算符 =拓展赋值运算符： += -= 等a=b=101.赋值表达式是有值的  a+b  b=10; //它的值等于赋值运算符右边表达式的值；2.赋值运算符从右向左结合的； 但是算数运算符是从左到右结合的；  a += 20; –&amp;gt; a = a + 20;  不能写a = 20 + a">
-<meta property="og:updated_time" content="2019-07-25T00:40:32.883Z">
+<meta property="og:description" content="1.把第三章的客户题写完了；放在第一行代码HomeWork中2.总结本周学习的内容： 前言我发现之前还有一部分的基础知识还没有中总结，直到复习的时候才发现。已经过去一个月了。但是前面的知识还是很重要的，所以，把所有的JAVASE的知识点补充完整很重要。今天还要考试，加油吧！ 预备知识标识符：概述：就是给类,接口,方法,变量等起名字时使用的字符序列组成规则： 英文大小写字母 数字 $和_ 注意事项：">
+<meta property="og:updated_time" content="2019-07-31T14:13:49.408Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java总结（一）">
-<meta name="twitter:description" content="1.把第三章的客户题写完了；放在第一行代码HomeWork中2.总结本周学习的内容： 星期一赋值运算符：基本运算符 =拓展赋值运算符： += -= 等a=b=101.赋值表达式是有值的  a+b  b=10; //它的值等于赋值运算符右边表达式的值；2.赋值运算符从右向左结合的； 但是算数运算符是从左到右结合的；  a += 20; –&amp;gt; a = a + 20;  不能写a = 20 + a">
+<meta name="twitter:description" content="1.把第三章的客户题写完了；放在第一行代码HomeWork中2.总结本周学习的内容： 前言我发现之前还有一部分的基础知识还没有中总结，直到复习的时候才发现。已经过去一个月了。但是前面的知识还是很重要的，所以，把所有的JAVASE的知识点补充完整很重要。今天还要考试，加油吧！ 预备知识标识符：概述：就是给类,接口,方法,变量等起名字时使用的字符序列组成规则： 英文大小写字母 数字 $和_ 注意事项：">
   
     <link rel="alternate" href="/" title="路要坚持" type="application/atom+xml">
   
@@ -151,18 +151,345 @@
         </div>
         <div class="content" style="overflow: auto">
             <p>1.把第三章的客户题写完了；放在第一行代码HomeWork中<br>2.总结本周学习的内容：</p>
-<h2 id="星期一"><a href="#星期一" class="headerlink" title="星期一"></a>星期一</h2><h3 id="赋值运算符："><a href="#赋值运算符：" class="headerlink" title="赋值运算符："></a>赋值运算符：</h3><p>基本运算符 =<br>拓展赋值运算符： += -= 等<br>a=b=10<br>1.赋值表达式是有值的<br>  a+b<br>  b=10; //它的值等于赋值运算符右边表达式的值；<br>2.赋值运算符从右向左结合的； 但是算数运算符是从左到右结合的；<br>  a += 20; –&gt; a = a + 20;  不能写a = 20 + a;<br>  左边一定要放在左边；a -= b –&gt; a = a-b; 只改变a的值；</p>
-<p>注意事项：<br>    扩展的赋值运算符隐含了强制类型转换；<br>    btye b1 = 10;<br>    btye b2 = 20;<br>    //b1 = b1 + b2;  //会报错<br>    b1 += b2;  –&gt;（byte）(b1+b2);<br>    System.out.println(b1); //不会报错</p>
-<h3 id="关系运算符："><a href="#关系运算符：" class="headerlink" title="关系运算符："></a>关系运算符：</h3><p>   == ！= &lt; &gt; &lt;= &gt;= instanceof</p>
-<p>注意事项：<br>    instanceof 运算符不能用于基本数据类型;用于判断两个类是否相同<br>    比较运算符结果是布尔型 true or  false;<br>    比较运算符不要写成赋值运算符，特别在if的判断中;</p>
-<h3 id="逻辑运算符："><a href="#逻辑运算符：" class="headerlink" title="逻辑运算符："></a>逻辑运算符：</h3><p>&amp;&amp;:第一个是false，第二个表达式就不会被计算<br>||：第一个是true, 第二个表达式也不会计算；</p>
-<p>在以后开发中，我们可以&amp; ，| 还是&amp;&amp; ||<br>   使用&amp;&amp; || 节约时间 方便编码；</p>
-<h3 id="位运算-难-："><a href="#位运算-难-：" class="headerlink" title="位运算(难)："></a>位运算(<strong><em>难</em></strong>)：</h3><p>&lt;&lt; &gt;&gt; &gt;&gt;&gt; （无符号右移） &amp; | ^ ~</p>
-<p>按位与： &amp;  同时为1 结果为1；<br>按位或： |  同时为0 结果为0 否则为1<br>按位异或： ^ 不同为1 其余为0<br>按位取反： ~  单目运算符</p>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>我发现之前还有一部分的基础知识还没有中总结，直到复习的时候才发现。已经过去一个月了。但是前面的知识还是很重要的，所以，把所有的JAVASE的知识点补充完整很重要。今天还要考试，加油吧！</p>
+<h2 id="预备知识"><a href="#预备知识" class="headerlink" title="预备知识"></a>预备知识</h2><h3 id="标识符："><a href="#标识符：" class="headerlink" title="标识符："></a>标识符：</h3><p>概述：就是给类,接口,方法,变量等起名字时使用的字符序列<br>组成规则：</p>
+<pre><code>英文大小写字母
+数字
+$和_
+</code></pre><p>注意事项：</p>
+<pre><code>不能以数字开头
+不能是java中的关键字
+区分大小写
+</code></pre><p>命名规范：见名知义<br>  包：(其实就是文件夹,用于解决相同类名问题)<br>    单级包: 全部小写</p>
+<pre><code>henson
+</code></pre><p>  多级包：单词全部小写, 域名反转,单词之间以.分隔</p>
+<pre><code>cskaoyan.com --&gt; com.cskaoyan
+</code></pre><p>类和接口：<br>  一个单词：首字母大写，其余字母小写</p>
+<pre><code>Student, Cloneable
+</code></pre><p>  多个单词：所有单词首字母大写 (驼峰命名法)</p>
+<pre><code>HelloWorld
+</code></pre><p>方法和变量<br>  一个单词：全部小写</p>
+<pre><code>main() age
+</code></pre><p>  多个单词：第一个单词首字母小写，其余单词首字母大写</p>
+<pre><code>showAllNames() maxAge
+</code></pre><p>常量<br>  一个单词：全部大写</p>
+<pre><code>PI
+</code></pre><p>  多个单词：全部大写，单词之间以_分隔</p>
+<pre><code>MAX_VALUE
+</code></pre><h3 id="常量："><a href="#常量：" class="headerlink" title="常量："></a>常量：</h3><p>概述：在程序运行过程中，值不会发生改变的量。<br>分类：</p>
+<pre><code>字面值常量
+字符串常量：用双引号括起来的内容 &quot;Hello, world!&quot;
+整数常量：0, 1, 100 (默认是int类型)
+浮点数常量： 3.14, 2.67
+字符常量： &apos;A&apos;, &apos;0&apos;, &apos;中&apos;
+布尔常量： true, false
+空常量： null
+
+自定义常量(final)
+</code></pre><h3 id="整数常量的四种表现形式"><a href="#整数常量的四种表现形式" class="headerlink" title="整数常量的四种表现形式"></a>整数常量的四种表现形式</h3><pre><code>二进制：0b100
+八进制: 0100
+十进制: 100
+十六进制：0x100
+</code></pre><p>注意事项：<br>  a.默认表现形式是十进制<br>  b.在JAVA是以补码的方式计算的，所以你<strong>输进去的时候就必须是补码</strong>看下面例子</p>
+<pre><code>class homework3{
+  public static void main(String[] args){
+    System.out.println(Long.toHexString(0x100000000L + 0xcafebabe));//打印出cafebabe 并不需要转
+  }
+}
+</code></pre><h3 id="数据类型："><a href="#数据类型：" class="headerlink" title="数据类型："></a>数据类型：</h3><p>  Java语言是强类型语言，对于每一种数据都定义了明确的具体数据类型。<br>  分类：<br>  <strong>基本数据类型(8种)</strong></p>
+<table>
+<thead>
+<tr>
+<th>整数</th>
+<th style="text-align:center">字节</th>
+<th style="text-align:center">范围</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>byte</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">-128 ~ 127</td>
+</tr>
+<tr>
+<td>short</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">65536</td>
+</tr>
+<tr>
+<td>int</td>
+<td style="text-align:center">4</td>
+<td style="text-align:center">43亿(int不能表示全体人类)</td>
+</tr>
+<tr>
+<td>long</td>
+<td style="text-align:center">8</td>
+<td style="text-align:center"></td>
+</tr>
+</tbody>
+</table>
+<p>表示方式：</p>
+<pre><code>二进制：0b
+八进制：0
+十进制：
+十六进制：0x
+</code></pre><table>
+<thead>
+<tr>
+<th>浮点数</th>
+<th style="text-align:center">字节</th>
+<th style="text-align:center">范围</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>float</td>
+<td style="text-align:center">4</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td>double</td>
+<td style="text-align:center">8</td>
+<td style="text-align:center"></td>
+</tr>
+</tbody>
+</table>
+<p>表示方式：</p>
+<pre><code>十进制数形式，如: 3.14   314.0
+科学记数法：如：3.14e0  3.14e2
+</code></pre><table>
+<thead>
+<tr>
+<th>类型</th>
+<th style="text-align:center">字节</th>
+<th style="text-align:center">举例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>字符char</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">‘中’</td>
+</tr>
+<tr>
+<td>布尔boolean</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">true, false。</td>
+</tr>
+</tbody>
+</table>
+<p>引用数据类型</p>
+<pre><code>类, 接口, 数组
+</code></pre><p>注意事项：</p>
+<pre><code>char占用两个字节，在Java中char采用是Unicode编码。
+在Java中不能用0表示false, 非0表示true。
+整数字面值常量默认是int类型，如果要表示long类型的整数，后面要加l或L, 最好使用大写L.
+浮点数字面值常量默认是double类型。如果要表示float类型，后面要加f或F.
+</code></pre><p>看例子：</p>
+<pre><code>/*
+猜测答案：66666
+实际答案：17777
+注意数的类型
+*/
+class DataTypeDemo3 {
+  public static void main(String[] args) {
+    System.out.println(12345 + 5432l); //这是小写的L
+    System.out.println(12345 + 5432L);
+  }
+}
+</code></pre><h3 id="隐式转化："><a href="#隐式转化：" class="headerlink" title="隐式转化："></a>隐式转化：</h3><pre><code>byte --&gt; short --&gt; int --&gt; long --&gt; float --&gt; double.
+char --&gt; int
+</code></pre><p>注意事项：</p>
+<pre><code>byte b = 10;编译器会判断常量值是否超出byte的表示范围，如果超出了就编译不通过，否则就赋值成功。
+boolean 不能和其他基本类型转换。
+char能够转换成int类型。(把char看成特殊的整型)
+</code></pre><p>问题：long占用8个字节, float占用4个字节, 为什么 long –&gt; float？</p>
+<pre><code>原因是整数和浮点数在计算机中存储的方式不一样。float的表数范围是比long类型大的。
+2^63 &lt; 8^21 &lt; 3.4*10^38
+</code></pre><p>面试题</p>
+<pre><code>byte b1=3,  b2=4, b;
+b = b1 + b2; (1)
+b = 3 + 4;   (2)
+</code></pre><p>哪句是编译失败的呢？为什么呢？<br>第一句编译失败，加法会隐式转化成int类型相加<br>第二句两个常量值相加为7没有超过byte的范围不会报错</p>
+<p>注意事项：</p>
+<pre><code>byte, short, char 参与运算的会自动提升为int类型。即使是同一种数据类型参与运算。
+</code></pre><h3 id="强制类型转换："><a href="#强制类型转换：" class="headerlink" title="强制类型转换："></a>强制类型转换：</h3><p>  目标类型 变量名= (目标类型)(被转换的数据);<br>  一般建议，最好不要随意使用强制类型转换，容易造成数据精度的损失。<br>  1) 表数范围大的数据类型转换为表数范围小的数据类型时，要加上强制转换符，但可能造成精度损失；使用时要格外注意。<br>  2) 有多种类型的数据混合运算时，系统首先自动的将所有数据转换成容量最大的那一种数据类型，然后再进行计算。</p>
+<p><strong>看题目（注意强制类型转换是否有符号位转换）</strong></p>
+<pre><code>class DataTypeDemo4 {
+  public static void main(String[] args) {
+    /*int i = -1;
+    System.out.println(i);*/
+    int i = (int)(char)(byte) -1;
+    System.out.println(i); //65535
+  }
+}
+
+int： 1111 1111 1111 1111 1111 1111 1111 1111
+byte: 1111 1111(有符号的整数, 符号位扩展)
+char: 1111 1111 1111 1111 (无符号的整数, 执行0扩展)
+int:  0000 0000 0000 0000 1111 1111 1111 1111
+
+/*
+猜测结果：1000000
+答案：-21
+原因：nanosPerday超出int的表示范围。
+1. 把nanosPerDay声明成long类型。
+  结果还是-21. 为什么？因为计算的结果int 之后在转成long的。所以应该在第一个数开始加L
+2. 24 * 60 * 60 * 1000 * 1000 * 1000它的结果就已经出现了精度损失。怎么改进？在后面添加L.
+  答案是5794.
+3. 24 * 60 * 60 * 1000 * 1000 就已经超出int的表数范围，出现了精度损失
+建议在第一个数前面加L这样计算就都以long类型来计算了
+*/
+class DataTypeDemo5 {
+  public static void main(String[] args) {
+    int millisPerDay = 24 * 60 * 60 * 1000;
+    //int nanosPerDay = 24 * 60 * 60 * 1000 * 1000 * 1000;
+    long nanosPerDay = 24L * 60 * 60 * 1000 * 1000 * 1000;
+    System.out.println(nanosPerDay / millisPerDay); // 1000*1000
+  }
+}
+</code></pre><p>请写出下列程序结果</p>
+<pre><code>System.out.println(‘a’);
+System.out.println(‘a’+1);  //98
+System.out.println(“hello”+’a’+1);   //helloa1
+System.out.println(‘a’+1+”hello”);   //98hello
+System.out.println(“5+5=”+5+5);
+System.out.println(5+5+”=5+5”);
+</code></pre><p>char 就是特殊的整型，可以转换成无符号的int<br>+都是从左到右结合</p>
+<h3 id="JAVA关于余数的处理"><a href="#JAVA关于余数的处理" class="headerlink" title="JAVA关于余数的处理"></a>JAVA关于余数的处理</h3><pre><code>/*
+算术运算符：
+  + - * / % ++ --
+  +：
+    a. 加法操作
+    b. 表示正数
+    c. 表示字符串的拼接 (运算符的重载)
+
+  /: 整数之间相除，结果是整数。(向0取整)
+    四舍五入, 向上取整, 向下取整, 向0取整
+    如果想得到浮点数，怎么办？
+    在前面乘以1.0即可
+
+  %：定义： a % b = a - (a / b) * b;
+    取余%操作是一个复杂的操作，比较耗时。在一些对性能要求比较高的应用中，最好不要用取余操作。
+
+注意取余数：
+  JAVA取余数和现实取余数是不同的。
+  现实的余数都是正的，
+  JAVA的余数可是是负数
+*/
+class OperatorDemo3 {
+  public static void main(String[] args) {
+    int a = 3;
+    int b = 4;
+    System.out.println(a + b); // 7
+    System.out.println(a - b); // -1
+    System.out.println(a * b); // 12
+    System.out.println(a / b); // 0
+    System.out.println(1.0 * a b); // 0.75
+
+    System.out.println(&quot;--------------------------&quot;);
+    //%：java定义： a % b = a - (a / b) * b;
+    System.out.println(a % b);  // 3 mod 4 = 3,     3 % 4 = 3 - (3 / 4) * 4 = 3;
+    System.out.println(-a % b); // -3 mod 4 = 1,    -3 % 4 = -3 - (-3 / 4) * 4 = -3
+    System.out.println(a % -b); // 3 mod -4 = 3     3 % -4 = 3 - (3 / -4) * -4 = 3;
+    System.out.println(-a % -b); // -3 mod -4 = 1   -3 % -4 = -3 - (-3 / -4) * -4 = -3;
+  }
+}
+</code></pre><h3 id="关于自增自减的问题"><a href="#关于自增自减的问题" class="headerlink" title="关于自增自减的问题"></a>关于自增自减的问题</h3><p>自增：++</p>
+<pre><code>前自增：++a; 先自增再参与计算
+后自增：a++; 先参与计算，再自增
+</code></pre><p>自减：–</p>
+<pre><code>前自减：--a; 先自减再参与计算
+后自减：a--; 先参与计算，再自减
+</code></pre><p>注意事项：</p>
+<pre><code>单独使用效果相同
+参与运算使用，在操作数的前后效果不同
+
+
+class OperatorDemo4 {
+  public static void main(String[] args) {
+    int a = 10;
+    int b = 10;
+    int c = 10;
+
+    a = b++; // a=10, b=11, c=10
+    c = --a; // a=9, b=11, c=9
+    b = ++a;// a=10, b=10, c=9
+    a = c--;// a=9, b=10, c=8
+
+    System.out.println(&quot;a=&quot; + a); // a=9
+    System.out.println(&quot;b=&quot; + b); // b=10
+    System.out.println(&quot;c=&quot; + c); // c=8
+</code></pre><p>//算数运算符是从左到右结合的；</p>
+<pre><code>int a = 4;
+int b = (a++) + (++a) + (a*10); // b = 4 + 6 + 60 = 70
+</code></pre><p>答案：</p>
+<pre><code>b = a++ = 4   (a = 5)
+b = 4 + (++a) = 4 + 6 = 10 (a = 6)
+b = 10 + a* 10 = 70
+</code></pre><p>问题二</p>
+<pre><code>    int i = 12;
+    System.out.println(i+=i-=i*=i) ;
+
+    //先写成：
+    i = i + i
+    i = i - i
+    i = i * i
+    //然后把每行的结果放到上一行
+    i = i + i - i*i;
+    // 12+12-（12*12）= -120
+
+  }
+}
+</code></pre><p>//问题三</p>
+<pre><code>class OperatorDemo5 {
+  public static void main(String[] args) {
+    int a = 3;
+    a = a++;
+    a = a++;
+    a = a++;
+    a = a++;// 3
+
+    // a = ++a;
+    // a = ++a;
+    // a = ++a;
+    // a = ++a; //7
+    System.out.println(a);
+  }
+}
+
+
+int b = a++;
+  int temp = a;
+  a = a + 1;
+  b = temp;
+a = a++
+  int temp = a; //先赋值
+  a = a + 1;   //再加加了
+  a = temp;
+先加加再赋值
+int b = ++a;
+  a = a + 1;
+  b = a;
+</code></pre><h2 id="星期一"><a href="#星期一" class="headerlink" title="星期一"></a>星期一</h2><h3 id="赋值运算符："><a href="#赋值运算符：" class="headerlink" title="赋值运算符："></a>赋值运算符：</h3><p>基本运算符 =<br>拓展赋值运算符： += -= 等<br>a=b=10<br>1.赋值表达式是有值的<br>  a+b<br>  b=10; //它的值等于赋值运算符右边表达式的值；<br>2.赋值运算符从右向左结合的； 但是算数运算符是从左到右结合的；<br>  a += 20; –&gt; a = a + 20;  不能写a = 20 + a;<br>  左边一定要放在左边；a -= b –&gt; a = a-b; 只改变a的值；</p>
+<p>注意事项：<br>    扩展的赋值运算符隐含了强制类型转换；<br>    btye b1 = 10;<br>    btye b2 = 20;<br>    <strong>b1 = b1 + b2;  //会报错，运算换变成int进行计算，再赋值回给byte肯定不行</strong><br>    b1 += b2;  –&gt;（byte）(b1+b2);//不会报错；<br>    System.out.println(b1); //不会报错</p>
+<h3 id="关系运算符："><a href="#关系运算符：" class="headerlink" title="关系运算符："></a>关系运算符：</h3><pre><code>== ！= &lt; &gt; &lt;= &gt;= instanceof
+</code></pre><p>注意事项：</p>
+<pre><code>instanceof 运算符不能用于基本数据类型;用于判断两个类是否相同
+比较运算符结果是布尔型 true or  false;
+比较运算符不要写成赋值运算符，特别在if的判断中;
+</code></pre><h3 id="逻辑运算符："><a href="#逻辑运算符：" class="headerlink" title="逻辑运算符："></a>逻辑运算符：</h3><p>&amp;&amp;:第一个是false，第二个表达式就不会被计算<br>||：第一个是true, 第二个表达式也不会计算；</p>
+<p>在以后开发中，我们可以&amp; ，| 还是&amp;&amp; ||<br>答：使用&amp;&amp; || 节约时间 方便编码，看下面的例子</p>
+<pre><code>if(i &lt; arr.length &amp;&amp;  arr[i] &lt; arr[arr.length])
+</code></pre><p>这样写就不会出现数组下标越界的异常，如果写&amp; 两个都判断就可能出现数组下标越界的异常</p>
+<h3 id="位运算-难-："><a href="#位运算-难-：" class="headerlink" title="位运算(难)："></a>位运算(<strong><em>难</em></strong>)：</h3><pre><code>&lt;&lt;   &gt;&gt;   &gt;&gt;&gt; （无符号右移） &amp; | ^ ~
+</code></pre><p>按位与： &amp;  同时为1 结果为1；<br>按位或： |  同时为0 结果为0 否则为1<br>按位异或： ^ 不同为1 其余为0<br>按位取反： ~  单目运算符</p>
 <p>注意事项：<br>    位运算只能用于整数和char(char类型可以看成无符号的整数)；<br>    位运算的效率是最高的</p>
 <p>一些用位运算题目：</p>
-<h4 id="1-对2的n次幂取余-都可以转成位运算"><a href="#1-对2的n次幂取余-都可以转成位运算" class="headerlink" title="1.对2的n次幂取余 都可以转成位运算"></a>1.对2的n次幂取余 都可以转成位运算</h4><p>a%64 == a&amp;（2^n-1）;<br>2^n:<br>    1101 1101<br>%<br>    0100 0000</p>
+<h4 id="1-对2的n次幂取余-都可以转成位运算"><a href="#1-对2的n次幂取余-都可以转成位运算" class="headerlink" title="1.对2的n次幂取余 都可以转成位运算"></a>1.对2的n次幂取余 都可以转成位运算</h4><p>a % 64 == a &amp;（2^n-1）;<br>2^n:<br>    1101 1101<br>%<br>    0100 0000</p>
 <p>可以转换成：<br>    1101 1101<br>&amp;<br>    0011 1111</p>
+<p>应用1：判断一个数是奇数还是偶数<br>a &amp; 1 = 1 -&gt; 奇数<br>a &amp; 1 = 0 -&gt; 偶数</p>
+<p>应用2：在hashMap的数组中，在求index时候就会求余数的操作。而且hashMap的数组长度是2^n就是为了方便取余数。使用的就是这里的方法；</p>
 <h4 id="2-判断一个数是否是2的n次幂？"><a href="#2-判断一个数是否是2的n次幂？" class="headerlink" title="2.判断一个数是否是2的n次幂？"></a>2.判断一个数是否是2的n次幂？</h4><p>  2^n :因子都是2；<br>  时间复杂度：log n;</p>
 <p>能否在常量时间复杂度内，判断一个数是否是2^n;<br>  2^n的存储特点：只有一个1 ，后面全部0；<br>  a &amp; (a-1) == 0;</p>
 <p>  0100 0000<br>&amp; 0011 1111<br>  0000 0000</p>
@@ -213,13 +540,18 @@
 <p>  格式：<br>    修饰符 返回值类型 方法名(参数类型 参数名1, 参数类型 参数名2…) {<br>      函数体;<br>      return 返回值;<br>    }</p>
 <p>  方法格式解释<br>    修饰符 比较多，后面会详细介绍。目前 public static<br>    返回值类型 用于限定返回值的数据类型<br>    方法名 标识符，为了方便我们调用方法<br>    参数类型 限定调用方法时传入参数的数据类型<br>    参数名 是一个变量，接收调用方法时传入的参数<br>    方法体 完成功能的代码<br>    return 结束方法以及返回方法指定类型的值<br>    返回值 程序被return带回的结果，返回给调用者</p>
 <p>  如何写一个方法：<br>    a. 明确功能<br>    b. 返回值类型<br>    c. 参数列表</p>
-<p>  练习：求两个数据之和<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">/*</div><div class="line">  功能：求两个数据的和</div><div class="line">  返回值类型：int</div><div class="line">  参数列表： int int</div><div class="line">*/</div></pre></td></tr></table></figure></p>
-<p>  返回值类型不为void方法的调用：<br>    a. 单独调用<br>    b. 输出调用<br>    c. 赋值调用</p>
+<p>  练习：求两个数据之和</p>
+<pre><code>/*
+  功能：求两个数据的和
+  返回值类型：int
+  参数列表： int int
+*/
+</code></pre><p>  返回值类型不为void方法的调用：<br>    a. 单独调用<br>    b. 输出调用<br>    c. 赋值调用</p>
 <p>注意事项：<br>  方法不调用不执行。</p>
 <h2 id="星期三："><a href="#星期三：" class="headerlink" title="星期三："></a>星期三：</h2><h3 id="方法-下"><a href="#方法-下" class="headerlink" title="方法(下)"></a>方法(下)</h3><p>包：同一个包下面能够有两个名字相同的类吗？<br>    不能<br>同一个类下面能有两个名字相同的方法吗？<br>    可以。方法的重载。</p>
 <p>方法重载：<br>  a. 在同一个类<br>  b. 方法名字相同<br>  c. 参数列表不同(参数类型, 参数个数, 参数顺序)</p>
 <p>术语：方法的签名(signature) 方法名 + 参数列表<br>  同一个类中方法名字可以相同，但是方法的签名不能相同</p>
-<p>问题：方法的签名为什么与返回值类型无关？<br>  单独调用时，就不能区分到底使用哪个方法。</p>
+<p>问题：方法的签名为什么与返回值类型无关？<br>  如果包括返回值类型，那么函数运行就不知道应该是走去void 的 还是去int返回值的方法。<br>  但是感觉再智能一点就能判断；<br>  单独调用时，就不能区分到底使用哪个方法。</p>
 <p>问题2：求两个数据的和。参数类型分别为两个byte类型，两个short类型，两个int类型，两个long类型，并在main方法中进行测试。</p>
 <p>问题： 如果传入的参数类型不同会怎么样,如下代码：</p>
 <pre><code>public int add(int a, int b) {
@@ -253,13 +585,14 @@ System.out.println(Arrays.toString(arr2)); //[4, 5, 6]
 change(arr1, arr2);
 System.out.println(Arrays.toString(arr1)); //[1, 2, 3]
 System.out.println(Arrays.toString(arr2)); //[4, 5, 6]
+
 public static void change(int[] arr1, int[] arr2) {
   int[] temp = arr1;
   arr1 = arr2;
   arr2 = temp;
 }
 </code></pre><p>这里并不会交换数组。不要死记硬背说引用类型会修改。这里只是在调用change函数时，<br>把两个数组位置变化。并没有影响main函数中的值。所以打印出来自然就不会变了</p>
-<h3 id="递归"><a href="#递归" class="headerlink" title="递归"></a>递归</h3><p>  方法定义中调用方法本身的现象<br>  java.lang.StackOverflowError：死递归, 递归太深了</p>
+<h3 id="递归"><a href="#递归" class="headerlink" title="递归"></a>递归</h3><p>  方法定义中调用方法本身的现象<br>  java.lang.StackOverflowError：死递归, 递归太深了<br>  递归小心重复计算的问题</p>
 <p>递归和循环在某些情况下可以相互转换。</p>
 <pre><code>class RecursionDemo3 {
   public static void main(String[] args) {
@@ -380,14 +713,20 @@ class RecursionDemo7 {
   char          &apos;\u0000&apos;
   boolean         false
   引用类型        null
-</code></pre><p>  c.在类中位置不同</p>
-<pre><code>局部变量: 方法内存或者方法声明上
+</code></pre><p><strong>局部变量一定要记得给初始化的值，并不像成员变量。这点很容易忘记，所以你要记得！</strong></p>
+<p>  c.在类中位置不同</p>
+<pre><code>局部变量: 方法内或者方法声明上
 成员变量：类中,方法外
 </code></pre><p>  d.生命周期不同</p>
 <pre><code>局部变量: 随着方法的入栈而开始，随着方法的出栈而消亡
 成员变量：随着对象的创建而开始, 随着对象的死亡而消亡
-</code></pre><p>  匿名对象：<br>    就是没有名字的对象。<br>    是对象的一种简化表示形式<br>  匿名对象的两种使用情况<br>    对象仅仅使用一次的时候<br>    作为实际参数传递</p>
-<p>封装：<br>封装(encapsulation)<br>  封装是一种信息隐藏技术。</p>
+</code></pre><p>  匿名对象：</p>
+<pre><code>就是没有名字的对象。
+是对象的一种简化表示形式
+</code></pre><p>  匿名对象的两种使用情况</p>
+<pre><code>对象仅仅使用一次的时候
+作为实际参数传递
+</code></pre><p>封装：<br>封装(encapsulation)<br>  封装是一种信息隐藏技术。</p>
 <p>  好处：<br>    a. 隐藏类的实现细节,实现了信息的隐藏及安全性；<br>    b. 提高了程序的模块化，且易于维护；<br>    c. 保证了数据的安全和系统的严密性;<br>    d. 将类的设计者和类的使用者分开。<br>  封装的技术包括：包, 类, 方法, 访问权限修饰符。</p>
 <p>private:<br>  私有的。是一种访问权限修饰符。<br>  被private修饰的成员变量或者成员方法只能在本类进行访问.</p>
 <p>  最常见的用法：<br>    把成员变量用private修饰<br>    然后提供getXxx()/setXxx()方法   getter &amp; setter</p>
@@ -395,8 +734,12 @@ class RecursionDemo7 {
 <pre><code>a. 如果没写构造方法,系统会提供无参构造方法(默认的构造方法)。
 b. 如果提供了构造方法, 系统将不再提供无参的构造方法。(建议: 自己写一个无参的构造方法)
 c. 构造方法也是可以重载的
-</code></pre><h2 id="星期六"><a href="#星期六" class="headerlink" title="星期六"></a>星期六</h2><h3 id="static"><a href="#static" class="headerlink" title="static:"></a>static:</h3><p>  静态的, 可以修饰成员<br>  特点：<br>    随着类的加载而加载<br>    优先于对象存在<br>    被类的所有对象共享<br>      这也是我们判断是否使用静态关键字的条件<br>    可以通过类名调用(推荐使用类名调用, 不要用对象名调用)</p>
-<p>  静态的成员是类所有<br>  非静态成员是对象所有</p>
+</code></pre><h2 id="星期六"><a href="#星期六" class="headerlink" title="星期六"></a>星期六</h2><h3 id="static"><a href="#static" class="headerlink" title="static:"></a>static:</h3><p>  静态的, 可以修饰成员<br>  特点：</p>
+<pre><code>a.随着类的加载而加载
+b.优先于对象存在
+c.被类的所有对象共享，这也是我们判断是否使用静态关键字的条件
+d.可以通过类名调用(推荐使用类名调用, 不要用对象名调用)
+</code></pre><p>  静态的成员是类所有<br>  非静态成员是对象所有</p>
 <p>注意事项：<br>  在静态方法中是没有this关键字的<br>  静态方法只能访问静态的成员<br>  非静态的方法可以访问静态的成员也可以访问非静态的成员。<br>  但是静态方法只能访问静态成员。静态上下文只能访问静态的东西。<br>  比如：静态内部类就只能访问外部类静态的属性或者方法。</p>
 <h3 id="成员变量和静态变量区别"><a href="#成员变量和静态变量区别" class="headerlink" title="成员变量和静态变量区别"></a>成员变量和静态变量区别</h3><p>  a.所属不同</p>
 <pre><code>成员变量：对象
@@ -513,7 +856,7 @@ public class MyMath {
         <br>
         Copyright © 王邸 2019
         <!--
-          Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+          Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
         -->
       </div>
     </div>

@@ -14,7 +14,7 @@
 <meta property="og:url" content="http://yoursite.com/2019/07/14/Java总结（三）上/index.html">
 <meta property="og:site_name" content="路要坚持">
 <meta property="og:description" content="星期一：StringBuffer：线程安全的可变字符序列。可以自动扩容 构造方法：StringBuffer()     创建空的字符序列，默认容量是16 StringBuffer(int capacity)     创建空的字符序列，容量为capacity. StringBuffer(String str)     字符串转成StringBuffer 成员方法：int capacity()">
-<meta property="og:updated_time" content="2019-07-25T02:53:12.674Z">
+<meta property="og:updated_time" content="2019-07-31T01:05:57.137Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java总结（三）上">
 <meta name="twitter:description" content="星期一：StringBuffer：线程安全的可变字符序列。可以自动扩容 构造方法：StringBuffer()     创建空的字符序列，默认容量是16 StringBuffer(int capacity)     创建空的字符序列，容量为capacity. StringBuffer(String str)     字符串转成StringBuffer 成员方法：int capacity()">
@@ -632,6 +632,7 @@ class GenericClass&lt;T,U&gt; implements GenericInterFace(T)；
 </code></pre><h3 id="foreach"><a href="#foreach" class="headerlink" title="foreach"></a>foreach</h3><p>增强for循环：<br>  简化数组和Collection集合的遍历<br>  格式：<br>    for(元素数据类型 变量名 : 数组或者集合) {<br>      使用变量即可，该变量就是元素<br>    }<br>  缺点：没有索引信息。<br>  foreach 的底层其实迭代器。<br>什么情况下可以使用增强for循环：<br>  只要有迭代器，就可以使用增强for循环<br>  Iterable: Iterator iterator();</p>
 <h3 id="可变参数variableParameter"><a href="#可变参数variableParameter" class="headerlink" title="可变参数variableParameter"></a>可变参数variableParameter</h3><p>格式：修饰符 返回值类型 方法名(数据类型…  变量名){}<br>优点：<br>  不需要封装数据<br>  更加直观<br>缺点：<br>  只能有一个可变参数，并且只能在最后<br>注意事项：<br>  a. 可变参数底层其实是数组<br>  b. 可变参数必须方法最后</p>
 <h3 id="包装类"><a href="#包装类" class="headerlink" title="包装类"></a>包装类</h3><p>JDK1.5新特性 (语法糖，提高程序员的编码效率)<br>自动装箱： 基本数据类型 –&gt; 包装数据类型<br>   int i = 10;<br>   Integer itg = Integer.ValueOf(i);<br>自动拆箱： 包装数据类型 –&gt; 基本数据类型<br>   Integer itg = new Integer(10);<br>   int i = itg.intValue();</p>
+<p>可以接着往下看，或者看下篇</p>
 <h2 id="星期六"><a href="#星期六" class="headerlink" title="星期六"></a>星期六</h2><h3 id="学习数据结构List"><a href="#学习数据结构List" class="headerlink" title="学习数据结构List"></a>学习数据结构List</h3><p>主要就是学习源码为什么这样写。有几点需要注意：<br>1）我们只学习核心的方法和迭代器的方法<br>2）迭代器的指针是指向两个结点之间的位置上的。这一定要注意；<br>3）一些细节上的问题我会说清楚<br>4）出现的异常总结：</p>
 <h3 id="整体结构"><a href="#整体结构" class="headerlink" title="整体结构"></a>整体结构</h3><p>1）我们需要一个List接口。两个list都继承这个接口的方法<br>2）我们需要一个iterator接口，两个类的子类对象要继承这个接口的方法<br>3）这个类的子类要和父类数据互通，不想被其他类访问最好就放在内部类<br>4）出现的异常<br>IllegalArgumentException   抛出的异常表明向方法传递了一个不合法或不正确的参数。<br>ArrayStoreException       试图将错误类型的对象存储到一个对象数组时抛出的异常。<br>IndexOutOfBoundsException 指示某排序索引（例如对数组、字符串或向量的排序）超出范围时抛出。<br>ConcurrentModificationException ： 当方法检测到对象的并发修改，但不允许这种修改时，抛出此异常。<br>IllegalStateException  在非法或不适当的时间调用方法时产生的信号。换句话说，即 Java 环境或 Java 应用程序没有处于请求操作所要求的适当状态下。<br>NoSuchElementException  由 Enumeration 的 nextElement 方法抛出，表明枚举中没有更多的元素。</p>
 <h3 id="实现的步骤（以ArrayList为例）；"><a href="#实现的步骤（以ArrayList为例）；" class="headerlink" title="实现的步骤（以ArrayList为例）；"></a>实现的步骤（以ArrayList为例）；</h3><p>1）先定义出List接口和iterator接口<br>2）然后写ArrayList<br>    1.属性<br>    2.构造方法<br>    3.重写List方法<br>3）实现iterator接口<br>    1.属性<br>    2.构造方法<br>    3.重写方法</p>
@@ -862,7 +863,7 @@ implements List&lt;E&gt;, Deque&lt;E&gt;, Cloneable, java.io.Serializable
         <br>
         Copyright © 王邸 2019
         <!--
-          Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+          Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
         -->
       </div>
     </div>
