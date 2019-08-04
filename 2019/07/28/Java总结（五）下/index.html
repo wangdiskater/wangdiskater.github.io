@@ -14,7 +14,7 @@
 <meta property="og:url" content="http://yoursite.com/2019/07/28/Java总结（五）下/index.html">
 <meta property="og:site_name" content="路要坚持">
 <meta property="og:description" content="接着之前的银行转账问题来说，我们先搞不弄那么复杂，一步一步的来，先把问题简化，有三个账户A,B,C，每个账户上有1000大洋。现在实现： A -&amp;gt; C 转100块 B -&amp;gt; C 转200块 如果是单线程的程序肯定没有问题。但是银行肯定不会等你一个一个转账的。肯定要使用多线程的还解决问题。那么多线程就会出现线程安全的问题。这个情景是否会出现线程安全的问题？ 答：那是肯定的，线程安全的问题">
-<meta property="og:updated_time" content="2019-07-28T15:49:15.682Z">
+<meta property="og:updated_time" content="2019-08-04T06:42:26.080Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java总结（五）下">
 <meta name="twitter:description" content="接着之前的银行转账问题来说，我们先搞不弄那么复杂，一步一步的来，先把问题简化，有三个账户A,B,C，每个账户上有1000大洋。现在实现： A -&amp;gt; C 转100块 B -&amp;gt; C 转200块 如果是单线程的程序肯定没有问题。但是银行肯定不会等你一个一个转账的。肯定要使用多线程的还解决问题。那么多线程就会出现线程安全的问题。这个情景是否会出现线程安全的问题？ 答：那是肯定的，线程安全的问题">
@@ -287,27 +287,26 @@ public class Apply {
 //transfer
 public void transfer(Account target, int amount) {
   //先判断是否有人在申请全部资源,自己能否申请到
-  while(!Apply.apply(this,target));
-    Apply.apply(this,target); //一次性获取全部资源
-    synchronized(this){
+  while(!Apply.apply(this,target));//一次性获取全部资源
+  synchronized(this){
+    try {
+      Thread.sleep(100);
+    } catch (InterruptedException e) {
+      e.printStackTrace();
+    }
+    synchronized (target){
+      this.balance -= amount;
+      //记录转钱的账户的金额
+      int value = target.balance;
       try {
         Thread.sleep(100);
       } catch (InterruptedException e) {
         e.printStackTrace();
       }
-      synchronized (target){
-        this.balance -= amount;
-        //记录转钱的账户的金额
-        int value = target.balance;
-        try {
-          Thread.sleep(100);
-        } catch (InterruptedException e) {
-          e.printStackTrace();
-        }
-        value += amount;
-        target.balance = value;
-      }
+      value += amount;
+      target.balance = value;
     }
+  }
   //用完资源要free要不然还是会出现死锁
   Apply.free(this, target);
 }

@@ -14,7 +14,7 @@
 <meta property="og:url" content="http://yoursite.com/2019/07/06/Java总结（二）/index.html">
 <meta property="og:site_name" content="路要坚持">
 <meta property="og:description" content="总结时间：0701-0706 概述这周主要把面向对象的内容讲完了。很多东西虽然很熟悉但是却很多细节的处理很重要。是打好基础的关键。但是万变不离其中，离不开三大特性：继承，封装，多态。现在也只能字面意思上去理解到底这些东西是什么。这些东西的规律是什么，但是他为什么这样实现的？最初的构想是什么？等等问题，这不是老师能教你的，你自己需要去学习。上个礼拜简单的讲了什么是封装，但是封装远远没有private">
-<meta property="og:updated_time" content="2019-07-31T11:11:17.826Z">
+<meta property="og:updated_time" content="2019-08-04T06:26:39.582Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java总结（二）">
 <meta name="twitter:description" content="总结时间：0701-0706 概述这周主要把面向对象的内容讲完了。很多东西虽然很熟悉但是却很多细节的处理很重要。是打好基础的关键。但是万变不离其中，离不开三大特性：继承，封装，多态。现在也只能字面意思上去理解到底这些东西是什么。这些东西的规律是什么，但是他为什么这样实现的？最初的构想是什么？等等问题，这不是老师能教你的，你自己需要去学习。上个礼拜简单的讲了什么是封装，但是封装远远没有private">
@@ -393,8 +393,9 @@ public class Test3 {
 </code></pre><p>(4)类与类,类与接口,接口与接口<br>  A:类与类   单继承<br>  B:类与接口  多实现<br>  C:接口与接口 多继承</p>
 <p>(5)抽象类和接口的区别<br>  A:成员区别<br>    抽象类：抽象方法，成员变量，静态成员等等<br>    接口：抽象方法，只能静态常量<br>  B:关系区别:<br>    类与类：  单继承<br>    类与接口：多实现<br>    接口与接口：多继承<br>  C:设计理念不同<br>    抽象类：和它的子类之间表现的是 is a的关系， 描述的是子类中共性<br>    接口：和它的子类之间表现的是 like a 的关系，描述的是扩展功能</p>
 <h3 id="形式参数和返回值的问题"><a href="#形式参数和返回值的问题" class="headerlink" title="形式参数和返回值的问题"></a>形式参数和返回值的问题</h3><p>(1)形式参数：<br>  类名：需要该类或者该类子类的对象<br>  抽象类名：需要该类的子类对象<br>  接口名：需要该接口的实现类对象<br>(2)返回值类型：<br>  类名：返回的是该类或者该类子类的对象<br>  抽象类名：返回的是该类的子类对象<br>  接口名：返回的是该接口的实现类的对象<br>(3)链式编程<br>  对象.方法1().方法2()…….方法n();</p>
-<h2 id="星期三-拉闸放假"><a href="#星期三-拉闸放假" class="headerlink" title="星期三(拉闸放假)"></a>星期三(拉闸放假)</h2><h2 id="星期四"><a href="#星期四" class="headerlink" title="星期四"></a>星期四</h2><h3 id="打包"><a href="#打包" class="headerlink" title="打包"></a>打包</h3><p>  命令：javac -d . xxx.java</p>
-<h3 id="导包"><a href="#导包" class="headerlink" title="导包"></a>导包</h3><p>(1)访问不同包的类<br>  a. 指定类的全限定名（例如java.util.Scanner）;<br>  b. 导包<br>(2)格式：<br>  import 包名.类名；<br>  静态导入：（导入静态方法，就好像导入的方法就定义在这个类中一样）<br>    import static 包名.类名.方法名<br>    要求该方法必须是静态的。<br>(3)面试题：package,import,class的在JAVA文件中的顺序<br>  package &gt; import &gt; class<br>  一个  多个  多个(建议一个文件里面只有一个class)</p>
+<h2 id="星期三-拉闸放假"><a href="#星期三-拉闸放假" class="headerlink" title="星期三(拉闸放假)"></a>星期三(拉闸放假)</h2><h2 id="星期四"><a href="#星期四" class="headerlink" title="星期四"></a>星期四</h2><h3 id="打包"><a href="#打包" class="headerlink" title="打包"></a>打包</h3><pre><code>命令：javac -d . xxx.java
+</code></pre><h3 id="执行"><a href="#执行" class="headerlink" title="执行"></a>执行</h3><pre><code>命令：java com.cs.kaoyan.demo;
+</code></pre><h3 id="导-包"><a href="#导-包" class="headerlink" title="导 包"></a>导 包</h3><p>(1)访问不同包的类<br>  a. 指定类的全限定名（例如java.util.Scanner）;<br>  b. 导包<br>(2)格式：<br>  import 包名.类名；<br>  静态导入：（导入静态方法，就好像导入的方法就定义在这个类中一样）<br>    import static 包名.类名.方法名<br>    要求该方法必须是静态的。<br>(3)面试题：package,import,class的在JAVA文件中的顺序<br>  package &gt; import &gt; class<br>  一个  多个  多个(建议一个文件里面只有一个class)</p>
 <h3 id="权限修饰符"><a href="#权限修饰符" class="headerlink" title="权限修饰符"></a>权限修饰符</h3><p>(1)权限修饰符</p>
 <table>
 <thead>

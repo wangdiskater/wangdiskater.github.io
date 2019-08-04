@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html class="full-height">
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="//cdn.bootcss.com/bulma/0.4.1/css/bulma.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+  
+  <title>Java总结（六）下 | 路要坚持</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="从今天开始JAVAEE，冲啊，一开始先学习数据库，然后再学习JDBC，前端的东西，然后就可以下一个阶段了。任重而道远加油吧 星期四(8.01)MYSQL学习总结指令的编写： 登录本机mysql: mysql -u 用户名 -p 输入密码。默认的root; 注意：请正确认识 “SQL 不区分大小写“ 组成： DDL：数据定义语言 DML：数据操作语言 DQL： 数据查询语言 DCL： 数据控制语言">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java总结（六）下">
+<meta property="og:url" content="http://yoursite.com/2019/08/04/Java总结（六）下/index.html">
+<meta property="og:site_name" content="路要坚持">
+<meta property="og:description" content="从今天开始JAVAEE，冲啊，一开始先学习数据库，然后再学习JDBC，前端的东西，然后就可以下一个阶段了。任重而道远加油吧 星期四(8.01)MYSQL学习总结指令的编写： 登录本机mysql: mysql -u 用户名 -p 输入密码。默认的root; 注意：请正确认识 “SQL 不区分大小写“ 组成： DDL：数据定义语言 DML：数据操作语言 DQL： 数据查询语言 DCL： 数据控制语言">
+<meta property="og:updated_time" content="2019-08-04T15:22:17.610Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java总结（六）下">
+<meta name="twitter:description" content="从今天开始JAVAEE，冲啊，一开始先学习数据库，然后再学习JDBC，前端的东西，然后就可以下一个阶段了。任重而道远加油吧 星期四(8.01)MYSQL学习总结指令的编写： 登录本机mysql: mysql -u 用户名 -p 输入密码。默认的root; 注意：请正确认识 “SQL 不区分大小写“ 组成： DDL：数据定义语言 DML：数据操作语言 DQL： 数据查询语言 DCL： 数据控制语言">
+  
+    <link rel="alternate" href="/" title="路要坚持" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/common.css">
+<link rel="stylesheet" href="/css/nav.css">
+<link rel="stylesheet" href="/css/layout.css">
+  
+
+</head>
+
+<body>
+  <header id="navbar" class="overflow-hidden">
+  <div class="container">
+    <nav class="nav">
+         <div class="nav-left">
+            <a href="/" class="nav-item" style="font-size: 20px;">
+              <span class="logo">王邸</span>'s Blog
+            </a>
+         </div>
+        <div class="nav-center is-hidden position-relative" id="search_container">
+            <div class="nav-item full-width full-height">
+                <i class="fa fa-search has-padding" aria-hidden="true"></i>
+                <input type="text" id="search_input" class="search-input full-height full-width" placeholder="Search post" autofocus>
+                <i id="close_search" class="fa fa-times" aria-hidden="true"></i>
+            </div>
+            <div id="search_result"></div>
+        </div>
+        <div class="nav-right nav-menu">
+            <a class="nav-item" id="search">
+                <i class="fa fa-search" aria-hidden="true"></i>
+            </a>
+            
+            <a class="nav-item" href="/">
+                Home
+            </a>
+            
+            <a class="nav-item" href="/works">
+                My Works
+            </a>
+            
+            <a class="nav-item" href="/about">
+                About
+            </a>
+            
+        </div>
+        <span class="nav-toggle" id="navMenuDropdown">
+            <span></span>
+            <span></span>
+            <span></span>
+        </span>
+        <div class="navbar-menu position-absolute full-width content-box is-hidden-desktop is-flex flex-column center" style="top: 100%;">
+            
+            <a class="nav-item flex-1" href="/">
+                Home
+            </a>
+            
+            <a class="nav-item flex-1" href="/works">
+                My Works
+            </a>
+            
+            <a class="nav-item flex-1" href="/about">
+                About
+            </a>
+            
+        </div>
+    </nav>
+  </div>
+</header>
+
+  <div id="main-wrap" class="position-relative" style="margin-top: 55px;">
+      <div class="main-inner-content">
+          <!--博文页面-->
+
+<style>
+    .header-box {
+        height: 370px;
+        filter: blur(10px);
+        background-size: cover;
+        background-color: lightsteelblue;
+    }
+
+    .post-box {
+        padding: 15px;
+        padding-top: 60px;
+        min-height: 80vh;
+        margin-top: -200px;
+        border-radius: 4px;
+        background-color: rgba(255,255,255,.8);
+    }
+
+    .post-avatar {
+        height: 30px;
+        width: 30px;
+        border-radius: 50%;
+    }
+
+    .flow-chart {
+        text-align: center;
+    }
+
+    img[alt="post-cover"] {
+        display: none;
+    }
+</style>
+<header>
+    <div id="header_box" class="header-box"></div>
+</header>
+<section>
+    <div class="container post-box">
+        <div class="content post-title is-flex center flex-column" style="margin-bottom: 70px; overflow: auto;">
+            <h1 class="has-text-centered" style="padding-bottom: 10px; border-bottom: 3px solid #fff">
+                <strong>Java总结（六）下</strong>
+            </h1>
+            
+            <div class="is-flex align-center">
+                <img class="post-avatar" src="https://q2.qlogo.cn/headimg_dl?bs=996057150&dst_uin=996057150&dst_uin=996057150&;dst_uin=996057150&spec=100&url_enc=0&referer=bu_interface&term_type=PC">
+                <span style="padding:0 10px;"> <span class="sub-title">By</span> 王邸</span>
+                <span class="post-date sub-title">at: 2019-08-04</span>
+            </div>
+            
+                <div>
+                    
+                </div>
+            
+        </div>
+        <div class="content" style="overflow: auto">
+            <p>从今天开始JAVAEE，冲啊，一开始先学习数据库，然后再学习JDBC，前端的东西，然后就可以下一个阶段了。任重而道远加油吧</p>
+<h2 id="星期四-8-01"><a href="#星期四-8-01" class="headerlink" title="星期四(8.01)"></a>星期四(8.01)</h2><h2 id="MYSQL学习"><a href="#MYSQL学习" class="headerlink" title="MYSQL学习"></a>MYSQL学习</h2><p>总结指令的编写：</p>
+<p>登录本机mysql:</p>
+<pre><code>mysql -u 用户名 -p 输入密码。默认的root;
+</code></pre><p>注意：请正确认识 “SQL 不区分大小写“</p>
+<p>组成：</p>
+<pre><code>DDL：数据定义语言
+DML：数据操作语言
+DQL： 数据查询语言
+DCL： 数据控制语言
+TPL： 事务处理语言
+</code></pre><h2 id="DDL：Data-Definition-Language"><a href="#DDL：Data-Definition-Language" class="headerlink" title="DDL：Data Definition Language"></a>DDL：Data Definition Language</h2><p>作用：创建 &amp; 管理 数据库和表 的结构。<br>常用关键字：</p>
+<pre><code>CREATE   SHOW  ALTER   DROP
+</code></pre><h2 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h2><h3 id="创建数据库-create"><a href="#创建数据库-create" class="headerlink" title="创建数据库(create)"></a>创建数据库(create)</h3><p>1.默认方式创造数据库</p>
+<pre><code>CREATE database db_name;
+</code></pre><p>2.创建有参数的数据库</p>
+<pre><code>CREATE database db_name CHARACTER SET UTF8 COLLEATE UTF8_GENERAL_CI;
+</code></pre><p>create_specification:</p>
+<pre><code>[DEFAULT] CHARACTER SET charset_name | [DEFAULT] COLLATE collation_name
+</code></pre><p>collection_name;<br>utf8_general_ci（不区分大小写）, utf8_bin（区分大小写）</p>
+<h3 id="查看数据库-show-："><a href="#查看数据库-show-：" class="headerlink" title="查看数据库(show)："></a>查看数据库(show)：</h3><p>1.显示数据库的语句</p>
+<pre><code>SHOW databases;
+</code></pre><p>2.显示数据库创建语句</p>
+<pre><code>SHOW CREATE DATABASE db_name;
+</code></pre><h3 id="删除数据库-DROP"><a href="#删除数据库-DROP" class="headerlink" title="删除数据库(DROP)"></a>删除数据库(DROP)</h3><pre><code>DROP DATABASE db_name;
+</code></pre><h3 id="修改数据库（ALTER）"><a href="#修改数据库（ALTER）" class="headerlink" title="修改数据库（ALTER）"></a>修改数据库（ALTER）</h3><p>1.修改数据库名字<br>很遗憾地告诉你，官方并没有提供直接修改数据库名称的命令。但网上有提供各种修改数据库名称的脚本，感兴趣的同学可以自己去研究~~~</p>
+<p>2.修改数据库创建的参数；</p>
+<pre><code>ALTER  DATABASE   db_name   
+[alter_specification [, alter_specification] ...]
+</code></pre><h3 id="选择数据库"><a href="#选择数据库" class="headerlink" title="选择数据库"></a>选择数据库</h3><pre><code>USE db_name;
+</code></pre><h2 id="表"><a href="#表" class="headerlink" title="表"></a>表</h2><h3 id="创建表-create"><a href="#创建表-create" class="headerlink" title="创建表(create)"></a>创建表(create)</h3><pre><code>CREATE TABLE table_name
+(
+  field1  datatype,
+  field2  datatype,
+  field3  datatype
+)[CHARACTER SET 字符集 COLLATE 校对规则]
+field：指定列名　datatype：指定列类型
+</code></pre><p>问题：表名是否可以和数据库名字相同？<br>可以创建和数据库名字相同的表名；</p>
+<h4 id="datatype（创建表参数）"><a href="#datatype（创建表参数）" class="headerlink" title="datatype（创建表参数）:"></a>datatype（创建表参数）:</h4><p><strong>注意：这里以MySQL为例，不同的DBMS的都支持数值类型，字符串类型以及日期类型，但他们的实现可能不一样。</strong></p>
+<p>整数类型<br>数据类型|占用字节|说明<br>-:|:-:|:-<br>TINYINT   |1| 很小的整数<br>SMALLINT  |2| 小的整数<br>MEDIUMINT |3| 中等大小的整数<br>INT       |4| 普通大小的整数<br>BIGINT    |8| 大整数</p>
+<p>浮点数类型和定点数类型<br>类型名称|占用字节|说明<br>-:|:-:|:-<br>FLOAT(M,D)    |4   |单精度浮点数<br>DOUBLE(M,D)   |8   |双精度浮点数<br>DECIMAL(M,D)  |M+2 |定点数<br>其中</p>
+<pre><code>M 称为精度，表示总共的位数;
+D 称为标度，表示小数的位数。
+DECIMAL 类型不同于 FLOAT &amp; DOUBLE，DECIMAL 实际是以字符串存放的，它的存储空间并不固定，而是由精度 M 决定的。
+</code></pre><p>例如：</p>
+<pre><code>CREATE TABLE float_data(float1 FLOAT(5,3),double1 DOUBLE(5,3),decimal1 decimal(5,3));
+</code></pre><p><strong><em>这三个有什么区别？</em></strong><br>（回答）<br>1.默认不设置MD,FLOAT显示6位，DOUBLE全部 显示。DECIMAL 只显示整数部分。他们小数部分都四舍五入；</p>
+<p>日期与时间类型<br>类型名称   日期格式                占用字节<br>-:|:-:|:-<br>YEAR      |YYYY       (2018)       |1<br>TIME      |HH:MM:SS   (10:20:00)   |3<br>DATE      |YYYY-MM-DD (2018-7-23)  |3<br>DATETIME  |YYYY-MM-DD HH:MM:SS     |8<br>TIMESTAMP |YYYY-MM-DD HH:MM:SS     |4</p>
+<p>DATETIME 和 TIMESTAMP 虽然显示的格式是一样的，但是它们有很大的区别：</p>
+<pre><code>1.DATETIME 的系统默认值是 NULL, 而 TIMESTAMP 的系统默认值是 当前时间 NOW();
+2.DATETIME 存储的时间与时区无关，而 TIMESTAMP 与时区有关
+</code></pre><p>例子：</p>
+<pre><code>CREATE table time1(t4 datetime, t5 timestamp);
+INSERT INTO time1 values (now(),now());
+
+INSERT INTO time1 values（）; //datetime默认值是null
+
+set time_zone = &apos;+10:00&apos;;
+//里面的timestamp会动态的更改成+10时区的时间，而datetime不变
+</code></pre><p>字符串类型</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:right">类型名称</th>
+<th style="text-align:center">占用字节</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right"></td>
+</tr>
+</tbody>
+</table>
+<p>CHAR(M)      |M, 1 &lt;= M &lt;= 255         |固定长度字符串<br>VARCHAR(M)   |L+1, L &lt;=M, 1 &lt;=M &lt;=255  |变长字符串<br>TINYTEXT     |L+1, L &lt; 2^8             |非常小的文本字符串<br>TEXT         |L+2, L &lt; 2^16            |小的文本字符串<br>MEDIUMTEXT   |L+3, L &lt; 2^24            |中等大小的文本字符串<br>LONGTEXT     |L+4, L &lt; 2^32            |大的文本字符串<br>ENUM         |1 或者 2个字节，          |取决于枚举的数目，最大 65535个  枚举类型<br>SET          |1,2,3,4或8个字节          |集合类型</p>
+<p>ENUM 类型总有一个默认值，当ENUM 列声明为NULL，则默认值为NULL。如果 ENUM 列被声明为 NOT NULL，<br>则其默认值为列表的第一个元素。</p>
+<p>ENUM 和 SET有什么区别</p>
+<pre><code>CREATE TABLE enum_set(enum1 ENUM(&apos;1&apos;,&apos;2&apos;,&apos;3&apos;), set1 SET(&apos;1&apos;,&apos;2&apos;,&apos;3&apos;));
+mysql&gt; insert into enum_set values(&apos;1&apos;,&apos;1,2,3&apos;);      //这样就能成功
+mysql&gt; insert into enum_set values(&apos;1，2&apos;,&apos;1,2,3&apos;);   //这样就会失败
+</code></pre><p>ENUM 设置多个备选项，但是只能选择一个<br>SET  设置多个备选项，也可以选择多个，但是不能选择声明外的<br>注意在插入时候两个写的格式是： ‘ ， ，’;而不是单独括号括起来<br>    mysql&gt; insert into enum_set values((‘1’),(‘1,2,3’));      //这是错误示范，没有括号，直接写引号；</p>
+<h3 id="查询表-desc"><a href="#查询表-desc" class="headerlink" title="查询表(desc)"></a>查询表(desc)</h3><p>简单描述表结构</p>
+<pre><code>DESC 表名
+DESCRIBE 表名
+</code></pre><p>查看生成数据定义语言的语句</p>
+<pre><code>show create table table_name;
+</code></pre><p>打印之后看到如下的属性页面，我之后会一个一个解释<br>Field|Type    | Null | Key | Default | Extra<br>id   | int(11)| YES  |     | NULL    |</p>
+<pre><code>Field:属性名字
+type:数据类型
+Null:应该是是否可以为null
+key:比如主键、外键。这个是用来建立索引的。
+Default:默认约束。输入数据时，如果不指定该列的值，那么就使用默认约束规定的值。
+Extra:对字段额外的说明
+</code></pre><h3 id="修改表-ALTER"><a href="#修改表-ALTER" class="headerlink" title="修改表(ALTER)"></a>修改表(ALTER)</h3><h3 id="ALTER-TABLE-table-name-ADD-增加一列"><a href="#ALTER-TABLE-table-name-ADD-增加一列" class="headerlink" title="ALTER TABLE table_name ADD //增加一列"></a>ALTER TABLE table_name ADD //增加一列</h3><pre><code>ALTER TABLE table_name
+ADD      (column datatype [DEFAULT expr]
+       [,ADD column datatype]...);
+</code></pre><h3 id="ALTER-TABLE-table-name-CHANGE-改变一列的name和datatype"><a href="#ALTER-TABLE-table-name-CHANGE-改变一列的name和datatype" class="headerlink" title="ALTER TABLE table_name CHANGE  改变一列的name和datatype"></a>ALTER TABLE table_name CHANGE  改变一列的name和datatype</h3><pre><code>ALTER TABLE table_name
+change     col_name new_col_name datatype [DEFAULT expr]
+[,change col_name new_col_name datatype [DEFAULT ...] ]...;
+</code></pre><h3 id="ALTER-TABLE-table-name-MODIFY-改变一列的datatype"><a href="#ALTER-TABLE-table-name-MODIFY-改变一列的datatype" class="headerlink" title="ALTER TABLE table_name MODIFY  改变一列的datatype"></a>ALTER TABLE table_name MODIFY  改变一列的datatype</h3><pre><code>ALTER TABLE table_name
+MODIFY column datatype [DEFAULT expr]
+       [,MODIFY column datatype]...;
+</code></pre><h3 id="ALTER-TABLE-table-name-DROP-删除一列"><a href="#ALTER-TABLE-table-name-DROP-删除一列" class="headerlink" title="ALTER TABLE table_name DROP; 删除一列"></a>ALTER TABLE table_name DROP; 删除一列</h3><pre><code>ALTER TABLE table_name
+DROP        (column);
+</code></pre><h3 id="RENAME-TABLE-table-name-to-new-name-修改表名"><a href="#RENAME-TABLE-table-name-to-new-name-修改表名" class="headerlink" title="RENAME TABLE table_name to new_name 修改表名"></a>RENAME TABLE table_name to new_name 修改表名</h3><p>修改表的名称：RENAME TABLE 表名 TO 新表名</p>
+<p>RENAME TABLE 语句的另一个用法是移动该表到另一个数据库<br>语法为：<br>RENAME TABLE 旧数据库名.旧表名 TO 新数据库名.新表名<br>提示：我们可以把 RENAME TABLE 的这两种用法很好地统一起来，如果我们把 “重命名” 理解为 “在同一数据库里的移动”。甚至我们可以省略数据库名，如果你恰好正在使用该数据库。<br>这个就好像Field的重命名一样，也有剪切的效果</p>
+<pre><code>File的方法：
+boolean renameTo(File dest)
+重新命名此抽象路径名表示的文件。
+</code></pre><p><strong>注意事项：</strong>只有添加的方法ADD 需要加（） 因为可以增加多个列，要设置括号。<br>其他都是</p>
+<pre><code>ALTER TABLE table_name 操作；
+</code></pre><h3 id="修改字符集"><a href="#修改字符集" class="headerlink" title="修改字符集"></a>修改字符集</h3><p>修改表的字符集：alter table student character set utf8;<br><strong>注意</strong>这应该要把数据库的字符集也要改了吧 要不然肯定还是不行的；</p>
+<h3 id="删除表-DROP"><a href="#删除表-DROP" class="headerlink" title="删除表(DROP)"></a>删除表(DROP)</h3><pre><code>DROP TABLE table_name;
+</code></pre><h2 id="DML数据操纵语言结合DQL"><a href="#DML数据操纵语言结合DQL" class="headerlink" title="DML数据操纵语言结合DQL"></a>DML数据操纵语言结合DQL</h2><p>DML:Data Manipulation Language<br>作用：用于向数据库表中插入、删除、修改数据。<br>常用关键字：<br>INSERT UPDATE DELETE</p>
+<h3 id="插入（INSERT）"><a href="#插入（INSERT）" class="headerlink" title="插入（INSERT）"></a>插入（INSERT）</h3><pre><code>INSERT INTO table_name [(column [, column...])]
+VALUES    (value [, value...]);
+</code></pre><p>插入的数据应与字段的数据类型相同。<br>数据的大小应在列的规定范围内，例如：不能将一个长度为80的字符串加入到长度为40的列中。<br>在values中列出的数据 。<br><strong>字符串和日期型数据应包含在单引号中。</strong><br>插入空值 insert into table value(null)  //注意之前设置table时候有可以设置是否可以为null;默认是yes;</p>
+<h3 id="更新（UPDATE）"><a href="#更新（UPDATE）" class="headerlink" title="更新（UPDATE）"></a>更新（UPDATE）</h3><p>使用 update语句修改表中数据。</p>
+<pre><code>UPDATE  table_name   
+  SET col_name1 = expr1 [, col_name2=expr2 ...]    
+  [WHERE where_definition]   
+</code></pre><p><strong>注意事项</strong></p>
+<ol>
+<li>UPDATE语法可以用新值更新原有表行中的各列。</li>
+<li>SET子句指示要修改哪些列和要给予哪些值。</li>
+<li>WHERE子句指定应更新哪些行。如没有WHERE子句，则更新所有的行。<br><strong>4. NULL+任何数的结果都是NULL 这里并不会报错</strong></li>
+</ol>
+<h3 id="删除（DELETE）"><a href="#删除（DELETE）" class="headerlink" title="删除（DELETE）"></a>删除（DELETE）</h3><p>使用 delete语句删除表中数据。</p>
+<pre><code>DELETE  from  table_name       
+  [WHERE where_definition]   
+</code></pre><p>如果不使用where子句，将删除表中所有数据。<br>Delete语句不能删除某一列的值，可使用update把一列的值都改了。或者直接 ALTER TABLE table_name drop colname;删除一列<br>delete删除的单位是行<br>使用delete语句仅删除记录，不删除表本身。如要删除表，使用drop  table语句。<br><strong>同insert和update一样，从一个表中删除记录将引起其它表的参照完整性问题，在修改数据库数据时，头脑中应该始终不要忘记这个潜在的问题。</strong></p>
+<h2 id="DQL数据查询语言（简单查询）"><a href="#DQL数据查询语言（简单查询）" class="headerlink" title="DQL数据查询语言（简单查询）"></a>DQL数据查询语言（简单查询）</h2><p>DQL：Data Query Language<br>作用：查询表中的数据。<br>关键字：<br>    SELECT</p>
+<h3 id="查询-SELECT"><a href="#查询-SELECT" class="headerlink" title="查询(SELECT)"></a>查询(SELECT)</h3><pre><code>SELECT column_name1 From table_name;
+SELECT column_name1,column_name2 From table_name;
+SELECT * From table_name;
+</code></pre><h3 id="使用-WHERE-子句过滤记录"><a href="#使用-WHERE-子句过滤记录" class="headerlink" title="使用 WHERE 子句过滤记录"></a>使用 WHERE 子句过滤记录</h3><pre><code>SELECT * | {column_names}
+FROM table_name
+WHERE &lt;filter_condition&gt;;
+</code></pre><p>filter_condition 是一个逻辑表达式，即表达式的结果是布尔类型</p>
+<h3 id="常见运算符介绍"><a href="#常见运算符介绍" class="headerlink" title="常见运算符介绍"></a>常见运算符介绍</h3><p>算术运算符</p>
+<pre><code>+    -    *    /     %
+</code></pre><table>
+<thead>
+<tr>
+<th style="text-align:right">运算符</th>
+<th style="text-align:center">作用</th>
+<th style="text-align:center">运算符</th>
+<th style="text-align:left">作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right"></td>
+</tr>
+</tbody>
+</table>
+<p>=           |等于           |&lt;=&gt;         | 安全的等于<br>&lt;&gt; (!=)     |不等于         |&lt;=          |  小于等于</p>
+<blockquote>
+<p>=          |大于等于       | &gt;          |  大于<br>IS NULL     |是否为NULL     |IS NOT NULL |  是否不为NULL<br>BETWEEN AND |是否在闭区间内  |IN          | 是否在列表内<br>NOT IN      |是否不在列表内  |LIKE        | 通配符匹配</p>
+</blockquote>
+<p>逻辑运算符<br>      NOT(!)       AND(&amp;&amp;)      OR(||)<br>位操作运算符<br>      &amp;     |     ~     ^     &lt;&lt;     &gt;&gt;</p>
+<h3 id="LIKE"><a href="#LIKE" class="headerlink" title="LIKE"></a>LIKE</h3><p>模糊匹配</p>
+<pre><code>select * from student where NAME LIKE &apos;陆%&apos;;
+</code></pre><p>通配符规则：</p>
+<pre><code>‘%’ 匹配任何数目的字符，甚至包括零字符
+‘_’ 只能匹配一个字符
+</code></pre><h3 id="DISTINCT-过滤相同的记录"><a href="#DISTINCT-过滤相同的记录" class="headerlink" title="DISTINCT 过滤相同的记录"></a>DISTINCT 过滤相同的记录</h3><pre><code>SELECT DISTINCT {column_names}
+FROM table_name;
+</code></pre><h3 id="LIMIT-限制结果"><a href="#LIMIT-限制结果" class="headerlink" title="LIMIT 限制结果"></a>LIMIT 限制结果</h3><p>SELECT 语句返回所有匹配的记录。但是如果我们只想返回第一行或者一定数量的行，这该怎么办呢？<br>在 MySQL 中，我们可以用 LIMIT 关键字实现这一要求。</p>
+<pre><code>SELECT * FROM file_name LIMIT offset, nums;     -- LIMIT 3, 4;
+--OR
+SELECT * FROM file_name LIMIT nums OFFSET offset;（建议第二种）
+</code></pre><p>注意：offset是指偏移量，当我们从第1行查起，偏移量自然为0。此时，可以写成 LIMIT nums;<br>扩展：我们可以使用 LIMIT 关键字实现分页查询。 LIMIT (page_num – 1) * page_size, page_size;</p>
+<h3 id="ORDER-BY-排序"><a href="#ORDER-BY-排序" class="headerlink" title="ORDER BY 排序"></a>ORDER BY 排序</h3><p>我们可以使用 ORDER BY 子句对查询结果进行排序。</p>
+<pre><code>select * from file_name order by column_name asc); //升序asc 降序desc
+</code></pre><p>默认是升序asc</p>
+<p><strong>注意事项</strong> ORDER BY 和LIMIT 同时存在的时候，ORDER BY 要写在 LIMIT前面;我发现的；</p>
+<pre><code>SELECT * FROM EMPLOYEE ORDER BY math LIMIT 3 OFFSET 1;
+</code></pre><p>功能全部加上</p>
+<pre><code>SELECT DISTINCT {column_name} from file_name ORDER BY math LIMIT num OFFSET offset;
+</code></pre><h2 id="星期五-8-02"><a href="#星期五-8-02" class="headerlink" title="星期五(8.02)"></a>星期五(8.02)</h2><p>MYSQL的控制：<br><a href="http://makaidong.com/linguoguo/148551_1704957.html" target="_blank" rel="external">链接</a></p>
+<p>2.ppt设置的超链接的文档打不开<br>把pptx的格式设置成ppt格式就可以了；<br>原理我也不知道- -</p>
+<h2 id="今日学习总结"><a href="#今日学习总结" class="headerlink" title="今日学习总结"></a>今日学习总结</h2><p>昨天学习到order by 今天我们继续；</p>
+<h3 id="别名"><a href="#别名" class="headerlink" title="别名"></a>别名</h3><p>当然，我们可以给 Chinese + math + english 起一个更简单直接一点的名字。AS 关键字就可以做到这一点。</p>
+<pre><code>SELECT name, chinese + math + english AS total FROM t_students;
+</code></pre><p>注意：在很多DBMS中，AS关键字是可选的，不过最好使用它，这被视为一条最佳实践。<br>提示：AS 关键字不仅能给列起别名，还可以给表起别名。在多表查询中，我们会这样使用它。</p>
+<h3 id="聚合函数"><a href="#聚合函数" class="headerlink" title="聚合函数"></a>聚合函数</h3><p>位置：在select后面</p>
+<p>COUNT()</p>
+<p>COUNT(*) 计算表中的总行数;<br>COUNT(column_name) 计算指定列下的总行数，<br>计算时将忽略值为NULL的行。<br>这里计算的是总的行数，下面计算的是一列的总和。</p>
+<p>SUM():返回指定<strong>列</strong>的所有值之和<br>    计算时将忽略值为NULL的行;<br>AVG():返回指定<strong>列</strong>的平均值<br>    计算时将忽略值为NULL的行;<br><strong>注意事项</strong>： AVG()求平均值的个数，并不是里面数据的条数，而是有值非null的个数，当我插入一个math为null的数据。求出平均值和之前的相同</p>
+<p>MAX():返回指定<strong>列</strong>的最大值<br>    计算时将忽略值为NULL的行;<br>MIN():返回指定<strong>列</strong>的最小值<br>    计算时将忽略值为NULL的行;</p>
+<p>查询全班平均成绩</p>
+<pre><code>select avg(math) as &apos;数学&apos;, avg(chinese) as &apos;中文 &apos;,avg(english) as &apos;英语&apos; from t_students;
+</code></pre><h3 id="分组查询GROUP-BY"><a href="#分组查询GROUP-BY" class="headerlink" title="分组查询GROUP BY"></a>分组查询GROUP BY</h3><p>比如：我们想统计各班学生的人数，该怎么办？这时候我们就得用到分组的概念。在 SQL 中，我们使用 GROUP BY 关键字对数据进行分组。<br>位置：加在from table_name的后面</p>
+<pre><code>[GROUP BY {column_names}] [HAVING &lt;filter_condition&gt;]
+使用 HAVING 过滤分组
+</code></pre><h3 id="having-and-where"><a href="#having-and-where" class="headerlink" title="having and where"></a>having and where</h3><pre><code>Where语句在分组之前，执行完where语句再去对数据进行分组
+Having语句在分组之后，执行完分组之后，再对分组数据进行一个过滤筛选。
+
+
+select class,name from t_students group by class;
+</code></pre><p>例子：获取每个班的人数，并且找出人数大于2的班级</p>
+<pre><code>select count(id) as &apos;人数&apos; ,class ,group_concat(id) from t_students group by class having 人数 &gt; 2;
++------+-------+------------------+
+| 人数 | class | group_concat(id) |
++------+-------+------------------+
+|    3 | 一班  | 1,6,7            |
+</code></pre><p>GROUP BY 关键字后可以接多个列名，其意思是从左到右，按层次分组。即先按第一个字段分组，然后在第一个字段值相同的记录中，再根据第2个字段的值进行分组…<strong>（多个字段看成一个整体）</strong></p>
+<p>分组和排序<br>我们经常发现，用 GROUP BY 分组的数据确实是以分组顺序输出的。此外，即使特定的 DBMS 总是按给出的 GROUP BY 子句排序数据，用户也可能会要求以不同的顺序排序。应该提供明确的 ORDER BY 子句，即使其效果等同于GROUP BY子句。<br>例如：统计每个班多少人，然后按班级人数升序排列(默认升序排列)：</p>
+<pre><code>SELECT COUNT(id) AS &apos;人数&apos; , class , group_concat(id) from t_students group by class order by 人数 asc;
+</code></pre><h3 id="SELECT语句执行顺序"><a href="#SELECT语句执行顺序" class="headerlink" title="SELECT语句执行顺序"></a>SELECT语句执行顺序</h3><p>顺序表示写法 括号的序号，表示指令执行的顺序；</p>
+<p><em>(5)</em> SELECT column_name, 聚合函数…<br><em>(1)</em> FROM table_name, …<br><em>(2)</em> [WHERE …]<br><em>(3)</em> [GROUP BY …]<br><em>(4)</em> [HAVING …]<br><em>(6)</em> [ORDER BY …];<br><em>(7)</em> [LIMIT nums OFFSET offset …];//分页是最后的</p>
+<h3 id="数据完整性"><a href="#数据完整性" class="headerlink" title="数据完整性"></a>数据完整性</h3><p>数据完整性是为了保证插入到数据库中的数据是正确的，它防止了用户可能的输入错误。<br>数据完整性主要分为以下三类：</p>
+<p>实体完整性 （唯一性）</p>
+<pre><code>规定表的一行（即每一条记录）在表中是唯一的实体。实体完整性通过表的主键来实现。
+</code></pre><p>域完整性：</p>
+<pre><code>指数据库表的列（即字段）必须符合某种特定的数据类型或约束。比如NOT NULL。
+</code></pre><p>参照完整性：</p>
+<pre><code>保证一个表的外键和另一个表的主键对应。
+</code></pre><h3 id="数据主键：表中经常有一个列或列的组合，其值能唯一地标识表中的每一行。这样的一列或多列称为表的主键，通过它可强制表的实体完整性。当创建或更改表时可通过定义PRIMARY-KEY-约束来创建主键。一个表只能有一个-PRIMARY-KEY-约束，而且-PRIMARY-KEY-约束中的列不能接受空值。由于-PRIMARY-KEY-约束确保唯一数据，所以经常用来定义标识列。-作用"><a href="#数据主键：表中经常有一个列或列的组合，其值能唯一地标识表中的每一行。这样的一列或多列称为表的主键，通过它可强制表的实体完整性。当创建或更改表时可通过定义PRIMARY-KEY-约束来创建主键。一个表只能有一个-PRIMARY-KEY-约束，而且-PRIMARY-KEY-约束中的列不能接受空值。由于-PRIMARY-KEY-约束确保唯一数据，所以经常用来定义标识列。-作用" class="headerlink" title="数据主键：表中经常有一个列或列的组合，其值能唯一地标识表中的每一行。这样的一列或多列称为表的主键，通过它可强制表的实体完整性。当创建或更改表时可通过定义PRIMARY KEY 约束来创建主键。一个表只能有一个 PRIMARY KEY 约束，而且 PRIMARY KEY 约束中的列不能接受空值。由于 PRIMARY KEY 约束确保唯一数据，所以经常用来定义标识列。 作用 :"></a>数据主键：表中经常有一个列或列的组合，其值能唯一地标识表中的每一行。这样的一列或多列称为表的主键，通过它可强制表的实体完整性。当创建或更改表时可通过定义<strong>PRIMARY KEY</strong> 约束来创建主键。一个表只能有一个 PRIMARY KEY 约束，而且 PRIMARY KEY 约束中的列不能接受空值。由于 PRIMARY KEY 约束确保唯一数据，所以经常用来定义标识列。 作用 :</h3><pre><code>1）保证实体的完整性;
+2）加快数据库的操作速度
+3） 在表中添加新记录时，会自动检查新记录的主键值，不允许该值与其他记录的主键值重复。
+4) 自动按主键值的顺序显示表中的记录。如果没有定义主键，则按输入记录的顺序显示表中的记录。
+</code></pre><h3 id="新建表的时候创建（CREATE）"><a href="#新建表的时候创建（CREATE）" class="headerlink" title="新建表的时候创建（CREATE）"></a>新建表的时候创建（CREATE）</h3><pre><code>create table people(
+  id int primary key auto_increment, //auto_increment默认自增
+  name varchar(30)
+)
+</code></pre><h3 id="修改表创建主键-ALTER"><a href="#修改表创建主键-ALTER" class="headerlink" title="修改表创建主键(ALTER)"></a>修改表创建主键(ALTER)</h3><pre><code>ALTER TABLE table_name modify id int primary key auto_increment;
+</code></pre><h3 id="主键的删除"><a href="#主键的删除" class="headerlink" title="主键的删除"></a>主键的删除</h3><p><strong>注意事项</strong> 主键要删除，必须先删除自增</p>
+<pre><code>ALTER TABLE table_name modify id int; //删除自增
+ALTER TABLE table_name drop primary key; //丢弃主键
+</code></pre><h3 id="主键的注意事项"><a href="#主键的注意事项" class="headerlink" title="主键的注意事项"></a>主键的注意事项</h3><p>1.主键默认自增，而且你修改id大于当前自增最大值，默认会把id自增的指针为现在最大值。<br>2.如果当前删除一个元素id = 9, 下次添加元素id = 10,id并不等于9。表中会默认记录曾经最大的id的值，<strong>但是id = 9的地方依旧可以插入</strong>，如果不设置id的值，默认还是最高指针的下一个地方。</p>
+<h3 id="唯一约束（UNIQUE）"><a href="#唯一约束（UNIQUE）" class="headerlink" title="唯一约束（UNIQUE）"></a>唯一约束（UNIQUE）</h3><p>可以添加多个null值</p>
+<h3 id="unique的新建表的时候创建"><a href="#unique的新建表的时候创建" class="headerlink" title="unique的新建表的时候创建"></a>unique的新建表的时候创建</h3><pre><code>CREATE TABLE table_name(
+  email varchar(50) unique;
+)
+</code></pre><h3 id="unique修改表创建-ALTER"><a href="#unique修改表创建-ALTER" class="headerlink" title="unique修改表创建(ALTER)"></a>unique修改表创建(ALTER)</h3><pre><code>ALTER TABLE table_name modify email varchar(50) unique;
+</code></pre><h3 id="unique的删除"><a href="#unique的删除" class="headerlink" title="unique的删除"></a>unique的删除</h3><pre><code>ALTER TABLT table_name drop index email;
+</code></pre><p><strong>注意</strong> 这就表明了 unique是通过index来确认是否是唯一的。</p>
+<h3 id="非空约束（not-null）"><a href="#非空约束（not-null）" class="headerlink" title="非空约束（not null）"></a>非空约束（not null）</h3><h3 id="非空的新建表的时候创建"><a href="#非空的新建表的时候创建" class="headerlink" title="非空的新建表的时候创建"></a>非空的新建表的时候创建</h3><pre><code>CREATE TABLE table_name(
+  email varchar(50) not null;
+)
+</code></pre><h3 id="非空的修改表创建-ALTER"><a href="#非空的修改表创建-ALTER" class="headerlink" title="非空的修改表创建(ALTER)"></a>非空的修改表创建(ALTER)</h3><pre><code>ALTER TABLE table_name modify email varchar(50) not null;
+</code></pre><h3 id="非空的删除"><a href="#非空的删除" class="headerlink" title="非空的删除"></a>非空的删除</h3><pre><code>ALTER TABLE table_name modify email varchar(50);
+</code></pre><h3 id="外键约束（constrain）-重点"><a href="#外键约束（constrain）-重点" class="headerlink" title="外键约束（constrain）!!重点"></a>外键约束（constrain）!!重点</h3><p>比如有两张表，一张学生选课表，另外一张课程表，学生选择的课程必须是课程表中出现的课程，这个时候可以用外键来约束。如果不是课程表内的课程，则无法插入。</p>
+<h3 id="外键的新建表的时候创建"><a href="#外键的新建表的时候创建" class="headerlink" title="外键的新建表的时候创建"></a>外键的新建表的时候创建</h3><pre><code>create table course(
+  id int primary key auto_increment,
+  cname varchar(30),
+)
+
+create table students(
+  id int primary key auto_increment;
+  cid int,
+  constraint student_course_FK foreign key (cid) references course (id)
+)
+</code></pre><h3 id="外键的修改表创建-ALTER"><a href="#外键的修改表创建-ALTER" class="headerlink" title="外键的修改表创建(ALTER)"></a>外键的修改表创建(ALTER)</h3><pre><code>ALTER TABLE table_name add(constraint student_course_FK foreign key (cid) references course id);
+</code></pre><h3 id="外键的删除"><a href="#外键的删除" class="headerlink" title="外键的删除"></a>外键的删除</h3><p><strong>删除外键的时候，需要用到新建外键时取的名称。</strong></p>
+<pre><code>ALTER TABLE table_name drop foreign key student_course_FK;
+</code></pre><h3 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h3><pre><code>SELECT * FROM t_students;  -- This is a annotation
+SELECT * FROM t_students;  # This is a annotation
+/* Hello World!
+     Hello Kitty~  */
+SELECT * FROM t_students
+</code></pre><h2 id="DQL数据查询语言（多表）"><a href="#DQL数据查询语言（多表）" class="headerlink" title="DQL数据查询语言（多表）"></a>DQL数据查询语言（多表）</h2><h3 id="多表查询"><a href="#多表查询" class="headerlink" title="多表查询"></a>多表查询</h3><pre><code>Select *
+from TABLE1 join_type TABLE2  [on (join_condition)]
+               [where (query_condition)]
+</code></pre><h3 id="交叉连接查询"><a href="#交叉连接查询" class="headerlink" title="交叉连接查询"></a>交叉连接查询</h3><p>不带on子句，返回连接表中所有数据行的笛卡儿积。<br>可以写成不带cross的写法，不过用的不多</p>
+<pre><code>Select * from table1 cross join table2;
+Select * from table1 join table2;
+Select * from table1 , table2; //这个速度偏慢
+</code></pre><h3 id="内部连接查询"><a href="#内部连接查询" class="headerlink" title="内部连接查询"></a>内部连接查询</h3><p>返回连接表中符合连接条件及查询条件的数据行。</p>
+<pre><code>SELECT * FROM customer    c INNER JOIN orders    o ON c.id=o.customer_id;
+SELECT * FROM customer as  c INNER JOIN orders as o  ON c.id=o.customer_id;
+</code></pre><p><strong>注意事项</strong> 表名的别名不需要加as</p>
+<h3 id="外连接查询"><a href="#外连接查询" class="headerlink" title="外连接查询"></a>外连接查询</h3><p>分为左外连接（left out join）、右外连接（right outer join）。与内连接不同的是，外连接不仅返回连接表中符合连接条件及查询条件的数据行，也返回左表（左外连接时）或右表（右外连接时）中仅符合查询条件但不符合连接条件的数据行。</p>
+<h3 id="左外连接查询"><a href="#左外连接查询" class="headerlink" title="左外连接查询"></a>左外连接查询</h3><pre><code>SELECT * FROM customer c LEFT OUTER JOIN orders o ON c.id=o.customer_id;
+不仅包含符合c.id=o.customer_id连接条件的数据行，还包含左表中的其他数据行
+</code></pre><p>带查询条件的左外连接查询，在where子句中设定查询条件</p>
+<pre><code>SELECT * FROM customer c LEFT OUTER JOIN orders o ON c.id=o.customer_id WHERE o.price&gt;250;
+</code></pre><h3 id="右外连接查询"><a href="#右外连接查询" class="headerlink" title="右外连接查询"></a>右外连接查询</h3><pre><code>SELECT * FROM customer c RIGHT OUTER JOIN orders o ON c.id=o.customer_id;
+不仅包含符合c.id=o.customer_id连接条件的数据行，还包含orders右表中的其他数据行
+</code></pre><p>带查询条件的右外连接查询，在where子句中设定查询条件</p>
+<pre><code>SELECT * FROM customer c RIGHT OUTER JOIN orders o ON c.id=o.customer_id WHERE o.price&gt;250;
+</code></pre><p><strong>注意事项</strong>:这里注意一定要用where 不要用成and<br>select * from emp right join dept on emp.deptno = dept.deptno and job = ‘clerk’;<br>+——-+——-+——-+——+——+——–+——–+——–+<br>| empno | ename | job   | mgr  | sal  | deptno | deptno | dname  |<br>+——-+——-+——-+——+——+——–+——–+——–+<br>| 01    | jacky | clerk | tom  | 1000 | 1      | 1      | 事业部 |<br>| 02    | tom   | clerk |      | 2000 | 1      | 1      | 事业部 |<br>| 07    | biddy | clerk |      | 2000 | 1      | 1      | 事业部 |<br>| NULL  | NULL  | NULL  | NULL | NULL | NULL   | 2      | 销售部 |<br>| NULL  | NULL  | NULL  | NULL | NULL | NULL   | 3      | 技术部 |<br>+——-+——-+——-+——+——+——–+——–+——–+</p>
+<p>因为在join …on 。。。 之前会先执行and 】<br>就把<br>| 01    | jacky | clerk | tom  | 1000 | 1      | 1      | 事业部 |<br>| 02    | tom   | clerk |      | 2000 | 1      | 1      | 事业部 |<br>| 07    | biddy | clerk |      | 2000 | 1      | 1      | 事业部 |<br>然后再和<br>+——–+——–+<br>| deptno | dname  |<br>+——–+——–+<br>| 1      | 事业部 |<br>| 2      | 销售部 |<br>| 3      | 技术部 |<br>+——–+——–+</p>
+<p>拼接，就出现了两个幽灵行，因为左边没有deptno = 2,3的<br>最后又发现 and 可以先找到 左边表 和 右边表，新建一个新的表 符合and的判断，然后再和另一个表拼接；</p>
+<p>当没有join…on 时候。 and 就会变成where</p>
+<h3 id="子查询"><a href="#子查询" class="headerlink" title="子查询"></a>子查询</h3><p>子查询也叫嵌套查询，是指在where子句或from子句中又嵌入select查询语句（一般写在where字句）<br>练习：<br>查询“郭靖”的所有订单信息</p>
+<pre><code>SELECT * FROM orders WHERE customer_id=(SELECT id FROM customer WHERE name LIKE ‘%郭靖%&apos;);
+select * from customer c inner join orders o on c.id = o.customer_id and c.name like &apos;%郭靖%&apos;;
+</code></pre><h3 id="联合查询（取并集）"><a href="#联合查询（取并集）" class="headerlink" title="联合查询（取并集）"></a>联合查询（取并集）</h3><p>联合查询能够合并两条查询语句的查询结果，去掉其中的重复数据行，然后返并没有重复数据行的查询结果。联合查询使用union关键字<br>SELECT <em> FROM orders WHERE price&gt;100 UNION SELECT </em> FROM orders WHERE customer_id=1;<br>注意：联合查询的各子查询使用的表结构应该相同，同时两个子查询返回的列也应相同。</p>
+<h3 id="报表查询"><a href="#报表查询" class="headerlink" title="报表查询"></a>报表查询</h3><p>对数据行进行分组统计，其语法格式为：</p>
+<pre><code>select …  from … [where…] [ group by … [having… ]] [ order by … ]
+其中group by 子句指定按照哪些字段分组，having子句设定分组查询条件。
+</code></pre><h3 id="数据库的备份和还原"><a href="#数据库的备份和还原" class="headerlink" title="数据库的备份和还原"></a>数据库的备份和还原</h3><p><strong>数据库备份： cmd命令下</strong></p>
+<pre><code>mysqldump -u root -p test(数据库名称)&gt;test.sql
+</code></pre><p>数据库恢复：<br><strong>创建数据库并选择该数据库</strong>注意，如果备份文件没有自动创建数据库，需要自己创一个数据库</p>
+<pre><code>在cmd命令下：mysql -u root -p test&lt;test.sql
+</code></pre><p>或者：<br>在mysql &gt;命令行下 执行  SOURCE 数据库文件</p>
+<pre><code>先创建一个空的数据库
+Mysql&gt;create databse mydb7;
+Mysql&gt;use mydb7;
+mysql &gt; source c:\user\zhao\test.sql
+</code></pre><h3 id="数据库三大范式"><a href="#数据库三大范式" class="headerlink" title="数据库三大范式"></a>数据库三大范式</h3><h3 id="第一范式"><a href="#第一范式" class="headerlink" title="第一范式"></a>第一范式</h3><p>每列应当保证原子性。即不可以再进行分割。</p>
+<p>比如收货地址这列，就不是原子性的，如果需要经常统计到省份或者城市信息，则该列的设计就不符合第一范式的要求，仍然可以进一步拆分为省份，城市。。。。</p>
+<h3 id="第二范式"><a href="#第二范式" class="headerlink" title="第二范式"></a>第二范式</h3><p>表：学号、课程号、姓名、学分;<br>学分依赖课程，姓名依赖学号</p>
+<p>这个时候，如果删除一条学分数据，会导致相应的课程数据也会被删除。同时这张表还存在数据冗余的情况。<br>如果数据存在部分依赖的情形，需要将字段进行拆分，拆成多个表。这样删除一个数据时，就不会把其他的需要的数据项删除，<br><strong>注意</strong> 这里说的删数据是删一条数据，而不是删除一列，列是一个字段，字段一般不能删除。最好把依赖的字段分成两个表<br>需要重新拆分表：<br>学生表：学号、姓名<br>课程表：课程号<br>选课表：课程号、学号、学分</p>
+<h3 id="第三范式"><a href="#第三范式" class="headerlink" title="第三范式"></a>第三范式</h3><p>不要存在冗余数据，虽然说可能有潜在的关系，但是最好使用外链关系起来，而不是放在一起你<br>表: 学号, 姓名, 年龄, 学院名称, 学院电话<br>学生表：学号、姓名、年龄、学院号<br>学院表：学院名称、学院电话、学院号<br>每一张表在设计的时候，都应该遵循着，只关注最小的一块功能，如统计学生信息，就仅停留在学生信息中，不要过多去延伸。分工而治的思想</p>
+<h2 id="星期六-8-03"><a href="#星期六-8-03" class="headerlink" title="星期六(8.03)"></a>星期六(8.03)</h2><p>（太忙了没时间写了，我明天补上8.4记录）<br>学习的JDBC的相关的知识</p>
+
+        </div>
+        <div class="post-reply">
+            
+                <!-- 来必力City版安装代码 -->
+                <div id="lv-container" data-id="city" data-uid="MTAyMC8yOTE4Ni81NzUz">
+                    <script type="text/javascript">
+                        (function(d, s) {
+                            var j, e = d.getElementsByTagName(s)[0];
+
+                            if (typeof LivereTower === 'function') { return; }
+
+                            j = d.createElement(s);
+                            j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+                            j.async = true;
+
+                            e.parentNode.insertBefore(j, e);
+                        })(document, 'script');
+                    </script>
+                    <noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+                </div>
+                <!-- City版安装代码已完成 -->
+            
+            
+        </div>
+    </div>
+</section>
+<script>
+    // 获取第一张图, 用以当封面背景图
+    var img = document.querySelectorAll('img')[1]
+
+    if (img) {
+        var header_box = document.querySelector('#header_box')
+        header_box.style.backgroundImage = 'url('+ img.src +')'
+    }
+</script>
+      </div>
+  </div>
+  <style>
+  #footer {
+    min-height: 10vh;
+    background: black;
+    color: #fff;
+  }
+
+  #footer a {
+    color: #e1e1e1;
+  }
+</style>
+<footer id="footer" class="has-text-centered is-flex center">
+  <div class="container has-padding">
+    <div>
+      <div>
+        <!--请您保留作者署名, 主题制作来之不易-->
+        主题来自 <a href="http://haojen.github.io/">Haojen Ma</a>
+        <br>
+        Copyright © 王邸 2019
+        <!--
+          Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+        -->
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="/js/search_core.js"></script>
+<script src="/js/script.js"></script>
+
+</body>
+</html>

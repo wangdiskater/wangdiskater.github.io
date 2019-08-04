@@ -1,0 +1,1202 @@
+<!DOCTYPE html>
+<html class="full-height">
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="//cdn.bootcss.com/bulma/0.4.1/css/bulma.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+  
+  <title>Java总结（六）上 | 路要坚持</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="概述这周把JAVASE部分都搞完了，接下来需要学习EE的部分，SE的知识决定是否能找一个好的工作，所以这一部分是非常非常重要的。并不是简简单单的知识点，涵盖了所有Java底层的东西，虽然没有全都弄懂，但是任重而道远。而且为了赶课程，这周的最后SE的部分并没有讲的很详细，所以主要总结的还是SE的内容：线程、网络编程、反射、GC回收机制。EE的内容就讲了数据库的一些操作和原理，然后讲了一点JDBC的东">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java总结（六）上">
+<meta property="og:url" content="http://yoursite.com/2019/08/04/Java总结（六）上/index.html">
+<meta property="og:site_name" content="路要坚持">
+<meta property="og:description" content="概述这周把JAVASE部分都搞完了，接下来需要学习EE的部分，SE的知识决定是否能找一个好的工作，所以这一部分是非常非常重要的。并不是简简单单的知识点，涵盖了所有Java底层的东西，虽然没有全都弄懂，但是任重而道远。而且为了赶课程，这周的最后SE的部分并没有讲的很详细，所以主要总结的还是SE的内容：线程、网络编程、反射、GC回收机制。EE的内容就讲了数据库的一些操作和原理，然后讲了一点JDBC的东">
+<meta property="og:updated_time" content="2019-08-04T15:18:24.120Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java总结（六）上">
+<meta name="twitter:description" content="概述这周把JAVASE部分都搞完了，接下来需要学习EE的部分，SE的知识决定是否能找一个好的工作，所以这一部分是非常非常重要的。并不是简简单单的知识点，涵盖了所有Java底层的东西，虽然没有全都弄懂，但是任重而道远。而且为了赶课程，这周的最后SE的部分并没有讲的很详细，所以主要总结的还是SE的内容：线程、网络编程、反射、GC回收机制。EE的内容就讲了数据库的一些操作和原理，然后讲了一点JDBC的东">
+  
+    <link rel="alternate" href="/" title="路要坚持" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/common.css">
+<link rel="stylesheet" href="/css/nav.css">
+<link rel="stylesheet" href="/css/layout.css">
+  
+
+</head>
+
+<body>
+  <header id="navbar" class="overflow-hidden">
+  <div class="container">
+    <nav class="nav">
+         <div class="nav-left">
+            <a href="/" class="nav-item" style="font-size: 20px;">
+              <span class="logo">王邸</span>'s Blog
+            </a>
+         </div>
+        <div class="nav-center is-hidden position-relative" id="search_container">
+            <div class="nav-item full-width full-height">
+                <i class="fa fa-search has-padding" aria-hidden="true"></i>
+                <input type="text" id="search_input" class="search-input full-height full-width" placeholder="Search post" autofocus>
+                <i id="close_search" class="fa fa-times" aria-hidden="true"></i>
+            </div>
+            <div id="search_result"></div>
+        </div>
+        <div class="nav-right nav-menu">
+            <a class="nav-item" id="search">
+                <i class="fa fa-search" aria-hidden="true"></i>
+            </a>
+            
+            <a class="nav-item" href="/">
+                Home
+            </a>
+            
+            <a class="nav-item" href="/works">
+                My Works
+            </a>
+            
+            <a class="nav-item" href="/about">
+                About
+            </a>
+            
+        </div>
+        <span class="nav-toggle" id="navMenuDropdown">
+            <span></span>
+            <span></span>
+            <span></span>
+        </span>
+        <div class="navbar-menu position-absolute full-width content-box is-hidden-desktop is-flex flex-column center" style="top: 100%;">
+            
+            <a class="nav-item flex-1" href="/">
+                Home
+            </a>
+            
+            <a class="nav-item flex-1" href="/works">
+                My Works
+            </a>
+            
+            <a class="nav-item flex-1" href="/about">
+                About
+            </a>
+            
+        </div>
+    </nav>
+  </div>
+</header>
+
+  <div id="main-wrap" class="position-relative" style="margin-top: 55px;">
+      <div class="main-inner-content">
+          <!--博文页面-->
+
+<style>
+    .header-box {
+        height: 370px;
+        filter: blur(10px);
+        background-size: cover;
+        background-color: lightsteelblue;
+    }
+
+    .post-box {
+        padding: 15px;
+        padding-top: 60px;
+        min-height: 80vh;
+        margin-top: -200px;
+        border-radius: 4px;
+        background-color: rgba(255,255,255,.8);
+    }
+
+    .post-avatar {
+        height: 30px;
+        width: 30px;
+        border-radius: 50%;
+    }
+
+    .flow-chart {
+        text-align: center;
+    }
+
+    img[alt="post-cover"] {
+        display: none;
+    }
+</style>
+<header>
+    <div id="header_box" class="header-box"></div>
+</header>
+<section>
+    <div class="container post-box">
+        <div class="content post-title is-flex center flex-column" style="margin-bottom: 70px; overflow: auto;">
+            <h1 class="has-text-centered" style="padding-bottom: 10px; border-bottom: 3px solid #fff">
+                <strong>Java总结（六）上</strong>
+            </h1>
+            
+            <div class="is-flex align-center">
+                <img class="post-avatar" src="https://q2.qlogo.cn/headimg_dl?bs=996057150&dst_uin=996057150&dst_uin=996057150&;dst_uin=996057150&spec=100&url_enc=0&referer=bu_interface&term_type=PC">
+                <span style="padding:0 10px;"> <span class="sub-title">By</span> 王邸</span>
+                <span class="post-date sub-title">at: 2019-08-04</span>
+            </div>
+            
+                <div>
+                    
+                </div>
+            
+        </div>
+        <div class="content" style="overflow: auto">
+            <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>这周把JAVASE部分都搞完了，接下来需要学习EE的部分，SE的知识决定是否能找一个好的工作，所以这一部分是非常非常重要的。并不是简简单单的知识点，涵盖了所有Java底层的东西，虽然没有全都弄懂，但是任重而道远。而且为了赶课程，这周的最后SE的部分并没有讲的很详细，所以主要总结的还是SE的内容：线程、网络编程、反射、GC回收机制。EE的内容就讲了数据库的一些操作和原理，然后讲了一点JDBC的东西。知识都比较乱和复杂，所以必须每天都总结，要不然容易忘记。</p>
+<h2 id="星期一-7-29"><a href="#星期一-7-29" class="headerlink" title="星期一(7.29)"></a>星期一(7.29)</h2><h3 id="线程间通信："><a href="#线程间通信：" class="headerlink" title="线程间通信："></a>线程间通信：</h3><pre><code>只有在同步的情况下，线程间才有必要通信。
+</code></pre><h3 id="等待唤醒机制："><a href="#等待唤醒机制：" class="headerlink" title="等待唤醒机制："></a>等待唤醒机制：</h3><p>Object (锁) :</p>
+<pre><code>void notify()   // 随机一个唤醒等待这把锁的线程
+void notifyAll() // 唤醒所以等待这把锁的线程
+void wait() // 当前正在执行的线程进入等待状态, 并且释放锁资源，等待被唤醒。
+void wait(long timeout) // 支持超时机制，如果在指定的时间内没有被唤醒，就会自动唤醒。
+void wait(long timeout, int nanos)
+</code></pre><p>为什么 wait() 方法和 notify() 方法不定义在 Thread 类中，而定义在 Object 中呢？<br>    线程间通信是通过锁对象实现的 (锁对象是线程间通信的媒介),又因为任何对象都可以做为锁，所以这些方法定义在Object类中</p>
+<p>注意事项：</p>
+<pre><code>a. notify(), notifyAll(): 申请的资源曾经可以利用的。
+b. 慎用 notify(), 除非确实考虑周全了，否则都用 notifyAll();
+</code></pre><p>回到上礼拜银行转账的例子：</p>
+<h3 id="解决死锁问题—-拿到全部资源"><a href="#解决死锁问题—-拿到全部资源" class="headerlink" title="解决死锁问题—-拿到全部资源"></a>解决死锁问题—-拿到全部资源</h3><p>从上个礼拜的解决死锁问题开始，第一种方法拿到全部资源，这里有一句</p>
+<pre><code>while(!Apply.apply(this,target));
+</code></pre><p>是要一直while等待是否可以同时拿到所有资源。还好这个apply方法是同步的，不会发生死锁问题，如果不是同步的，就很可能出现两边一直等待的问题。<br>之前的apply的方法</p>
+<pre><code>public class Apply {
+  private static List&lt;Account&gt; list = new ArrayList&lt;&gt;();
+  //方法也要是同步的，这样才能一次进入一个
+  public synchronized static boolean apply(Account accountA, Account accountB) {
+    //如果里面有就要判断不能进入
+    if(list.contains(accountA) || list.contains(accountB)) {
+        return false;
+    }
+    list.add(accountA);
+    list.add(accountB);
+    return true;
+  }
+  //释放资源
+  public synchronized static void free(Account accountA, Account accountB) {
+    list.remove(accountA);
+    list.remove(accountB);
+  }
+}
+</code></pre><p>修改后的经典做法，使用wait(),nodifyAll() ,但是要是使用的同一把锁，写在不同两个方法里面，所以锁只能是class文件，<br>注意这里需要使用while来判断 while (list.contains(accountA) || list.contains(accountB))，因为唤醒的时候就怕又有其他的线程进来，所以必须要重新判断。</p>
+<pre><code>public synchronized static boolean apply(Account accountA, Account accountB) {
+  // 经典做法
+  while (list.contains(accountA) || list.contains(accountB)) {
+      // return false;
+      try {
+          Apply.class.wait(); // 阻塞
+      } catch (InterruptedException e) {
+          e.printStackTrace();
+      }
+  }
+  list.add(accountA);
+  list.add(accountB);
+  return true;
+}
+</code></pre><p>在free()资源的时候唤醒其他线程</p>
+<pre><code>public synchronized static void free(Account accountA, Account accountB) {
+  list.remove(accountA);
+  list.remove(accountB);
+  Apply.class.notifyAll();
+}
+</code></pre><p><strong>注意事项</strong>：wait 和 notify 需要使用同一把锁来进行判断，这两个方法必须要在同步代码中才能使用。所以锁是任意对象也就证明了watit和 notify是Object类型上的两个方法。这种感觉就好像，一个人在一扇门里面，一个人在同一扇门的外面，他们中间就间隔了一把锁，只有通过这把锁，里面的人才能叫醒外面的人进来，外面的人才能等待。为了让线程的同步，我们引入了阻塞队列。</p>
+<h3 id="阻塞队列"><a href="#阻塞队列" class="headerlink" title="阻塞队列"></a>阻塞队列</h3><p>组赛队列其实也就是生产者消费者模型的核心的东西，生产者只能在东西没满的时候生产，消费者只能在生产有东西的时候消费。这就是简单的BlockingQueue</p>
+<pre><code>enque: 当队列满了，会阻塞，等待队列不满的时候，再入队列，并返回。
+deque: 当队列为空，会阻塞，等待队列不空的时候，再出队列，并返回。
+</code></pre><h4 id="自己手写的阻塞队列"><a href="#自己手写的阻塞队列" class="headerlink" title="自己手写的阻塞队列"></a>自己手写的阻塞队列</h4><p>思路：<br>1.阻塞队列必须是一个<strong>循环队列</strong>，所以循环队列需要一个front 一个 rear指针<br>2.阻塞队列当然需要一个数组去存储数据。但是这个长度是固定的<br>3.注意使用同一把锁来确定入队和出队的操作，因为是在对象上操作，所以可以写成同步方法<br>4.记得判断size == 0 和 size == length时候的阻塞问题</p>
+<pre><code>//简单的实现阻塞队列
+public class MyBlockingQue {
+  //属性
+  int front;
+  int rear;
+  String[] elements;
+  int size;
+
+  //构造方法
+  public MyBlockingQue(){
+    elements = new String[10];
+    front = 0;
+    rear = elements.length-1;
+  }
+
+  //方法
+</code></pre><p>//入队操作</p>
+<pre><code>public synchronized void enque(String input) {
+  while(size == elements.length) {
+    try{
+      wait();     //如果满了就等待
+    } catch (InterruptedException e){
+      e.printStackTrace();
+    }
+  }
+  rear = (rear+1) % elements.length;
+  element[rear] = input;
+  size++;
+  notifyAll();  //唤醒其他所有线程
+}
+</code></pre><p>//出栈操作</p>
+<pre><code>public synchronized void deque() {
+  while(size == 0) {
+    try{
+      wait(); //如果没有元素就等待出队
+    } catch (InterruptedException e) {
+      e.printStackTrace();
+    }
+  }
+  String oldValue = elements[front];
+  front = (front + 1) % elements.length;
+  size--;
+  notifyAll(); //唤醒所有线程
+  return oldValue;
+}
+</code></pre><p>//测试阻塞队列</p>
+<pre><code>  public static void main(String[] args) {
+    MyBlockingQueue1 bq1 = new MyBlockingQueue1();
+    new Thread(){
+      @Override
+      public void run(){
+        int i = 1;
+        while(true){
+          bq1.enque(i+&quot;进来了&quot;);
+          System.out.println(bq1);
+          i++;
+          try {
+              Thread.sleep(100);
+          } catch (InterruptedException e) {
+              e.printStackTrace();
+          }
+        }
+      }
+    }.start();
+  }
+  new Thread(){
+    @Override
+    public void run(){
+      while(true){
+        System.out.println(&quot;我出队了&quot; + bq1.deque());
+       try {
+           Thread.sleep(1000);
+       } catch (InterruptedException e) {
+           e.printStackTrace();
+       }
+      }
+    }
+  }.start();
+}
+</code></pre><h3 id="BlockingQue类"><a href="#BlockingQue类" class="headerlink" title="BlockingQue类"></a>BlockingQue类</h3><p>public interface BlockingQueue<e> extends Queue<e><br>阻塞方法：<br>    void put(E e);<br>    E take();</e></e></p>
+<p>子类：ArrayBlockingQueue，LinkedBlockingDeque</p>
+<p><strong>注意事项</strong>这两个阻塞方法显示是有点问题的，因为put()，take()方法和size()方法不是同步的，所以为了在显示生产消费的时候，只能确保他是阻塞的运行put 和 take方法，而不能去判断他里面有多少个，队满的时候依旧可能显示:</p>
+<pre><code>生产了一个包子, 还剩9个
+生产了一个包子, 还剩10个
+消费了一个包子，还剩10个
+生产了一个包子, 还剩10个
+</code></pre><p>显示有问题的源码：</p>
+<pre><code>public class BunStore {
+
+BlockingQueue&lt;Bun&gt; bq = new BlockingQue(10); //长度10
+public void produce() {
+  try {
+    bq.put(new Bun());
+    Thread.sleep(100);
+  } catch (InterruptedException e) {
+    e.printStackTrace();
+  }
+  System.out.println(&quot;生产了一个包子, 还剩&quot; + bq.size() + &quot;个&quot;);
+}
+
+public  Bun consume() {
+  Bun bun = null;
+  try {
+    bun = bq.take();
+    Thread.sleep(500);
+  } catch (InterruptedException e) {
+    e.printStackTrace();
+  }
+  System.out.println(&quot;消费了一个包子，还剩&quot; + bq.size() + &quot;个&quot;);
+  return bun;
+}
+</code></pre><p>//main 方法</p>
+<pre><code>public static void main(String[] args) {
+    BunStore store = new BunStore(&quot;陈妍希牌小笼包&quot;, 10);
+    new Thread() {
+        @Override
+        public void run() {
+            while(true) {
+                store.produce();
+            }
+        }
+    }.start();
+
+    new Thread() {
+        @Override
+        public void run() {
+            while (true) {
+                store.consume();
+            }
+        }
+    }.start();
+}
+</code></pre><h3 id="解决办法1-上锁"><a href="#解决办法1-上锁" class="headerlink" title="解决办法1 上锁"></a>解决办法1 上锁</h3><pre><code>因为我们已经知道是put 和size方法没有同步的问题，所以现在要解决这个问题，我想到的第一个方法是把put size锁在bq中
+把take 和 size锁在同一个bq中，如下所示：
+</code></pre><p>生产</p>
+<pre><code>public void produce() {
+    try {
+        //锁在一个bq中
+        synchronized (bq){
+            bq.put(new Bun());
+            System.out.println(&quot;生产了一个包子, 还剩&quot; + bq.size() + &quot;个&quot;);
+        }
+        Thread.sleep(100);
+    } catch (InterruptedException e) {
+        e.printStackTrace();
+    }
+}
+</code></pre><p>消费</p>
+<pre><code>public Bun consume() {
+    Bun bun = null;
+    try {
+        synchronized (bq){
+            bun = bq.take();
+            System.out.println(&quot;消费了一个包子，还剩&quot; + bq.size() + &quot;个&quot;);
+        }
+        Thread.sleep(500);
+    } catch (InterruptedException e) {
+        e.printStackTrace();
+    }
+    return bun;
+}
+</code></pre><p>这失败了，这显示到第一次出现阻塞队列就死锁了，因为put 和 take本来就是阻塞的方法，但是这样又设置了一把锁。导致put方法外层的锁进去了，内层的锁进去了，内层的锁阻塞了，进不去内层的锁了，put被锁在内层锁的外面。但是另一个方法还take阻塞在外层的锁外面呢，他肯本不知道外层锁里面是什么样子的。所以两个方法都在等待就都进不去。他们等待锁的地方不同。虽然两把锁都是bq，但是地方不同。</p>
+<h3 id="解决办法2（同步方法）"><a href="#解决办法2（同步方法）" class="headerlink" title="解决办法2（同步方法）"></a>解决办法2（同步方法）</h3><p>为了使得put 和 size 同步，我们可以在这个BunStore上做文章，如果给consume和produce上锁不就能保证他们同步的了吗？所以就引出了第二个方法：<br>//回复之前的写法，在两个方法使用同步方法；</p>
+<pre><code>public  synchronized void produce() {
+    try {
+        bq.put(new Bun());
+        Thread.sleep(100);
+    } catch (InterruptedException e) {
+        e.printStackTrace();
+    }
+    System.out.println(&quot;生产了一个包子, 还剩&quot; + bq.size() + &quot;个&quot;);
+}
+
+public  synchronized Bun consume() {
+    Bun bun = null;
+    try {
+        bun = bq.take();
+        Thread.sleep(1000);
+    } catch (InterruptedException e) {
+        e.printStackTrace();
+    }
+    System.out.println(&quot;消费了一个包子，还剩&quot; + bq.size() + &quot;个&quot;);
+    return bun;
+}
+</code></pre><p>同样的又失败了，也是一样的问题，也是上了两把锁，虽然保证了size 和 put是同步的，但是consume 和 produce方法如果是同步的就会有问题：和上面的问题一样，一个方法被困在外层锁外面（这个BunStore对象）,一个被困在内层锁（bq）外面。外面的进不来，里面的出不去，所以又死锁了。而且这个死锁很容易发生，比不上锁更容易发生。也是两把锁的问题，但是和上一种方法上锁的对象不同，上面两层都是bq锁，这个外层是这个对象的锁，内层锁才是bq锁。他就很容易发生连续调用consume 或者produce方法直到其中一种方法内层进入阻塞。</p>
+<h3 id="解决办法3"><a href="#解决办法3" class="headerlink" title="解决办法3"></a>解决办法3</h3><p>首先我们可以肯定 size 和 put必须要满足同步，size 和take也要满足同步。 所以必须要使得consume和produce方法是满足同步的，然后我们就不用put和take方法的同步的锁了，我们自己使用wait和notify方法，告诉别的线程你可以开始操作了。<strong>而put 和 take就仅仅是使用了入队和出队的操作。</strong></p>
+<p>//生产包子</p>
+<pre><code>public synchronized void produce() {
+    try {
+        while (bq.size() == 10){
+            wait();
+        }
+        bq.put(new Bun());
+        System.out.println(&quot;生产，目前有&quot; + bq.size() + &quot;个包子&quot;);
+         notifyAll();
+        Thread.sleep(500);
+    } catch (InterruptedException e) {
+        e.printStackTrace();
+    }
+}
+</code></pre><p>//消费包子</p>
+<pre><code>public synchronized Bun consume() {
+    Bun bun = null;
+    try{
+        while(bq.size() == 0){
+            wait();
+        }
+        bun = bq.take();
+        System.out.println(&quot;卖出，目前有&quot; + bq.size() + &quot;个包子&quot;);
+        notifyAll();
+        Thread.sleep(600);
+    } catch (InterruptedException e) {
+        e.printStackTrace();
+    }
+    return bun;
+}
+</code></pre><h3 id="线程池的初步了解"><a href="#线程池的初步了解" class="headerlink" title="线程池的初步了解"></a>线程池的初步了解</h3><p>启动一个新线程的成本是比较高的，因为它涉及到与操作系统进行交互。这种情况下使用线程池可以更好的提高性能，尤其在当前程序需要创建大量的生存周期很短的线程时，更应该考虑使用线程池。<br>原理</p>
+<pre><code>线程池里每一个线程代码结束后，并不会死亡，而是再次回到线程池中成为空闲状态，等待下一次被使用。
+</code></pre><p>从原理可以看出：线程池应该是以集合的形式保存的，而线程应该是相同的，需要把线程和任务进行解耦，把任务放在阻塞队列中，而不是把任务写成Thread的子类来进行运行。这样有任务就拿出线程，没任务就在线程池里待着，这样就不用频繁的创建线程和销毁线程了。<br>一个简单的线程池的实现如下：</p>
+<p>思路：<br>1.首先要实现线程池，需要一个容器来装线程，这里就简单的使用ArrayList<br>2.需要使用一个阻塞队列来存储任务，这样就能把任务都缓存起来依次执行</p>
+<pre><code>public class MyThreadPool {
+    //属性
+    //阻塞队列存放任务
+    BlockingQueue&lt;Runnable&gt; bq = new ArrayBlockingQueue&lt;&gt;(10);
+    //一个简单的线程池
+    Collection&lt;WorkThread&gt; threads;
+
+    //构造函数
+    public MyThreadPool(int size) {
+        threads = new ArrayList&lt;&gt;(size);
+        for (int i = 0; i &lt; size; i++) {
+            //初始化工作线程，并启动线程放入线程池
+            WorkThread wt = new WorkThread();
+            wt.start();
+            threads.add(wt);
+        }
+    }
+</code></pre><p>// 获取任务放进阻塞队列</p>
+<pre><code>public void execute(Runnable task) {
+    try {
+        bq.put(task);
+    } catch (InterruptedException e) {
+        e.printStackTrace();
+    }
+}
+</code></pre><p>//工作线程</p>
+<pre><code>private class WorkThread extends Thread {
+    @Override
+    public void run() {
+      // 线程一直执行，不会进入死亡状态
+        while (true) {
+            try {
+                Runnable task = bq.take(); //如果没有任务就会阻塞在这；
+                task.run();                //执行任务
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+}
+</code></pre><p>//主函数，包括要执行的任务</p>
+<pre><code>    public static void main(String[] args) {
+        MyThreadPool pool = new MyThreadPool(10);
+        Runnable task1 = new Runnable() {
+            @Override
+            public void run() {
+                for (int i = 0; i &lt; 100; i++) {
+                    System.out.println(Thread.currentThread().getName() + &quot;: &quot; + i);
+                    try {
+                        Thread.sleep(50);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        };
+        Runnable task2 = new Runnable() {
+            @Override
+            public void run() {
+                System.out.println(Thread.currentThread().getName() + &quot;: begin&quot;);
+                try {
+                    Thread.sleep(500);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                System.out.println(Thread.currentThread().getName() + &quot;: end&quot;);
+            }
+        };
+        pool.execute(task1);
+        pool.execute(task2);
+    }
+}
+</code></pre><p>这只是一个简单的线程池，让线程在创建的时候全部启动，然后WorkThread线程内的run方法都阻塞在阻塞队列bq这里，有任务就执行，没有任务就一直空转，虽然会提高效率，如果不用的时候还是建议把线程池关了，以免造成资源的浪费。</p>
+<h3 id="JAVA简单线程池ThreadPoolExecutor"><a href="#JAVA简单线程池ThreadPoolExecutor" class="headerlink" title="JAVA简单线程池ThreadPoolExecutor:"></a>JAVA简单线程池ThreadPoolExecutor:</h3><pre><code>Executor: void execute(Runnable command)  执行任务
+    |-- ExecutorService:
+        |-- ThreadPoolExecutor:
+</code></pre><p>继承关系</p>
+<pre><code>public class ThreadPoolExecutor extends AbstractExecutorService
+</code></pre><p>构造方法</p>
+<pre><code>ThreadPoolExecutor(int corePoolSize, int maximumPoolSize, long keepAliveTime, TimeUnit unit, BlockingQueue&lt;Runnable&gt; workQueue, RejectedExecutionHandler handler)
+用给定的初始参数和默认的线程工厂创建新的 ThreadPoolExecutor。
+</code></pre><p>参数的解释:</p>
+<p>int corePoolSize: 核心线程，           项目组的核心成员<br>int maximumPoolSize: 项目组很忙的时候  人数的最大上线<br>long keepAliveTime: 线程最长的空闲时间 撤销线程<br>TimeUnit unit: 时间单位               设置线程空闲时间<br>BlockingQueue<runnable> workQueue：  缓存任务的队列<br>RejectedExecutionHandler handler：   当缓存队列满的时候，拒绝策略</runnable></p>
+<p>TimeUnit: 枚举类型</p>
+<pre><code>DAYS
+HOURS
+MINUTES
+SECONDS
+MILLISECONDS
+MICROSECONDS
+NANOSECONDS
+</code></pre><p>RejectedExecutionHandler：</p>
+<pre><code>|-- ThreadPoolExecutor.AbortPolicy  抛出一个异常 RejectedExecutionException（默认是这个）
+|-- ThreadPoolExecutor.CallerRunsPolicy 往线程池添加任务的线程执行该任务
+|-- ThreadPoolExecutor.DiscardOldestPolicy 丢弃最早的任务，添加该任务
+|-- ThreadPoolExecutor.DiscardPolicy 直接丢弃任务
+</code></pre><p>问题：如何停止应用程序？</p>
+<pre><code>void shutdown()：不接受新任务, 把缓存队列中的任务执行完毕后就关闭线程池。
+List&lt;Runnable&gt; shutdownNow(): 尝试立刻关闭线程池，返回等待任务的队列
+</code></pre><p>看了JDK有下面几句话：</p>
+<pre><code>强烈建议程序员使用较为方便的 Executors 工厂方法
+Executors.newCachedThreadPool()（无界线程池，可以进行自动线程回收）、
+Executors.newFixedThreadPool(int)（固定大小线程池）和
+Executors.newSingleThreadExecutor()（单个后台线程），它们均为大多数使用场景预定义了设置。
+</code></pre><p>接下来就来讨论一下这些工厂方法</p>
+<h3 id="Executors"><a href="#Executors" class="headerlink" title="Executors:"></a>Executors:</h3><pre><code>public static ExecutorService newCachedThreadPool()
+    corePoolSize = 0 //没有核心线程，都是来打临时工的
+
+public static ExecutorService newFixedThreadPool(int nThreads)
+    corePoolSize = maximumPoolSize = nThreads //全都是核心线程，需要自己设置
+
+public static ExecutorService newSingleThreadExecutor()  //只有一个核心线程
+    corePoolSize = maximumPoolSize = 1
+</code></pre><p>这里首先要注意的是这三个工厂函数的返回值是ExecutorService，而ExecutorService是一个接口,继承了Executor<br>而之前上面说的ThreadPoolExcutor则是ExecutorService的子类：</p>
+<h3 id="Executor"><a href="#Executor" class="headerlink" title="Executor:"></a>Executor:</h3><pre><code>void execute(Runnable task)
+
+|-- ExecutorService:
+    Future&lt;?&gt; submit(Runnable task)
+    &lt;T&gt; Future&lt;T&gt; submit(Runnable task, T result)
+    &lt;T&gt; Future&lt;T&gt; submit(Callable&lt;T&gt; task)
+    关闭线程池
+    void shutdown()
+    List&lt;Runnable&gt; shutdownNow()
+</code></pre><p><strong>注意事项</strong> 注execute方法是没有返回值的，但是子接口三个方法都有返回值，而<t> Future<t> submit(Runnable task, T result)还有返回的结果。 咩有返回结果，他的用法就和直接调用execute相同；</t></t></p>
+<h3 id="ExecutorService"><a href="#ExecutorService" class="headerlink" title="ExecutorService"></a>ExecutorService</h3><pre><code>继承关系
+public interface ExecutorService extends Executor
+所有已知实现类：
+AbstractExecutorService, ScheduledThreadPoolExecutor, ThreadPoolExecutor
+</code></pre><p> 方法：</p>
+<pre><code>void shutdown()   启动一次顺序关闭，执行以前提交的任务，但不接受新任务。
+List&lt;Runnable&gt; shutdownNow()   试图停止所有正在执行的活动任务，暂停处理正在等待的任务，并返回等待执行的任务列表。
+&lt;T&gt; Future&lt;T&gt; submit(Callable&lt;T&gt; task)   提交一个返回值的任务用于执行，返回一个表示任务的未决结果的 Future。
+Future&lt;?&gt; submit(Runnable task)   提交一个 Runnable 任务用于执行，并返回一个表示该任务的 Future。
+&lt;T&gt; Future&lt;T&gt; submit(Runnable task, T result)   提交一个 Runnable 任务用于执行，并返回一个表示该任务的 Future。
+</code></pre><p>关于后面三个方法的返回值类型和传入参数Callable 的说明：</p>
+<h3 id="Future"><a href="#Future" class="headerlink" title="Future:"></a>Future:</h3><p>   Future 表示异步计算的结果。它提供了检查计算是否完成的方法，以等待计算的完成，并获取计算的结果。<br>   计算完成后只能使用 get 方法来获取结果，如有必要，计算完成前可以阻塞此方法。</p>
+<pre><code>V get(): 获取异步结果，如果异步线程还没计算完，主线程就阻塞，直到异步线程计算完成。
+V get(long timeout, TimeUnit unit)：获取异步结果，如果异步线程还没计算完，主线程就阻塞，支持超时机制。
+boolean isDone()
+</code></pre><h3 id="Callable-有返回值的任务"><a href="#Callable-有返回值的任务" class="headerlink" title="Callable: (有返回值的任务)"></a>Callable: (有返回值的任务)</h3><pre><code>V call()
+</code></pre><p>时间问题下面就举一个ExecutorSerivce的一个工厂函数 <t> Future<t> submit(Runnable task, T result)<br>// <t> Future<t> submit(Runnable task, T result) 执行任务，并把结果放入 result 中</t></t></t></t></p>
+<pre><code>ExecutorService pool1 = Executors.newCachedThreadPool(); //（无界线程池，可以进行自动线程回收）
+List&lt;String&gt; result = new ArrayList&lt;&gt;(); //存放结果
+Future&lt;List&gt; future = pool1.submit(new Runnable() {
+    @Override
+    public void run() {
+        for (int i = 0; i &lt; 10; i++) {
+            result.add(&quot;&quot; + i);
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+}, result);
+
+// 主线程执行其他任务....
+List list = null;
+try {
+    list = future.get();
+} catch (InterruptedException e) {
+    e.printStackTrace();
+} catch (ExecutionException e) {
+    e.printStackTrace();
+}
+System.out.println(list);
+</code></pre><h3 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h3><p>使用线程池，一般都会用以上的三个Executor的工厂函数构造ExecutorSerivce然后再根据自己的实际应用来用线程池。而一开始说的ThreadPoolExecutor并没有实际的意义，只是让我们跟容易的立即线程池需要的参数。例如核心线程个数，缓冲任务队列，线程撤销时间，和任务拒绝策略等等。</p>
+<h3 id="中场休息时间："><a href="#中场休息时间：" class="headerlink" title="中场休息时间："></a>中场休息时间：</h3><pre><code>上面的东西有一些多而且并不是看到的那么容易的，所以不要掉以轻心。
+</code></pre><h3 id="定时器（Timer）和定时任务（TimerTask）"><a href="#定时器（Timer）和定时任务（TimerTask）" class="headerlink" title="定时器（Timer）和定时任务（TimerTask）"></a>定时器（Timer）和定时任务（TimerTask）</h3><p>构造方法：</p>
+<pre><code>Timer()
+Timer(boolean isDaemon): 是否以守护线程去指定定时任务，默认是false
+Timer(String name)
+Timer(String name, boolean isDaemon)
+</code></pre><p>方法：</p>
+<pre><code>void schedule(TimerTask task, Date time) 在指定的时间执行指定的任务(一次)
+void schedule(TimerTask task, Date firstTime, long period)
+void schedule(TimerTask task, long delay) 延迟多少时间后，执行指定的任务(一次)
+void schedule(TimerTask task, long delay, long period)
+void cancel() 关闭定时器
+</code></pre><p>abstract TimerTask: 定时任务(注意他是一个抽象类)</p>
+<p>方法：</p>
+<pre><code>boolean cancel() 取消定时任务
+abstract void run() 要执行的任务
+long scheduledExecutionTime() 上一次执行的时间
+</code></pre><p>一个简单的例子,每隔1秒打印一次爆炸</p>
+<pre><code>Timer timer = new Timer();
+String s = &quot;2019-07-29 15:31:00&quot;; //开始时间
+SimpleDateFormat sdf = new SimpleDateFormat(&quot;yyyy-MM-dd HH:mm:ss&quot;);
+Date date = sdf.parse(s);
+
+//void schedule(TimerTask task, Date firstTime, long period)
+
+timer.schedule(new TimerTask() {
+    @Override
+    public void run() {
+        System.out.println(&quot;boom!&quot;);
+    }
+}, date, 1000);
+</code></pre><p><strong>注意事项</strong><br>这个定时任务有点蠢，好像并没有参数确定循环执行的次数，如果有需要手动关闭需要自己设置一个计数器，然后次数到了自己timer.cancel()。</p>
+<p>小小总结：<br>多线程有几种实现方案，分别是哪几种?</p>
+<pre><code>a. 继承Thread
+b. 实现Runnable接口
+c. 线程池(callable)
+</code></pre><p>同步有几种方式，分别是什么?</p>
+<pre><code>a. synchronize  同步代码块 同步方法(this) 静态同步方法(字节码文件对象)
+b. 锁 Lock --&gt; lock() unlock()
+</code></pre><p>启动一个线程是run()还是start()?它们的区别?</p>
+<pre><code>start()
+run: 封装的线程要执行的任务, 直接调用相当于普通方法调用，并不会创建一个线程
+start: 创建一个线程，并执行该Thread对象的run方法
+</code></pre><p>sleep()和wait()方法的区别</p>
+<pre><code>sleep() 和 wait() 让当前线程进入阻塞状态。
+a. sleep() Thread类中一个静态方法。表示线程休眠，不会释放锁。有时间参数，支持超时机制。
+b. wait() Object中的成员方法。 表示当前线程进入等待状态，释放锁。可以有时间参数，也可以没有时间参数。
+</code></pre><p>为什么wait(),notify(),notifyAll()等方法都定义在Object类中</p>
+<pre><code>因为线程间的通信是通过锁对象实现的，并且锁可以是任意对象，因此这些方法定义在Object类中。
+</code></pre><p>线程的生命周期图</p>
+<pre><code>NEW : 新建
+RUNNABLE: 就绪, 运行
+BLOCKED: 等待阻塞(等待唤醒)
+WAITING: 无限期的等待
+TIMED_WAITING: 有时间限制的等待
+TERMINATED： 死亡
+</code></pre><h2 id="星期二-7-30"><a href="#星期二-7-30" class="headerlink" title="星期二(7.30)"></a>星期二(7.30)</h2><h2 id="网络编程"><a href="#网络编程" class="headerlink" title="网络编程"></a>网络编程</h2><pre><code>一些概念的东西，可能很枯燥，但是还是要了解，多看几遍。
+</code></pre><h3 id="网络模型"><a href="#网络模型" class="headerlink" title="网络模型"></a>网络模型</h3><pre><code>计算机网络之间以何种规则进行通信，就是网络模型研究问题。
+</code></pre><p>网络模型一般是指</p>
+<pre><code>OSI（Open System Interconnection开放系统互连）参考模型
+TCP/IP参考模型
+</code></pre><p>网络模型7层概述：<br>1.<strong>物理层</strong>：主要定义物理设备标准，如网线的接口类型、光纤的接口类型、各种传输介质的传输速率等。它的主要作用是传输比特流（就是由1、0转化为电流强弱来进行传输,到达目的地后在转化为1、0，也就是我们常说的数模转换与模数转换）。这一层的数据叫做比特。</p>
+<ol>
+<li><strong>数据链路层</strong>：主要将从物理层接收的数据进行MAC地址（网卡的地址）的封装与解封装。常把这一层的数据叫做帧。在这一层工作的设备是交换机，数据通过交换机来传输。</li>
+<li><strong>网络层</strong>：主要将从下层接收到的数据进行IP地址（例192.168.0.1)的封装与解封装。在这一层工作的设备是路由器，常把这一层的数据叫做数据包。</li>
+<li><strong>传输层</strong>：定义了一些传输数据的协议和端口号（WWW端口80等），如：TCP（传输控制协议，传输效率低，可靠性强，用于传输可靠性要求高，数据量大的数据），UDP（用户数据报协议，与TCP特性恰恰相反，用于传输可靠性要求不高，数据量小的数据，如QQ聊天数据就是通过这种方式传输的）。 主要是将从下层接收的数据进行分段和传输，到达目的地址后再进行重组。常常把这一层数据叫做段。<br>5.<strong>会话层</strong>：通过传输层（端口号：传输端口与接收端口）建立数据传输的通路。主要在你的系统之间发起会话或者接受会话请求（设备之间需要互相认识可以是IP也可以是MAC或者是主机名）<br>6.<strong>表示层</strong>：主要是进行对接收的数据进行解释、加密与解密、压缩与解压缩等（也就是把计算机能够识别的东西转换成人能够能识别的东西（如图片、声音等）。<br>7.<strong>应用层</strong>： 主要是一些终端的应用，比如说FTP（各种文件下载），WEB（IE浏览），QQ之类的（可以把它理解成我们在电脑屏幕上可以看到的东西．就是终端应用）。</li>
+</ol>
+<h3 id="网络通信三要素"><a href="#网络通信三要素" class="headerlink" title="网络通信三要素"></a>网络通信三要素</h3><p>IP地址:InetAddress（类）</p>
+<pre><code>网络中设备的标识，不易记忆，可用主机名
+</code></pre><p>端口号</p>
+<pre><code>用于标识进程的逻辑地址，不同进程的标识
+</code></pre><p>传输协议</p>
+<pre><code>通讯的规则
+常见协议：TCP，UDP
+</code></pre><h3 id="IP地址：-InetAddress类"><a href="#IP地址：-InetAddress类" class="headerlink" title="IP地址： InetAddress类:"></a>IP地址： InetAddress类:</h3><pre><code>此类表示互联网协议 (IP) 地址
+</code></pre><p>常用方法：</p>
+<pre><code>static InetAddress getLocalHost()
+static InetAddress getByName(String host)
+String getHostName()
+String getHostAddress()
+</code></pre><p><strong>注意事项</strong><br>以上方法都是静态的方法<br>getByName()里面写的是主机名，写ip地址应该不行。</p>
+<h3 id="端口号"><a href="#端口号" class="headerlink" title="端口号"></a>端口号</h3><p>逻辑端口 我们指的就是逻辑端口</p>
+<pre><code>A:每个网络程序都会至少有一个逻辑端口
+B:用于标识进程的逻辑地址，不同进程的标识
+C:有效端口：0~65535，其中0~1023系统使用或保留端口。(2字节)
+通过安全软件等工具可以查看端口号
+</code></pre><h3 id="协议UDP和TCP-传输层协议"><a href="#协议UDP和TCP-传输层协议" class="headerlink" title="协议UDP和TCP(传输层协议)"></a>协议UDP和TCP(传输层协议)</h3><p>UDP</p>
+<pre><code>将数据源地址和目的地址封装成数据包中，不需要建立连接；每个数据报的大小在限制在64k；因无连接，是不可靠协议；不需要建立连接，速度快（传输小量数据）
+</code></pre><p>TCP</p>
+<pre><code>将数据源地址和目的地址封装成数据包中，建立连接，形成传输数据的通道；在连接中进行大数据量传输；通过三次握手完成连接，是可靠协议；必须建立连接，效率会稍低
+</code></pre><h3 id="实现网络编程"><a href="#实现网络编程" class="headerlink" title="实现网络编程"></a>实现网络编程</h3><h3 id="Socket（所有的高级语言都支持）"><a href="#Socket（所有的高级语言都支持）" class="headerlink" title="Socket（所有的高级语言都支持）"></a>Socket（所有的高级语言都支持）</h3><p>Socket套接字：</p>
+<pre><code>网络上具有唯一标识的IP地址和端口号组合在一起才能构成唯一能识别的标识符套接字。Socket屏蔽了协议的具体细节（不同类型的socket使用不同的协议）
+</code></pre><p>Socket原理机制：</p>
+<pre><code>通信的两端都有Socket。
+网络通信其实就是Socket间的通信。
+</code></pre><p>数据在两个Socket间通过<strong>IO传输</strong></p>
+<h3 id="实现UDP传输"><a href="#实现UDP传输" class="headerlink" title="实现UDP传输"></a>实现UDP传输</h3><pre><code>DatagramSocket与DatagramPacket
+建立发送端，接收端。
+建立数据包。
+调用Socket的发送接收方法。
+关闭Socket。
+发送端与接收端是两个独立的运行程序。
+</code></pre><h3 id="套接字：DatagramSocket"><a href="#套接字：DatagramSocket" class="headerlink" title="套接字：DatagramSocket"></a>套接字：DatagramSocket</h3><p>构造方法：</p>
+<pre><code>DatagramSocket() 默认ip:本机  port:随机端口
+DatagramSocket(int port)
+DatagramSocket(int port, InetAddress laddr)
+</code></pre><p>发送方法：</p>
+<pre><code>void send(DatagramPacket p)
+void close()  释放资源
+</code></pre><p>接收方法：<br>     void receive(DatagramPacket p)<br>     void close()  释放资源</p>
+<h3 id="DatagramPacket-数据报包"><a href="#DatagramPacket-数据报包" class="headerlink" title="DatagramPacket:数据报包"></a>DatagramPacket:数据报包</h3><p>构造方法：</p>
+<pre><code>DatagramPacket(byte[] buf, int length) //用于接收
+DatagramPacket(byte[] buf, int length, InetAddress address, int port) //用于发哦少年宫
+</code></pre><p>DatagramPacket</p>
+<pre><code>InetAddress getAddress(): 获取发送端的ip地址
+int getPort(): 获取发送端的端口
+byte[] getData(): 获取缓冲区数组
+int getLength(): 实际接收字节的长度
+</code></pre><p>我们看到：<br>发送端的DatagramSocket可以不用设置初始值，但是DatagramPacket要设置发送的内容，长度，发送的ip，和发送的端口号。<br>接受端的DatagramSocket设置接收的端口，而接收的DatagramPacket就设置接收的数组，和数组长度即可。<br>我们写了一个例子，设计一个聊天室，两个人可以聊天。<br>分析：<br>1.这个例子需要接收别的数据，也要发送数据给别人，所以要设置两个线程来完成不同的任务。<br>2.注意发送端和接收端两个任务的差异</p>
+<pre><code>public static void main(String[] args) {
+  Runnable sendTask = new Runnable() {
+    @Override
+    public void run(){
+      //try...with...resource 自动close
+      try(DatagramSocket ds = new DatagramSocket()){
+        InetAddress local = InextAddress.getLocalHost();
+        Scanner scanner = neww Scanner(System.in);
+        while(true){
+          String meassage = scanner.nextLine();
+          byte[] bytes = new s.getBytes();
+          DatagramPacket dp  = new DatagramPacket(bytes,bytes.length.local,10086);
+          ds.send(dp);
+          if(&quot;886&quot;.equals(meassage)){
+            break;//推出聊天
+          }
+        }
+      } catch (Exception e) {
+        e.printStackTrace();
+      }
+    }
+  };
+
+  //接收方法
+  Runnable receiveTask = new Runnable() {
+    @Override
+    public void run(){
+      try(DatagramSocket ds = new DatagramSocket(10086)){
+        byte[] bytes = new byte[1024];
+        DatagramPacket dp = new DatagramPacket(bytes,bytes.length);
+        while (true) {
+          //阻塞方法
+          ds.receive(dp);
+          String ip = dp.getAddress().getHostAddress();
+          int port = dp.getPort();
+          byte[] data = dp.getData();
+          int length = dp.getLength();
+          String s = new String(bytes,0,length);
+          System.out.println(&quot;from &quot;+ ip + &quot;/&quot; + port + &quot;:&quot; + s);
+          if(&quot;886&quot;.equals(s)){
+              break;
+          }
+        }
+      } catch (IOException e) {
+        e.printStackTrace();
+      }
+    }
+  };
+}
+
+new Thread(receiveTask).start();
+try {
+    Thread.sleep(100);
+} catch (InterruptedException e) {
+    e.printStackTrace();
+}
+new Thread(sendTask).start();
+</code></pre><h3 id="实现TCP传输"><a href="#实现TCP传输" class="headerlink" title="实现TCP传输"></a>实现TCP传输</h3><pre><code>Socket和ServerSocket
+建立客户端和服务器端
+建立连接后，通过Socket中的IO流进行数据的传输
+关闭socket
+同样，客户端与服务器端是两个独立的应用程序。
+</code></pre><h3 id="客户端套接字：Socket"><a href="#客户端套接字：Socket" class="headerlink" title="客户端套接字：Socket"></a>客户端套接字：Socket</h3><p>构造方法：</p>
+<pre><code>Socket() 未连接的套接字
+Socket(InetAddress address, int port)
+Socket(String host, int port)
+</code></pre><p>方法：</p>
+<pre><code>InputStream getInputStream()
+OutputStream getOutputStream()
+</code></pre><h3 id="ServerSocket-服务器套接字"><a href="#ServerSocket-服务器套接字" class="headerlink" title="ServerSocket: 服务器套接字"></a>ServerSocket: 服务器套接字</h3><pre><code>ServerSocket() 没有绑定端口
+ServerSocket(int port) 绑定指定的端口
+</code></pre><p>方法：<br>    Socket accept()： 侦听并接受到此套接字的连接。</p>
+<p>例子如下：</p>
+<p>//客户端代码：</p>
+<pre><code>public class ClientDemo1 {
+  public static void main(String[] args) throws IOException {
+    InetAddress local = InetAddress.getLocalHost();
+    Socket socket = new Socket(local, 12345); // java.net.ConnectException:
+    OutputStream outputStream = socket.getOutputStream();
+    String s = &quot;Hello, tcp!&quot;;
+    outputStream.write(s.getBytes());
+    // 释放资源
+    // outputStream.close();
+    socket.close();
+  }
+}
+</code></pre><p>//服务端代码</p>
+<pre><code>public class ServerDemo1 {
+  public static void main(String[] args) throws Exception{
+    ServerSocket ss = new ServerSocket(12345);
+    // 监听请求，并通过三次握手，形成数据传输的通道, 阻塞方法
+    Socket socket = ss.accept(); //获取Socket对象 然后就可以使用流了
+    InputStream inputStream = socket.getInputStream();
+    byte[] bytes = new byte[1024];
+    int length = inputStream.read(bytes);
+    String s = new String(bytes, 0, length);
+    System.out.println(s);
+    socket.close();
+    // ss.close(); //服务器一般不会关闭
+  }
+}
+</code></pre><p><strong>注意事项：TCP传输容易出现的问题</strong><br>1.客户端连接上服务端，两端都在等待，没有任何数据传输。<br>通过例程分析：</p>
+<pre><code>因为read方法或者readLine方法是阻塞式。
+</code></pre><p>解决办法：</p>
+<pre><code>自定义结束标记
+使用shutdownInput，shutdownOutput方法。
+</code></pre><p>2.Socket在传输数据的时候使用的是字节流，所以只能用byte[] 保存和传输，或者一个字节一个字节的操作;</p>
+<h3 id="反射reflection"><a href="#反射reflection" class="headerlink" title="反射reflection"></a>反射reflection</h3><p>在说反射之前，我们先要了解什么是类的加载</p>
+<h3 id="类的加载"><a href="#类的加载" class="headerlink" title="类的加载"></a>类的加载</h3><p>当程序要使用某个类时，如果该类还未被加载到内存中，则系统会通过加载，连接，初始化三步来实现对这个类进行初始化。</p>
+<p>加载</p>
+<pre><code>就是指将class文件读入内存，并为之创建一个Class对象。
+任何类被使用时系统都会建立一个Class对象。(字节码文件对象)
+</code></pre><p>连接</p>
+<pre><code>验证 确保被加载类的正确性
+准备 负责为类的静态成员分配内存，并设置默认初始化值。给给对象分配空间
+</code></pre><p>解析</p>
+<pre><code>将类中的符号引用替换为直接引用
+</code></pre><p>初始化</p>
+<pre><code>就是我们以前讲过的初始化步骤
+</code></pre><h3 id="类加载时机"><a href="#类加载时机" class="headerlink" title="类加载时机"></a>类加载时机</h3><pre><code>创建类的实例
+访问类的静态变量
+调用类的静态方法
+使用反射方式来强制创建某个类或接口对应的java.lang.Class对象
+初始化某个类的子类，子类父类都加载
+直接使用java.exe命令来运行某个主类
+</code></pre><h3 id="类的加载器"><a href="#类的加载器" class="headerlink" title="类的加载器"></a>类的加载器</h3><p>类加载器</p>
+<pre><code>负责将.class文件加载到内存中，并为之生成对应的Class对象。
+虽然我们不需要关心类加载机制，但是了解这个机制我们就能更好的理解程序的运行。
+</code></pre><p>类加载器的组成</p>
+<h3 id="Bootstrap-ClassLoader-根类加载器"><a href="#Bootstrap-ClassLoader-根类加载器" class="headerlink" title="Bootstrap ClassLoader 根类加载器"></a>Bootstrap ClassLoader 根类加载器</h3><pre><code>也被称为引导类加载器，负责Java核心类的加载
+比如System,String等。在JDK中JRE的lib目录下rt.jar文件中
+</code></pre><h3 id="Extension-ClassLoader-扩展类加载器"><a href="#Extension-ClassLoader-扩展类加载器" class="headerlink" title="Extension ClassLoader 扩展类加载器"></a>Extension ClassLoader 扩展类加载器</h3><pre><code>负责JRE的扩展目录中jar包的加载。
+在JDK中JRE的lib目录下ext目录
+</code></pre><h3 id="System-ClassLoader-系统类加载器"><a href="#System-ClassLoader-系统类加载器" class="headerlink" title="System  ClassLoader  系统类加载器"></a>System  ClassLoader  系统类加载器</h3><pre><code>Sysetm ClassLoader 系统类加载器（应用类加载器）
+负责在JVM启动时加载来自java命令的class文件
+</code></pre><p>到目前为止我们已经知道把class文件加载到内存了，那么，如果我们仅仅站在这些class文件的角度，我们如何来使用这些class文件中的内容呢?<br>这就是我们反射要研究的内容。</p>
+<h2 id="反射（非常重要）"><a href="#反射（非常重要）" class="headerlink" title="反射（非常重要）"></a>反射（非常重要）</h2><pre><code>JAVA反射机制是在运行状态中，对于任意一个类，都能够知道这个类的所有属性和方法；对于任意一个对象，都能够调用它的任意一个方法和属性；这种动态获取的信息以及动态调用对象的方法的功能称为java语言的反射机制。
+要想解剖一个类,必须先要获取到该类的字节码文件对象。而解剖使用的就是Class类对象。从而得到其中的方法或成员.所以先要获取到每一个字节码文件对应的Class类型的对象。
+</code></pre><p><strong>反射的前提：获取类的字节码文件对象</strong></p>
+<p>获取字节码文件对象的方式：<br>方式一：</p>
+<pre><code>Object: getClass()
+</code></pre><p>方式二：</p>
+<pre><code>类名.class
+</code></pre><p>方式三：</p>
+<pre><code>static Class&lt;?&gt; forName(String className)
+</code></pre><p>Class:</p>
+<pre><code>Class类的实例表示正在运行的Java应用程序中的类和接口。枚举是一种类，注解是一种接口。
+</code></pre><h3 id="通过反射获取构造的对象"><a href="#通过反射获取构造的对象" class="headerlink" title="通过反射获取构造的对象"></a>通过反射获取构造的对象</h3><p>得到了类的字节码文件对象，如何利用它创建对象？</p>
+<pre><code>Class&lt;T&gt;：T newInstance() 创建此 Class 对象所表示的类的一个新实例。调用的类的无参构造方法。
+</code></pre><p>AccessibleObject（）</p>
+<pre><code>void setAccessible(boolean flag) 将此对象的 accessible 标志设置为指示的布尔值。
+|--Constructor&lt;T&gt;
+直接已知子类：
+Constructor, Field, Method
+</code></pre><h3 id="反射获取构造器-Constructor"><a href="#反射获取构造器-Constructor" class="headerlink" title="反射获取构造器(Constructor)"></a>反射获取构造器(Constructor)</h3><p>Class:</p>
+<pre><code>Constructor&lt;T&gt; getConstructor(Class&lt;?&gt;... parameterTypes)  获取公共的构造器
+Constructor&lt;?&gt;[] getConstructors()  获取所有的公共构造器
+Constructor&lt;T&gt; getDeclaredConstructor(Class&lt;?&gt;... parameterTypes)  获取在类中声明的构造器(包括私有的)
+Constructor&lt;?&gt;[] getDeclaredConstructors()  获取类中声明的所有构造器
+</code></pre><p>Constructor:</p>
+<pre><code>T newInstance(Object... initargs)
+constructor.setAccessible(true); // 暴力访问私有构造方法
+</code></pre><h3 id="反射获取成员变量-Field"><a href="#反射获取成员变量-Field" class="headerlink" title="反射获取成员变量(Field)"></a>反射获取成员变量(Field)</h3><p>a. 通过类的字节码文件对象Class获取类的成员变量</p>
+<pre><code>Field getField(String name) 获取公共的成员变量(包括父类)
+Field[] getFields() 获取所有公共的成员变量(包括父类)
+Field getDeclaredField(String name)  获取在本类中声明的成员变量(包括私有的)
+Field[] getDeclaredFields()  获取在本类中声明的所有的成员变量(包括私有的)
+</code></pre><p>b. Field的两个操作：<br>读取：读取对象的该属性的值</p>
+<pre><code>Object get(Object obj) obj查看的对象
+boolean getBoolean(Object obj)
+byte getByte(Object obj)
+char getChar(Object obj)
+double getDouble(Object obj)
+float getFloat(Object obj)
+short getShort(Object obj)
+int getInt(Object obj)
+long getLong(Object obj)
+</code></pre><p>写入：设置对象的该属性的值</p>
+<pre><code>void set(Object obj, Object value)
+void setBoolean(Object obj, boolean z)
+void setByte(Object obj, byte b)
+...
+</code></pre><p>暴力访问修改：</p>
+<pre><code>aField.setAccessible(true);
+</code></pre><h3 id="反射获取成员方法-Method"><a href="#反射获取成员方法-Method" class="headerlink" title="反射获取成员方法(Method)"></a>反射获取成员方法(Method)</h3><p>a. 通过字节码文件对象获取方法</p>
+<pre><code>Method getMethod(String name, Class&lt;?&gt;... parameterTypes) 获取公共的方法(包括父类的)
+Method[] getMethods() 获取所有公共的方法(包括父类的)
+Method getDeclaredMethod(String name, Class&lt;?&gt;... parameterTypes) 获取本类中声明的方法(包括私有的)
+Method[] getDeclaredMethods()  获取本类中声明的所有方法(包括私有的)
+</code></pre><p>b. ：如果调用该方法</p>
+<pre><code>Object invoke(Object obj, Object... args) Object obj: 调用该方法的对象
+</code></pre><h3 id="说了这么多到底反射的作用是什么？"><a href="#说了这么多到底反射的作用是什么？" class="headerlink" title="说了这么多到底反射的作用是什么？"></a>说了这么多到底反射的作用是什么？</h3><p>通过配置文件，动态的生成对象，把要生成的对象放在配置文件中，这样可以通过反射创建我们需要的对象。框架的底层都是这样做的，所以必须要知道，这里就写一个简单的例子创建，通过Class.forName(classname)创建对象；</p>
+<pre><code>//Test2.java
+public class Test2 {
+    public static void main(String[] args) throws Exception{
+        Properties properties = new Properties();
+        properties.load(new FileReader(&quot;class.properties&quot;));
+        String className = properties.getProperty(&quot;className&quot;);
+        Class&lt;?&gt; cl = Class.forName(className);
+        Person person = (Person) cl.newInstance();
+    }
+}
+
+//class.properties
+className=com.cskaoyan.exercise.Student
+</code></pre><h3 id="注解-不是注释"><a href="#注解-不是注释" class="headerlink" title="注解(不是注释)"></a>注解(不是注释)</h3><pre><code>一种Java语言用来在代码中添加额外信息的形式化方法，使得Java程序可以在编译或者运行之后的某个时刻很方便的去使用这些额外信息（数据）引入的时间：JDK5之后引入。
+</code></pre><h3 id="两个我们见过的注解"><a href="#两个我们见过的注解" class="headerlink" title="两个我们见过的注解"></a>两个我们见过的注解</h3><pre><code>@Override：检查子类确实是覆盖了父类的方法
+@Deprecated：说明已经过时了。
+
+我们看到两个注解的源码
+</code></pre><p>// @Override</p>
+<pre><code>@Target(ElementType.METHOD)
+@Retention(RetentionPolicy.SOURCE)
+public @interface Override {
+}
+</code></pre><p>//@Deprecated</p>
+<pre><code>@Documented
+@Retention(RetentionPolicy.RUNTIME)
+@Target(value={CONSTRUCTOR, FIELD, LOCAL_VARIABLE, METHOD, PACKAGE, PARAMETER, TYPE})
+public @interface Deprecated {
+}
+</code></pre><p>这些@来@去的到底是一些什么东西呀？<br>这里就引出了注解的核心：元注解<br>有了元注解我们才能去自定义的去描述我们需要的注解</p>
+<h3 id="元注解-meta-描述注解的注解"><a href="#元注解-meta-描述注解的注解" class="headerlink" title="元注解(meta): 描述注解的注解"></a>元注解(meta): 描述注解的注解</h3><p>@Target：作用，指定该注解能用在什么地方。</p>
+<pre><code>ElementType:  TYPE, METHOD, FIELD, CONSTRUCTOR...
+</code></pre><p>@Retention:作用。改变自定义的注解的存活范围。</p>
+<p>RetentionPolicy</p>
+<pre><code>1.SOURCE:在源文件中有效（即源文件保留）
+2.CLASS:在class文件中有效（即class保留）
+3.RUNTIME:在运行时有效（即运行时保留
+</code></pre><p>明天我们将来介绍一下到底怎么用注解–&gt;自定义注解</p>
+<h2 id="星期三-7-31"><a href="#星期三-7-31" class="headerlink" title="星期三(7.31)"></a>星期三(7.31)</h2><h3 id="自定义注解"><a href="#自定义注解" class="headerlink" title="自定义注解"></a>自定义注解</h3><p>1.声明</p>
+<pre><code>定义注解格式：public @interface 注解名 {
+    定义体
+}
+</code></pre><p>注意事项：</p>
+<pre><code>a. @必不可少
+b. 自定义注解继承了Annotation这个接口，由编译期完成细节
+c. 不能继承任何接口
+</code></pre><p>说明：<strong>前两点最重要</strong></p>
+<pre><code>1.方法的名称就是参数的名称，
+2.返回值类型就是参数的类型（返回值类型只能是基本类型、Class、String、enum, 以及它们的数组类型）。
+3.方法不用写具体实现
+4.一个方法表示一个配置
+5.当只需要给 value 配置的时候，可以省略名称
+6.方法之后可以使用 default 默认值
+</code></pre><p>一个简单的例子：</p>
+<pre><code>public @interface MyAnnotation  {
+    int value() default 18;
+    String method() default &quot;Henson_z&quot;;
+    //...
+}
+
+@MyAnnotation()     // 创建了注解对象
+public class AnnotationTest {
+}
+</code></pre><h3 id="properties-和-自定义注解？"><a href="#properties-和-自定义注解？" class="headerlink" title="properties 和 自定义注解？"></a>properties 和 自定义注解？</h3><p>这两个之间有什么关系？我们看下面的例子:<br>假如我们要创建一个账户。要记录账户的姓名和年龄，那么我们是否需要对用户输入的信息去判断一下</p>
+<pre><code>//用户input: name 、 age
+int minLength = 10;
+int maxLength = 20;
+int minAge = 18;
+int maxAge = 100;
+
+if (name.length() &lt; minLength || name.length() &gt; maxLength) {
+  throw new IllegalArgumentException(&quot;名字太长了&quot;);
+}
+if (age &lt; minAge || age &gt; maxAge) {
+  throw new IllegalArgumentException(&quot;age=&quot; + age);
+}
+</code></pre><h3 id="properties存放判断配置文件"><a href="#properties存放判断配置文件" class="headerlink" title="properties存放判断配置文件"></a>properties存放判断配置文件</h3><p>如果minLength maxLength minAge maxAge要经常改变怎么办？我们又不能经常去修改代码。这时候机智的我们就想到把这四个参数放在properties配置文件嘛，要用时候直接load进来判断就好了，以后要改也是改配置文件</p>
+<pre><code>//student.properties
+minAge=6
+maxAge=1000
+minLength=2
+maxLength=10
+
+Properties properties = new Properties();
+try {
+  properties.load(new FileReader(&quot;student.properties&quot;));
+} catch (Exception e) {
+  e.printStackTrace();
+}
+
+int minAge = Integer.parseInt(properties.getProperty(&quot;minAge&quot;));
+int maxAge = Integer.parseInt(properties.getProperty(&quot;maxAge&quot;));
+int minLength = Integer.parseInt(properties.getProperty(&quot;minLength&quot;));
+int maxLength = Integer.parseInt(properties.getProperty(&quot;maxLength&quot;));
+</code></pre><p>然后再进行判断就好了。但是这里有个问题，如果以后配置文件多了的话，如果要修改配置文件中哪一个成员，我们很容易找不到需要修改的是哪个，到时候还要去一个一个的判断进入类中去看是否是这个参数。 这时候有个老哥出来的说：能不能在这个类上面就判断好了每个参数的范围。就在类对应成员上面确定参数的值，这样就很好确定，要修改的参数，直接在这个成员上修改即可。这时候就引出了<strong>自定义的注解</strong></p>
+<h3 id="自定义注解实现判断功能"><a href="#自定义注解实现判断功能" class="headerlink" title="自定义注解实现判断功能"></a>自定义注解实现判断功能</h3><p>1.先创建两个自定义的注解：</p>
+<pre><code>// 大括号表示数组，如果只有一个元素可以省略大括号
+@Target({ElementType.FIELD, ElementType.TYPE, ElementType.METHOD})
+@Retention(RetentionPolicy.RUNTIME)
+public @interface AgeConstraint {
+    int minAge();
+    int maxAge();
+}
+
+@Retention(RetentionPolicy.RUNTIME)
+public @interface NameConstraint {
+    int minLength();
+    int maxLength();
+}
+</code></pre><p>注意这里的Retention一定要设置成RetentionPolicy.RUNTIME 已确保这个注解在程序运行的时候还可以用，要不然编译完就拉闸了，实际运行用不了。</p>
+<p>2.在对应的成员变量上加上注解</p>
+<pre><code>public class Student {
+    @NameConstraint(minLength = 2, maxLength = 10)
+    private String name;
+
+    @AgeConstraint(minAge = 6, maxAge = 1000)
+    private int age;
+。。。。
+</code></pre><p>3.如何使用的问题；<br>我们刚刚学过反射，但是之前有个东西没有讲，可以通过反射的以下方法，获取到注释的对象，然后在使用即可。类，构造器，属性，方法都有这个方法</p>
+<pre><code>getAnnotation(Class&lt;A&gt; annotationClass) 如果存在该元素的指定类型的注释，则返回这些注释，否则返回 null。
+</code></pre><p>具体代码如下：</p>
+<pre><code>Class&lt;Student&gt; cl = Student.class;
+int minLength = 0;
+int maxLength = Integer.MAX_VALUE;
+int minAge = 0;
+int maxAge = Integer.MAX_VALUE;
+try {
+  Field nameField = cl.getDeclaredField(&quot;name&quot;);
+  NameConstraint nameAnnotation = nameField.getAnnotation(NameConstraint.class);
+  minLength = nameAnnotation.minLength();
+  maxLength = nameAnnotation.maxLength();
+  Field ageField = cl.getDeclaredField(&quot;age&quot;);
+  AgeConstraint ageAnnotation = ageField.getAnnotation(AgeConstraint.class);
+  minAge = ageAnnotation.minAge();
+  maxAge = ageAnnotation.maxAge();
+} catch (Exception e) {
+  e.printStackTrace();
+}
+//如果构造方法私有化，还可以反射创建对象
+Student s = null;
+try {
+  Constructor&lt;Student&gt; c = cl.getDeclaredConstructor(String.class, int.class);
+  c.setAccessible(true);
+  s = c.newInstance(name, age);
+} catch (Exception e) {
+  e.printStackTrace();
+}
+</code></pre><h3 id="两者的优劣"><a href="#两者的优劣" class="headerlink" title="两者的优劣"></a>两者的优劣</h3><p>配置文件：</p>
+<pre><code>优点：可配置，不用改源码。
+缺点：不直观，开发效率低
+</code></pre><p>注解：</p>
+<pre><code>优点：直观，开发效率高
+缺点：硬编码，修改之后需要重新编译运行
+</code></pre><h3 id="GC与内存泄漏。。"><a href="#GC与内存泄漏。。" class="headerlink" title="GC与内存泄漏。。"></a>GC与内存泄漏。。</h3><p>这一部分没有代码，都是理论的东西，如果要深入理解还是需要一些功底的。就简单概括一下以后有机会在学习</p>
+<h3 id="垃圾回收"><a href="#垃圾回收" class="headerlink" title="垃圾回收"></a>垃圾回收</h3><p>1) 判断什么是垃圾</p>
+<pre><code>垃圾：不能再访问到的对象就是垃圾。
+算法：
+a. 引用计数法
+  给堆中的每一个对象增加一个引用计数器，当每一次创建一个对象并赋值给一个变量是，
+  引用计数器就加1.当对象不再使用时（出了作用域），引用计数机减一。一但引用计数器为0，
+  对象就满足了垃圾回收的条件。
+
+b. 该算法的基本思路就是通过一系列的名为GC Root的对象作为起始点，从这些节点开始向下搜索，
+  搜索所走的路径称为引用链（Reference chain）。当一个对象到所有的GC root之间没有任何引用链相连
+  （用图论的话来说就是没GC  roots到这些对象不可达）时，证明该对象是不可用的，GC程序即可回收这些对象。
+GCroots:
+  JAVA虚拟机栈中的引用对象
+  方法区中的静态属性引用的对象
+  方法区中常量引用的对象
+  Shallow size 就是对象本身占用的内存大小，也就是对象头加成员变量占用内存大小的总和
+  Retained size 是该对象自己的shallow size 加上仅可以从该对象访问（直接或者间接访问）的对象的shallow size之和。
+  Retained size是该对象被GC之后所能回收的内存的总和。
+</code></pre><p>2) 回收垃圾</p>
+<pre><code>a. 标记清除算法  先把要丢的垃圾全部都打上标记，然后统一把打标记的全部移除。
+缺点：产生空间碎片，创建大对象和数组出现空间不够，而且创建对象很慢
+b. 标记整理算法  分为标记和整理两个阶段：首先标记出所有需要回收的对象，让所有存活的对象都向一端移动，然后直接清理掉端边界以外的内存。
+
+c. 标记复制算法
+它先将可用的内存按容量划分为大小相同的两块，每次只是用其中的一块。当这块内存用完了，就将还存活着的对象复制到另一块上面，然后把已经使用过的内存空间一次清理掉。
+d. 分代收集算法
+据对象存活的周期的不同将内存划分为几块，然后再选择合适的收集算法。一般是把java堆分成新生代和老年代，这样就可以根据各个年待的特点采用最适合的收集算法。在新生代中，每次垃圾收集都会有大量的对象死去，只有少量存活，所以选用复制算法。老年代因为对象存活率高，没有额外空间对他进行分配担保，所以一般采用标记整理或者标记清除算法进行回收。
+</code></pre><p><a href="https://blog.csdn.net/FateRuler/article/details/81158510" target="_blank" rel="external">四种收集算法</a><br>  3) GC触发的时机<br>    a.申请heap space失败后会触发GC回收<br>    b.系统进入idle后一段时间会进行回收<br>    c.主动调用GC进行回收 System.gc();</p>
+<h3 id="内存泄露-VS-内存溢出"><a href="#内存泄露-VS-内存溢出" class="headerlink" title="内存泄露 VS 内存溢出"></a>内存泄露 VS 内存溢出</h3><p>—— 内存泄露可能导致内存溢出，但不是必然导致内存溢出</p>
+<h3 id="JAVASE考试总结"><a href="#JAVASE考试总结" class="headerlink" title="JAVASE考试总结"></a>JAVASE考试总结</h3><p>一些踩过的坑</p>
+<p>1静态方法</p>
+<pre><code>class Dog {
+    public static void bark() {System.out.print(&quot;woof &quot;);
+}
+class Basenji extends Dog{public static void bark(){}}
+public class quest5 {
+    public static void main(String args[]) {
+        Dog woofer = new Dog();
+        Dog nipper = new Basenji();
+        woofer.bark();
+        nipper.bark();
+    }
+}
+结果 woof woof
+</code></pre><p>静态方法并不是编译看左边，运行看右边，而是方法属于类，两个都是Dog类所以调用都是Dog类的方法</p>
+<p>2下列说法正确的有（C）</p>
+<pre><code>A．class中的constructor不可省略
+B．constructor必须与class同名，但方法不能与class同名
+C．constructor在一个对象被new时执行
+D．一个class只能定义一个constructor
+</code></pre><p>可以有方法与class同名，而且不是构造方法，而是成员方法</p>
+<p>3表示double类型变量d<br>因为浮点数默认就是d类型的所以很容易忽视，这次有一个警醒吧</p>
+<pre><code>public class quest10 {
+    public static void main(String[] args) {
+        double num = getNum(1.4f);
+    }
+    public static double getNum(float d) {
+        //这两个d不是一个意思
+        // 第一个d是参数
+        // 第二个d表示的是double类型
+
+        System.out.println(d);
+        System.out.println(4.0d);
+        return 4.0d;
+    }
+}
+</code></pre><h3 id="JAVASE结束"><a href="#JAVASE结束" class="headerlink" title="JAVASE结束"></a>JAVASE结束</h3><pre><code>考试完了SE部分结束了，接下来的部分更加重要和需要总结，不要慌，虽然很累但是学习就是逆水行舟。加油，后面的总结放在下期
+</code></pre>
+        </div>
+        <div class="post-reply">
+            
+                <!-- 来必力City版安装代码 -->
+                <div id="lv-container" data-id="city" data-uid="MTAyMC8yOTE4Ni81NzUz">
+                    <script type="text/javascript">
+                        (function(d, s) {
+                            var j, e = d.getElementsByTagName(s)[0];
+
+                            if (typeof LivereTower === 'function') { return; }
+
+                            j = d.createElement(s);
+                            j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+                            j.async = true;
+
+                            e.parentNode.insertBefore(j, e);
+                        })(document, 'script');
+                    </script>
+                    <noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+                </div>
+                <!-- City版安装代码已完成 -->
+            
+            
+        </div>
+    </div>
+</section>
+<script>
+    // 获取第一张图, 用以当封面背景图
+    var img = document.querySelectorAll('img')[1]
+
+    if (img) {
+        var header_box = document.querySelector('#header_box')
+        header_box.style.backgroundImage = 'url('+ img.src +')'
+    }
+</script>
+      </div>
+  </div>
+  <style>
+  #footer {
+    min-height: 10vh;
+    background: black;
+    color: #fff;
+  }
+
+  #footer a {
+    color: #e1e1e1;
+  }
+</style>
+<footer id="footer" class="has-text-centered is-flex center">
+  <div class="container has-padding">
+    <div>
+      <div>
+        <!--请您保留作者署名, 主题制作来之不易-->
+        主题来自 <a href="http://haojen.github.io/">Haojen Ma</a>
+        <br>
+        Copyright © 王邸 2019
+        <!--
+          Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+        -->
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="/js/search_core.js"></script>
+<script src="/js/script.js"></script>
+
+</body>
+</html>
