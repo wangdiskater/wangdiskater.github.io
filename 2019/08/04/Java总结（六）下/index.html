@@ -14,7 +14,7 @@
 <meta property="og:url" content="http://yoursite.com/2019/08/04/Java总结（六）下/index.html">
 <meta property="og:site_name" content="路要坚持">
 <meta property="og:description" content="从今天开始JAVAEE，冲啊，一开始先学习数据库，然后再学习JDBC，前端的东西，然后就可以下一个阶段了。任重而道远加油吧 星期四(8.01)MYSQL学习总结指令的编写： 登录本机mysql: mysql -u 用户名 -p 输入密码。默认的root; 注意：请正确认识 “SQL 不区分大小写“ 组成： DDL：数据定义语言 DML：数据操作语言 DQL： 数据查询语言 DCL： 数据控制语言">
-<meta property="og:updated_time" content="2019-08-04T15:22:17.610Z">
+<meta property="og:updated_time" content="2019-08-05T01:18:34.161Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java总结（六）下">
 <meta name="twitter:description" content="从今天开始JAVAEE，冲啊，一开始先学习数据库，然后再学习JDBC，前端的东西，然后就可以下一个阶段了。任重而道远加油吧 星期四(8.01)MYSQL学习总结指令的编写： 登录本机mysql: mysql -u 用户名 -p 输入密码。默认的root; 注意：请正确认识 “SQL 不区分大小写“ 组成： DDL：数据定义语言 DML：数据操作语言 DQL： 数据查询语言 DCL： 数据控制语言">
@@ -458,7 +458,137 @@ mysql &gt; source c:\user\zhao\test.sql
 <h3 id="第二范式"><a href="#第二范式" class="headerlink" title="第二范式"></a>第二范式</h3><p>表：学号、课程号、姓名、学分;<br>学分依赖课程，姓名依赖学号</p>
 <p>这个时候，如果删除一条学分数据，会导致相应的课程数据也会被删除。同时这张表还存在数据冗余的情况。<br>如果数据存在部分依赖的情形，需要将字段进行拆分，拆成多个表。这样删除一个数据时，就不会把其他的需要的数据项删除，<br><strong>注意</strong> 这里说的删数据是删一条数据，而不是删除一列，列是一个字段，字段一般不能删除。最好把依赖的字段分成两个表<br>需要重新拆分表：<br>学生表：学号、姓名<br>课程表：课程号<br>选课表：课程号、学号、学分</p>
 <h3 id="第三范式"><a href="#第三范式" class="headerlink" title="第三范式"></a>第三范式</h3><p>不要存在冗余数据，虽然说可能有潜在的关系，但是最好使用外链关系起来，而不是放在一起你<br>表: 学号, 姓名, 年龄, 学院名称, 学院电话<br>学生表：学号、姓名、年龄、学院号<br>学院表：学院名称、学院电话、学院号<br>每一张表在设计的时候，都应该遵循着，只关注最小的一块功能，如统计学生信息，就仅停留在学生信息中，不要过多去延伸。分工而治的思想</p>
-<h2 id="星期六-8-03"><a href="#星期六-8-03" class="headerlink" title="星期六(8.03)"></a>星期六(8.03)</h2><p>（太忙了没时间写了，我明天补上8.4记录）<br>学习的JDBC的相关的知识</p>
+<h2 id="星期六-8-03"><a href="#星期六-8-03" class="headerlink" title="星期六(8.03)"></a>星期六(8.03)</h2><p>（太忙了没时间写了，我明天补上8.4记录）</p>
+<h3 id="数据库的访问过程"><a href="#数据库的访问过程" class="headerlink" title="数据库的访问过程"></a>数据库的访问过程</h3><p>根据之前我们所学过的知识，其实不难知道，数据库的访问过程如下：</p>
+<pre><code>客服端与Mysql服务器之间建立连接
+客户端向Mysql服务器发送数据库请求
+Mysql服务器处理客户端请求，并返回结果给客户端
+客户端接受Mysql服务器的响应，并按照自己的业务逻辑做响应处理。
+释放相关资源。
+</code></pre><h3 id="数据库驱动"><a href="#数据库驱动" class="headerlink" title="数据库驱动"></a>数据库驱动</h3><p>java定义的访问数据库的接口（jdbc）<br>SUN公司为了简化、统一对数据库的操作，定义了一套Java操作数据库的规范，称之为JDBC。这套接口由数据库厂商去实现，这样，开发人员只需要学习jdbc接口，并通过jdbc加载具体的驱动，就可以操作数据库。</p>
+<p>JDBC全称为：Java Data Base Connectivity（java数据库连接），它主要由接口组成。组成JDBC的２个包：java.sql  javax.sql</p>
+<pre><code>java.sql.*;  是核心包里的
+java.sql.*是jdbc2.0之前的东西
+javax.sql.*; 是扩展包中的
+javax.sql.*包括了jdbc3.0的特性
+</code></pre><p>开发JDBC应用需要以上2个包的支持外，还需要导入相应JDBC的数据库实现(即数据库驱动)</p>
+<h3 id="JDBC第一个程序"><a href="#JDBC第一个程序" class="headerlink" title="JDBC第一个程序"></a>JDBC第一个程序</h3><p>1、搭建实验环境</p>
+<pre><code>1、在mysql中创建一个库，并创建user表和插入表的数据。
+2、新建一个Java工程，并导入数据驱动。(mysql-connector-xx.jar)
+</code></pre><p>2、编写程序，在程序中加载数据库驱动（二选一）</p>
+<pre><code>DriverManage.registerDiver(new Driver);
+Class.forName(com.mysql.jdbc.Driver);
+</code></pre><p>3、建立连接</p>
+<pre><code>Connection conn = DriverManage.getConnection(url,username,password);
+</code></pre><p>4、创建用于向数据库发送sql的Statement对象并发送sql</p>
+<pre><code>Statement statement = conn.createStatement();
+</code></pre><p>5、从代表结果集的ResultSet中取出数据，打印</p>
+<pre><code>ResultSet resultSet = statement.executeQuery(sql)
+</code></pre><p>6、断开与数据库的链接</p>
+<pre><code>conn.close();//必须要关闭，而且必须先关闭
+statement.close();
+resultSet.close();
+</code></pre><h3 id="程序详解"><a href="#程序详解" class="headerlink" title="程序详解"></a>程序详解</h3><p>URL编写：<br>URL用于标识数据库的位置，程序员通过URL地址告诉JDBC程序连接哪个数据库，URL的写法为：</p>
+<pre><code>jdbc:mysql:［］//localhost:3306/test ?参数名=参数值
+</code></pre><p>常用数据库URL地址的写法：<br>Oracle写法：jdbc:oracle:thin:@localhost:1521:dbname<br>SqlServer：jdbc:microsoft:sqlserver://localhost:1433; DatabaseName=dbname<br>MySql：jdbc:mysql://localhost:3306/dbname<br>Mysql的url地址的简写形式： jdbc:mysql:///sid如果你的主机地址默认是localhost  端口是3306</p>
+<h3 id="程序详解—Connection"><a href="#程序详解—Connection" class="headerlink" title="程序详解—Connection"></a>程序详解—Connection</h3><p>Jdbc程序中的Connection，它用于代表数据库的连接（桥梁）， Connection是数据库编程中最重要的一个对象，客户端与数据库所有交互都是通过connection对象完成的，这个对象的常用方法：</p>
+<pre><code>createStatement()：创建向数据库发送sql的statement对象。
+prepareStatement(sql) ：创建向数据库发送预编译sql的PrepareSatement对象。
+setAutoCommit(boolean autoCommit)：设置事务是否自动提交。
+commit() ：在链接上提交事务。
+rollback() ：在此链接上回滚事务。
+</code></pre><h3 id="程序详解—Statement"><a href="#程序详解—Statement" class="headerlink" title="程序详解—Statement"></a>程序详解—Statement</h3><p>Jdbc程序中的Statement对象用于向数据库发送SQL语句， Statement对象常用方法：</p>
+<pre><code>boolean execute(String sql)：用于向数据库发送任意sql语句
+ResultSet executeQuery(String sql) ：用于向数据发送查询语句。
+int executeUpdate(String sql)：用于向数据库发送insert、update或delete语句
+</code></pre><p><strong>execute注意！</strong><br>一般execute用来判断是向数据库发送查询信息，或者是发送insert、update或delete语句，<br>查询信息返回的true，修改返回的是false;<strong>现在的问题是</strong>查询失败是否会返回false,经过试验证明查找不存在的数据execute返回的还是true，所以并不能用execute判断是否插入</p>
+<p>executeQuery:返回的是计数的值 大于0表示操作成功</p>
+<pre><code>1) 对于 SQL 数据操作语言 (DML) 语句，返回行计数
+(2) 对于什么都不返回的 SQL 语句，返回 0
+</code></pre><h3 id="程序详解—ResultSet"><a href="#程序详解—ResultSet" class="headerlink" title="程序详解—ResultSet"></a>程序详解—ResultSet</h3><p>Jdbc程序中的ResultSet用于代表Sql语句的执行结果。Resultset封装执行结果时，采用的类似于表格的方式。ResultSet 对象维护了一个指向表格数据行的游标，初始的时候，游标在第一行之前，调用ResultSet.next() 方法，可以使游标指向具体的数据行，进行调用方法获取该行的数据。<br>ResultSet既然用于封装执行结果的，所以该对象提供的都是用于获取数据的get方法：</p>
+<pre><code>获取任意类型的数据
+getObject(int index)
+getObject(string columnName)
+获取指定类型的数据，(封装数据时方便)例如：
+getString(int index)
+getString(String columnName)
+</code></pre><p>提问：数据库中列的类型是varchar，获取该列的数据调用什么方法？Int类型呢？bigInt类型呢？Boolean类型？<br>我TM用getString()全都可以拿到，没毛病</p>
+<p>Tip：常用数据类型转换表</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:right">SQL类型 数据库</th>
+<th style="text-align:center">Jdbc对应方法</th>
+<th style="text-align:left">返回类型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right">TINYINT</td>
+<td style="text-align:center">getByte()</td>
+<td style="text-align:left">byte</td>
+</tr>
+<tr>
+<td style="text-align:right">SMALLINT</td>
+<td style="text-align:center">getShort()</td>
+<td style="text-align:left">short</td>
+</tr>
+<tr>
+<td style="text-align:right">INT</td>
+<td style="text-align:center">getInt()</td>
+<td style="text-align:left">int</td>
+</tr>
+<tr>
+<td style="text-align:right">BIGINT</td>
+<td style="text-align:center">getLong()</td>
+<td style="text-align:left">long</td>
+</tr>
+<tr>
+<td style="text-align:right">CHAR,VARCHAR,LONG VARCHAR</td>
+<td style="text-align:center">getString()</td>
+<td style="text-align:left">String</td>
+</tr>
+<tr>
+<td style="text-align:right">text(clob) Blob</td>
+<td style="text-align:center">getClob,getBlob()</td>
+<td style="text-align:left">clob blob</td>
+</tr>
+<tr>
+<td style="text-align:right">DATE</td>
+<td style="text-align:center">getDate()</td>
+<td style="text-align:left">java.sql.Date</td>
+</tr>
+<tr>
+<td style="text-align:right">TIME</td>
+<td style="text-align:center">getTime()</td>
+<td style="text-align:left">java.sql.Time</td>
+</tr>
+<tr>
+<td style="text-align:right">TIMESTAMP</td>
+<td style="text-align:center">getTimestamp()</td>
+<td style="text-align:left">java.sql.Timestamp</td>
+</tr>
+</tbody>
+</table>
+<p>注意事项：这里date返回类似并不是java.util.date而是java.mysql.date他们之间方法可能有差异，所以要注意</p>
+<p>ResultSet还提供了对结果集的游标进行滚动的方法：</p>
+<pre><code>next()：移动到下一行
+Previous()：移动到前一行
+absolute(int row)：移动到指定行
+beforeFirst()：移动resultSet的最前面。
+afterLast() ：移动到resultSet的最后一行之后。
+</code></pre><p>程序详解—释放资源</p>
+<p>Jdbc程序运行完后，切记要释放程序在运行过程中，创建的那些与数据库进行交互的对象，这些对象通常是ResultSet, Statement和Connection对象。<br>特别是Connection对象，它是非常稀有的资源，用完后必须马上释放，如果Connection不能及时、正确的关闭，极易导致系统宕机。Connection的使用原则是尽量晚创建，尽量早的释放。<br>为确保资源释放代码能运行，资源释放代码也一定要放在finally语句中。</p>
+<p>数据库存放数据，那么数据库安全吗？</p>
+<h3 id="数据库注入问题"><a href="#数据库注入问题" class="headerlink" title="数据库注入问题"></a>数据库注入问题</h3><p>对于数据库注入，我们来看一个登陆的例子：</p>
+<pre><code>假设有一个登陆界面，让我们输入用户名和密码进行登陆，我们这样输入用户名和密码：
+用户名：name = &quot;xxxx&apos; (用户名随便输入)OR 0==0 --&quot;;
+密码：密码=“xxxx”（随便输入一串）
+此时我们可以试一下，我们是否可以登陆成功。
+让我们看一下，在我们的代码中，最终拼接而成的，发送给数据库执行的sql语句
+String sql = &quot;select * from t_user where name =&apos;&quot;+ name +&quot;&apos; AND PASSWORD = &apos;&quot;+ password +&quot;&apos;&quot;;
+</code></pre><p>不管写什么都能直接登陆。问题来了，如何规避这种情况呢？<br>仔细分析一下，数据库注入成功的根本原因是，<br>我们把sql语句中的参数(用户的输入)和sql命令拼接成了一个sql语句，因为一个sql语句中既可以有sql的命令又可以有参数，因此，用户的输入也可以被当做sql的语句来解析执行。<br>那么，既然知道了sql注入成功的原因，我们就反其道而行之，不让用户输入的参数被当做sql命令解析，而是只把它当做普通字符串来解析。<br>由此，java中引入了prepareStatement，利用preparestatement来防止sql注入的核心思想就是，不把用户的输入当做sql命令来解析和执行。</p>
+<h3 id="PreparedStatement"><a href="#PreparedStatement" class="headerlink" title="PreparedStatement"></a>PreparedStatement</h3><p>PreparedStatement继承自Statement，可以通过Connection的prepareStatement方法得到。<br>prepareStatement很明显的将sql命令语句与参数分开处理，其执行过程是，首先在sql语句真正执行之前，先把sql命令送到数据库中进行预编译，生成相应 的数据库命令，然后在获取sql中的参数，然后真正执行该sql语句。<br>这样一来，用户输入的参数，只被当做参数而非命令来解析，就可以避免数据库注入这样的问题发生。<br><strong>不过，这样一来，单次执行PreparedStatement需要与数据库通信两次，效率，比之于单词执行Statement要低。</strong></p>
 
         </div>
         <div class="post-reply">
@@ -517,7 +647,7 @@ mysql &gt; source c:\user\zhao\test.sql
         <br>
         Copyright © 王邸 2019
         <!--
-          Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+          Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
         -->
       </div>
     </div>
