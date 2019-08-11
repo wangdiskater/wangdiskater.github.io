@@ -14,7 +14,7 @@
 <meta property="og:url" content="http://yoursite.com/2019/07/06/Java总结（二）/index.html">
 <meta property="og:site_name" content="路要坚持">
 <meta property="og:description" content="总结时间：0701-0706 概述这周主要把面向对象的内容讲完了。很多东西虽然很熟悉但是却很多细节的处理很重要。是打好基础的关键。但是万变不离其中，离不开三大特性：继承，封装，多态。现在也只能字面意思上去理解到底这些东西是什么。这些东西的规律是什么，但是他为什么这样实现的？最初的构想是什么？等等问题，这不是老师能教你的，你自己需要去学习。上个礼拜简单的讲了什么是封装，但是封装远远没有private">
-<meta property="og:updated_time" content="2019-08-04T06:26:39.582Z">
+<meta property="og:updated_time" content="2019-08-07T02:36:46.755Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java总结（二）">
 <meta name="twitter:description" content="总结时间：0701-0706 概述这周主要把面向对象的内容讲完了。很多东西虽然很熟悉但是却很多细节的处理很重要。是打好基础的关键。但是万变不离其中，离不开三大特性：继承，封装，多态。现在也只能字面意思上去理解到底这些东西是什么。这些东西的规律是什么，但是他为什么这样实现的？最初的构想是什么？等等问题，这不是老师能教你的，你自己需要去学习。上个礼拜简单的讲了什么是封装，但是封装远远没有private">
@@ -395,7 +395,7 @@ public class Test3 {
 <h3 id="形式参数和返回值的问题"><a href="#形式参数和返回值的问题" class="headerlink" title="形式参数和返回值的问题"></a>形式参数和返回值的问题</h3><p>(1)形式参数：<br>  类名：需要该类或者该类子类的对象<br>  抽象类名：需要该类的子类对象<br>  接口名：需要该接口的实现类对象<br>(2)返回值类型：<br>  类名：返回的是该类或者该类子类的对象<br>  抽象类名：返回的是该类的子类对象<br>  接口名：返回的是该接口的实现类的对象<br>(3)链式编程<br>  对象.方法1().方法2()…….方法n();</p>
 <h2 id="星期三-拉闸放假"><a href="#星期三-拉闸放假" class="headerlink" title="星期三(拉闸放假)"></a>星期三(拉闸放假)</h2><h2 id="星期四"><a href="#星期四" class="headerlink" title="星期四"></a>星期四</h2><h3 id="打包"><a href="#打包" class="headerlink" title="打包"></a>打包</h3><pre><code>命令：javac -d . xxx.java
 </code></pre><h3 id="执行"><a href="#执行" class="headerlink" title="执行"></a>执行</h3><pre><code>命令：java com.cs.kaoyan.demo;
-</code></pre><h3 id="导-包"><a href="#导-包" class="headerlink" title="导 包"></a>导 包</h3><p>(1)访问不同包的类<br>  a. 指定类的全限定名（例如java.util.Scanner）;<br>  b. 导包<br>(2)格式：<br>  import 包名.类名；<br>  静态导入：（导入静态方法，就好像导入的方法就定义在这个类中一样）<br>    import static 包名.类名.方法名<br>    要求该方法必须是静态的。<br>(3)面试题：package,import,class的在JAVA文件中的顺序<br>  package &gt; import &gt; class<br>  一个  多个  多个(建议一个文件里面只有一个class)</p>
+</code></pre><h3 id="导包"><a href="#导包" class="headerlink" title="导包"></a>导包</h3><p>(1)访问不同包的类<br>  a. 指定类的全限定名（例如java.util.Scanner）;<br>  b. 导包<br>(2)格式：<br>  import 包名.类名；<br>  静态导入：（导入静态方法，就好像导入的方法就定义在这个类中一样）<br>    import static 包名.类名.方法名<br>    要求该方法必须是静态的。<br>(3)面试题：package,import,class的在JAVA文件中的顺序<br>  package &gt; import &gt; class<br>  一个  多个  多个(建议一个文件里面只有一个class)</p>
 <h3 id="权限修饰符"><a href="#权限修饰符" class="headerlink" title="权限修饰符"></a>权限修饰符</h3><p>(1)权限修饰符</p>
 <table>
 <thead>
@@ -496,6 +496,7 @@ class Outer1 {
   public static void method2() {
     //只有创建了对象才能在外部类使用
     Inner2 inner2 = new Inner2();
+
     System.out.println(inner2.c);
     System.out.println(inner2.c);
     System.out.println(inner2.num1);
@@ -544,7 +545,7 @@ class Outer1 {
 <pre><code>首先外部类是非静态的，所以外部类如果不创建内部类对象是访问不了内部类的成员的。
 然后我觉得既然可以直接创建内部类，那还要外部类包装干什么？
 和普通的成员内部类区别？
-</code></pre><p>  <a href="https://blog.csdn.net/nimeghbia/article/details/87871441" target="_blank" rel="external">内部静态类作用</a><br>  如果需要内部类需要创静态的成员，就要用到内部类。静态成员是类所有，但这是静态内部类的特性；</p>
+</code></pre><p>  <a href="https://blog.csdn.net/nimeghbia/article/details/87871441" target="_blank" rel="external">内部静态类作用</a><br>  <strong>如果需要内部类需要创静态的成员，就要用到内部类。静态成员是类所有，但这是静态内部类的特性</strong></p>
 <p>(7)局部内部类(局部变量)<br>  a. 内部类怎么访问外部类？<br>    直接访问，并且可以访问私有的。<br>    访问外部类的局部变量：要求该局部变量不能改变。（放在常量池中）（通过画图了解和反编译了解）<br>  b. 外部类怎么访问内部类？<br>    只能在该方法中访问。<br>    创建对象，并且可以访问内部类私有成员<br>  c. 其他类怎么访问内部类？<br>    不能！</p>
 <p>  A:局部内部类访问局部变量必须是最终量或者是实际的最终量（final）,为什么呢?<br>  因为局部变量使用完毕就消失，而堆内存的数据并不会立即消失。<br>  为了让该值还存在，就加final修饰。 –&gt; 常量池</p>
 <pre><code>反编译的源码：
@@ -723,11 +724,26 @@ Rectangle:
 衍生域：area, perimeter
 无关域：color
 根据关键域进行比较
-</code></pre><p>equals方法常规协定：<br>    equals 方法在非空对象引用上实现相等关系：<br>        自反性：对于任何非空引用值 x，x.equals(x) 都应返回true。<br>        对称性：对于任何非空引用值 x 和 y，当且仅当 y.equals(x) 返回true时，x.equals(y)才应返回true。<br>        传递性：对于任何非空引用值 x、y 和 z，如果x.equals(y)返回 true，并且y.equals(z)返回 true，那么 x.equals(z) 应返回 true。<br>        一致性：对于任何非空引用值 x 和 y，多次调用 x.equals(y) 始终返回 true 或始终返回 false，前提是对象上 equals 比较中所用的信息没有被修改。<br>        非空性：对于任何非空引用值 x，x.equals(null) 都应返回 false。</p>
-<p><strong><em>注意事项：当此方法被重写时，通常有必要重写hashCode方法，在IDEA中使用alt+insert可以自动生成。通常改写是为了比较两个对象是否“相等”，这里的相等，并不是地址值相等。而是成员内容相等。或者用于判断深拷贝是否成功</em></strong></p>
-<p>instanceof:是 Java 的保留关键字。它的作用是测试它左边的对象是否是它右边的类的实例，返回 boolean 的数据类型。<br>    null instanceof 类名: 返回fasle;<br>    obj instanceof Object: 返回true, 子类能够内父类接受</p>
-<p>instanceof可以判断类和类的关系吗？或者对象和对象的？<br>只能判断对象是否是右边的类的实例或者是子类的实例。</p>
-<h3 id="protected-void-finalize-throws-Throwable"><a href="#protected-void-finalize-throws-Throwable" class="headerlink" title="protected void finalize() throws Throwable"></a>protected void finalize() throws Throwable</h3><p>概述：当垃圾回收器回收这个对象时，会自动调用此方法。子类重写 finalize 方法，以释放资源。<br>默认实现：什么都没做，空实现。</p>
+</code></pre><p>equals方法常规协定：<br>    equals 方法在非空对象引用上实现相等关系：</p>
+<pre><code>自反性：对于任何非空引用值 x，x.equals(x) 都应返回true。
+对称性：对于任何非空引用值 x 和 y，当且仅当 y.equals(x) 返回true时，x.equals(y)才应返回true。
+传递性：对于任何非空引用值 x、y 和 z，如果x.equals(y)返回 true，并且y.equals(z)返回 true，那么 x.equals(z) 应返回 true。
+一致性：对于任何非空引用值 x 和 y，多次调用 x.equals(y) 始终返回 true 或始终返回 false，前提是对象上 equals 比较中所用的信息没有被修改。
+非空性：对于任何非空引用值 x，x.equals(null) 都应返回 false。
+</code></pre><p><strong><em>注意事项：当此方法被重写时，通常有必要重写hashCode方法，在IDEA中使用alt+insert可以自动生成。通常改写是为了比较两个对象是否“相等”，这里的相等，并不是地址值相等。而是成员内容相等。或者用于判断深拷贝是否成功</em></strong></p>
+<pre><code>public boolean equals(Object o) {
+  if(o == this) return true; //包括了null
+  if(o == null || o.getClass() != this.getClass()) return false;
+  //比较成员变量
+  return id == emp.id &amp;&amp;
+            Double.compare(emp.salary, salary) == 0 &amp;&amp;
+            Objects.equals(name, emp.name) &amp;&amp;
+            Objects.equals(flag, emp.flag);
+}
+</code></pre><p>instanceof:是 Java 的保留关键字。它的作用是测试它左边的对象是否是它右边的类的实例，返回 boolean 的数据类型。<br>    null instanceof 类名: 返回fasle;<br>    obj instanceof Object: 返回true, 子类能够内父类接受</p>
+<p>instanceof可以判断类和类的关系吗？或者对象和对象的？</p>
+<pre><code>只能判断对象是否是右边的类的实例或者是子类的实例。
+</code></pre><h3 id="protected-void-finalize-throws-Throwable"><a href="#protected-void-finalize-throws-Throwable" class="headerlink" title="protected void finalize() throws Throwable"></a>protected void finalize() throws Throwable</h3><p>概述：当垃圾回收器回收这个对象时，会自动调用此方法。子类重写 finalize 方法，以释放资源。<br>默认实现：什么都没做，空实现。</p>
 <p>finalize:</p>
 <ol>
 <li>可以自动调用, 该对象没有被回收。</li>

@@ -1,0 +1,1019 @@
+<!DOCTYPE html>
+<html class="full-height">
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="//cdn.bootcss.com/bulma/0.4.1/css/bulma.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+  
+  <title>Java总结（七） | 路要坚持</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="这周学习了一些JDBC的内容，也学习了前端，但是讲的太水了，不敢苟同。所以自己去整理，但是自己也没有书，只有去MDN去学习，发现讲的很全面，虽然是火狐浏览器为基础的。但是讲的都是很标准的东西。想要通过几天把前端都回顾完是不可能的，还有很多坑在里面。只有一步步来。每天都复习一点。 星期一（8.5）JDBC批处理就是多次进行处理，没有批处理，我们如何批量新增数据也许应该是这样：使用循环然后statem">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java总结（七）">
+<meta property="og:url" content="http://yoursite.com/2019/08/11/Java总结（七）/index.html">
+<meta property="og:site_name" content="路要坚持">
+<meta property="og:description" content="这周学习了一些JDBC的内容，也学习了前端，但是讲的太水了，不敢苟同。所以自己去整理，但是自己也没有书，只有去MDN去学习，发现讲的很全面，虽然是火狐浏览器为基础的。但是讲的都是很标准的东西。想要通过几天把前端都回顾完是不可能的，还有很多坑在里面。只有一步步来。每天都复习一点。 星期一（8.5）JDBC批处理就是多次进行处理，没有批处理，我们如何批量新增数据也许应该是这样：使用循环然后statem">
+<meta property="og:updated_time" content="2019-08-11T15:43:39.398Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java总结（七）">
+<meta name="twitter:description" content="这周学习了一些JDBC的内容，也学习了前端，但是讲的太水了，不敢苟同。所以自己去整理，但是自己也没有书，只有去MDN去学习，发现讲的很全面，虽然是火狐浏览器为基础的。但是讲的都是很标准的东西。想要通过几天把前端都回顾完是不可能的，还有很多坑在里面。只有一步步来。每天都复习一点。 星期一（8.5）JDBC批处理就是多次进行处理，没有批处理，我们如何批量新增数据也许应该是这样：使用循环然后statem">
+  
+    <link rel="alternate" href="/" title="路要坚持" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/common.css">
+<link rel="stylesheet" href="/css/nav.css">
+<link rel="stylesheet" href="/css/layout.css">
+  
+
+</head>
+
+<body>
+  <header id="navbar" class="overflow-hidden">
+  <div class="container">
+    <nav class="nav">
+         <div class="nav-left">
+            <a href="/" class="nav-item" style="font-size: 20px;">
+              <span class="logo">王邸</span>'s Blog
+            </a>
+         </div>
+        <div class="nav-center is-hidden position-relative" id="search_container">
+            <div class="nav-item full-width full-height">
+                <i class="fa fa-search has-padding" aria-hidden="true"></i>
+                <input type="text" id="search_input" class="search-input full-height full-width" placeholder="Search post" autofocus>
+                <i id="close_search" class="fa fa-times" aria-hidden="true"></i>
+            </div>
+            <div id="search_result"></div>
+        </div>
+        <div class="nav-right nav-menu">
+            <a class="nav-item" id="search">
+                <i class="fa fa-search" aria-hidden="true"></i>
+            </a>
+            
+            <a class="nav-item" href="/">
+                Home
+            </a>
+            
+            <a class="nav-item" href="/works">
+                My Works
+            </a>
+            
+            <a class="nav-item" href="/about">
+                About
+            </a>
+            
+        </div>
+        <span class="nav-toggle" id="navMenuDropdown">
+            <span></span>
+            <span></span>
+            <span></span>
+        </span>
+        <div class="navbar-menu position-absolute full-width content-box is-hidden-desktop is-flex flex-column center" style="top: 100%;">
+            
+            <a class="nav-item flex-1" href="/">
+                Home
+            </a>
+            
+            <a class="nav-item flex-1" href="/works">
+                My Works
+            </a>
+            
+            <a class="nav-item flex-1" href="/about">
+                About
+            </a>
+            
+        </div>
+    </nav>
+  </div>
+</header>
+
+  <div id="main-wrap" class="position-relative" style="margin-top: 55px;">
+      <div class="main-inner-content">
+          <!--博文页面-->
+
+<style>
+    .header-box {
+        height: 370px;
+        filter: blur(10px);
+        background-size: cover;
+        background-color: lightsteelblue;
+    }
+
+    .post-box {
+        padding: 15px;
+        padding-top: 60px;
+        min-height: 80vh;
+        margin-top: -200px;
+        border-radius: 4px;
+        background-color: rgba(255,255,255,.8);
+    }
+
+    .post-avatar {
+        height: 30px;
+        width: 30px;
+        border-radius: 50%;
+    }
+
+    .flow-chart {
+        text-align: center;
+    }
+
+    img[alt="post-cover"] {
+        display: none;
+    }
+</style>
+<header>
+    <div id="header_box" class="header-box"></div>
+</header>
+<section>
+    <div class="container post-box">
+        <div class="content post-title is-flex center flex-column" style="margin-bottom: 70px; overflow: auto;">
+            <h1 class="has-text-centered" style="padding-bottom: 10px; border-bottom: 3px solid #fff">
+                <strong>Java总结（七）</strong>
+            </h1>
+            
+            <div class="is-flex align-center">
+                <img class="post-avatar" src="https://q2.qlogo.cn/headimg_dl?bs=996057150&dst_uin=996057150&dst_uin=996057150&;dst_uin=996057150&spec=100&url_enc=0&referer=bu_interface&term_type=PC">
+                <span style="padding:0 10px;"> <span class="sub-title">By</span> 王邸</span>
+                <span class="post-date sub-title">at: 2019-08-11</span>
+            </div>
+            
+                <div>
+                    
+                </div>
+            
+        </div>
+        <div class="content" style="overflow: auto">
+            <p>这周学习了一些JDBC的内容，也学习了前端，但是讲的太水了，不敢苟同。所以自己去整理，但是自己也没有书，只有去MDN去学习，发现讲的很全面，虽然是火狐浏览器为基础的。但是讲的都是很标准的东西。想要通过几天把前端都回顾完是不可能的，还有很多坑在里面。只有一步步来。每天都复习一点。</p>
+<h2 id="星期一（8-5）"><a href="#星期一（8-5）" class="headerlink" title="星期一（8.5）"></a>星期一（8.5）</h2><h3 id="JDBC批处理"><a href="#JDBC批处理" class="headerlink" title="JDBC批处理"></a>JDBC批处理</h3><p>就是多次进行处理，没有批处理，我们如何批量新增数据<br>也许应该是这样：使用循环然后statement.executeUpdate()来插入数据；</p>
+<pre><code>//批量插入数据 500条
+Connection connection = null;
+Statement statement = null;
+try {
+    connection = JdbcUtil.getConnection();
+    statement = connection.createStatement();
+    for (int i = 0; i &lt; 500; i++) {
+        statement.executeUpdate(&quot;insert into user values (null,&apos;&quot; + i + &quot;&apos;,&apos;&quot; + i + &quot;&apos;)&quot;);
+    }
+} catch (IOException e) {
+    e.printStackTrace();
+} catch (ClassNotFoundException e) {
+    e.printStackTrace();
+} catch (SQLException e) {
+    e.printStackTrace();
+}finally {
+    try {
+        JdbcUtil.releaseConnection(connection,null,statement);
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+}
+</code></pre><h3 id="使用statement的批处理："><a href="#使用statement的批处理：" class="headerlink" title="使用statement的批处理："></a>使用statement的批处理：</h3><pre><code>statement.addBatch(sql); 相当于将砖放到一个小推车里
+statement.executeBatch(); 推着小推车去目的地
+statement.clearBatch();  将小推车里面的砖块卸了，再回到目的地
+
+//批量插入数据 500条
+Connection connection = null;
+Statement statement = null;
+try {
+    connection = JdbcUtil.getConnection();
+    statement = connection.createStatement();
+    for (int i = 0; i &lt; 500; i++) {
+        statement.addBatch(&quot;insert into user values (null,&apos;&quot; + i + &quot;&apos;,&apos;&quot; + i + &quot;&apos;)&quot;);
+        statement.addBatch(&quot;delete from user where id = 1&quot;);
+        if(i == 249){
+          statement.executeBatch();
+          statement.clearBatch();  //第一次搬砖
+        }
+    }
+    statement.executeBatch();      //第二次搬砖
+</code></pre><p>特点：<br>较为灵活，可以执行多条不同类型的sql语句。</p>
+<h3 id="prepareStatement批处理："><a href="#prepareStatement批处理：" class="headerlink" title="prepareStatement批处理："></a>prepareStatement批处理：</h3><pre><code>Connextion connection = null;
+PrepareStatement preparedStatement = null;
+try{
+  connection = JdbcUtil.getConnection();
+  String sql = &quot;insert into user values (&apos;null&apos;,?,?)&quot;;
+  preparedStatement = connection.prepareStatement(sql);
+  for(int i = 0; i &lt; 500; i++) {
+    preparedStatement.setString(1,i+&quot;&quot;);
+    preparedStatement.setString(2,i+&quot;&quot;);
+    preparedStatement.addBatch();
+
+    if(i = ((500-1)&gt;&gt;1)){ //先把一半的砖都拿走
+      preparedStatement.executeBatch();
+      prepatedStatement.clearBatch();
+    }
+  }
+  preparedStatement.executeBatch();//办第二次
+  preparedStatement.clearBatch();
+} catch (IOException e) {
+    e.printStackTrace();
+} catch (ClassNotFoundException e) {
+    e.printStackTrace();
+} catch (SQLException e) {
+    e.printStackTrace();
+}finally {
+    try {
+        JdbcUtil.releaseConnection(connection,null,preparedStatement);
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+}
+</code></pre><p>仅能执行类型相同而参数不同的sql语句。但是效率很高</p>
+<p>采用PreparedStatement.addBatch()实现批处理<br>优点：与数据库通信次数在批量操作时，PreparedStatment的通信次数远少于Statment。<br>缺点：只能应用在SQL语句相同，但参数不同的批处理中。因此此种形式的批处理经常用于在同一个表中批量插入数据，或批量更新表的数据。</p>
+<p><strong>注意事项</strong>：<br>1.默认情况下Mysql的批处理仍然是一条一条执行，需要在url后面添加rewriteBatchedStatements=true参数例如：</p>
+<pre><code>url=jdbc:mysql://localhost:3306/bank?characterEncoding=utf8&amp;rewriteBatchedStatements=true
+</code></pre><p>2.PreparedStatement.addBatch()注意内存溢出问题</p>
+<p>为什么addBatch()会内存溢出？</p>
+<pre><code>// private byte[][] parameterValues = (byte[][])null;
+public synchronized void addBatch() throws SQLException {
+  if (this.batchedArgs == null) {
+    this.batchedArgs = new ArrayList();
+  }
+  for(int i = 0; i &lt; this.parameterValues.length; ++i) {
+    this.checkAllParametersSet(this.parameterValues[i], this.parameterStreams[i], i);
+  }
+  this.batchedArgs.add(new PreparedStatement.BatchParams(this.parameterValues, this.parameterStreams, this.isStream, this.streamLengths, this.isNull));
+}
+</code></pre><p>看到是一个ArrayList存储的不知道哪里可能会出现内存溢出<br>网上搜了一下：数据库存取内存溢出的问题：</p>
+<p>1.是ibatis 频繁读取数据库的问题，换成jdbc就好了<br>2.jdbc statement.executeQuery(sql) 造成内存溢出。<br>如果你要读取一个超大的表，使用下面的语句有可能会造成内存溢出：</p>
+<pre><code>Statement statement = conn.createStatement(
+                    ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY);
+ResultSet rs = statement.executeQuery(sql);
+这是因为如果不设置statement的fetchSize的话，mysql驱动默认会将数据全部载入到内存中，所以就会OutOfMemoryError了。
+</code></pre><p>解决的方法有两种，在执行statement.executeQuery(sql);添加下面两行中的一行，即可：</p>
+<pre><code>statement.setFetchSize(Integer.MIN_VALUE);
+ ((com.mysql.jdbc.Statement)stat).enableStreamingResults();
+</code></pre><p>3.<a href="https://antival.iteye.com/blog/1340774" target="_blank" rel="external">JDBC批处理内存溢出问题分析</a>关键点：</p>
+<pre><code>第五步，分析发现19万分每次5000笔也是38次，38次connnection和PreparedStatement可能有问题。因此修改代码，将链接(connection)和PreparedStatement都提出来，在循环之外。然后每次批量执行完毕都执行清理操作（pstat.clearBatch()）。内存稳定，没有增加，问题解决。
+结论：PreparedStatement批量执行方式占用内存有可能非常大（跟批量数据量有关系），如果只是使用close，包括connection的close，并不能及时释放，哪怕是强制gc也不能释放。
+解决的方法就是使用统一个PreparedStatement，那么假设它占用50M的空间，循环使用的情况下，只是覆盖没有新new一些地址，可能就是解决问题的思路。
+</code></pre><h2 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h2><p>事务指逻辑上的一组操作，组成这组操作的各个单元，要么全部成功，要么全部不成功。</p>
+<p>Mysql数据库在默认情况下是自动提交事务的，这点需要与oracle数据库做一个区分。Oracle数据库执行完之后，需要手动执行commit操作。<br>命令行开启事务的方式：</p>
+<pre><code>start transaction  开启事务DTL 取消自动提交事务
+rollback           回滚到start transaction
+commit             提交
+</code></pre><h3 id="事务的四个特性-ACID"><a href="#事务的四个特性-ACID" class="headerlink" title="事务的四个特性(ACID)"></a>事务的四个特性(ACID)</h3><p>原子性（Atomicity）</p>
+<pre><code>原子性是指事务是一个不可分割的工作单位，事务中的操作要么都发生，要么都不发生。 
+</code></pre><p>一致性（Consistency）</p>
+<pre><code>事务必须使数据库从一个一致性状态变换到另外一个一致性状态。
+</code></pre><p><strong>隔离性（Isolation）</strong></p>
+<pre><code>事务的隔离性是多个用户并发访问数据库时，数据库为每一个用户开启的事务，不能被其他事务的操作数据所干扰，多个并发事务之间要相互隔离。
+</code></pre><p>持久性（Durability）</p>
+<pre><code>持久性是指一个事务一旦被提交，它对数据库中数据的改变就是永久性的，接下来即使数据库发生故障(软件故障)也不应该对其有任何影响。
+</code></pre><h3 id="事务的隔离性"><a href="#事务的隔离性" class="headerlink" title="事务的隔离性"></a>事务的隔离性</h3><p>隔离性做的不够好（对应于不同的隔离等级），会有哪些问题产生：</p>
+<pre><code>脏读：一个事务读取到了另外一个事务未提交的数据。
+不可重复读：一个事务读取到了另外一个事务已经提交的数据。
+虚读：一个事务读取到了另外一个事务新增的数据。
+</code></pre><p>脏读是最低级的，虚读是最高级的。</p>
+<p>下面就来说说这几种隔离性不好的问题的差异，我们还是在命令行操作，首先使用两个命令行窗口，</p>
+<pre><code>窗口一，窗口二同时开始事务 输入命令：start transaction
+第一个命令行窗口只做操作，
+第二个命令行窗口只去数据库读取信息
+</code></pre><p>窗口二只读取数据库三次：</p>
+<pre><code>1.在窗口一开始操作之前读
+2.在窗口一设置数据之后，未提交之前读
+3.在窗口一提交之后读数据库
+</code></pre><p>我们分别把这三个结果叫 结果1，结果2，结果3<br>当我们设置隔离等级是read uncommitted ，为了能表示出脏读</p>
+<pre><code>set global transaction isolation level read uncommitted;
+</code></pre><p>我们可以得出 结果1 ！= 结果2时，就发生了脏读:事务二读取到了事务一的未提交的数据</p>
+<p>当我们设置隔离等级是read committed ，为了能表示出不可重复读</p>
+<pre><code>set global transaction isolation level read committed;
+</code></pre><p>得出： 结果1 = 结果2 ！= 结果3 ：一个事务重新读取前面读取过的数据， 发现该数据已经被另一个已提交的事务修改过。<br>表现出不可重复读</p>
+<p><strong>注意事项</strong>Mysql是表现不出脏读的，因为Mysql在隔离级别Repeatable read就避免phantom read（虚读）但是在别的数据库里虚读的表现和不可重读读是类似的也是：结果1 = 结果2 ！= 结果3，但是这就表现出的是行数的不同，而不是数据的不同。</p>
+<h3 id="数据库提供了四种不同级别的隔离等级："><a href="#数据库提供了四种不同级别的隔离等级：" class="headerlink" title="数据库提供了四种不同级别的隔离等级："></a>数据库提供了四种不同级别的隔离等级：</h3><pre><code>Read uncommitted ：以上三种情况均不能避免
+Read committed：可避免脏读的发生
+Repeatable read：可避免脏读，不可重复读发生
+Serializable：可避免所有问题发生（串行化，一个一个走）
+</code></pre><p>查看和设置事务隔离级别命令：在Mysql的命令下：</p>
+<pre><code>select @@transaction_isolation;                                 //查看隔离级别
+set session/global transaction isolation level read uncommitted //这是隔离级别
+</code></pre><h3 id="JDBC启用事务模式"><a href="#JDBC启用事务模式" class="headerlink" title="JDBC启用事务模式"></a>JDBC启用事务模式</h3><p>当Jdbc程序向数据库获得一个Connection对象时，默认情况下这个Connection对象会自动向数据库提交commit在它上面发送的SQL语句。若想关闭这种默认提交方式，让多条SQL在一个事务中执行，可使用下列语句：<br>JDBC控制事务语句|对应的命令行操作<br>-:|:-<br>Connection.setAutoCommit(false)  |  start transaction<br>Connection.rollback();           |  rollback<br>Connection.commit();             |  commit</p>
+<h3 id="设置事务回滚点Connection-rollback"><a href="#设置事务回滚点Connection-rollback" class="headerlink" title="设置事务回滚点Connection.rollback()"></a>设置事务回滚点Connection.rollback()</h3><pre><code>Savepoint sp = conn.setSavepoint();
+Conn.rollback(sp);
+Conn.commit();   //回滚后必须要提交
+</code></pre><p>看下面的例子</p>
+<p>//jdbc设置事务：老板给员工转账问题<br>设置事务的回滚点：<br>比如公司老板给多名员工同时发工资，发到一半时，出现了问题，这个时候，我们可以回滚到出错的上一个人位置，而不必直接rollback到最开始的时候。<br>1.首先老板选择需要发放工资的员工人员，接下来，他直接操作，最终程序自动完成转账功能。<br>2.每个员工的薪水是不同的，具体的薪水存放在薪水表中。从新水表获取到需要发放工资的员工对应的薪水，<br>3.之后，进入转账环节，转账成功同时要写入相应的转账记录。</p>
+<p>需要的表如下：<br>员工表（包含每个员工应该得的工资） 金额表（每个员工自己的资金是多少）  转账记录表记录转账</p>
+<p>员工表：</p>
+<pre><code>emp   | CREATE TABLE `emp` (
+ `id` int(11) NOT NULL AUTO_INCREMENT,
+ `name` varchar(30) DEFAULT NULL,
+ `salary` double DEFAULT NULL,
+ `flag` enum(&apos;成功&apos;,&apos;失败&apos;) DEFAULT &apos;失败&apos;,
+ PRIMARY KEY (`id`)
+</code></pre><p>金额表：</p>
+<pre><code>account | CREATE TABLE `account` (
+ `id` int(11) NOT NULL AUTO_INCREMENT,
+ `name` varchar(255) DEFAULT NULL,
+ `money` double NOT NULL,
+ `eid` int(11) NOT NULL,
+ PRIMARY KEY (`id`)
+</code></pre><p>转账记录表：</p>
+<pre><code>`id` int(11) NOT NULL AUTO_INCREMENT,
+  `getId` int(11) DEFAULT NULL,
+  `getName` varchar(30) DEFAULT NULL,
+  `supplyId` int(11) DEFAULT NULL,
+  `supplyName` varchar(30) DEFAULT NULL,
+  `money` double DEFAULT NULL,
+  `time` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+</code></pre><p>这个表使用一个字段来标记是否转账成功，以避免事务中途被强制结束，有一些转账成功，一些转账失败，导致重复转账的情况，下面上代码，这里注意，还是用了之前的jdbcUtil的方法来获取连接和释放资源；<br>首先先需要一个bean(pojo)来保存数据库取出的数据</p>
+<pre><code>package practise.pojo;
+//java bean设计的一些注意事项
+//字段属性设置private，然后提供get和set方法
+//提供无参构造函数，如果写了有参，则要把无参另外写出来
+public class Emp {
+    private int id;
+    private String name;
+    private double salary;
+    private String flag;
+    public Emp() {}
+    public Emp(int id, String name, double salary) {
+        this.id = id;
+        this.name = name;
+        this.salary = salary;
+    }
+    public int getId() {return id;}
+    public void setId(int id) {this.id = id;}
+    public String getName() {return name;}
+    public void setName(String name) {this.name = name;}
+    public double getSalary() {return salary;}
+    public void setSalary(double salary) {this.salary = salary;}
+    public String getFlag() {return flag;}
+    public void setFlag(String flag) {this.flag = flag;}
+}
+</code></pre><p>2.编写一个重数据库取出数据的类LoadSalary</p>
+<pre><code>public class LoadSalar{
+    public static void main(String[] args) {
+        Connection connection = null;
+        PreparedStatement preparedstatement = null;
+        ResultSet resultSet = null;
+        List&lt;Emp&gt; list = new ArrayList&lt;&gt;();
+        try{
+            connection = jdbcUtil.getConnection();
+            String s1 = &quot;select * from emp&quot;;
+            preparedStatement = connection.prepareStatement(s1);
+            resultSet = preparedStatement.executeQuery();
+            while(result.next){
+                Emp employee = new Emp();
+                int id = resultSet.getInt(&quot;id&quot;);
+                String name = resultSet.getString(&quot;name&quot;);
+                double salary = resultSet.getDouble(&quot;salary&quot;);
+                String flag = resultSet.getString(&quot;flag&quot;);
+                employee.setId(id);
+                employee.setName(name);
+                employee.setSalary(salary);
+                employee.setFlag(flag);
+                list.add(employee);
+            }
+            TransSalary.transfer(list);// 进行转账操作
+        } catch(Exception e) {
+            e.printStackTrace();
+        } finally {
+            try{
+                JdbcUtil.releaseConnection(connection,resultSet,preparedStatement);
+            } catch(SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+}
+</code></pre><p>3.编写转账的JDBC</p>
+<pre><code>public class TransSalary{
+    public static void transfer(List&lt;Emp&gt; list) {
+        //先把boss从list里面拿出来
+        Emp boss = new Emp();
+        for(Emp emp1 : list) {
+            if(&quot;佟掌柜&quot;.equals(emp1.getName)) {
+                boss = emp1;
+                break;
+            }
+        }
+        Connection connection = null;
+        //需要两个prepareStatement来操作两个数据库
+        PrepareStatement preparedStatement1 = null;
+        PrepareStatement preparedStatement2 = null;
+        Savepoint savepoint = nulll; //设置回滚点
+
+
+
+        ResultSet resultSet = null;
+        try{
+
+            connection = JdbcUtil.getConnection();
+            //手动开启事务
+            connection.setAutoCommit(false);
+            //转账sql
+            String sql = &quot;update account set money = money - ? where eid = ?&quot;;
+            //修改emp标记sql
+            String sql2 = &quot;update emp set flag = &apos;成功&apos; where id = ?&quot;;
+
+            preparement1 = connection.prepareStatement(sql);
+            preparement2 = connection.prepareStatement(sql2);
+
+            //转账开始
+            for(Emp emp : list) {
+
+                //给钱
+                preparement1.setDouble(1,-list.getSalary());
+                preparement1.setInt(2,emp.getId());
+                preparement1.executeUpdate();  //返回影响的行数
+
+                //老板扣钱
+                preparement1.setDouble(1,list.getSalary());
+                preparement1.setInt(2,boss.getId());
+                preparement1.executeUpdate();
+
+                //设置emp的标签为成功
+                preparement2.setInt(1,emp.getId());
+                prepatement2.executeUpdate();
+
+                //到这里说明成功，成功就写记录到数据库
+                //被转账的人信息  转账人的信息 转账金额 日期
+                RecordSalary.record(emp.getId(), emp.getName(), boss.getId(), boss.getName(), emp.getSalary());
+
+                //转账成功记录保存点
+                savepoint = connection.setSavepoint();
+            }
+        connection.commit();//提交事务
+        } catch (Exception e) {
+            //发生异常需要回滚
+            e.printStackTrace();
+
+            //判断一下回滚点是否是null
+            if(savepoint == null) {
+                connection.rollback();//就停止了
+            } else {
+                connection.rollback(savepoint);
+                //记得提交事务
+                connection.commit();
+            }
+
+            connection.rollback(savepoint);
+        } finnaly{
+            try{
+                JdbcUtil.releaseConnection(connection,null,preparedStatement);
+                preparement2.close();
+            } catch(SQLExeception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+}
+</code></pre><p>4.向record写入记录</p>
+<pre><code>public class RecordSalary {
+    public static void record(int getId,String getName, int supplyId, String supplyName, double salary ) {
+        Connection connection  = null;
+        PreparedStatement preparedStatement = null;
+        //id getid getName supplyId supplyName,salary,dateTime
+        String sql = &quot;Insert into record values(null,?,?,?,?,?,now())&quot;;
+        try {
+            connection = JdbcUtil.getConnection();
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1,getId);
+            preparedStatement.setString(2,getName);
+            preparedStatement.setInt(3,supplyId);
+            preparedStatement.setString(4,supplyName);
+            preparedStatement.setDouble(5,salary);
+            preparedStatement.executeUpdate();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally{
+            try {
+                JdbcUtil.releaseConnection(connection,null,preparedStatement);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+}
+</code></pre><p><strong>注意事项</strong><br>1.这里注意rollback方法，回到的是savepoint的地方，这个savepoint是由connection给的，一开始默认值是null,我看了rollback方法两个是分开的方法，所以savepoint一定要先判断是否为null再决定是rollback(savepoint)还是rollback()直接回到一开始；</p>
+<p>2.对rollback函数的构想，能否单独抽离出rollback函数，这样自己设置保存点。就能自己写一个callback的方法，能回到自己想回到的地方，但是这个怎么执行之类，还需要对这个函数更加了解才行</p>
+<h2 id="星期二（8-6）"><a href="#星期二（8-6）" class="headerlink" title="星期二（8.6）"></a>星期二（8.6）</h2><h3 id="数据库连接池"><a href="#数据库连接池" class="headerlink" title="数据库连接池"></a>数据库连接池</h3><p>什么是数据库连接池，为什么需要？<br>在之前的JDBC操作中，每次都需要手动去创建一个连接，并且在使用完成之后，关闭该连接。但是在真实的生产环境中，连接的创建是非常消耗性能的，花费时间较久，在多用户并发访问的时候，极容易出现数据库内存溢出，系统宕机。<br>解决方案，就是新建一个数据库连接池，预先在连接池里面存放一些数据库连接，当用户访问的时候，直接去连接池中去拿一个连接，而不是新创建一个。同时使用完之后，也不是直接关闭销毁，而是放回连接池。</p>
+<p>数据库连接池和我们之前学的JDBC的操作流程有没有互相违背的地方？？？<br>JDBC中一致强调要及释放资源，关闭connection对象。连接池又说要用一个池子来保存连接，避免新建一个连接。</p>
+<h3 id="初识连接池"><a href="#初识连接池" class="headerlink" title="初识连接池"></a>初识连接池</h3><p>自己手写一个连接池，然后只重写了close方法，close并不是关闭连接，只是把连接丢会连接池</p>
+<pre><code>public class MyConnectionPool {
+  //要从头删除，所以使用LinkedList
+  private static List&lt;Connection&gt; pool = new LinkedList&lt;&gt;();
+  //初始化连接池
+  static {
+    resize(10); //就构建一个长度10的连接池
+  }
+  private static void resize(int number){
+    for (int i = 0; i &lt; number; i++) {
+      try {
+        //真正类型是JDBC4Connection
+        Connection connection = JdbcUtil.getConnection();
+        pool.add(connection);
+      } catch (IOException e) {
+        e.printStackTrace();
+      } catch (ClassNotFoundException e) {
+        e.printStackTrace();
+      } catch (SQLException e) {
+        e.printStackTrace();
+      }
+    }
+  }
+  public static Connection getConnection(){
+    if(pool.size() &lt; 4) {
+      resize(6);
+    }
+    return pool.remove(0);
+  }
+  //回收Connection
+  public static void returnConnection(Connection connection){
+    pool.add(connection);
+  }
+}
+</code></pre><p><strong>出现的问题</strong><br>第一个数据库连接池存在的问题：没有符合规范。每家的数据库连接池可能API名称都不同，同时也许有的可以直接通过静态方法调用，有的不能够直接调用，这个时候还是需要去查阅相应的开发文档，使用起来不是很方便，如果有一个规范来约束每个API名称应该是什么，这个时候，在使用各个开源数据库连接池产品时，可以直接调用接口的方法即可。<br>Sun公司定义了一个<strong>DataSource</strong>接口，用以规范数据库连接池相关的API。<br>解决办法就是实现DataSource接口，实现规范！！！让大家用同一种规范来重写方法</p>
+<h2 id="重写连接池"><a href="#重写连接池" class="headerlink" title="重写连接池"></a>重写连接池</h2><pre><code>//MyDataSource
+public class MyDataSource implements DataScoure {
+  private static List&lt;Connection&gt; pool = new LinkedList&lt;&gt;();
+  static {
+      resize(10);
+  }
+  private static void resize(int number){
+    for (int i = 0; i &lt; number; i++) {
+      try {
+        //真正类型是JDBC4Connection
+        Connection connection = JdbcUtil.getConnection();
+
+        //接下来将JDBC4Connection对象作为参数传入到connectionWrapper中
+        ConnectionWrapper connectionWrapper = new ConnectionWrapper(connection,pool);
+
+        //pool.add(connection);
+        pool.add(connectionWrapper);
+      } catch (IOException e) {
+        e.printStackTrace();
+      } catch (ClassNotFoundException e) {
+        e.printStackTrace();
+      } catch (SQLException e) {
+        e.printStackTrace();
+      }
+    }
+  }
+  @Override 重写方法
+  public Connection getConnection() throws SQLException {
+      if(pool.size() &lt; 4){
+          resize(6);
+      }
+      return pool.remove(0);
+  }
+
+  //这个方法并没有被重写
+  //public  void returnConnection(Connection connection){
+    public void close(Connection connection) {
+      pool.add(connection);
+    }
+  }
+}
+</code></pre><p>实现了DataSource接口之后，发现接口中没有定义returnConnection的API，同时还有一点，我们自己实现的DataSoure肯定希望别人能够使用，作为一个第三方jar包。无法阻止其他人主动去调用connection.close方法。再次放入连接池，该连接池就没有任何意义了。我们应该想一个办法重写close()方法：<br><strong>当调用connection.close方法时，不是关闭连接，而是将连接返回到连接池中。</strong><br>所以，这里我们发现resize方法有一些不同，add的是一个ConnectionWrapper，而不是第一次写的Connection。给Connection了一个包装类，这样就能阻止用户直接调用Connection自身的close()方法结束链接，而是调用我们包装类的close()。把数据连接放回到连接池。连接池里面放的就是我们的包装类，而不是Connection的本身实现的子类JDBC4Connection;</p>
+<pre><code>public class ConnectionWrapper implements Connection {
+  private Connection connectin;
+  private List&lt;Connection&gt; pool;
+
+  //通过构造函数传进来一个会写这些方法的connection过来，然后完成这些方法
+
+  public ConnectionWrapper(Connection connection, List&lt;Connection&gt; pool) {
+      this.connection = connection;
+      this.pool = pool;
+  }
+  ...
+  ...
+  ...
+  //需要将这个方法重写，不是真正关闭连接，而是返回连接池
+  @Override
+  public void close() throws SQLException {
+      //connection.close();
+      pool.add(this);
+  }
+}
+</code></pre><p>虽然我们实现了dataSource接口的规范，但是自己写的工具类还是有一些问题的：</p>
+<pre><code>1.很多API没有实现
+2.没有扩容机制
+3.也没有回收连接机制，存在连接池中也是一种资源浪费
+</code></pre><p>更多的还是理解写包装类的作用。就是为了数据连接池能复用连接。</p>
+<h3 id="第三方开源的数据库连接池"><a href="#第三方开源的数据库连接池" class="headerlink" title="第三方开源的数据库连接池"></a>第三方开源的数据库连接池</h3><p><strong>友情提示：</strong>这三个数据库的连接池还是需要用：<strong>mysql-connection.jar</strong>的并不是说不用了。这里一定要注意</p>
+<h3 id="DBCP"><a href="#DBCP" class="headerlink" title="DBCP"></a>DBCP</h3><p>原理就是上面自己写的connectionpool，就是来使用：</p>
+<pre><code>首先要加载三个包：
+commons-dbcp2-2.5.0.jar
+commons-logging-1.2.jar
+commons-pool2-2.6.0.jar
+</code></pre><p>//test</p>
+<pre><code>public class DbcpTest {
+  public static void main(String[] args) {
+    Connection connection = null;
+    PreparedStatement preparedStatement = null;
+    ResultSet resultSet = null;
+    try {
+      connection = DBCPUtils.getConnection();
+      preparedStatement = connection.prepareStatement(&quot;select * from account&quot;);
+      resultSet = preparedStatement.executeQuery();
+      resultSet.next();
+      String name = resultSet.getString(&quot;name&quot;);
+      System.out.println(name);
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }finally {
+      try {
+          //就把connction 放回连接池并不是关闭
+          connection.close();
+          if(preparedStatement != null){
+              preparedStatement.close();
+          }
+          if(resultSet != null){
+              resultSet.close();
+          }
+      }catch (Exception e){
+          e.printStackTrace();
+      }
+    }
+  }
+}
+</code></pre><p>//代替之前的JdbcUtil工具类<br>DBCPUtils.java</p>
+<pre><code>public class DBCPUtil {
+  private static DataSource dataSource;
+  static {
+    BasicDataSourceFactory factory = new BasicDataSourceFactory();
+    Properties properties = new Properties)();
+    try{
+      //以前读取配置文件是这样的：
+      properties.load(new FileInputStream(&quot;dbcpconfig.properties&quot;));
+      //现在可以这样
+      InputStream resourceAsStream = DBCPUtil.class.getClassLoader().getResourceAsStream(&quot;dbcpconfig.properties&quot;);
+      properties.load(resourceAdStream);
+      //创建连接池
+      dataSource = factory.createDataSource(properties);
+    } catch (IOException e) {
+      e.printStackTrace();
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+  }
+  public static Connection getConnection() throws SQLException {
+      //调用DBCP重写的dataSource子类的getConnection();
+      return dataSource.getConnection();
+  }
+}
+</code></pre><p><strong>注意事项：</strong><br>1.两种配置文件写法的不不同点</p>
+<pre><code>第一种写法，相对路径默认是相对于整个项目的相对路径，需要自己去配置edit configuration。
+第二种写法，相对路径相对于src文件。不需要自己在配置。可以直接读得到。这个文件最终会被IDEA带到out文件夹里面
+</code></pre><h3 id="C3P0"><a href="#C3P0" class="headerlink" title="C3P0"></a>C3P0</h3><p>配置文件必须放到src目录下，且配置文件的名称必须为c3p0-config.xml</p>
+<p>需要导入包：</p>
+<pre><code>c3p0-0.9.1.2.jar
+public class C3p0Test {
+  public static void main(String[] args) {
+    Connection connection = null;
+    PreparedStatement preparedStatement = null;
+    ResultSet resultSet = null;
+    try {
+        connection = C3p0Utils.getConnection();
+        preparedStatement = connection.prepareStatement(&quot;select * from account&quot;);
+        resultSet = preparedStatement.executeQuery();
+        resultSet.next();
+        String name = resultSet.getString(&quot;name&quot;);
+        System.out.println(name);
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }finally {
+        try {
+            connection.close();
+            if(preparedStatement != null){
+                preparedStatement.close();
+            }
+            if(resultSet != null){
+                resultSet.close();
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+  }
+}
+</code></pre><p>//C3p0Utils</p>
+<pre><code>public class C3p0Utils {
+  private static ComboPooledDataSource dataSource;
+  static {
+    dataSource = new ComboPooledDataSource(&quot;dev&quot;);
+  }
+  public static Connection getConnection() throws SQLException {
+      return dataSource.getConnection();
+  }
+}
+</code></pre><p>//c3p0-config.xml</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;c3p0-config&gt;
+  &lt;default-config&gt;
+    &lt;property name=&quot;user&quot;&gt;root&lt;/property&gt;
+    &lt;property name=&quot;password&quot;&gt;123456&lt;/property&gt;
+    &lt;property name=&quot;driverClass&quot;&gt;com.mysql.jdbc.Driver&lt;/property&gt;
+    &lt;property name=&quot;jdbcUrl&quot;&gt;jdbc:mysql://localhost:3306/bank?characterEncoding=utf8&lt;/property&gt;
+    &lt;property name=&quot;checkoutTimeout&quot;&gt;30000&lt;/property&gt;
+    &lt;property name=&quot;idleConnectionTestPeriod&quot;&gt;30&lt;/property&gt;
+    &lt;property name=&quot;initialPoolSize&quot;&gt;10&lt;/property&gt;
+    &lt;property name=&quot;maxIdleTime&quot;&gt;30&lt;/property&gt;
+    &lt;property name=&quot;maxPoolSize&quot;&gt;100&lt;/property&gt;
+    &lt;property name=&quot;minPoolSize&quot;&gt;10&lt;/property&gt;
+    &lt;property name=&quot;maxStatements&quot;&gt;200&lt;/property&gt;
+  &lt;/default-config&gt;
+
+  &lt;named-config name=&quot;dev&quot;&gt;
+    &lt;property name=&quot;user&quot;&gt;root&lt;/property&gt;
+    &lt;property name=&quot;password&quot;&gt;123456&lt;/property&gt;
+    &lt;property name=&quot;driverClass&quot;&gt;com.mysql.jdbc.Driver&lt;/property&gt;
+    &lt;property name=&quot;jdbcUrl&quot;&gt;jdbc:mysql://localhost:3306/bank?serverTimezone=GMT&lt;/property&gt;
+    &lt;property name=&quot;checkoutTimeout&quot;&gt;30000&lt;/property&gt;
+    &lt;property name=&quot;idleConnectionTestPeriod&quot;&gt;30&lt;/property&gt;
+    &lt;property name=&quot;initialPoolSize&quot;&gt;10&lt;/property&gt;
+    &lt;property name=&quot;maxIdleTime&quot;&gt;30&lt;/property&gt;
+    &lt;property name=&quot;maxPoolSize&quot;&gt;100&lt;/property&gt;
+    &lt;property name=&quot;minPoolSize&quot;&gt;10&lt;/property&gt;
+    &lt;property name=&quot;maxStatements&quot;&gt;200&lt;/property&gt;
+  &lt;/named-config&gt;
+
+&lt;/c3p0-config&gt;
+</code></pre><p>我们看到C3P0Util里面只有一两句话，这主要是因为他把需要用的参数都抽离出来成配置文件了。只需要时设置一下使用哪个标签</p>
+<pre><code>默认是&lt;c3p0-config&gt;
+dataSource = new ComboPooledDataSource(); //默认会调用标签：&lt;c3p0-config&gt;里的配置
+dataSource = new ComboPooledDataSource(&quot;dev&quot;);//调用标签dev：&lt;named-config name=&quot;dev&quot;&gt;的配置
+</code></pre><h3 id="Druid-德鲁伊"><a href="#Druid-德鲁伊" class="headerlink" title="Druid(德鲁伊)"></a>Druid(德鲁伊)</h3><p>导包：</p>
+<pre><code>druid-1.1.10.jar
+</code></pre><p>//测试</p>
+<pre><code>public class DruidTest {
+  public static void main(String[] args) {
+    Connection connection = null;
+    PreparedStatement preparedStatement = null;
+    ResultSet resultSet = null;
+    try {
+      connection = DruidUtils.getConnection();
+      preparedStatement = connection.prepareStatement(&quot;select * from account&quot;);
+      resultSet = preparedStatement.executeQuery();
+      resultSet.next();
+      String name = resultSet.getString(&quot;name&quot;);
+      System.out.println(name);
+    } catch (SQLException e) {
+        e.printStackTrace();
+    } finally {
+      try {
+          connection.close();
+          if(preparedStatement != null){
+              preparedStatement.close();
+          }
+          if(resultSet != null){
+              resultSet.close();
+          }
+      }catch (Exception e){
+          e.printStackTrace();
+      }
+    }
+  }
+}
+</code></pre><p>DruidUtil.java</p>
+<pre><code>public class DruidUtil {
+  private static DataSource dataSource;
+  static {
+    InputStream resourceAsStream = DruidUtils.clas.getClassLoader().getResourceAsStream(&quot;druid.properties&quot;);
+    Properties properties = new Properties();
+    try {
+      properties.load(resourceAsStream);
+      dataSorce = new DruidDataSourceFactory().createDataSource(properties);
+    } catch (IOException e) {
+      e.printStackTrace();
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+  }
+
+  public static Connection getConnection() throws SQLException {
+    return dataSource.getConnection();
+  }
+}
+</code></pre><p><strong>小结</strong><br>三种connectionPool 第三种最常用，阿里自己的连接池，光平简单的操作。看不出来他们之间的差异，第一种和第三种感觉写法是很类似的。使用了工厂类来创建dataSource，第二种方法全部给你搞好了。只需要自己创建，连配置文件都给你弄好了。三种写法再总结一下创建连接池dataSource：<br>DBCP：</p>
+<pre><code>private static DataSource dataSource;
+dataSource = new BasicDataSourceFactory().createDataSource(properties);
+</code></pre><p>C3P0</p>
+<pre><code>private static ComboPooledDataSource dataSource;
+dataSource = new ComboPooledDataSource(&quot;dev&quot;);
+</code></pre><p>Druid<br>    private static DataSource dataSource;<br>    dataSorce = new DruidDataSourceFactory().createDataSource(properties);</p>
+<h2 id="Dbutils"><a href="#Dbutils" class="headerlink" title="Dbutils"></a>Dbutils</h2><p>Commons DbUtils是Apache组织提供的一个对JDBC进行简单封装的开源工具类库，使用它能够简化JDBC应用程序的开发，同时也不会影响程序的性能。(百度百科)</p>
+<p>DbUtils is a very small library of classes so it won’t take long to go through the javadocs for each class. The core classes/interfaces in DbUtils are <strong>QueryRunner</strong> and <strong>ResultSetHandler</strong>. You don’t need to know about any other DbUtils classes to benefit from using the library. The following example demonstrates how these classes are used together.（apache官方的介绍）</p>
+<p>导包</p>
+<pre><code>mysql-connector-java-5.1.17.jar (还是需要这个包的)
+commons-dbutils-1.4.jar
+</code></pre><h3 id="QueryRunner"><a href="#QueryRunner" class="headerlink" title="QueryRunner"></a>QueryRunner</h3><p>构造函数有带datasource和无参两种。<br>所有的API也都有带Connection参数和无Connection参数两种。<br>如果使用的是无Connection参数的API，则必须提供一个datasource，这样DBUtil才知道你用的是哪个connection</p>
+<p>构造函数：</p>
+<pre><code>QueryRunner()
+          Constructor for QueryRunner.
+QueryRunner(DataSource ds)
+    Constructor for QueryRunner which takes a DataSource.
+</code></pre><p>看例子</p>
+<pre><code>public class QueryRunnerTest {
+  public static void main(String[] args) {
+    QueryRunner runner = new QueryRunner(DruidUtils.getDataSource());
+    //如果构造函数使用的是带datasource的，则query方法用不带connection的
+    try {
+      Account account = (Account) runner.query(&quot;select * from account&quot;, new ResultSetHandler&lt;Object&gt;() {
+        @Override
+        public Object handle(ResultSet resultSet) throws SQLException {
+          //应该怎么写呢？？？ ---&gt;这里应该是runner.query返回的对象
+          //这是自己写的ResultSetHandler，但是这TM肯定是错误的用法
+          resultSet.next();
+          int id = resultSet.getInt(&quot;id&quot;);
+          String name = resultSet.getString(&quot;name&quot;);
+          double money = resultSet.getDouble(&quot;money&quot;);
+          Account account = new Account();
+          account.setUid(id);
+          account.setName(name);
+          account.setMoney(money);
+          //这里面return的东西将作为整个query函数的返回值
+          return account;
+        }
+      });
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+  }
+}
+</code></pre><p>我们看到里面QueryRunner 有个方法query</p>
+<pre><code>query(Connection conn, String sql, ResultSetHandler&lt;T&gt; rsh)
+  Execute an SQL SELECT query without any replacement parameters.
+</code></pre><p>ResultSetHandler是什么？</p>
+<h3 id="ResultSetHandler"><a href="#ResultSetHandler" class="headerlink" title="ResultSetHandler"></a>ResultSetHandler</h3><p>Interface ResultSetHandler<t><br>Type Parameters:<br>    T - the target type the input ResultSet will be converted to.</t></p>
+<p>All Known Implementing Classes:</p>
+<pre><code>AbstractKeyedHandler, AbstractListHandler, ArrayHandler, ArrayListHandler, BeanHandler, BeanListHandler, ColumnListHandler, KeyedHandler, MapHandler, MapListHandler, ScalarHandler
+</code></pre><p>方法：</p>
+<pre><code>handle(ResultSet rs)
+Turn the ResultSet into an Object.
+</code></pre><p>上面那些已知的子类肯定是已经重写好ResultSet方法了，不需要我们再写了；直接用即可<br>例如</p>
+<pre><code>QueryRunner qr = new QueryRunner(DruidUtil.getDataSource());给他一个dataSource就不用我们自己设置了
+List&lt;Emp&gt; list = qr.query(sql,new BeanListHandler&lt;Emp&gt;(Emp.class));//获取得到查询的结果包装成bean集合，需要自己先创建一个bean类，然后他会自己去找对应的setXX方法，
+</code></pre><p><strong>注意1</strong>这里的setXX()方法的XX 必须和数据库的字段一样，要不然找不到。可以和类里的成员变量不一样。但是必须和数据库的字段名一样<br>例如：(如果mysql保存的字段是id)</p>
+<pre><code>emp.java
+void setId(int cid){
+  this.cid = cid; //成功，因为setXX和数据库中的一致
+}
+void setCid(int cid){
+  this.cid = cid; //失败这就找不到
+}
+</code></pre><p><strong>注意2</strong><br>我们建议在创建 QueryRunner 时候还是给一个dataSource 给他构造，这样DButil会帮我们关掉connection 要不然要我们自己需要关，当使用事务的时候，我们就需要自己设置connection的setAutoCommit,commit,rollback等等，就需要我们自己去创建一个connection了</p>
+<p>我们去QueryRunner源码看看就知道了：假设就看query方法：<br>//我们已经写了dataSorce不带connection写法：</p>
+<pre><code>public &lt;T&gt; T query(String sql, ResultSetHandler&lt;T&gt; rsh) throws SQLException {
+    Connection conn = this.prepareConnection(); //自动给我从dataSource里面取出连接
+    return this.query(conn, true, sql, rsh, (Object[])null);
+}
+</code></pre><p>//没有写dataSorce自己写了一个getConnection()获得一个connection传进去</p>
+<pre><code>public &lt;T&gt; T query(Connection conn, String sql, ResultSetHandler&lt;T&gt; rsh) throws SQLException {
+    return this.query(conn, false, sql, rsh, (Object[])null);
+}
+</code></pre><p>我们发现最终调用了：</p>
+<pre><code>private &lt;T&gt; T query(Connection conn, boolean closeConn, String sql, ResultSetHandler&lt;T&gt; rsh, Object... params) throws SQLException {
+</code></pre><p>如果我们自己没有传connection,他会自己去找dataSorce里面拿一个connection,看prepareConnection()方法</p>
+<pre><code>protected Connection prepareConnection() throws SQLException {
+    if (this.getDataSource() == null) {
+        throw new SQLException(&quot;QueryRunner requires a DataSource to be invoked in this way, or a Connection should be passed in&quot;);
+    } else {
+        return this.getDataSource().getConnection(); //他自己去用我们传的dataSorce里面去拿一个
+    }
+}
+</code></pre><p>而query方法里这里有一个布尔值的参数： <strong>closeCon</strong>，这个标签就控制了是否会帮我们关闭connection连接,当我们没有传connection是true,当我们传connection时候是false;</p>
+<p>一起来解析一下这个函数：</p>
+<pre><code>private &lt;T&gt; T query(Connection conn, boolean closeConn, String sql, ResultSetHandler&lt;T&gt; rsh, Object... params) throws SQLException {
+    //如果连接是conn
+    if (conn == null) {
+        throw new SQLException(&quot;Null connection&quot;);
+        //如果sql语句是null
+    } else if (sql == null) {
+        if (closeConn) {
+            this.close(conn);
+        }
+        throw new SQLException(&quot;Null SQL statement&quot;);
+        //如果resultSetHandler是null就关闭
+    } else if (rsh == null) {
+        if (closeConn) {
+            this.close(conn);
+        }
+        throw new SQLException(&quot;Null ResultSetHandler&quot;);
+
+    //这里才开始判断
+    } else {
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        Object result = null;
+        try {
+            stmt = this.prepareStatement(conn, sql);
+            this.fillStatement(stmt, params);  //就是我们的setXX(index,value)那个方法
+            rs = this.wrap(stmt.executeQuery()); //这一步啥也没干
+            result = rsh.handle(rs);
+        } catch (SQLException var33) {
+            this.rethrow(var33, sql, params);
+        } finally {
+            try {
+                //关闭resultSet
+                this.close(rs);
+            } finally {
+                //关闭statement
+                this.close(stmt);
+                //如果设置了closeConn为true则把他放会到池子里
+                if (closeConn) {
+                    this.close(conn);
+                }
+            }
+        }
+        return result;
+    }
+}
+</code></pre><h3 id="单元测试"><a href="#单元测试" class="headerlink" title="单元测试"></a>单元测试</h3><p>//junit单元测试<br>//如何做到的?  反射调用某个方法<br>//rsh内部通过反射然后调用相应类的set方法，将数据库的相应字段的值赋给对应的成员变量<br>//javabena中的某个成员变量的名称可以不与表中的列名保持一致，但是相应的set方法一定要一致<br>在方法上面写：    @Test<br>就会运行这个方法，<br>但是要记得先导入java.junit.Test;例如测试一下ResultSetHandler的 子类beanListHandler就可以这样写：</p>
+<pre><code>@Test
+public void test1(){
+    QueryRunner runner = new QueryRunner(DruidUtil.getDataSource());
+    try {
+        List&lt;Dept&gt; list = runner.query(&quot;select * from Dept where id &gt; ?&quot;, new BeanListHandler&lt;Dept&gt;(Dept.class),2);
+        for (Dept Dept : list) {
+            System.out.println(Dept);
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+}
+</code></pre><p>后面几天都是在讲前端的东西，但是讲的不好，我自己总结了，但是很多东西都忘记。所以等我整理出来在发前端的知识吧</p>
+<h2 id="星期三（8-7）"><a href="#星期三（8-7）" class="headerlink" title="星期三（8.7）"></a>星期三（8.7）</h2><h2 id="星期四（8-8）"><a href="#星期四（8-8）" class="headerlink" title="星期四（8.8）"></a>星期四（8.8）</h2><h2 id="星期五（8-9）"><a href="#星期五（8-9）" class="headerlink" title="星期五（8.9）"></a>星期五（8.9）</h2><h2 id="星期六（8-10）"><a href="#星期六（8-10）" class="headerlink" title="星期六（8.10）"></a>星期六（8.10）</h2>
+        </div>
+        <div class="post-reply">
+            
+                <!-- 来必力City版安装代码 -->
+                <div id="lv-container" data-id="city" data-uid="MTAyMC8yOTE4Ni81NzUz">
+                    <script type="text/javascript">
+                        (function(d, s) {
+                            var j, e = d.getElementsByTagName(s)[0];
+
+                            if (typeof LivereTower === 'function') { return; }
+
+                            j = d.createElement(s);
+                            j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+                            j.async = true;
+
+                            e.parentNode.insertBefore(j, e);
+                        })(document, 'script');
+                    </script>
+                    <noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+                </div>
+                <!-- City版安装代码已完成 -->
+            
+            
+        </div>
+    </div>
+</section>
+<script>
+    // 获取第一张图, 用以当封面背景图
+    var img = document.querySelectorAll('img')[1]
+
+    if (img) {
+        var header_box = document.querySelector('#header_box')
+        header_box.style.backgroundImage = 'url('+ img.src +')'
+    }
+</script>
+      </div>
+  </div>
+  <style>
+  #footer {
+    min-height: 10vh;
+    background: black;
+    color: #fff;
+  }
+
+  #footer a {
+    color: #e1e1e1;
+  }
+</style>
+<footer id="footer" class="has-text-centered is-flex center">
+  <div class="container has-padding">
+    <div>
+      <div>
+        <!--请您保留作者署名, 主题制作来之不易-->
+        主题来自 <a href="http://haojen.github.io/">Haojen Ma</a>
+        <br>
+        Copyright © 王邸 2019
+        <!--
+          Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+        -->
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="/js/search_core.js"></script>
+<script src="/js/script.js"></script>
+
+</body>
+</html>

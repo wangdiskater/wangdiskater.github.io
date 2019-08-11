@@ -14,7 +14,7 @@
 <meta property="og:url" content="http://yoursite.com/2019/06/30/Java总结（一）/index.html">
 <meta property="og:site_name" content="路要坚持">
 <meta property="og:description" content="1.把第三章的客户题写完了；放在第一行代码HomeWork中2.总结本周学习的内容： 前言我发现之前还有一部分的基础知识还没有中总结，直到复习的时候才发现。已经过去一个月了。但是前面的知识还是很重要的，所以，把所有的JAVASE的知识点补充完整很重要。今天还要考试，加油吧！ 预备知识标识符：概述：就是给类,接口,方法,变量等起名字时使用的字符序列组成规则： 英文大小写字母 数字 $和_ 注意事项：">
-<meta property="og:updated_time" content="2019-08-01T05:58:56.978Z">
+<meta property="og:updated_time" content="2019-08-07T02:15:18.753Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java总结（一）">
 <meta name="twitter:description" content="1.把第三章的客户题写完了；放在第一行代码HomeWork中2.总结本周学习的内容： 前言我发现之前还有一部分的基础知识还没有中总结，直到复习的时候才发现。已经过去一个月了。但是前面的知识还是很重要的，所以，把所有的JAVASE的知识点补充完整很重要。今天还要考试，加油吧！ 预备知识标识符：概述：就是给类,接口,方法,变量等起名字时使用的字符序列组成规则： 英文大小写字母 数字 $和_ 注意事项：">
@@ -160,7 +160,7 @@ $和_
 <pre><code>不能以数字开头
 不能是java中的关键字
 区分大小写
-</code></pre><p>命名规范：见名知义<br>  包：(其实就是文件夹,用于解决相同类名问题)<br>    单级包: 全部小写</p>
+</code></pre><h3 id="命名规范：见名知义（非常重要）"><a href="#命名规范：见名知义（非常重要）" class="headerlink" title="命名规范：见名知义（非常重要）"></a>命名规范：见名知义（非常重要）</h3><p>  包：(其实就是文件夹,用于解决相同类名问题)<br>    单级包: 全部小写</p>
 <pre><code>henson
 </code></pre><p>  多级包：单词全部小写, 域名反转,单词之间以.分隔</p>
 <pre><code>cskaoyan.com --&gt; com.cskaoyan
@@ -184,7 +184,6 @@ $和_
 字符常量： &apos;A&apos;, &apos;0&apos;, &apos;中&apos;
 布尔常量： true, false
 空常量： null
-
 自定义常量(final)
 </code></pre><h3 id="整数常量的四种表现形式"><a href="#整数常量的四种表现形式" class="headerlink" title="整数常量的四种表现形式"></a>整数常量的四种表现形式</h3><pre><code>二进制：0b100
 八进制: 0100
@@ -284,7 +283,7 @@ $和_
 <pre><code>char占用两个字节，在Java中char采用是Unicode编码。
 在Java中不能用0表示false, 非0表示true。
 整数字面值常量默认是int类型，如果要表示long类型的整数，后面要加l或L, 最好使用大写L.
-浮点数字面值常量默认是double类型。如果要表示float类型，后面要加f或F.
+浮点数字面值常量默认是double类型。如果要表示float类型，后面要加f或F，double类型后面可以加d表示double类型例如:4.0d;
 </code></pre><p>看例子：</p>
 <pre><code>/*
 猜测答案：66666
@@ -430,7 +429,7 @@ b = 4 + (++a) = 4 + 6 = 10 (a = 6)
 b = 10 + a* 10 = 70
 </code></pre><p>问题二</p>
 <pre><code>    int i = 12;
-    System.out.println(i+=i-=i*=i) ;
+    System.out.println(i+=i-=i*=i) ; //-120
 
     //先写成：
     i = i + i
@@ -449,8 +448,7 @@ b = 10 + a* 10 = 70
     a = a++;
     a = a++;
     a = a++;
-    a = a++;// 3
-
+    a = a++;  // 3
     // a = ++a;
     // a = ++a;
     // a = ++a;
@@ -458,9 +456,8 @@ b = 10 + a* 10 = 70
     System.out.println(a);
   }
 }
-
-
-int b = a++;
+</code></pre><p>问题三解释：</p>
+<pre><code>int b = a++;
   int temp = a;
   a = a + 1;
   b = temp;
@@ -472,7 +469,7 @@ a = a++
 int b = ++a;
   a = a + 1;
   b = a;
-</code></pre><h2 id="星期一"><a href="#星期一" class="headerlink" title="星期一"></a>星期一</h2><h3 id="赋值运算符："><a href="#赋值运算符：" class="headerlink" title="赋值运算符："></a>赋值运算符：</h3><p>基本运算符 =<br>拓展赋值运算符： += -= 等<br>a=b=10<br>1.赋值表达式是有值的<br>  a+b<br>  b=10; //它的值等于赋值运算符右边表达式的值；<br>2.赋值运算符从右向左结合的； 但是算数运算符是从左到右结合的；<br>  a += 20; –&gt; a = a + 20;  不能写a = 20 + a;<br>  左边一定要放在左边；a -= b –&gt; a = a-b; 只改变a的值；</p>
+</code></pre><h2 id="星期一"><a href="#星期一" class="headerlink" title="星期一"></a>星期一</h2><h3 id="赋值运算符："><a href="#赋值运算符：" class="headerlink" title="赋值运算符："></a>赋值运算符：</h3><p>基本运算符 =<br>拓展赋值运算符： += -= 等<br>a = b = 10<br>1.赋值表达式是有值的<br>  a + b<br>  b = 10; //它的值等于赋值运算符右边表达式的值；<br>2.赋值运算符从右向左结合的； 但是算数运算符是从左到右结合的；<br>  a += 20; –&gt; a = a + 20;  不能写a = 20 + a;<br>  左边一定要放在左边；a -= b –&gt; a = a-b; 只改变a的值；</p>
 <p>注意事项：<br>    扩展的赋值运算符隐含了强制类型转换；<br>    btye b1 = 10;<br>    btye b2 = 20;<br>    <strong>b1 = b1 + b2;  //会报错，运算换变成int进行计算，再赋值回给byte肯定不行</strong><br>    b1 += b2;  –&gt;（byte）(b1+b2);//不会报错；<br>    System.out.println(b1); //不会报错</p>
 <h3 id="关系运算符："><a href="#关系运算符：" class="headerlink" title="关系运算符："></a>关系运算符：</h3><pre><code>== ！= &lt; &gt; &lt;= &gt;= instanceof
 </code></pre><p>注意事项：</p>
@@ -489,8 +486,10 @@ int b = ++a;
 <p>一些用位运算题目：</p>
 <h4 id="1-对2的n次幂取余-都可以转成位运算"><a href="#1-对2的n次幂取余-都可以转成位运算" class="headerlink" title="1.对2的n次幂取余 都可以转成位运算"></a>1.对2的n次幂取余 都可以转成位运算</h4><p>a % 64 == a &amp;（2^n-1）;<br>2^n:<br>    1101 1101<br>%<br>    0100 0000</p>
 <p>可以转换成：<br>    1101 1101<br>&amp;<br>    0011 1111</p>
-<p>应用1：判断一个数是奇数还是偶数<br>a &amp; 1 = 1 -&gt; 奇数<br>a &amp; 1 = 0 -&gt; 偶数</p>
-<p>应用2：在hashMap的数组中，在求index时候就会求余数的操作。而且hashMap的数组长度是2^n就是为了方便取余数。使用的就是这里的方法；</p>
+<p>应用1：判断一个数是奇数还是偶数</p>
+<pre><code>a &amp; 1 = 1 -&gt; 奇数
+a &amp; 1 = 0 -&gt; 偶数
+</code></pre><p>应用2：在hashMap的数组中，在求index时候就会求余数的操作。而且hashMap的数组长度是2^n就是为了方便取余数。使用的就是这里的方法；</p>
 <h4 id="2-判断一个数是否是2的n次幂？"><a href="#2-判断一个数是否是2的n次幂？" class="headerlink" title="2.判断一个数是否是2的n次幂？"></a>2.判断一个数是否是2的n次幂？</h4><p>  2^n :因子都是2；<br>  时间复杂度：log n;</p>
 <p>能否在常量时间复杂度内，判断一个数是否是2^n;<br>  2^n的存储特点：只有一个1 ，后面全部0；<br>  a &amp; (a-1) == 0;</p>
 <p>  0100 0000<br>&amp; 0011 1111<br>  0000 0000</p>
@@ -500,14 +499,11 @@ int b = ++a;
 <p>因为a^a = 0<br>0 ^ 任何数 = 任何数 所以能直接找出单独的数。<br>但是这里有个问题，如果a = 0能否找出?<br>如果最后的结果是0是有两种答案：<br>1）没有单独的数<br>2）单独的数就是0</p>
 <p>&lt;&lt; 左移： 低位补0 高位丢失<br>&gt;&gt; 右移： 高位补符号位 低位丢弃<br>&gt;&gt;&gt;无符号右移：高位补0 低位丢弃</p>
 <p>注意事项：<br>    左移：左移N个单位，相当乘以2^n;<br>    右移：右移n个单位，相当于除以2^n;<br>    对于移位运算符来说，当操作数超出字长时；实际移动n mod 字长<br>    int a = 64<br>    a&gt;&gt; 32 = a</p>
-<h2 id="星期二"><a href="#星期二" class="headerlink" title="星期二"></a>星期二</h2><h3 id="switch"><a href="#switch" class="headerlink" title="switch"></a>switch</h3><p>  switch表示这是switch语句<br>  表达式的取值：byte, short, int, char<br>    JDK5以后可以是：枚举<br>    JDK7以后可以是：String<br>  case后面跟的是要和表达式进行比较的值<br>  语句体部分可以是一条或多条语句<br>  break表示中断，结束的意思，可以结束switch语句<br>  default语句表示所有情况都不匹配的时候，就执行该处的内容，和if语句的else相似。</p>
+<h2 id="星期二"><a href="#星期二" class="headerlink" title="星期二"></a>星期二</h2><h3 id="switch"><a href="#switch" class="headerlink" title="switch"></a>switch</h3><p>  switch表示这是switch语句<br>  表达式的取值：byte, short, int, char<br>  JDK5以后可以是：枚举<br>  JDK7以后可以是：String<br>  case后面跟的是要和表达式进行比较的值<br>  语句体部分可以是一条或多条语句<br>  break表示中断，结束的意思，可以结束switch语句<br>  default语句表示所有情况都不匹配的时候，就执行该处的内容，和if语句的else相似。</p>
 <p>注意事项:<br>  a. case后面只能是常量，不能是变量，而且，多个case后面的值不能出现相同的<br>  b. default可以省略吗?<br>    可以省略。一般不建议。除非判断的值是固定的。(单选题)<br>  c. break可以省略吗?<br>    可以省略，一般不建议。否则结果可能不是你想要的 (case穿越)<br>  d. default的位置一定要在最后吗?<br>    可以出现在switch语句任意位置。<br>  e. switch语句的结束条件<br>    遇到break<br>    执行到程序的末尾</p>
 <p>使用场景<br>  a. if语句是通用的。<br>  b. case只有几种常量的情况, 对于常量还有一些限制。(比较单一)<br>    byte, short, int, char, enum, String</p>
 <h3 id="循环语句"><a href="#循环语句" class="headerlink" title="循环语句"></a>循环语句</h3><p>死循环,注意下面这个例子</p>
 <pre><code>for(int i = Integer.MAX_VALUE - 10; i &lt;= Integer.MAX_VALUE; i++) {
-  System.out.println(&quot;我爱刘亦菲!&quot;);
-}
-for(int i = Integer.MAX_VALUE - 10; i &lt;= Integer.MAX_VALUE; i++) {
   System.out.println(&quot;我爱刘亦菲!&quot;);
 }
 </code></pre><p><strong>上面这个for循环会一直出不了。因为整数最大值加到最大，就变成了最小值。然后再加上来，又循环</strong></p>
@@ -713,7 +709,7 @@ class RecursionDemo7 {
 </code></pre><h2 id="星期五"><a href="#星期五" class="headerlink" title="星期五"></a>星期五</h2><h3 id="面向对象部分"><a href="#面向对象部分" class="headerlink" title="面向对象部分"></a>面向对象部分</h3><p>变量<br>成员变量和局部变量的区别<br>  a.在内存中位置不同</p>
 <pre><code>局部变量: 栈
 成员变量：堆
-</code></pre><p>  b.初始化值不同</p>
+</code></pre><p>  b.初始化值不同(局部变量必须初始化)</p>
 <pre><code>局部变量: 没有默认值, 没有初始化，就不能使用。
 成员变量：有默认值。
   byte, short, int, long  0

@@ -14,7 +14,7 @@
 <meta property="og:url" content="http://yoursite.com/2019/08/04/Java总结（六）下/index.html">
 <meta property="og:site_name" content="路要坚持">
 <meta property="og:description" content="从今天开始JAVAEE，冲啊，一开始先学习数据库，然后再学习JDBC，前端的东西，然后就可以下一个阶段了。任重而道远加油吧 星期四(8.01)MYSQL学习总结指令的编写： 登录本机mysql: mysql -u 用户名 -p 输入密码。默认的root; 注意：请正确认识 “SQL 不区分大小写“ 组成： DDL：数据定义语言 DML：数据操作语言 DQL： 数据查询语言 DCL： 数据控制语言">
-<meta property="og:updated_time" content="2019-08-05T15:48:53.917Z">
+<meta property="og:updated_time" content="2019-08-09T03:43:45.536Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java总结（六）下">
 <meta name="twitter:description" content="从今天开始JAVAEE，冲啊，一开始先学习数据库，然后再学习JDBC，前端的东西，然后就可以下一个阶段了。任重而道远加油吧 星期四(8.01)MYSQL学习总结指令的编写： 登录本机mysql: mysql -u 用户名 -p 输入密码。默认的root; 注意：请正确认识 “SQL 不区分大小写“ 组成： DDL：数据定义语言 DML：数据操作语言 DQL： 数据查询语言 DCL： 数据控制语言">
@@ -311,6 +311,7 @@ WHERE &lt;filter_condition&gt;;
 <p>=          |大于等于       | &gt;          |  大于<br>IS NULL     |是否为NULL     |IS NOT NULL |  是否不为NULL<br>BETWEEN AND |是否在闭区间内  |IN          | 是否在列表内<br>NOT IN      |是否不在列表内  |LIKE        | 通配符匹配</p>
 </blockquote>
 <p>逻辑运算符<br>      NOT(!)       AND(&amp;&amp;)      OR(||)<br>位操作运算符<br>      &amp;     |     ~     ^     &lt;&lt;     &gt;&gt;</p>
+<h3 id="lt-gt"><a href="#lt-gt" class="headerlink" title="&lt;=&gt;"></a>&lt;=&gt;</h3><p>可以找到值为null的数据<br>= 找不到值为null的数据</p>
 <h3 id="LIKE"><a href="#LIKE" class="headerlink" title="LIKE"></a>LIKE</h3><p>模糊匹配</p>
 <pre><code>select * from student where NAME LIKE &apos;陆%&apos;;
 </code></pre><p>通配符规则：</p>
@@ -444,16 +445,27 @@ select * from customer c inner join orders o on c.id = o.customer_id and c.name 
 <h3 id="报表查询"><a href="#报表查询" class="headerlink" title="报表查询"></a>报表查询</h3><p>对数据行进行分组统计，其语法格式为：</p>
 <pre><code>select …  from … [where…] [ group by … [having… ]] [ order by … ]
 其中group by 子句指定按照哪些字段分组，having子句设定分组查询条件。
-</code></pre><h3 id="数据库的备份和还原"><a href="#数据库的备份和还原" class="headerlink" title="数据库的备份和还原"></a>数据库的备份和还原</h3><p><strong>数据库备份： cmd命令下</strong></p>
-<pre><code>mysqldump -u root -p test(数据库名称)&gt;test.sql
-</code></pre><p>数据库恢复：<br><strong>创建数据库并选择该数据库</strong>注意，如果备份文件没有自动创建数据库，需要自己创一个数据库</p>
-<pre><code>在cmd命令下：mysql -u root -p test&lt;test.sql
+</code></pre><h3 id="数据库的备份和还原"><a href="#数据库的备份和还原" class="headerlink" title="数据库的备份和还原"></a>数据库的备份和还原</h3><p>在说备份和还原之前，先要知道数据库备份的路径在哪里：</p>
+<pre><code>show global variables like &apos;%datadir%&apos;;
+datadir： C:\ProgramData\MySQL\MySQL Server 5.7\Data\
+</code></pre><p><strong>数据库备份： cmd命令下</strong></p>
+<pre><code>mysqldump -u root -p test(数据库名称) &gt;test.sql   在执行这条语句的路径下面创建一个.sql的文件，
+</code></pre><p>备份整个数据库</p>
+<pre><code>mysqldump -u root -p --all-databases &gt; alldump.sql;
+</code></pre><p>2）备份部分数据库（不带–databases的备份语句在生成的.sql文件中没有create database和use 语句，需要手动建立数据库，可能导致数据库名与之前不一致）</p>
+<pre><code>mysqldump -u root -p --databases yekai&gt;yekai.sql
+</code></pre><p>3）备份数据库中的几张表</p>
+<pre><code>mysqldump -u root -p yekai emp &gt; emp.sql
+</code></pre><p><strong>注意事项</strong>： mysqldump不需要加分号，因为是在cmd命令中</p>
+<p>数据库恢复：<br><strong>创建数据库并选择该数据库</strong>注意，如果备份文件没有自动创建数据库，需要自己创一个数据库</p>
+<pre><code>在cmd命令下：mysql -u root -p test &lt; test.sql
 </code></pre><p>或者：<br>在mysql &gt;命令行下 执行  SOURCE 数据库文件</p>
 <pre><code>先创建一个空的数据库
 Mysql&gt;create databse mydb7;
 Mysql&gt;use mydb7;
 mysql &gt; source c:\user\zhao\test.sql
-</code></pre><h3 id="数据库三大范式"><a href="#数据库三大范式" class="headerlink" title="数据库三大范式"></a>数据库三大范式</h3><h3 id="第一范式"><a href="#第一范式" class="headerlink" title="第一范式"></a>第一范式</h3><p>每列应当保证原子性。即不可以再进行分割。</p>
+</code></pre><p><strong>注意事项</strong>：如果文件放在c盘，可能由于权限原因无法访问。更换到其他盘符再试。</p>
+<h3 id="数据库三大范式"><a href="#数据库三大范式" class="headerlink" title="数据库三大范式"></a>数据库三大范式</h3><h3 id="第一范式"><a href="#第一范式" class="headerlink" title="第一范式"></a>第一范式</h3><p>每列应当保证原子性。即不可以再进行分割。</p>
 <p>比如收货地址这列，就不是原子性的，如果需要经常统计到省份或者城市信息，则该列的设计就不符合第一范式的要求，仍然可以进一步拆分为省份，城市。。。。</p>
 <h3 id="第二范式"><a href="#第二范式" class="headerlink" title="第二范式"></a>第二范式</h3><p>表：学号、课程号、姓名、学分;<br>学分依赖课程，姓名依赖学号</p>
 <p>这个时候，如果删除一条学分数据，会导致相应的课程数据也会被删除。同时这张表还存在数据冗余的情况。<br>如果数据存在部分依赖的情形，需要将字段进行拆分，拆成多个表。这样删除一个数据时，就不会把其他的需要的数据项删除，<br><strong>注意</strong> 这里说的删数据是删一条数据，而不是删除一列，列是一个字段，字段一般不能删除。最好把依赖的字段分成两个表<br>需要重新拆分表：<br>学生表：学号、姓名<br>课程表：课程号<br>选课表：课程号、学号、学分</p>
@@ -597,7 +609,12 @@ preparedstatement.setInt(1,i);
 preparedstatement.executeQuery();
 connection.close();
 preparedstatement.close();
-</code></pre><h3 id="一些小总结"><a href="#一些小总结" class="headerlink" title="一些小总结"></a>一些小总结</h3><h3 id="JMS"><a href="#JMS" class="headerlink" title="JMS"></a>JMS</h3><h3 id="mysql5-7设置允许外部访问"><a href="#mysql5-7设置允许外部访问" class="headerlink" title="mysql5.7设置允许外部访问"></a>mysql5.7设置允许外部访问</h3><p>JDBC设置外部访问<br><a href="https://blog.csdn.net/qq_17810899/article/details/90642207" target="_blank" rel="external">https://blog.csdn.net/qq_17810899/article/details/90642207</a></p>
+</code></pre><h3 id="一些小总结"><a href="#一些小总结" class="headerlink" title="一些小总结"></a>一些小总结</h3><p>原来是学习JMS的，后来发现不懂MQ真的学不了</p>
+<p><a href="https://blog.csdn.net/guanghuichenshao/article/details/79546140" target="_blank" rel="external">传送门</a></p>
+<h3 id="MQ"><a href="#MQ" class="headerlink" title="MQ"></a>MQ</h3><p>消息队列（MQ）是一种应用程序对应用程序的通信方法。应用程序通过写和检索出入列队的针对应用程序的数据（消息）来通信，而无需专用连接来链接它们。</p>
+<h3 id="JMS"><a href="#JMS" class="headerlink" title="JMS"></a>JMS</h3><pre><code>JMS即Java消息服务（Java Message Service）应用程序接口，是一个Java平台中关于面向消息中间件（MOM）的API，用于在两个应用程序之间，或分布式系统中发送消息，进行异步通信。Java消息服务是一个与具体平台无关的API，绝大多数MOM提供商都对JMS提供支持。
+</code></pre><h3 id="JNDI"><a href="#JNDI" class="headerlink" title="JNDI"></a>JNDI</h3><pre><code>JNDI(Java Naming and Directory Interface,Java命名和目录接口)是SUN公司提供的一种标准的Java命名系统接口，JNDI提供统一的客户端API，通过不同的访问提供者接口JNDI服务供应接口(SPI)的实现，由管理者将JNDI API映射为特定的命名服务和目录系统，使得Java应用程序可以和这些命名服务和目录服务之间进行交互。目录服务是命名服务的一种自然扩展。两者之间的关键差别是目录服务中对象不但可以有名称还可以有属性（例如，用户有email地址），而命名服务中对象没有属性 [1]  。
+</code></pre><h3 id="mysql5-7设置允许外部访问"><a href="#mysql5-7设置允许外部访问" class="headerlink" title="mysql5.7设置允许外部访问"></a>mysql5.7设置允许外部访问</h3><p>JDBC设置外部访问<br><a href="https://blog.csdn.net/qq_17810899/article/details/90642207" target="_blank" rel="external">https://blog.csdn.net/qq_17810899/article/details/90642207</a></p>
 <p>登陆进去mysql</p>
 <pre><code>update user set host = &apos;%&apos; where user = &apos;root&apos;;
 FLUSH PRIVILEGES;
