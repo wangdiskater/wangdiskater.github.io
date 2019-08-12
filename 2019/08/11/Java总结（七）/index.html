@@ -14,7 +14,7 @@
 <meta property="og:url" content="http://yoursite.com/2019/08/11/Java总结（七）/index.html">
 <meta property="og:site_name" content="路要坚持">
 <meta property="og:description" content="这周学习了一些JDBC的内容，也学习了前端，但是讲的太水了，不敢苟同。所以自己去整理，但是自己也没有书，只有去MDN去学习，发现讲的很全面，虽然是火狐浏览器为基础的。但是讲的都是很标准的东西。想要通过几天把前端都回顾完是不可能的，还有很多坑在里面。只有一步步来。每天都复习一点。 星期一（8.5）JDBC批处理就是多次进行处理，没有批处理，我们如何批量新增数据也许应该是这样：使用循环然后statem">
-<meta property="og:updated_time" content="2019-08-11T15:43:39.398Z">
+<meta property="og:updated_time" content="2019-08-12T11:04:25.686Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java总结（七）">
 <meta name="twitter:description" content="这周学习了一些JDBC的内容，也学习了前端，但是讲的太水了，不敢苟同。所以自己去整理，但是自己也没有书，只有去MDN去学习，发现讲的很全面，虽然是火狐浏览器为基础的。但是讲的都是很标准的东西。想要通过几天把前端都回顾完是不可能的，还有很多坑在里面。只有一步步来。每天都复习一点。 星期一（8.5）JDBC批处理就是多次进行处理，没有批处理，我们如何批量新增数据也许应该是这样：使用循环然后statem">
@@ -947,7 +947,112 @@ public void test1(){
     }
 }
 </code></pre><p>后面几天都是在讲前端的东西，但是讲的不好，我自己总结了，但是很多东西都忘记。所以等我整理出来在发前端的知识吧</p>
-<h2 id="星期三（8-7）"><a href="#星期三（8-7）" class="headerlink" title="星期三（8.7）"></a>星期三（8.7）</h2><h2 id="星期四（8-8）"><a href="#星期四（8-8）" class="headerlink" title="星期四（8.8）"></a>星期四（8.8）</h2><h2 id="星期五（8-9）"><a href="#星期五（8-9）" class="headerlink" title="星期五（8.9）"></a>星期五（8.9）</h2><h2 id="星期六（8-10）"><a href="#星期六（8-10）" class="headerlink" title="星期六（8.10）"></a>星期六（8.10）</h2>
+<h2 id="星期三（8-7）"><a href="#星期三（8-7）" class="headerlink" title="星期三（8.7）"></a>星期三（8.7）</h2><h2 id="星期四（8-8）"><a href="#星期四（8-8）" class="headerlink" title="星期四（8.8）"></a>星期四（8.8）</h2><h2 id="星期五（8-9）"><a href="#星期五（8-9）" class="headerlink" title="星期五（8.9）"></a>星期五（8.9）</h2><h2 id="星期六（8-10）"><a href="#星期六（8-10）" class="headerlink" title="星期六（8.10）"></a>星期六（8.10）</h2><h3 id="本周小总结："><a href="#本周小总结：" class="headerlink" title="本周小总结："></a>本周小总结：</h3><p>1.关于批处理问题：报错</p>
+<pre><code>java.sql.BatchUpdateException: No value specified for parameter 1
+在使用prepareStatement.addBatch()；
+在addBatch之前，最好setXX 对之前的sql语句进行修改，而不要空过，这样会报错不懂为啥
+如果之前没有占位符，那就手动加一个占位符
+
+例如：
+    String s1 = &quot;insert into student () value ()&quot;;
+    PreparedStatement preparedstatement = connection.preparedstatement(s1);
+    preparestatement.addBatch();//这里可能报错
+
+    String s1 = &quot;insert into student (id,math) value (null,?)&quot;;
+    PreparedStatement preparedstatement = connection.preparedstatement(s1);
+    preparedstatement.setDouble(1,100);
+    preparestatement.addBatch();//这就不会报错了
+</code></pre><p>2.debug窗口可以移动。有几个页面注意<br>watch 和 variable不一样 ，variable才是我们debug能看到的变量的参数</p>
+<p>3.java.sql.SQLException: com.mysql.jdbc.Driver<br>今天讲的三个连接池，还有DBUtil必须还要添加mysql-connection<br>要不然还是会报错找不到driver</p>
+<p>4.主键被删了好像不能再设置成主键？<br>报错<br>ALTER TABLE causes auto_increment resequencing, resulting in duplicate entry ‘1’ for key ‘PRIMARY’<br>设置主键字段为自动递增时报错：<br>解答：需要把数据中已存在主键值为0的记录，改成不为0且不重复的任意数字，而且要包装数字是自增的</p>
+<p>5一些内容：</p>
+<pre><code>SEO（Search Engine Optimization）
+https://baike.baidu.com/item/%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E%E4%BC%98%E5%8C%96/3132?fromtitle=seo&amp;fromid=102990&amp;fr=aladdin
+
+2.html——a标签与base标签
+base已经淘汰了。就用a标签好了
+
+3.Go语言
+了解了一下
+
+4.安排
+把前端先过完一遍，再回顾之前写的东西
+
+5。
+一些技术栈：
+quasarchs
+http://www.quasarchs.com/guide/index.html
+vue
+
+6. HTML标准
+https://html.spec.whatwg.org/multipage/
+
+7 做作业忘记的标签，也就是还没复习到的标签
+    1、input radio设置默认选中值 加checked
+    2、label 能够点击能够跳转到对应的输入框
+    &lt;form&gt;
+      &lt;label for=&quot;male&quot;&gt;Male&lt;/label&gt;
+      &lt;input type=&quot;radio&quot; name=&quot;sex&quot; id=&quot;male&quot; /&gt;
+      &lt;br /&gt;
+      &lt;label for=&quot;female&quot;&gt;Female&lt;/label&gt;
+      &lt;input type=&quot;radio&quot; name=&quot;sex&quot; id=&quot;female&quot; /&gt;
+    &lt;/form&gt;
+    3、获取DOM getElementById()
+    4、监听事件addEventListener() //注意要window.onload 之后才可以
+    5、单选框radio 复选框checkbox
+    6、下拉列表
+    &lt;selection&gt;
+      &lt;option value = &quot;1&quot;&gt;1&lt;/option&gt;
+      &lt;option value = &quot;2&quot;&gt;2&lt;/option&gt;
+      &lt;option value = &quot;3&quot;&gt;3&lt;/option&gt;
+    &lt;/selection&gt;
+
+8.前端技术栈：
+vscode
+</code></pre><p>6.关于反射：</p>
+<pre><code>Constructor&lt;T&gt;getDeclaredConstructor(Class&lt;?&gt;... parameterTypes)
+Constructor&lt;?&gt;[] getDeclaredConstructors()
+</code></pre><p>如果是getDeclaredConstructors（）获取Constructor数组不需要设置</p>
+<pre><code>void setAccessible(boolean flag)
+</code></pre><p>将此对象的 accessible 标志设置为指示的布尔值，为true，就可以拿到所有的自己Declared的构造函数。<br>那么可以立即推：我相信所有的getDeclaredFields()和getDeclaredMethods()也不需要设置，能拿到所有自己定义的；</p>
+<p>7.其他<br>        2、&nbsp;表示英文空格， 两个英文空格是一个汉字长度</p>
+<pre><code>3.误删IDEA的out中的字节码文件，把整个module都删了就能重新生成一个out的module文件夹
+
+4flutter
+谷歌的移动UI框架，可以快速在iOS和Android上构建高质量的原生用户界面。
+
+5.select 选择触发事件 onchange
+
+6.如何设置默认选项
+  &lt;option  selected=&quot;selected&quot;&gt;&lt;/option&gt;
+</code></pre><p>8.CSS3相关 动画布局<br>        1.背景颜色的透明度，设置RGBA<br>         background-color:rgba(255,45,81,0); color: #fff;</p>
+<pre><code>2.动画属性
+animation:animation_name 2s;
+在下面再定义
+@keyframes{
+  0% {}
+  100% {}
+}
+
+div.show{
+  animation:myAnimation 0.5s;
+  border-radius: 5px;
+  background: #ff2d51;
+  color: #fff;
+}
+@keyframes myAnimation {
+  0%   { background-color:rgba(255,45,81,0); color: #fff; }
+  100% { background-color:rgba(255,45,81,1); color: #fff;}
+}
+
+3.flex属性
+container 和 里面的item
+</code></pre><p><strong>我觉得这些东西一定要天天搞，熟能生巧</strong></p>
+<p>9.margin塌陷问题<br>父元素使用：</p>
+<pre><code>overflow ： hidden;
+</code></pre><p><a href="https://www.cnblogs.com/syp172654682/p/7671830.html" target="_blank" rel="external">文章</a></p>
+<p>10.css 如何让test-align : justify生效<br>不能是只有一行的，或者是最后一行<br>需要给他再加一行</p>
+
         </div>
         <div class="post-reply">
             
@@ -1005,7 +1110,7 @@ public void test1(){
         <br>
         Copyright © 王邸 2019
         <!--
-          Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+          Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
         -->
       </div>
     </div>
