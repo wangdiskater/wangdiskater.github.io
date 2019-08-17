@@ -8,16 +8,16 @@
   
   <title>Java总结（六）上 | 路要坚持</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="概述这周把JAVASE部分都搞完了，接下来需要学习EE的部分，SE的知识决定是否能找一个好的工作，所以这一部分是非常非常重要的。并不是简简单单的知识点，涵盖了所有Java底层的东西，虽然没有全都弄懂，但是任重而道远。而且为了赶课程，这周的最后SE的部分并没有讲的很详细，所以主要总结的还是SE的内容：线程、网络编程、反射、GC回收机制。EE的内容就讲了数据库的一些操作和原理，然后讲了一点JDBC的东">
+  <meta name="description" content="线程的通讯，阻塞队列（BlockingQue），生产者消费者问题，线程池(Executor)，定时任务，网络编程（UTP传输（DatagramSocket，DatagramPacket）,TCP（Socket，ServerSocket））,反射（重点）,注解，GC回收机制。接下来先讲数据库的一些操作和原理，然后讲了一点JDBC的东西。 概述这周把JAVASE部分都搞完了，接下来需要学习EE的部分，">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java总结（六）上">
 <meta property="og:url" content="http://yoursite.com/2019/08/04/Java总结（六）上/index.html">
 <meta property="og:site_name" content="路要坚持">
-<meta property="og:description" content="概述这周把JAVASE部分都搞完了，接下来需要学习EE的部分，SE的知识决定是否能找一个好的工作，所以这一部分是非常非常重要的。并不是简简单单的知识点，涵盖了所有Java底层的东西，虽然没有全都弄懂，但是任重而道远。而且为了赶课程，这周的最后SE的部分并没有讲的很详细，所以主要总结的还是SE的内容：线程、网络编程、反射、GC回收机制。EE的内容就讲了数据库的一些操作和原理，然后讲了一点JDBC的东">
-<meta property="og:updated_time" content="2019-08-04T15:18:24.120Z">
+<meta property="og:description" content="线程的通讯，阻塞队列（BlockingQue），生产者消费者问题，线程池(Executor)，定时任务，网络编程（UTP传输（DatagramSocket，DatagramPacket）,TCP（Socket，ServerSocket））,反射（重点）,注解，GC回收机制。接下来先讲数据库的一些操作和原理，然后讲了一点JDBC的东西。 概述这周把JAVASE部分都搞完了，接下来需要学习EE的部分，">
+<meta property="og:updated_time" content="2019-08-17T03:57:35.165Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java总结（六）上">
-<meta name="twitter:description" content="概述这周把JAVASE部分都搞完了，接下来需要学习EE的部分，SE的知识决定是否能找一个好的工作，所以这一部分是非常非常重要的。并不是简简单单的知识点，涵盖了所有Java底层的东西，虽然没有全都弄懂，但是任重而道远。而且为了赶课程，这周的最后SE的部分并没有讲的很详细，所以主要总结的还是SE的内容：线程、网络编程、反射、GC回收机制。EE的内容就讲了数据库的一些操作和原理，然后讲了一点JDBC的东">
+<meta name="twitter:description" content="线程的通讯，阻塞队列（BlockingQue），生产者消费者问题，线程池(Executor)，定时任务，网络编程（UTP传输（DatagramSocket，DatagramPacket）,TCP（Socket，ServerSocket））,反射（重点）,注解，GC回收机制。接下来先讲数据库的一些操作和原理，然后讲了一点JDBC的东西。 概述这周把JAVASE部分都搞完了，接下来需要学习EE的部分，">
   
     <link rel="alternate" href="/" title="路要坚持" type="application/atom+xml">
   
@@ -150,7 +150,8 @@
             
         </div>
         <div class="content" style="overflow: auto">
-            <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>这周把JAVASE部分都搞完了，接下来需要学习EE的部分，SE的知识决定是否能找一个好的工作，所以这一部分是非常非常重要的。并不是简简单单的知识点，涵盖了所有Java底层的东西，虽然没有全都弄懂，但是任重而道远。而且为了赶课程，这周的最后SE的部分并没有讲的很详细，所以主要总结的还是SE的内容：线程、网络编程、反射、GC回收机制。EE的内容就讲了数据库的一些操作和原理，然后讲了一点JDBC的东西。知识都比较乱和复杂，所以必须每天都总结，要不然容易忘记。</p>
+            <p>线程的通讯，阻塞队列（BlockingQue），生产者消费者问题，线程池(Executor)，定时任务，网络编程（UTP传输（DatagramSocket，DatagramPacket<br>）,TCP（Socket，ServerSocket））,反射（重点）,注解，GC回收机制。接下来先讲数据库的一些操作和原理，然后讲了一点JDBC的东西。</p>
+<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>这周把JAVASE部分都搞完了，接下来需要学习EE的部分，SE的知识决定是否能找一个好的工作，所以这一部分是非常非常重要的。并不是简简单单的知识点，涵盖了所有Java底层的东西，虽然没有全都弄懂，但是任重而道远。而且为了赶课程，这周的最后SE的部分并没有讲的很详细，所以主要总结的还是SE的内容：线程、网络编程、反射、GC回收机制。EE的内容就讲了数据库的一些操作和原理，然后讲了一点JDBC的东西。知识都比较乱和复杂，所以必须每天都总结，要不然容易忘记。</p>
 <h2 id="星期一-7-29"><a href="#星期一-7-29" class="headerlink" title="星期一(7.29)"></a>星期一(7.29)</h2><h3 id="线程间通信："><a href="#线程间通信：" class="headerlink" title="线程间通信："></a>线程间通信：</h3><pre><code>只有在同步的情况下，线程间才有必要通信。
 </code></pre><h3 id="等待唤醒机制："><a href="#等待唤醒机制：" class="headerlink" title="等待唤醒机制："></a>等待唤醒机制：</h3><p>Object (锁) :</p>
 <pre><code>void notify()   // 随机一个唤醒等待这把锁的线程
@@ -289,7 +290,7 @@ public class MyBlockingQue {
     }
   }.start();
 }
-</code></pre><h3 id="BlockingQue类"><a href="#BlockingQue类" class="headerlink" title="BlockingQue类"></a>BlockingQue类</h3><p>public interface BlockingQueue<e> extends Queue<e><br>阻塞方法：<br>    void put(E e);<br>    E take();</e></e></p>
+</code></pre><h3 id="BlockingQue-类"><a href="#BlockingQue-类" class="headerlink" title="BlockingQue 类"></a>BlockingQue 类</h3><p>public interface BlockingQueue<e> extends Queue<e><br>阻塞方法：<br>    void put(E e);<br>    E take();</e></e></p>
 <p>子类：ArrayBlockingQueue，LinkedBlockingDeque</p>
 <p><strong>注意事项</strong>这两个阻塞方法显示是有点问题的，因为put()，take()方法和size()方法不是同步的，所以为了在显示生产消费的时候，只能确保他是阻塞的运行put 和 take方法，而不能去判断他里面有多少个，队满的时候依旧可能显示:</p>
 <pre><code>生产了一个包子, 还剩9个
@@ -1188,7 +1189,7 @@ D．一个class只能定义一个constructor
         <br>
         Copyright © 王邸 2019
         <!--
-          Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+          Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
         -->
       </div>
     </div>

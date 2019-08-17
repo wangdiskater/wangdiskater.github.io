@@ -8,16 +8,16 @@
   
   <title>Java总结（七） | 路要坚持</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="这周学习了一些JDBC的内容，也学习了前端，但是讲的太水了，不敢苟同。所以自己去整理，但是自己也没有书，只有去MDN去学习，发现讲的很全面，虽然是火狐浏览器为基础的。但是讲的都是很标准的东西。想要通过几天把前端都回顾完是不可能的，还有很多坑在里面。只有一步步来。每天都复习一点。 星期一（8.5）JDBC批处理就是多次进行处理，没有批处理，我们如何批量新增数据也许应该是这样：使用循环然后statem">
+  <meta name="description" content="这周学习了JDBC批处理，事务(默认提交)，连接池（DBCP,C3P0,Druid），DButil，单元测试，也学习了前端，但是讲的太水了，不敢苟同。所以自己去整理，但是自己也没有书，只有去MDN去学习，发现讲的很全面，虽然是火狐浏览器为基础的。但是讲的都是很标准的东西。想要通过几天把前端都回顾完是不可能的，还有很多坑在里面。只有一步步来。每天都复习一点。 星期一（8.5）JDBC批处理就是多次进">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java总结（七）">
 <meta property="og:url" content="http://yoursite.com/2019/08/11/Java总结（七）/index.html">
 <meta property="og:site_name" content="路要坚持">
-<meta property="og:description" content="这周学习了一些JDBC的内容，也学习了前端，但是讲的太水了，不敢苟同。所以自己去整理，但是自己也没有书，只有去MDN去学习，发现讲的很全面，虽然是火狐浏览器为基础的。但是讲的都是很标准的东西。想要通过几天把前端都回顾完是不可能的，还有很多坑在里面。只有一步步来。每天都复习一点。 星期一（8.5）JDBC批处理就是多次进行处理，没有批处理，我们如何批量新增数据也许应该是这样：使用循环然后statem">
-<meta property="og:updated_time" content="2019-08-12T11:04:25.686Z">
+<meta property="og:description" content="这周学习了JDBC批处理，事务(默认提交)，连接池（DBCP,C3P0,Druid），DButil，单元测试，也学习了前端，但是讲的太水了，不敢苟同。所以自己去整理，但是自己也没有书，只有去MDN去学习，发现讲的很全面，虽然是火狐浏览器为基础的。但是讲的都是很标准的东西。想要通过几天把前端都回顾完是不可能的，还有很多坑在里面。只有一步步来。每天都复习一点。 星期一（8.5）JDBC批处理就是多次进">
+<meta property="og:updated_time" content="2019-08-17T04:12:39.157Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java总结（七）">
-<meta name="twitter:description" content="这周学习了一些JDBC的内容，也学习了前端，但是讲的太水了，不敢苟同。所以自己去整理，但是自己也没有书，只有去MDN去学习，发现讲的很全面，虽然是火狐浏览器为基础的。但是讲的都是很标准的东西。想要通过几天把前端都回顾完是不可能的，还有很多坑在里面。只有一步步来。每天都复习一点。 星期一（8.5）JDBC批处理就是多次进行处理，没有批处理，我们如何批量新增数据也许应该是这样：使用循环然后statem">
+<meta name="twitter:description" content="这周学习了JDBC批处理，事务(默认提交)，连接池（DBCP,C3P0,Druid），DButil，单元测试，也学习了前端，但是讲的太水了，不敢苟同。所以自己去整理，但是自己也没有书，只有去MDN去学习，发现讲的很全面，虽然是火狐浏览器为基础的。但是讲的都是很标准的东西。想要通过几天把前端都回顾完是不可能的，还有很多坑在里面。只有一步步来。每天都复习一点。 星期一（8.5）JDBC批处理就是多次进">
   
     <link rel="alternate" href="/" title="路要坚持" type="application/atom+xml">
   
@@ -150,7 +150,7 @@
             
         </div>
         <div class="content" style="overflow: auto">
-            <p>这周学习了一些JDBC的内容，也学习了前端，但是讲的太水了，不敢苟同。所以自己去整理，但是自己也没有书，只有去MDN去学习，发现讲的很全面，虽然是火狐浏览器为基础的。但是讲的都是很标准的东西。想要通过几天把前端都回顾完是不可能的，还有很多坑在里面。只有一步步来。每天都复习一点。</p>
+            <p>这周学习了JDBC批处理，事务(默认提交)，连接池（DBCP,C3P0,Druid），DButil，单元测试，也学习了前端，但是讲的太水了，不敢苟同。所以自己去整理，但是自己也没有书，只有去MDN去学习，发现讲的很全面，虽然是火狐浏览器为基础的。但是讲的都是很标准的东西。想要通过几天把前端都回顾完是不可能的，还有很多坑在里面。只有一步步来。每天都复习一点。</p>
 <h2 id="星期一（8-5）"><a href="#星期一（8-5）" class="headerlink" title="星期一（8.5）"></a>星期一（8.5）</h2><h3 id="JDBC批处理"><a href="#JDBC批处理" class="headerlink" title="JDBC批处理"></a>JDBC批处理</h3><p>就是多次进行处理，没有批处理，我们如何批量新增数据<br>也许应该是这样：使用循环然后statement.executeUpdate()来插入数据；</p>
 <pre><code>//批量插入数据 500条
 Connection connection = null;
@@ -401,8 +401,6 @@ public class Emp {
         PrepareStatement preparedStatement1 = null;
         PrepareStatement preparedStatement2 = null;
         Savepoint savepoint = nulll; //设置回滚点
-
-
 
         ResultSet resultSet = null;
         try{
@@ -1110,7 +1108,7 @@ container 和 里面的item
         <br>
         Copyright © 王邸 2019
         <!--
-          Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+          Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
         -->
       </div>
     </div>

@@ -8,16 +8,16 @@
   
   <title>Java总结（三）下 | 路要坚持</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="星期六学习数据结构List主要就是学习源码为什么这样写。有几点需要注意：1）我们只学习核心的方法和迭代器的方法2）迭代器的指针是指向两个结点之间的位置上的。这一定要注意；3）一些细节上的问题我会说清楚4）出现的异常总结： 整体结构1）我们需要一个List接口。两个list都继承这个接口的方法2）我们需要一个iterator接口，两个类的子类对象要继承这个接口的方法3）这个类的子类要和父类数据互通，">
+  <meta name="description" content="星期六学习数据结构List主要就是学习源码为什么这样写。有几点需要注意：1）我们只学习核心的方法和迭代器的方法2）迭代器的指针是指向两个结点之间的位置上的。这一定要注意；3）一些细节上的问题我会说清楚 整体结构1）我们需要一个List接口。两个list都继承这个接口的方法2）我们需要一个iterator接口，两个类的子类对象要继承这个接口的方法3）这个类的子类要和父类数据互通，不想被其他类访问最好">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java总结（三）下">
 <meta property="og:url" content="http://yoursite.com/2019/07/14/Java总结（三）下/index.html">
 <meta property="og:site_name" content="路要坚持">
-<meta property="og:description" content="星期六学习数据结构List主要就是学习源码为什么这样写。有几点需要注意：1）我们只学习核心的方法和迭代器的方法2）迭代器的指针是指向两个结点之间的位置上的。这一定要注意；3）一些细节上的问题我会说清楚4）出现的异常总结： 整体结构1）我们需要一个List接口。两个list都继承这个接口的方法2）我们需要一个iterator接口，两个类的子类对象要继承这个接口的方法3）这个类的子类要和父类数据互通，">
-<meta property="og:updated_time" content="2019-07-14T13:20:02.554Z">
+<meta property="og:description" content="星期六学习数据结构List主要就是学习源码为什么这样写。有几点需要注意：1）我们只学习核心的方法和迭代器的方法2）迭代器的指针是指向两个结点之间的位置上的。这一定要注意；3）一些细节上的问题我会说清楚 整体结构1）我们需要一个List接口。两个list都继承这个接口的方法2）我们需要一个iterator接口，两个类的子类对象要继承这个接口的方法3）这个类的子类要和父类数据互通，不想被其他类访问最好">
+<meta property="og:updated_time" content="2019-08-17T03:16:04.333Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java总结（三）下">
-<meta name="twitter:description" content="星期六学习数据结构List主要就是学习源码为什么这样写。有几点需要注意：1）我们只学习核心的方法和迭代器的方法2）迭代器的指针是指向两个结点之间的位置上的。这一定要注意；3）一些细节上的问题我会说清楚4）出现的异常总结： 整体结构1）我们需要一个List接口。两个list都继承这个接口的方法2）我们需要一个iterator接口，两个类的子类对象要继承这个接口的方法3）这个类的子类要和父类数据互通，">
+<meta name="twitter:description" content="星期六学习数据结构List主要就是学习源码为什么这样写。有几点需要注意：1）我们只学习核心的方法和迭代器的方法2）迭代器的指针是指向两个结点之间的位置上的。这一定要注意；3）一些细节上的问题我会说清楚 整体结构1）我们需要一个List接口。两个list都继承这个接口的方法2）我们需要一个iterator接口，两个类的子类对象要继承这个接口的方法3）这个类的子类要和父类数据互通，不想被其他类访问最好">
   
     <link rel="alternate" href="/" title="路要坚持" type="application/atom+xml">
   
@@ -150,7 +150,7 @@
             
         </div>
         <div class="content" style="overflow: auto">
-            <h2 id="星期六"><a href="#星期六" class="headerlink" title="星期六"></a>星期六</h2><h3 id="学习数据结构List"><a href="#学习数据结构List" class="headerlink" title="学习数据结构List"></a>学习数据结构List</h3><p>主要就是学习源码为什么这样写。有几点需要注意：<br>1）我们只学习核心的方法和迭代器的方法<br>2）迭代器的指针是指向两个结点之间的位置上的。这一定要注意；<br>3）一些细节上的问题我会说清楚<br>4）出现的异常总结：</p>
+            <h2 id="星期六"><a href="#星期六" class="headerlink" title="星期六"></a>星期六</h2><h3 id="学习数据结构List"><a href="#学习数据结构List" class="headerlink" title="学习数据结构List"></a>学习数据结构List</h3><p>主要就是学习源码为什么这样写。有几点需要注意：<br>1）我们只学习核心的方法和迭代器的方法<br>2）迭代器的指针是指向两个结点之间的位置上的。这一定要注意；<br>3）一些细节上的问题我会说清楚</p>
 <h3 id="整体结构"><a href="#整体结构" class="headerlink" title="整体结构"></a>整体结构</h3><p>1）我们需要一个List接口。两个list都继承这个接口的方法<br>2）我们需要一个iterator接口，两个类的子类对象要继承这个接口的方法<br>3）这个类的子类要和父类数据互通，不想被其他类访问最好就放在内部类<br>4）出现的异常<br>IllegalArgumentException   抛出的异常表明向方法传递了一个不合法或不正确的参数。<br>ArrayStoreException       试图将错误类型的对象存储到一个对象数组时抛出的异常。<br>IndexOutOfBoundsException 指示某排序索引（例如对数组、字符串或向量的排序）超出范围时抛出。<br>ConcurrentModificationException ： 当方法检测到对象的并发修改，但不允许这种修改时，抛出此异常。<br>IllegalStateException  在非法或不适当的时间调用方法时产生的信号。换句话说，即 Java 环境或 Java 应用程序没有处于请求操作所要求的适当状态下。<br>NoSuchElementException  由 Enumeration 的 nextElement 方法抛出，表明枚举中没有更多的元素。</p>
 <h3 id="实现的步骤（以ArrayList为例）；"><a href="#实现的步骤（以ArrayList为例）；" class="headerlink" title="实现的步骤（以ArrayList为例）；"></a>实现的步骤（以ArrayList为例）；</h3><p>1）先定义出List接口和iterator接口<br>2）然后写ArrayList<br>    1.属性<br>    2.构造方法<br>    3.重写List方法<br>3）实现iterator接口<br>    1.属性<br>    2.构造方法<br>    3.重写方法</p>
 <h3 id="List接口"><a href="#List接口" class="headerlink" title="List接口"></a>List接口</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">public interface MyList &#123;</div><div class="line">    boolean add(String s);</div><div class="line">    void add(int index, String s);</div><div class="line">    void clear();</div><div class="line">    boolean contains(String s);</div><div class="line">    String get(int index);</div><div class="line">    int indexOf(String s);</div><div class="line">    boolean isEmpty();</div><div class="line">    MyIterator iterator();</div><div class="line">    int lastIndexOf(String s);</div><div class="line">    String remove(int index);</div><div class="line">    boolean remove(String s);</div><div class="line">    String set(int index, String s);</div><div class="line">    int size();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
@@ -284,7 +284,7 @@ implements List&lt;E&gt;, Deque&lt;E&gt;, Cloneable, java.io.Serializable
         <br>
         Copyright © 王邸 2019
         <!--
-          Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+          Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
         -->
       </div>
     </div>

@@ -153,7 +153,7 @@
                         
                         </div>
                         <p class="post-content-text is-marginless has-padding text-shadow">
-                            这周学习了一些JDBC的内容，也学习了前端，但是讲的太水了，不敢苟同。所以自己去整理，但是自己也没有书，只有去MDN去学习，发现讲的很全面，虽然是火狐浏览器为基础的。但是讲的都是很标准的东西。想要通过几天把前端都回顾完是不可能的，还有很..
+                            这周学习了JDBC批处理，事务(默认提交)，连接池（DBCP,C3P0,Druid），DButil，单元测试，也学习了前端，但是讲的太水了，不敢苟同。所以自己去整理，但是自己也没有书，只有去MDN去学习，发现讲的很全面，虽然是火狐浏览器..
                         </p>
                         <p class="date text-shadow">2019-08-11</p>
                         <button class="button is-info is-small">Read More</button>
@@ -176,7 +176,7 @@
             
             <p class="sub-title text-shadow"></p>
             <p class="is-marginless text-shadow post-content-text">
-                从今天开始JAVAEE，冲啊，一开始先学习数据库，然后再学习JDBC，前端的东西，然后就可以下一..
+                接下来JAVAEE，一开始先学习mysql数据库的语言（sql）操作的语言四种（DDL,DML,..
             </p>
             <p class="date text-shadow is-marginless">2019-08-04</p>
         </div>
@@ -196,7 +196,7 @@
             
             <p class="sub-title text-shadow"></p>
             <p class="is-marginless text-shadow post-content-text">
-                概述这周把JAVASE部分都搞完了，接下来需要学习EE的部分，SE的知识决定是否能找一个好的工作..
+                线程的通讯，阻塞队列（BlockingQue），生产者消费者问题，线程池(Executor)，定..
             </p>
             <p class="date text-shadow is-marginless">2019-08-04</p>
         </div>
@@ -219,7 +219,7 @@
             
             <p class="sub-title text-shadow"></p>
             <p class="is-marginless text-shadow post-content-text">
-                从今天开始JAVAEE，冲啊，一开始先学习数据库，然后再学习JDBC，前端的东西，然后就可以下一..
+                接下来JAVAEE，一开始先学习mysql数据库的语言（sql）操作的语言四种（DDL,DML,..
             </p>
             <p class="date text-shadow is-marginless">2019-08-04</p>
         </div>
@@ -239,7 +239,7 @@
             
             <p class="sub-title text-shadow"></p>
             <p class="is-marginless text-shadow post-content-text">
-                概述这周把JAVASE部分都搞完了，接下来需要学习EE的部分，SE的知识决定是否能找一个好的工作..
+                线程的通讯，阻塞队列（BlockingQue），生产者消费者问题，线程池(Executor)，定..
             </p>
             <p class="date text-shadow is-marginless">2019-08-04</p>
         </div>
@@ -265,15 +265,8 @@
                                             
                                         </p>
                                         <p>
-                                            从今天开始JAVAEE，冲啊，一开始先学习数据库，然后再学习JDBC，前端的东西，然后就可以下一个阶段了。任重而道远加油吧
-星期四(8.01)MYSQL学习总结指令的编写：
-登录本机mysql:
-mysql -u 用户名 -p 输入密码。默认的root;
-注意：请正确认识 “SQL 不区分大小写“
-组成：
-DDL：数据定义语言
-DML：数据操作语言
-DQ..
+                                            接下来JAVAEE，一开始先学习mysql数据库的语言（sql）操作的语言四种（DDL,DML,DQL,DCL(没讲之后我补上),TPL），数据库主要进行的是查询Query一定要会，JDBC（JAVA DB CONNECTIVITY）三连(connection preparedstatement,resultset)
+星期四(8.01)MYSQL学习总结..
                                         </p>
                                         <p>2019-08-04</p>
                                         <button class="button is-small">Read More</button>
@@ -297,7 +290,8 @@ DQ..
                                             
                                         </p>
                                         <p>
-                                            概述这周把JAVASE部分都搞完了，接下来需要学习EE的部分，SE的知识决定是否能找一个好的工作，所以这一部分是非常非常重要的。并不是简简单单的知识点，涵盖了所有Java底层的东西，虽然没有全都弄懂，但是任重而道远。而且为了赶课程，这周的最后SE的部分并没有讲的很详细，所以主要总结的还是SE的内容：线程、网络编程、反射、GC回收机制。EE的内容就讲了数据..
+                                            线程的通讯，阻塞队列（BlockingQue），生产者消费者问题，线程池(Executor)，定时任务，网络编程（UTP传输（DatagramSocket，DatagramPacket）,TCP（Socket，ServerSocket））,反射（重点）,注解，GC回收机制。接下来先讲数据库的一些操作和原理，然后讲了一点JDBC的东西。
+概述这周把JAVA..
                                         </p>
                                         <p>2019-08-04</p>
                                         <button class="button is-small">Read More</button>
@@ -321,10 +315,10 @@ DQ..
                                             
                                         </p>
                                         <p>
-                                            接着之前的银行转账问题来说，我们先搞不弄那么复杂，一步一步的来，先把问题简化，有三个账户A,B,C，每个账户上有1000大洋。现在实现：
+                                            具体讲解银行转账例子，如何实现线程安全的，接着之前的银行转账问题来说，我们先搞不弄那么复杂，一步一步的来，先把问题简化，有三个账户A,B,C，每个账户上有1000大洋。现在实现：
 A -&gt; C 转100块
 B -&gt; C 转200块
-如果是单线程的程序肯定没有问题。但是银行肯定不会等你一个一个转账的。肯定要使用多线程的还解决问题。那么多线程就会出现线程安全的问题。这个情景是否会出现线程..
+如果是单线程的程序肯定没有问题。但是银行肯定不会等你一个一个转账的。肯定要使用多线程的还解决问题。那么多线程就会..
                                         </p>
                                         <p>2019-07-28</p>
                                         <button class="button is-small">Read More</button>
@@ -348,12 +342,7 @@ B -&gt; C 转200块
                                             
                                         </p>
                                         <p>
-                                            星期一（0722）Mappublic interface Map:  将键映射到值的对象。一个映射不能包含重复的键；每个键最多只能映射到一个值。方法：  增：
-V put(K key, V value)
-void putAll(Map&lt;? extends K,? extends V&gt; m)
-  删：
-V remove(Object key)
-..
+                                            Map:HashMap、TreeMap，自己实现HashMap（拉链法），文件（路径），字节流（输入、输出、缓冲流），字符流（转换流、输入、输出、缓冲流），设计模式（装饰者模式），Data流，Object流，序列化流，打印流，标准输入输出流，错误流，Properties类，hashTable方法，线程，多线程的实现（两种方法创建线程），线程的控制（sle..
                                         </p>
                                         <p>2019-07-28</p>
                                         <button class="button is-small">Read More</button>
@@ -377,12 +366,9 @@ V remove(Object key)
                                             
                                         </p>
                                         <p>
-                                            接上一篇，上一篇我们总结了：冒泡，插入，希尔，选择，快排，归并排序。这一篇介绍的主要内容是堆，二分法以及set集合的知识，以及一些还没学习的知识
+                                            接上一篇，上一篇我们总结了：冒泡，插入，希尔，选择，快排，归并排序。这一篇介绍的主要内容是堆和堆排序应用，二分法，以及二分法的变形，以及hashSet,treeSet集合的知识，以及一些还没学习的知识,红黑树，动态规划等等。。
 星期五7.19堆就是一个完全二叉树，分为大顶堆小顶堆，注意二叉搜索树不一定是完全二叉树哦；
-建堆public class Heap {
-    //属性
-    private int[] elements;
-..
+建堆public class Hea..
                                         </p>
                                         <p>2019-07-21</p>
                                         <button class="button is-small">Read More</button>
@@ -406,9 +392,9 @@ V remove(Object key)
                                             
                                         </p>
                                         <p>
-                                            这周学习的是数据结构，之前学习过。所以主要还是学习代码的实现；但是上课很多东西都还是很重要的。主要是数据结构的代码的实现，结构的应用的实现等等。一些还是有点难度的：二叉排序树的增加和删除；还有一些递归操作用循环实现。
+                                            这周学习的是数据结构，主要还是学习代码的实现，结构的应用的实现等等。二叉排序树的增加和删除，还有一些递归操作用循环实现，最后讲了冒泡，插入，希尔，选择，快排，归并排序，以及他们的比较。
 星期一（7.15）：线性表顺序印象 非顺序印象
-栈:先进后出顺序印象 非顺序印象栈的应用：1.反转2.括号匹配3.浏览器history4...
+栈:先进后出顺序印象 非顺序印象栈的应用：1.反转2.括号匹配3.浏览器history4.深度优先遍历(非递归的写法需要记..
                                         </p>
                                         <p>2019-07-21</p>
                                         <button class="button is-small">Read More</button>
@@ -432,8 +418,8 @@ V remove(Object key)
                                             
                                         </p>
                                         <p>
-                                            星期六学习数据结构List主要就是学习源码为什么这样写。有几点需要注意：1）我们只学习核心的方法和迭代器的方法2）迭代器的指针是指向两个结点之间的位置上的。这一定要注意；3）一些细节上的问题我会说清楚4）出现的异常总结：
-整体结构1）我们需要一个List接口。两个list都继承这个接口的方法2）我们需要一个iterator接口，两个类的子类对象要继承这个..
+                                            星期六学习数据结构List主要就是学习源码为什么这样写。有几点需要注意：1）我们只学习核心的方法和迭代器的方法2）迭代器的指针是指向两个结点之间的位置上的。这一定要注意；3）一些细节上的问题我会说清楚
+整体结构1）我们需要一个List接口。两个list都继承这个接口的方法2）我们需要一个iterator接口，两个类的子类对象要继承这个接口的方法3）这个类..
                                         </p>
                                         <p>2019-07-14</p>
                                         <button class="button is-small">Read More</button>
@@ -457,14 +443,7 @@ V remove(Object key)
                                             
                                         </p>
                                         <p>
-                                            星期一：StringBuffer：线程安全的可变字符序列。可以自动扩容
-构造方法：StringBuffer()
-    创建空的字符序列，默认容量是16
-StringBuffer(int capacity)
-    创建空的字符序列，容量为capacity.
-StringBuffer(String str)
-    字符串转成StringBuffer
-成..
+                                            本周内容摘要：StringBuffer，Date对象，DateFormat类，Math，debug调试快捷键，异常，Collection集合，迭代器（iterator），ArrayList，LinkedList，泛型，foreach(有迭代器都可以)，可变参数variableParameter，基本数据类型的包装类，ArrayList 和linkedLi..
                                         </p>
                                         <p>2019-07-14</p>
                                         <button class="button is-small">Read More</button>
@@ -489,7 +468,7 @@ StringBuffer(String str)
                                         </p>
                                         <p>
                                             总结时间：0701-0706
-概述这周主要把面向对象的内容讲完了。很多东西虽然很熟悉但是却很多细节的处理很重要。是打好基础的关键。但是万变不离其中，离不开三大特性：继承，封装，多态。现在也只能字面意思上去理解到底这些东西是什么。这些东西的规律是什么，但是他为什么这样实现的？最初的构想是什么？等等问题，这不是老师能教你的，你自己需要去学习。上个礼拜简单的讲..
+本周主要内容:代码块介绍，对象继承，final（修饰类，方法，变量），对象的多态，抽象类，接口，打包指令，权限修饰符（public default…），内部类（成员内部类，静态内部类，局部内部类，匿名内部类），Object类（注意他的方法，所有类都可以重写），String类（注意byte数组可以构建String（流对象）），..
                                         </p>
                                         <p>2019-07-06</p>
                                         <button class="button is-small">Read More</button>
@@ -633,16 +612,16 @@ StringBuffer(String str)
         </div>
         <div class="content-inner is-flex flex-wrap justify-space-between">
             
-                <a class="tags-item" href="tags/规范/" title="规范" rel="1">
-                    规范
-                </a>
-            
                 <a class="tags-item" href="tags/帮助/" title="帮助" rel="1">
                     帮助
                 </a>
             
                 <a class="tags-item" href="tags/人生/" title="人生" rel="1">
                     人生
+                </a>
+            
+                <a class="tags-item" href="tags/规范/" title="规范" rel="1">
+                    规范
                 </a>
             
         </div>
@@ -691,7 +670,7 @@ StringBuffer(String str)
         <br>
         Copyright © 王邸 2019
         <!--
-          Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+          Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
         -->
       </div>
     </div>

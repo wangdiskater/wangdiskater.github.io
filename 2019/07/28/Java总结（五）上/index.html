@@ -8,16 +8,16 @@
   
   <title>Java总结（五）上 | 路要坚持</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="星期一（0722）Mappublic interface Map:  将键映射到值的对象。一个映射不能包含重复的键；每个键最多只能映射到一个值。方法：  增： V put(K key, V value) void putAll(Map&amp;lt;? extends K,? extends V&amp;gt; m)   删： V remove(Object key) void clear()   改： V pu">
+  <meta name="description" content="Map:HashMap、TreeMap，自己实现HashMap（拉链法），文件（路径），字节流（输入、输出、缓冲流），字符流（转换流、输入、输出、缓冲流），设计模式（装饰者模式），Data流，Object流，序列化流，打印流，标准输入输出流，错误流，Properties类，hashTable方法，线程，多线程的实现（两种方法创建线程），线程的控制（sleep,join,yeild,setDamon">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java总结（五）上">
 <meta property="og:url" content="http://yoursite.com/2019/07/28/Java总结（五）上/index.html">
 <meta property="og:site_name" content="路要坚持">
-<meta property="og:description" content="星期一（0722）Mappublic interface Map:  将键映射到值的对象。一个映射不能包含重复的键；每个键最多只能映射到一个值。方法：  增： V put(K key, V value) void putAll(Map&amp;lt;? extends K,? extends V&amp;gt; m)   删： V remove(Object key) void clear()   改： V pu">
-<meta property="og:updated_time" content="2019-07-28T15:13:09.164Z">
+<meta property="og:description" content="Map:HashMap、TreeMap，自己实现HashMap（拉链法），文件（路径），字节流（输入、输出、缓冲流），字符流（转换流、输入、输出、缓冲流），设计模式（装饰者模式），Data流，Object流，序列化流，打印流，标准输入输出流，错误流，Properties类，hashTable方法，线程，多线程的实现（两种方法创建线程），线程的控制（sleep,join,yeild,setDamon">
+<meta property="og:updated_time" content="2019-08-17T03:50:37.458Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java总结（五）上">
-<meta name="twitter:description" content="星期一（0722）Mappublic interface Map:  将键映射到值的对象。一个映射不能包含重复的键；每个键最多只能映射到一个值。方法：  增： V put(K key, V value) void putAll(Map&amp;lt;? extends K,? extends V&amp;gt; m)   删： V remove(Object key) void clear()   改： V pu">
+<meta name="twitter:description" content="Map:HashMap、TreeMap，自己实现HashMap（拉链法），文件（路径），字节流（输入、输出、缓冲流），字符流（转换流、输入、输出、缓冲流），设计模式（装饰者模式），Data流，Object流，序列化流，打印流，标准输入输出流，错误流，Properties类，hashTable方法，线程，多线程的实现（两种方法创建线程），线程的控制（sleep,join,yeild,setDamon">
   
     <link rel="alternate" href="/" title="路要坚持" type="application/atom+xml">
   
@@ -150,7 +150,8 @@
             
         </div>
         <div class="content" style="overflow: auto">
-            <h2 id="星期一（0722）"><a href="#星期一（0722）" class="headerlink" title="星期一（0722）"></a>星期一（0722）</h2><h3 id="Map"><a href="#Map" class="headerlink" title="Map"></a>Map</h3><p>public interface Map:<br>  将键映射到值的对象。一个映射不能包含重复的键；每个键最多只能映射到一个值。<br>方法：<br>  增：</p>
+            <p>Map:HashMap、TreeMap，自己实现HashMap（拉链法），文件（路径），字节流（输入、输出、缓冲流），字符流（转换流、输入、输出、缓冲流），设计模式（装饰者模式），Data流，Object流，序列化流，打印流，标准输入输出流，错误流，Properties类，hashTable方法，线程，多线程的实现（两种方法创建线程），线程的控制（sleep,join,yeild,setDamon,interrupt)，线程安全问题，线程同步，银行转账案例</p>
+<h2 id="星期一（0722）"><a href="#星期一（0722）" class="headerlink" title="星期一（0722）"></a>星期一（0722）</h2><h3 id="Map"><a href="#Map" class="headerlink" title="Map"></a>Map</h3><p>public interface Map:<br>  将键映射到值的对象。一个映射不能包含重复的键；每个键最多只能映射到一个值。<br>方法：<br>  增：</p>
 <pre><code>V put(K key, V value)
 void putAll(Map&lt;? extends K,? extends V&gt; m)
 </code></pre><p>  删：</p>
@@ -175,7 +176,7 @@ Map.Entry&lt;K,V&gt; 键-值对
 方式2：Set&lt;K&gt; keySet() + V get(key)
 方式3：Collection&lt;V&gt; values()
 </code></pre><h3 id="HashMap"><a href="#HashMap" class="headerlink" title="HashMap"></a>HashMap</h3><p>注意事项：<br>    键的唯一性和存储键的equals() 和 hashCode()方法有关<br>    HashMap的键和值可以 null.</p>
-<h3 id="自己构造HashMap-MyHashMap-java"><a href="#自己构造HashMap-MyHashMap-java" class="headerlink" title="自己构造HashMap(MyHashMap.java)"></a>自己构造HashMap(MyHashMap.java)</h3><p>思路：<br>1.首先HashMap是键值对存储的，单纯的数组肯定是不行的。需要一个Node对象保存key 和 value。</p>
+<h3 id="自己构造-HashMap-MyHashMap-java"><a href="#自己构造-HashMap-MyHashMap-java" class="headerlink" title="自己构造 HashMap (MyHashMap.java)"></a>自己构造 HashMap (MyHashMap.java)</h3><p>思路：<br>1.首先HashMap是键值对存储的，单纯的数组肯定是不行的。需要一个Node对象保存key 和 value。</p>
 <p>2.为了解决冲突容易所以使用拉链法（链地址法）来解决冲突。原理就是一个Table数组放每一个单链表的头指针。然后出现冲突，就把结点以头插法的形式插入到每一个Table[index]中。所以这里需要给每一个Node一个next属性</p>
 <p>3.关于加载因子和阈值，这两个指标其实表示的就是一个意思：</p>
 <pre><code>加载因子*Table长度 = 阈值
@@ -467,7 +468,7 @@ public File[] listFiles(FilenameFilter filter)
 abstract int read() // 读取一个字节
 int read(byte[] b) // 把读取的数据放入字节数组中
 int read(byte[] b, int off, int len) // 把读取的数据放入部分数组中
-</code></pre><p>###读取的方式（重点）：<br>1.按一个字节一个字节读取（注意读取的是<strong><em>int值</em></strong>）<br>2.用一个字节数组保存读取</p>
+</code></pre><h3 id="读取的方式（重点）："><a href="#读取的方式（重点）：" class="headerlink" title="读取的方式（重点）："></a>读取的方式（重点）：</h3><p>1.按一个字节一个字节读取（注意读取的是<strong><em>int值</em></strong>）<br>2.用一个字节数组保存读取</p>
 <p>例子如下：<br>//这里使用了try… with…resource的语句</p>
 <pre><code>try(FileInputStream in = new FileInputStream(&quot;a.txt&quot;)) {
 
@@ -1041,7 +1042,7 @@ private Runnable target;
 <p>2.哪种方法更好<br>很明显方法二更好</p>
 <p>方式一的缺陷<br>如果某个类已经有父类，则无法再继承Thread类</p>
 <p>方式二的优点<br>解决了单继承的局限性<br>还有一个优点，便于多线程共享数据<br><strong>将线程和任务解耦</strong><br>方法二的实现Runable的类就能看成是一个任务。这样就能把任务和线程分开，自己负责自己的领域</p>
-<h3 id="线程的控制"><a href="#线程的控制" class="headerlink" title="线程的控制"></a>线程的控制</h3><h3 id="线程休眠：使当前线程休眠"><a href="#线程休眠：使当前线程休眠" class="headerlink" title="线程休眠：使当前线程休眠"></a>线程休眠：使当前线程休眠</h3><pre><code>static void sleep(long millis)
+<h3 id="线程的控制"><a href="#线程的控制" class="headerlink" title="线程的控制"></a>线程的控制</h3><h3 id="void-sleep-线程休眠：使当前线程休眠"><a href="#void-sleep-线程休眠：使当前线程休眠" class="headerlink" title="void sleep() 线程休眠：使当前线程休眠"></a>void sleep() 线程休眠：使当前线程休眠</h3><pre><code>static void sleep(long millis)
 static void sleep(long millis, int nanos) 可以精确到纳秒级别
 </code></pre><h3 id="void-join"><a href="#void-join" class="headerlink" title="void join()"></a>void join()</h3><pre><code>当前线程等待调用join()方法的线程执行完毕再执行
 void join(long millis) 指定等待期限
@@ -1177,7 +1178,7 @@ public static void main(String[] args) {
   t2.start();
   t3.start();
 }
-</code></pre><p>##两种方法比较，发现第二种方法不仅不需要设置静态的变量，而且他有一个很明显的优点，他实现了任务和线程的解耦，一个任务多个线程同时完成。而第一种方法，需要去创建三个独立的线程去共享数据，而且这个数据是静态的才能共享就很蠢。##</p>
+</code></pre><p><strong>两种方法比较，发现第二种方法不仅不需要设置静态的变量，而且他有一个很明显的优点，他实现了任务和线程的解耦，一个任务多个线程同时完成。而第一种方法，需要去创建三个独立的线程去共享数据，而且这个数据是静态的才能共享就很蠢。</strong><br><strong><em>注意一点：任务和线程的解耦非常重要</em></strong></p>
 <p>注意：这里有可能看到控制台打印的内容不是按顺序的：</p>
 <pre><code>窗口3: 售出了一张票，还剩1张票
 窗口3: 售出了一张票，还剩0张票
@@ -1366,7 +1367,7 @@ c. 按照一定的顺序申请资源
         <br>
         Copyright © 王邸 2019
         <!--
-          Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+          Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
         -->
       </div>
     </div>

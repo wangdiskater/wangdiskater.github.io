@@ -8,16 +8,16 @@
   
   <title>Java总结（三）上 | 路要坚持</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="星期一：StringBuffer：线程安全的可变字符序列。可以自动扩容 构造方法：StringBuffer()     创建空的字符序列，默认容量是16 StringBuffer(int capacity)     创建空的字符序列，容量为capacity. StringBuffer(String str)     字符串转成StringBuffer 成员方法：int capacity()">
+  <meta name="description" content="本周内容摘要：StringBuffer，Date对象，DateFormat类，Math，debug调试快捷键，异常，Collection集合，迭代器（iterator），ArrayList，LinkedList，泛型，foreach(有迭代器都可以)，可变参数variableParameter，基本数据类型的包装类，ArrayList 和linkedList的源码的编写 星期一：StringBuf">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java总结（三）上">
 <meta property="og:url" content="http://yoursite.com/2019/07/14/Java总结（三）上/index.html">
 <meta property="og:site_name" content="路要坚持">
-<meta property="og:description" content="星期一：StringBuffer：线程安全的可变字符序列。可以自动扩容 构造方法：StringBuffer()     创建空的字符序列，默认容量是16 StringBuffer(int capacity)     创建空的字符序列，容量为capacity. StringBuffer(String str)     字符串转成StringBuffer 成员方法：int capacity()">
-<meta property="og:updated_time" content="2019-07-31T01:05:57.137Z">
+<meta property="og:description" content="本周内容摘要：StringBuffer，Date对象，DateFormat类，Math，debug调试快捷键，异常，Collection集合，迭代器（iterator），ArrayList，LinkedList，泛型，foreach(有迭代器都可以)，可变参数variableParameter，基本数据类型的包装类，ArrayList 和linkedList的源码的编写 星期一：StringBuf">
+<meta property="og:updated_time" content="2019-08-17T03:15:46.939Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java总结（三）上">
-<meta name="twitter:description" content="星期一：StringBuffer：线程安全的可变字符序列。可以自动扩容 构造方法：StringBuffer()     创建空的字符序列，默认容量是16 StringBuffer(int capacity)     创建空的字符序列，容量为capacity. StringBuffer(String str)     字符串转成StringBuffer 成员方法：int capacity()">
+<meta name="twitter:description" content="本周内容摘要：StringBuffer，Date对象，DateFormat类，Math，debug调试快捷键，异常，Collection集合，迭代器（iterator），ArrayList，LinkedList，泛型，foreach(有迭代器都可以)，可变参数variableParameter，基本数据类型的包装类，ArrayList 和linkedList的源码的编写 星期一：StringBuf">
   
     <link rel="alternate" href="/" title="路要坚持" type="application/atom+xml">
   
@@ -150,7 +150,8 @@
             
         </div>
         <div class="content" style="overflow: auto">
-            <h2 id="星期一："><a href="#星期一：" class="headerlink" title="星期一："></a>星期一：</h2><h3 id="StringBuffer："><a href="#StringBuffer：" class="headerlink" title="StringBuffer："></a>StringBuffer：</h3><p>线程安全的可变字符序列。可以自动扩容</p>
+            <p>本周内容摘要：StringBuffer，Date对象，DateFormat类，Math，debug调试快捷键，异常，Collection集合，迭代器（iterator），ArrayList，LinkedList，泛型，foreach(有迭代器都可以)，可变参数variableParameter，基本数据类型的包装类，ArrayList 和linkedList的源码的编写</p>
+<h2 id="星期一："><a href="#星期一：" class="headerlink" title="星期一："></a>星期一：</h2><h3 id="StringBuffer："><a href="#StringBuffer：" class="headerlink" title="StringBuffer："></a>StringBuffer：</h3><p>线程安全的可变字符序列。可以自动扩容</p>
 <h4 id="构造方法："><a href="#构造方法：" class="headerlink" title="构造方法："></a>构造方法：</h4><pre><code>StringBuffer()
     创建空的字符序列，默认容量是16
 StringBuffer(int capacity)
@@ -298,11 +299,10 @@ Date(long date)
         //使用了df2来解析 报错
     }
 }
-</code></pre><p>3.math</p>
-<pre><code>public final class Math
+</code></pre><h3 id="Math"><a href="#Math" class="headerlink" title="Math"></a>Math</h3><pre><code>public final class Math
 </code></pre><p>  概述：Math 类包含用于执行基本数学运算的方法，如初等指数、对数、平方根和三角函数。<br>  字段：E: 自然对数的底；PI: 圆周率</p>
 <p>  方法：<br>      工具类都是static方法，之前有介绍过，返回的都是浮点数的值；<br>      public static int abs(int a)<br>      public static double ceil(double a)<br>      public static double floor(double a)<br>      public static int max(int a,int b) min自学<br>      public static int round(float a)<br>      public static double pow(double a,double b)<br>      public static double random()<br>      public static double sqrt(double a)</p>
-<p>4.debug<br>  这是一门大学问。并不是简单的就说清楚的，这里写一些简单的IDEA自带的快捷键<br>  shift + F9 debug模式运行程序，或者点左边的小虫子；<br>  Frames: 代表栈帧 写的入栈的方法；<br>  step over: 快捷键 F8，跳出方法执行完<br>  step into 快捷键 F7，进入你自己写的方法<br>  force step into 快捷键 alt + shift + f7可以进入java写的方法；<br>  step out : 快捷键 shift + F8<br>  ctrl + F2：结束当前debug</p>
+<h3 id="debug"><a href="#debug" class="headerlink" title="debug"></a>debug</h3><p>  这是一门大学问。并不是简单的就说清楚的，这里写一些简单的IDEA自带的快捷键<br>  shift + F9 debug模式运行程序，或者点左边的小虫子；<br>  Frames: 代表栈帧 写的入栈的方法；<br>  step over: 快捷键 F8，跳出方法执行完<br>  step into 快捷键 F7，进入你自己写的方法<br>  force step into 快捷键 alt + shift + f7可以进入java写的方法；<br>  step out : 快捷键 shift + F8<br>  ctrl + F2：结束当前debug</p>
 <p>  其他还不怎么会用<br>  这里调试就遇到一个问题。<br>  两个StringBufferappend时候，使用IDEA进入append里面就出现问题了。</p>
 <pre><code> StringBuffer s1 = new StringBuffer(&quot;hello&quot;);
  StringBuffer s2 = new StringBuffer(&quot;wowowowo&quot;);
@@ -633,12 +633,36 @@ class GenericClass&lt;T,U&gt; implements GenericInterFace(T)；
 <h3 id="可变参数variableParameter"><a href="#可变参数variableParameter" class="headerlink" title="可变参数variableParameter"></a>可变参数variableParameter</h3><p>格式：修饰符 返回值类型 方法名(数据类型…  变量名){}<br>优点：<br>  不需要封装数据<br>  更加直观<br>缺点：<br>  只能有一个可变参数，并且只能在最后<br>注意事项：<br>  a. 可变参数底层其实是数组<br>  b. 可变参数必须方法最后</p>
 <h3 id="包装类"><a href="#包装类" class="headerlink" title="包装类"></a>包装类</h3><p>JDK1.5新特性 (语法糖，提高程序员的编码效率)<br>自动装箱： 基本数据类型 –&gt; 包装数据类型<br>   int i = 10;<br>   Integer itg = Integer.ValueOf(i);<br>自动拆箱： 包装数据类型 –&gt; 基本数据类型<br>   Integer itg = new Integer(10);<br>   int i = itg.intValue();</p>
 <p>可以接着往下看，或者看下篇</p>
-<h2 id="星期六"><a href="#星期六" class="headerlink" title="星期六"></a>星期六</h2><h3 id="学习数据结构List"><a href="#学习数据结构List" class="headerlink" title="学习数据结构List"></a>学习数据结构List</h3><p>主要就是学习源码为什么这样写。有几点需要注意：<br>1）我们只学习核心的方法和迭代器的方法<br>2）迭代器的指针是指向两个结点之间的位置上的。这一定要注意；<br>3）一些细节上的问题我会说清楚<br>4）出现的异常总结：</p>
+<h2 id="星期六"><a href="#星期六" class="headerlink" title="星期六"></a>星期六</h2><h3 id="学习数据结构List"><a href="#学习数据结构List" class="headerlink" title="学习数据结构List"></a>学习数据结构List</h3><p>主要就是学习源码为什么这样写。有几点需要注意：<br>1）我们只学习核心的方法和迭代器的方法<br>2）迭代器的指针是指向两个结点之间的位置上的。这一定要注意；<br>3）一些细节上的问题我会说清楚</p>
 <h3 id="整体结构"><a href="#整体结构" class="headerlink" title="整体结构"></a>整体结构</h3><p>1）我们需要一个List接口。两个list都继承这个接口的方法<br>2）我们需要一个iterator接口，两个类的子类对象要继承这个接口的方法<br>3）这个类的子类要和父类数据互通，不想被其他类访问最好就放在内部类<br>4）出现的异常<br>IllegalArgumentException   抛出的异常表明向方法传递了一个不合法或不正确的参数。<br>ArrayStoreException       试图将错误类型的对象存储到一个对象数组时抛出的异常。<br>IndexOutOfBoundsException 指示某排序索引（例如对数组、字符串或向量的排序）超出范围时抛出。<br>ConcurrentModificationException ： 当方法检测到对象的并发修改，但不允许这种修改时，抛出此异常。<br>IllegalStateException  在非法或不适当的时间调用方法时产生的信号。换句话说，即 Java 环境或 Java 应用程序没有处于请求操作所要求的适当状态下。<br>NoSuchElementException  由 Enumeration 的 nextElement 方法抛出，表明枚举中没有更多的元素。</p>
-<h3 id="实现的步骤（以ArrayList为例）；"><a href="#实现的步骤（以ArrayList为例）；" class="headerlink" title="实现的步骤（以ArrayList为例）；"></a>实现的步骤（以ArrayList为例）；</h3><p>1）先定义出List接口和iterator接口<br>2）然后写ArrayList<br>    1.属性<br>    2.构造方法<br>    3.重写List方法<br>3）实现iterator接口<br>    1.属性<br>    2.构造方法<br>    3.重写方法</p>
-<h3 id="List接口"><a href="#List接口" class="headerlink" title="List接口"></a>List接口</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">public interface MyList &#123;</div><div class="line">    boolean add(String s);</div><div class="line">    void add(int index, String s);</div><div class="line">    void clear();</div><div class="line">    boolean contains(String s);</div><div class="line">    String get(int index);</div><div class="line">    int indexOf(String s);</div><div class="line">    boolean isEmpty();</div><div class="line">    MyIterator iterator();</div><div class="line">    int lastIndexOf(String s);</div><div class="line">    String remove(int index);</div><div class="line">    boolean remove(String s);</div><div class="line">    String set(int index, String s);</div><div class="line">    int size();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="ListIterator接口"><a href="#ListIterator接口" class="headerlink" title="ListIterator接口"></a>ListIterator接口</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">public interface MyIterator &#123;</div><div class="line">    void add(String s);</div><div class="line">    boolean hasNext();</div><div class="line">    boolean hasPrevious();</div><div class="line">    String next();</div><div class="line">    String previous();</div><div class="line">    int nextIndex();</div><div class="line">    int previousIndex();</div><div class="line">    void remove();</div><div class="line">    void set(String s);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="源码解析ArrayList"><a href="#源码解析ArrayList" class="headerlink" title="源码解析ArrayList"></a>源码解析ArrayList</h3><p>  1.属性<br>  分析：首先ArrayList是顺序存储的，而且是一个动态的数组，所以我们需要一个数组装元素elements[]，一个属性表示容量。还需要属性来表示长度（size）,<strong>为了处理并发修改异常还需要一个属性来记录在迭代器迭代时候，集合有没有修改元素modCount</strong></p>
+<h3 id="实现的步骤（以ArrayList为例）；"><a href="#实现的步骤（以ArrayList为例）；" class="headerlink" title="实现的步骤（以ArrayList为例）；"></a>实现的步骤（以ArrayList为例）；</h3><p>1）先定义出 List 接口和 iterator 接口<br>2）然后写 ArrayList<br>    1.属性<br>    2.构造方法<br>    3.重写 List 方法<br>3）实现 iterator 接口<br>    1.属性<br>    2.构造方法<br>    3.重写方法</p>
+<h3 id="List接口"><a href="#List接口" class="headerlink" title="List接口"></a>List接口</h3><pre><code>public interface MyList {
+    boolean add(String s);
+    void add(int index, String s);
+    void clear();
+    boolean contains(String s);
+    String get(int index);
+    int indexOf(String s);
+    boolean isEmpty();
+    MyIterator iterator();
+    int lastIndexOf(String s);
+    String remove(int index);
+    boolean remove(String s);
+    String set(int index, String s);
+    int size();
+}
+</code></pre><h3 id="ListIterator接口"><a href="#ListIterator接口" class="headerlink" title="ListIterator接口"></a>ListIterator接口</h3><pre><code>public interface MyIterator {
+    void add(String s);
+    boolean hasNext();
+    boolean hasPrevious();
+    String next();
+    String previous();
+    int nextIndex();
+    int previousIndex();
+    void remove();
+    void set(String s);
+}
+</code></pre><h3 id="源码解析ArrayList"><a href="#源码解析ArrayList" class="headerlink" title="源码解析ArrayList"></a>源码解析ArrayList</h3><p>  1.属性<br>  分析：首先ArrayList是顺序存储的，而且是一个动态的数组，所以我们需要一个数组装元素elements[]，一个属性表示容量。还需要属性来表示长度（size）,<strong>为了处理并发修改异常还需要一个属性来记录在迭代器迭代时候，集合有没有修改元素modCount</strong></p>
 <pre><code>//属性
 public static final int MAX_CAPACITY = Integer.MAX_VALUE - 8; //最大长度
 public static final int DEFAULT_CAPACITY = 10; //默认长度
@@ -863,7 +887,7 @@ implements List&lt;E&gt;, Deque&lt;E&gt;, Cloneable, java.io.Serializable
         <br>
         Copyright © 王邸 2019
         <!--
-          Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+          Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
         -->
       </div>
     </div>
