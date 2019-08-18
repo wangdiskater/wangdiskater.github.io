@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+<html class="full-height">
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="//cdn.bootcss.com/bulma/0.4.1/css/bulma.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+  
+  <title>Java总结（八） | 路要坚持</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="总结，本周还是讲的前端，不过使用node+vue启动的前端项目 星期一（8.12）DOM文档对象模型，是W3C织制订的一套用于访问HTML文档的标准.允许脚本动态地访问和更新文档的内容、结构和样式.分类 DOM Core XML DOM HTML DOM XML DOM 和 HTML DOM 关系XML DOM 定义了访问和处理 XML 文档的标准方法HTML文档格式 符合XML语法标准，所以可以">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java总结（八）">
+<meta property="og:url" content="http://yoursite.com/2019/08/18/Java总结（八）/index.html">
+<meta property="og:site_name" content="路要坚持">
+<meta property="og:description" content="总结，本周还是讲的前端，不过使用node+vue启动的前端项目 星期一（8.12）DOM文档对象模型，是W3C织制订的一套用于访问HTML文档的标准.允许脚本动态地访问和更新文档的内容、结构和样式.分类 DOM Core XML DOM HTML DOM XML DOM 和 HTML DOM 关系XML DOM 定义了访问和处理 XML 文档的标准方法HTML文档格式 符合XML语法标准，所以可以">
+<meta property="og:updated_time" content="2019-08-18T14:48:47.705Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java总结（八）">
+<meta name="twitter:description" content="总结，本周还是讲的前端，不过使用node+vue启动的前端项目 星期一（8.12）DOM文档对象模型，是W3C织制订的一套用于访问HTML文档的标准.允许脚本动态地访问和更新文档的内容、结构和样式.分类 DOM Core XML DOM HTML DOM XML DOM 和 HTML DOM 关系XML DOM 定义了访问和处理 XML 文档的标准方法HTML文档格式 符合XML语法标准，所以可以">
+  
+    <link rel="alternate" href="/" title="路要坚持" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/common.css">
+<link rel="stylesheet" href="/css/nav.css">
+<link rel="stylesheet" href="/css/layout.css">
+  
+
+</head>
+
+<body>
+  <header id="navbar" class="overflow-hidden">
+  <div class="container">
+    <nav class="nav">
+         <div class="nav-left">
+            <a href="/" class="nav-item" style="font-size: 20px;">
+              <span class="logo">王邸</span>'s Blog
+            </a>
+         </div>
+        <div class="nav-center is-hidden position-relative" id="search_container">
+            <div class="nav-item full-width full-height">
+                <i class="fa fa-search has-padding" aria-hidden="true"></i>
+                <input type="text" id="search_input" class="search-input full-height full-width" placeholder="Search post" autofocus>
+                <i id="close_search" class="fa fa-times" aria-hidden="true"></i>
+            </div>
+            <div id="search_result"></div>
+        </div>
+        <div class="nav-right nav-menu">
+            <a class="nav-item" id="search">
+                <i class="fa fa-search" aria-hidden="true"></i>
+            </a>
+            
+            <a class="nav-item" href="/">
+                Home
+            </a>
+            
+            <a class="nav-item" href="/works">
+                My Works
+            </a>
+            
+            <a class="nav-item" href="/about">
+                About
+            </a>
+            
+        </div>
+        <span class="nav-toggle" id="navMenuDropdown">
+            <span></span>
+            <span></span>
+            <span></span>
+        </span>
+        <div class="navbar-menu position-absolute full-width content-box is-hidden-desktop is-flex flex-column center" style="top: 100%;">
+            
+            <a class="nav-item flex-1" href="/">
+                Home
+            </a>
+            
+            <a class="nav-item flex-1" href="/works">
+                My Works
+            </a>
+            
+            <a class="nav-item flex-1" href="/about">
+                About
+            </a>
+            
+        </div>
+    </nav>
+  </div>
+</header>
+
+  <div id="main-wrap" class="position-relative" style="margin-top: 55px;">
+      <div class="main-inner-content">
+          <!--博文页面-->
+
+<style>
+    .header-box {
+        height: 370px;
+        filter: blur(10px);
+        background-size: cover;
+        background-color: lightsteelblue;
+    }
+
+    .post-box {
+        padding: 15px;
+        padding-top: 60px;
+        min-height: 80vh;
+        margin-top: -200px;
+        border-radius: 4px;
+        background-color: rgba(255,255,255,.8);
+    }
+
+    .post-avatar {
+        height: 30px;
+        width: 30px;
+        border-radius: 50%;
+    }
+
+    .flow-chart {
+        text-align: center;
+    }
+
+    img[alt="post-cover"] {
+        display: none;
+    }
+</style>
+<header>
+    <div id="header_box" class="header-box"></div>
+</header>
+<section>
+    <div class="container post-box">
+        <div class="content post-title is-flex center flex-column" style="margin-bottom: 70px; overflow: auto;">
+            <h1 class="has-text-centered" style="padding-bottom: 10px; border-bottom: 3px solid #fff">
+                <strong>Java总结（八）</strong>
+            </h1>
+            
+            <div class="is-flex align-center">
+                <img class="post-avatar" src="https://q2.qlogo.cn/headimg_dl?bs=996057150&dst_uin=996057150&dst_uin=996057150&;dst_uin=996057150&spec=100&url_enc=0&referer=bu_interface&term_type=PC">
+                <span style="padding:0 10px;"> <span class="sub-title">By</span> 王邸</span>
+                <span class="post-date sub-title">at: 2019-08-18</span>
+            </div>
+            
+                <div>
+                    
+                </div>
+            
+        </div>
+        <div class="content" style="overflow: auto">
+            <p>总结，本周还是讲的前端，不过使用node+vue启动的前端项目</p>
+<h2 id="星期一（8-12）"><a href="#星期一（8-12）" class="headerlink" title="星期一（8.12）"></a>星期一（8.12）</h2><h3 id="DOM"><a href="#DOM" class="headerlink" title="DOM"></a>DOM</h3><p>文档对象模型，<br>是W3C织制订的一套用于访问HTML文档的标准.允许脚本动态地访问和更新文档的内容、结构和样式.<br>分类</p>
+<pre><code>DOM Core
+XML DOM
+HTML DOM
+</code></pre><h3 id="XML-DOM-和-HTML-DOM-关系"><a href="#XML-DOM-和-HTML-DOM-关系" class="headerlink" title="XML DOM 和 HTML DOM 关系"></a>XML DOM 和 HTML DOM 关系</h3><p>XML DOM 定义了访问和处理 XML 文档的标准方法<br>HTML文档格式 符合XML语法标准，所以可以使用XML DOM API<br>在XML DOM每个元素 都会被解析为一个节点Node，而常用的节点类型又分为</p>
+<pre><code>元素节点  Element
+属性节点  Attr
+文本节点  Text
+文档节点  Document
+</code></pre><p>HTML DOM 定义了针对 HTML文档的对象，可以说是一套 更加适用于 JavaScript 技术开发 的API<br>HTML DOM是对XML DOM的扩展<br>进行 JavaScript DOM开发 可以同时使用 XML DOM和 HTML DOM</p>
+<h3 id="Node的特性方法"><a href="#Node的特性方法" class="headerlink" title="Node的特性方法"></a>Node的特性方法</h3><table>
+<thead>
+<tr>
+<th style="text-align:right">特性/方法</th>
+<th style="text-align:center">类型/返回类型</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right">nodeName</td>
+<td style="text-align:center">String</td>
+<td style="text-align:left">节点的名字；根据节点的类型而定义</td>
+</tr>
+<tr>
+<td style="text-align:right">nodeValue</td>
+<td style="text-align:center">String</td>
+<td style="text-align:left">节点的值；根据节点的类型而定义</td>
+</tr>
+<tr>
+<td style="text-align:right">nodeType</td>
+<td style="text-align:center">Number</td>
+<td style="text-align:left">节点的类型常量值之一</td>
+</tr>
+<tr>
+<td style="text-align:right">ownerDocument</td>
+<td style="text-align:center">Document</td>
+<td style="text-align:left">指向这个节点所属的文档</td>
+</tr>
+<tr>
+<td style="text-align:right">firstChild</td>
+<td style="text-align:center">Node</td>
+<td style="text-align:left">指向在childNodes列表中的第一个节点</td>
+</tr>
+<tr>
+<td style="text-align:right">lastChild</td>
+<td style="text-align:center">Node</td>
+<td style="text-align:left">指向在childNodes列表中的最后一个节点</td>
+</tr>
+<tr>
+<td style="text-align:right">childNodes</td>
+<td style="text-align:center">NodeList</td>
+<td style="text-align:left">所有子节点的列表</td>
+</tr>
+<tr>
+<td style="text-align:right">parentNode</td>
+<td style="text-align:center">Node</td>
+<td style="text-align:left">返回一个给定节点的父节点。</td>
+</tr>
+<tr>
+<td style="text-align:right">previousSibling</td>
+<td style="text-align:center">Node</td>
+<td style="text-align:left">指向前一个兄弟节点；如果这个节点就是第一个兄弟节点，那么该值为null</td>
+</tr>
+<tr>
+<td style="text-align:right">nextSibling</td>
+<td style="text-align:center">Node</td>
+<td style="text-align:left">指向后一个兄弟节点；如果这个节点就是最后一个兄弟节点，那么该值为null</td>
+</tr>
+<tr>
+<td style="text-align:right">hasChildNodes()</td>
+<td style="text-align:center">Boolean</td>
+<td style="text-align:left">当childNodes包含一个或多个节点时，返回真</td>
+</tr>
+<tr>
+<td style="text-align:right">attributes</td>
+<td style="text-align:center">NamedNodeMap</td>
+<td style="text-align:left">包含了代表一个元素的属性的Attr对象；仅用于Element节点</td>
+</tr>
+<tr>
+<td style="text-align:right">appendChild(node)</td>
+<td style="text-align:center">Node</td>
+<td style="text-align:left">将node添加到childNodes的末尾</td>
+</tr>
+<tr>
+<td style="text-align:right">removeChild(node)</td>
+<td style="text-align:center">Node</td>
+<td style="text-align:left">从childNodes中删除node</td>
+</tr>
+<tr>
+<td style="text-align:right">replaceChild</td>
+<td style="text-align:center">Node</td>
+<td style="text-align:left">将childNodes中的oldnode替换成newnode(newnode, oldnode)</td>
+</tr>
+<tr>
+<td style="text-align:right">insertBefore</td>
+<td style="text-align:center">Node</td>
+<td style="text-align:left">在childNodes中的refnode之前插入newnode(newnode, refnode)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="DOM-节点常用属性"><a href="#DOM-节点常用属性" class="headerlink" title="DOM 节点常用属性"></a>DOM 节点常用属性</h3><p>nodeName</p>
+<pre><code>如果节点是元素节点，nodeName返回这个元素的名称
+如果是属性节点，nodeName返回这个属性的名称
+如果是文本节点，nodeName返回一个内容为#text 的字符串
+</code></pre><p>nodeType</p>
+<pre><code>Node.ELEMENT_NODE    ---1    -- 元素节点
+Node.ATTRIBUTE_NODE  ---2    -- 属性节点
+Node.TEXT_NODE       ---3    -- 文本节点
+</code></pre><p>nodeValue</p>
+<pre><code>如果给定节点是一个属性节点，返回值是这个属性的值
+如果给定节点是一个文本节点，返回值是这个文本节点内容
+如果给定节点是一个元素节点，返回值是 null
+</code></pre><h2 id="星期二（8-13）"><a href="#星期二（8-13）" class="headerlink" title="星期二（8.13）"></a>星期二（8.13）</h2><h3 id="XML"><a href="#XML" class="headerlink" title="XML"></a>XML</h3><p>这个东西已经过时了，主要用的还是XML的两个常用约束DTD 和 schema</p>
+<h3 id="DTD"><a href="#DTD" class="headerlink" title="DTD"></a>DTD</h3><p>文档类型定义（DTD）可定义合法的XML文档构建模块。它使用一系列合法的元素来定义文档的结构。<br>DTD 可被成行地声明于 XML 文档中，也可作为一个外部引用</p>
+<h3 id="DTD-简介"><a href="#DTD-简介" class="headerlink" title="DTD 简介"></a>DTD 简介</h3><p>对XML DTD 的简介，以及使用它的原因。</p>
+<h3 id="内部的-DOCTYPE-声明"><a href="#内部的-DOCTYPE-声明" class="headerlink" title="内部的 DOCTYPE 声明"></a>内部的 DOCTYPE 声明</h3><p>假如 DTD 被包含在您的 XML 源文件中，它应当通过下面的语法包装在一个 DOCTYPE 声明中：</p>
+<pre><code>&lt;!DOCTYPE 根元素 [元素声明]&gt;
+</code></pre><p>带有 DTD 的 XML 文档实例（请在 IE5 以及更高的版本打开，并选择查看源代码）：</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot;?&gt;
+&lt;!DOCTYPE note [
+  &lt;!ELEMENT note (to,from,heading,body)&gt;
+  &lt;!ELEMENT to      (#PCDATA)&gt;
+  &lt;!ELEMENT from    (#PCDATA)&gt;
+  &lt;!ELEMENT heading (#PCDATA)&gt;
+  &lt;!ELEMENT body    (#PCDATA)&gt;
+]&gt;
+&lt;note&gt;
+  &lt;to&gt;George&lt;/to&gt;
+  &lt;from&gt;John&lt;/from&gt;
+  &lt;heading&gt;Reminder&lt;/heading&gt;
+  &lt;body&gt;Don&apos;t forget the meeting!&lt;/body&gt;
+&lt;/note&gt;
+</code></pre><p>以上 DTD 解释如下：<br>!DOCTYPE note (第二行)定义此文档是 note 类型的文档。<br>!ELEMENT note (第三行)定义 note 元素有四个元素：”to、from、heading,、body”<br>!ELEMENT to (第四行)定义 to 元素为 “#PCDATA” 类型<br>!ELEMENT from (第五行)定义 from 元素为 “#PCDATA” 类型<br>!ELEMENT heading (第六行)定义 heading 元素为 “#PCDATA” 类型<br>!ELEMENT body (第七行)定义 body 元素为 “#PCDATA” 类型</p>
+<p>外部文档声明<br>假如 DTD 位于 XML 源文件的外部，那么它应通过下面的语法被封装在一个 DOCTYPE 定义中：</p>
+<pre><code>&lt;!DOCTYPE 根元素 SYSTEM &quot;文件名&quot;&gt;
+</code></pre><p>这个 XML 文档和上面的 XML 文档相同，但是拥有一个外部的 DTD: （在 IE5 中打开，并选择“查看源代码”命令。）</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot;?&gt;
+&lt;!DOCTYPE note SYSTEM &quot;note.dtd&quot;&gt;
+&lt;note&gt;
+&lt;to&gt;George&lt;/to&gt;
+&lt;from&gt;John&lt;/from&gt;
+&lt;heading&gt;Reminder&lt;/heading&gt;
+&lt;body&gt;Don&apos;t forget the meeting!&lt;/body&gt;
+&lt;/note&gt;
+</code></pre><p>这是包含 DTD 的 “note.dtd” 文件：</p>
+<pre><code>&lt;!ELEMENT note (to,from,heading,body)&gt;
+&lt;!ELEMENT to (#PCDATA)&gt;
+&lt;!ELEMENT from (#PCDATA)&gt;
+&lt;!ELEMENT heading (#PCDATA)&gt;
+&lt;!ELEMENT body (#PCDATA)&gt;
+</code></pre><h3 id="DTD-XML-构建模块"><a href="#DTD-XML-构建模块" class="headerlink" title="DTD - XML 构建模块"></a>DTD - XML 构建模块</h3><p>可以在 DTD 中定义的 XML 构建模块。<br>所有的 XML 文档（以及 HTML 文档）均由以下简单的构建模块构成：</p>
+<pre><code>元素
+属性
+实体
+PCDATA
+CDATA
+</code></pre><h3 id="DTD-元素"><a href="#DTD-元素" class="headerlink" title="DTD 元素"></a>DTD 元素</h3><p>如何使用 DTD 定义 XML 文档的合法元素。<br>声明一个元素<br>在 DTD 中，XML 元素通过元素声明来进行声明。元素声明使用下面的语法：<br>&lt;!ELEMENT 元素名称 类别&gt;<br>或者<br>&lt;!ELEMENT 元素名称 (元素内容)&gt;<br>只有 PCDATA 的元素<br>只有 PCDATA 的元素通过圆括号中的 #PCDATA 进行声明：</p>
+<pre><code>&lt;!ELEMENT 元素名称 (#PCDATA)&gt; 只有 PCDATA 的元素
+&lt;!ELEMENT 元素名称 ANY&gt; 带有任何内容的元素
+&lt;!ELEMENT 元素名称 (子元素名称 1,子元素名称 2,.....)&gt; 带有子元素（序列）的元素
+&lt;!ELEMENT 元素名称 (子元素名称)&gt;声明只出现一次的元素
+&lt;!ELEMENT 元素名称 (子元素名称+)&gt; 声明最少出现一次的元素
+&lt;!ELEMENT 元素名称 (子元素名称*)&gt; 声明出现零次或多次的元素
+&lt;!ELEMENT note (to,from,header,(message|body))&gt;声明“非.../既...”类型的内容 ：&quot;note&quot; 元素必须包含 &quot;to&quot; 元素、&quot;from&quot; 元素、&quot;header&quot; 元素，以及 &quot;message&quot; 元素或&quot;body&quot; 元素。
+</code></pre><p>例子：</p>
+<pre><code>&lt;!ELEMENT from (#PCDATA)&gt;
+&lt;!ELEMENT note (message)&gt;
+</code></pre><h3 id="DTD-属性"><a href="#DTD-属性" class="headerlink" title="DTD 属性"></a>DTD 属性</h3><p>如何使用 DTD 定义 XML 元素的合法属性。<br>在 DTD 中，属性通过 ATTLIST 声明来进行声明。<br>声明属性<br>属性声明使用下列语法：</p>
+<pre><code>&lt;!ATTLIST 元素名称 属性名称 属性类型 默认值&gt;
+</code></pre><p>DTD 实例:</p>
+<pre><code>&lt;!ATTLIST payment type CDATA &quot;check&quot;&gt;
+</code></pre><p>XML 实例:</p>
+<pre><code>&lt;payment type=&quot;check&quot; /&gt;
+</code></pre><p>以下是属性类型的选项：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:right">类型</th>
+<th style="text-align:left">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right">CDATA</td>
+<td style="text-align:left">值为字符数据 (character data)</td>
+</tr>
+<tr>
+<td style="text-align:right">(en1</td>
+<td style="text-align:left">en2</td>
+<td>..)</td>
+<td>此值是枚举列表中的一个值</td>
+</tr>
+<tr>
+<td style="text-align:right">ID</td>
+<td style="text-align:left">值为唯一的 id</td>
+</tr>
+<tr>
+<td style="text-align:right">IDREF</td>
+<td style="text-align:left">值为另外一个元素的 id</td>
+</tr>
+<tr>
+<td style="text-align:right">IDREFS</td>
+<td style="text-align:left">值为其他 id 的列表</td>
+</tr>
+<tr>
+<td style="text-align:right">NMTOKEN</td>
+<td style="text-align:left">值为合法的 XML 名称</td>
+</tr>
+<tr>
+<td style="text-align:right">NMTOKENS</td>
+<td style="text-align:left">值为合法的 XML 名称的列表</td>
+</tr>
+<tr>
+<td style="text-align:right">ENTITY</td>
+<td style="text-align:left">值是一个实体</td>
+</tr>
+<tr>
+<td style="text-align:right">ENTITIES</td>
+<td style="text-align:left">值是一个实体列表</td>
+</tr>
+<tr>
+<td style="text-align:right">NOTATION</td>
+<td style="text-align:left">此值是符号的名称</td>
+</tr>
+<tr>
+<td style="text-align:right">xml:</td>
+<td style="text-align:left">值是一个预定义的 XML 值</td>
+</tr>
+</tbody>
+</table>
+<p>默认值参数可使用下列值：</p>
+<pre><code>值 解释
+值 属性的默认值
+#REQUIRED 属性值是必需的
+#IMPLIED  属性不是必需的
+#FIXED value  属性值是固定的
+</code></pre><p>例子<br>DTD:<br>&lt;!ATTLIST person number CDATA #REQUIRED&gt;<br>合法的 XML:</p>
+<pre><code>&lt;person number=&quot;5677&quot; /&gt;
+</code></pre><h3 id="DTD-实体"><a href="#DTD-实体" class="headerlink" title="DTD 实体"></a>DTD 实体</h3><h3 id="DTD-验证"><a href="#DTD-验证" class="headerlink" title="DTD 验证"></a>DTD 验证</h3><h3 id="DTD-实例"><a href="#DTD-实例" class="headerlink" title="DTD 实例"></a>DTD 实例</h3><p><a href="https://www.w3school.com.cn/dtd/dtd_examples.asp" target="_blank" rel="external">一些真实的 DTD 案例</a>。</p>
+<h3 id="Schema"><a href="#Schema" class="headerlink" title="Schema"></a>Schema</h3><p>XML Schema 是基于 XML 的 DTD 替代者。<br>XML Schema 描述 XML 文档的结构。<br>XML Schema 语言也称作 XML Schema 定义（XML Schema Definition，XSD）。</p>
+<h3 id="XML-Schema-使用-XML-语法"><a href="#XML-Schema-使用-XML-语法" class="headerlink" title="XML Schema 使用 XML 语法"></a>XML Schema 使用 XML 语法</h3><p>另一个关于 XML Schema 的重要特性是，它们由 XML 编写。<br>由 XML 编写 XML Schema 有很多好处：</p>
+<pre><code>不必学习新的语言
+可使用 XML 编辑器来编辑 Schema 文件
+可使用 XML 解析器来解析 Schema 文件
+可通过 XML DOM 来处理 Schema
+可通过 XSLT 来转换 Schema
+</code></pre><h3 id="XML-Schema-可保护数据通信"><a href="#XML-Schema-可保护数据通信" class="headerlink" title="XML Schema 可保护数据通信"></a>XML Schema 可保护数据通信</h3><p>当数据从发送方被发送到接受方时，其要点是双方应有关于内容的相同的“期望值”。<br>通过 XML Schema，发送方可以用一种接受方能够明白的方式来描述数据。<br>一种数据，比如 “03-11-2004”，在某些国家被解释为11月3日，而在另一些国家为当作3月11日。<br>但是一个带有数据类型的 XML 元素，比如：</p>
+<pre><code>&lt;date type=&quot;date&quot;&gt;2004-03-11&lt;/date&gt;，
+</code></pre><p>可确保对内容一致的理解，这是因为 XML 的数据类型 “date” 要求的格式是 “YYYY-MM-DD”。</p>
+<h3 id="XML-Schema-可扩展"><a href="#XML-Schema-可扩展" class="headerlink" title="XML Schema 可扩展"></a>XML Schema 可扩展</h3><p>XML Schema 是可扩展的，因为它们由 XML 编写。<br>通过可扩展的 Schema 定义，您可以：</p>
+<pre><code>在其他 Schema 中重复使用您的 Schema
+创建由标准类型衍生而来的您自己的数据类型
+在相同的文档中引用多重的 Schema
+</code></pre><p>形式良好是不够的，我们把符合 XML 语法的文档称为形式良好的 XML 文档，比如：</p>
+<pre><code>它必须以 XML 声明开头
+它必须拥有唯一的根元素
+开始标签必须与结束标签相匹配
+元素对大小写敏感
+所有的元素都必须关闭
+所有的元素都必须正确地嵌套
+必须对特殊字符使用实体
+</code></pre><p>即使文档的形式良好，仍然不能保证它们不会包含错误，并且这些错误可能会产生严重的后果。</p>
+<h3 id="一个简单的例子"><a href="#一个简单的例子" class="headerlink" title="一个简单的例子"></a>一个简单的例子</h3><pre><code>&lt;?xml version=&quot;1.0&quot;?&gt;
+&lt;note&gt;
+&lt;to&gt;George&lt;/to&gt;
+&lt;from&gt;John&lt;/from&gt;
+&lt;heading&gt;Reminder&lt;/heading&gt;
+&lt;body&gt;Don&apos;t forget the meeting!&lt;/body&gt;
+&lt;/note&gt;
+</code></pre><p>XML Schema<br>下面这个例子是一个名为 “note.xsd” 的 XML Schema 文件，它定义了上面那个 XML 文档的元素：</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot;?&gt;
+&lt;xs:schema xmlns:xs=&quot;http://www.w3.org/2001/XMLSchema&quot;
+targetNamespace=&quot;http://www.w3school.com.cn&quot;
+xmlns=&quot;http://www.w3school.com.cn&quot;
+elementFormDefault=&quot;qualified&quot;&gt;
+&lt;xs:element name=&quot;note&quot;&gt;
+    &lt;xs:complexType&gt;
+      &lt;xs:sequence&gt;
+    &lt;xs:element name=&quot;to&quot; type=&quot;xs:string&quot;/&gt;
+    &lt;xs:element name=&quot;from&quot; type=&quot;xs:string&quot;/&gt;
+    &lt;xs:element name=&quot;heading&quot; type=&quot;xs:string&quot;/&gt;
+    &lt;xs:element name=&quot;body&quot; type=&quot;xs:string&quot;/&gt;
+      &lt;/xs:sequence&gt;
+    &lt;/xs:complexType&gt;
+&lt;/xs:element&gt;
+&lt;/xs:schema&gt;
+</code></pre><p>对 XML Schema 的引用</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot;?&gt;
+&lt;note
+xmlns=&quot;http://www.w3school.com.cn&quot;
+xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+xsi:schemaLocation=&quot;http://www.w3school.com.cn note.xsd&quot;&gt;
+
+&lt;to&gt;George&lt;/to&gt;
+&lt;from&gt;John&lt;/from&gt;
+&lt;heading&gt;Reminder&lt;/heading&gt;
+&lt;body&gt;Don&apos;t forget the meeting!&lt;/body&gt;
+&lt;/note&gt;
+</code></pre><h3 id="元素"><a href="#元素" class="headerlink" title=" 元素"></a><schema> 元素</schema></h3><pre><code>&lt;schema&gt; 元素可包含属性。一个 schema 声明往往看上去类似这样：
+
+&lt;?xml version=&quot;1.0&quot;?&gt;
+
+&lt;xs:schema xmlns:xs=&quot;http://www.w3.org/2001/XMLSchema&quot;
+targetNamespace=&quot;http://www.w3school.com.cn&quot;
+xmlns=&quot;http://www.w3school.com.cn&quot;
+elementFormDefault=&quot;qualified&quot;&gt;
+
+...
+...
+&lt;/xs:schema&gt;
+</code></pre><p>代码解释：<br>下面的片断：</p>
+<pre><code>xmlns:xs=&quot;http://www.w3.org/2001/XMLSchema&quot;
+显示 schema 中用到的元素和数据类型来自命名空间 &quot;http://www.w3.org/2001/XMLSchema&quot;。同时它还规定了来自命名空间 &quot;http://www.w3.org/2001/XMLSchema&quot; 的元素和数据类型应该使用前缀 xs：
+</code></pre><p>这个片断：</p>
+<pre><code>targetNamespace=&quot;http://www.w3school.com.cn&quot;
+显示被此 schema 定义的元素 (note, to, from, heading, body) 来自命名空间： &quot;http://www.w3school.com.cn&quot;。
+</code></pre><p>这个片断：</p>
+<pre><code>xmlns=&quot;http://www.w3school.com.cn&quot;
+指出默认的命名空间是 &quot;http://www.w3school.com.cn&quot;。
+</code></pre><p>这个片断：</p>
+<pre><code>elementFormDefault=&quot;qualified&quot;
+指出任何 XML 实例文档所使用的且在此 schema 中声明过的元素必须被命名空间限定。
+</code></pre><p>在 XML 文档中引用 Schema<br>此 XML 文档含有对 XML Schema 的引用：</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot;?&gt;
+
+&lt;note xmlns=&quot;http://www.w3school.com.cn&quot;
+xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+xsi:schemaLocation=&quot;http://www.w3school.com.cn note.xsd&quot;&gt;
+
+&lt;to&gt;George&lt;/to&gt;
+&lt;from&gt;John&lt;/from&gt;
+&lt;heading&gt;Reminder&lt;/heading&gt;
+&lt;body&gt;Don&apos;t forget the meeting!&lt;/body&gt;
+&lt;/note&gt;
+</code></pre><p>代码解释：<br>下面的片断：</p>
+<pre><code>xmlns=&quot;http://www.w3school.com.cn&quot;
+规定了默认命名空间的声明。此声明会告知 schema 验证器，在此 XML 文档中使用的所有元素都被声明于 &quot;http://www.w3school.com.cn&quot; 这个命名空间。
+</code></pre><p>一旦您拥有了可用的 XML Schema 实例命名空间：</p>
+<pre><code>xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+</code></pre><p>您就可以使用 schemaLocation 属性了。此属性有两个值。第一个值是需要使用的命名空间。第二个值是供命名空间使用的 XML schema 的位置：</p>
+<pre><code>xsi:schemaLocation=&quot;http://www.w3school.com.cn note.xsd&quot;
+</code></pre><h2 id="星期三（8-14）"><a href="#星期三（8-14）" class="headerlink" title="星期三（8.14）"></a>星期三（8.14）</h2><h3 id="Node"><a href="#Node" class="headerlink" title="Node"></a>Node</h3><p>类比:(js-&gt;node,,,,,,java-&gt;虚拟机)<br>Node.js 是一个基于 Chrome V8 引擎的 JavaScript 运行环境。<br> Node.js 使用了一个事件驱动、非阻塞式 I/O 的模型。<br>Npm<br>NPM是随同NodeJS一起安装的包管理工具，能解决NodeJS代码部署上的很多问题</p>
+<h3 id="webpack"><a href="#webpack" class="headerlink" title="webpack"></a>webpack</h3><p>WebPack可以看做是模块打包机：它做的事情是，分析你的项目结构，找到JavaScript模块以及其它的一些浏览器不能直接运行的拓展语言（TypeScript等），并将其转换和打包为合适的格式供浏览器使用.<br>简单的说就是打包，压缩各种静态资源的工具</p>
+<h3 id="ESLint"><a href="#ESLint" class="headerlink" title="ESLint"></a>ESLint</h3><p>ESLint最初是由Nicholas C. Zakas 于2013年6月创建的开源项目。它的目标是提供一个插件化的javascript代码检测工具。</p>
+<h3 id="Vue"><a href="#Vue" class="headerlink" title="Vue"></a>Vue</h3><p>vue基本语法(简单)</p>
+<pre><code>简洁,轻量,快速,数据驱动,模块友好,组件化
+</code></pre><p>vue各种插件(完善)vue 官方提供了一系列的工具，如:</p>
+<pre><code>路由 vue-router，
+状态树管理器 vuex，
+网络请求 axios（非 vue 官方出，纯推荐）等。
+(如果您不打算做 SPA，那么您是不需要 vue-router 的；假如您的页面不存在非常复杂的交互或数据递进式体验时，您可能不需要 vuex... )总之，官方都为开发者考虑好了，少了技术选型的痛苦。
+</code></pre><p>基于Vue<br>Nuxt</p>
+<pre><code>SEO问题
+页面初次渲染还是有可能很慢，白屏等待时间太长，对日益挑剔的用户群体来说，无法接受。
+服务端渲染
+</code></pre><p>Weex</p>
+<pre><code>Weex 致力于使开发者能基于通用跨平台的 Web 开发语言和开发经验，来构建 Android、iOS 和 Web 应用。简单来说，在集成了 WeexSDK 之后，你可以使用 JavaScript 语言和前端开发经验来开发移动应用。
+</code></pre><h2 id="星期四（8-15）"><a href="#星期四（8-15）" class="headerlink" title="星期四（8.15）"></a>星期四（8.15）</h2><h3 id="v-bind"><a href="#v-bind" class="headerlink" title="v-bind:"></a>v-bind:</h3><p>用来绑定数据和属性以及表达式，缩写为’：’示例</p>
+<pre><code>&lt;div v-bind:title=&quot;text&quot; &gt;hello&lt;/div&gt;
+&lt;div v-bind:title=&quot;&apos;***&apos;+text&quot; &gt;hello&lt;/div&gt;
+&lt;input type=&quot;text&quot; v-bind:value=&quot;text&quot;&gt;
+new Vue({
+    el:&quot;#root&quot;,
+    data:{
+        text:&quot;this is ***&quot;
+    },
+})
+</code></pre><h3 id="v-model"><a href="#v-model" class="headerlink" title="v-model:"></a>v-model:</h3><p>实现双向数据绑定<br>示例<br>输入框:</p>
+<pre><code>&lt;input type=&quot;text&quot; v-model=&quot; text&quot; /&gt;
+&lt;input type=&quot;text&quot; v-model:value =&quot;text&quot;/&gt;
+ &lt;div &gt;{{text}}&lt;/div&gt;
+</code></pre><p>单选:</p>
+<pre><code> 1:&lt;input type=&quot;radio&quot; value=&quot;one&quot; v-model=&quot;text&quot; /&gt;
+ 2:&lt;input type=&quot;radio&quot; value=&quot;two&quot; v-model=&quot;text&quot; /&gt;
+    &lt;div &gt;{{text}}&lt;/div&gt;
+new  Vue({
+        el:&quot;#data2&quot;,
+        data:{
+            text:&quot;-----&quot;
+        },
+    })
+</code></pre><p>单选不需要设置name来确保只能选一个，v-model同一个值就行了</p>
+<h3 id="v-text"><a href="#v-text" class="headerlink" title="v-text"></a>v-text</h3><pre><code>更新元素的 innerText
+</code></pre><h3 id="v-html"><a href="#v-html" class="headerlink" title="v-html"></a>v-html</h3><pre><code>更新元素的 innerHTML
+</code></pre><h3 id="v-on"><a href="#v-on" class="headerlink" title="v-on:"></a>v-on:</h3><pre><code>绑定事件监听器。可简写@
+</code></pre><p>示例</p>
+<pre><code>&lt;div v-on:click=&quot;handleClick&quot;&gt;{{text}}&lt;/div&gt;
+ new Vue({
+    el:&quot;#event&quot;,
+    data:{
+        text:&quot;hello&quot;
+    },
+    methods:{
+        handleClick:function () {
+            alert(&quot;谁在点击我&quot;)
+        }
+    }
+})
+</code></pre><h3 id="v-show"><a href="#v-show" class="headerlink" title="v-show"></a>v-show</h3><pre><code>标签控制隐藏,  (display设置none)
+</code></pre><h3 id="v-if"><a href="#v-if" class="headerlink" title="v-if"></a>v-if</h3><pre><code>根据表达式的值的真假条件渲染元素。
+v-else-if , v-else
+</code></pre><h3 id="v-for"><a href="#v-for" class="headerlink" title="v-for"></a>v-for</h3><p>基于源数据多次渲染元素或模板块(循环渲染元素)</p>
+<h3 id="v-slot"><a href="#v-slot" class="headerlink" title="v-slot"></a>v-slot</h3><p>插槽。<br>是组件的一块HTML模版，<br>这块模版由使用组件者即父组件提供。<br>可以说是子组件暴露的一个<br>让父组件传入自定义内容的接口</p>
+<h3 id="computed"><a href="#computed" class="headerlink" title="computed:"></a>computed:</h3><pre><code>first:&lt;input  v-model=&quot;firstName&quot; &gt;
+last:&lt;input v-model=&quot;lastName&quot;&gt;
+&lt;div&gt;{{full}}  &lt;/div&gt;
+
+new Vue({
+    el:&quot;#add&quot;,
+    data:{
+        firstName:0,
+        lastName:0
+    },
+    //计算属性
+    //computed：指的是一个属性通过其他属性计算而来
+    computed:{
+        full: function () {
+            return parseInt(this.firstName) + parseInt(this.lastName)
+        }
+    }
+})
+</code></pre><p>计算属性是真的牛皮，不是自己的东西都能计算到，使用状态管理，就能监听别的地方改变状态的数据。</p>
+<h3 id="watch"><a href="#watch" class="headerlink" title="watch:"></a>watch:</h3><p>监听一个属性改变触发一个事件。</p>
+<pre><code>new Vue({
+        el:&quot;#add2&quot;,
+        data:{
+            firstName:0,
+            lastName:0
+        },
+computed:{
+            full: function () {
+                return parseInt(this.firstName) + parseInt(this.lastName)
+            }
+        },
+watch:{
+            firstName:function () {
+                this.count++
+            },
+            lastName:function () {
+                this.count++
+            },
+            full() {
+                console.log(&apos;full&apos;)
+            }
+        }
+    })
+</code></pre><h3 id="template"><a href="#template" class="headerlink" title="template:"></a>template:</h3><p>一个字符串模板作为 Vue 实例的标识使用。模板将会 替换 挂载的元素。挂载元素的内容都将被忽略(除非模板的内容有分发插槽)。</p>
+<pre><code>&lt;div id=&quot;root1&quot;&gt;
+    123//这里会被替换
+&lt;/div&gt;
+
+&lt;script&gt;
+    new  Vue({
+        el:&quot;#root1&quot;,
+        template:&apos;&lt;h1&gt;--&gt;{{msg}}&lt;/h1&gt;&apos;,
+        data:{
+            msg: &quot;hello data&quot;
+        }
+    })
+&lt;/script&gt;
+</code></pre><h3 id="Vue-component"><a href="#Vue-component" class="headerlink" title="Vue.component"></a>Vue.component</h3><p>项目中用法就是局部组件的用法，就是把组件import进来使用</p>
+<pre><code>&lt;todo&gt;&lt;/todo&gt;
+123
+&lt;to-do&gt;&lt;/to-do&gt;
+//定义局部组件
+var  todo = {
+    template: &apos;&lt;li&gt;todo&lt;/li&gt;&apos;
+}
+new Vue({
+    el:&quot;#to&quot;,
+    data:{
+    },
+    //引用（注册）局部组件
+    components:{
+        &apos;todo&apos;:todo,
+        &apos;ToDo&apos;:todo
+    }
+})
+</code></pre><h2 id="星期五（8-16）"><a href="#星期五（8-16）" class="headerlink" title="星期五（8.16）"></a>星期五（8.16）</h2><p>Vue全家桶：</p>
+<h3 id="vue-cli"><a href="#vue-cli" class="headerlink" title="vue-cli"></a>vue-cli</h3><h3 id="bus"><a href="#bus" class="headerlink" title="bus"></a>bus</h3><p>vue bus可以实现不同组件间、不同页面间的通信，比如我在A页面出发点击事件，要B页面发生变化<br>一个中央事件总线bus，可以作为一个简单的组件传递数据，用于解决跨级和兄弟组件通信问题</p>
+<pre><code>Bus.js
+import Vue from &apos;vue&apos;
+const Bus = new Vue()
+export default Bus
+
+main.js//全局引用
+import bus from &apos;./bus/Bus&apos;
+Vue.prototype.bus = bus
+
+//要用的地方监听事件
+mounted () {
+    this.bus.$on(&apos;add&apos;, a =&gt; {
+      this.list.push(a)
+    })
+},
+
+//通过方法触发事件
+ add () {
+  this.bus.$emit(&apos;add&apos;, this.a)
+}
+</code></pre><h3 id="Axios"><a href="#Axios" class="headerlink" title="Axios"></a>Axios</h3><p>axios 是一个基于 promise 的 HTTP 库，在浏览器和 node.js 中使用。<br>axios主要是用于向后台发起请求的，还有在请求中做更多是可控功能。<br>xios<br>cnpm install axios  –save</p>
+<pre><code>main.js
+import axios from &apos;axios’
+Vue.prototype.$axios = axios
+this.$axios.get(&apos;/terms&apos;)
+      .then(this.res1Method).catch((err) =&gt; {
+        this.catchMethod(err)
+      })
+</code></pre><h3 id="Vue-router路由"><a href="#Vue-router路由" class="headerlink" title="Vue-router路由"></a>Vue-router路由</h3><p>路由是根据不同url展示不同的页面或内容<br>Vue Router 是 Vue.js 官方的路由管理器。它和 Vue.js 的核心深度集成，让构建单页面应用变得易如反掌。</p>
+<pre><code>cnpm install vue-router  --save-dev
+//src下新建router-&gt;index.js
+import Vue from &apos;vue&apos;
+import Router from &apos;vue-router&apos;
+import HelloWorld from &apos;@/components/HelloWorld&apos;
+Vue.use(Router)
+export default new Router({
+  routes: [
+    {
+      path: &apos;/&apos;,
+      name: &apos;HelloWorld&apos;,
+      component: HelloWorld
+    },
+    {
+      path: &apos;/city&apos;,
+      name: &apos;City&apos;,
+      component: () =&gt; import(&apos;@/components/city/City&apos;)
+    }
+  ]
+})
+//main.js
+import router from &apos;./router’
+new Vue({
+  el: &apos;#app&apos;,
+  router,
+  components: { App },
+  template: &apos;&lt;App/&gt;&apos;
+})
+</code></pre><h3 id="访问"><a href="#访问" class="headerlink" title="访问"></a>访问</h3><p>浏览器</p>
+<pre><code>http://localhost:8080/#/city
+</code></pre><p>声明式</p>
+<pre><code>&lt;router-link to=&quot;/city&quot;&gt;跳转到city&lt;/router-link&gt;
+</code></pre><p>编程式</p>
+<pre><code>this.$router.push(&apos;/city&apos;)
+</code></pre><h3 id="vuex"><a href="#vuex" class="headerlink" title="vuex"></a>vuex</h3><h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><p>Vuex 是一个专为 Vue.js 应用程序开发的状态管理模式。它采用集中式存储管理应用的所有组件的状态，<br>解决vue中各个组件之间传值的痛苦，在vue中我们可以使用vuex来保存我们需要管理的状态值，值一旦被修改，所有引用该值的地方就会自动更新。<br>适用于多个视图依赖于同一状态。来自不同视图的行为需要变更同一状态。<br>(如果您不打算开发大型单页应用，使用 Vuex 可能是繁琐冗余的)</p>
+<p>安装</p>
+<pre><code>npm install vuex –save
+</code></pre><p>引入</p>
+<pre><code>state：存储状态（变量）
+getters：对数据获取之前的再次编译，可以理解为state的计算属性。我们在组件中使用 $sotre.getters.fun()
+mutations：修改状态，并且是同步的。在组件中使用$store.commit(&apos;&apos;,params)。这个和我们组件中的自定义事件类似。
+actions：异步操作。在组件中使用是$store.dispath(&apos;&apos;)
+modules：store的子模块，为了开发大型项目，方便状态管理而使用的。
+</code></pre><h3 id="使用state"><a href="#使用state" class="headerlink" title="使用state"></a>使用state</h3><p>src下新建vuex-&gt;store.js</p>
+<pre><code>import Vue from &apos;vue&apos;
+import Vuex from &apos;vuex&apos;
+Vue.use(Vuex)
+const state = {
+  token: &apos;token&apos;
+}
+export default new Vuex.Store({
+  state
+})
+
+Main.js
+import store from &apos;./vuex/sotre&apos;
+new Vue({
+  el: &apos;#app&apos;,
+  router,
+  store,//把store添加进来
+  components: { App },
+  template: &apos;&lt;App/&gt;&apos;
+})
+使用
+&lt;h3&gt;{{$store.state. token}}&lt;/h3&gt;
+</code></pre><h3 id="Vuex-mutations"><a href="#Vuex-mutations" class="headerlink" title="Vuex-mutations"></a>Vuex-mutations</h3><pre><code>mutations
+mutations里面放置的是我们操作state对象属性的方法
+Store.js
+const mutations = {
+  mutationsUpdateToken (state, newtoken = &apos;newtoken&apos;) {
+    return (state. token = newtoken)
+  },
+  mutationsDeleteToken (state, newtoken = &apos;&apos;) {
+    return (state. token = newtoken)
+  }
+}
+export default new Vuex.Store({
+  state,
+  mutations
+})
+//在我们要用的地方
+updateToken () {
+  this.$store.commit(&apos;mutationsUpdateToken&apos;, &apos;update&apos;)
+},
+deleteToken () {
+  this.$store.commit(&apos;mutationsDeleteToken&apos;, &apos;delete&apos;)
+}
+</code></pre><h3 id="Vuex-actions"><a href="#Vuex-actions" class="headerlink" title="Vuex-actions"></a>Vuex-actions</h3><p>actions<br>actions 类似于 mutation，actions 提交的是 mutation，而不是直接变更状态。actions 可以包含任意异步操作。用来异步触发mutations里面的方法<br>里面调用其实还是使用的mutation的commit方法</p>
+<pre><code>Store.js
+const actions = {
+  actionsUpdateToken (context, newtoken = &apos;&apos;) {
+    return context.commit(&apos;mutationsUpdateToken&apos;, newtoken)
+  },
+  actionsDeleteToken ({ commit }, newtoken = &apos;&apos;) {
+    return commit(&apos;mutationsDeleteToken&apos;, newtoken)
+  }
+}
+export default new Vuex.Store({
+  state,
+  mutations,
+  actions
+})
+使用
+updateToken () {
+ this.$store.dispatch(&apos;actionsUpdateToken&apos;, &apos;updatedispatch’)
+},
+deleteToken () {
+this.$store.dispatch(&apos;actionsDeleteToken&apos;, &apos;deletedispatch’)
+}
+</code></pre><h3 id="Vuex-getters"><a href="#Vuex-getters" class="headerlink" title="Vuex-getters"></a>Vuex-getters</h3><p>我们一般使用getters来获取我们的state，可以把getters理解为state的计算属性</p>
+<pre><code>Store.js
+const getters = {
+  getters1 () {
+    return state.token + &apos;getters1&apos;
+  },
+  getters2 () {
+    return state.token + &apos;getters2&apos;
+  }
+}
+export default new Vuex.Store({
+  state,
+  mutations,
+  actions,
+  getters
+})
+</code></pre><p>使用</p>
+<pre><code>{{$store.getters.getters1}}
+this.$store.getters.getters1
+</code></pre><h2 id="星期六（8-17）"><a href="#星期六（8-17）" class="headerlink" title="星期六（8.17）"></a>星期六（8.17）</h2><p>项目<br>就带着做一个项目。很蠢，并没有体现出VUE的优势，后来又发了一个项目。我们现在来分析一下这个项目<br>（很快补上，今天脑子有点不舒服）</p>
+<h3 id="小总结系列"><a href="#小总结系列" class="headerlink" title="小总结系列"></a>小总结系列</h3><h3 id="0-JS的坑"><a href="#0-JS的坑" class="headerlink" title="0.JS的坑"></a>0.JS的坑</h3><p>不要使用变量名为name 浏览器会默认有一个全局的变量name，而且不知道指向的是哪里，还不能被修改。</p>
+<h3 id="1-关于DOM获取相邻结点的问题"><a href="#1-关于DOM获取相邻结点的问题" class="headerlink" title="1.关于DOM获取相邻结点的问题"></a>1.关于DOM获取相邻结点的问题</h3><p>nextSibling<br>previousSibling<br>获取紧跟的结点，有可能是空白结点，所以慎用</p>
+<h3 id="2-VUE"><a href="#2-VUE" class="headerlink" title="2.VUE"></a>2.VUE</h3><p>vue.js:634 [Vue warn]: Property or method “id” is not defined on the instance but referenced during render.<br>需要在data定义一个id</p>
+<h3 id="3-动态参数："><a href="#3-动态参数：" class="headerlink" title="3.动态参数："></a>3.动态参数：</h3><p>官方动态参数报错问题,官网文档这样写的：<br>动态参数<br>2.6.0 新增<br>从 2.6.0 开始，可以用方括号括起来的 JavaScript 表达式作为一个指令的参数：</p>
+<pre><code>&lt;a v-bind:[attributeName]=&quot;url&quot;&gt; ... &lt;/a&gt;
+</code></pre><p>这里的 attributeName 会被作为一个 JavaScript 表达式进行动态求值，求得的值将会作为最终的参数来使用。例如，如果你的 Vue 实例有一个 data 属性 attributeName，其值为 “href”，那么这个绑定将等价于 v-bind:href。<br>但是实际并不能成功，因为[]里面的名字不能写成attributeName 只要改个名字就可以用了。fk<br>改的名字，必须是小写。不能大小写混写，草 官方文档在下面写了一行小字：</p>
+<pre><code>文档有说：另外，如果你在 DOM 中使用模板 (直接在一个 HTML 文件里撰写模板)，需要留意浏览器会把特性名全部强制转为小写
+</code></pre><h3 id="4-关于computed属性和methods-写方法"><a href="#4-关于computed属性和methods-写方法" class="headerlink" title="4.关于computed属性和methods 写方法"></a>4.关于computed属性和methods 写方法</h3><p>  1）不能同时存在名字相同的计算属性和方法<br>  2）计算属性只要不改变就会缓存。但是方法不行</p>
+<h3 id="5-Lodash"><a href="#5-Lodash" class="headerlink" title="5.Lodash"></a>5.Lodash</h3><p>Lodash 通过降低 array、number、objects、string 等等的使用难度从而让 JavaScript 变得更简单。<br>Lodash 的模块化方法 非常适用于：</p>
+<pre><code>遍历 array、object 和 string
+对值进行操作和检测
+创建符合功能的函数
+</code></pre><p>Lodash就是这样的一套工具库，它内部封装了诸多对字符串、数组、对象等常见数据类型的处理函数，其中部分是目前ECMAScript尚未制订的规范</p>
+<h3 id="6-注意名字带’-‘-属性名要加””-例如："><a href="#6-注意名字带’-‘-属性名要加””-例如：" class="headerlink" title="6.注意名字带’-‘ 属性名要加”” 例如："></a>6.注意名字带’-‘ 属性名要加”” 例如：</h3><p> “err-err”:true ,建议全都带引号就没问题了吧？</p>
+<pre><code>data:{
+  &quot;classobject&quot;:{
+    &quot;active&quot;:true,
+    &quot;err-err&quot;:true
+  }
+}
+</code></pre><h3 id="7-VUE的模块引进来驼峰，写成标签用-代替"><a href="#7-VUE的模块引进来驼峰，写成标签用-代替" class="headerlink" title="7.VUE的模块引进来驼峰，写成标签用-代替"></a>7.VUE的模块引进来驼峰，写成标签用-代替</h3><h3 id="8不要用H5标签做模板名字"><a href="#8不要用H5标签做模板名字" class="headerlink" title="8不要用H5标签做模板名字"></a>8不要用H5标签做模板名字</h3><p>.Do not use built-in or reserved HTML elements as component id: header<br>不能用H5标签作为模板名字</p>
+<h3 id="9-vue-项目地址去掉-的方法"><a href="#9-vue-项目地址去掉-的方法" class="headerlink" title="9.vue 项目地址去掉 #的方法"></a>9.vue 项目地址去掉 #的方法</h3><p>使用history模式，在路由里面加入：</p>
+<pre><code>mode: &apos;history&apos;,
+</code></pre><h3 id="10-v-model正确用法"><a href="#10-v-model正确用法" class="headerlink" title="10 v-model正确用法"></a>10 v-model正确用法</h3><p>一开始他讲错了，v-model就是直接写= 而不是： input默认就会绑定相应的值，输入就绑定value，选择绑定checked，下拉绑定selected</p>
+<pre><code>&lt;input type=&quot;text&quot; v-model:value=&quot;aaa&quot;&gt; 可以这样写，但是项目中ESLINT肯定报错
+&lt;input type=&quot;text&quot; v-model=&quot;aaa&quot;&gt;       标准这样写
+</code></pre><h3 id="11-项目小问题"><a href="#11-项目小问题" class="headerlink" title="11 项目小问题"></a>11 项目小问题</h3><pre><code>1.发现有坑
+最好不要改项目的名字，在install 包之前就把项目的名字确定好
+2.页面的坑
+1）如何去除input标签选中的框：
+给input设置 outline:none;
+</code></pre>
+        </div>
+        <div class="post-reply">
+            
+                <!-- 来必力City版安装代码 -->
+                <div id="lv-container" data-id="city" data-uid="MTAyMC8yOTE4Ni81NzUz">
+                    <script type="text/javascript">
+                        (function(d, s) {
+                            var j, e = d.getElementsByTagName(s)[0];
+
+                            if (typeof LivereTower === 'function') { return; }
+
+                            j = d.createElement(s);
+                            j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+                            j.async = true;
+
+                            e.parentNode.insertBefore(j, e);
+                        })(document, 'script');
+                    </script>
+                    <noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+                </div>
+                <!-- City版安装代码已完成 -->
+            
+            
+        </div>
+    </div>
+</section>
+<script>
+    // 获取第一张图, 用以当封面背景图
+    var img = document.querySelectorAll('img')[1]
+
+    if (img) {
+        var header_box = document.querySelector('#header_box')
+        header_box.style.backgroundImage = 'url('+ img.src +')'
+    }
+</script>
+      </div>
+  </div>
+  <style>
+  #footer {
+    min-height: 10vh;
+    background: black;
+    color: #fff;
+  }
+
+  #footer a {
+    color: #e1e1e1;
+  }
+</style>
+<footer id="footer" class="has-text-centered is-flex center">
+  <div class="container has-padding">
+    <div>
+      <div>
+        <!--请您保留作者署名, 主题制作来之不易-->
+        主题来自 <a href="http://haojen.github.io/">Haojen Ma</a>
+        <br>
+        Copyright © 王邸 2019
+        <!--
+          Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+        -->
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="/js/search_core.js"></script>
+<script src="/js/script.js"></script>
+
+</body>
+</html>
