@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html class="full-height">
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="//cdn.bootcss.com/bulma/0.4.1/css/bulma.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+  
+  <title>Java总结（九） | 路要坚持</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="本周又回到了JAVAEE讲了：http协议，tomcat使用，Servlet 请求和相应,文件的上传和下载等等。主要考虑的还是乱码的问题，其他的东西在SE阶段就已经接触过了，网络编程那一段，其实就是socket封装的response和request。根本就没有什么新东西 星期一（0819）今天学习HTTP协议 和 TOMCAT的一些基本用法 HTTPHTTP是JavaEE的基础，所以必须要好好掌握">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java总结（九）">
+<meta property="og:url" content="http://yoursite.com/2019/08/25/Java总结（九）/index.html">
+<meta property="og:site_name" content="路要坚持">
+<meta property="og:description" content="本周又回到了JAVAEE讲了：http协议，tomcat使用，Servlet 请求和相应,文件的上传和下载等等。主要考虑的还是乱码的问题，其他的东西在SE阶段就已经接触过了，网络编程那一段，其实就是socket封装的response和request。根本就没有什么新东西 星期一（0819）今天学习HTTP协议 和 TOMCAT的一些基本用法 HTTPHTTP是JavaEE的基础，所以必须要好好掌握">
+<meta property="og:updated_time" content="2019-08-25T15:26:33.266Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java总结（九）">
+<meta name="twitter:description" content="本周又回到了JAVAEE讲了：http协议，tomcat使用，Servlet 请求和相应,文件的上传和下载等等。主要考虑的还是乱码的问题，其他的东西在SE阶段就已经接触过了，网络编程那一段，其实就是socket封装的response和request。根本就没有什么新东西 星期一（0819）今天学习HTTP协议 和 TOMCAT的一些基本用法 HTTPHTTP是JavaEE的基础，所以必须要好好掌握">
+  
+    <link rel="alternate" href="/" title="路要坚持" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/common.css">
+<link rel="stylesheet" href="/css/nav.css">
+<link rel="stylesheet" href="/css/layout.css">
+  
+
+</head>
+
+<body>
+  <header id="navbar" class="overflow-hidden">
+  <div class="container">
+    <nav class="nav">
+         <div class="nav-left">
+            <a href="/" class="nav-item" style="font-size: 20px;">
+              <span class="logo">王邸</span>'s Blog
+            </a>
+         </div>
+        <div class="nav-center is-hidden position-relative" id="search_container">
+            <div class="nav-item full-width full-height">
+                <i class="fa fa-search has-padding" aria-hidden="true"></i>
+                <input type="text" id="search_input" class="search-input full-height full-width" placeholder="Search post" autofocus>
+                <i id="close_search" class="fa fa-times" aria-hidden="true"></i>
+            </div>
+            <div id="search_result"></div>
+        </div>
+        <div class="nav-right nav-menu">
+            <a class="nav-item" id="search">
+                <i class="fa fa-search" aria-hidden="true"></i>
+            </a>
+            
+            <a class="nav-item" href="/">
+                Home
+            </a>
+            
+            <a class="nav-item" href="/works">
+                My Works
+            </a>
+            
+            <a class="nav-item" href="/about">
+                About
+            </a>
+            
+        </div>
+        <span class="nav-toggle" id="navMenuDropdown">
+            <span></span>
+            <span></span>
+            <span></span>
+        </span>
+        <div class="navbar-menu position-absolute full-width content-box is-hidden-desktop is-flex flex-column center" style="top: 100%;">
+            
+            <a class="nav-item flex-1" href="/">
+                Home
+            </a>
+            
+            <a class="nav-item flex-1" href="/works">
+                My Works
+            </a>
+            
+            <a class="nav-item flex-1" href="/about">
+                About
+            </a>
+            
+        </div>
+    </nav>
+  </div>
+</header>
+
+  <div id="main-wrap" class="position-relative" style="margin-top: 55px;">
+      <div class="main-inner-content">
+          <!--博文页面-->
+
+<style>
+    .header-box {
+        height: 370px;
+        filter: blur(10px);
+        background-size: cover;
+        background-color: lightsteelblue;
+    }
+
+    .post-box {
+        padding: 15px;
+        padding-top: 60px;
+        min-height: 80vh;
+        margin-top: -200px;
+        border-radius: 4px;
+        background-color: rgba(255,255,255,.8);
+    }
+
+    .post-avatar {
+        height: 30px;
+        width: 30px;
+        border-radius: 50%;
+    }
+
+    .flow-chart {
+        text-align: center;
+    }
+
+    img[alt="post-cover"] {
+        display: none;
+    }
+</style>
+<header>
+    <div id="header_box" class="header-box"></div>
+</header>
+<section>
+    <div class="container post-box">
+        <div class="content post-title is-flex center flex-column" style="margin-bottom: 70px; overflow: auto;">
+            <h1 class="has-text-centered" style="padding-bottom: 10px; border-bottom: 3px solid #fff">
+                <strong>Java总结（九）</strong>
+            </h1>
+            
+            <div class="is-flex align-center">
+                <img class="post-avatar" src="https://q2.qlogo.cn/headimg_dl?bs=996057150&dst_uin=996057150&dst_uin=996057150&;dst_uin=996057150&spec=100&url_enc=0&referer=bu_interface&term_type=PC">
+                <span style="padding:0 10px;"> <span class="sub-title">By</span> 王邸</span>
+                <span class="post-date sub-title">at: 2019-08-25</span>
+            </div>
+            
+                <div>
+                    
+                </div>
+            
+        </div>
+        <div class="content" style="overflow: auto">
+            <p>本周又回到了JAVAEE讲了：http协议，tomcat使用，Servlet 请求和相应,文件的上传和下载等等。<br>主要考虑的还是乱码的问题，其他的东西在SE阶段就已经接触过了，网络编程那一段，其实就是socket封装的response和request。根本就没有什么新东西</p>
+<h2 id="星期一（0819）"><a href="#星期一（0819）" class="headerlink" title="星期一（0819）"></a>星期一（0819）</h2><p>今天学习HTTP协议 和 TOMCAT的一些基本用法</p>
+<h3 id="HTTP"><a href="#HTTP" class="headerlink" title="HTTP"></a>HTTP</h3><p>HTTP是JavaEE的基础，所以必须要好好掌握，请求和响应将伴随javaEE<br>HyperText Transport Protocol超文本传输协议<br>协议：规范。两台计算机之间进行通信需要遵循的一个规范<br>传输：双向的。浏览器（发送方）和服务器（接收方）之间进行传输。<br>超文本：区别于普通文本。还有音频，视频，图片等资源。</p>
+<p>HyperText Markup Language 超文本标记语言<br>有千丝万缕的关系。http其实最早产生就是用来传输html的。<br>HTTP/0.9  HTTP/1.0  HTTP/1.1  HTTP/2（google）  HTTP/3（google）<br>长连接，短连接</p>
+<h3 id="一次完整的http请求"><a href="#一次完整的http请求" class="headerlink" title="一次完整的http请求"></a>一次完整的http请求</h3><p>1.域名解析<br>2.客户端发起TCP的三次握手 （客户端先发送一个数据包给服务端）<br>3.发起HTTP请求（连接成功后）<br>4.服务器响应HTTP（请求）<br>5.浏览器解析HTML代码并请求HTML中需要的css 等静态文件<br>6.浏览器对页面进行渲染</p>
+<h3 id="HTTP请求报文"><a href="#HTTP请求报文" class="headerlink" title="HTTP请求报文"></a>HTTP请求报文</h3><p>当我们输入一个URL会发生什么？<br>服务端会返回一个响应，响应的内容是一个html页面。浏览器拿到html页面，会对html进行解析，发现如果还需要css样式文件，js文件，图片资源等，浏览器会自行再发送http请求，去请求相关的资源。</p>
+<h3 id="request请求"><a href="#request请求" class="headerlink" title="request请求"></a>request请求</h3><p>请求由请求行 请求头 <strong>空格</strong>  请求体组成</p>
+<h3 id="请求行"><a href="#请求行" class="headerlink" title="请求行"></a>请求行</h3><p>三部分组成：请求方式   请求资源名称   HTTP版本号</p>
+<h3 id="请求方式"><a href="#请求方式" class="headerlink" title="请求方式"></a>请求方式</h3><p>Get请求和post请求区别：get请求提交数据放在地址栏中拼接，数据一般不超过1k<br>Post请求提交数据是放在请求正文中。 略微安全一些。传输的  数据没有大小限制。传输过程明文传输。</p>
+<p>最常用的是Get请求和post请求方式，还有一些其他的请求方式，可能服务器不会接受此方法。<br>HEAD：  只返回除了响应正文的部分，即响应头。部分服务器可能支持，也可能不支持。<br>OPTIONS: 当前url所支持的方法<br>DELETE:  向服务器发送一个删除资源的请求<br>PUT:     向服务器发送一个提交文件的请求</p>
+<h3 id="请求头"><a href="#请求头" class="headerlink" title="请求头"></a>请求头</h3><p>举例：</p>
+<pre><code>GET /books/java.html?Name=value HTTP/1.1  //请求行
+Accept: text/html
+Accept-Language: en-us
+Connection: Keep-Alive
+Host: localhost
+Referer: http://localhost/links.asp
+User-Agent: Mozilla/4.0
+Accept-Encoding: gzip, deflate
+                                          //一个空行
+</code></pre><p>常用请求头：</p>
+<pre><code>Accept:浏览器可接受的    MIME类型 */*   (大类型)/(小类型)
+Accept-Charset: 浏览器通过这个头告诉服务器，它支持哪种字符集
+Accept-Encoding:浏览器能够进行解码的数据编码方式，比如gzip
+Accept-Language: 浏览器所希望的语言种类，当服务器能够提供一种以上的语言版本时要用到。 可以在浏览器中进行设置。
+Host:初始URL中的主机和端口
+Referer:包含一个URL，用户从该URL代表的页面出发访问当前请求的页面 （防盗链）
+Content-Type:内容类型
+If-Modified-Since: Wed, 02 Feb 2011 12:04:56 GMT 服务器利用这个头与服务器的文件进行比对，如果一致，则告诉浏览器从缓存中直接读取文件。
+User-Agent:浏览器类型.
+Content-Length:表示请求消息正文的长度
+Connection:表示是否需要持久连接。如果服务器看到这里的值为“Keep -Alive”，或者看到请求使用的是HTTP 1.1（HTTP 1.1默认进行持久连接
+Cookie:这是最重要的请求头信息之一
+Date：Date: Mon, 22 Aug 2011 01:55:39 GMT请求时间GMT
+</code></pre><p>内容类型：MIME类型<br>MIME(Multipurpose Internet Mail Extensions)多用途互联网邮件扩展类型就是设定某种扩展名的文件用一种应用程序来打开的方式类型，当该扩展名文件被访问的时候，浏览器会自动使用指定应用程序来打开。多用于指定一些客户端自定义的文件名，以及一些媒体文件打开方式</p>
+<pre><code>MIME类型：Multipurpose Internet Mail Extensions 媒体类型
+MIME：针对html文档而言：text/html;
+针对图片等：image/png;image/gif等
+声音资源：audio/mp3等
+视频：video/mp4、mkv、avi
+这里面引出一个MIME类型的概念，
+后面我们会发送http响应，如果是普通文档，你设置它的类型是text/html没有问题，但是如果是一个静态资源，比如图片，设置类型是text/html就会引起一系列问题，比如图片无法正常加载。
+</code></pre><h3 id="HTTP消息头（HTTP请求或相应的头部的公共规则）"><a href="#HTTP消息头（HTTP请求或相应的头部的公共规则）" class="headerlink" title="HTTP消息头（HTTP请求或相应的头部的公共规则）"></a>HTTP消息头（HTTP请求或相应的头部的公共规则）</h3><p>使用消息头，可以实现HTTP客户机与服务器之间的条件请求和应答，消息头相当于服务器和浏览器之间的一些暗号指令。<br>每个消息头包含一个头字段名称，然后依次是冒号、空格、值、回车和换行符</p>
+<pre><code>如： Accept-Encoding: gzip, deflate
+</code></pre><p>消息头字段名是不区分大小写的，但习惯上讲每个单词的第一个字母大写，与xml的标签对应<br><strong>整个消息头部分中的各行消息头可按任何顺序排列。</strong><br>许多请求头字段都允许客户端在值部分指定多个可接受的选项，多个选项之间以逗号分隔。<br>有些头字段可以出现多次 .</p>
+<h3 id="请求报文的格式"><a href="#请求报文的格式" class="headerlink" title="请求报文的格式"></a>请求报文的格式</h3><pre><code>请求行：  请求方法    请求URL   版本
+请求首部： 名: 值
+          名: 值
+（空行）
+请求正文：    （HTTP要传输的内容）
+</code></pre><h3 id="HTTP响应消息response"><a href="#HTTP响应消息response" class="headerlink" title="HTTP响应消息response"></a>HTTP响应消息response</h3><p>一个状态行、若干消息头、空格 及响应正文，其中的一些消息头和正文都是可选的，消息头和正文内容之间要用空行隔开。<br>例子:</p>
+<pre><code>HTTP/1.1 200 OK
+Server: Microsoft-IIS/5.0
+Date: Thu, 13 Jul 2000 05:46:53 GMT
+Content-Length: 2291
+Content-Type: text/html
+Cache-control: private
+
+&lt;HTML&gt;
+&lt;BODY&gt;
+……
+</code></pre><h3 id="响应报文的格式"><a href="#响应报文的格式" class="headerlink" title="响应报文的格式"></a>响应报文的格式</h3><pre><code>响应行： 协议版本    状态码   原因短语
+首部：  名: 值
+                        （空行）
+实体的主体部分：（HTTP要传输的内容）
+</code></pre><h3 id="状态行"><a href="#状态行" class="headerlink" title="状态行"></a>状态行</h3><p>格式： HTTP版本号　状态码　原因叙述<crlf><br>举例：HTTP 1.1 200 OK<br>状态码用于表示服务器对请求的各种不同处理结果和状态，它是一个三位的十进制数。响应状态码分为5类，使用最高位为1到5来进行分类如下所示：</crlf></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:right">状态码</th>
+<th style="text-align:left">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right">200～299</td>
+<td style="text-align:left">表示成功接收请求并已完成整个处理过程 200 OK   206</td>
+</tr>
+<tr>
+<td style="text-align:right">300～399</td>
+<td style="text-align:left">（重定向）为完成请求，客户需进一步细化请求。例如，请求的资源已经移动一个新地址</td>
+</tr>
+<tr>
+<td style="text-align:right">400～499</td>
+<td style="text-align:left">客户端的请求有错误</td>
+</tr>
+<tr>
+<td style="text-align:right">500～599</td>
+<td style="text-align:left">服务器端出现错误</td>
+</tr>
+</tbody>
+</table>
+<h3 id="常用状态码"><a href="#常用状态码" class="headerlink" title="常用状态码"></a>常用状态码</h3><table>
+<thead>
+<tr>
+<th style="text-align:right">状态</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right">200</td>
+<td style="text-align:left">(正常)表示一切正常，返回的是正常请求结果</td>
+</tr>
+<tr>
+<td style="text-align:right">206</td>
+<td style="text-align:left">表示分段的请求OK</td>
+</tr>
+<tr>
+<td style="text-align:right">301、302/307</td>
+<td style="text-align:left">(临时重定向)指出被请求的文档已被临时移动到别处，此文档的新的URL在Location响应头中给出。</td>
+</tr>
+<tr>
+<td style="text-align:right">304</td>
+<td style="text-align:left">(未修改)表示客户机缓存的版本是最新的，客户机可以继续使用它，无需到服务器请求。</td>
+</tr>
+<tr>
+<td style="text-align:right">404</td>
+<td style="text-align:left">(找不到)服务器上不存在客户机所请求的资源。</td>
+</tr>
+<tr>
+<td style="text-align:right">400</td>
+<td style="text-align:left">服务器不支持这种请求方式</td>
+</tr>
+<tr>
+<td style="text-align:right">500</td>
+<td style="text-align:left">(服务器内部错误)  服务器端的程序发生错误</td>
+</tr>
+</tbody>
+</table>
+<h3 id="常用响应头1"><a href="#常用响应头1" class="headerlink" title="常用响应头1"></a>常用响应头1</h3><table>
+<thead>
+<tr>
+<th style="text-align:right">响应头</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right">Location:</td>
+<td style="text-align:left"><a href="http://www.cskaoyan.com/指示新的资源的位置" target="_blank" rel="external">http://www.cskaoyan.com/指示新的资源的位置</a></td>
+</tr>
+<tr>
+<td style="text-align:right">Server:</td>
+<td style="text-align:left">apache tomcat 指示服务器的类型</td>
+</tr>
+<tr>
+<td style="text-align:right">Content-Encoding:</td>
+<td style="text-align:left">gzip 服务器发送的数据采用的编码类型</td>
+</tr>
+<tr>
+<td style="text-align:right">Content-Length:</td>
+<td style="text-align:left">80 告诉浏览器正文的长度</td>
+</tr>
+<tr>
+<td style="text-align:right">Content-Language:</td>
+<td style="text-align:left">zh-cn服务发送的文本的语言</td>
+</tr>
+<tr>
+<td style="text-align:right">Content-Type:</td>
+<td style="text-align:left">text/html;  服务器发送的内容的MIME类型</td>
+</tr>
+<tr>
+<td style="text-align:right">Last-Modified:</td>
+<td style="text-align:left">Tue, 11 Jul 2000 18:23:51 GMT文件的最后修改时间</td>
+</tr>
+<tr>
+<td style="text-align:right">Refresh:</td>
+<td style="text-align:left">1;url=<a href="http://www.cskaoyan.com指示客户端刷新频率。单位是秒" target="_blank" rel="external">http://www.cskaoyan.com指示客户端刷新频率。单位是秒</a></td>
+</tr>
+<tr>
+<td style="text-align:right">Content-Disposition:</td>
+<td style="text-align:left">attachment; filename=aaa.zip指示客户端保存文件</td>
+</tr>
+<tr>
+<td style="text-align:right">Set-Cookie:</td>
+<td style="text-align:left">SS=Q0=5Lb_nQ; path=/search服务器端发送的Cookie</td>
+</tr>
+<tr>
+<td style="text-align:right">Expires:</td>
+<td style="text-align:left">0</td>
+</tr>
+<tr>
+<td style="text-align:right">Cache-Control:</td>
+<td style="text-align:left">no-cache (1.1)</td>
+</tr>
+<tr>
+<td style="text-align:right">Connection:</td>
+<td style="text-align:left">close/Keep-Alive</td>
+</tr>
+<tr>
+<td style="text-align:right">Date:</td>
+<td style="text-align:left">Tue, 11 Jul 2000 18:23:51 GMT</td>
+</tr>
+</tbody>
+</table>
+<h3 id="HTTPS"><a href="#HTTPS" class="headerlink" title="HTTPS"></a>HTTPS</h3><p>加密的 带证书</p>
+<h2 id="2-Tomcat-Java-WebServer"><a href="#2-Tomcat-Java-WebServer" class="headerlink" title="2. Tomcat (Java WebServer)"></a>2. Tomcat (Java WebServer)</h2><p>简单介绍一些tomcat的配置和一些必须知道的知识点</p>
+<h3 id="修改端口号"><a href="#修改端口号" class="headerlink" title="修改端口号"></a>修改端口号</h3><p>Conf目录下server.xml在对应http协议的connector上面修改<br>80端口号在访问的时候默认可以省略，不带端口号。</p>
+<h3 id="认识Tomcat目录结构"><a href="#认识Tomcat目录结构" class="headerlink" title="认识Tomcat目录结构"></a>认识Tomcat目录结构</h3><p>bin       二进制文件目录，也是启动停止的地方<br>conf      配置文件，可以配置虚拟映射，启动等配置<br>lib       需要的库文件<br>logs      日志文件<br>temp      临时文件存放的目录<br>webapps   项目发布的目录<br>work      工作目录 work目录只是tomcat的工作目录，也就是tomcat把jsp转换为class文件的工作目录。</p>
+<h3 id="部署项目"><a href="#部署项目" class="headerlink" title="部署项目"></a>部署项目</h3><p><strong>注意事项</strong>访问webapps目录下的应用，通过域名+端口号/应用名/资源名来访问，其中有一个需要特别注意，ROOT项目，该项目在访问的时候，不需要输入应用名。</p>
+<h3 id="直接部署"><a href="#直接部署" class="headerlink" title="直接部署"></a>直接部署</h3><p>在webapps目录下，新建一个目录，该目录名称就是你的应用名，在里面添加你说需要供他人访问的静态或者动态web资源。<br>Localhost:port/应用名/资源名称</p>
+<h3 id="打成war包，扔进webapps目录下"><a href="#打成war包，扔进webapps目录下" class="headerlink" title="打成war包，扔进webapps目录下"></a>打成war包，扔进webapps目录下</h3><p>War：web application archive。类似于一种压缩格式。Tomcat启动的时候会自动解压缩。<br>之后访问方法同上。</p>
+<h3 id="虚拟映射"><a href="#虚拟映射" class="headerlink" title="虚拟映射"></a>虚拟映射</h3><p>什么叫虚拟映射？？正常情况下，我们发布应用发布到webapps目录下就可以了，但是如果我不想把应用放到该目录下，我可以通过某种方式将其他目录下的应用关联到该webapps目录下，等同于在webapps目录下。</p>
+<p>1）在Host节点下新增Context节点<br>比如在D盘有一个应用，我需要发布到网络上，新增Context节点，path表示该应用的应用名，（和放在webapp目录下略有不同，文件夹的名称即为应用名称），docBase指向的是该应用所在的位置。</p>
+<pre><code>&lt;Context path=&quot;/second&quot; docBase=&quot;D:\secondapp&quot;&gt;&lt;/Context&gt;
+</code></pre><p>2） 在conf/catalina/localhost目录下新增 应用名.xml文件<br>//second.xml</p>
+<pre><code>&lt;Context docBase=&quot;D:\secondapp&quot;&gt;&lt;/Context&gt;
+</code></pre><h2 id="星期二（0820）"><a href="#星期二（0820）" class="headerlink" title="星期二（0820）"></a>星期二（0820）</h2><h3 id="Servlet"><a href="#Servlet" class="headerlink" title="Servlet"></a>Servlet</h3><p>ervlet = Server + applet<br>Servlet是接口，规范，相应的类由谁来实现？？？Web服务器、tomcat：Servlet容器<br>To implement this interface,<br>you can write a generic servlet that extends javax.servlet.GenericServlet<br>or an HTTP servlet that extends javax.servlet.http.HttpServlet.</p>
+<h3 id="手动实现servlet（不用IDEA）"><a href="#手动实现servlet（不用IDEA）" class="headerlink" title="手动实现servlet（不用IDEA）"></a>手动实现servlet（不用IDEA）</h3><p>目的是为了知道怎么运行，<br>因为servlet是一个接口，所以要去文档找他的实现类来进行编写<br>All Known Implementing Classes:</p>
+<pre><code>GenericServlet
+</code></pre><p>使用实现类实现service方法</p>
+<pre><code>public class Servlet enxtends GenericServlet {
+  public void service (ServletRequest req, ServletResponse res) {
+    System.out.println(&quot;first service&quot;);
+  }
+}
+</code></pre><p>现在的问题是这个：应该放在哪里运行<br>如果直接命令行运行会报错，因为jre里面没有这个jar包，简单说就是jre里面的jar包没有这个class类。<br>所以我们就需要去回顾一下类加载器的问题：</p>
+<pre><code>1.  Bootstrap类加载器：负责加载Java的核心类库，JAVA_HOME/jre/下面的类
+2.  Extension类加载器：负责加载JAVA/jre/lib/ext下面的类
+3.  System类加载器：负责将命令中的classpath或者CLASSPATH环境变量指定的类库加载到内存中。
+</code></pre><p>需要导包（不是import）<br>方式一：在Extension类加载器加载时加载<br>把tomcat/lib中的servlet-api.jar包 放在jdk…/jre/lib/ext的目录下直接编译就好了</p>
+<pre><code>javac firstServlet.java
+</code></pre><p>方法二：System类的加载器加载<br>Javac -classpath jar包的路径 java文件</p>
+<pre><code>javac -classpath D:\apache-tomcat-8.5.37\lib firstServlet.java
+</code></pre><h3 id="Servlet执行过程"><a href="#Servlet执行过程" class="headerlink" title="Servlet执行过程"></a>Servlet执行过程</h3><pre><code>1.  在浏览器上输入http://localhost/firstservlet/first，发生什么事情？？
+2.  首先被监听80端口号的connector HTTP 1.1接收，接收之后将请求转发给Engine处理。
+3.  Engine将请求匹配给虚拟主机localhost，如果没有找到，也是匹配给它，这个是默认的虚拟主机。
+4.  虚拟主机接收到请求，然后将请求的路径变成/firstservlet/first，之后在该host节点下去搜寻Context节点，应用名
+5.  找到firstservlet应用，将请求转发给该应用，/first，之后再去web.xml中去搜索/first，通过url-pattern找到servlet-name，再通过name找到相应的class文件，之后加载该class文件。
+6.  检查是否有该servlet的实例，有的话，则不会再次执行init方法，没有的话，则创建一个实例对象，执行init方法。
+7.  tomcat创建一个用于封装HTTP请求消息的HttpServletRequest对象和一个代表HTTP响应消息的HttpServletResponse对象，然后调用Servlet的service()方法并将请求和响应对象作为参数传递进去。
+8.  WEB应用程序被停止或重新启动之前，Servlet引擎将卸载Servlet，并在卸载之前调用Servlet的destroy()方法。
+</code></pre><h3 id="我自己的理解"><a href="#我自己的理解" class="headerlink" title="我自己的理解"></a>我自己的理解</h3><p>1.在浏览器输入一个URL之后，首先服务器会去读取他自己的配置文件：<strong>config/server.xml</strong>的文件。然后去找Connector标签，每个Connector标签对应一种请求的协议，找到对应的Connector，一般都是HTTP的。<br>2.然后去往下找<strong>标签 &lt; engine &gt; 只有Catalina的引擎</strong><br>3.然后往下 <strong>Host标签</strong>，接收到请求，获取到ip后面的部分/firstservlet/first<br>4.Host就去里面找<strong>Context标签</strong>，去上下文中找<strong>应用</strong><br>5.应用1)可以写在Host标签里面，2)也可以放在Catalina里面的最里面以<strong>应用名.xml</strong>读取应用找到firstservlet应用<br>6.然后在应用中找first 这个servlet<br>7.找这个servlet也可以放两个地方:1)可以写在web应用的中的WEB-INFO/web.xml中的servlet标签2）也可以在java的文件上写注解@WebServlet(“/servletName”) 这个之后会重点介绍的</p>
+<h3 id="Servlet的运行过程"><a href="#Servlet的运行过程" class="headerlink" title="Servlet的运行过程"></a>Servlet的运行过程</h3><p>Servlet程序是由WEB服务器调用，web服务器收到客户端的Servlet访问请求后：</p>
+<pre><code>1.Web服务器首先检查是否已经装载并创建了该Servlet的实例对象。如果是，则直接执行第④步，否则，执行第②步。
+2.装载并创建该Servlet的一个实例对象。
+3.调用Servlet实例对象的init()方法。
+4.tomcat创建一个用于封装HTTP请求消息的HttpServletRequest对象和一个代表HTTP响应消息的HttpServletResponse对象，然后调用Servlet的service()方法并将请求和响应对象作为参数传递进去。
+5.WEB应用程序被停止或重新启动之前，Servlet引擎将卸载Servlet，并在卸载之前调用Servlet的destroy()方法。
+</code></pre><h3 id="Servlet实现"><a href="#Servlet实现" class="headerlink" title="Servlet实现"></a>Servlet实现</h3><p>Servlet接口SUN公司定义了两个默认实现类，分别为：GenericServlet、HttpServlet。 HttpServlet是GenericServlet的子类</p>
+<p>HttpServlet指能够处理HTTP请求的servlet，它在原有Servlet接口上添加了一些与HTTP协议处理方法，它比Servlet接口的功能更为强大。因此开发人员在编写Servlet时，通常应继承这个类，而避免直接去实现Servlet接口。<br>HttpServlet在实现Servlet接口时，覆写了service方法，该方法体内的代码会自动判断用户的请求方式，如为GET请求，则调用HttpServlet的doGet方法，如为Post请求，则调用doPost方法。因此，开发人员在编写Servlet时，通常只需要覆写doGet或doPost方法，而不要去覆写service方法。<br><a href="http://tomcat.apache.org/tomcat-5.5-doc/servletapi/" target="_blank" rel="external">阅读HttpServlet API文档，看一下servlet-api.jar</a></p>
+<h3 id="如何使用servlet"><a href="#如何使用servlet" class="headerlink" title="如何使用servlet?"></a>如何使用servlet?</h3><p>由于客户端是通过URL地址访问web服务器中的资源，所以Servlet程序若想被外界访问，必须把servlet程序映射到一个URL地址上，这个工作在web.xml文件中使用&lt;servlet&gt;元素和&lt;servlet-mapping&gt;元素完成。<br>&lt;servlet&gt;元素用于注册Servlet，它包含有两个主要的子元素：&lt;servlet-name&gt;和&lt;servlet-class&gt;，分别用于设置Servlet的注册名称和Servlet的完整类名。<br>一个&lt;servlet-mapping&gt;元素用于映射一个已注册的Servlet的一个对外访问路径，它包含有两个子元素：&lt;servlet-name&gt;和&lt;url-pattern&gt;，分别用于指定Servlet的注册名称和Servlet的对外访问路径。例如：</p>
+<pre><code>&lt;web-app&gt;
+  &lt;servlet&gt;
+    &lt;servlet-name&gt;AnyName&lt;/servlet-name&gt;
+    &lt;servlet-class&gt;HelloServlet&lt;/servlet-class&gt;
+  &lt;/servlet&gt;
+  &lt;servlet-mapping&gt;
+    &lt;servlet-name&gt;AnyName&lt;/servlet-name&gt;
+    &lt;url-pattern&gt;/demo/hello.html&lt;/url-pattern&gt;
+  &lt;/servlet-mapping&gt;
+&lt;/web-app&gt;
+</code></pre><p><strong>注意事项</strong></p>
+<pre><code>同一个Servlet可以被映射到多个URL上，即多个&lt;servlet-mapping&gt;元素的&lt;servlet-name&gt;子元素的设置值可以是同一个Servlet的注册名。
+在Servlet映射到的URL中也可以使用*通配符，但是只能有两种固定的格式：    一种格式是“*.扩展名”，一种格式是以正斜杠（/）开头并以“/*”结尾。
+</code></pre><h3 id="为什么一个servlet可以对应多个url-pattern-而不能多个servlet去对应一个url-pattern？"><a href="#为什么一个servlet可以对应多个url-pattern-而不能多个servlet去对应一个url-pattern？" class="headerlink" title="为什么一个servlet可以对应多个url_pattern 而不能多个servlet去对应一个url_pattern？"></a>为什么一个servlet可以对应多个url_pattern 而不能多个servlet去对应一个url_pattern？</h3><p>稍加思考你就发现，你再浏览器输入一个servlet请求，那么浏览器发出给服务器，如果多个servlet对应一个url_pattern那么服务器就不懂给哪个servlet去处理这个请求了，所以肯定不行。 就好像你要去进行实名登记（发送请求），要去办公室（服务端），办公室去处理你的登记的时候可以发现有多个和你名字一样的人。但是你不能一个人写两个名字。这样就会<strong>你们要抓的是周树人，和我鲁迅什么关系？</strong></p>
+<h3 id="关于url-pattern冲突匹配的问题"><a href="#关于url-pattern冲突匹配的问题" class="headerlink" title="关于url_pattern冲突匹配的问题"></a>关于url_pattern冲突匹配的问题</h3><p>url_pattern固定两种写法：</p>
+<pre><code>第一种 /。。。。/。。。。，以/开头  /*  必须要以/开头，要记住
+第二种*.后缀
+</code></pre><p>对于如下的一些映射关系：<br>Servlet1 映射到 /abc/*<br>Servlet2 映射到 /*<br>Servlet3 映射到 /abc<br>Servlet4 映射到 *.do<br>问题：</p>
+<pre><code>当请求URL为“/abc/a.html”，“/abc/*”和“/*”都匹配，哪个servlet响应
+  Servlet引擎将调用Servlet1。
+
+当请求URL为“/abc”时，“/abc” /*都匹配，哪个servlet响应
+  Servlet引擎将调用Servlet3。
+
+当请求URL为“/abc/a.do”时，“/abc/*”和“*.do”和/*都匹配，哪个servlet响应
+  Servlet引擎将调用Servlet1。
+
+当请求URL为“/a.do”时，“/*”和“*.do”都匹配，哪个servlet响应
+  Servlet引擎将调用Servlet2。
+
+当请求URL为“/xxx/yyy/a.do”时，“/*”和“*.do”都匹配，哪个servlet响应
+  Servlet引擎将调用Servlet2。
+</code></pre><p><strong>一些结论</strong><br>1.可以精确匹配，就用最精确的匹配<br>2./*的优先级要高于*.do以/开头的优先级要高于*.后缀的优先级<br>精准匹配要优先级最高，（以/开头的匹配）</p>
+<h2 id="关于-和"><a href="#关于-和" class="headerlink" title="关于/ 和 /*"></a>关于/ 和 /*</h2><p>当一个应用里面设置两个servlet，他们的映射的url是’/‘ ‘/*‘时，<br>访问jsp和html页面，均无法访问到，都被/*拦截掉当把/*去掉之后，jsp可以访问到（jsp本质上也是servlet，它有一个url-pattern）但是这个时候依旧不能访问静态的文件。默认情况下处理静态文件的servlet它的url-pattern就是/(其实是tomcat提供了这个servlet)<br>/的优先级最低，缺省servlet，也就是说，任何servlet的url-pattern都匹配不到该路径时，这个时候/来处理。这个时候，如果项目中存在html或者图片，则被/*匹配到，无法显示正常的网页、资源</p>
+<p>/* 能匹配到所有不是精准匹配的资源，jsp文件不能显示<br>/ 默认的匹配，默认是处理静态文件资源的，如果自己实现这个servlet，服务器就会使用这个servlet来处理静态请求。</p>
+<h3 id="Servlet的生命周期"><a href="#Servlet的生命周期" class="headerlink" title="Servlet的生命周期"></a>Servlet的生命周期</h3><p>Servlet是一个供其他Java程序（Servlet引擎）调用的Java类，它不能独立运行，它的运行完全由Servlet引擎来控制和调度。</p>
+<p>针对客户端的多次Servlet请求，通常情况下，服务器只会创建一个Servlet实例对象，也就是说Servlet实例对象一旦创建，它就会驻留在内存中，为后续的其它请求服务，直至web容器退出(或应用停止)，servlet实例对象才会销毁。<br>在Servlet的整个生命周期内，Servlet的<strong>init方法</strong>只被调用一次。而对一个Servlet的每次访问请求都导致Servlet引擎调用一次servlet的<strong>service方法</strong>。对于每次访问请求，Servlet引擎都会创建一个新的HttpServletRequest请求对象和一个新的HttpServletResponse响应对象，然后将这两个对象作为参数传递给它调用的Servlet的service()方法，service方法再根据请求方式分别调用doXXX方法。</p>
+<h3 id="如何让servlet自己动起来？"><a href="#如何让servlet自己动起来？" class="headerlink" title="如何让servlet自己动起来？"></a>如何让servlet自己动起来？</h3><p>创建：正常情况下，servlet在第一次访问的时候被创建，被谁创建？？Tomcat。<br>但是，可以通过设置一个参数，让servlet在项目加载的时候自动创建。<br><strong>Load-on-startup</strong>可以更改servlet的生命周期的创建阶段</p>
+<pre><code>&lt;servlet&gt;
+  &lt;servlet-name&gt;invoker&lt;/servlet-name&gt;
+  &lt;servlet-class&gt;
+    org.apache.catalina.servlets.InvokerServlet
+  &lt;/servlet-class&gt;
+  &lt;load-on-startup&gt;2&lt;/load-on-startup&gt;
+&lt;/servlet&gt;
+</code></pre><p>或者说第一次访问的时候创建，有什么好处？懒加载。什么时候用，什么时候创建。<br>对于一些需要经常访问的servlet，或者说需要在项目启动的时候做一些加载，可以将servlet的load-on-startup设置为一个非负数，这样，则可以减轻服务器的部分压力。<br>正常情况下，默认-1，表示初次访问的时候才会加载。数字大小表示加载的先后顺序，越小则越先加载。</p>
+<p>用途：为web应用写一个InitServlet，这个servlet配置为启动时装载，为整个web应用创建必要的数据库表和数据。</p>
+<h3 id="ServletConfig对象（没什么卵用，你要取出来又不能修改）"><a href="#ServletConfig对象（没什么卵用，你要取出来又不能修改）" class="headerlink" title="ServletConfig对象（没什么卵用，你要取出来又不能修改）"></a>ServletConfig对象（没什么卵用，你要取出来又不能修改）</h3><p>当servlet配置了初始化参数后，web容器在创建servlet实例对象时，会自动将这些初始化参数封装到ServletConfig对象中，并在调用servlet的init方法时，将ServletConfig对象传递给servlet。进而，程序员通过ServletConfig对象就可以得到当前servlet的初始化参数信息。</p>
+<h3 id="ServletContext"><a href="#ServletContext" class="headerlink" title="ServletContext"></a>ServletContext</h3><p>WEB容器在启动时，它会为每个WEB应用程序都创建一个对应的ServletContext对象，它代表当前web应用，就是之前讲的<context>标签<br>ServletConfig对象中维护了ServletContext对象的引用，开发人员在编写servlet时，可以通过ServletConfig.getServletContext方法获得ServletContext对象。<br>由于一个WEB应用中的所有Servlet共享同一个ServletContext对象，因此Servlet对象之间可以通过ServletContext对象来实现通讯。ServletContext对象通常也被称之为context域对象。</context></p>
+<h3 id="ServletContext用法"><a href="#ServletContext用法" class="headerlink" title="ServletContext用法"></a>ServletContext用法</h3><p>API的介绍<br>目前常用的就这几个，第一个获取上下文对象，中间三个是获取，设置，删除属性 dispatcher是用转发和包含的 最后一个是获取真实路径</p>
+<p> ServletContext getServletContext()<br>          Returns:a ServletContext object, used by the caller to interact with its servlet container（返回一个上下文）</p>
+<p> void removeAttribute(java.lang.String name)<br>          Removes the attribute with the given name from the servlet context.（删除一个上下文的属性）</p>
+<p> void setAttribute(java.lang.String name, java.lang.Object object)<br>          Binds an object to a given attribute name in this servlet context.</p>
+<p> java.lang.Object getAttribute(java.lang.String name)<br>          Returns the servlet container attribute with the given name, or null if there is no attribute by that name.</p>
+<p>RequestDispatcher getRequestDispatcher(java.lang.String path)<br>          Returns a RequestDispatcher object that acts as a wrapper for the resource located at the given path.</p>
+<p>java.lang.String  getRealPath(java.lang.String path)<br>          Returns a String containing the real path for a given virtual path.</p>
+<p>1.共享数据</p>
+<pre><code>//Servlet1
+getServletContext().setAttribute(&quot;neigui&quot;,&quot;guangtou&quot;)
+//Servlet2
+(String)getServletContext().getAttribute(&quot;neigui&quot;);  //光头
+</code></pre><p>2.获取全局性的初始化参数<br> Web.xml定义一个context-param节点，所有的servlet均可以获取到该初始化参数。与ServletConfig不同。ServletConfig初始化参数的标签叫init-param，这个标签是存在于servlet内部的，所以仅当前servlet可以获取到该初始化参数。</p>
+<pre><code>&lt;context-param&gt;
+    &lt;param-name&gt;guangtou&lt;/param-name&gt;
+    &lt;param-value&gt;neigui&lt;/param-value&gt;
+&lt;/context-param&gt;
+</code></pre><p>这里写的是String 类型</p>
+<pre><code>(String)getServletContext().getAttribute(&quot;neigui&quot;);  //光头
+</code></pre><p>3.获取EE项目的文件路径<br>相对路径，相对的是谁的路径？Jdk里面如何描述相对路径的？？相对路径指的是相对java虚拟机调用的目录。在哪个目录下调用jvm，就相对的是哪个路径。SE的项目都是我们自己调用的jre 但是EE项目不是，是tomcat里面有个argument调用了main方法。</p>
+<pre><code>File file = new File(&quot;a.html&quot;);
+System.out.println(file.getAbsolutePath());//D:\apache-tomcat-8.5.37\bin\a.html
+
+getServletContext.getRealPath(); //获取的是你项目的路径
+</code></pre><p><strong>注意事项</strong> getServletContext.getRealPath();获取的是部署目录的应用名的路径，而不是开发路径的，所以就有可能会出线，这是发布路径上面有文件，而且路径是正确的，但是偏偏项目启动却找不到，因为部署目录上面没有这个文件夹。没有对应的文件，这时候有两个解决方案：<br>1.点IDEA上的build project,重新构建一下项目到部署目录<br>2.设置一下开发路径上class文件的编译放的文件路径，他应该会默认重新构建项目，就把东西复制到部署目录了。</p>
+<p><strong>ServletContext应用</strong><br>获取WEB应用的初始化参数。(多个serlvet获取相同参数)<br>多个Servlet通过ServletContext对象实现数据共享。<br>实现Servlet的转发（request）。</p>
+<h2 id="星期三（0821）"><a href="#星期三（0821）" class="headerlink" title="星期三（0821）"></a>星期三（0821）</h2><h3 id="request（请求）"><a href="#request（请求）" class="headerlink" title="request（请求）"></a>request（请求）</h3><p>一些API的使用，以及转发和包含的功能</p>
+<h3 id="HttpServletRequest"><a href="#HttpServletRequest" class="headerlink" title="HttpServletRequest"></a>HttpServletRequest</h3><p>public interface HttpServletRequest extends ServletRequest</p>
+<h3 id="API"><a href="#API" class="headerlink" title="API"></a>API</h3><pre><code>getRequestURL方法返回客户端发出请求时的完整URL。
+getRequestURI方法返回请求行中的资源名部分。
+//getQueryString 方法返回请求行中的参数部分（POST就拿不到参数）。一般不用不能获取请求体中的参数
+getRemoteAddr方法返回发出请求的客户机的IP地址
+getRemoteHost方法返回发出请求的客户机的完整主机名
+getRemotePort方法返回客户机所使用的网络端口号
+getLocalAddr方法返回WEB服务器的IP地址。
+getLocalName方法返回WEB服务器的主机名
+getMethod得到客户机请求方式
+</code></pre><h3 id="关于request的三个资源名字："><a href="#关于request的三个资源名字：" class="headerlink" title="关于request的三个资源名字："></a>关于request的三个资源名字：</h3><p>//URI 统一资源标识符 /request  URL 统一资源定位符 <a href="http://localhost/request" target="_blank" rel="external">http://localhost/request</a></p>
+<pre><code>    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding(&quot;utf-8&quot;);
+        String contextPath = request.getContextPath();
+        String requestURI = request.getRequestURI();
+        StringBuffer requestURL = request.getRequestURL();
+
+        System.out.println(contextPath); //应用名       /0824test_war_exploded（/是内容）
+        System.out.println(requestURI);  // 资源标识符   /0824test_war_exploded/Servlet1（/是内容）
+        System.out.println(requestURL);  // 资源定位    http://localhost/0824test_war_exploded/Servlet1
+    }
+}
+</code></pre><h3 id="常用参数"><a href="#常用参数" class="headerlink" title="常用参数"></a>常用参数</h3><p>获得客户机请求头</p>
+<pre><code>getHeader(name)方法
+getHeaders(String name)方法
+getHeaderNames方法
+</code></pre><p>获得客户机请求参数(客户端提交的数据)</p>
+<pre><code>getParameter(name)方法
+getParameterValues（String name）方法
+getParameterNames方法
+getParameterMap()
+</code></pre><h3 id="第三方库获取用户的参数"><a href="#第三方库获取用户的参数" class="headerlink" title="第三方库获取用户的参数"></a>第三方库获取用户的参数</h3><p>获取用户的请求参数，如果我们一个一个从请求拿出来，然后赋值给我们自己建的bean就很蠢，能否有个工具像DBUtil一样能够直接通过ResultHandler传给他一个对象，他反射来创建bean对象，调用我们bean的方法，来填充我们的bean对象。答案当然是有的：<br>引用两个jar包：</p>
+<pre><code>commons-beanutils-1.8.3.jar
+commons-logging-1.1.1.jar
+</code></pre><p>然后在servlet里面开始操作</p>
+<pre><code>    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+//        Enumeration&lt;String&gt; parameterNames = request.getParameterNames();
+//        while (parameterNames.hasMoreElements()){
+//            String key = parameterNames.nextElement();
+//            String[] parameterValues = request.getParameterValues(key);
+//            ...然后一个一个把参数放进我们的bean中，就很麻烦，能不能一步到位？
+//        }
+        Map&lt;String, String[]&gt; parameterMap = request.getParameterMap();
+        //还有一种情形，假如我想将获取到的数据封装到一个java bean中，应该怎么做 User
+        //反射  调用相应的set方法来完成赋值
+        //运用第三方的jar包
+        User user = new User();
+        try {
+            BeanUtils.populate(user,parameterMap);
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        }
+        System.out.println(user);
+    }
+</code></pre><h3 id="前端form表单书写的问题"><a href="#前端form表单书写的问题" class="headerlink" title="前端form表单书写的问题"></a>前端form表单书写的问题</h3><p>1.写全地址</p>
+<pre><code>http://127.0.0.1/servlet1
+</code></pre><p>这种方式不推荐，原因：在公司开发软件的过程中，会涉及到多个环境，开发环境，测试环境，生产环境。</p>
+<p>2.以/开头写法<br>写法：/应用名/资源名。</p>
+<p>3.相对当前页面的写法，不以/开头</p>
+<p><strong>注意事项</strong>这里又涉及到了路径的问题，之后我会总结路径的问题，这里就提一点，以/开头的路径的写法，如果执行的主体是浏览器，那么要写应用名，就例如这里的表单：</p>
+<pre><code>/应用名/资源名
+</code></pre><p>但是执行的主体是服务器的时候，不需要写应用名。例如马上回顾的转发和包含。执行主体是ServletContext是服务器主体：</p>
+<pre><code>/Servlet_name(资源名)
+</code></pre><h3 id="转发和包含-request-getRequestDispatcher"><a href="#转发和包含-request-getRequestDispatcher" class="headerlink" title="转发和包含 request.getRequestDispatcher()"></a>转发和包含 request.getRequestDispatcher()</h3><p>一个Servlet对象无法获得另一个Servelt对象的引用；如果需要多个Servet组件共同协作(数据传递)，只能使用Servelt规范为我们提供的两种方式：</p>
+<p>请求转发：Servlet(源组件)先对客户请求做一些预处理操作，然后把请求转发给其他web组件(目标组件)来完成包括生成响应结果在内的后续操作。<br>包含：Servelt(源组件)把其他web组件(目标组件)生成的响应结果包含到自身的响应结果中。</p>
+<h3 id="转发forward"><a href="#转发forward" class="headerlink" title="转发forward"></a>转发forward</h3><p>dispatcher.forward(request,response)的处理流程：<br>1、清空用于存放<strong>响应正文</strong>数据的缓冲区，所以源组件依然可以设置响应头<br>2、如果目标组件为Servlet或JSP，tomcat就调用它们，把它们产生的响应结果发送到客户端；如果目标组件为文件系统中的静态HTML文档，tomcat就读取文档中的数据并把它发送给客户端。<br>特点：<br>1、由于forward()方法先清空用于存放响应正文数据的缓冲区，因此源组件生成的响应结果（无论转发前后）不会被发送到客户端，只有目标组件生成的响应结果才会被送到客户端。<br>2、如果源组件在进行请求转发之前，已经提交了响应结果（如调用了response的flush或close方法），那么forward（）方法会抛出IllegalStateException。为了避免该异常，不应该在源组件中提交响应结果。</p>
+<h3 id="包含include"><a href="#包含include" class="headerlink" title="包含include"></a>包含include</h3><p>include()方法的处理流程：<br>1、如果目标组件为Servlet或JSP，就执行它们，并把它们产生的响应正文添加到源组件的响应结果中；如果目标组件为HTML文档，就直接把文档的内容添加到源组件的响应结果中。<br>特点：<br>1、源组件与被包含的目标组件的输出数据都会被添加到响应结果中。<br><strong>2、在目标组件中对响应状态代码或者响应头所做的修改都会被忽略</strong></p>
+<h3 id="转发和包含的共同点"><a href="#转发和包含的共同点" class="headerlink" title="转发和包含的共同点"></a>转发和包含的共同点</h3><p>源组件和目标组件处理的都是同一个客户请求，源组件和目标组件共享同一个ServeltRequest和ServletResponse对象<br>目标组件都可以为Servlet、JSP或HTML文档都依赖 javax.servlet.RequestDispatcher接口</p>
+<p>就相当于把请求转移，请求由谁发送的？？应该由浏览器发送，所以只发送了一次请求。<br>转发是服务器的内部行为，和浏览器没有任何关系。<br>源组件：dispatcher1<br>目标组件： dispatcher2</p>
+<pre><code>//dispatcher1
+RequestDispatcher requestDispatcher = request.getRequestDispatcher(&quot;/dispatcher2&quot;);
+</code></pre><h3 id="转发和包含之间又有什么样的区别"><a href="#转发和包含之间又有什么样的区别" class="headerlink" title="转发和包含之间又有什么样的区别"></a>转发和包含之间又有什么样的区别</h3><p>转发：（源组件）留头（响应头）不留体（响应体）。<br>源组件做了初步处理之后，将请求转发给目标组件，之后源组件对于响应正文的数据不再参与进来，全权由目标组件来完成。但是源组件可以写入响应头信息。<br>包含：（源组件）留头（响应头）也留体（响应体）。（目标组件）不留响应头</p>
+<p>无论包含还是转发，执行的先后顺序，源组件执行到include/forward语句之后，就跳转至目标组件<br>目标组件组件执行完毕之后，再次回到源组件forward/include下面的语句执行<br>但是在转发之后，源组件不能在执行response相关的操作。例如不能在返回响应中写东西</p>
+<pre><code>protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding(&quot;utf-8&quot;);
+//        RequestDispatcher requestDispatcher = request.getRequestDispatcher(&quot;/DispatcherServlet2&quot;);
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher(&quot;DispatcherServlet2&quot;);
+        requestDispatcher.forward(request,response);
+        response.getWriter().println(&quot;dispatcher1&quot;);           //无效
+        System.out.println(&quot;dispatcher1后面的代码还会执行吗？&quot;); //会执行
+    }
+</code></pre><h3 id="转发和包含的用途"><a href="#转发和包含的用途" class="headerlink" title="转发和包含的用途"></a>转发和包含的用途</h3><p>最常用的地方就是用于servlet向jsp/html页面跳转，比如登录页面，登录成功，跳转到success页面，登录失败跳转到fail页面。</p>
+<h3 id="request域"><a href="#request域" class="headerlink" title="request域"></a>request域</h3><p>一个范围，ServletContext域，也是一个范围。<br>Context域范围：整个web应用下的资源都可以访问到<br>Request域范围：针对同一个request对象内有效。所有共享同一个request对象的组件，都可以共享request域。转发的源组件和目标组件共享request域吗？当然共享，Servlet跳转到jsp页面的话，可以共享同一个request域对象数据。<br>小问题：这里说的跳转是什么意思？和设置响应头的跳转和重定向有关系吗？</p>
+<h3 id="请求范围"><a href="#请求范围" class="headerlink" title="请求范围"></a>请求范围</h3><p>web应用范围内的共享数据作为ServeltContext对象的属性而存在(setAttribute)，只要共享ServletContext对象也就共享了其数据。<br>请求范围内的共享数据作为ServletRequest对象的属性而存在(setAttribute)，只要共享ServletRequest对象也就共享了其数据。</p>
+<h2 id="星期四（0822）"><a href="#星期四（0822）" class="headerlink" title="星期四（0822）"></a>星期四（0822）</h2><h3 id="response"><a href="#response" class="headerlink" title="response"></a>response</h3><p>Request是对请求报文的封装，response就是对响应报文的封装。其实也就是socket 和 serviceSocket的关系</p>
+<h3 id="常见的API"><a href="#常见的API" class="headerlink" title="常见的API"></a>常见的API</h3><p>Response.setStatus 设置相应的状态码<br>Response.setHeader(name,value)通用的一个形式   设置响应头<br>Response.getWriter() /getOutputStream()</p>
+<h3 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h3><h3 id="1-传输文件"><a href="#1-传输文件" class="headerlink" title="1.传输文件"></a>1.传输文件</h3><p>1.字符流传输文件</p>
+<pre><code>String realPath = getServletContext().getRealPath(&quot;/2.png&quot;);
+File file = new File(realPath);
+FileInputStream fileInputStream = new FileInputStream(file);
+int length = 0;
+byte[] bytes = new byte[1024];
+while ((length = fileInputStream.read(bytes)) != -1){
+    response.getOutputStream().write(bytes,0,length);
+}
+fileInputStream.close();
+</code></pre><p><strong>注意事项</strong> 字节流输出中文默认不会乱码： 那是因为getBytes()的将String转字符是以系统的默认编码格式为基准，而浏览器的字符编码格式也是系统的默认编码格式，所以他们的编码格式都是GBK，碰巧就能显示不乱码的情形：</p>
+<pre><code>response.getOutputStream().write(&quot;你好&quot;.getBytes()); //不会乱码默认是中文转字符是GBK格式
+String csn = Charset.defaultCharset().name();
+System.out.println(csn); //gbk  字符流默认编码格式
+</code></pre><p>//字节流最常用的使用方式还是传输文件</p>
+<pre><code>response.getOutputStream().write(&quot;你好&quot;.getBytes(&quot;utf-8&quot;));
+response.setContentType(&quot;text/html;charset=utf-8&quot;);
+</code></pre><p>2.字符流传输文件（只能传输文本文件）</p>
+<pre><code>request.setCharacterEncoding(&quot;utf-8&quot;); //字符流才有效
+response.setContentType(&quot;text/html;charset=utf-8&quot;);
+String path = getServletContext().getRealPath(&quot;a.txt&quot;);
+System.out.println(path);
+FileReader fileReader = new FileReader(new File(path));
+PrintWriter writer = response.getWriter();
+int len;
+char[] chars = new char[1024];
+while((len = fileReader.read(chars)) !=-1 ) {
+   writer.write(chars);
+}
+</code></pre><h3 id="2-定时刷新"><a href="#2-定时刷新" class="headerlink" title="2.定时刷新"></a>2.定时刷新</h3><pre><code>//设置响应头，定时刷新 2表示2秒后执行后面的url；还有一种写法，只有一个数字，只执行一次
+//response.setHeader(&quot;refresh&quot;,&quot;2;url=http://www.cskaoyan.com&quot;);
+//表示每隔2s便会刷新当前页面一次，反复执行
+response.setHeader(&quot;refresh&quot;,&quot;2&quot;);
+</code></pre><h3 id="3-重定向（）"><a href="#3-重定向（）" class="headerlink" title="3.重定向（）"></a>3.重定向（）</h3><pre><code>response.sendRedirect(&quot;/response/1.html&quot;);
+</code></pre><p>//重定向的另外一种写法：</p>
+<pre><code>response.setStatus(302);
+response.setHeader(&quot;location&quot;,&quot;/response/1.html&quot;);
+</code></pre><h3 id="重定向、定时刷新页面、转发和包含区别"><a href="#重定向、定时刷新页面、转发和包含区别" class="headerlink" title="重定向、定时刷新页面、转发和包含区别"></a>重定向、定时刷新页面、转发和包含区别</h3><p>1.转发和包含是服务器介导的，执行主体是服务器，重定向、refresh刷新是浏览器介导的，执行主体是浏览器<br>2.转发和包含地址栏不会发生变化，浏览器只发出一次请求，重定向、refresh地址栏会发生变化，浏览器会发送两次请求<br>3.转发和包含是request介导的，重定向、refresh是response介导的<br>4.转发和包含只可以访问当前应用下的资源，重定向、refresh可以访问其他服务器资源<br>5.转发和包含可以共享同一request域，重定向、refresh不可以。</p>
+<h3 id="文件下载"><a href="#文件下载" class="headerlink" title="文件下载"></a>文件下载</h3><p>设置响应头<br>    response.setHeader(“Content-Disposition”,”attachment; filename=aaa.txt”);</p>
+<h3 id="response注意事项"><a href="#response注意事项" class="headerlink" title="response注意事项"></a>response注意事项</h3><p>1.getOutputStream和getWriter方法分别用于得到输出二进制数据、输出文本数据的ServletOuputStream、Printwriter对象。<br>2.getOutputStream和getWriter这两个方法互相排斥，调用了其中的任何一个方法后，就不能再调用另一方法。  会抛异常。<br>3.Servlet程序向ServletOutputStream或PrintWriter对象中写入的数据将被Servlet引擎从response里面获取，Servlet引擎将这些数据当作响应消息的正文，然后再与响应状态行和各响应头组合后输出到客户端。<br>4.Serlvet的service方法结束后，Servlet引擎将检查getWriter或getOutputStream方法返回的输出流对象是否已经调用过close方法，如果没有，Servlet引擎将调用close方法关闭该输出流对象。但是不会自动关闭输入流inputStream  所以要自己手动关闭输入流</p>
+<h2 id="星期五（0823）"><a href="#星期五（0823）" class="headerlink" title="星期五（0823）"></a>星期五（0823）</h2><p>今天主要学习会话，也只是使用而已，还有一些小的细节</p>
+<h3 id="会话"><a href="#会话" class="headerlink" title="会话"></a>会话</h3><p>问题：什么是会话？<br>  会话可简单理解为：用户开一个浏览器，点击多个超链接，访问同一个服务器多个web资源，然后关闭浏览器，整个过程称之为一个会话。<br>会话过程中要解决的一些问题？<br>每个用户在使用浏览器与服务器进行会话的过程中，不可避免各自会产生一些数据，程序要想办法为每个用户保存这些数据。<br>例如：用户点击超链接通过一个servlet购买了一个商品，程序应该想办法保存用户购买的商品，以便于用户点结帐servlet时，结帐servlet可以得到用户购买的商品为用户结帐。</p>
+<h3 id="HTTP是无状态的协议"><a href="#HTTP是无状态的协议" class="headerlink" title="HTTP是无状态的协议"></a>HTTP是无状态的协议</h3><p>Web应用程序是使用HTTP协议传输数据的。HTTP协议是无状态的协议。一旦数据交换完毕，客户端与服务器端的连接就会关闭，再次交换数据需要建立新的连接。这就意味着服务器无法从连接上跟踪会话。即用户A购买了一件商品放入购物车内，当再次购买商品时服务器已经无法判断该购买行为是属于用户A的会话还是用户B的会话了。要跟踪该会话，<strong>必须引入一种机制</strong>。<br>cookie<br>由于服务器无法从http协议上分辨不同的用户，所以服务器要想办法给客户端们颁发一个证件，每人一个，无论谁访问都必须携带自己证件。这样服务器就能从每个人的证件上确认客户身份了。这就是Cookie的工作原理。<br>Cookie实际上是一小段的文本信息。客户端请求服务器，如果服务器需要记录该用户状态，就使用response向客户端浏览器颁发一个Cookie。客户端浏览器会把Cookie保存起来。当浏览器再请求该网站时，浏览器把请求的网址连同该Cookie一同提交给服务器。服务器检查该Cookie，以此来辨认用户状态。服务器还可以根据需要修改Cookie的内容。</p>
+<h3 id="保存会话数据的两种技术"><a href="#保存会话数据的两种技术" class="headerlink" title="保存会话数据的两种技术"></a>保存会话数据的两种技术</h3><h3 id="Cookie"><a href="#Cookie" class="headerlink" title="Cookie"></a>Cookie</h3><p>Cookie是客户端(浏览器)技术，服务器程序把每个用户的数据以cookie的形式写给用户各自的浏览器。当用户使用浏览器再去访问服务器中的web资源时，就会带着各自的数据去访问。这样，WEB服务器就能通过cookie去识别用户了。web资源处理的就是用户各自的数据了。</p>
+<p>Cookie技术–放映（注意顺序）<br>第一次请求：服务器会在响应头设置 set-cookie: 给用户一个cookie，为了标识用户，此时用户自身请求体没有cookie<br>第二次请求：浏览器带cookie去和用户请求，服务器接收到一个cookie数组，在里面查找就能分辨是谁来请求了。</p>
+<h3 id="Cookie基本API"><a href="#Cookie基本API" class="headerlink" title="Cookie基本API"></a>Cookie基本API</h3><p>javax.servlet.http.Cookie类用于创建一个Cookie，response接口中定义了一个addCookie方法，它用于在其响应头中增加一个相应的Set-Cookie头字段。 同样，request接口中也定义了一个getCookies方法，它用于获取客户端提交的Cookie。Cookie类的方法：</p>
+<pre><code>public Cookie(String name,String value)
+setValue与getValue方法
+setMaxAge与getMaxAge方法 (秒)
+getName方法
+setPath与getPath方法
+setDomain与getDomain方法（没什么卵用，一般浏览器不会给你改域名的）
+</code></pre><p><strong>注意</strong><br>给不给传cookie是由浏览器决定的，取决于MYURL.startWith(domain+path)完全匹配<br>也就是运行的主题是浏览器，所以需要加上应用名</p>
+<h3 id="Cookie-细节"><a href="#Cookie-细节" class="headerlink" title="Cookie 细节"></a>Cookie 细节</h3><pre><code>1.一个Cookie只能标识一种信息，它至少含有一个标识该信息的名称（NAME）和设置值（VALUE）value也必须是字符串类型。
+2.一个WEB站点可以给一个WEB浏览器发送多个Cookie，一个WEB浏览器也可以存储多个WEB站点提供的Cookie。
+3.浏览器一般只允许存放300个Cookie，每个站点最多存放20-50个Cookie，每个Cookie的大小限制为4KB。
+4.如果创建了一个cookie，并将他发送到浏览器，默认情况下它是一个会话级别的cookie（即存储在浏览器的内存中），用户退出浏览器之后即被删除。若希望浏览器将该cookie存储在磁盘上，则需要使用maxAge，并给出一个以秒为单位的时间。将最大时效设为0则是命令浏览器删除该cookie。
+5.注意，删除 cookie 时，path必须一致，否则不会删除
+6.cookie默认的存在是在浏览器的内存中，也就是说默认关闭浏览器cookie就会消失。可以通过setMaxAge来改变
+    setMaxAge 是负数，表示和默认一样，关闭浏览器就消失
+    setMaxAge 是正数，表示cookie存活的秒数。是从addCookie开始算起的时间，并不是关闭浏览器后存活的时间，而是创建的时候开始算的时间
+    setMaxAge 是零， 表示杀死cookie不会再出现，注意杀死的path要一致
+7.不同浏览器之间能否共享cookie
+</code></pre><h3 id="使用-cookie"><a href="#使用-cookie" class="headerlink" title="使用 cookie"></a>使用 cookie</h3><pre><code>//第一步，新增一个cookie对象
+Cookie cookie = new Cookie(&quot;name&quot;,&quot;zhangsan&quot;);
+//第二步，将cookie返回给客户端
+response.addCookie(cookie);
+
+//之后客户端再请求
+ Cookie[] cookies = request.getCookies();
+if(cookies != null){
+    for (Cookie cookie : cookies) {
+        if(&quot;name&quot;.equals(cookie.getName())){
+            response.getWriter().println(cookie.getValue());
+            //这个时候删除cookie没有删除成功，为什么？
+            //删除cookie的时候，cookie的path一定要和创建的时候path保持一致
+            cookie.setMaxAge(0);
+            cookie.setPath(&quot;/cookie/cookie3&quot;);
+            response.addCookie(cookie);
+        }
+    }
+}
+</code></pre><h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><p>假如一个cookie的path是/demo/cookie，那么它能否区分一个应用名即demo，然后资源名是cookie，还有一个应用名是/，资源名是/demo/cookie</p>
+<p>可以区分，因为是浏览器为主体path写/demo 就是以引用名开头，所以是可以区分的。实际操作也是可以区分的；当请求应用名/,资源名是/demo/cookie什么都没有</p>
+<h3 id="Session"><a href="#Session" class="headerlink" title="Session"></a>Session</h3><p>问题：什么是会话？</p>
+<pre><code>会话可简单理解为：用户开一个浏览器，点击多个超链接，访问服务器多个web资源，然后关闭浏览器，整个过程称之为一个会话。
+</code></pre><p>会话过程中要解决的一些问题？</p>
+<pre><code>每个用户在使用浏览器与服务器进行会话的过程中，不可避免各自会产生一些数据，程序要想办法为每个用户保存这些数据。
+例如：用户点击超链接通过一个servlet购买了一个商品，程序应该想办法保存用户购买的商品，以便于用户点结帐servlet时，结帐servlet可以得到用户购买的商品为用户结帐。
+</code></pre><p>WEB开发中，服务器可以为每个浏览器创建一个会话对象（session对象），注意：把用户数据写到用户浏览器独占的session中，当前用户使一个浏览器独占一个session对象(默认情况下)。因此，在需要保存用户数据时，服务器程序可以用session保存。同一浏览器可以从用户的session中取出该用户的数据，为用户服务。<br>（数据保存在服务器的Session对象中,内存。浏览器怎么拿到？会给用户一个cookie 名字叫：JsessionID）<br>Session对象由服务器创建，开发人员可以调用request对象的getSession方法得到session对象。</p>
+<p>问题：跟cookie一样 从request报文中拿到Session数据？<br>并不是，而是通过报文里的JsessionID 去 服务器内存里查找）</p>
+<h3 id="Session的创建"><a href="#Session的创建" class="headerlink" title="Session的创建"></a>Session的创建</h3><p>Request.getSession()/getSession(boolean)<br>服务器区分不同浏览器完全是依靠JSESSIONID的值。如果当前浏览器没有JSESSIONID或者携带一个失效的ID，则服务器会给当前浏览器再新建一个session（只有访问request.getSession()方法时才会新建），并且把 session 的 id JSESSIONID 以 cookie 的形式返回给浏览器端。</p>
+<p><strong>两个的区别</strong><br>getSession()方法返回一个session，如果当前没有session，则创建一个。<br>getSession（boolean create）,如果create是true的话，有则返回一个session对象，没有则创建一个。如果为false的情形，有则返回一个，没有则不会创建，返回null。</p>
+<h3 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h3><p>第一次访问服务器set-cookie 给用户一个sessionID,<br>第二次用户自己带着sessionID的cookie去请求服务器，服务器去找到那个session。</p>
+<h3 id="关闭浏览器，重新再访问，会创建新的session吗"><a href="#关闭浏览器，重新再访问，会创建新的session吗" class="headerlink" title="关闭浏览器，重新再访问，会创建新的session吗"></a>关闭浏览器，重新再访问，会创建新的session吗</h3><p>会，关不浏览器之后，默认情况下浏览器的cookie就已经过期拉闸了，之前的session已经不可达了，所以要创建一个新的session给他一个新的cookie&gt;</p>
+<h3 id="假如重新打开浏览器，仍然可以看到原来的数据，应该做哪些操作。？？？"><a href="#假如重新打开浏览器，仍然可以看到原来的数据，应该做哪些操作。？？？" class="headerlink" title="假如重新打开浏览器，仍然可以看到原来的数据，应该做哪些操作。？？？"></a>假如重新打开浏览器，仍然可以看到原来的数据，应该做哪些操作。？？？</h3><p>这是考试题目？现在我们来实现以下，很简单，就是把cookie设置一个setMaxAge就好了。<br>注意创建的cookie一定要放到response中。要不然肯定没用啦。新的cookie只要name和path和原来的cookie一样，那么这两个就是相同的cookie，新创建的cookie就能覆盖之前的cookie。</p>
+<pre><code>protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+   HttpSession httpSession = request.getSession();
+   //创建一个新的cookie覆盖 session自己创建的cookie，记得设置存在时间
+   Cookie cookie = new Cookie(&quot;JSESSIONID&quot;,httpSession.getId());
+   cookie.setMaxAge(1000);
+   response.addCookie(cookie);
+}
+</code></pre><h3 id="Session-生命周期"><a href="#Session-生命周期" class="headerlink" title="Session 生命周期"></a>Session 生命周期</h3><p>注意这里的 seesion 的生命周期，看是说的是 Session 的生命周期，还是里面数据的生命周期，两者是不一样。</p>
+<h3 id="Session的生命周期"><a href="#Session的生命周期" class="headerlink" title="Session的生命周期"></a>Session的生命周期</h3><p>当调用request.getSession()如果request没检测到有JSESSIONID的cookie就会创建一个新的session<br>当服务器关闭，应用卸载，Session对象会死亡，但是里面的<strong>数据并不会死亡！</strong>，会放在idea复制的tomcat配置文件的目录下：</p>
+<pre><code>C:\Users\lenovo\.IntelliJIdea2019.1\system\tomcat\Tomcat_8_5_37_JavaEE_10\work\Catalina\localhost\ROOT
+</code></pre><p>的文件中SESSIONS.ser，当再次创建Session对象，又会从这个文件中读取原先Session的数据，虽然不是同一个Session对象，但是他们的数据是相同的。</p>
+<h3 id="Session数据的生命周期"><a href="#Session数据的生命周期" class="headerlink" title="Session数据的生命周期"></a>Session数据的生命周期</h3><p>只要用户还有cookie(JsessionId)就能找到那个session对象的数据，也许服务器关闭，或者servlet拉闸，只要有cookie就能拿到你的数据。<br>就好像银行，只要你有银行卡，不管银行卡关不关门（服务器），或者在不在同一家取（session对象地址是否相同），你都可以取到你的钱。</p>
+<p>Session数据拉闸只有两种可能：—-session的有效期<br>1.Session数据默认的存在时间是30分钟，可以在tomcat的conf/web.xml配置文件中去修改这个值</p>
+<pre><code>&lt;session-config&gt;
+    &lt;session-timeout&gt;30&lt;/session-timeout&gt;
+&lt;/session-config&gt;
+</code></pre><p>2.调用session.invalidate();数据就会拉闸</p>
+<h3 id="Session域"><a href="#Session域" class="headerlink" title="Session域"></a>Session域</h3><p>Session setAttribute/ getAttribute /removeAttribute</p>
+<p>Context域  &gt;  Session域   &gt;   Request域</p>
+<p>Context域：当前应用下所有的资源均可以使用的一个域<br>Session域：同一个浏览器，都可以访问的一个域（用户登录成功之后，将用户名放入session域中，接着进入个人主页，显示欢迎你，xxxxx，这个数据从session中获取。）<br>Request域：同一次请求内的资源可以访问，转发：源组件和目标组件之间。</p>
+<p>也就是说当需要用户使用不同的浏览器都能访问相同的数据时候，我们使用Context域来临时存放属性<br>当用户只需要在同一个浏览器中不同页面进行数据的传输我们使用Session&amp;cookie<br>request只能是当前的请求，只能在转发，包含的页面的servlet或者jsp等资源中</p>
+<p>Context：针对的同一个是服务（应用）<br>Session:针对的是同一个浏览器<br>request:针对的是同一个请求</p>
+<h3 id="Session和Cookie的主要区别在于："><a href="#Session和Cookie的主要区别在于：" class="headerlink" title="Session和Cookie的主要区别在于："></a>Session和Cookie的主要区别在于：</h3><pre><code>Cookie是把用户的数据写给用户的浏览器（在浏览器保存）。
+Session技术把用户的数据写到用户独占的session中。（在服务器端保存）
+</code></pre><h2 id="星期六（0824）"><a href="#星期六（0824）" class="headerlink" title="星期六（0824）"></a>星期六（0824）</h2><h3 id="文件上传-FileUpload"><a href="#文件上传-FileUpload" class="headerlink" title="文件上传 FileUpload"></a>文件上传 FileUpload</h3><p>实现web开发中的文件上传功能，需完成如下二步操作：</p>
+<pre><code>在web页面中添加上传输入项
+在servlet中读取上传文件的数据，并保存到服务器硬盘中。
+</code></pre><p>前端实现思路：使用一个input标签type=”file”就可以传输文件，如果你不会可以使用form表单进行提交，或者使用AJAX进行提交，注意跨域的问题。</p>
+<p>后端实现的思路：上传的文件会在请求报文中，请求报文被tomcat封装到request对象中，因此，我们只需要从request对象中取出请求报文的请求体，也就是我们上传的文件。看样子和我们从服务器下载文件是相反的一个相同的过程。<br>Request.getInputStream();接下来就是常规的IO操作。</p>
+<p><strong>发现问题！！！</strong></p>
+<h3 id="问题一：仅上传文件名，不上传文件内容，这TM怎么办？"><a href="#问题一：仅上传文件名，不上传文件内容，这TM怎么办？" class="headerlink" title="问题一：仅上传文件名，不上传文件内容，这TM怎么办？"></a>问题一：仅上传文件名，不上传文件内容，这TM怎么办？</h3><p>注意：&lt;input type=“file”&gt;标签用于在web页面中添加文件上传输入项，设置文件上传输入项时须注意：</p>
+<pre><code>1、必须要设置input输入项的name属性，否则浏览器将不会发送上传文件的数据。
+２、必须把form的enctype属值设为multipart/form-data.设置该值后，浏览器在上传文件时，将把文件数据附带在http请求消息体中，并使用ＭＩＭＥ协议对上传的文件进行描述，以方便接收方对上传数据进行解析和处理。
+3、表单的提交方式要是post
+</code></pre><p><strong>为什么提交表单使用post请求？</strong><br>虽然get请求也可以传提交的数据，但是长度只有1k，一般文件都大于1k，除非是图片使用H5的一些技术能把图片转成二进制进行传输，不过这个不常用，还是直接提交图片。使用post请求；</p>
+<h3 id="问题二：写代码处理上传，图片无法打开"><a href="#问题二：写代码处理上传，图片无法打开" class="headerlink" title="问题二：写代码处理上传，图片无法打开?"></a>问题二：写代码处理上传，图片无法打开?</h3><p>发现虽然可以上传文件，而且文件的格式也是正确的，使用的也是字节流进行传输，但是就是在服务端保存的文件就是打不开？这是怎么回事<br>当我们使用一个txt文本进行上传，发现文件多了一部分内容。<br>当文件上传和普通form表单数据一起提交的时候，<strong>表单数据被写入到文件中</strong>，因为我们没有写代码来进行分割。<br>这尼玛就很难受了</p>
+<pre><code>------WebKitFormBoundaryMJXzkNCcTt6PwnGA
+Content-Disposition: form-data; name=&quot;username&quot;
+
+admin
+------WebKitFormBoundaryMJXzkNCcTt6PwnGA
+Content-Disposition: form-data; name=&quot;password&quot;
+
+admin
+------WebKitFormBoundaryMJXzkNCcTt6PwnGA
+Content-Disposition: form-data; name=&quot;file&quot;; filename=&quot;1.txt&quot;
+Content-Type: text/plain
+
+拉闸
+------WebKitFormBoundaryMJXzkNCcTt6PwnGA--
+</code></pre><p>除此之外，还有什么？？？数据结构？？？？<br>添加multipart/form-data之后的请求报文结构<br>发现那些表单中的参数都没了，也就是说<strong>不能再使用servlet的getParameter这一类的方法获取请求的参数了</strong></p>
+<h3 id="文件上传面临的问题"><a href="#文件上传面临的问题" class="headerlink" title="文件上传面临的问题"></a>文件上传面临的问题</h3><p>必须要添加multipart/form-data,不添加则不能上传文件。<br>添加之后，必须手动来处理普通form表单上数据和文件数据。<br>可以利用WebKitFormBoundary来进行分割出各部分数据，方向是对的，但是执行起来很有难度，因此，我们采用一个三方组件，jar包来完成文件上传。</p>
+<h3 id="Commons-FileUpload"><a href="#Commons-FileUpload" class="headerlink" title="Commons-FileUpload"></a>Commons-FileUpload</h3><p>阿帕奇牛皮！！！<br>阿里牛皮！！！<br>阿开头的都牛皮</p>
+<p>首先引入两个jar包</p>
+<pre><code>commons-fileupload-1.3.1.jar
+commons-io-2.4.jar
+</code></pre><p>然后看教程怎么玩：<a href="http://commons.apache.org/proper/commons-fileupload/using.html" target="_blank" rel="external">官方教你怎么玩</a><br>官方实例的表单：</p>
+<pre><code>&lt;form method=&quot;POST&quot; enctype=&quot;multipart/form-data&quot; action=&quot;fup.cgi&quot;&gt;
+  File to upload: &lt;input type=&quot;file&quot; name=&quot;upfile&quot;&gt;&lt;br/&gt;
+  Notes about the file: &lt;input type=&quot;text&quot; name=&quot;note&quot;&gt;&lt;br/&gt;
+  &lt;br/&gt;
+  &lt;input type=&quot;submit&quot; value=&quot;Press&quot;&gt; to upload the file!
+&lt;/form&gt;
+</code></pre><h3 id="isMultipart判断上传的表单是否有写enctype-”multipart-form-data”"><a href="#isMultipart判断上传的表单是否有写enctype-”multipart-form-data”" class="headerlink" title="isMultipart判断上传的表单是否有写enctype=”multipart/form-data”"></a>isMultipart判断上传的表单是否有写enctype=”multipart/form-data”</h3><pre><code>boolean isMultipart = ServletFileUpload.isMultipartContent(request);
+</code></pre><h3 id="The-simplest-case"><a href="#The-simplest-case" class="headerlink" title="The simplest case"></a>The simplest case</h3><pre><code>// Create a factory for disk-based file items
+DiskFileItemFactory factory = new DiskFileItemFactory();
+// Configure a repository (to ensure a secure temp location is used)
+ServletContext servletContext = this.getServletConfig().getServletContext();
+File repository = (File) servletContext.getAttribute(&quot;javax.servlet.context.tempdir&quot;);
+factory.setRepository(repository);
+// Create a new file upload handler
+ServletFileUpload upload = new ServletFileUpload(factory);
+// Parse the request
+List&lt;FileItem&gt; items = upload.parseRequest(request);
+</code></pre><h3 id="Processing-the-uploaded-items-处理上传的表单的数据"><a href="#Processing-the-uploaded-items-处理上传的表单的数据" class="headerlink" title="Processing the uploaded items 处理上传的表单的数据"></a>Processing the uploaded items 处理上传的表单的数据</h3><pre><code>Iterator&lt;FileItem&gt; iter = items.iterator();
+while (iter.hasNext()) {
+    FileItem item = iter.next();
+    if (item.isFormField()) {
+        processFormField(item);
+    } else {
+        processUploadedFile(item);
+    }
+}
+</code></pre><p>//如果是一个表单的常规参数 ，Process a regular form field</p>
+<pre><code>if (item.isFormField()) {
+    String name = item.getFieldName();
+    String value = item.getString();
+    ...
+}
+</code></pre><p>//如果是上传的文件 Process a file upload</p>
+<pre><code>if (!item.isFormField()) {
+    String fieldName = item.getFieldName();
+    String fileName = item.getName();
+    String contentType = item.getContentType();
+    boolean isInMemory = item.isInMemory();
+    long sizeInBytes = item.getSize();
+    ...
+}
+</code></pre><p>// Process a file upload你可以选择直接写入你的服务器的硬盘，或者使用流读取到你的内存中但是不建议</p>
+<pre><code>if (writeToFile) {
+    File uploadedFile = new File(...);
+    item.write(uploadedFile);
+} else {
+    InputStream uploadedStream = item.getInputStream();
+    ...
+    uploadedStream.close();
+}
+</code></pre><p>大概就是这些,可以自己封装一个上传文件的小工具。</p>
+<h3 id="文件上传的问题："><a href="#文件上传的问题：" class="headerlink" title="文件上传的问题："></a>文件上传的问题：</h3><h3 id="1-同名文件上传问题"><a href="#1-同名文件上传问题" class="headerlink" title="1.同名文件上传问题"></a>1.同名文件上传问题</h3><p>使用UUID来给文件取名字：</p>
+<h3 id="2-文件过多查找难度问题"><a href="#2-文件过多查找难度问题" class="headerlink" title="2.文件过多查找难度问题"></a>2.文件过多查找难度问题</h3><p>同一目录下文件数过多，会导致文件读取很慢<br>Hashcode 散列 ，其实HashMap底层就是散列存储，然后使用拉链法来解决冲突的。<br>首先得到文件名的Hashcode，转为16进制的字符串。<br>接着将每一位的字符串分别新建一个文件夹 ，一共8级目录，每一级目录16个文件夹<br>最后，在相应的目录下存放对应的文件。</p>
+<h3 id="实现前面写的两个问题"><a href="#实现前面写的两个问题" class="headerlink" title="实现前面写的两个问题"></a>实现前面写的两个问题</h3><pre><code>private static void processUploadedFile(FileItem item , Map&lt;String, String[]&gt; parameterMap) throws FileUploadException {
+    String fieldName = item.getFieldName();
+    //文件名称需要做一个处理，保证每一个文件不会与其他文件重名
+    //当前的时间戳加上一些序列数2019082411254790
+    String uuid = UUID.randomUUID().toString();
+
+    //第二个问题，一个目录内文件数目过多，应该怎么办？散列
+    String fileName = item.getName();
+    String contentType = item.getContentType();
+
+    //判断一下是否有上传文件
+    if(!(fileName.endsWith(&quot;.png&quot;))&amp;&amp;!(fileName.endsWith(&quot;.jpg&quot;))){
+        throw new FileUploadException(&quot;文件的格式不正确！&quot;);
+    } else {
+        fileName = uuid + &quot;-&quot; + fileName;
+        String upload = servletContext.getRealPath(&quot;upload&quot;);
+        int hashCode = fileName.hashCode();
+        //int 32  16  8   1 2 3 4 a b f 3  16^8 40亿左右
+        String s = Integer.toHexString(hashCode);
+        String fileInt = &quot;&quot;; //数据库存储的地址
+        char[] chars = s.toCharArray();
+        for (char aChar : chars) {
+            upload = upload + &quot;/&quot; + aChar;
+            fileInt = &quot;/&quot; + aChar;
+        }
+        // 创建路径保存文件
+        String filePath = upload + &quot;/&quot; + fileName;
+        System.out.println(&quot;保存路径：&quot; + upload);
+        //saveFile(item,filePath); //保存图片到服务器
+        parameterMap.put(&quot;icon&quot;,new String[]{fileInt + fileName}); //只能保存一个
+    }
+}
+</code></pre><h2 id="小总结"><a href="#小总结" class="headerlink" title="小总结"></a>小总结</h2><p>1.VUE发布到tomcat的一些设置：<br><a href="https://blog.csdn.net/qq_38387487/article/details/78461412" target="_blank" rel="external">https://blog.csdn.net/qq_38387487/article/details/78461412</a><br>2.map的遍历<br>使用entryset遍历<br>for (Map.Entry<integer, integer=""> entry : map.entrySet()) {<br>  System.out.println(“key = “ + entry.getKey() + “, value = “ + entry.getValue());<br>}</integer,></p>
+<p>3.反射传参数是数组，invoke时候要强转成objet<br>Method method = userClass.getDeclaredMethod(methodsName,String[].class);<br>   method.setAccessible(true);<br>   method.invoke(user1, (Object) value);</p>
+<p>4.调度员（转发和包含）<br>就是一个接口，有两个方法</p>
+<pre><code>void  forward(ServletRequest request, ServletResponse response)
+      Forwards a request from a servlet to another resource (servlet, JSP file, or HTML file) on the server.
+void include(ServletRequest request, ServletResponse response)
+      Includes the content of a resource (servlet, JSP page, HTML file) in the response.
+</code></pre><p>5.如果 servletA forward 到 servletB<br>在 servletA 设置 response 的响应头才有效！</p>
+<p>6.在web-info目录下的文件没有被放到部署路径<br>需要创建一个classes文件夹，设置一下编译的class文件放在classes文件夹下，他就会自动过去了</p>
+<p>7.JAVA下载文件中文名是下划线的问题：<br>这应该是由于浏览器的默认编码不同所引起的，需要判断一下，然后进行转码</p>
+<pre><code>if(request.getHeader(&quot;User-Agent&quot;).toUpperCase().indexOf(&quot;MSIE&quot;) &gt; 0) {
+    response.setHeader(&quot;Content-Disposition&quot;,&quot;attachment;&quot;+ &quot;filename=&quot;+ new
+String(filename.getBytes(&quot;GBK&quot;),&quot;ISO8859-1&quot;));
+}else{//firefox、chrome、safari、opera
+  response.setHeader(&quot;Content-Disposition&quot;,&quot;attachment;&quot;+
+ &quot;filename=&quot;+ new String(filename.getBytes(&quot;UTF8&quot;), &quot;ISO8859-1&quot;) );
+}
+</code></pre><p>8.关于 cookie 存在时间的问题<br>注意设置 setMaxAge（）的单位是秒 ，怪不得之前设置太少了就没保存<br>还有设置完注意：<br>1）如果是刚创建完的时候设置的时间，就没事<br>2）如果不是刚创建完的之后遍历获取cookie然后再修改的，注意把cookie add回去response.addCookie(cookie);</p>
+<pre><code>for (Cookie cookie : cookies) {
+    String name = cookie.getName();
+    String value = cookie.getValue();
+    System.out.println(name);
+    System.out.println(value);
+    if(&quot;name&quot;.equals(name)) {
+        cookie.setMaxAge(100);
+        cookie.setPath(&quot;/0823_war_exploded/CookieServlet2&quot;);
+        response.addCookie(cookie);
+    }
+}
+</code></pre><p>3）配合session使用，让 session 在关闭浏览器后，重新打开还能再使用，就在服务器设置一个cookie，覆盖掉session自己的cookie。</p>
+<pre><code>HttpSession HttpSession = request.getSession();
+HttpSession.getId();
+Cookie cookie = new Cookie(&quot;JSEESIONID&quot;,HttpSession.getId());
+cookie.setMaxAge(1000);//1000秒
+response.addCookie(cookie);
+</code></pre><p>9.文件上传问题，<br>1) 只要有</p>
+<pre><code>&lt;form action=&quot;/Upload&quot; enctype=&quot;multipart/form-data&quot; method=&quot;post&quot;&gt;&lt;/form&gt;
+</code></pre><p>直接提交也会保存文件，这样感觉不太科学<br>就会上传一个空的文件类型的文件。<br>2) 设置了这个enctype。request.getParaMeterValues()..这一类的就无效了</p>
+<p>10.JAVA 使用转json的jar包<a href="https://www.w3cschool.cn/fastjson/fastjson-quickstart.html" target="_blank" rel="external">https://www.w3cschool.cn/fastjson/fastjson-quickstart.html</a><br>11.在 bean里面添加成员变量的问题，一定要记得重写toString 的方法，<br>12.第一次创建session 设置 cookie时间问题： <a href="https://www.cnblogs.com/jarl/p/5892996.html" target="_blank" rel="external">https://www.cnblogs.com/jarl/p/5892996.html</a></p>
+
+        </div>
+        <div class="post-reply">
+            
+                <!-- 来必力City版安装代码 -->
+                <div id="lv-container" data-id="city" data-uid="MTAyMC8yOTE4Ni81NzUz">
+                    <script type="text/javascript">
+                        (function(d, s) {
+                            var j, e = d.getElementsByTagName(s)[0];
+
+                            if (typeof LivereTower === 'function') { return; }
+
+                            j = d.createElement(s);
+                            j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+                            j.async = true;
+
+                            e.parentNode.insertBefore(j, e);
+                        })(document, 'script');
+                    </script>
+                    <noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+                </div>
+                <!-- City版安装代码已完成 -->
+            
+            
+        </div>
+    </div>
+</section>
+<script>
+    // 获取第一张图, 用以当封面背景图
+    var img = document.querySelectorAll('img')[1]
+
+    if (img) {
+        var header_box = document.querySelector('#header_box')
+        header_box.style.backgroundImage = 'url('+ img.src +')'
+    }
+</script>
+      </div>
+  </div>
+  <style>
+  #footer {
+    min-height: 10vh;
+    background: black;
+    color: #fff;
+  }
+
+  #footer a {
+    color: #e1e1e1;
+  }
+</style>
+<footer id="footer" class="has-text-centered is-flex center">
+  <div class="container has-padding">
+    <div>
+      <div>
+        <!--请您保留作者署名, 主题制作来之不易-->
+        主题来自 <a href="http://haojen.github.io/">Haojen Ma</a>
+        <br>
+        Copyright © 王邸 2019
+        <!--
+          Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+        -->
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="/js/search_core.js"></script>
+<script src="/js/script.js"></script>
+
+</body>
+</html>

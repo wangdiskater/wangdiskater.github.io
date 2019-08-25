@@ -14,7 +14,7 @@
 <meta property="og:url" content="http://yoursite.com/2019/08/11/Java总结（七）/index.html">
 <meta property="og:site_name" content="路要坚持">
 <meta property="og:description" content="这周学习了JDBC批处理，事务(默认提交)，连接池（DBCP,C3P0,Druid），DButil，单元测试，也学习了前端，但是讲的太水了，不敢苟同。所以自己去整理，但是自己也没有书，只有去MDN去学习，发现讲的很全面，虽然是火狐浏览器为基础的。但是讲的都是很标准的东西。想要通过几天把前端都回顾完是不可能的，还有很多坑在里面。只有一步步来。每天都复习一点。 星期一（8.5）JDBC批处理就是多次进">
-<meta property="og:updated_time" content="2019-08-17T04:12:39.157Z">
+<meta property="og:updated_time" content="2019-08-19T14:54:09.178Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java总结（七）">
 <meta name="twitter:description" content="这周学习了JDBC批处理，事务(默认提交)，连接池（DBCP,C3P0,Druid），DButil，单元测试，也学习了前端，但是讲的太水了，不敢苟同。所以自己去整理，但是自己也没有书，只有去MDN去学习，发现讲的很全面，虽然是火狐浏览器为基础的。但是讲的都是很标准的东西。想要通过几天把前端都回顾完是不可能的，还有很多坑在里面。只有一步步来。每天都复习一点。 星期一（8.5）JDBC批处理就是多次进">
@@ -286,7 +286,7 @@ commit             提交
 <p>当我们设置隔离等级是read committed ，为了能表示出不可重复读</p>
 <pre><code>set global transaction isolation level read committed;
 </code></pre><p>得出： 结果1 = 结果2 ！= 结果3 ：一个事务重新读取前面读取过的数据， 发现该数据已经被另一个已提交的事务修改过。<br>表现出不可重复读</p>
-<p><strong>注意事项</strong>Mysql是表现不出脏读的，因为Mysql在隔离级别Repeatable read就避免phantom read（虚读）但是在别的数据库里虚读的表现和不可重读读是类似的也是：结果1 = 结果2 ！= 结果3，但是这就表现出的是行数的不同，而不是数据的不同。</p>
+<p><strong>注意事项</strong>Mysql是表现不出虚读的，因为Mysql在隔离级别Repeatable read就避免phantom read（虚读）但是在别的数据库里虚读的表现和不可重读读是类似的也是：结果1 = 结果2 ！= 结果3，但是这就表现出的是行数的不同，而不是数据的不同。</p>
 <h3 id="数据库提供了四种不同级别的隔离等级："><a href="#数据库提供了四种不同级别的隔离等级：" class="headerlink" title="数据库提供了四种不同级别的隔离等级："></a>数据库提供了四种不同级别的隔离等级：</h3><pre><code>Read uncommitted ：以上三种情况均不能避免
 Read committed：可避免脏读的发生
 Repeatable read：可避免脏读，不可重复读发生
@@ -650,7 +650,7 @@ commons-pool2-2.6.0.jar
       properties.load(new FileInputStream(&quot;dbcpconfig.properties&quot;));
       //现在可以这样
       InputStream resourceAsStream = DBCPUtil.class.getClassLoader().getResourceAsStream(&quot;dbcpconfig.properties&quot;);
-      properties.load(resourceAdStream);
+      properties.load(resourceAsStream);
       //创建连接池
       dataSource = factory.createDataSource(properties);
     } catch (IOException e) {

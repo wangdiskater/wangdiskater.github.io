@@ -14,7 +14,7 @@
 <meta property="og:url" content="http://yoursite.com/2019/08/04/Java总结（六）下/index.html">
 <meta property="og:site_name" content="路要坚持">
 <meta property="og:description" content="接下来JAVAEE，一开始先学习mysql数据库的语言（sql）操作的语言四种（DDL,DML,DQL,DCL(没讲之后我补上),TPL），数据库主要进行的是查询Query一定要会，JDBC（JAVA DB CONNECTIVITY）三连(connection preparedstatement,resultset) 星期四(8.01)MYSQL学习总结指令的编写： 登录本机mysql: mysq">
-<meta property="og:updated_time" content="2019-08-17T04:04:13.833Z">
+<meta property="og:updated_time" content="2019-08-19T06:01:26.807Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java总结（六）下">
 <meta name="twitter:description" content="接下来JAVAEE，一开始先学习mysql数据库的语言（sql）操作的语言四种（DDL,DML,DQL,DCL(没讲之后我补上),TPL），数据库主要进行的是查询Query一定要会，JDBC（JAVA DB CONNECTIVITY）三连(connection preparedstatement,resultset) 星期四(8.01)MYSQL学习总结指令的编写： 登录本机mysql: mysq">
@@ -197,7 +197,42 @@ DECIMAL 类型不同于 FLOAT &amp; DOUBLE，DECIMAL 实际是以字符串存放
 </code></pre><p>例如：</p>
 <pre><code>CREATE TABLE float_data(float1 FLOAT(5,3),double1 DOUBLE(5,3),decimal1 decimal(5,3));
 </code></pre><p><strong><em>这三个有什么区别？</em></strong><br>（回答）<br>1.默认不设置MD,FLOAT显示6位，DOUBLE全部 显示。DECIMAL 只显示整数部分。他们小数部分都四舍五入；</p>
-<p>日期与时间类型<br>类型名称   日期格式                占用字节<br>-:|:-:|:-<br>YEAR      |YYYY       (2018)       |1<br>TIME      |HH:MM:SS   (10:20:00)   |3<br>DATE      |YYYY-MM-DD (2018-7-23)  |3<br>DATETIME  |YYYY-MM-DD HH:MM:SS     |8<br>TIMESTAMP |YYYY-MM-DD HH:MM:SS     |4</p>
+<h3 id="日期与时间类型"><a href="#日期与时间类型" class="headerlink" title="日期与时间类型"></a>日期与时间类型</h3><table>
+<thead>
+<tr>
+<th style="text-align:right">类型名称</th>
+<th style="text-align:center">日期格式</th>
+<th style="text-align:left">占用字节</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right">YEAR</td>
+<td style="text-align:center">YYYY       (2018)</td>
+<td style="text-align:left">1</td>
+</tr>
+<tr>
+<td style="text-align:right">TIME</td>
+<td style="text-align:center">HH:MM:SS   (10:20:00)</td>
+<td style="text-align:left">3</td>
+</tr>
+<tr>
+<td style="text-align:right">DATE</td>
+<td style="text-align:center">YYYY-MM-DD (2018-7-23)</td>
+<td style="text-align:left">3</td>
+</tr>
+<tr>
+<td style="text-align:right">DATETIME</td>
+<td style="text-align:center">YYYY-MM-DD HH:MM:SS</td>
+<td style="text-align:left">8</td>
+</tr>
+<tr>
+<td style="text-align:right">TIMESTAMP</td>
+<td style="text-align:center">YYYY-MM-DD HH:MM:SS</td>
+<td style="text-align:left">4</td>
+</tr>
+</tbody>
+</table>
 <p>DATETIME 和 TIMESTAMP 虽然显示的格式是一样的，但是它们有很大的区别：</p>
 <pre><code>1.DATETIME 的系统默认值是 NULL, 而 TIMESTAMP 的系统默认值是 当前时间 NOW();
 2.DATETIME 存储的时间与时区无关，而 TIMESTAMP 与时区有关
@@ -220,11 +255,47 @@ set time_zone = &apos;+10:00&apos;;
 </thead>
 <tbody>
 <tr>
-<td style="text-align:right"></td>
+<td style="text-align:right">CHAR(M)</td>
+<td style="text-align:center">M, 1 &lt;= M &lt;= 255</td>
+<td style="text-align:left">固定长度字符串</td>
+</tr>
+<tr>
+<td style="text-align:right">VARCHAR(M)</td>
+<td style="text-align:center">L+1, L &lt;=M, 1 &lt;=M &lt;=255</td>
+<td style="text-align:left">变长字符串</td>
+</tr>
+<tr>
+<td style="text-align:right">TINYTEXT</td>
+<td style="text-align:center">L+1, L &lt; 2^8</td>
+<td style="text-align:left">非常小的文本字符串</td>
+</tr>
+<tr>
+<td style="text-align:right">TEXT</td>
+<td style="text-align:center">L+2, L &lt; 2^16</td>
+<td style="text-align:left">小的文本字符串</td>
+</tr>
+<tr>
+<td style="text-align:right">MEDIUMTEXT</td>
+<td style="text-align:center">L+3, L &lt; 2^24</td>
+<td style="text-align:left">中等大小的文本字符串</td>
+</tr>
+<tr>
+<td style="text-align:right">LONGTEXT</td>
+<td style="text-align:center">L+4, L &lt; 2^32</td>
+<td style="text-align:left">大的文本字符串</td>
+</tr>
+<tr>
+<td style="text-align:right">ENUM</td>
+<td style="text-align:center">1 或者 2个字节，</td>
+<td style="text-align:left">取决于枚举的数目，最大 65535个  枚举类型</td>
+</tr>
+<tr>
+<td style="text-align:right">SET</td>
+<td style="text-align:center">1,2,3,4或8个字节</td>
+<td style="text-align:left">集合类型</td>
 </tr>
 </tbody>
 </table>
-<p>CHAR(M)      |M, 1 &lt;= M &lt;= 255         |固定长度字符串<br>VARCHAR(M)   |L+1, L &lt;=M, 1 &lt;=M &lt;=255  |变长字符串<br>TINYTEXT     |L+1, L &lt; 2^8             |非常小的文本字符串<br>TEXT         |L+2, L &lt; 2^16            |小的文本字符串<br>MEDIUMTEXT   |L+3, L &lt; 2^24            |中等大小的文本字符串<br>LONGTEXT     |L+4, L &lt; 2^32            |大的文本字符串<br>ENUM         |1 或者 2个字节，          |取决于枚举的数目，最大 65535个  枚举类型<br>SET          |1,2,3,4或8个字节          |集合类型</p>
 <p>ENUM 类型总有一个默认值，当ENUM 列声明为NULL，则默认值为NULL。如果 ENUM 列被声明为 NOT NULL，<br>则其默认值为列表的第一个元素。</p>
 <p>ENUM 和 SET有什么区别</p>
 <pre><code>CREATE TABLE enum_set(enum1 ENUM(&apos;1&apos;,&apos;2&apos;,&apos;3&apos;), set1 SET(&apos;1&apos;,&apos;2&apos;,&apos;3&apos;));
@@ -275,8 +346,9 @@ VALUES    (value [, value...]);
 <ol>
 <li>UPDATE语法可以用新值更新原有表行中的各列。</li>
 <li>SET子句指示要修改哪些列和要给予哪些值。</li>
-<li>WHERE子句指定应更新哪些行。如没有WHERE子句，则更新所有的行。<br><strong>4. NULL+任何数的结果都是NULL 这里并不会报错</strong></li>
+<li>WHERE子句指定应更新哪些行。如没有WHERE子句，则更新所有的行。</li>
 </ol>
+<p><strong>特别要注意的是： NULL+任何数的结果都是NULL 这里并不会报错</strong></p>
 <h3 id="删除（DELETE）"><a href="#删除（DELETE）" class="headerlink" title="删除（DELETE）"></a>删除（DELETE）</h3><p>使用 delete语句删除表中数据。</p>
 <pre><code>DELETE  from  table_name       
   [WHERE where_definition]   
@@ -302,16 +374,45 @@ WHERE &lt;filter_condition&gt;;
 </thead>
 <tbody>
 <tr>
-<td style="text-align:right"></td>
+<td style="text-align:right">=</td>
+<td style="text-align:center">等于</td>
+<td style="text-align:center">&lt;=&gt;</td>
+<td style="text-align:left">安全的等于</td>
+</tr>
+<tr>
+<td style="text-align:right">&lt;&gt; (!=)</td>
+<td style="text-align:center">不等于</td>
+<td style="text-align:center">&lt;=</td>
+<td style="text-align:left">小于等于</td>
+</tr>
+<tr>
+<td style="text-align:right">&gt;=</td>
+<td style="text-align:center">大于等于</td>
+<td style="text-align:center">&gt;</td>
+<td style="text-align:left">大于</td>
+</tr>
+<tr>
+<td style="text-align:right">IS NULL</td>
+<td style="text-align:center">是否为NULL</td>
+<td style="text-align:center">IS NOT NULL</td>
+<td style="text-align:left">是否不为NULL</td>
+</tr>
+<tr>
+<td style="text-align:right">BETWEEN AND</td>
+<td style="text-align:center">是否在闭区间内</td>
+<td style="text-align:center">IN</td>
+<td style="text-align:left">是否在列表内</td>
+</tr>
+<tr>
+<td style="text-align:right">NOT IN</td>
+<td style="text-align:center">是否不在列表内</td>
+<td style="text-align:center">LIKE</td>
+<td style="text-align:left">通配符匹配</td>
 </tr>
 </tbody>
 </table>
-<p>=           |等于           |&lt;=&gt;         | 安全的等于<br>&lt;&gt; (!=)     |不等于         |&lt;=          |  小于等于</p>
-<blockquote>
-<p>=          |大于等于       | &gt;          |  大于<br>IS NULL     |是否为NULL     |IS NOT NULL |  是否不为NULL<br>BETWEEN AND |是否在闭区间内  |IN          | 是否在列表内<br>NOT IN      |是否不在列表内  |LIKE        | 通配符匹配</p>
-</blockquote>
 <p>逻辑运算符<br>      NOT(!)       AND(&amp;&amp;)      OR(||)<br>位操作运算符<br>      &amp;     |     ~     ^     &lt;&lt;     &gt;&gt;</p>
-<h3 id="lt-gt"><a href="#lt-gt" class="headerlink" title="&lt;=&gt;"></a>&lt;=&gt;</h3><p>可以找到值为null的数据<br>= 找不到值为null的数据</p>
+<h3 id="lt-gt-安全的等于"><a href="#lt-gt-安全的等于" class="headerlink" title="&lt;=&gt; 安全的等于"></a>&lt;=&gt; 安全的等于</h3><p>可以找到值为null的数据<br>= 找不到值为null的数据</p>
 <h3 id="LIKE"><a href="#LIKE" class="headerlink" title="LIKE"></a>LIKE</h3><p>模糊匹配</p>
 <pre><code>select * from student where NAME LIKE &apos;陆%&apos;;
 </code></pre><p>通配符规则：</p>

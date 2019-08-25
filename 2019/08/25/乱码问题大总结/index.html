@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html class="full-height">
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="//cdn.bootcss.com/bulma/0.4.1/css/bulma.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+  
+  <title>乱码问题大总结 | 路要坚持</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="本篇文章目的是总结记录所有乱码问题，从前端到后端，会不断增加和更新。谁TM不是这样过来的。 乱码问题的本质原因编解码不一致导致的 默认编码格式在总结乱码问题之前，要说明的是默认的编码格式，这TM就很扯淡了，不同的系统的默认的编码格式。 系统的默认的编码格式简体中文window操作系统   GBKlinux默认的编码方式为    utf-8 服务器的默认编码格式tomcat的默认编码格式：tomca">
+<meta property="og:type" content="article">
+<meta property="og:title" content="乱码问题大总结">
+<meta property="og:url" content="http://yoursite.com/2019/08/25/乱码问题大总结/index.html">
+<meta property="og:site_name" content="路要坚持">
+<meta property="og:description" content="本篇文章目的是总结记录所有乱码问题，从前端到后端，会不断增加和更新。谁TM不是这样过来的。 乱码问题的本质原因编解码不一致导致的 默认编码格式在总结乱码问题之前，要说明的是默认的编码格式，这TM就很扯淡了，不同的系统的默认的编码格式。 系统的默认的编码格式简体中文window操作系统   GBKlinux默认的编码方式为    utf-8 服务器的默认编码格式tomcat的默认编码格式：tomca">
+<meta property="og:updated_time" content="2019-08-25T15:27:18.145Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="乱码问题大总结">
+<meta name="twitter:description" content="本篇文章目的是总结记录所有乱码问题，从前端到后端，会不断增加和更新。谁TM不是这样过来的。 乱码问题的本质原因编解码不一致导致的 默认编码格式在总结乱码问题之前，要说明的是默认的编码格式，这TM就很扯淡了，不同的系统的默认的编码格式。 系统的默认的编码格式简体中文window操作系统   GBKlinux默认的编码方式为    utf-8 服务器的默认编码格式tomcat的默认编码格式：tomca">
+  
+    <link rel="alternate" href="/" title="路要坚持" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/common.css">
+<link rel="stylesheet" href="/css/nav.css">
+<link rel="stylesheet" href="/css/layout.css">
+  
+
+</head>
+
+<body>
+  <header id="navbar" class="overflow-hidden">
+  <div class="container">
+    <nav class="nav">
+         <div class="nav-left">
+            <a href="/" class="nav-item" style="font-size: 20px;">
+              <span class="logo">王邸</span>'s Blog
+            </a>
+         </div>
+        <div class="nav-center is-hidden position-relative" id="search_container">
+            <div class="nav-item full-width full-height">
+                <i class="fa fa-search has-padding" aria-hidden="true"></i>
+                <input type="text" id="search_input" class="search-input full-height full-width" placeholder="Search post" autofocus>
+                <i id="close_search" class="fa fa-times" aria-hidden="true"></i>
+            </div>
+            <div id="search_result"></div>
+        </div>
+        <div class="nav-right nav-menu">
+            <a class="nav-item" id="search">
+                <i class="fa fa-search" aria-hidden="true"></i>
+            </a>
+            
+            <a class="nav-item" href="/">
+                Home
+            </a>
+            
+            <a class="nav-item" href="/works">
+                My Works
+            </a>
+            
+            <a class="nav-item" href="/about">
+                About
+            </a>
+            
+        </div>
+        <span class="nav-toggle" id="navMenuDropdown">
+            <span></span>
+            <span></span>
+            <span></span>
+        </span>
+        <div class="navbar-menu position-absolute full-width content-box is-hidden-desktop is-flex flex-column center" style="top: 100%;">
+            
+            <a class="nav-item flex-1" href="/">
+                Home
+            </a>
+            
+            <a class="nav-item flex-1" href="/works">
+                My Works
+            </a>
+            
+            <a class="nav-item flex-1" href="/about">
+                About
+            </a>
+            
+        </div>
+    </nav>
+  </div>
+</header>
+
+  <div id="main-wrap" class="position-relative" style="margin-top: 55px;">
+      <div class="main-inner-content">
+          <!--博文页面-->
+
+<style>
+    .header-box {
+        height: 370px;
+        filter: blur(10px);
+        background-size: cover;
+        background-color: lightsteelblue;
+    }
+
+    .post-box {
+        padding: 15px;
+        padding-top: 60px;
+        min-height: 80vh;
+        margin-top: -200px;
+        border-radius: 4px;
+        background-color: rgba(255,255,255,.8);
+    }
+
+    .post-avatar {
+        height: 30px;
+        width: 30px;
+        border-radius: 50%;
+    }
+
+    .flow-chart {
+        text-align: center;
+    }
+
+    img[alt="post-cover"] {
+        display: none;
+    }
+</style>
+<header>
+    <div id="header_box" class="header-box"></div>
+</header>
+<section>
+    <div class="container post-box">
+        <div class="content post-title is-flex center flex-column" style="margin-bottom: 70px; overflow: auto;">
+            <h1 class="has-text-centered" style="padding-bottom: 10px; border-bottom: 3px solid #fff">
+                <strong>乱码问题大总结</strong>
+            </h1>
+            
+            <div class="is-flex align-center">
+                <img class="post-avatar" src="https://q2.qlogo.cn/headimg_dl?bs=996057150&dst_uin=996057150&dst_uin=996057150&;dst_uin=996057150&spec=100&url_enc=0&referer=bu_interface&term_type=PC">
+                <span style="padding:0 10px;"> <span class="sub-title">By</span> 王邸</span>
+                <span class="post-date sub-title">at: 2019-08-25</span>
+            </div>
+            
+                <div>
+                    
+                </div>
+            
+        </div>
+        <div class="content" style="overflow: auto">
+            <p>本篇文章目的是总结记录所有乱码问题，从前端到后端，会不断增加和更新。谁TM不是这样过来的。</p>
+<h3 id="乱码问题的本质原因"><a href="#乱码问题的本质原因" class="headerlink" title="乱码问题的本质原因"></a>乱码问题的本质原因</h3><p>编解码不一致导致的</p>
+<h2 id="默认编码格式"><a href="#默认编码格式" class="headerlink" title="默认编码格式"></a>默认编码格式</h2><p>在总结乱码问题之前，要说明的是默认的编码格式，这TM就很扯淡了，不同的系统的默认的编码格式。</p>
+<h3 id="系统的默认的编码格式"><a href="#系统的默认的编码格式" class="headerlink" title="系统的默认的编码格式"></a>系统的默认的编码格式</h3><p>简体中文window操作系统   GBK<br>linux默认的编码方式为    utf-8</p>
+<h3 id="服务器的默认编码格式"><a href="#服务器的默认编码格式" class="headerlink" title="服务器的默认编码格式"></a>服务器的默认编码格式</h3><p>tomcat的默认编码格式：tomcat8以后默认编码格式是utf-8；7之前的都是iso8859-1</p>
+<h3 id="浏览器的默认编码格式"><a href="#浏览器的默认编码格式" class="headerlink" title="浏览器的默认编码格式"></a>浏览器的默认编码格式</h3><p>浏览器默认编码格式跟随系统，不同的系统默认的编码格式不同</p>
+<h3 id="一些方法会调用默认编码"><a href="#一些方法会调用默认编码" class="headerlink" title="一些方法会调用默认编码"></a>一些方法会调用默认编码</h3><p>Java 的String.getByte()///默认把字符串按默认编码格式转成byte类型</p>
+<h2 id="显示乱码系列"><a href="#显示乱码系列" class="headerlink" title="显示乱码系列"></a>显示乱码系列</h2><p>接下来总结一些显示的乱码，不涉及请求。就是自生启动就发生乱码的情况。</p>
+<h3 id="浏览器显示乱码"><a href="#浏览器显示乱码" class="headerlink" title="浏览器显示乱码"></a>浏览器显示乱码</h3><p>问题：浏览器自己显示乱码。<br>原因：<br>1.和用的编辑器有关。<br>如果你的编辑器默认使用的是GBK编码格式就不出现乱码。有些编辑器的默认编码格式就是UTF-8格式。有些则跟随系统的编码格式。<br>2.和网页的编码格式有关<br>建议：让浏览器以UTF-8显示网页。<br>解答：在HTML页面上加上</p>
+<pre><code>&lt;meta charset=&quot;UTF-8&quot;&gt;
+</code></pre><h3 id="服务器显示乱码"><a href="#服务器显示乱码" class="headerlink" title="服务器显示乱码"></a>服务器显示乱码</h3><p>背景：目前使用的是tomcat的服务器，通过点击tomcat/bin/startup服务器启动出现的乱码</p>
+<p>原因:<br>具体原因我也不清楚，但是解决办法却有一箩筐。接下来总结写一些解决办法<br>解决：<br>1.conf/logging.properties 里的文件把UTF-8全部改成GBK，或者就把最后一个编码改成GBK</p>
+<pre><code>java.util.logging.ConsoleHandler.encoding = GBK
+</code></pre><p>网上说这个有奇效，但是我写的是UTF-8，也不会出现乱码问题</p>
+<p>2.修改 connector 的编码格式<br>在tomcat/config/server.xml文件，设置connector</p>
+<pre><code>&lt;Connector port=&quot;80&quot; protocol=&quot;HTTP/1.1&quot; connectionTimeout=&quot;20000&quot; redirectPort=&quot;8443&quot; /&gt;
+</code></pre><p>改成：加URIEncoding=”utf-8”</p>
+<pre><code>&lt;Connector URIEncoding=&quot;utf-8&quot; connectionTimeout=&quot;20000&quot; port=&quot;8888&quot; protocol=&quot;HTTP/1.1&quot; redirectPort=&quot;8443&quot;/&gt;
+</code></pre><p>但是我没加也没有显示乱码，这个主要是为了get请求给客户端可能出现乱码准备的。</p>
+<p>3.我的方式修改（暴力解决）：<br>把tomcat/config里面所有GBK，全部改成utf-8。使用sublime可以直接搜索出来所有文字为GBK<br>在tomcat/config目录中 一共出现16个UTF-8。大部分是xml的配置文件的编码格式，这个必须改成UTF-8的格式<br>主要还有logging.properties这个配置文件；</p>
+<h3 id="idea显示乱码"><a href="#idea显示乱码" class="headerlink" title="idea显示乱码"></a>idea显示乱码</h3><p>解决办法(建议全部都设置！！！)：<br>1.修改IDEA的默认设置，ctrl + alt + s打开设置 搜索encoding<br>打开IntelliJ IDEA&gt;File&gt;Setting&gt;Editor&gt;File Encodings，将Global Encoding、Project Encoding、Default encodeing for properties files这三项都设置成UTF-8，点击OK或者Apply。</p>
+<p>2.进入idea的安装目录的bin目录下：<br>修改这两个文件：<br>idea.exe.vmoptions<br>idea64.exe.vmoptions<br>最后都加上：<br>-Dfile.encoding=UTF-8</p>
+<p><strong>注意：</strong>以上两点必须重启IDEA，慢就慢点，忍忍吧。</p>
+<p>3.前两个设置如果控制台还出现乱码。那这个建议设置一下：<br>打开tomcat配置页面，Edit Configurations。<br>选择项目部署的tomcat，在配置项VM options文本框中输入</p>
+<pre><code>-Dfile.encoding=UTF-8
+</code></pre><p>点击Apply或OK，然后必须重启服务器（就是点最后一个restart Server!）。<br><strong>如果项目中使用的是字符流来传输文件（getWriter()，….），这个建议最好设置，这样IDEA显示的乱码，你的数据是不会乱码的。就不会带到你要写的文件中，建议必须设置。</strong></p>
+<p>4.如果以上三点还没解决乱码问题，相信我肯定不是IDEA的锅！</p>
+<h2 id="发送请求服务器显示乱码（request）"><a href="#发送请求服务器显示乱码（request）" class="headerlink" title="发送请求服务器显示乱码（request）"></a>发送请求服务器显示乱码（request）</h2><h3 id="先从浏览器说起"><a href="#先从浏览器说起" class="headerlink" title="先从浏览器说起"></a>先从浏览器说起</h3><p>之前我们已经提及了使用元数据来设置网页的编码格式是UTF-8，但是这个远远不够，因为我们还有表单，还要上传文件，还要去请求，等等。</p>
+<h3 id="post请求（上传文件）"><a href="#post请求（上传文件）" class="headerlink" title="post请求（上传文件）"></a>post请求（上传文件）</h3><p>问题：上传文本文件乱码，或者上传的文件的名字乱码<br>解决 ：如果不是特别要求建议所有的文件都用字节流传输，字节流可能比字符流传输慢一点。但是字节流传输只需要在servlet。在获取数据之前设置request的编码格式就行了就像下面这样。</p>
+<pre><code>request.setCharacterEncoding(&quot;utf-8&quot;);
+</code></pre><p>虽然经历的不多，但是我感觉这样出现的问题会少一些。因为上传文件一般都是POST请求，设置这句话只能对请求体有效。所以对 POST 特别管用。</p>
+<h3 id="get请求（提交参数）"><a href="#get请求（提交参数）" class="headerlink" title="get请求（提交参数）"></a>get请求（提交参数）</h3><p>在connection里面加字符编码格式，get请求写在url里面，servlet是那个引擎去那这段参数，所以理所当然修改的tomcat的那个配置文件，上面也有说：</p>
+<pre><code>&lt;Connector URIEncoding=&quot;utf-8&quot; connectionTimeout=&quot;20000&quot; port=&quot;8888&quot; protocol=&quot;HTTP/1.1&quot; redirectPort=&quot;8443&quot;/&gt;
+</code></pre><h2 id="接收请求浏览器显示乱码-response"><a href="#接收请求浏览器显示乱码-response" class="headerlink" title="接收请求浏览器显示乱码(response)"></a>接收请求浏览器显示乱码(response)</h2><p>在发送响应给浏览器之前，服务器在家也喜欢搞一些花里胡哨的东西，但是必须时刻记住自己的编码格式<strong>默认并不是UTF-8</strong>。所以在发送给浏览器之前一定要做两件事情：<br>1.自己变成UTF-8格式进行操作数据<br>2.告诉浏览器你必须使用UTF-8进行编码</p>
+<pre><code>response.setHeader(&quot;content-type&quot;,&quot;text/html;charset=utf-8&quot;);
+//或者
+response.setContentType(&quot;text/html;charset=utf-8&quot;);
+</code></pre><p>当你从服务器返回一个页面给浏览器的时候，别忘了设置response的编码格式哦</p>
+<pre><code>response.setCharacterEncoding(&quot;utf-8&quot;);
+</code></pre><h3 id="下载文件时候文件名乱码"><a href="#下载文件时候文件名乱码" class="headerlink" title="下载文件时候文件名乱码"></a>下载文件时候文件名乱码</h3><p>需要这是一下相应头中下载文件名。表示这是可行的。</p>
+<pre><code>if(request.getHeader(&quot;User-Agent&quot;).toUpperCase().indexOf(&quot;MSIE&quot;) &gt; 0) {
+    response.setHeader(&quot;Content-Disposition&quot;,&quot;attachment;&quot;+ &quot;filename=&quot;+ new String(filename.getBytes(&quot;GBK&quot;),&quot;ISO8859-1&quot;));
+} else {//firefox、chrome、safari、opera
+  response.setHeader(&quot;Content-Disposition&quot;,&quot;attachment;&quot;+
+ &quot;filename=&quot;+ new String(filename.getBytes(&quot;UTF8&quot;), &quot;ISO8859-1&quot;) );
+}
+</code></pre><h2 id="数据库乱码"><a href="#数据库乱码" class="headerlink" title="数据库乱码"></a>数据库乱码</h2><p>先进入数据库看看数据库是什么编码格式的,查看表是什么格式的</p>
+<pre><code>show create database database_name;
+show create table table_name;
+</code></pre><p>修改数据库的字符编码格式：</p>
+<pre><code>Alter database database_name character set utf8;  //这里不是utf-8
+</code></pre><p>一劳永逸的办法：<br>修改全局性默认字符集为utf8，操作步骤如下：</p>
+<pre><code>C:\ProgramData\MySQL\MySQL Server 5.7
+</code></pre><p>目录下找到my.ini文件：不要用记事本打开（programData目录为隐藏目录）<br>在[mysql]下添加</p>
+<pre><code>default-character-set=utf8
+</code></pre><p>在[mysqld]下添加</p>
+<pre><code>character_set_server=utf8
+</code></pre><p>然后在重新启动数据库：</p>
+<pre><code>net end mysql57
+net start mysql57
+</code></pre><p>以后创建的数据库默认都是UTF-8的编码</p>
+<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>乱码先分析问题的原因是什么，是本身的问题，还是客户端和服务端传输过程中的乱码问题。所以这需要我们自己分析和经验的积累。<br>现在的办法就是：<strong>通过打断点来判断到底是什么情况</strong>。我就出现过打断点没有显示乱码，但是idea控制台打印的时候显示了乱码，后来设置了VMOPTIION就好了。<br>这些原理现阶段可能还只是知道怎么用。等到以后遇到更深的问题可能才会触及到本质。加油吧少年。</p>
+
+        </div>
+        <div class="post-reply">
+            
+                <!-- 来必力City版安装代码 -->
+                <div id="lv-container" data-id="city" data-uid="MTAyMC8yOTE4Ni81NzUz">
+                    <script type="text/javascript">
+                        (function(d, s) {
+                            var j, e = d.getElementsByTagName(s)[0];
+
+                            if (typeof LivereTower === 'function') { return; }
+
+                            j = d.createElement(s);
+                            j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+                            j.async = true;
+
+                            e.parentNode.insertBefore(j, e);
+                        })(document, 'script');
+                    </script>
+                    <noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+                </div>
+                <!-- City版安装代码已完成 -->
+            
+            
+        </div>
+    </div>
+</section>
+<script>
+    // 获取第一张图, 用以当封面背景图
+    var img = document.querySelectorAll('img')[1]
+
+    if (img) {
+        var header_box = document.querySelector('#header_box')
+        header_box.style.backgroundImage = 'url('+ img.src +')'
+    }
+</script>
+      </div>
+  </div>
+  <style>
+  #footer {
+    min-height: 10vh;
+    background: black;
+    color: #fff;
+  }
+
+  #footer a {
+    color: #e1e1e1;
+  }
+</style>
+<footer id="footer" class="has-text-centered is-flex center">
+  <div class="container has-padding">
+    <div>
+      <div>
+        <!--请您保留作者署名, 主题制作来之不易-->
+        主题来自 <a href="http://haojen.github.io/">Haojen Ma</a>
+        <br>
+        Copyright © 王邸 2019
+        <!--
+          Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+        -->
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="/js/search_core.js"></script>
+<script src="/js/script.js"></script>
+
+</body>
+</html>
