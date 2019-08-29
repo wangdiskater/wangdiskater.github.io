@@ -8,16 +8,16 @@
   
   <title>Java总结（八） | 路要坚持</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="总结，本周还是讲的前端，不过使用node+vue启动的前端项目 星期一（8.12）DOM文档对象模型，是W3C织制订的一套用于访问HTML文档的标准.允许脚本动态地访问和更新文档的内容、结构和样式.分类 DOM Core XML DOM HTML DOM XML DOM 和 HTML DOM 关系XML DOM 定义了访问和处理 XML 文档的标准方法HTML文档格式 符合XML语法标准，所以可以">
+  <meta name="description" content="总结，本周还是讲的XML前端，不过使用node+vue启动的前端项目 星期一（8.12）DOM文档对象模型，是W3C织制订的一套用于访问HTML文档的标准.允许脚本动态地访问和更新文档的内容、结构和样式.分类 DOM Core XML DOM HTML DOM XML DOM 和 HTML DOM 关系XML DOM 定义了访问和处理 XML 文档的标准方法HTML文档格式 符合XML语法标准，所">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java总结（八）">
 <meta property="og:url" content="http://yoursite.com/2019/08/18/Java总结（八）/index.html">
 <meta property="og:site_name" content="路要坚持">
-<meta property="og:description" content="总结，本周还是讲的前端，不过使用node+vue启动的前端项目 星期一（8.12）DOM文档对象模型，是W3C织制订的一套用于访问HTML文档的标准.允许脚本动态地访问和更新文档的内容、结构和样式.分类 DOM Core XML DOM HTML DOM XML DOM 和 HTML DOM 关系XML DOM 定义了访问和处理 XML 文档的标准方法HTML文档格式 符合XML语法标准，所以可以">
-<meta property="og:updated_time" content="2019-08-18T14:48:47.705Z">
+<meta property="og:description" content="总结，本周还是讲的XML前端，不过使用node+vue启动的前端项目 星期一（8.12）DOM文档对象模型，是W3C织制订的一套用于访问HTML文档的标准.允许脚本动态地访问和更新文档的内容、结构和样式.分类 DOM Core XML DOM HTML DOM XML DOM 和 HTML DOM 关系XML DOM 定义了访问和处理 XML 文档的标准方法HTML文档格式 符合XML语法标准，所">
+<meta property="og:updated_time" content="2019-08-27T01:23:23.064Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java总结（八）">
-<meta name="twitter:description" content="总结，本周还是讲的前端，不过使用node+vue启动的前端项目 星期一（8.12）DOM文档对象模型，是W3C织制订的一套用于访问HTML文档的标准.允许脚本动态地访问和更新文档的内容、结构和样式.分类 DOM Core XML DOM HTML DOM XML DOM 和 HTML DOM 关系XML DOM 定义了访问和处理 XML 文档的标准方法HTML文档格式 符合XML语法标准，所以可以">
+<meta name="twitter:description" content="总结，本周还是讲的XML前端，不过使用node+vue启动的前端项目 星期一（8.12）DOM文档对象模型，是W3C织制订的一套用于访问HTML文档的标准.允许脚本动态地访问和更新文档的内容、结构和样式.分类 DOM Core XML DOM HTML DOM XML DOM 和 HTML DOM 关系XML DOM 定义了访问和处理 XML 文档的标准方法HTML文档格式 符合XML语法标准，所">
   
     <link rel="alternate" href="/" title="路要坚持" type="application/atom+xml">
   
@@ -150,7 +150,7 @@
             
         </div>
         <div class="content" style="overflow: auto">
-            <p>总结，本周还是讲的前端，不过使用node+vue启动的前端项目</p>
+            <p>总结，本周还是讲的XML前端，不过使用node+vue启动的前端项目</p>
 <h2 id="星期一（8-12）"><a href="#星期一（8-12）" class="headerlink" title="星期一（8.12）"></a>星期一（8.12）</h2><h3 id="DOM"><a href="#DOM" class="headerlink" title="DOM"></a>DOM</h3><p>文档对象模型，<br>是W3C织制订的一套用于访问HTML文档的标准.允许脚本动态地访问和更新文档的内容、结构和样式.<br>分类</p>
 <pre><code>DOM Core
 XML DOM
@@ -259,12 +259,63 @@ HTML DOM
 </code></pre><p>nodeType</p>
 <pre><code>Node.ELEMENT_NODE    ---1    -- 元素节点
 Node.ATTRIBUTE_NODE  ---2    -- 属性节点
-Node.TEXT_NODE       ---3    -- 文本节点
+Node.TEXT_NODE       ---3    -- 文本节点（空节点）
 </code></pre><p>nodeValue</p>
 <pre><code>如果给定节点是一个属性节点，返回值是这个属性的值
 如果给定节点是一个文本节点，返回值是这个文本节点内容
 如果给定节点是一个元素节点，返回值是 null
-</code></pre><h2 id="星期二（8-13）"><a href="#星期二（8-13）" class="headerlink" title="星期二（8.13）"></a>星期二（8.13）</h2><h3 id="XML"><a href="#XML" class="headerlink" title="XML"></a>XML</h3><p>这个东西已经过时了，主要用的还是XML的两个常用约束DTD 和 schema</p>
+</code></pre><h2 id="星期二（8-13）"><a href="#星期二（8-13）" class="headerlink" title="星期二（8.13）"></a>星期二（8.13）</h2><h3 id="XML"><a href="#XML" class="headerlink" title="XML"></a>XML</h3><p>这个东西已经过时了，主要用的还是XML的两个常用约束DTD 和 schema，为了更好的理解这两个配置文件的约束，我们先了解一下XML的语法规范</p>
+<h3 id="XML的语法规则"><a href="#XML的语法规则" class="headerlink" title="XML的语法规则"></a>XML的语法规则</h3><p><strong>所有的 XML 元素都必须有一个关闭标签</strong><br>在 HTML 中，某些元素不必有一个关闭标签：</p>
+<pre><code>&lt;p&gt;This is a paragraph.
+&lt;br&gt;
+</code></pre><p>在 XML 中，省略关闭标签是非法的。所有元素都必须有关闭标签：</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;
+&lt;p&gt;This is a paragraph.&lt;/p&gt;
+</code></pre><p>注释：从上面的实例中，您也许已经注意到 XML 第一行中声明没有关闭标签，这不是错误，声明不是 XML 文档本身的一部分，它没有关闭标签。</p>
+<p><strong>XML 标签对大小写敏感</strong><br>XML 标签对大小写敏感。</p>
+<pre><code>标签 &lt;Message&gt; 与标签 &lt;message&gt; 是不同的。
+</code></pre><p>必须使用相同的大小写来编写打开标签和关闭标签：</p>
+<pre><code>&lt;Message&gt;This is incorrect&lt;/message&gt;
+&lt;message&gt;This is correct&lt;/message&gt;
+</code></pre><p>注释：打开标签和关闭标签通常被称为开始标签和结束标签。不论您喜欢哪种术语，它们的概念都是相同的。</p>
+<p><strong>XML 必须正确嵌套</strong><br>在 HTML 中，常会看到没有正确嵌套的元素：</p>
+<pre><code>&lt;b&gt;&lt;i&gt;This text is bold and italic&lt;/b&gt;&lt;/i&gt; //错误的嵌套
+</code></pre><p>在 XML 中，所有元素都必须彼此正确地嵌套：</p>
+<pre><code>&lt;b&gt;&lt;i&gt;This text is bold and italic&lt;/i&gt;&lt;/b&gt;
+在上面的实例中，正确嵌套的意思是：由于 &lt;i&gt; 元素是在 &lt;b&gt; 元素内打开的，那么它必须在 &lt;b&gt; 元素内关闭。
+</code></pre><p><strong>XML 文档必须有根元素</strong><br>XML 文档必须有一个元素是所有其他元素的父元素。该元素称为根元素。</p>
+<pre><code>&lt;root&gt;
+&lt;child&gt;
+&lt;subchild&gt;.....&lt;/subchild&gt;
+&lt;/child&gt;
+&lt;/root&gt;
+</code></pre><p><strong>XML 属性值必须加引号</strong><br>与 HTML 类似，XML 元素也可拥有属性（名称/值的对）。<br>在 XML 中，XML 的属性值必须加引号。<br>请研究下面的两个 XML 文档。 第一个是错误的，第二个是正确的：</p>
+<pre><code>&lt;note date=12/11/2007&gt;
+&lt;to&gt;Tove&lt;/to&gt;
+&lt;from&gt;Jani&lt;/from&gt;
+&lt;/note&gt;
+
+&lt;note date=&quot;12/11/2007&quot;&gt;
+&lt;to&gt;Tove&lt;/to&gt;
+&lt;from&gt;Jani&lt;/from&gt;
+&lt;/note&gt;
+</code></pre><p>在第一个文档中的错误是，note 元素中的 date 属性没有加引号。</p>
+<p><strong>实体引用</strong><br>在 XML 中，一些字符拥有特殊的意义。<br>如果您把字符 “&lt;” 放在 XML 元素中，会发生错误，这是因为解析器会把它当作新元素的开始。<br>这样会产生 XML 错误：</p>
+<pre><code>&lt;message&gt;if salary &lt; 1000 then&lt;/message&gt;
+</code></pre><p>为了避免这个错误，请用实体引用来代替 “&lt;” 字符：</p>
+<p> <message>if salary &lt; 1000 then</message><br>在 XML 中，有 5 个预定义的实体引用：</p>
+<pre><code>&amp;lt;    &lt;   less than
+&amp;gt;    &gt;   greater than
+&amp;amp;   &amp;   ampersand
+&amp;apos;  &apos;   apostrophe
+&amp;quot;  &quot;   quotation mark
+</code></pre><p>注释：在 XML 中，只有字符 “&lt;” 和 “&amp;” 确实是非法的。大于号是合法的，但是用实体引用来代替它是一个好习惯。</p>
+<p><strong>XML 中的注释</strong><br>在 XML 中编写注释的语法与 HTML 的语法很相似。</p>
+<pre><code>&lt;!-- This is a comment --&gt;
+提示：你也可以了解一下“HTML &lt;!--...--&gt; 注释标签”。
+</code></pre><p><strong>在 XML 中，空格会被保留</strong><br>HTML 会把多个连续的空格字符裁减（合并）为一个：</p>
+<p>HTML:   Hello Tove<br>Output: Hello Tove<br>在 XML 中，文档中的空格不会被删减。</p>
+<p><strong>XML 以 LF 存储换行</strong><br>在 Windows 应用程序中，换行通常以一对字符来存储：回车符（CR）和换行符（LF）。<br>在 Unix 和 Mac OSX 中，使用 LF 来存储新行。<br>在旧的 Mac 系统中，使用 CR 来存储新行。<br>XML 以 LF 存储换行。<br>以上就是在使用 XML 时需要注意到的语法规则，按照这些规则，编写一个正确的 XML 文档！</p>
 <h3 id="DTD"><a href="#DTD" class="headerlink" title="DTD"></a>DTD</h3><p>文档类型定义（DTD）可定义合法的XML文档构建模块。它使用一系列合法的元素来定义文档的结构。<br>DTD 可被成行地声明于 XML 文档中，也可作为一个外部引用</p>
 <h3 id="DTD-简介"><a href="#DTD-简介" class="headerlink" title="DTD 简介"></a>DTD 简介</h3><p>对XML DTD 的简介，以及使用它的原因。</p>
 <h3 id="内部的-DOCTYPE-声明"><a href="#内部的-DOCTYPE-声明" class="headerlink" title="内部的 DOCTYPE 声明"></a>内部的 DOCTYPE 声明</h3><p>假如 DTD 被包含在您的 XML 源文件中，它应当通过下面的语法包装在一个 DOCTYPE 声明中：</p>
@@ -553,8 +604,8 @@ new  Vue({
 </code></pre><h3 id="v-show"><a href="#v-show" class="headerlink" title="v-show"></a>v-show</h3><pre><code>标签控制隐藏,  (display设置none)
 </code></pre><h3 id="v-if"><a href="#v-if" class="headerlink" title="v-if"></a>v-if</h3><pre><code>根据表达式的值的真假条件渲染元素。
 v-else-if , v-else
-</code></pre><h3 id="v-for"><a href="#v-for" class="headerlink" title="v-for"></a>v-for</h3><p>基于源数据多次渲染元素或模板块(循环渲染元素)</p>
-<h3 id="v-slot"><a href="#v-slot" class="headerlink" title="v-slot"></a>v-slot</h3><p>插槽。<br>是组件的一块HTML模版，<br>这块模版由使用组件者即父组件提供。<br>可以说是子组件暴露的一个<br>让父组件传入自定义内容的接口</p>
+</code></pre><h3 id="v-for"><a href="#v-for" class="headerlink" title="v-for"></a>v-for</h3><pre><code>基于源数据多次渲染元素或模板块(循环渲染元素)
+</code></pre><h3 id="v-slot"><a href="#v-slot" class="headerlink" title="v-slot"></a>v-slot</h3><p>插槽。<br>是组件的一块HTML模版，<br>这块模版由使用组件者即父组件提供。<br>可以说是子组件暴露的一个<br>让父组件传入自定义内容的接口</p>
 <h3 id="computed"><a href="#computed" class="headerlink" title="computed:"></a>computed:</h3><pre><code>first:&lt;input  v-model=&quot;firstName&quot; &gt;
 last:&lt;input v-model=&quot;lastName&quot;&gt;
 &lt;div&gt;{{full}}  &lt;/div&gt;
@@ -573,7 +624,7 @@ new Vue({
         }
     }
 })
-</code></pre><p>计算属性是真的牛皮，不是自己的东西都能计算到，使用状态管理，就能监听别的地方改变状态的数据。</p>
+</code></pre><p><strong>计算属性是真的牛皮，不是自己的东西都能计算到，使用状态管理，就能监听别的地方改变状态的数据。</strong></p>
 <h3 id="watch"><a href="#watch" class="headerlink" title="watch:"></a>watch:</h3><p>监听一个属性改变触发一个事件。</p>
 <pre><code>new Vue({
         el:&quot;#add2&quot;,
@@ -631,7 +682,35 @@ new Vue({
     }
 })
 </code></pre><h2 id="星期五（8-16）"><a href="#星期五（8-16）" class="headerlink" title="星期五（8.16）"></a>星期五（8.16）</h2><p>Vue全家桶：</p>
-<h3 id="vue-cli"><a href="#vue-cli" class="headerlink" title="vue-cli"></a>vue-cli</h3><h3 id="bus"><a href="#bus" class="headerlink" title="bus"></a>bus</h3><p>vue bus可以实现不同组件间、不同页面间的通信，比如我在A页面出发点击事件，要B页面发生变化<br>一个中央事件总线bus，可以作为一个简单的组件传递数据，用于解决跨级和兄弟组件通信问题</p>
+<h3 id="vue-cli"><a href="#vue-cli" class="headerlink" title="vue-cli"></a>vue-cli</h3><p>Vue.js 开发的标准工具<br>因为很多包都是在国外，所以我们构建一个vue项目一般来说是很慢的。<br>方法一：3.x开始可以这么创建，官方推荐</p>
+<p>安装vue-cli</p>
+<pre><code>npm install -g @vue/cli    (3.X)
+vue –V  (查看版本)
+</code></pre><p>创建项目<br>最新版本</p>
+<pre><code>vue create hello-world    (3.X)
+</code></pre><p>方法二：cli是3.x 想构建2.x的项目<br>安装vue-cli</p>
+<pre><code>npm install -g @vue/cli    (3.X)
+vue -V  (查看版本)
+</code></pre><p>创建项目</p>
+<pre><code>npm install -g @vue/cli-init    (2.X桥接工具)
+vue init webpack my-project    (2.X)
+</code></pre><p>方法三：快速构建方式<br>安装vue-cli</p>
+<pre><code>cnpm install -g @vue/cli    (3.X)
+</code></pre><p>创建项目</p>
+<pre><code>cnpm install -g @vue/cli-init    (2.X桥接工具)
+cnpm install -g webpack         (安装webpack)
+vue init webpack my-project    (2.X)
+</code></pre><p>拒绝npm安装，自己使用cnpm安装</p>
+<pre><code>Cnpm install
+</code></pre><h3 id="Vue项目的目录结构（cli构建出来的）"><a href="#Vue项目的目录结构（cli构建出来的）" class="headerlink" title="Vue项目的目录结构（cli构建出来的）"></a>Vue项目的目录结构（cli构建出来的）</h3><p>Build           构建脚本目录(webpack相关)<br>Config          项目配置,包括端口号等。我们初学可以使用默认的<br>node_modules    npm 加载的项目依赖模块<br>Src             这里是我们要开发的目录，基本上要做的事情都在这个目录里<br>static          静态资源文件<br>test            测试目录<br>.xxxx文件       这些是一些配置文件，包括语法配置，git配置等。<br>index.html      首页入口文件,可以添加一些 meta 信息或统计代码。<br>package.json    项目配置文件<br>README.md       项目的说明文档，markdown 格式</p>
+<h3 id="服务简单配置-端口…"><a href="#服务简单配置-端口…" class="headerlink" title="服务简单配置(端口…)"></a>服务简单配置(端口…)</h3><p>启动端口</p>
+<pre><code>Config-&gt;index.js
+Dev-&gt;port
+</code></pre><p>开发模式(dev)启动时访问（别人可以通过你的ip地址访问你的项目）</p>
+<pre><code>Package.json -&gt; dev
+--host 0.0.0.0
+vue-router
+</code></pre><h3 id="bus"><a href="#bus" class="headerlink" title="bus"></a>bus</h3><p>vue bus可以实现不同组件间、不同页面间的通信，比如我在A页面出发点击事件，要B页面发生变化<br>一个中央事件总线bus，可以作为一个简单的组件传递数据，用于解决跨级和兄弟组件通信问题</p>
 <pre><code>Bus.js
 import Vue from &apos;vue&apos;
 const Bus = new Vue()
@@ -797,7 +876,8 @@ this.$store.getters.getters1
 <pre><code>&lt;a v-bind:[attributeName]=&quot;url&quot;&gt; ... &lt;/a&gt;
 </code></pre><p>这里的 attributeName 会被作为一个 JavaScript 表达式进行动态求值，求得的值将会作为最终的参数来使用。例如，如果你的 Vue 实例有一个 data 属性 attributeName，其值为 “href”，那么这个绑定将等价于 v-bind:href。<br>但是实际并不能成功，因为[]里面的名字不能写成attributeName 只要改个名字就可以用了。fk<br>改的名字，必须是小写。不能大小写混写，草 官方文档在下面写了一行小字：</p>
 <pre><code>文档有说：另外，如果你在 DOM 中使用模板 (直接在一个 HTML 文件里撰写模板)，需要留意浏览器会把特性名全部强制转为小写
-</code></pre><h3 id="4-关于computed属性和methods-写方法"><a href="#4-关于computed属性和methods-写方法" class="headerlink" title="4.关于computed属性和methods 写方法"></a>4.关于computed属性和methods 写方法</h3><p>  1）不能同时存在名字相同的计算属性和方法<br>  2）计算属性只要不改变就会缓存。但是方法不行</p>
+</code></pre><p><strong>动态参数一个数一个特性</strong> 所以不能驼峰写法</p>
+<h3 id="4-关于computed属性和methods-写方法"><a href="#4-关于computed属性和methods-写方法" class="headerlink" title="4.关于computed属性和methods 写方法"></a>4.关于computed属性和methods 写方法</h3><p>  1）不能同时存在名字相同的计算属性和方法<br>  2）计算属性只要不改变就会缓存。但是方法不行，方法每次都会执行</p>
 <h3 id="5-Lodash"><a href="#5-Lodash" class="headerlink" title="5.Lodash"></a>5.Lodash</h3><p>Lodash 通过降低 array、number、objects、string 等等的使用难度从而让 JavaScript 变得更简单。<br>Lodash 的模块化方法 非常适用于：</p>
 <pre><code>遍历 array、object 和 string
 对值进行操作和检测
@@ -810,10 +890,10 @@ this.$store.getters.getters1
     &quot;err-err&quot;:true
   }
 }
-</code></pre><h3 id="7-VUE的模块引进来驼峰，写成标签用-代替"><a href="#7-VUE的模块引进来驼峰，写成标签用-代替" class="headerlink" title="7.VUE的模块引进来驼峰，写成标签用-代替"></a>7.VUE的模块引进来驼峰，写成标签用-代替</h3><h3 id="8不要用H5标签做模板名字"><a href="#8不要用H5标签做模板名字" class="headerlink" title="8不要用H5标签做模板名字"></a>8不要用H5标签做模板名字</h3><p>.Do not use built-in or reserved HTML elements as component id: header<br>不能用H5标签作为模板名字</p>
+</code></pre><h3 id="7-VUE的模块（component）引进来驼峰，写成标签用-代替"><a href="#7-VUE的模块（component）引进来驼峰，写成标签用-代替" class="headerlink" title="7.VUE的模块（component）引进来驼峰，写成标签用-代替"></a>7.VUE的模块（component）引进来驼峰，写成标签用-代替</h3><h3 id="8不要用H5标签做模板名字"><a href="#8不要用H5标签做模板名字" class="headerlink" title="8不要用H5标签做模板名字"></a>8不要用H5标签做模板名字</h3><p>.Do not use built-in or reserved HTML elements as component id: header<br>不能用H5标签作为模板名字</p>
 <h3 id="9-vue-项目地址去掉-的方法"><a href="#9-vue-项目地址去掉-的方法" class="headerlink" title="9.vue 项目地址去掉 #的方法"></a>9.vue 项目地址去掉 #的方法</h3><p>使用history模式，在路由里面加入：</p>
 <pre><code>mode: &apos;history&apos;,
-</code></pre><h3 id="10-v-model正确用法"><a href="#10-v-model正确用法" class="headerlink" title="10 v-model正确用法"></a>10 v-model正确用法</h3><p>一开始他讲错了，v-model就是直接写= 而不是： input默认就会绑定相应的值，输入就绑定value，选择绑定checked，下拉绑定selected</p>
+</code></pre><h3 id="10-v-model正确用法"><a href="#10-v-model正确用法" class="headerlink" title="10 v-model正确用法"></a>10 v-model正确用法</h3><p>一开始他讲错了，v-model就是直接写= 而不是： input默认就会绑定相应的值，输入就绑定value，选择绑定checked，下拉绑定selected,这是官方的写法</p>
 <pre><code>&lt;input type=&quot;text&quot; v-model:value=&quot;aaa&quot;&gt; 可以这样写，但是项目中ESLINT肯定报错
 &lt;input type=&quot;text&quot; v-model=&quot;aaa&quot;&gt;       标准这样写
 </code></pre><h3 id="11-项目小问题"><a href="#11-项目小问题" class="headerlink" title="11 项目小问题"></a>11 项目小问题</h3><pre><code>1.发现有坑

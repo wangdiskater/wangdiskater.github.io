@@ -14,7 +14,7 @@
 <meta property="og:url" content="http://yoursite.com/2019/08/25/Java总结（九）/index.html">
 <meta property="og:site_name" content="路要坚持">
 <meta property="og:description" content="本周又回到了JAVAEE讲了：http协议，tomcat使用，Servlet 请求和相应,文件的上传和下载等等。主要考虑的还是乱码的问题，其他的东西在SE阶段就已经接触过了，网络编程那一段，其实就是socket封装的response和request。根本就没有什么新东西 星期一（0819）今天学习HTTP协议 和 TOMCAT的一些基本用法 HTTPHTTP是JavaEE的基础，所以必须要好好掌握">
-<meta property="og:updated_time" content="2019-08-25T15:26:33.266Z">
+<meta property="og:updated_time" content="2019-08-29T01:44:10.843Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java总结（九）">
 <meta name="twitter:description" content="本周又回到了JAVAEE讲了：http协议，tomcat使用，Servlet 请求和相应,文件的上传和下载等等。主要考虑的还是乱码的问题，其他的东西在SE阶段就已经接触过了，网络编程那一段，其实就是socket封装的response和request。根本就没有什么新东西 星期一（0819）今天学习HTTP协议 和 TOMCAT的一些基本用法 HTTPHTTP是JavaEE的基础，所以必须要好好掌握">
@@ -358,8 +358,8 @@ Cache-control: private
 <pre><code>&lt;Context path=&quot;/second&quot; docBase=&quot;D:\secondapp&quot;&gt;&lt;/Context&gt;
 </code></pre><p>2） 在conf/catalina/localhost目录下新增 应用名.xml文件<br>//second.xml</p>
 <pre><code>&lt;Context docBase=&quot;D:\secondapp&quot;&gt;&lt;/Context&gt;
-</code></pre><h2 id="星期二（0820）"><a href="#星期二（0820）" class="headerlink" title="星期二（0820）"></a>星期二（0820）</h2><h3 id="Servlet"><a href="#Servlet" class="headerlink" title="Servlet"></a>Servlet</h3><p>ervlet = Server + applet<br>Servlet是接口，规范，相应的类由谁来实现？？？Web服务器、tomcat：Servlet容器<br>To implement this interface,<br>you can write a generic servlet that extends javax.servlet.GenericServlet<br>or an HTTP servlet that extends javax.servlet.http.HttpServlet.</p>
-<h3 id="手动实现servlet（不用IDEA）"><a href="#手动实现servlet（不用IDEA）" class="headerlink" title="手动实现servlet（不用IDEA）"></a>手动实现servlet（不用IDEA）</h3><p>目的是为了知道怎么运行，<br>因为servlet是一个接口，所以要去文档找他的实现类来进行编写<br>All Known Implementing Classes:</p>
+</code></pre><h2 id="星期二（0820）"><a href="#星期二（0820）" class="headerlink" title="星期二（0820）"></a>星期二（0820）</h2><h3 id="Servlet"><a href="#Servlet" class="headerlink" title="Servlet"></a>Servlet</h3><p>ervlet = Server + applet<br>Servlet是接口，规范，相应的类由谁来实现？？？Web服务器、tomcat：Servlet 容器<br>To implement this interface,<br>you can write a generic servlet that extends javax.servlet.GenericServlet<br>or an HTTP servlet that extends javax.servlet.http.HttpServlet.</p>
+<h3 id="手动实现-servlet-（不用IDEA）"><a href="#手动实现-servlet-（不用IDEA）" class="headerlink" title="手动实现 servlet （不用IDEA）"></a>手动实现 servlet （不用IDEA）</h3><p>目的是为了知道怎么运行，<br>因为servlet是一个接口，所以要去文档找他的实现类来进行编写<br>All Known Implementing Classes:</p>
 <pre><code>GenericServlet
 </code></pre><p>使用实现类实现service方法</p>
 <pre><code>public class Servlet enxtends GenericServlet {
@@ -403,6 +403,8 @@ Cache-control: private
     &lt;url-pattern&gt;/demo/hello.html&lt;/url-pattern&gt;
   &lt;/servlet-mapping&gt;
 &lt;/web-app&gt;
+</code></pre><p><strong>通过注解创界servlet</strong></p>
+<pre><code>@WebServlet(name = &quot;UserServlet&quot;, urlPatterns = &quot;/user&quot;)
 </code></pre><p><strong>注意事项</strong></p>
 <pre><code>同一个Servlet可以被映射到多个URL上，即多个&lt;servlet-mapping&gt;元素的&lt;servlet-name&gt;子元素的设置值可以是同一个Servlet的注册名。
 在Servlet映射到的URL中也可以使用*通配符，但是只能有两种固定的格式：    一种格式是“*.扩展名”，一种格式是以正斜杠（/）开头并以“/*”结尾。
@@ -500,7 +502,7 @@ getHeaderNames方法
 getParameterValues（String name）方法
 getParameterNames方法
 getParameterMap()
-</code></pre><h3 id="第三方库获取用户的参数"><a href="#第三方库获取用户的参数" class="headerlink" title="第三方库获取用户的参数"></a>第三方库获取用户的参数</h3><p>获取用户的请求参数，如果我们一个一个从请求拿出来，然后赋值给我们自己建的bean就很蠢，能否有个工具像DBUtil一样能够直接通过ResultHandler传给他一个对象，他反射来创建bean对象，调用我们bean的方法，来填充我们的bean对象。答案当然是有的：<br>引用两个jar包：</p>
+</code></pre><h3 id="第三方库将用户的参数保存在bean中"><a href="#第三方库将用户的参数保存在bean中" class="headerlink" title="第三方库将用户的参数保存在bean中"></a>第三方库将用户的参数保存在bean中</h3><p>获取用户的请求参数，如果我们一个一个从请求拿出来，然后赋值给我们自己建的bean就很蠢，能否有个工具像DBUtil一样能够直接通过ResultHandler传给他一个对象，他反射来创建bean对象，调用我们bean的方法，来填充我们的bean对象。答案当然是有的：<br>引用两个jar包：</p>
 <pre><code>commons-beanutils-1.8.3.jar
 commons-logging-1.1.1.jar
 </code></pre><p>然后在servlet里面开始操作</p>

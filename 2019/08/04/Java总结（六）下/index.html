@@ -14,7 +14,7 @@
 <meta property="og:url" content="http://yoursite.com/2019/08/04/Java总结（六）下/index.html">
 <meta property="og:site_name" content="路要坚持">
 <meta property="og:description" content="接下来JAVAEE，一开始先学习mysql数据库的语言（sql）操作的语言四种（DDL,DML,DQL,DCL(没讲之后我补上),TPL），数据库主要进行的是查询Query一定要会，JDBC（JAVA DB CONNECTIVITY）三连(connection preparedstatement,resultset) 星期四(8.01)MYSQL学习总结指令的编写： 登录本机mysql: mysq">
-<meta property="og:updated_time" content="2019-08-19T06:01:26.807Z">
+<meta property="og:updated_time" content="2019-08-27T00:26:21.277Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java总结（六）下">
 <meta name="twitter:description" content="接下来JAVAEE，一开始先学习mysql数据库的语言（sql）操作的语言四种（DDL,DML,DQL,DCL(没讲之后我补上),TPL），数据库主要进行的是查询Query一定要会，JDBC（JAVA DB CONNECTIVITY）三连(connection preparedstatement,resultset) 星期四(8.01)MYSQL学习总结指令的编写： 登录本机mysql: mysq">
@@ -169,7 +169,8 @@ TPL： 事务处理语言
 <pre><code>CREATE database db_name CHARACTER SET UTF8 COLLEATE UTF8_GENERAL_CI;
 </code></pre><p>create_specification:</p>
 <pre><code>[DEFAULT] CHARACTER SET charset_name | [DEFAULT] COLLATE collation_name
-</code></pre><p>collection_name;<br>utf8_general_ci（不区分大小写）, utf8_bin（区分大小写）</p>
+</code></pre><p><strong>注意事项</strong>: utf-8在数据库里面写的是utf8</p>
+<p>collection_name;<br>utf8_general_ci（不区分大小写）, utf8_bin（区分大小写）</p>
 <h3 id="查看数据库-show-："><a href="#查看数据库-show-：" class="headerlink" title="查看数据库(show)："></a>查看数据库(show)：</h3><p>1.显示数据库的语句</p>
 <pre><code>SHOW databases;
 </code></pre><p>2.显示数据库创建语句</p>
@@ -179,6 +180,8 @@ TPL： 事务处理语言
 <p>2.修改数据库创建的参数；</p>
 <pre><code>ALTER  DATABASE   db_name   
 [alter_specification [, alter_specification] ...]
+
+ALTER DATABASE DB_NAME CHARACTER utf8; //修改字符编码格式
 </code></pre><h3 id="选择数据库"><a href="#选择数据库" class="headerlink" title="选择数据库"></a>选择数据库</h3><pre><code>USE db_name;
 </code></pre><h2 id="表"><a href="#表" class="headerlink" title="表"></a>表</h2><h3 id="创建表-create"><a href="#创建表-create" class="headerlink" title="创建表(create)"></a>创建表(create)</h3><pre><code>CREATE TABLE table_name
 (
@@ -318,14 +321,14 @@ Extra:对字段额外的说明
 ADD      (column datatype [DEFAULT expr]
        [,ADD column datatype]...);
 </code></pre><h3 id="ALTER-TABLE-table-name-CHANGE-改变一列的name和datatype"><a href="#ALTER-TABLE-table-name-CHANGE-改变一列的name和datatype" class="headerlink" title="ALTER TABLE table_name CHANGE  改变一列的name和datatype"></a>ALTER TABLE table_name CHANGE  改变一列的name和datatype</h3><pre><code>ALTER TABLE table_name
-change     col_name new_col_name datatype [DEFAULT expr]
+change old_col_name new_col_name datatype [DEFAULT expr]
 [,change col_name new_col_name datatype [DEFAULT ...] ]...;
 </code></pre><h3 id="ALTER-TABLE-table-name-MODIFY-改变一列的datatype"><a href="#ALTER-TABLE-table-name-MODIFY-改变一列的datatype" class="headerlink" title="ALTER TABLE table_name MODIFY  改变一列的datatype"></a>ALTER TABLE table_name MODIFY  改变一列的datatype</h3><pre><code>ALTER TABLE table_name
 MODIFY column datatype [DEFAULT expr]
        [,MODIFY column datatype]...;
 </code></pre><h3 id="ALTER-TABLE-table-name-DROP-删除一列"><a href="#ALTER-TABLE-table-name-DROP-删除一列" class="headerlink" title="ALTER TABLE table_name DROP; 删除一列"></a>ALTER TABLE table_name DROP; 删除一列</h3><pre><code>ALTER TABLE table_name
 DROP        (column);
-</code></pre><h3 id="RENAME-TABLE-table-name-to-new-name-修改表名"><a href="#RENAME-TABLE-table-name-to-new-name-修改表名" class="headerlink" title="RENAME TABLE table_name to new_name 修改表名"></a>RENAME TABLE table_name to new_name 修改表名</h3><p>修改表的名称：RENAME TABLE 表名 TO 新表名</p>
+</code></pre><h3 id="ALTER-TABLE-TABLE-NAME-RENAME-TABLE-table-name-to-new-name-修改表名"><a href="#ALTER-TABLE-TABLE-NAME-RENAME-TABLE-table-name-to-new-name-修改表名" class="headerlink" title="ALTER TABLE TABLE_NAME RENAME TABLE table_name to new_name 修改表名"></a>ALTER TABLE TABLE_NAME RENAME TABLE table_name to new_name 修改表名</h3><p>修改表的名称：RENAME TABLE 表名 TO 新表名</p>
 <p>RENAME TABLE 语句的另一个用法是移动该表到另一个数据库<br>语法为：<br>RENAME TABLE 旧数据库名.旧表名 TO 新数据库名.新表名<br>提示：我们可以把 RENAME TABLE 的这两种用法很好地统一起来，如果我们把 “重命名” 理解为 “在同一数据库里的移动”。甚至我们可以省略数据库名，如果你恰好正在使用该数据库。<br>这个就好像Field的重命名一样，也有剪切的效果</p>
 <pre><code>File的方法：
 boolean renameTo(File dest)
@@ -420,7 +423,9 @@ WHERE &lt;filter_condition&gt;;
 ‘_’ 只能匹配一个字符
 </code></pre><h3 id="DISTINCT-过滤相同的记录"><a href="#DISTINCT-过滤相同的记录" class="headerlink" title="DISTINCT 过滤相同的记录"></a>DISTINCT 过滤相同的记录</h3><pre><code>SELECT DISTINCT {column_names}
 FROM table_name;
-</code></pre><h3 id="LIMIT-限制结果"><a href="#LIMIT-限制结果" class="headerlink" title="LIMIT 限制结果"></a>LIMIT 限制结果</h3><p>SELECT 语句返回所有匹配的记录。但是如果我们只想返回第一行或者一定数量的行，这该怎么办呢？<br>在 MySQL 中，我们可以用 LIMIT 关键字实现这一要求。</p>
+</code></pre><p><strong>注意事项：</strong>过滤不能和聚合函数连用</p>
+<pre><code>select distinct (gender) count(gender) from student; //报错
+</code></pre><h3 id="LIMIT-限制结果-分页"><a href="#LIMIT-限制结果-分页" class="headerlink" title="LIMIT 限制结果(分页)"></a>LIMIT 限制结果(分页)</h3><p>SELECT 语句返回所有匹配的记录。但是如果我们只想返回第一行或者一定数量的行，这该怎么办呢？<br>在 MySQL 中，我们可以用 LIMIT 关键字实现这一要求。</p>
 <pre><code>SELECT * FROM file_name LIMIT offset, nums;     -- LIMIT 3, 4;
 --OR
 SELECT * FROM file_name LIMIT nums OFFSET offset;（建议第二种）
@@ -448,9 +453,9 @@ SELECT * FROM file_name LIMIT nums OFFSET offset;（建议第二种）
 </code></pre><h3 id="分组查询GROUP-BY"><a href="#分组查询GROUP-BY" class="headerlink" title="分组查询GROUP BY"></a>分组查询GROUP BY</h3><p>比如：我们想统计各班学生的人数，该怎么办？这时候我们就得用到分组的概念。在 SQL 中，我们使用 GROUP BY 关键字对数据进行分组。<br>位置：加在from table_name的后面</p>
 <pre><code>[GROUP BY {column_names}] [HAVING &lt;filter_condition&gt;]
 使用 HAVING 过滤分组
-</code></pre><h3 id="having-and-where"><a href="#having-and-where" class="headerlink" title="having and where"></a>having and where</h3><pre><code>Where语句在分组之前，执行完where语句再去对数据进行分组
-Having语句在分组之后，执行完分组之后，再对分组数据进行一个过滤筛选。
-
+</code></pre><h3 id="having-and-where"><a href="#having-and-where" class="headerlink" title="having and where"></a>having and where</h3><pre><code>Where  语句在分组之前，执行完where语句再去对数据进行分组
+Having 语句在分组之后，执行完分组之后，再对分组数据进行一个过滤筛选。
+and    最先执行，在where之前
 
 select class,name from t_students group by class;
 </code></pre><p>例子：获取每个班的人数，并且找出人数大于2的班级</p>
@@ -481,14 +486,14 @@ select class,name from t_students group by class;
 )
 </code></pre><h3 id="修改表创建主键-ALTER"><a href="#修改表创建主键-ALTER" class="headerlink" title="修改表创建主键(ALTER)"></a>修改表创建主键(ALTER)</h3><pre><code>ALTER TABLE table_name modify id int primary key auto_increment;
 </code></pre><h3 id="主键的删除"><a href="#主键的删除" class="headerlink" title="主键的删除"></a>主键的删除</h3><p><strong>注意事项</strong> 主键要删除，必须先删除自增</p>
-<pre><code>ALTER TABLE table_name modify id int; //删除自增
+<pre><code>ALTER TABLE table_name modify id int;    //删除自增
 ALTER TABLE table_name drop primary key; //丢弃主键
 </code></pre><h3 id="主键的注意事项"><a href="#主键的注意事项" class="headerlink" title="主键的注意事项"></a>主键的注意事项</h3><p>1.主键默认自增，而且你修改id大于当前自增最大值，默认会把id自增的指针为现在最大值。<br>2.如果当前删除一个元素id = 9, 下次添加元素id = 10,id并不等于9。表中会默认记录曾经最大的id的值，<strong>但是id = 9的地方依旧可以插入</strong>，如果不设置id的值，默认还是最高指针的下一个地方。</p>
-<h3 id="唯一约束（UNIQUE）"><a href="#唯一约束（UNIQUE）" class="headerlink" title="唯一约束（UNIQUE）"></a>唯一约束（UNIQUE）</h3><p>可以添加多个null值</p>
-<h3 id="unique的新建表的时候创建"><a href="#unique的新建表的时候创建" class="headerlink" title="unique的新建表的时候创建"></a>unique的新建表的时候创建</h3><pre><code>CREATE TABLE table_name(
+<h3 id="唯一约束（-UNIQUE-）"><a href="#唯一约束（-UNIQUE-）" class="headerlink" title="唯一约束（ UNIQUE ）"></a>唯一约束（ UNIQUE ）</h3><p>可以添加多个null值</p>
+<h3 id="unique-的新建表的时候创建"><a href="#unique-的新建表的时候创建" class="headerlink" title="unique 的新建表的时候创建"></a>unique 的新建表的时候创建</h3><pre><code>CREATE TABLE table_name(
   email varchar(50) unique;
 )
-</code></pre><h3 id="unique修改表创建-ALTER"><a href="#unique修改表创建-ALTER" class="headerlink" title="unique修改表创建(ALTER)"></a>unique修改表创建(ALTER)</h3><pre><code>ALTER TABLE table_name modify email varchar(50) unique;
+</code></pre><h3 id="unique-修改表创建-ALTER"><a href="#unique-修改表创建-ALTER" class="headerlink" title="unique 修改表创建(ALTER)"></a>unique 修改表创建(ALTER)</h3><pre><code>ALTER TABLE table_name modify email varchar(50) unique;
 </code></pre><h3 id="unique的删除"><a href="#unique的删除" class="headerlink" title="unique的删除"></a>unique的删除</h3><pre><code>ALTER TABLT table_name drop index email;
 </code></pre><p><strong>注意</strong> 这就表明了 unique是通过index来确认是否是唯一的。</p>
 <h3 id="非空约束（not-null）"><a href="#非空约束（not-null）" class="headerlink" title="非空约束（not null）"></a>非空约束（not null）</h3><h3 id="非空的新建表的时候创建"><a href="#非空的新建表的时候创建" class="headerlink" title="非空的新建表的时候创建"></a>非空的新建表的时候创建</h3><pre><code>CREATE TABLE table_name(
@@ -510,6 +515,7 @@ create table students(
 </code></pre><h3 id="外键的修改表创建-ALTER"><a href="#外键的修改表创建-ALTER" class="headerlink" title="外键的修改表创建(ALTER)"></a>外键的修改表创建(ALTER)</h3><pre><code>ALTER TABLE table_name add(constraint student_course_FK foreign key (cid) references course id);
 </code></pre><h3 id="外键的删除"><a href="#外键的删除" class="headerlink" title="外键的删除"></a>外键的删除</h3><p><strong>删除外键的时候，需要用到新建外键时取的名称。</strong></p>
 <pre><code>ALTER TABLE table_name drop foreign key student_course_FK;
+ALTER TABLE TABLE_NAME DROP INDEX UNIQUE_NAME;
 </code></pre><h3 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h3><pre><code>SELECT * FROM t_students;  -- This is a annotation
 SELECT * FROM t_students;  # This is a annotation
 /* Hello World!
@@ -534,10 +540,11 @@ SELECT * FROM customer as  c INNER JOIN orders as o  ON c.id=o.customer_id;
 </code></pre><h3 id="右外连接查询"><a href="#右外连接查询" class="headerlink" title="右外连接查询"></a>右外连接查询</h3><pre><code>SELECT * FROM customer c RIGHT OUTER JOIN orders o ON c.id=o.customer_id;
 不仅包含符合c.id=o.customer_id连接条件的数据行，还包含orders右表中的其他数据行
 </code></pre><p>带查询条件的右外连接查询，在where子句中设定查询条件</p>
-<pre><code>SELECT * FROM customer c RIGHT OUTER JOIN orders o ON c.id=o.customer_id WHERE o.price&gt;250;
+<pre><code>SELECT * FROM customer c RIGHT OUTER JOIN orders o ON c.id = o.customer_id WHERE o.price&gt;250;
 </code></pre><p><strong>注意事项</strong>:这里注意一定要用where 不要用成and<br>select * from emp right join dept on emp.deptno = dept.deptno and job = ‘clerk’;<br>+——-+——-+——-+——+——+——–+——–+——–+<br>| empno | ename | job   | mgr  | sal  | deptno | deptno | dname  |<br>+——-+——-+——-+——+——+——–+——–+——–+<br>| 01    | jacky | clerk | tom  | 1000 | 1      | 1      | 事业部 |<br>| 02    | tom   | clerk |      | 2000 | 1      | 1      | 事业部 |<br>| 07    | biddy | clerk |      | 2000 | 1      | 1      | 事业部 |<br>| NULL  | NULL  | NULL  | NULL | NULL | NULL   | 2      | 销售部 |<br>| NULL  | NULL  | NULL  | NULL | NULL | NULL   | 3      | 技术部 |<br>+——-+——-+——-+——+——+——–+——–+——–+</p>
-<p>因为在join …on 。。。 之前会先执行and 】<br>就把<br>| 01    | jacky | clerk | tom  | 1000 | 1      | 1      | 事业部 |<br>| 02    | tom   | clerk |      | 2000 | 1      | 1      | 事业部 |<br>| 07    | biddy | clerk |      | 2000 | 1      | 1      | 事业部 |<br>然后再和<br>+——–+——–+<br>| deptno | dname  |<br>+——–+——–+<br>| 1      | 事业部 |<br>| 2      | 销售部 |<br>| 3      | 技术部 |<br>+——–+——–+</p>
-<p>拼接，就出现了两个幽灵行，因为左边没有deptno = 2,3的<br>最后又发现 and 可以先找到 左边表 和 右边表，新建一个新的表 符合and的判断，然后再和另一个表拼接；</p>
+<p>因为在join …on 。。。 之前会先执行and 】<br>就把所有的clerk找出来<br>| empno | ename | job   | mgr  | sal  | deptno | deptno | dname  |<br>| 01    | jacky | clerk | tom  | 1000 | 1      | 1      | 事业部 |<br>| 02    | tom   | clerk |      | 2000 | 1      | 1      | 事业部 |<br>| 07    | biddy | clerk |      | 2000 | 1      | 1      | 事业部 |</p>
+<p>然后再和右外连接，拼接<br>+——–+——–+<br>| deptno | dname  |<br>+——–+——–+<br>| 1      | 事业部 |<br>| 2      | 销售部 |<br>| 3      | 技术部 |<br>+——–+——–+</p>
+<p>因为左边先and就没有了deptno = 2,3的数据。就出现了两个幽灵行，因为左边没有deptno = 2,3的<br>最后又发现 and 可以先找到 左边表 和 右边表，新建一个新的表 符合and的判断，然后再和另一个表拼接；</p>
 <p>当没有join…on 时候。 and 就会变成where</p>
 <h3 id="子查询"><a href="#子查询" class="headerlink" title="子查询"></a>子查询</h3><p>子查询也叫嵌套查询，是指在where子句或from子句中又嵌入select查询语句（一般写在where字句）<br>练习：<br>查询“郭靖”的所有订单信息</p>
 <pre><code>SELECT * FROM orders WHERE customer_id=(SELECT id FROM customer WHERE name LIKE ‘%郭靖%&apos;);
@@ -546,15 +553,15 @@ select * from customer c inner join orders o on c.id = o.customer_id and c.name 
 <h3 id="报表查询"><a href="#报表查询" class="headerlink" title="报表查询"></a>报表查询</h3><p>对数据行进行分组统计，其语法格式为：</p>
 <pre><code>select …  from … [where…] [ group by … [having… ]] [ order by … ]
 其中group by 子句指定按照哪些字段分组，having子句设定分组查询条件。
-</code></pre><h3 id="数据库的备份和还原"><a href="#数据库的备份和还原" class="headerlink" title="数据库的备份和还原"></a>数据库的备份和还原</h3><p>在说备份和还原之前，先要知道数据库备份的路径在哪里：</p>
+</code></pre><h3 id="数据库的备份和还原-（-gt-）"><a href="#数据库的备份和还原-（-gt-）" class="headerlink" title="数据库的备份和还原 （ &gt; ）"></a>数据库的备份和还原 （ &gt; ）</h3><p>在说备份和还原之前，先要知道数据库备份的路径在哪里：</p>
 <pre><code>show global variables like &apos;%datadir%&apos;;
 datadir： C:\ProgramData\MySQL\MySQL Server 5.7\Data\
 </code></pre><p><strong>数据库备份： cmd命令下</strong></p>
-<pre><code>mysqldump -u root -p test(数据库名称) &gt;test.sql   在执行这条语句的路径下面创建一个.sql的文件，
-</code></pre><p>备份整个数据库</p>
+<pre><code>mysqldump -u root -p test(数据库名称) &gt; test.sql   在执行这条语句的路径下面创建一个.sql的文件，
+</code></pre><p>1) 备份整个数据库</p>
 <pre><code>mysqldump -u root -p --all-databases &gt; alldump.sql;
 </code></pre><p>2）备份部分数据库（不带–databases的备份语句在生成的.sql文件中没有create database和use 语句，需要手动建立数据库，可能导致数据库名与之前不一致）</p>
-<pre><code>mysqldump -u root -p --databases yekai&gt;yekai.sql
+<pre><code>mysqldump -u root -p --databases yekai &gt; yekai.sql
 </code></pre><p>3）备份数据库中的几张表</p>
 <pre><code>mysqldump -u root -p yekai emp &gt; emp.sql
 </code></pre><p><strong>注意事项</strong>： mysqldump不需要加分号，因为是在cmd命令中</p>
@@ -593,10 +600,12 @@ javax.sql.*包括了jdbc3.0的特性
 Class.forName(com.mysql.jdbc.Driver);
 </code></pre><p>3、建立连接</p>
 <pre><code>Connection conn = DriverManage.getConnection(url,username,password);
+url = &quot;jdbc:mysql://localhost:3306/database_name?characterEncoding=utf8&quot;;
 </code></pre><p>4、创建用于向数据库发送sql的Statement对象并发送sql</p>
 <pre><code>Statement statement = conn.createStatement();
 </code></pre><p>5、从代表结果集的ResultSet中取出数据，打印</p>
 <pre><code>ResultSet resultSet = statement.executeQuery(sql)
+statement.executeUpdate(sql);
 </code></pre><p>6、断开与数据库的链接</p>
 <pre><code>conn.close();//必须要关闭，而且必须先关闭
 statement.close();
@@ -625,7 +634,9 @@ getObject(string columnName)
 获取指定类型的数据，(封装数据时方便)例如：
 getString(int index)
 getString(String columnName)
-</code></pre><p>提问：数据库中列的类型是varchar，获取该列的数据调用什么方法？Int类型呢？bigInt类型呢？Boolean类型？<br>我TM用getString()全都可以拿到，没毛病</p>
+....
+还有getInt(),getDouble(),等等的方法
+</code></pre><p>提问：数据库中列的类型是 varchar，获取该列的数据调用什么方法？Int类型呢？bigInt类型呢？Boolean类型？<br>我TM用getString()全都可以拿到，没毛病</p>
 <p>Tip：常用数据类型转换表</p>
 <table>
 <thead>
@@ -657,6 +668,11 @@ getString(String columnName)
 <td style="text-align:left">long</td>
 </tr>
 <tr>
+<td style="text-align:right">DOUBLE</td>
+<td style="text-align:center">getDouble()</td>
+<td style="text-align:left">double</td>
+</tr>
+<tr>
 <td style="text-align:right">CHAR,VARCHAR,LONG VARCHAR</td>
 <td style="text-align:center">getString()</td>
 <td style="text-align:left">String</td>
@@ -684,7 +700,7 @@ getString(String columnName)
 </tbody>
 </table>
 <p>注意事项：这里date返回类似并不是java.util.date而是java.mysql.date他们之间方法可能有差异，所以要注意</p>
-<p>ResultSet还提供了对结果集的游标进行滚动的方法：</p>
+<p>和迭代器类似ResultSet还提供了对结果集的游标进行滚动的方法：</p>
 <pre><code>next()：移动到下一行
 Previous()：移动到前一行
 absolute(int row)：移动到指定行
@@ -706,7 +722,7 @@ String sql = &quot;select * from t_user where name =&apos;&quot;+ name +&quot;&a
 Connection connection = DriverManager.getConnection(url,username,password);
 String sql = &quot;select * from emp where id = ?&quot;
 PreparedStatement preparedstatement = connection.prepareStatement(sql);
-preparedstatement.setInt(1,i);
+preparedstatement.setInt(1,i); //注意下标从1开始的
 preparedstatement.executeQuery();
 connection.close();
 preparedstatement.close();
