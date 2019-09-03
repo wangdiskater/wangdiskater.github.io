@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html class="full-height">
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="//cdn.bootcss.com/bulma/0.4.1/css/bulma.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+  
+  <title>Java总结（十） | 路要坚持</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="这周首先学习了JSP，因为在搞自己的系统所以没认真听，考试就吃了大亏，直接拉闸了。然后讲了filter 和 listener。最后讲了一下JSON 和 MVC，以及软件开发的三层架构（controller,service,dao）。之后就开进行项目。还是那句话，一定要多写代码，不要直接去搬人家写的，自己写一遍，自己就知道流程了。在写项目所以更新慢了 星期一（0826）JSP这一部分没好好听，导致考">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java总结（十）">
+<meta property="og:url" content="http://yoursite.com/2019/09/03/Java总结（十）/index.html">
+<meta property="og:site_name" content="路要坚持">
+<meta property="og:description" content="这周首先学习了JSP，因为在搞自己的系统所以没认真听，考试就吃了大亏，直接拉闸了。然后讲了filter 和 listener。最后讲了一下JSON 和 MVC，以及软件开发的三层架构（controller,service,dao）。之后就开进行项目。还是那句话，一定要多写代码，不要直接去搬人家写的，自己写一遍，自己就知道流程了。在写项目所以更新慢了 星期一（0826）JSP这一部分没好好听，导致考">
+<meta property="og:updated_time" content="2019-09-03T00:45:02.238Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java总结（十）">
+<meta name="twitter:description" content="这周首先学习了JSP，因为在搞自己的系统所以没认真听，考试就吃了大亏，直接拉闸了。然后讲了filter 和 listener。最后讲了一下JSON 和 MVC，以及软件开发的三层架构（controller,service,dao）。之后就开进行项目。还是那句话，一定要多写代码，不要直接去搬人家写的，自己写一遍，自己就知道流程了。在写项目所以更新慢了 星期一（0826）JSP这一部分没好好听，导致考">
+  
+    <link rel="alternate" href="/" title="路要坚持" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/common.css">
+<link rel="stylesheet" href="/css/nav.css">
+<link rel="stylesheet" href="/css/layout.css">
+  
+
+</head>
+
+<body>
+  <header id="navbar" class="overflow-hidden">
+  <div class="container">
+    <nav class="nav">
+         <div class="nav-left">
+            <a href="/" class="nav-item" style="font-size: 20px;">
+              <span class="logo">王邸</span>'s Blog
+            </a>
+         </div>
+        <div class="nav-center is-hidden position-relative" id="search_container">
+            <div class="nav-item full-width full-height">
+                <i class="fa fa-search has-padding" aria-hidden="true"></i>
+                <input type="text" id="search_input" class="search-input full-height full-width" placeholder="Search post" autofocus>
+                <i id="close_search" class="fa fa-times" aria-hidden="true"></i>
+            </div>
+            <div id="search_result"></div>
+        </div>
+        <div class="nav-right nav-menu">
+            <a class="nav-item" id="search">
+                <i class="fa fa-search" aria-hidden="true"></i>
+            </a>
+            
+            <a class="nav-item" href="/">
+                Home
+            </a>
+            
+            <a class="nav-item" href="/works">
+                My Works
+            </a>
+            
+            <a class="nav-item" href="/about">
+                About
+            </a>
+            
+        </div>
+        <span class="nav-toggle" id="navMenuDropdown">
+            <span></span>
+            <span></span>
+            <span></span>
+        </span>
+        <div class="navbar-menu position-absolute full-width content-box is-hidden-desktop is-flex flex-column center" style="top: 100%;">
+            
+            <a class="nav-item flex-1" href="/">
+                Home
+            </a>
+            
+            <a class="nav-item flex-1" href="/works">
+                My Works
+            </a>
+            
+            <a class="nav-item flex-1" href="/about">
+                About
+            </a>
+            
+        </div>
+    </nav>
+  </div>
+</header>
+
+  <div id="main-wrap" class="position-relative" style="margin-top: 55px;">
+      <div class="main-inner-content">
+          <!--博文页面-->
+
+<style>
+    .header-box {
+        height: 370px;
+        filter: blur(10px);
+        background-size: cover;
+        background-color: lightsteelblue;
+    }
+
+    .post-box {
+        padding: 15px;
+        padding-top: 60px;
+        min-height: 80vh;
+        margin-top: -200px;
+        border-radius: 4px;
+        background-color: rgba(255,255,255,.8);
+    }
+
+    .post-avatar {
+        height: 30px;
+        width: 30px;
+        border-radius: 50%;
+    }
+
+    .flow-chart {
+        text-align: center;
+    }
+
+    img[alt="post-cover"] {
+        display: none;
+    }
+</style>
+<header>
+    <div id="header_box" class="header-box"></div>
+</header>
+<section>
+    <div class="container post-box">
+        <div class="content post-title is-flex center flex-column" style="margin-bottom: 70px; overflow: auto;">
+            <h1 class="has-text-centered" style="padding-bottom: 10px; border-bottom: 3px solid #fff">
+                <strong>Java总结（十）</strong>
+            </h1>
+            
+            <div class="is-flex align-center">
+                <img class="post-avatar" src="https://q2.qlogo.cn/headimg_dl?bs=996057150&dst_uin=996057150&dst_uin=996057150&;dst_uin=996057150&spec=100&url_enc=0&referer=bu_interface&term_type=PC">
+                <span style="padding:0 10px;"> <span class="sub-title">By</span> 王邸</span>
+                <span class="post-date sub-title">at: 2019-09-03</span>
+            </div>
+            
+                <div>
+                    
+                </div>
+            
+        </div>
+        <div class="content" style="overflow: auto">
+            <p>这周首先学习了JSP，因为在搞自己的系统所以没认真听，考试就吃了大亏，直接拉闸了。然后讲了filter 和 listener。最后讲了一下JSON 和 MVC，以及软件开发的三层架构（controller,service,dao）。之后就开进行项目。还是那句话，一定要多写代码，不要直接去搬人家写的，自己写一遍，自己就知道流程了。在写项目所以更新慢了</p>
+<h2 id="星期一（0826）"><a href="#星期一（0826）" class="headerlink" title="星期一（0826）"></a>星期一（0826）</h2><h3 id="JSP"><a href="#JSP" class="headerlink" title="JSP"></a>JSP</h3><p>这一部分没好好听，导致考试直接拉闸，现在用一天的时间，重新学习JSP。虽然以后不用了，但是对理解servlet有着非常重要的作用（最后单独来写）</p>
+<h2 id="星期二（0827）"><a href="#星期二（0827）" class="headerlink" title="星期二（0827）"></a>星期二（0827）</h2><h3 id="filter"><a href="#filter" class="headerlink" title="filter"></a>filter</h3><h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><p>过滤器是Servlet规范的高级特性。<br>过滤器（Filter）技术是从Servlet2.3规范开始引入的。过滤器是一种Web应用程序组件，可以部署在Web应用程序中。过滤器由Servlet容器调用，用来拦截以及处理请求和响应。过滤器本身并不能生成请求和响应对象，但是可以对请求和响应对象进行检查和修改。</p>
+<p>过滤器介于客户端与Servlet/JSP等相关的资源之间，对于与过滤器关联的Servlet来说，过滤器可以在Servlet被调用之前检查并且修改request对象。在Servlet调用之后检查并修改response对象。</p>
+<h3 id="过滤器工作原理"><a href="#过滤器工作原理" class="headerlink" title="过滤器工作原理"></a>过滤器工作原理</h3><p>以上过程可分为以下步骤：</p>
+<pre><code>1．客户端将请求发送给Web容器；
+2．Web容器根据客户端发送的请求生成请求对象request和响应对象response。
+3．Web容器在调用与过滤器相关联的Web组件（例如Servlet/JSP）之前，先将request对象以及response对象发送给过滤器。
+4．过滤器对request对象进行必要的处理；
+5．过滤器把处理过的request对象以及response对象传递给Web组件；
+6．Web组件调用完成后，再次通过过滤器，此时过滤器对response对象进行必要的处理；
+7．过滤器把处理过的response对象传递给Web容器；
+8．Web容器将响应的结果返回到客户端，并在浏览器上显示。
+</code></pre><h3 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h3><p>Servlet规范中使用javax.servlet.Filter接口支持过滤器的使用<br>创建过滤器必须实现Filter接口，该接口中定义了三个方法</p>
+<h3 id="void-init-FilterConfig-config-："><a href="#void-init-FilterConfig-config-：" class="headerlink" title="void init(FilterConfig config)："></a>void init(FilterConfig config)：</h3><p>用于初始化过滤器，当容器装载并初始化过滤器时调用。Web容器为此方法传递一个FilterConfig对象，FilterConfig对象可以获取web.xml文件中过滤器初始化参数的配置；利用FilterConfig对象也可以获取当前Filter的名称以及相关联的ServletContext对象。</p>
+<h3 id="void-doFilter-ServletRequst-request-ServletResponse-response-FilterChain-chain-："><a href="#void-doFilter-ServletRequst-request-ServletResponse-response-FilterChain-chain-：" class="headerlink" title="void doFilter(ServletRequst request, ServletResponse response, FilterChain chain)："></a>void doFilter(ServletRequst request, ServletResponse response, FilterChain chain)：</h3><p>此方法是Filter接口的核心方法，用于对请求对象和响应对象进行检查和处理。此方法包括三个输入参数。其中，ServletRequest对象为请求对象，包括表单数据、Cookie以及HTTP请求头等信息；ServletResponse对象为响应对象，用于响应使用ServletRequest对象访问的信息；FilterChain用来调用过滤器链中的下一个资源，即将ServletRequest对象以及ServletResponse对象传递给下一个过滤器或者是其它的Servlet/JSP等资源。</p>
+<h3 id="void-destroy-："><a href="#void-destroy-：" class="headerlink" title="void destroy( )："></a>void destroy( )：</h3><p>此方法用于销毁过滤器，当容器要销毁过滤器实例时调用此方法，Servlet过滤器占用的资源会被释放。</p>
+<h3 id="filter的执行过程"><a href="#filter的执行过程" class="headerlink" title="filter的执行过程"></a>filter的执行过程</h3><p>doFilter的第三个参数FilterChain，（不加第三个参数，filter不会放行到servlet）用来调用过滤器链中的下一个资源，将ServletRequest对象以及ServletResponse对象传给下一个过滤器或者JSP等。从这里我们可以得出一个信息，那就是filter可以设置多个，可以组成串执行。从最开始的Filter开始依次往后传，传给下一个filter，如果没有filter，那就将Request和Response对象传给Servlet或者JSP等。执行过程如下：</p>
+<pre><code>filter dofilter before
+filter dofilter2 before
+filter dofilter3 before
+servlet
+filter dofilter3 after
+filter dofilter2 after
+filter dofilter after
+</code></pre><p>我们首先执行Filter1的doFilter方法，也就是说该方法入栈了，之后调用FilterChain的doFilter方法，这个方法的作用就是调用这一链上的其他资源入栈。如果是filter的话，就是继续执行下一filter 的doFilter方法，当遇到后面filter的FilterChain的doFilter方法时，重复刚刚的动作，继续调用下一个链上的资源，如果还是filter，那么和之前的过程一样。如果没有filter了，那么调用Servlet或者JSP，当执行完毕之后，出栈，重新返回上一栈，然后依次出栈执行。代码上的表现形式就是入栈时，依次执行FilterChain.doFilter方法以前的代码，出栈时，反向依次执行FilterChain.doFilter方法后面的代码。我们也可以在IDEA的debug模式下，查看这一过程。</p>
+<h3 id="JAVA中实现过滤器"><a href="#JAVA中实现过滤器" class="headerlink" title="JAVA中实现过滤器"></a>JAVA中实现过滤器</h3><pre><code>1．创建一个实现Filter接口的Java类；
+2．实现init( )方法，如有必要，读取过滤器的初始化参数；
+3．实现doFilter( )方法，完成对ServletRequest对象以及ServletResponse对象的检查和处理；
+4．在doFilter( )方法中调用FilterChain接口对象chain的doFilter( )方法，以便将过滤器传递给后续的过滤器或资源。
+5．在web.xml中注册过滤器，设置参数以及过滤器要过滤的资源。
+</code></pre><h3 id="Filter-Chain"><a href="#Filter-Chain" class="headerlink" title="Filter Chain"></a>Filter Chain</h3><p>FilterChain是servlet容器为开发人员提供的对象，它提供了对某一资源的已过滤请求调用链的视图。过滤器使用 FilterChain 调用链中的下一个过滤器，直到最后一个过滤器。多个Filter对同一个资源进行了拦截，那么当我们在开始的Filter中执行chain.doFilter(request,response)时，是访问下一下Filter,直到最后一个Filter执行时，它后面没有了Filter,才会访问web资源。关于多个FIlter的访问顺序问题:它们的执行顺序取决于&lt;filter-mapping&gt;在web.xml文件中配置的先后顺序,之后是注注解的配置，注解配置则是按照类名的ASCII码表顺序（也就是字母大小写排序）；</p>
+<h3 id="Filter生命周期"><a href="#Filter生命周期" class="headerlink" title="Filter生命周期"></a>Filter生命周期</h3><p>当服务器启动，会创建Filter对象，并调用init方法，只调用一次.<br>当访问资源时，路径与Filter的拦截路径匹配，会执行Filter中的doFilter方法，这个方法是真正拦截操作的方法.<br>当服务器关闭时，会调用Filter的destroy方法来进行销毁操作.</p>
+<h3 id="Filter配置详解"><a href="#Filter配置详解" class="headerlink" title="Filter配置详解"></a>Filter配置详解</h3><p>在web.xml中</p>
+<pre><code>&lt;filter&gt;
+  &lt;filter-name&gt;filter名称&lt;/filter-name&gt;
+  &lt;filter-class&gt;filter类全名&lt;/filter-class&gt;
+&lt;/filter&gt;
+&lt;filter-mapping&gt;
+  &lt;filter-name&gt;filter名称&lt;/filter-name&gt;
+  &lt;url-pattern&gt;映射路径&lt;/url-pattern&gt;
+&lt;/filter-mapping&gt;
+</code></pre><p>在注解上：</p>
+<pre><code>@WebFilter(filterName = &quot;Filter1&quot;,value = &quot;/*&quot;)
+</code></pre><p><strong>关于url-pattern配置</strong><br>和servlet的配置差不多：</p>
+<pre><code>1.完全匹配
+  要求必须以&quot;/&quot;开始.
+2.目录匹配
+  要求必须以&quot;/&quot;开始，以*结束.
+3.扩展名匹配
+  不能以“/”开始，以*.xxx结束. （或*）
+</code></pre><h3 id="lisenter"><a href="#lisenter" class="headerlink" title="lisenter"></a>lisenter</h3><p>Listener是Java Web三大组件之一，Servlet，Listener，Filter。<br>监听器用于监听Web常用对象HttpServletRequest，HttpSession，ServletContext。监听对象的生命周期以及属性变化（添加，删除，替换等）。<br>在说Listener之前，必须要先说一个概念：<br><strong>接口回调</strong>。在java中，无论什么种类，什么样的Listener形式，本质上，都是接口回调。这个思想很重要。对于JAVA解耦合来说。</p>
+<h3 id="接口回调"><a href="#接口回调" class="headerlink" title="接口回调"></a>接口回调</h3><p>在计算机程序设计中，回调函数，或简称回调，是指通过函数参数传递到其它代码的，某一块可执行代码的引用。这一设计允许了底层代码调用在高层定义的子程序。</p>
+<h3 id="一个简单的例子"><a href="#一个简单的例子" class="headerlink" title="一个简单的例子"></a>一个简单的例子</h3><p>员工向老板汇报工作</p>
+<pre><code>//Boss.类 适当的时机告诉老板工作完成
+public class Boss {
+  public void report(){
+      System.out.println(&quot;报告老板，工作已经完成&quot;);
+  }
+}
+
+//员工类
+//员工工作，工作完毕，向老板汇报工作完成
+public class Employee {
+  private Boss boss;
+  public Employee(Boss boss) {
+      this.boss = boss;
+  }
+  public void work(){
+      System.out.println(&quot;员工正在拼命工作中&quot;);
+      boss.report();
+  }
+}
+
+//测试
+public class Test {
+  public static void main(String[] args) {
+    Employee employee = new Employee(new Boss());
+    employee.work();
+  }
+}
+</code></pre><p>这里就是一个简单员工工作完，创建一个boss告诉他我工作完了。如果有一天员工升职了，boss不再是他的老板了，Manager才是他的老板，那么我们是不是要重新创一个manager类去实现一个report()方法，在employee里面再创建一个manager的对象。。。。。。 ？<br>这样一看就是耦合的代码，并不能复用。那么我们能不能想一个办法。employee上级不确定，但是我们可以用一个对象来表示他的上级。这个对象能实现report方法。同时和不同的领导汇报的工作是不同的，所以需要不同的领导report不同。那么我们就想到了接口这个东西，有一个report方法，所有的领导都实现这个接口即可。而employee可以使用这个接口的类型的对象，通过领导向上转型来接收每一个领导。说起来有点抽象，直接上代码：<br>首先需要一个callback接口，表示employee的上级</p>
+<p>//Callback.java</p>
+<pre><code>public interface Callback {
+  void report();
+}
+</code></pre><p>//不同的领导实现这个接口，也就是说他们拥有这个方法</p>
+<pre><code>//Manager.java
+public class Manager implements Callback {
+  //重写report()
+  @override
+  void report(){
+    System.out.println(&quot;向经理汇报情况！&quot;);
+  }
+}
+</code></pre><p>//employee类 有一个callback 成员，直接调用callback对象的report方法</p>
+<pre><code>employee.java
+public class employee {
+  Callback boss;
+  public employee (Callback boss) {
+    this.boss = boss;
+  }
+  //work直接调用callback的report即可
+  public void work(){
+    System.out.prinln(&quot;working&quot;);
+    boss.report()//向领导汇报
+  }
+}
+</code></pre><p>listener就是这样的一个东西，他有很多子类实现这个接口，同时他们自己有自己不同的功能，监听的就是context。<br><strong>Listener的类型虽然有很多种，但是使用方式都是一样的。要想注册一个listener，首先编写一个类实现listener接口。</strong><br>Servlet共提供了三种类型8个监听器。</p>
+<h3 id="三个域对象创建和销毁的监听器"><a href="#三个域对象创建和销毁的监听器" class="headerlink" title="三个域对象创建和销毁的监听器"></a>三个域对象创建和销毁的监听器</h3><p><strong>ServletContextListener（例子）</strong></p>
+<pre><code>public class MyServletContextListener implements ServletContextListener {
+  @Override
+  public void contextInitialized(ServletContextEvent servletContextEvent) {
+  }
+  @Override
+  public void contextDestroyed(ServletContextEvent servletContextEvent) {
+  }
+}
+
+这样是不是就可以了呢？因为web服务器不知道有这么一个listener？你得告诉服务器我新增了一个监听器。在web.xml中注册监听器的信息。
+web.xml
+&lt;listener&gt;
+  &lt;listener-class&gt;MyServletContextListener&lt;/listener-class&gt;
+&lt;/listener&gt;
+
+或者在创建的时候写注解：
+@WebListener  //写这个注解
+public class MyServletContextListener implements ServletContextListener {
+  @Override
+  public void contextInitialized(ServletContextEvent servletContextEvent) {
+  }
+  @Override
+  public void contextDestroyed(ServletContextEvent servletContextEvent) {
+  }
+}
+</code></pre><p>HttpSessionListener<br>ServletRequestListener</p>
+<p><strong>三个域对象的属性变更的监听器</strong><br>ServletContextAttributeListener</p>
+<pre><code>public class MyServletContextAttributeListener implements ServletContextAttributeListener {
+  @Override
+  public void attributeAdded(ServletContextAttributeEvent servletContextAttributeEvent) {
+  }
+
+  @Override
+  public void attributeRemoved(ServletContextAttributeEvent servletContextAttributeEvent) {
+  }
+
+  @Override
+  public void attributeReplaced(ServletContextAttributeEvent servletContextAttributeEvent) {
+  }
+}
+</code></pre><p>ServletRequestAttributeListener<br>HttpSessionAttributeListener</p>
+<p><strong>监听HttpSession对象中JavaBean状态的改变（不同）</strong><br>这两个Listener的使用方式和之前的有很大不同，不需要通过注册web.xml。 直接在相应的 entity 中实现相应的接口。</p>
+<p>HttpSessionBindingListener<br>HttpSessionActivationListener</p>
+<h2 id="星期三（0828）"><a href="#星期三（0828）" class="headerlink" title="星期三（0828）"></a>星期三（0828）</h2><h3 id="JSON"><a href="#JSON" class="headerlink" title="JSON"></a>JSON</h3><p>使用谷歌Gson就行 或者fastJson</p>
+<h2 id="星期四（0829）"><a href="#星期四（0829）" class="headerlink" title="星期四（0829）"></a>星期四（0829）</h2><h3 id="重构之前的项目"><a href="#重构之前的项目" class="headerlink" title="重构之前的项目"></a>重构之前的项目</h3><p>通过三层架构分层，然后分成不同的功能模块。虽然以后使用框架来写的，但是大体思路都是这样<br>|-controller<br>|-dao<br>|-filter<br>|-model<br>|-service<br>|-util</p>
+<h3 id="考试总结"><a href="#考试总结" class="headerlink" title="考试总结"></a>考试总结</h3><p>非常的不认真，导致非常的不好，大部分错的都是Json，所以问题很严重。必须重新学习<br>5.关于http 协议不正确的描述是（C ）<br>A、Http 请求中的Referer 字段的值表示用户从该URL 代表的页面出发访问<br>当前请求的页面<br>B、http 整个消息头部分中的各行消息头可按任何顺序排列<br>C、http 协议响应报文返回状态码302 表示重定向。<br>D、http 请求有说明当前协议的版本号, 响应首部没有。</p>
+<p>看错了,响应头不是响应报文。</p>
+<p>9.Servlet1 的访问路径为<a href="http://localhost/news/servlet/Servlet1，" target="_blank" rel="external">http://localhost/news/servlet/Servlet1，</a><br>在Servlet1 中使用如下代码设置Cookie：<br>Cookie c = new Cookie(“myCookie”,”xxxx”);<br>response.addCookie(c);</p>
+<p>请问当访问哪个Servlet 时可以获取不到这个Cookie 信息？（ C ）<br>A、<a href="http://localhost/news/servlet/Servlet1" target="_blank" rel="external">http://localhost/news/servlet/Servlet1</a><br>B、<a href="http://localhost/news/servlet/Servlet2" target="_blank" rel="external">http://localhost/news/servlet/Servlet2</a><br>C、<a href="http://localhost/news/Servlet3" target="_blank" rel="external">http://localhost/news/Servlet3</a><br>D、<a href="http://localhost/news/servlet/n/Servlet4" target="_blank" rel="external">http://localhost/news/servlet/n/Servlet4</a><br>实验证明确实是这样，只要是/servlet/*下面，不管有没有访问到，都会带cookie，而没有/servlet这一层的所有URL就都没有这个cookie。我印象中老师没有讲过，但是我觉得应该是一个树的结构，<br>例如：/news/servlet/Servlet1。 当我在这棵树的某个结点设置了cookie，这棵树的父类的所有子树都能拥有这个 cookie 。如果这个结点就是应用下的首层的结点，则整个应用都可以拥有这个cookie。</p>
+<p><strong>这里想到另一个问题，如果我设置cookie时候设置了path是下一层，那么结果会如何</strong>，同样创建了四个servlet来测试</p>
+<pre><code>@WebServlet(name = &quot;Servlet1&quot;, urlPatterns = &quot;/Servlet1&quot;)
+public class Servlet1 extends HttpServlet {
+  protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+  }
+  protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    request.setCharacterEncoding(&quot;utf-8&quot;);
+    Cookie c = new Cookie(&quot;myCookie&quot;,&quot;test&quot;);
+    c.setPath(&quot;/news/servlet/Servlet2&quot;); //我把cookie给到下一层 这一层还有吗？
+    response.addCookie(c);
+  }
+}
+</code></pre><p><strong>注意</strong>这就发生了一个很奇怪的现象，这时候并不是servlet下的资源都带有这个cookie,和我们刚才的结论就不同了，这里只有Servlet2下面的资源才有这个cookie。按照之前的接乱，我这一层拿到的cookie，应该所有的兄弟结点和兄弟的孩子都可以拿到。但是设置path之后，之后path的子节点和他自己才能拿到。这里就有点诡异。我们从cookie设计的角度出发去看这个问题，如果我们setPath(“”)不是比原来深的资源，而是比原来浅。那么是不是就会有cookie能被整个应用共享的安全隐患。所以我觉得这样设计还是有他的想法的。</p>
+<p>13.aa.jsp 要把请求转发给bb.jsp, aa.jsp 位于根目录下的page 文件夹，<br>aa.jsp.bb.jsp 位于helloapp 应用的根目录下。以下哪个选项能使aa.jsp 正确地把<br>请求转发给bb.jsp?（ D ）</p>
+<pre><code>A、&lt;a href=“bb.jsp”&gt;bb.jsp&lt;/a&gt;
+B、&lt;jsp:forward page=“bb.jsp”/&gt;
+C、&lt;jsp:forward page=“${pageContext.request.contextPath }/bb.jsp”/&gt;
+D、&lt;jsp:forward page=“/bb.jsp”/&gt;
+</code></pre><p>14.在HTTP 请求中包含一个名字为“username”，值为“Tom”的Cookie，以下<br>哪个选项能输在这个Cookie 的名字“username” （ C ）<br>A、${cookie.username.name}<br>B、${cookie.username.value}<br>C、${cookie.username }<br>D、${reques.cookie.username.name}</p>
+<p>没学过是，EL表达式，11个隐式对象</p>
+<pre><code>pageScope page 作用域
+requestScope  request 作用域
+sessionScope  session 作用域
+applicationScope  application 作用域
+param Request 对象的参数，字符串
+paramValues Request对象的参数，字符串集合
+header  HTTP 信息头，字符串
+headerValues  HTTP 信息头，字符串集合
+initParam 上下文初始化参数
+cookie  Cookie值
+pageContext 当前页面的pageContext
+</code></pre><p>19.学校数据库中有学生和宿舍两种表，表的结构为学生(学号，姓名)，宿舍(楼名，房间号，床位号，学号)，现在要列出<strong>所有学生</strong>的床位分配情况，则应执行<br>（ C ）、<br>A、交叉连接 B、内连接 C、左外连接 D、隐式连接</p>
+<p>题目说是所有的学生，所以左外链接可以把左边所有的数据都查到，也可以查出来学生没有床位的情况。要查出哪边全部数据就在哪边查询；有可能还是会出现幽灵结点。</p>
+<p>20.在JSTL的迭代标签 &lt;forEach&gt; 的属性中，用于指定要遍历的对象集合（ B ）<br>A、var B、items C、value D、varStatus<br>没学过，别人能对你也可以</p>
+<h3 id="大题"><a href="#大题" class="headerlink" title="大题"></a>大题</h3><p>1.返回什么</p>
+<pre><code>Public class Servlet1 extends HttpServlet {
+  Public void init() throws ServletException{
+  }
+  Public void service(HttpServletRequest request,HttpServletResponse response)Throws ServletException,IOException{
+    PrintWriter out = response.getWriter();
+    out.println(“hello!”);
+  }
+}
+</code></pre><p>HttpServlet 的doGet() 和 doPost()方法并不一定要继承，不是抽象方法，他当然可以重写service方法</p>
+<p>2.helloapp 应用中的test.jsp 文件的源代码如下：</p>
+<pre><code>&lt;%!
+public void amethod(){
+  String username=request.getParameter(“username”);
+  out.print(username);
+}
+%&gt;
+&lt;%amethod();%&gt;
+</code></pre><p>当客户端访问</p>
+<pre><code>http://localhost:8080/helloapp/test.jsp?username=Tom 时，打印出的结果是什么？
+</code></pre><p>编译错误，因为request是service方法中的局部变量。不能在另一个函数中使用。</p>
+<p>4.访问如下jsp 时，浏览器将得到怎样的输出？<br>&lt;% int i = 0; %&gt;<br>&lt;!—<br>&lt;% i=i+100; %&gt;<br>–&gt;<br>&lt;%=i %&gt;<br>输出为100</p>
+<p>在JAVA文件会翻译成：</p>
+<pre><code>out.write(&quot;  &quot;);
+int i = 0;
+out.write(&quot;\n&quot;);
+out.write(&quot;  &lt;!--\n&quot;);
+out.write(&quot;  &quot;);
+i=i+100;
+out.write(&quot;\n&quot;);
+out.write(&quot;  --&gt;\n&quot;);
+out.write(&quot;  &quot;);
+out.print(i);
+</code></pre><p>//学生表<br>Create table t_stu (<br>  t_sid int primary key,<br>  t_sName varchar(10)<br>);</p>
+<p>//老师表<br>Create table t_teacher (<br>  t_tid int primary key,<br>  t_tName varchar(10)<br>);</p>
+<p>//课程表<br>Create table t_course (<br>  t_cid int Primary key,<br>  t_tid int,<br>  t_cName varchar(10),<br>  Constraint t_tid_fk foreign key(t_tid) references t_teacher(t_tid)<br>);</p>
+<p>//分数关联表<br>CREATE TABLE t_sc (<br>  t_Sid INT,<br>  t_cid INT,<br>  score INT,<br>  PRIMARY KEY(t_cid,t_sid),<br>  CONSTRAINT t_sid_fk FOREIGN KEY(t_sid) REFERENCES t_stu(t_sid),<br>  CONSTRAINT t_cid_fk FOREIGN KEY(t_cid) REFERENCES t_course(t_cid)<br>)</p>
+<p>问题：</p>
+<p>1.查询所有教师所带课程的情况。（4 分）</p>
+<pre><code>select * from t_teacher left join t_course on t_teacher.t_tid = t_course.t_tid;
+</code></pre><p>2.查询所有满足如下条件的同学的姓名，及其单科成绩：该同学的单科成绩大于其平均成绩</p>
+<pre><code>select * from t_stu inner join t_sc on t_stu.t_sid = t_sc.t_Sid where t_sc.score &gt; (select AVG(score) from t_sc);
+</code></pre><p>隐式内连接，配合子查询<br>SELECT *  FROM t_stu, t_sc  WHERE t_stu.t_sid = t_sc.t_sid  AND  score &gt; (<br>SELECT AVG(score) FROM t_sc WHERE t_stu.t_sid=t_sc.t_sid)</p>
+<p>1）为什么要写两次：t_stu.t_sid=t_sc.t_sid ？<br>第二个不用写，<br>SELECT *  FROM t_stu, t_sc  WHERE t_stu.t_sid = t_sc.t_sid  and  score &gt; (<br>SELECT AVG(score) FROM t_sc);<br>2）AND和where的区别？<br>因为使用了隐式内连接，所以使用and来代替where执行</p>
+<h2 id="星期五（0830）"><a href="#星期五（0830）" class="headerlink" title="星期五（0830）"></a>星期五（0830）</h2><p>正式开始项目，开始写项目，那么知识点就变少了，成为CURD boy，编写接口文档。发现最主要的还是mysql的语句的编写，等等。</p>
+<h2 id="星期六（0831）"><a href="#星期六（0831）" class="headerlink" title="星期六（0831）"></a>星期六（0831）</h2><h3 id="模糊查询"><a href="#模糊查询" class="headerlink" title="模糊查询"></a>模糊查询</h3><p><strong>sql语句拼接就是核心</strong></p>
+<p>public List<admin> getSearchAdmins(Admin admin) throws SQLException {<br>  String account = admin.getAccount();<br>  String name = admin.getName();<br>  String sql = “select * from admin where 1=1 “;<br>  List<object> parameter = new ArrayList&lt;&gt;();<br>  if(!StringUtils.isEmpty(account)) {<br>    sql += “ AND account like ? “;<br>    parameter.add(“%” + account + “%”);<br>  }<br>  if(!StringUtils.isEmpty(name)) {<br>    sql += “ AND name like ? “;<br>    parameter.add(“%” + name + “%”);<br>  }<br>  return adminDao.getSearchAdmins(sql,parameter);<br>}</object></admin></p>
+<h2 id="星期日（0901）"><a href="#星期日（0901）" class="headerlink" title="星期日（0901）"></a>星期日（0901）</h2><h3 id="乱码问题"><a href="#乱码问题" class="headerlink" title="乱码问题"></a>乱码问题</h3><p>设置-Dfile.encoding=UTF-8</p>
+
+        </div>
+        <div class="post-reply">
+            
+                <!-- 来必力City版安装代码 -->
+                <div id="lv-container" data-id="city" data-uid="MTAyMC8yOTE4Ni81NzUz">
+                    <script type="text/javascript">
+                        (function(d, s) {
+                            var j, e = d.getElementsByTagName(s)[0];
+
+                            if (typeof LivereTower === 'function') { return; }
+
+                            j = d.createElement(s);
+                            j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+                            j.async = true;
+
+                            e.parentNode.insertBefore(j, e);
+                        })(document, 'script');
+                    </script>
+                    <noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+                </div>
+                <!-- City版安装代码已完成 -->
+            
+            
+        </div>
+    </div>
+</section>
+<script>
+    // 获取第一张图, 用以当封面背景图
+    var img = document.querySelectorAll('img')[1]
+
+    if (img) {
+        var header_box = document.querySelector('#header_box')
+        header_box.style.backgroundImage = 'url('+ img.src +')'
+    }
+</script>
+      </div>
+  </div>
+  <style>
+  #footer {
+    min-height: 10vh;
+    background: black;
+    color: #fff;
+  }
+
+  #footer a {
+    color: #e1e1e1;
+  }
+</style>
+<footer id="footer" class="has-text-centered is-flex center">
+  <div class="container has-padding">
+    <div>
+      <div>
+        <!--请您保留作者署名, 主题制作来之不易-->
+        主题来自 <a href="http://haojen.github.io/">Haojen Ma</a>
+        <br>
+        Copyright © 王邸 2019
+        <!--
+          Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+        -->
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="/js/search_core.js"></script>
+<script src="/js/script.js"></script>
+
+</body>
+</html>
