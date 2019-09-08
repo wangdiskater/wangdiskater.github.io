@@ -14,7 +14,7 @@
 <meta property="og:url" content="http://yoursite.com/2019/08/25/乱码问题大总结/index.html">
 <meta property="og:site_name" content="路要坚持">
 <meta property="og:description" content="本篇文章目的是总结记录所有乱码问题，从前端到后端，会不断增加和更新。谁TM不是这样过来的。 乱码问题的本质原因编解码不一致导致的 默认编码格式在总结乱码问题之前，要说明的是默认的编码格式，这TM就很扯淡了，不同的系统的默认的编码格式。 系统的默认的编码格式简体中文window操作系统   GBKlinux默认的编码方式为    utf-8 服务器的默认编码格式tomcat的默认编码格式：tomca">
-<meta property="og:updated_time" content="2019-08-25T15:27:18.145Z">
+<meta property="og:updated_time" content="2019-09-07T01:54:22.155Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="乱码问题大总结">
 <meta name="twitter:description" content="本篇文章目的是总结记录所有乱码问题，从前端到后端，会不断增加和更新。谁TM不是这样过来的。 乱码问题的本质原因编解码不一致导致的 默认编码格式在总结乱码问题之前，要说明的是默认的编码格式，这TM就很扯淡了，不同的系统的默认的编码格式。 系统的默认的编码格式简体中文window操作系统   GBKlinux默认的编码方式为    utf-8 服务器的默认编码格式tomcat的默认编码格式：tomca">
@@ -157,6 +157,7 @@
 <h3 id="服务器的默认编码格式"><a href="#服务器的默认编码格式" class="headerlink" title="服务器的默认编码格式"></a>服务器的默认编码格式</h3><p>tomcat的默认编码格式：tomcat8以后默认编码格式是utf-8；7之前的都是iso8859-1</p>
 <h3 id="浏览器的默认编码格式"><a href="#浏览器的默认编码格式" class="headerlink" title="浏览器的默认编码格式"></a>浏览器的默认编码格式</h3><p>浏览器默认编码格式跟随系统，不同的系统默认的编码格式不同</p>
 <h3 id="一些方法会调用默认编码"><a href="#一些方法会调用默认编码" class="headerlink" title="一些方法会调用默认编码"></a>一些方法会调用默认编码</h3><p>Java 的String.getByte()///默认把字符串按默认编码格式转成byte类型</p>
+<h3 id="编辑器的编码问题"><a href="#编辑器的编码问题" class="headerlink" title="编辑器的编码问题"></a>编辑器的编码问题</h3><p>很多编辑器默认的编码方式是UTF-8，但是有些文本编辑器是以系统的编码方式作为自己的编码方式。window的自带的记事本就是这样。还有一种情况是编辑器会自动把编码格式改变。例如sublime。</p>
 <h2 id="显示乱码系列"><a href="#显示乱码系列" class="headerlink" title="显示乱码系列"></a>显示乱码系列</h2><p>接下来总结一些显示的乱码，不涉及请求。就是自生启动就发生乱码的情况。</p>
 <h3 id="浏览器显示乱码"><a href="#浏览器显示乱码" class="headerlink" title="浏览器显示乱码"></a>浏览器显示乱码</h3><p>问题：浏览器自己显示乱码。<br>原因：<br>1.和用的编辑器有关。<br>如果你的编辑器默认使用的是GBK编码格式就不出现乱码。有些编辑器的默认编码格式就是UTF-8格式。有些则跟随系统的编码格式。<br>2.和网页的编码格式有关<br>建议：让浏览器以UTF-8显示网页。<br>解答：在HTML页面上加上</p>
 <pre><code>&lt;meta charset=&quot;UTF-8&quot;&gt;

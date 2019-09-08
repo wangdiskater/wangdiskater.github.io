@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html class="full-height">
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="//cdn.bootcss.com/bulma/0.4.1/css/bulma.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+  
+  <title>Java总结（十一） | 路要坚持</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="前言从上周开始做项目，火烧火燎的做了项目。这是后端第一个项目，虽然没有用什么框架，手写的servlet，以及MVC的架构。总的来说这个是一个小项目。虽然 bug 不多，但是发现很多问题。这些问题，越早发现越好。而且这些问题我希望自己下次不再犯了。言归正传，这次总结，结合周总结进行总结。分为两个部分，一个部分是每天学习的知识，一个部分是项目开发的过程。 学习知识部分：星期一（0902）主要讲了两个知">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java总结（十一）">
+<meta property="og:url" content="http://yoursite.com/2019/09/08/Java总结（十一）/index.html">
+<meta property="og:site_name" content="路要坚持">
+<meta property="og:description" content="前言从上周开始做项目，火烧火燎的做了项目。这是后端第一个项目，虽然没有用什么框架，手写的servlet，以及MVC的架构。总的来说这个是一个小项目。虽然 bug 不多，但是发现很多问题。这些问题，越早发现越好。而且这些问题我希望自己下次不再犯了。言归正传，这次总结，结合周总结进行总结。分为两个部分，一个部分是每天学习的知识，一个部分是项目开发的过程。 学习知识部分：星期一（0902）主要讲了两个知">
+<meta property="og:updated_time" content="2019-09-08T10:15:45.511Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java总结（十一）">
+<meta name="twitter:description" content="前言从上周开始做项目，火烧火燎的做了项目。这是后端第一个项目，虽然没有用什么框架，手写的servlet，以及MVC的架构。总的来说这个是一个小项目。虽然 bug 不多，但是发现很多问题。这些问题，越早发现越好。而且这些问题我希望自己下次不再犯了。言归正传，这次总结，结合周总结进行总结。分为两个部分，一个部分是每天学习的知识，一个部分是项目开发的过程。 学习知识部分：星期一（0902）主要讲了两个知">
+  
+    <link rel="alternate" href="/" title="路要坚持" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/common.css">
+<link rel="stylesheet" href="/css/nav.css">
+<link rel="stylesheet" href="/css/layout.css">
+  
+
+</head>
+
+<body>
+  <header id="navbar" class="overflow-hidden">
+  <div class="container">
+    <nav class="nav">
+         <div class="nav-left">
+            <a href="/" class="nav-item" style="font-size: 20px;">
+              <span class="logo">王邸</span>'s Blog
+            </a>
+         </div>
+        <div class="nav-center is-hidden position-relative" id="search_container">
+            <div class="nav-item full-width full-height">
+                <i class="fa fa-search has-padding" aria-hidden="true"></i>
+                <input type="text" id="search_input" class="search-input full-height full-width" placeholder="Search post" autofocus>
+                <i id="close_search" class="fa fa-times" aria-hidden="true"></i>
+            </div>
+            <div id="search_result"></div>
+        </div>
+        <div class="nav-right nav-menu">
+            <a class="nav-item" id="search">
+                <i class="fa fa-search" aria-hidden="true"></i>
+            </a>
+            
+            <a class="nav-item" href="/">
+                Home
+            </a>
+            
+            <a class="nav-item" href="/works">
+                My Works
+            </a>
+            
+            <a class="nav-item" href="/about">
+                About
+            </a>
+            
+        </div>
+        <span class="nav-toggle" id="navMenuDropdown">
+            <span></span>
+            <span></span>
+            <span></span>
+        </span>
+        <div class="navbar-menu position-absolute full-width content-box is-hidden-desktop is-flex flex-column center" style="top: 100%;">
+            
+            <a class="nav-item flex-1" href="/">
+                Home
+            </a>
+            
+            <a class="nav-item flex-1" href="/works">
+                My Works
+            </a>
+            
+            <a class="nav-item flex-1" href="/about">
+                About
+            </a>
+            
+        </div>
+    </nav>
+  </div>
+</header>
+
+  <div id="main-wrap" class="position-relative" style="margin-top: 55px;">
+      <div class="main-inner-content">
+          <!--博文页面-->
+
+<style>
+    .header-box {
+        height: 370px;
+        filter: blur(10px);
+        background-size: cover;
+        background-color: lightsteelblue;
+    }
+
+    .post-box {
+        padding: 15px;
+        padding-top: 60px;
+        min-height: 80vh;
+        margin-top: -200px;
+        border-radius: 4px;
+        background-color: rgba(255,255,255,.8);
+    }
+
+    .post-avatar {
+        height: 30px;
+        width: 30px;
+        border-radius: 50%;
+    }
+
+    .flow-chart {
+        text-align: center;
+    }
+
+    img[alt="post-cover"] {
+        display: none;
+    }
+</style>
+<header>
+    <div id="header_box" class="header-box"></div>
+</header>
+<section>
+    <div class="container post-box">
+        <div class="content post-title is-flex center flex-column" style="margin-bottom: 70px; overflow: auto;">
+            <h1 class="has-text-centered" style="padding-bottom: 10px; border-bottom: 3px solid #fff">
+                <strong>Java总结（十一）</strong>
+            </h1>
+            
+            <div class="is-flex align-center">
+                <img class="post-avatar" src="https://q2.qlogo.cn/headimg_dl?bs=996057150&dst_uin=996057150&dst_uin=996057150&;dst_uin=996057150&spec=100&url_enc=0&referer=bu_interface&term_type=PC">
+                <span style="padding:0 10px;"> <span class="sub-title">By</span> 王邸</span>
+                <span class="post-date sub-title">at: 2019-09-08</span>
+            </div>
+            
+                <div>
+                    
+                </div>
+            
+        </div>
+        <div class="content" style="overflow: auto">
+            <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>从上周开始做项目，火烧火燎的做了项目。这是后端第一个项目，虽然没有用什么框架，手写的servlet，以及MVC的架构。总的来说这个是一个小项目。虽然 bug 不多，但是发现很多问题。这些问题，越早发现越好。而且这些问题我希望自己下次不再犯了。言归正传，这次总结，结合周总结进行总结。分为两个部分，一个部分是每天学习的知识，一个部分是项目开发的过程。</p>
+<h2 id="学习知识部分："><a href="#学习知识部分：" class="headerlink" title="学习知识部分："></a>学习知识部分：</h2><h3 id="星期一（0902）"><a href="#星期一（0902）" class="headerlink" title="星期一（0902）"></a>星期一（0902）</h3><p>主要讲了两个知识点：跨域，模糊查询</p>
+<h3 id="跨域"><a href="#跨域" class="headerlink" title="跨域"></a>跨域</h3><p>这是属于前端的技术范畴，之前我也知道，前端常用有AJAX 等等方法，主要是解决不同域名+端口号的请求。为了安全考虑默认是不允许这样做的。但是在前后端分离的环境下，这个问题是无法避免。因为前后端肯定不是同一台电脑开发的，而且还要链接公司的内网，少不了就是跨域的问题。老师给了一个比较暴力的方法来解决这个问题：写了一个全局的filter 默认接收所有来源的请求，这样做当然不好。所有请求都放行肯定要拉闸的。所以一般设置一个配置文件放可以访问的域名。</p>
+<pre><code>public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain) throws ServletException, IOException {
+    HttpServletRequest request = (HttpServletRequest) req;
+    HttpServletResponse response = (HttpServletResponse) resp;
+    request.setCharacterEncoding(&quot;utf-8&quot;);
+    response.setContentType(&quot;application/json;charset=UTF-8&quot;);
+    chain.doFilter(request, response);
+    //这三个头与跨域访问有关，如果不设置，则访问不成功
+    response.addHeader(&quot;Access-Control-Allow-Origin&quot;, &quot;*&quot;);
+    response.addHeader(&quot;Access-Control-Allow-Methods&quot;, &quot;POST,GET,OPTIONS,PUT,DELETE&quot;);
+    response.addHeader(&quot;Access-Control-Allow-Headers&quot;, &quot;x-requested-with,Authorization,Content-Type&quot;);
+}
+</code></pre><h3 id="模糊查询"><a href="#模糊查询" class="headerlink" title="模糊查询"></a>模糊查询</h3><p>模糊查询的核心就是sql语句的拼接，其实我发现，这种做法不仅仅是模糊查询，而是最大程度上的复用了一个DAO的方法，只需要一个要求，就是这个方法的返回值是相同的，那么我传给他一个sql语句，一个语句的参数，我就能拿到我要的返回值，DAO就单纯的负责去给我CURD，岂不是美滋滋。话不多说直接上代码：<br>核心代码就是这样：sql语句拼接 + 存放参数的list<br>service:查询一个有pid的商品，模糊查询like 里面有一个价格范围内的商品。</p>
+<pre><code>String sql = &quot;select * from product where 1 = 1 &quot;;
+List&lt;Object&gt; list = new ArrayList&lt;&gt;();
+if(!StringUtils.isEmpty(pid)){
+  sql = sql + &quot; and pid = ? &quot;;
+  list.add(Integer.parseInt(pid));
+}
+if(!StringUtils.isEmpty(pname)){
+  //最好不要直接拼参数，防止sql注入
+  sql += &quot; and pname like ?&quot;;
+  list.add(&quot;%&quot;+ pname+ &quot;%&quot;);
+}
+if(!StringUtils.isEmpty(minprice)){
+  sql += &quot; and estoreprice &gt; ? &quot;;
+  list.add(Double.parseDouble(minprice));
+}
+if(!StringUtils.isEmpty(maxprice)){
+  sql += &quot; and estoreprice &lt; ?&quot;;
+  list.add(Double.parseDouble(maxprice));
+}
+return productDao.getSearchProducts(sql,list);
+</code></pre><p>DAO:</p>
+<pre><code>public List&lt;Product&gt; getSearchProducts(String sql, List&lt;Object&gt; list) throws SQLException {
+  QueryRunner runner = new QueryRunner(DruidUtils.getDataSource());
+  List&lt;Product&gt; products = runner.query(sql, new BeanListHandler&lt;Product&gt;(Product.class), list.toArray());
+  return products;
+}
+</code></pre><p>这里还有一个点需要注意runner.query 和runner.update 是可以传可变参数的。而可变参数是什么？就是一个数组，所以才可以用list.toArray()去作为参数进行查找</p>
+<h3 id="星期二（0903）"><a href="#星期二（0903）" class="headerlink" title="星期二（0903）"></a>星期二（0903）</h3><h3 id="权限控制filter"><a href="#权限控制filter" class="headerlink" title="权限控制filter"></a>权限控制filter</h3><p>后台接口的权限控制：<br>目前系统仅仅是前台页面有登录校验，但是如果直接访问接口，那么可以直接访问到所有的数据。接口系统中增加权限控制，session，登录时添加session，注销时清除session。但是因为我们是跨域的项目。默认情况是不允许带cookie，cookie只允许在安全的情况下才给用户带上。跨域就是一种不安全的操作，但是现在必须这样做，就没得办法了。需要在前，后端设置一些参数，<br><strong>注意事项：</strong>这个设置很容易使得前端向后端请求失败，因为经常忘记改这改那，要么可能发不出POST和GET请求，要么可能找不到服务器，等等。这里filter的设置一定要懂得filter的运行逻辑，老师上课演示写的不是很标准，并不能直接拿来用。<strong>总之要调好这个filter需要花一些时间，如果原理懂了就会快一些</strong></p>
+<p><strong>前端配置</strong><br>在前端的axios的配置文件需要设置：<br>axios.js</p>
+<pre><code>axios.defaults.withCredentials = true;
+</code></pre><p><strong>后端配置</strong><br>filter的配置这里要注意几点：<br>1.options的请求必须要放行，只有options放行了浏览器才会发送对应的get，post的请求<br>2.发送请求的时候我们拦截，让这个请求不执行chain.doFilter(request, response);但是我们还是要让这个请求<strong>带上那些服务器的响应头</strong>的，这样浏览器才能正常的接收到服务器的响应，要不然浏览器接收时候会爆异常，并不能正确显示服务器传回给浏览器的信息。<br>3.filter的名字不能改，这个问题是我发现一个比较诡异的问题，可以修改，但是不要refactor，是我太菜了，还不知道原因。如果要改，就必须在注解的地方不要写filterName,就只写那个url-pattern,例如：</p>
+<pre><code>@WebFilter(filterName = &quot;GlobalFilter&quot;,urlPatterns = &quot;/api/admin/*&quot;)
+</code></pre><p>写成：</p>
+<pre><code>@WebFilter(urlPatterns = &quot;/api/admin/*&quot;)
+</code></pre><p>就好了<br>4.设置完filter 服务器必须要重启一下，如果有问题建议把out目录下的文件全删了，给idea重新再导出一遍。<br>上代码：<br>//filter 注解</p>
+<pre><code>@WebFilter(filterName = &quot;GlobalFilter&quot;,urlPatterns = &quot;/api/admin/*&quot;)
+</code></pre><p> 实现Filter接口</p>
+<pre><code>public class GlobalFilter implements Filter {
+    public void destroy() {
+    }
+
+    //解决cookie问题
+    public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain) throws ServletException, IOException {
+        //跨域解决
+        HttpServletRequest request = (HttpServletRequest) req;
+        HttpServletResponse response = (HttpServletResponse) resp;
+        request.setCharacterEncoding(&quot;utf-8&quot;);
+        response.setContentType(&quot;application/json;charset=UTF-8&quot;);
+
+        //给跨域带上cookie能使用会话
+        if(&quot;GET&quot;.equals(request.getMethod()) || &quot;POST&quot;.equals(request.getMethod()) ){
+            //获取一个会话，之后查看session scope里面是否有username
+            HttpSession session = request.getSession();
+            String requestURI = request.getRequestURI();
+            //这一步用来替换掉前面的/api/admin
+            requestURI = requestURI.replace(&quot;/api/admin/&quot;,&quot;&quot;);
+</code></pre><p>//把需要直接放过的请求放在list中</p>
+<pre><code>List&lt;String&gt; list = new ArrayList&lt;&gt;();
+list.add(&quot;adminLogin&quot;);
+list.add(&quot;goods/getType&quot;);
+list.add(&quot;goods/imgUpload&quot;);
+
+if(!list.contains(requestURI)){
+    String username = (String) session.getAttribute(&quot;username&quot;);
+    System.out.println(&quot;username &quot; + username);
+    if(username == null){
+        String message = &quot;你无权查看网页！&quot;;
+        HttpUtils.resultError(message,response);
+</code></pre><p>//注意！，就算是不放过，这里还是要设置响应头的，而不是直接return</p>
+<pre><code>                    setResponseHeader(response);
+                    return;
+                }
+            }
+        }
+        chain.doFilter(request, response);
+        setResponseHeader(response);
+    }
+
+    void setResponseHeader(HttpServletResponse response) throws IOException {
+        //这三个头与跨域访问有关，如果不设置，则访问不成功
+        //配置文件获取origin
+        InputStream resourceAsStream = GlobalFilter.class.getClassLoader().getResourceAsStream(&quot;main.properties&quot;);
+        Properties properties = new Properties();
+        properties.load(resourceAsStream);
+        String origin = properties.getProperty(&quot;origin&quot;);
+        response.addHeader(&quot;Access-Control-Allow-Origin&quot;, origin);
+        response.addHeader(&quot;Access-Control-Allow-Methods&quot;, &quot;POST,GET,OPTIONS,PUT,DELETE&quot;);
+        response.addHeader(&quot;Access-Control-Allow-Headers&quot;, &quot;x-requested-with,Authorization,Content-Type&quot;);
+        response.setHeader(&quot;Access-Control-Allow-Credentials&quot;, &quot;true&quot;);
+    }
+    public void init(FilterConfig config) throws ServletException {
+    }
+}
+</code></pre><p>我觉得这样写，才能使得不管过没过滤都能给浏览器一个交代，过滤的请求直接return就会拉闸，浏览器啥也没有</p>
+<h3 id="星期三（0904）"><a href="#星期三（0904）" class="headerlink" title="星期三（0904）"></a>星期三（0904）</h3><h3 id="正则表达式"><a href="#正则表达式" class="headerlink" title="正则表达式"></a>正则表达式</h3><p>主要是学会看懂就行（我会单独写一篇文章来总结）<br><a href="https://www.w3cschool.cn/zhengzebiaodashi/" target="_blank" rel="external">https://www.w3cschool.cn/zhengzebiaodashi/</a></p>
+<h3 id="星期四（0905）"><a href="#星期四（0905）" class="headerlink" title="星期四（0905）"></a>星期四（0905）</h3><h3 id="添加事务（-transation-）"><a href="#添加事务（-transation-）" class="headerlink" title="添加事务（ transation ）"></a>添加事务（ transation ）</h3><p>一个简单的例子：<br>在用户下订单的时候，如果出现网络不好情况，用户下单和商品的减少中间如果出现连接数据库异常，是不是就应该回滚到交易之前的状态。那么我们就应该引入事务的机制：要么都成功，要么都失败。一条船上的蚂蚱。<br><strong>引入事务的难点</strong>：要引入事务，我们使用连接池，就遇到一个难题，如何保证我们每次从连接池拿出来的connection都是同一个connection。<br>这里引入一个很重要的概念，听说之后spring也会用到：<strong> ThreadLocal </strong></p>
+<h3 id="ThreadLocal"><a href="#ThreadLocal" class="headerlink" title="ThreadLocal"></a>ThreadLocal</h3><p>简单理解就是一个thread里面的一个ThreadLocal对象，这个参数就只能在这个线程内使用，进入别的线程使用的就是别的线程的ThreadLocal对象。在主线程中使用，就只能在主线程中使用，当你创建一个新的线程就不能使用。我的理解就是一个类似<strong>线程域</strong>的东西。</p>
+<h3 id="使用ThreadLocal"><a href="#使用ThreadLocal" class="headerlink" title="使用ThreadLocal"></a>使用ThreadLocal</h3><p>就两个方法get()  set()方法。</p>
+<pre><code>public static void main(String[] args) {
+  ThreadLocal&lt;String&gt; threadlocal = new ThreadLocal&lt;&gt;();
+  threadLocal.set(&quot;zhangshan&quot;);
+  System.out.println(threadLocal.get()); //zhangshan
+}
+</code></pre><p>我们去看看源码：</p>
+<pre><code>/**
+ * Returns the value in the current thread&apos;s copy of this
+ * thread-local variable.  If the variable has no value for the
+ * current thread, it is first initialized to the value returned
+ * by an invocation of the {@link #initialValue} method.
+ *
+ * 返回一个目前线程的一个变量的值，如果没有值就通过initialValue方法初始化一个值
+ * @return the current thread&apos;s value of this thread-local
+ */
+public T get() {
+    Thread t = Thread.currentThread();
+    ThreadLocalMap map = getMap(t);
+    if (map != null) {
+        ThreadLocalMap.Entry e = map.getEntry(this);
+        if (e != null) {
+            @SuppressWarnings(&quot;unchecked&quot;)
+            T result = (T)e.value;
+            return result;
+        }
+    }
+    return setInitialValue();
+}
+</code></pre><p>首先获取一个ThreadLocalMap，去里面找当前线程的threadLocal对象，通过this 这个key 去找value值。<br>再看看set方法：</p>
+<pre><code>public void set(T value) {
+  Thread t = Thread.currentThread();
+  ThreadLocalMap map = getMap(t);
+  if (map != null)
+      map.set(this, value);
+  else
+      createMap(t, value);
+}
+ThreadLocalMap getMap(Thread t) {
+    return t.threadLocals;
+}
+</code></pre><p>和get方法类似，我们可以先获取到一个threadLocalMap对象，然后设置key,value。 this就是key，value就是我们要存的值。<br>这里都使用了Thread的一个静态方法：</p>
+<pre><code>Thread t = Thread.currentThread();
+</code></pre><p>我们并不陌生，之前要找当前线程的时候，经常用这个方法去找当前的线程。每一个线程有自己的threadLocalMap ,里面放了你这个线程你创建的threadLocal 对象，里面保存了值。当然一个线程可以创建多个threadLocal。</p>
+<h3 id="加入到我们的项目"><a href="#加入到我们的项目" class="headerlink" title="加入到我们的项目"></a>加入到我们的项目</h3><p>在druidUtil中加入ThreadLocal存放connection</p>
+<pre><code>public class DruidUtils {
+    private static DataSource dataSource;
+    private static ThreadLocal&lt;Connection&gt; threadLocal = new ThreadLocal&lt;&gt;();
+    static {
+        //dataSource = new DruidDataSource();
+        InputStream resourceAsStream = DruidUtils.class.getClassLoader().getResourceAsStream(&quot;druid.properties&quot;);
+        Properties properties = new Properties();
+        try {
+            properties.load(resourceAsStream);
+            dataSource = new DruidDataSourceFactory().createDataSource(properties);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    public static Connection getConnection() throws SQLException {
+        return dataSource.getConnection();
+    }
+</code></pre><p>当我们需要开启事务使用同一个connection的时候flag给true：</p>
+<pre><code>/**
+ * flag表示是否开启事务，true表示开启事务
+ * @param flag
+ * @return
+ */
+public static Connection getConnection(boolean flag) throws SQLException {
+    if(flag){
+        Connection connection = threadLocal.get();
+        //如果是null，表示第一次，那么要放入ThreadLocal中
+        if(connection == null){
+            connection = getConnection();
+            threadLocal.set(connection);
+        }
+        return connection;
+    }
+    return getConnection();
+}
+
+public static DataSource getDataSource(){
+    return dataSource;
+}
+</code></pre><p>我们发现这里多了这个方法，这个方法也是我们加上的，还记得如果我们自己手动写的connection在调用runner.query 和 runner.update的时候不会帮我们关connection吗？所以我们需要自己关connection.<strong>但是</strong>这里又有新的问题：我们关掉之前用的connection,第二次用的时候怎么办？第二次再取出来已经关闭的connectin，根本用不了。所以我们要采取措施：<br><strong>每次用完把threadLocal.set(null)</strong>这样就把threadLocal里的connection置为null,下次事务使用connection时又和第一次一样。这就好像前端canvas每次使用完画布需要把画布清空一样。不影响下次的使用。</p>
+<pre><code>    public static void setThreadLocalIsNull(){
+        threadLocal.set(null);
+    }
+}
+</code></pre><h3 id="一个关于事务的坑"><a href="#一个关于事务的坑" class="headerlink" title="一个关于事务的坑"></a>一个关于事务的坑</h3><p>这里有一个事务的坑，一开始我以为是我逻辑错了，打断点之后发现取数据的时候出现了问题。这个问题之前没有遇过，还是一个很幼稚的问题，还是我太年轻了。不够努力学习：这个坑就是取数据的问题。因为我需要获得刚刚插入数据的id值，在存另一张表时候，需要把这个值也放在另一张表中。后来我发现<strong>另一张表存的并不是这个刚插入数据的id。而是上一条的id</strong>。之后debug发现，开启事务之后，数据并不会马上插入到数据库中，需要等事务提交才会放到数据库中。所以取出来的数据就有问题。那么就想解决办法：<br><strong>方法一</strong>：在取出来的id+1。这个方法看起来很方便，但是这里有一个问题，如果前一条数据被删了，你获取的id就是前前的id 然后再+1，那么这个肯定是错的，因为那个id表示的是你之前删除的前一条数据的id。另一张表存的是删除数据的id,明显也不行。<br><strong>方法二</strong>：把插入第一张表的操作放在事务开始之前，然后到最后，如果需要事务的回滚，之后再把这条数据从数据库中删掉。这个方法我最后采用的方法，感觉还是有点蠢，但是不会依赖其他的数据。</p>
+<h3 id="星期五（0906）"><a href="#星期五（0906）" class="headerlink" title="星期五（0906）"></a>星期五（0906）</h3><p>拉闸</p>
+<h3 id="星期六（0907）"><a href="#星期六（0907）" class="headerlink" title="星期六（0907）"></a>星期六（0907）</h3><p>今天讲的就是一些MAVEN的东西<br>maven的核心就是：</p>
+<p>1、项目构建<br>2、依赖管理(重点)</p>
+<p>最核心的思想其实就是<strong>解耦</strong>其他都没什么好说的，学到再说。今天讲的知识，没有代码很难讲的生动</p>
+<h2 id="实战部分："><a href="#实战部分：" class="headerlink" title="实战部分："></a>实战部分：</h2><h3 id="星期日（0901）"><a href="#星期日（0901）" class="headerlink" title="星期日（0901）"></a>星期日（0901）</h3><p>内容：<br>完成商品管理，留言功能（完成）</p>
+<p>总结：<br>1.请求处理乱码问题<br>那个处理请求的工具有问题设置：vmoption:-Dfile.encoding=UTF-8</p>
+<p>2.servlet报错问题：<br> org.apache.catalina.core.ContainerBase.addChildInternal ContainerBase.addChild: start:<br> org.apache.catalina.LifecycleException: Failed to start component [StandardEngine[Catalina].StandardHost[localhost].StandardContext[]]<br> 设置了两个相同的url-pattern 所以会报错</p>
+<p>3.mysql 注意关键字一定要加: `` ，规范是每个名字都要加``</p>
+<pre><code>String sql = &quot;update addGoods set name = ?, typeId = ?, img = ?, `desc` = ? where id = ?&quot;;
+</code></pre><p>4 ResultSetHandler的总结</p>
+<p><a href="https://blog.csdn.net/qq_37796017/article/details/78032605" target="_blank" rel="external">出处</a><br><strong>1.BeanListHandler:返回值  List<t></t></strong><br>       (适合取多条数据)把查询到的每一条结果封装成实体类，再最终把每一个实体类放到list集合中<br><strong>2.BeanHanlder:返回值  T</strong><br>    (适合取单条数据) 把查询到的一条结果封装成实体类。</p>
+<p><strong>3.ArrayHandler: 返回值：  Object[]</strong><br>   (适合取单条数据) 把查询的一条结果值依次封装到一个对象数组中。object[]<br><strong>4.ArrayListHandler:返回值：  List<object[]></object[]></strong><br>(适合取多条数据) 把查询的一条结果值依次封装到一个对象数组中。再最终把对象数组依次放入到list集合中。</p>
+<p><strong>5.MapHandler:   返回值：  Map<string,object></string,object></strong><br>     (适合取单条数据)把查询到的结果以键值对的形式进行封装，封装的时候列名是map的键，值就是map的值<br><strong>6.MapListHandler: 返回值：  List<map<string,object>&gt;</map<string,object></strong><br>   (适合取多条数据)把查询到的结果以键值对的形式进行封装，封装的时候列名是map的键，值就是map的值,<br>最终把每一条数据封装到list中</p>
+<p><strong>7.ColumnListHandler: 返回值：List<object></object></strong><br>取出某一列的数据存储到list集合<br>三种取法：根据结果集的形式来决定sql语句如何写：<br>第一种：推荐</p>
+<pre><code>ColumnListHandler()   : sql：select 具体的列名 from 表名
+</code></pre><p>第二种：</p>
+<pre><code>ColumnListHandler(列的位置int)   sql：   select * from 表名
+</code></pre><p>第三种：</p>
+<pre><code>ColumnListHandler(列的名称)       sql：   select * from 表名
+</code></pre><p><strong>8.ScalarHandler:适合于取单行单列的数据</strong></p>
+<p><strong>9.KeyedHandler:   返回值是Map<object,map<string,object></object,map<string,object></strong></p>
+<pre><code>把每一条查到的结果封装，把这条数据对应的列名当作map的键存入，把这条数据对应的列的值当作map的value存储，在把每一条的数据再次存入到map中，把该条数据的唯一表示id当作键存储，这条数据的map当作外层map的value存入
+</code></pre><p>必须掌握： BeanHandler  ,BeanListHandler ,ColumnListHandler,  ScalarHandler</p>
+<h3 id="星期一（0902）-1"><a href="#星期一（0902）-1" class="headerlink" title="星期一（0902）"></a>星期一（0902）</h3><p><strong>内容：</strong><br>1.把img的域名写成配置文件（完成）<br>2.添加商品，保存最低价，和总的库存（完成）<br>3.修改商品显示之前的图片<br>4.完成订单管理（完成）<br>5.修改商品添加规格有bug</p>
+<p><strong>问题</strong><br>1.double转int出错<br>java.lang.ClassCastException: java.lang.Double cannot be cast to java.lang.Integer<br>从map拿到前端传过来的json,用gson接收转成map，id是double类型，而且这个double不能转型还会报错。<br>原来还想   Value.of(id.toString);后来发现还是不行，<br>不管强转什么类型都会报错。</p>
+<p>原因：通过打断点发现：Gson 转换过来的map,他默认会把类型转成最大范围的类型,数字就是double,map获取double 然后先强转double 再强转成int例如：<br>int state = (int)(double) map.get(“state”); //  订单状态全部订单-1</p>
+<h3 id="星期二（0903）-1"><a href="#星期二（0903）-1" class="headerlink" title="星期二（0903）"></a>星期二（0903）</h3><p>昨天问题：<br>3.修改商品显示之前的图片 （完成）<br>5.修改商品添加规格有bug (完成)</p>
+<p>今天任务：<br>1.代码大改（把数据处理从dao层抽离到sevice层）<br>2.解决前后端跨域带cookie问题<br>但是出现新的问题，图片上传也被拦截，尝试直接把图片放行，最后解决由老师修改代码使用axios上传图片<br>3.评估前台功能需要的接口</p>
+<pre><code>1.用户模块
+2.购物车模块
+3.订单模块
+4.商品详情模块
+5.filter
+</code></pre><p>总结：<br>1.报错<br> Cannot create com.cskaoyan.model.SpecList: com.cskaoyan.model.SpecList Query: select * from specList where gid = ?<br>这是由于我之前突然写了一个带参数的构造函数，但是没有设置默认构造函数造成的。所以出现这个问题由于没有给bean设置默认构造函数的问题。记得自己必须提供一个不带参数的构造方法</p>
+<p>2.跨域可以让请求带cookie<br>1.在vue的配置文件中加：<br>axios.defaults.withCredentials = true;</p>
+<p>2.在自己的filter上加：<br>//配置文件中取出能通过的IP<br>InputStream resourceAsStream = GlobalFilter.class.getClassLoader().getResourceAsStream(“main.properties”);<br>Properties properties = new Properties();<br>properties.load(resourceAsStream);<br>String origin = properties.getProperty(“origin”);</p>
+<p>response.addHeader(“Access-Control-Allow-Origin”, origin);<br>response.addHeader(“Access-Control-Allow-Methods”, “POST,GET,OPTIONS,PUT,DELETE”);<br>response.addHeader(“Access-Control-Allow-Headers”, “x-requested-with,Authorization,Content-Type”);<br>response.setHeader(“Access-Control-Allow-Credentials”, “true”);<br><strong>注意事项</strong>当你发现有时候只有OPTION没有GET POST 大概率是这里的问题，看看是没有加axios还是后端的问题</p>
+<p>3.需要查哪个表的数据，就调用对应的DAO，而不要使用别的service去走自己的DAO取数据。而用对应的DAO去找数据。这样在不同的service还能复用我们的dao的方法。这里我建议每个表都写两个方法:</p>
+<pre><code>一个是:getXXXById(int id) 通过id获取你的数据
+一个是:getXXX(String sql, list&lt;Object&gt; parameter)通过你自己写的sql去获取数据
+</code></pre><p>当然不是最好的，只是我觉得这复用比较多。</p>
+<h3 id="星期三（0904）-1"><a href="#星期三（0904）-1" class="headerlink" title="星期三（0904）"></a>星期三（0904）</h3><p>1.servlet的改名问题，<br>会出现前端找不到servlet的情况，把servlet的name去掉就好了。应该是没有更新新的name问题，写成这样就好了</p>
+<pre><code>@WebServlet(urlPatterns = &quot;/api/user/user/*&quot;)
+</code></pre><p>2.有问题 goodsDetailId 是 specList 的Id 还有东西要大改（MMP）</p>
+<p>3.应该把传回给前端的 bean 和 数据库接收的 bean 分开！！！快做完的时候，我自己总结发现的。这样后端自己get给前端拼，美滋滋。</p>
+<p>4.java.sql.SQLException: Cannot set goods: incompatible types. Query: select * from userOrder where 1 = 1  AND userId = ?  Parameters: [1]<br>注意自己new beanListHandler接收的类是否都全部正确 可能一个是string 一个是object</p>
+<h3 id="星期四（0905）-1"><a href="#星期四（0905）-1" class="headerlink" title="星期四（0905）"></a>星期四（0905）</h3><p>1.问题<br>对于filter直接return的问题，不能是直接判断完filter不给进就return 这样后面设置跨域的也没有执行，那么response信息就没有拿到，直接就vue catch报错了，所以不要轻易在跨域设置之前return<br>2.IDEA如何查看哪里调用这个函数：鼠标右键 Find Usage 。或者使用快捷键 Alt + f7;<br>3.VUE 自适应显示img的问题，vue显示如何使得图片不管是长比宽大还是宽比长大都能自定义显示。</p>
+<h3 id="星期五（0906）-1"><a href="#星期五（0906）-1" class="headerlink" title="星期五（0906）"></a>星期五（0906）</h3><p>1.在数据库选择字段之前，要确定好表之间的关系</p>
+<p>2.display实现过渡效果<br><a href="https://blog.csdn.net/longyin0528/article/details/81212137" target="_blank" rel="external">https://blog.csdn.net/longyin0528/article/details/81212137</a></p>
+<p>3.首页轮播图默认做法是直接修改透明度的方法，但是我要加上跳转，一开始发现不管换那张照片显示都是最后一张照片的链接。这很难受，我就吧opacity改成了display的属性来控制，后来我发现，display的效果又不能有过渡效果了，正在焦头烂额之际我想到了一个方法，使用z-index 和 opacity连用 效果极佳！</p>
+<pre><code>&lt;div class=&quot;swiperItem&quot; v-for=&quot;(item,index) in len&quot; :style=&quot;{opacity:curIndex===index?1:0, zIndex:curIndex===index?1:0}&quot;&gt;
+  &lt;slot :name=&quot;&apos;item&apos;+(index+1)&quot;&gt;&lt;/slot&gt;
+&lt;/div&gt;
+</code></pre><p>但是这时候要注意，其他的部分按钮可能会被盖到图片下面，所以要设置其他按钮的z-index要比图片高，而且注意有些属性会使得z-index失效。切记。</p>
+<p>4.添加功能<br>商品管理在添加商品时，默认选择点击对应类目的商品<br>在跳转的URL后面添加参数：</p>
+<pre><code>&lt;div class=&quot;addGoods&quot; @click=&quot;navTo(&apos;/backstage/goods/new?typeId=&apos; + curTypeId)&quot;&gt;
+</code></pre><p>在页面使用路由获取<br>在跳转页面mounted中设置初始化一下</p>
+<pre><code>mounted(){
+   this.getTypes();
+   this.initTypeId = this.$route.query.typeId;
+   //初始化的type给到当前type
+   this.temTypeId = this.initTypeId;
+</code></pre><p>this.$route还是有挺多参数的，要设置URL可以试试</p>
+<h3 id="星期六（0907）-1"><a href="#星期六（0907）-1" class="headerlink" title="星期六（0907）"></a>星期六（0907）</h3><p>1 优化图片显示<br>图片使用了绝对定位，发现container并不能装得下图片。所以要给container的div一个position:relative;这样img就相对于你设置的container布局了。默认会找到第一个position不是static的父类去布局。</p>
+<p>2.关于事务的问题，这里有一个问题，我的业务逻辑需要获取最近的数据的时候，我发现我总是获取不到。因为我开了事务，所以实际上数据还没有存到数据中，拿到的是上一次的存放的最后一条数据。所以这里就使得数据不能同步而报错。也不能把拿到的id默认加一就是插入的数据。因为中间如果有删除数据，也会发现拿错数据的情况。我的解决办法就是把要插入的数据放事务外面。如果出现回滚，在回滚之前，把插入的数据删了。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><h3 id="总结的心得"><a href="#总结的心得" class="headerlink" title="总结的心得"></a>总结的心得</h3><p>总之，这个礼拜一直都在做项目，而且睡的时间也少。主要运动少了，缺少了一点该有的生气。而且做得也焦虑，不断的发现问题，不断的大改。到达一定阶段就发现再改也来不及了。但是这算吸取了经验。<br>1）<strong>准备</strong>。做项目之前一定要想清楚应该怎么写，而不是上去就开始干controller,service,dom。没想清楚怎么写，到最后花更多的时间去重构，例如：之前说的不要把所有要处理的逻辑都写在dao层，这样dao层的东西还不能复用。又例如应该把要传给前端的bean和从数据库取出数据的bean分开，这样更高效的去传输数据，不管字段是什么，就算前后端不同，也能够传递。还有就是数据库的字段问题，为了方便设计了多张表，但是多张表出现了重复的字段，这就不够优雅了，不符合数据库的三大范式。因为项目经验不足，而且时间紧迫，所以出现了很多感觉不该出现的问题，下次写项目之前一定要好好想清楚。</p>
+<p>2）<strong>计划</strong>做项目一定要清楚自己的任务，每天一定要有计划，而不是慢慢悠悠的写。这样到最后肯定拉闸，时间不够用。虽然我在规定时间完成了但事实上我感觉虽然没有什么东西，却已经花了太多的时间在写逻辑上。</p>
+<p>3）<strong>思考</strong>做项目时要多思考，多发现问题，我发现很容易就陷入一个误区，认为所有的业务代码写法都一样。也许时间不够，忽略了每个接口之间的不同，虽然说功能的实现可能没有问题。但是代码显得更加臃肿，我们前端讲究的就是代码的优雅，当然现在做了后端，代码风格也需要更加优雅才行。</p>
+<h3 id="总结的技术"><a href="#总结的技术" class="headerlink" title="总结的技术"></a>总结的技术</h3><p>技术来说，这个项目太太太简单了。并没有什么技术上的难点，后端就是CRUD，前端就是展示一些数据，一些交互。算是初步了解了一个JavaEE的项目应该要实现哪些功能，以及如何实现的问题。接下来我将分几个部分进行总结：</p>
+<h3 id="前端"><a href="#前端" class="headerlink" title="前端"></a>前端</h3><p>前端使用的是VUE，虽然马上进入4.0，但是两年前从2.0刚出来开始我就开始玩了，那时候VUE还没有那么火，也只是自学的阶段公司当时使用的还是微信的框架，还有jquery之类的东西。自学就发现VUE还是非常非常好用的。两年过去了虽然基础语法没怎么改变，但是现在的VUE，感觉更加方便，更加快速的去构建项目（虽然以前也挺快的）。没得说，VUE配合element-ui可以更快速的构建一个我们需要的项目。而axios能够更方便的负责前端像后端传输数据，而bus和vuex也能够让前端的数据的共享，上升到一个新的层次。当然这些都是之前学过的，通过项目重新在复习一遍，美滋滋。</p>
+<h3 id="CRUD"><a href="#CRUD" class="headerlink" title="CRUD"></a>CRUD</h3><h3 id="CREATE"><a href="#CREATE" class="headerlink" title="CREATE"></a>CREATE</h3><p>创建当然是最关键的部分，一个数据库表的设计就决定了存取是否高效。当然最基础的就是要满足三大范式。我TM就知道你三大范式已经忘了，还好我还记得放在了哪里：</p>
+<h3 id="数据库三大范式"><a href="#数据库三大范式" class="headerlink" title="数据库三大范式"></a>数据库三大范式</h3><h3 id="第一范式"><a href="#第一范式" class="headerlink" title="第一范式"></a>第一范式</h3><p>每列应当保证原子性。即不可以再进行分割。<br>比如收货地址这列，就不是原子性的，如果需要经常统计到省份或者城市信息，则该列的设计就不符合第一范式的要求，仍然可以进一步拆分为省份，城市。。。。</p>
+<h3 id="第二范式"><a href="#第二范式" class="headerlink" title="第二范式"></a>第二范式</h3><p>表：学号、课程号、姓名、学分;<br>学分依赖课程，姓名依赖学号</p>
+<p>这个时候，如果删除一条学分数据，会导致相应的课程数据也会被删除。同时这张表还存在数据冗余的情况。<br>如果数据存在部分依赖的情形，需要将字段进行拆分，拆成多个表。这样删除一个数据时，就不会把其他的需要的数据项删除，<br><strong>注意</strong> 这里说的删数据是删一条数据，而不是删除一列，列是一个字段，字段一般不能删除。最好把依赖的字段分成两个表<br>需要重新拆分表：<br>学生表：学号、姓名<br>课程表：课程号<br>选课表：课程号、学号、学分</p>
+<h3 id="第三范式"><a href="#第三范式" class="headerlink" title="第三范式"></a>第三范式</h3><p>不要存在冗余数据，虽然说可能有潜在的关系，但是最好使用外链关系起来，而不是放在一起<br>只有一张表: 学号, 姓名, 年龄, 学院名称, 学院电话，虽然说学院电话和学生有那么一点关系，但是放一起就冗余了。</p>
+<p>学生表：学号、姓名、年龄、学院号<br>学院表：学院名称、学院电话、学院号<br>每一张表在设计的时候，都应该遵循着，只关注最小的一块功能，如统计学生信息，就仅停留在学生信息中，不要过多去延伸。分工而治的思想</p>
+<p>在来说回创建，如果满足了这三个范式我觉得应该没什么问题了</p>
+<h3 id="READ"><a href="#READ" class="headerlink" title="READ"></a>READ</h3><p>读数据就按上面 resultSetHandler 的那几个类去取数据就好了，拿出来然后再做处理。</p>
+<h3 id="DELETE"><a href="#DELETE" class="headerlink" title="DELETE"></a>DELETE</h3><p>如果要问CRUD最难的是哪部分，现阶段我觉得最难的还是删除，为什么？因为我把他放在了Update的前面，自然说明很重要。因为表和表之前不可能是独立的，表和表之前肯定有一定的关系关联起来的，要么是外键，要么是有相同的字段。举一个例子，就拿我们的项目说，如果我要删除一个物品，那么我不仅需要删除这个商品，而且还要删除这个商品的规格，这个商品的订单，商品的评分，商品下的问答。那么删除表就显得尤为的困难了，因为删除表，必须要对整个数据库有完整的了解，知道那些该删除，哪些不该删除。</p>
+<h3 id="UPDATE"><a href="#UPDATE" class="headerlink" title="UPDATE"></a>UPDATE</h3><p>同样的更新数据库，就是对数据库里的一条数据进行修改，那么是否会影响其他的数据？这是肯定的，但是相比较删除来说，这个更容易去实现一些，因为不一定所有的有关系的数据都要修改。就举个例子，就好像一个图，就以无相图为例，我要删除一个结点，那么我必须要把所有和这个结点联通的结点都要删除。这样才不会有脏数据产生。但是要update一个数据，不一定所有联通的结点都要update。</p>
+<h3 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h3><p>这个项目我打算是学完spring框架之后，再来重构这个项目，所以我打算再把前端完善一下，实现一些功能，之后配合后端使用spring。代码一定要多写，写多了就会了。</p>
+
+        </div>
+        <div class="post-reply">
+            
+                <!-- 来必力City版安装代码 -->
+                <div id="lv-container" data-id="city" data-uid="MTAyMC8yOTE4Ni81NzUz">
+                    <script type="text/javascript">
+                        (function(d, s) {
+                            var j, e = d.getElementsByTagName(s)[0];
+
+                            if (typeof LivereTower === 'function') { return; }
+
+                            j = d.createElement(s);
+                            j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+                            j.async = true;
+
+                            e.parentNode.insertBefore(j, e);
+                        })(document, 'script');
+                    </script>
+                    <noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+                </div>
+                <!-- City版安装代码已完成 -->
+            
+            
+        </div>
+    </div>
+</section>
+<script>
+    // 获取第一张图, 用以当封面背景图
+    var img = document.querySelectorAll('img')[1]
+
+    if (img) {
+        var header_box = document.querySelector('#header_box')
+        header_box.style.backgroundImage = 'url('+ img.src +')'
+    }
+</script>
+      </div>
+  </div>
+  <style>
+  #footer {
+    min-height: 10vh;
+    background: black;
+    color: #fff;
+  }
+
+  #footer a {
+    color: #e1e1e1;
+  }
+</style>
+<footer id="footer" class="has-text-centered is-flex center">
+  <div class="container has-padding">
+    <div>
+      <div>
+        <!--请您保留作者署名, 主题制作来之不易-->
+        主题来自 <a href="http://haojen.github.io/">Haojen Ma</a>
+        <br>
+        Copyright © 王邸 2019
+        <!--
+          Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+        -->
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="/js/search_core.js"></script>
+<script src="/js/script.js"></script>
+
+</body>
+</html>
