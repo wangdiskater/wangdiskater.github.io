@@ -14,7 +14,7 @@
 <meta property="og:url" content="http://yoursite.com/2019/09/08/Java总结（十一）/index.html">
 <meta property="og:site_name" content="路要坚持">
 <meta property="og:description" content="前言从上周开始做项目，火烧火燎的做了项目。这是后端第一个项目，虽然没有用什么框架，手写的servlet，以及MVC的架构。总的来说这个是一个小项目。虽然 bug 不多，但是发现很多问题。这些问题，越早发现越好。而且这些问题我希望自己下次不再犯了。言归正传，这次总结，结合周总结进行总结。分为两个部分，一个部分是每天学习的知识，一个部分是项目开发的过程。 学习知识部分：星期一（0902）主要讲了两个知">
-<meta property="og:updated_time" content="2019-09-08T15:33:15.773Z">
+<meta property="og:updated_time" content="2019-09-09T06:11:06.046Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java总结（十一）">
 <meta name="twitter:description" content="前言从上周开始做项目，火烧火燎的做了项目。这是后端第一个项目，虽然没有用什么框架，手写的servlet，以及MVC的架构。总的来说这个是一个小项目。虽然 bug 不多，但是发现很多问题。这些问题，越早发现越好。而且这些问题我希望自己下次不再犯了。言归正传，这次总结，结合周总结进行总结。分为两个部分，一个部分是每天学习的知识，一个部分是项目开发的过程。 学习知识部分：星期一（0902）主要讲了两个知">
@@ -409,8 +409,17 @@ public void KeyedHandler() throws SQLException {
 5.filter
 </code></pre><p>总结：<br>1.报错<br> Cannot create com.cskaoyan.model.SpecList: com.cskaoyan.model.SpecList Query: select * from specList where gid = ?<br>这是由于我之前突然写了一个带参数的构造函数，但是没有设置默认构造函数造成的。所以出现这个问题由于没有给bean设置默认构造函数的问题。记得自己必须提供一个不带参数的构造方法</p>
 <p>2.跨域可以让请求带cookie<br>1.在vue的配置文件中加：<br>axios.defaults.withCredentials = true;</p>
-<p>2.在自己的filter上加：<br>//配置文件中取出能通过的IP<br>InputStream resourceAsStream = GlobalFilter.class.getClassLoader().getResourceAsStream(“main.properties”);<br>Properties properties = new Properties();<br>properties.load(resourceAsStream);<br>String origin = properties.getProperty(“origin”);</p>
-<p>response.addHeader(“Access-Control-Allow-Origin”, origin);<br>response.addHeader(“Access-Control-Allow-Methods”, “POST,GET,OPTIONS,PUT,DELETE”);<br>response.addHeader(“Access-Control-Allow-Headers”, “x-requested-with,Authorization,Content-Type”);<br>response.setHeader(“Access-Control-Allow-Credentials”, “true”);<br><strong>注意事项</strong>当你发现有时候只有OPTION没有GET POST 大概率是这里的问题，看看是没有加axios还是后端的问题</p>
+<p>2.在自己的filter上加：<br>//配置文件中取出能通过的IP</p>
+<pre><code>InputStream resourceAsStream = GlobalFilter.class.getClassLoader().getResourceAsStream(&quot;main.properties&quot;);
+Properties properties = new Properties();
+properties.load(resourceAsStream);
+String origin = properties.getProperty(&quot;origin&quot;);
+
+response.addHeader(&quot;Access-Control-Allow-Origin&quot;, origin);
+response.addHeader(&quot;Access-Control-Allow-Methods&quot;, &quot;POST,GET,OPTIONS,PUT,DELETE&quot;);
+response.addHeader(&quot;Access-Control-Allow-Headers&quot;, &quot;x-requested-with,Authorization,Content-Type&quot;);
+response.setHeader(&quot;Access-Control-Allow-Credentials&quot;, &quot;true&quot;);
+</code></pre><p><strong>注意事项</strong>当你发现有时候只有OPTION没有GET POST 大概率是这里的问题，看看是没有加axios还是后端的问题</p>
 <p>3.需要查哪个表的数据，就调用对应的DAO，而不要使用别的service去走自己的DAO取数据。而用对应的DAO去找数据。这样在不同的service还能复用我们的dao的方法。这里我建议每个表都写两个方法:</p>
 <pre><code>一个是:getXXXById(int id) 通过id获取你的数据
 一个是:getXXX(String sql, list&lt;Object&gt; parameter)通过你自己写的sql去获取数据
