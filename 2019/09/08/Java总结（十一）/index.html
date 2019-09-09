@@ -14,7 +14,7 @@
 <meta property="og:url" content="http://yoursite.com/2019/09/08/Java总结（十一）/index.html">
 <meta property="og:site_name" content="路要坚持">
 <meta property="og:description" content="前言从上周开始做项目，火烧火燎的做了项目。这是后端第一个项目，虽然没有用什么框架，手写的servlet，以及MVC的架构。总的来说这个是一个小项目。虽然 bug 不多，但是发现很多问题。这些问题，越早发现越好。而且这些问题我希望自己下次不再犯了。言归正传，这次总结，结合周总结进行总结。分为两个部分，一个部分是每天学习的知识，一个部分是项目开发的过程。 学习知识部分：星期一（0902）主要讲了两个知">
-<meta property="og:updated_time" content="2019-09-08T10:15:45.511Z">
+<meta property="og:updated_time" content="2019-09-08T15:33:15.773Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java总结（十一）">
 <meta name="twitter:description" content="前言从上周开始做项目，火烧火燎的做了项目。这是后端第一个项目，虽然没有用什么框架，手写的servlet，以及MVC的架构。总的来说这个是一个小项目。虽然 bug 不多，但是发现很多问题。这些问题，越早发现越好。而且这些问题我希望自己下次不再犯了。言归正传，这次总结，结合周总结进行总结。分为两个部分，一个部分是每天学习的知识，一个部分是项目开发的过程。 学习知识部分：星期一（0902）主要讲了两个知">
@@ -195,7 +195,7 @@ return productDao.getSearchProducts(sql,list);
 <h3 id="星期二（0903）"><a href="#星期二（0903）" class="headerlink" title="星期二（0903）"></a>星期二（0903）</h3><h3 id="权限控制filter"><a href="#权限控制filter" class="headerlink" title="权限控制filter"></a>权限控制filter</h3><p>后台接口的权限控制：<br>目前系统仅仅是前台页面有登录校验，但是如果直接访问接口，那么可以直接访问到所有的数据。接口系统中增加权限控制，session，登录时添加session，注销时清除session。但是因为我们是跨域的项目。默认情况是不允许带cookie，cookie只允许在安全的情况下才给用户带上。跨域就是一种不安全的操作，但是现在必须这样做，就没得办法了。需要在前，后端设置一些参数，<br><strong>注意事项：</strong>这个设置很容易使得前端向后端请求失败，因为经常忘记改这改那，要么可能发不出POST和GET请求，要么可能找不到服务器，等等。这里filter的设置一定要懂得filter的运行逻辑，老师上课演示写的不是很标准，并不能直接拿来用。<strong>总之要调好这个filter需要花一些时间，如果原理懂了就会快一些</strong></p>
 <p><strong>前端配置</strong><br>在前端的axios的配置文件需要设置：<br>axios.js</p>
 <pre><code>axios.defaults.withCredentials = true;
-</code></pre><p><strong>后端配置</strong><br>filter的配置这里要注意几点：<br>1.options的请求必须要放行，只有options放行了浏览器才会发送对应的get，post的请求<br>2.发送请求的时候我们拦截，让这个请求不执行chain.doFilter(request, response);但是我们还是要让这个请求<strong>带上那些服务器的响应头</strong>的，这样浏览器才能正常的接收到服务器的响应，要不然浏览器接收时候会爆异常，并不能正确显示服务器传回给浏览器的信息。<br>3.filter的名字不能改，这个问题是我发现一个比较诡异的问题，可以修改，但是不要refactor，是我太菜了，还不知道原因。如果要改，就必须在注解的地方不要写filterName,就只写那个url-pattern,例如：</p>
+</code></pre><p><strong>后端配置</strong><br>filter的配置这里要注意几点：<br>1.options的请求必须要放行，只有options放行了浏览器才会发送对应的get，post的请求<br>2.发送请求的时候我们拦截，让这个请求不执行chain.doFilter(request, response);但是我们还是要让这个请求<strong>带上那些服务器的响应头</strong>的，这样浏览器才能正常的接收到服务器的响应，要不然浏览器接收时候会爆异常，并不能正确显示服务器传回给浏览器的信息。<br>3.filter的名字不能改，这个问题是我发现一个比较诡异的问题，修改里面的内容可以，但是不要refactor，是我太菜了，还不知道原因。如果要改，就必须在注解的地方不要写filterName,就只写那个url-pattern,例如：</p>
 <pre><code>@WebFilter(filterName = &quot;GlobalFilter&quot;,urlPatterns = &quot;/api/admin/*&quot;)
 </code></pre><p>写成：</p>
 <pre><code>@WebFilter(urlPatterns = &quot;/api/admin/*&quot;)
@@ -261,14 +261,14 @@ if(!list.contains(requestURI)){
 </code></pre><p>我觉得这样写，才能使得不管过没过滤都能给浏览器一个交代，过滤的请求直接return就会拉闸，浏览器啥也没有</p>
 <h3 id="星期三（0904）"><a href="#星期三（0904）" class="headerlink" title="星期三（0904）"></a>星期三（0904）</h3><h3 id="正则表达式"><a href="#正则表达式" class="headerlink" title="正则表达式"></a>正则表达式</h3><p>主要是学会看懂就行（我会单独写一篇文章来总结）<br><a href="https://www.w3cschool.cn/zhengzebiaodashi/" target="_blank" rel="external">https://www.w3cschool.cn/zhengzebiaodashi/</a></p>
 <h3 id="星期四（0905）"><a href="#星期四（0905）" class="headerlink" title="星期四（0905）"></a>星期四（0905）</h3><h3 id="添加事务（-transation-）"><a href="#添加事务（-transation-）" class="headerlink" title="添加事务（ transation ）"></a>添加事务（ transation ）</h3><p>一个简单的例子：<br>在用户下订单的时候，如果出现网络不好情况，用户下单和商品的减少中间如果出现连接数据库异常，是不是就应该回滚到交易之前的状态。那么我们就应该引入事务的机制：要么都成功，要么都失败。一条船上的蚂蚱。<br><strong>引入事务的难点</strong>：要引入事务，我们使用连接池，就遇到一个难题，如何保证我们每次从连接池拿出来的connection都是同一个connection。<br>这里引入一个很重要的概念，听说之后spring也会用到：<strong> ThreadLocal </strong></p>
-<h3 id="ThreadLocal"><a href="#ThreadLocal" class="headerlink" title="ThreadLocal"></a>ThreadLocal</h3><p>简单理解就是一个thread里面的一个ThreadLocal对象，这个参数就只能在这个线程内使用，进入别的线程使用的就是别的线程的ThreadLocal对象。在主线程中使用，就只能在主线程中使用，当你创建一个新的线程就不能使用。我的理解就是一个类似<strong>线程域</strong>的东西。</p>
+<h3 id="ThreadLocal"><a href="#ThreadLocal" class="headerlink" title="ThreadLocal"></a>ThreadLocal</h3><p>简单理解就是一个thread里面的一个ThreadLocal对象，这个参数就只能在这个线程内使用，进入别的线程使用的就是别的线程的ThreadLocal对象。在主线程中创建的对象，就只能在主线程中使用，当你创建一个新的线程就不能使用。我的理解就是一个类似<strong>线程域</strong>的东西。</p>
 <h3 id="使用ThreadLocal"><a href="#使用ThreadLocal" class="headerlink" title="使用ThreadLocal"></a>使用ThreadLocal</h3><p>就两个方法get()  set()方法。</p>
 <pre><code>public static void main(String[] args) {
   ThreadLocal&lt;String&gt; threadlocal = new ThreadLocal&lt;&gt;();
   threadLocal.set(&quot;zhangshan&quot;);
   System.out.println(threadLocal.get()); //zhangshan
 }
-</code></pre><p>我们去看看源码：</p>
+</code></pre><p>我们去看看源码：<br>ThreadLocal.java</p>
 <pre><code>/**
  * Returns the value in the current thread&apos;s copy of this
  * thread-local variable.  If the variable has no value for the
@@ -291,7 +291,7 @@ public T get() {
     }
     return setInitialValue();
 }
-</code></pre><p>首先获取一个ThreadLocalMap，去里面找当前线程的threadLocal对象，通过this 这个key 去找value值。<br>再看看set方法：</p>
+</code></pre><p>首先获取一个ThreadLocalMap，去里面通过this 这个key 去找value值。<br>再看看set方法：</p>
 <pre><code>public void set(T value) {
   Thread t = Thread.currentThread();
   ThreadLocalMap map = getMap(t);
@@ -303,6 +303,9 @@ public T get() {
 ThreadLocalMap getMap(Thread t) {
     return t.threadLocals;
 }
+/* ThreadLocal values 存在 to this thread. This map is maintained
+ * by the ThreadLocal class. */
+ThreadLocal.ThreadLocalMap threadLocals = null;
 </code></pre><p>和get方法类似，我们可以先获取到一个threadLocalMap对象，然后设置key,value。 this就是key，value就是我们要存的值。<br>这里都使用了Thread的一个静态方法：</p>
 <pre><code>Thread t = Thread.currentThread();
 </code></pre><p>我们并不陌生，之前要找当前线程的时候，经常用这个方法去找当前的线程。每一个线程有自己的threadLocalMap ,里面放了你这个线程你创建的threadLocal 对象，里面保存了值。当然一个线程可以创建多个threadLocal。</p>
@@ -353,15 +356,15 @@ public static DataSource getDataSource(){
         threadLocal.set(null);
     }
 }
-</code></pre><h3 id="一个关于事务的坑"><a href="#一个关于事务的坑" class="headerlink" title="一个关于事务的坑"></a>一个关于事务的坑</h3><p>这里有一个事务的坑，一开始我以为是我逻辑错了，打断点之后发现取数据的时候出现了问题。这个问题之前没有遇过，还是一个很幼稚的问题，还是我太年轻了。不够努力学习：这个坑就是取数据的问题。因为我需要获得刚刚插入数据的id值，在存另一张表时候，需要把这个值也放在另一张表中。后来我发现<strong>另一张表存的并不是这个刚插入数据的id。而是上一条的id</strong>。之后debug发现，开启事务之后，数据并不会马上插入到数据库中，需要等事务提交才会放到数据库中。所以取出来的数据就有问题。那么就想解决办法：<br><strong>方法一</strong>：在取出来的id+1。这个方法看起来很方便，但是这里有一个问题，如果前一条数据被删了，你获取的id就是前前的id 然后再+1，那么这个肯定是错的，因为那个id表示的是你之前删除的前一条数据的id。另一张表存的是删除数据的id,明显也不行。<br><strong>方法二</strong>：把插入第一张表的操作放在事务开始之前，然后到最后，如果需要事务的回滚，之后再把这条数据从数据库中删掉。这个方法我最后采用的方法，感觉还是有点蠢，但是不会依赖其他的数据。</p>
-<h3 id="星期五（0906）"><a href="#星期五（0906）" class="headerlink" title="星期五（0906）"></a>星期五（0906）</h3><p>拉闸</p>
-<h3 id="星期六（0907）"><a href="#星期六（0907）" class="headerlink" title="星期六（0907）"></a>星期六（0907）</h3><p>今天讲的就是一些MAVEN的东西<br>maven的核心就是：</p>
+</code></pre><h3 id="一个关于事务的坑"><a href="#一个关于事务的坑" class="headerlink" title="一个关于事务的坑"></a>一个关于事务的坑</h3><p>这里有一个事务的坑，一开始我以为是我逻辑错了，打断点之后发现取数据的时候出现了问题。这个问题之前没有遇过，还是一个很幼稚的问题，还是我太年轻了。不够努力学习：这个坑就是取数据的问题。因为我需要获得刚刚插入数据的id值，在存另一张表时候，需要把这个值也放在另一张表中。后来我发现<strong>另一张表存的并不是这个刚插入数据的id。而是上一条的id</strong>。之后debug发现，开启事务之后，数据并不会马上插入到数据库中，需要等事务提交才会放到数据库中。所以取出来的数据就有问题。那么就想解决办法：<br><strong>方法一</strong>：在取出来的id+1。这个方法看起来很方便，但是这里有一个问题，如果前一条数据被删了，你获取的id就是上上条数据的id 然后再+1，就是上一条数据的id.那么这个肯定是错的，因为那个id表示的是你之前删除的数据的id。另一张表存的是删除数据的id,明显不行。<br><strong>方法二</strong>：把插入第一张表的操作放在事务开始之前，然后到最后，如果需要事务的回滚，再把这条数据从数据库中删掉。这个方法我最后采用的方法，感觉还是有点蠢，但是不会依赖其他的数据。</p>
+<h3 id="星期五（0906）"><a href="#星期五（0906）" class="headerlink" title="星期五（0906）"></a>星期五（0906）</h3><p>拉闸,出去玩了一天，没有写代码的一天，感觉手生。</p>
+<h3 id="星期六（0907）"><a href="#星期六（0907）" class="headerlink" title="星期六（0907）"></a>星期六（0907）</h3><p>今天讲的就是一些MAVEN的东西<br>maven 的核心就是：</p>
 <p>1、项目构建<br>2、依赖管理(重点)</p>
 <p>最核心的思想其实就是<strong>解耦</strong>其他都没什么好说的，学到再说。今天讲的知识，没有代码很难讲的生动</p>
 <h2 id="实战部分："><a href="#实战部分：" class="headerlink" title="实战部分："></a>实战部分：</h2><h3 id="星期日（0901）"><a href="#星期日（0901）" class="headerlink" title="星期日（0901）"></a>星期日（0901）</h3><p>内容：<br>完成商品管理，留言功能（完成）</p>
 <p>总结：<br>1.请求处理乱码问题<br>那个处理请求的工具有问题设置：vmoption:-Dfile.encoding=UTF-8</p>
 <p>2.servlet报错问题：<br> org.apache.catalina.core.ContainerBase.addChildInternal ContainerBase.addChild: start:<br> org.apache.catalina.LifecycleException: Failed to start component [StandardEngine[Catalina].StandardHost[localhost].StandardContext[]]<br> 设置了两个相同的url-pattern 所以会报错</p>
-<p>3.mysql 注意关键字一定要加: `` ，规范是每个名字都要加``</p>
+<p>3.mysql 注意关键字一定要加: `` ，规范是每个字段的名字都要加``</p>
 <pre><code>String sql = &quot;update addGoods set name = ?, typeId = ?, img = ?, `desc` = ? where id = ?&quot;;
 </code></pre><p>4 ResultSetHandler的总结</p>
 <p><a href="https://blog.csdn.net/qq_37796017/article/details/78032605" target="_blank" rel="external">出处</a><br><strong>1.BeanListHandler:返回值  List<t></t></strong><br>       (适合取多条数据)把查询到的每一条结果封装成实体类，再最终把每一个实体类放到list集合中<br><strong>2.BeanHanlder:返回值  T</strong><br>    (适合取单条数据) 把查询到的一条结果封装成实体类。</p>
@@ -374,13 +377,30 @@ public static DataSource getDataSource(){
 </code></pre><p>第三种：</p>
 <pre><code>ColumnListHandler(列的名称)       sql：   select * from 表名
 </code></pre><p><strong>8.ScalarHandler:适合于取单行单列的数据</strong></p>
-<p><strong>9.KeyedHandler:   返回值是Map<object,map<string,object></object,map<string,object></strong></p>
-<pre><code>把每一条查到的结果封装，把这条数据对应的列名当作map的键存入，把这条数据对应的列的值当作map的value存储，在把每一条的数据再次存入到map中，把该条数据的唯一表示id当作键存储，这条数据的map当作外层map的value存入
-</code></pre><p>必须掌握： BeanHandler  ,BeanListHandler ,ColumnListHandler,  ScalarHandler</p>
+<p><strong>9.KeyedHandler:返回值是Map<object,map<string,object></object,map<string,object></strong><br>把每一条查到的结果封装，把这条数据对应的列名当作map的键存入，把这条数据对应的列的值当作map的value存储，在把每一条的数据再次存入到map中，把该条数据的唯一表示id当作键存储，这条数据的map当作外层map的value存入<br>最后一个说起来有点绕，还是上代码吧：</p>
+<pre><code>@Test
+public void KeyedHandler() throws SQLException {
+  QueryRunner queryRunner = new QueryRunner(C3P0Utils.getDataSource());
+  String sql=&quot;select * from user&quot;;
+  //查询结果： 把每一条查到的结果封装，把这条数据对应的列名当作map的键存入，把这条数据对应的列的值当作map的value存储，
+ //          在把每一条的数据再次存入到map中，把该条数据的唯一表示id当作键存储，这条数据的map当作外层map的value存入
+  Map&lt;Object, Map&lt;String, Object&gt;&gt;   map = queryRunner.query(sql, new KeyedHandler());
+   for (Map.Entry&lt;Object, Map&lt;String, Object&gt;&gt; m : map.entrySet()) {
+     Object object  = m.getKey();
+     System.out.println(&quot;===&quot;+object); //每一条数据的id
+     Map&lt;String, Object&gt; m1 = m.getValue();
+     for (Map.Entry&lt;String, Object&gt; m2 : m1.entrySet()) {
+         //key:列名  value:列的值
+         System.out.println(&quot;=qqqqqq=&quot;+m2.getKey()+&quot;==&quot;+m2.getValue());
+      }
+    }
+}
+</code></pre><p><strong>必须掌握： BeanHandler  ,BeanListHandler ,ColumnListHandler,  ScalarHandler</strong></p>
 <h3 id="星期一（0902）-1"><a href="#星期一（0902）-1" class="headerlink" title="星期一（0902）"></a>星期一（0902）</h3><p><strong>内容：</strong><br>1.把img的域名写成配置文件（完成）<br>2.添加商品，保存最低价，和总的库存（完成）<br>3.修改商品显示之前的图片<br>4.完成订单管理（完成）<br>5.修改商品添加规格有bug</p>
 <p><strong>问题</strong><br>1.double转int出错<br>java.lang.ClassCastException: java.lang.Double cannot be cast to java.lang.Integer<br>从map拿到前端传过来的json,用gson接收转成map，id是double类型，而且这个double不能转型还会报错。<br>原来还想   Value.of(id.toString);后来发现还是不行，<br>不管强转什么类型都会报错。</p>
-<p>原因：通过打断点发现：Gson 转换过来的map,他默认会把类型转成最大范围的类型,数字就是double,map获取double 然后先强转double 再强转成int例如：<br>int state = (int)(double) map.get(“state”); //  订单状态全部订单-1</p>
-<h3 id="星期二（0903）-1"><a href="#星期二（0903）-1" class="headerlink" title="星期二（0903）"></a>星期二（0903）</h3><p>昨天问题：<br>3.修改商品显示之前的图片 （完成）<br>5.修改商品添加规格有bug (完成)</p>
+<p>原因：通过打断点发现：Gson 转换过来的map,他默认会把类型转成最大范围的类型,数字就是double,map获取double 然后先强转double 再强转成int例如：</p>
+<pre><code>int state = (int)(double) map.get(&quot;state&quot;); //  订单状态全部订单-1
+</code></pre><h3 id="星期二（0903）-1"><a href="#星期二（0903）-1" class="headerlink" title="星期二（0903）"></a>星期二（0903）</h3><p>昨天问题：<br>3.修改商品显示之前的图片 （完成）<br>5.修改商品添加规格有bug (完成)</p>
 <p>今天任务：<br>1.代码大改（把数据处理从dao层抽离到sevice层）<br>2.解决前后端跨域带cookie问题<br>但是出现新的问题，图片上传也被拦截，尝试直接把图片放行，最后解决由老师修改代码使用axios上传图片<br>3.评估前台功能需要的接口</p>
 <pre><code>1.用户模块
 2.购物车模块

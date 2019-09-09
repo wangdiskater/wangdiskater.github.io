@@ -14,7 +14,7 @@
 <meta property="og:url" content="http://yoursite.com/2019/09/03/Java总结（十）/index.html">
 <meta property="og:site_name" content="路要坚持">
 <meta property="og:description" content="这周首先学习了JSP，因为在搞自己的系统所以没认真听，考试就吃了大亏，直接拉闸了。然后讲了filter 和 listener。最后讲了一下JSON 和 MVC，以及软件开发的三层架构（controller,service,dao）。之后就开进行项目。还是那句话，一定要多写代码，不要直接去搬人家写的，自己写一遍，自己就知道流程了。在写项目所以更新慢了 星期一（0826）JSP这一部分没好好听，导致考">
-<meta property="og:updated_time" content="2019-09-03T00:45:02.238Z">
+<meta property="og:updated_time" content="2019-09-08T15:00:29.257Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java总结（十）">
 <meta name="twitter:description" content="这周首先学习了JSP，因为在搞自己的系统所以没认真听，考试就吃了大亏，直接拉闸了。然后讲了filter 和 listener。最后讲了一下JSON 和 MVC，以及软件开发的三层架构（controller,service,dao）。之后就开进行项目。还是那句话，一定要多写代码，不要直接去搬人家写的，自己写一遍，自己就知道流程了。在写项目所以更新慢了 星期一（0826）JSP这一部分没好好听，导致考">
@@ -305,23 +305,23 @@ public class MyServletContextListener implements ServletContextListener {
 <p>HttpSessionBindingListener<br>HttpSessionActivationListener</p>
 <h2 id="星期三（0828）"><a href="#星期三（0828）" class="headerlink" title="星期三（0828）"></a>星期三（0828）</h2><h3 id="JSON"><a href="#JSON" class="headerlink" title="JSON"></a>JSON</h3><p>使用谷歌Gson就行 或者fastJson</p>
 <h2 id="星期四（0829）"><a href="#星期四（0829）" class="headerlink" title="星期四（0829）"></a>星期四（0829）</h2><h3 id="重构之前的项目"><a href="#重构之前的项目" class="headerlink" title="重构之前的项目"></a>重构之前的项目</h3><p>通过三层架构分层，然后分成不同的功能模块。虽然以后使用框架来写的，但是大体思路都是这样<br>|-controller<br>|-dao<br>|-filter<br>|-model<br>|-service<br>|-util</p>
-<h3 id="考试总结"><a href="#考试总结" class="headerlink" title="考试总结"></a>考试总结</h3><p>非常的不认真，导致非常的不好，大部分错的都是Json，所以问题很严重。必须重新学习<br>5.关于http 协议不正确的描述是（C ）<br>A、Http 请求中的Referer 字段的值表示用户从该URL 代表的页面出发访问<br>当前请求的页面<br>B、http 整个消息头部分中的各行消息头可按任何顺序排列<br>C、http 协议响应报文返回状态码302 表示重定向。<br>D、http 请求有说明当前协议的版本号, 响应首部没有。</p>
+<h3 id="考试总结"><a href="#考试总结" class="headerlink" title="考试总结"></a>考试总结</h3><p>非常的不认真，导致非常的不好，大部分错的都是Jsp，所以问题很严重。必须重新学习<br>5.关于http 协议不正确的描述是（C ）<br>A、Http 请求中的Referer 字段的值表示用户从该URL 代表的页面出发访问<br>当前请求的页面<br>B、http 整个消息头部分中的各行消息头可按任何顺序排列<br>C、http 协议响应报文返回状态码302 表示重定向。<br>D、http 请求有说明当前协议的版本号, 响应首部没有。</p>
 <p>看错了,响应头不是响应报文。</p>
 <p>9.Servlet1 的访问路径为<a href="http://localhost/news/servlet/Servlet1，" target="_blank" rel="external">http://localhost/news/servlet/Servlet1，</a><br>在Servlet1 中使用如下代码设置Cookie：<br>Cookie c = new Cookie(“myCookie”,”xxxx”);<br>response.addCookie(c);</p>
-<p>请问当访问哪个Servlet 时可以获取不到这个Cookie 信息？（ C ）<br>A、<a href="http://localhost/news/servlet/Servlet1" target="_blank" rel="external">http://localhost/news/servlet/Servlet1</a><br>B、<a href="http://localhost/news/servlet/Servlet2" target="_blank" rel="external">http://localhost/news/servlet/Servlet2</a><br>C、<a href="http://localhost/news/Servlet3" target="_blank" rel="external">http://localhost/news/Servlet3</a><br>D、<a href="http://localhost/news/servlet/n/Servlet4" target="_blank" rel="external">http://localhost/news/servlet/n/Servlet4</a><br>实验证明确实是这样，只要是/servlet/*下面，不管有没有访问到，都会带cookie，而没有/servlet这一层的所有URL就都没有这个cookie。我印象中老师没有讲过，但是我觉得应该是一个树的结构，<br>例如：/news/servlet/Servlet1。 当我在这棵树的某个结点设置了cookie，这棵树的父类的所有子树都能拥有这个 cookie 。如果这个结点就是应用下的首层的结点，则整个应用都可以拥有这个cookie。</p>
-<p><strong>这里想到另一个问题，如果我设置cookie时候设置了path是下一层，那么结果会如何</strong>，同样创建了四个servlet来测试</p>
-<pre><code>@WebServlet(name = &quot;Servlet1&quot;, urlPatterns = &quot;/Servlet1&quot;)
+<p>请问当访问哪个Servlet 时可以获取不到这个Cookie 信息？（ C ）<br>A、<a href="http://localhost/news/servlet/Servlet1" target="_blank" rel="external">http://localhost/news/servlet/Servlet1</a><br>B、<a href="http://localhost/news/servlet/Servlet2" target="_blank" rel="external">http://localhost/news/servlet/Servlet2</a><br>C、<a href="http://localhost/news/Servlet3" target="_blank" rel="external">http://localhost/news/Servlet3</a><br>D、<a href="http://localhost/news/servlet/n/Servlet4" target="_blank" rel="external">http://localhost/news/servlet/n/Servlet4</a><br>实验证明确实是这样，只要是/servlet/*下面，以及/servlet。不管有没有servlet来接收这个请求，都会带cookie，而没有/servlet这一层的所有URL就都没有这个cookie。我印象中老师没有讲过，但是我理解应该是一个树的结构，<br>例如：/news/servlet/Servlet1。 当我在这棵树的某个结点设置了cookie，这棵树的父类以及父类的所有子树都能拥有这个cookie 。如果这个结点就是应用下的首层的结点，则整个应用都可以拥有这个cookie。而这题就是在servlet1设置的cookie，所有的/servlet/*<br>和/servlet 都能带上这个 cookie。</p>
+<p><strong>这里想到另一个问题，如果我设置cookie时候设置了path是下一层，那么结果会如何</strong>，同样创建了四个servlet来测试其它层都一样就,设置cookie的地方不一样</p>
+<pre><code>@WebServlet(name = &quot;Servlet1&quot;, urlPatterns = &quot;/Servlet1&quot;)//就改了这里
 public class Servlet1 extends HttpServlet {
   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
   }
   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     request.setCharacterEncoding(&quot;utf-8&quot;);
     Cookie c = new Cookie(&quot;myCookie&quot;,&quot;test&quot;);
-    c.setPath(&quot;/news/servlet/Servlet2&quot;); //我把cookie给到下一层 这一层还有吗？
+    c.setPath(&quot;/news/servlet/Servlet2&quot;); //我把 cookie 给到下一层 这一层还有吗？
     response.addCookie(c);
   }
 }
-</code></pre><p><strong>注意</strong>这就发生了一个很奇怪的现象，这时候并不是servlet下的资源都带有这个cookie,和我们刚才的结论就不同了，这里只有Servlet2下面的资源才有这个cookie。按照之前的接乱，我这一层拿到的cookie，应该所有的兄弟结点和兄弟的孩子都可以拿到。但是设置path之后，之后path的子节点和他自己才能拿到。这里就有点诡异。我们从cookie设计的角度出发去看这个问题，如果我们setPath(“”)不是比原来深的资源，而是比原来浅。那么是不是就会有cookie能被整个应用共享的安全隐患。所以我觉得这样设计还是有他的想法的。</p>
+</code></pre><p><strong>注意</strong>这就发生了一个很奇怪的现象，这时候并不是Path的路径：servlet下的资源/servlet/*（包括/servlet），都带有这个cookie,和我们刚才的结论就不同了，这里只有Servlet2下面的资源(包括/Servlet2)才有这个cookie。按照之前的结论，我这一层拿到的cookie，应该所有的兄弟结点和兄弟的孩子都可以拿到。但是设置path之后，之后path的子节点和他自己才能拿到。这里就有点诡异。我们从cookie设计的角度出发去看这个问题，如果我们setPath(“”)不是比原来深的资源，而是比原来浅。那么是不是就会有cookie能被整个应用共享的安全隐患。所以我觉得这样设计还是有他的想法的。</p>
 <p>13.aa.jsp 要把请求转发给bb.jsp, aa.jsp 位于根目录下的page 文件夹，<br>aa.jsp.bb.jsp 位于helloapp 应用的根目录下。以下哪个选项能使aa.jsp 正确地把<br>请求转发给bb.jsp?（ D ）</p>
 <pre><code>A、&lt;a href=“bb.jsp”&gt;bb.jsp&lt;/a&gt;
 B、&lt;jsp:forward page=“bb.jsp”/&gt;

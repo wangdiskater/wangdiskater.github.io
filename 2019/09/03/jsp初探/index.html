@@ -8,13 +8,16 @@
   
   <title>jsp初探 | 路要坚持</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="article">
+  <meta name="description" content="概述这里先对JSP的最基本的语法做概述，基础当然重中之重，所以必须要掌握清楚。不然真的看不懂JSP。 脚本脚本程序可以包含任意量的Java语句、变量、方法或表达式，只要它们在脚本语言中是有效的。脚本程序的语法格式： &amp;lt;% 代码片段 %&amp;gt; 表达式一个JSP表达式中包含的脚本语言表达式，先被转化成String，然后插入到表达式出现的地方。由于表达式的值会被转化成String，所以您可以在一">
+<meta property="og:type" content="article">
 <meta property="og:title" content="jsp初探">
 <meta property="og:url" content="http://yoursite.com/2019/09/03/jsp初探/index.html">
 <meta property="og:site_name" content="路要坚持">
-<meta property="og:updated_time" content="2019-09-03T00:45:57.674Z">
+<meta property="og:description" content="概述这里先对JSP的最基本的语法做概述，基础当然重中之重，所以必须要掌握清楚。不然真的看不懂JSP。 脚本脚本程序可以包含任意量的Java语句、变量、方法或表达式，只要它们在脚本语言中是有效的。脚本程序的语法格式： &amp;lt;% 代码片段 %&amp;gt; 表达式一个JSP表达式中包含的脚本语言表达式，先被转化成String，然后插入到表达式出现的地方。由于表达式的值会被转化成String，所以您可以在一">
+<meta property="og:updated_time" content="2019-09-08T14:26:47.088Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="jsp初探">
+<meta name="twitter:description" content="概述这里先对JSP的最基本的语法做概述，基础当然重中之重，所以必须要掌握清楚。不然真的看不懂JSP。 脚本脚本程序可以包含任意量的Java语句、变量、方法或表达式，只要它们在脚本语言中是有效的。脚本程序的语法格式： &amp;lt;% 代码片段 %&amp;gt; 表达式一个JSP表达式中包含的脚本语言表达式，先被转化成String，然后插入到表达式出现的地方。由于表达式的值会被转化成String，所以您可以在一">
   
     <link rel="alternate" href="/" title="路要坚持" type="application/atom+xml">
   
@@ -147,7 +150,390 @@
             
         </div>
         <div class="content" style="overflow: auto">
-            
+            <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>这里先对JSP的最基本的语法做概述，基础当然重中之重，所以必须要掌握清楚。不然真的看不懂JSP。</p>
+<h3 id="脚本"><a href="#脚本" class="headerlink" title="脚本"></a>脚本</h3><p>脚本程序可以包含任意量的Java语句、变量、方法或表达式，只要它们在脚本语言中是有效的。脚本程序的语法格式：</p>
+<pre><code>&lt;% 代码片段 %&gt;
+</code></pre><h3 id="表达式"><a href="#表达式" class="headerlink" title="表达式"></a>表达式</h3><p>一个JSP表达式中包含的脚本语言表达式，先被转化成String，然后插入到表达式出现的地方。<br>由于表达式的值会被转化成String，所以您可以在一个文本行中使用表达式而不用去管它是否是HTML标签。<br>表达式元素中可以包含任何符合Java语言规范的表达式，但是不能使用<strong>分号</strong>来结束表达式。<br>JSP表达式的语法格式：</p>
+<pre><code>&lt;%= 表达式 %&gt;
+</code></pre><h3 id="声明"><a href="#声明" class="headerlink" title="声明"></a>声明</h3><p>一个声明语句可以声明一个或多个变量、方法，供后面的Java代码使用。在JSP文件中，您必须先声明这些变量和方法然后才能使用它们。<br>JSP声明的语法格式：</p>
+<pre><code>&lt;%! declaration; [ declaration; ]+ ... %&gt;
+</code></pre><h3 id="JSP注释"><a href="#JSP注释" class="headerlink" title="JSP注释"></a>JSP注释</h3><table>
+<thead>
+<tr>
+<th style="text-align:right">语法</th>
+<th style="text-align:left">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right">&lt;%-- 注释 --%&gt;</td>
+<td style="text-align:left">JSP注释，注释内容不会被发送至浏览器甚至不会被编译</td>
+</tr>
+<tr>
+<td style="text-align:right">&lt;!-- 注释 --&gt;</td>
+<td style="text-align:left">HTML注释，通过浏览器查看网页源代码时可以看见注释内容</td>
+</tr>
+<tr>
+<td style="text-align:right">&lt;\%</td>
+<td style="text-align:left">代表静态 &lt;%常量</td>
+</tr>
+<tr>
+<td style="text-align:right">%></td>
+<td style="text-align:left">代表静态 %&gt; 常量</td>
+</tr>
+<tr>
+<td style="text-align:right">\’</td>
+<td style="text-align:left">在属性中使用的单引号</td>
+</tr>
+<tr>
+<td style="text-align:right">\”</td>
+<td style="text-align:left">在属性中使用的双引号</td>
+</tr>
+</tbody>
+</table>
+<h3 id="JSP指令"><a href="#JSP指令" class="headerlink" title="JSP指令"></a>JSP指令</h3><p>JSP指令用来设置与整个JSP页面相关的属性。<br>JSP指令语法格式：</p>
+<pre><code>&lt;%@ directive attribute=&quot;value&quot; %&gt;
+</code></pre><p>这里有三种指令标签：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:right">指令</th>
+<th style="text-align:left">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right">&lt;%@ page … %&gt;</td>
+<td style="text-align:left">定义页面的依赖属性，比如脚本语言、error页面、缓存需求等等</td>
+</tr>
+<tr>
+<td style="text-align:right">&lt;%@ include … %&gt;</td>
+<td style="text-align:left">包含其他文件</td>
+</tr>
+<tr>
+<td style="text-align:right">&lt;%@ taglib … %&gt;</td>
+<td style="text-align:left">引入标签库的定义，可以是自定义标签</td>
+</tr>
+</tbody>
+</table>
+<h3 id="JSP行为（动作元素）"><a href="#JSP行为（动作元素）" class="headerlink" title="JSP行为（动作元素）"></a>JSP行为（动作元素）</h3><p>JSP行为标签使用XML语法结构来控制servlet引擎。它能够动态插入一个文件，重用JavaBean组件，引导用户去另一个页面，为Java插件产生相关的HTML等等。<br>行为标签只有一种语法格式，它严格遵守XML标准：</p>
+<pre><code>&lt;jsp:action_name attribute=&quot;value&quot; /&gt;
+</code></pre><p>行为标签基本上是一些预先就定义好的函数，下表罗列出了一些可用的JSP行为标签：：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:right">语法</th>
+<th style="text-align:left">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right">jsp:include</td>
+<td style="text-align:left">用于在当前页面中包含静态或动态资源</td>
+</tr>
+<tr>
+<td style="text-align:right">jsp:useBean</td>
+<td style="text-align:left">寻找和初始化一个JavaBean组件</td>
+</tr>
+<tr>
+<td style="text-align:right">jsp:setProperty</td>
+<td style="text-align:left">设置 JavaBean组件的值</td>
+</tr>
+<tr>
+<td style="text-align:right">jsp:getProperty</td>
+<td style="text-align:left">将 JavaBean组件的值插入到 output中</td>
+</tr>
+<tr>
+<td style="text-align:right">jsp:forward</td>
+<td style="text-align:left">从一个JSP文件向另一个文件传递一个包含用户请求的request对象</td>
+</tr>
+<tr>
+<td style="text-align:right">jsp:plugin</td>
+<td style="text-align:left">用于在生成的HTML页面中包含Applet和JavaBean对象</td>
+</tr>
+<tr>
+<td style="text-align:right">jsp:element</td>
+<td style="text-align:left">动态创建一个XML元素</td>
+</tr>
+<tr>
+<td style="text-align:right">jsp:attribute</td>
+<td style="text-align:left">定义动态创建的XML元素的属性</td>
+</tr>
+<tr>
+<td style="text-align:right">jsp:body</td>
+<td style="text-align:left">定义动态创建的XML元素的主体</td>
+</tr>
+<tr>
+<td style="text-align:right">jsp:text</td>
+<td style="text-align:left">用于封装模板数据</td>
+</tr>
+</tbody>
+</table>
+<h3 id="JSP隐含对象"><a href="#JSP隐含对象" class="headerlink" title="JSP隐含对象"></a>JSP隐含对象</h3><p>JSP支持九个自动定义的变量，江湖人称隐含对象。这九个隐含对象的简介见下表：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:right">对象</th>
+<th style="text-align:left">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right">request</td>
+<td style="text-align:left">HttpServletRequest类的实例</td>
+</tr>
+<tr>
+<td style="text-align:right">response</td>
+<td style="text-align:left">HttpServletResponse类的实例</td>
+</tr>
+<tr>
+<td style="text-align:right">out</td>
+<td style="text-align:left">PrintWriter类的实例，用于把结果输出至网页上</td>
+</tr>
+<tr>
+<td style="text-align:right">session</td>
+<td style="text-align:left">HttpSession类的实例</td>
+</tr>
+<tr>
+<td style="text-align:right">application</td>
+<td style="text-align:left">ServletContext类的实例，与应用上下文有关</td>
+</tr>
+<tr>
+<td style="text-align:right">config</td>
+<td style="text-align:left">ServletConfig类的实例</td>
+</tr>
+<tr>
+<td style="text-align:right">pageContext</td>
+<td style="text-align:left">PageContext类的实例，提供对JSP页面所有对象以及命名空间的访问</td>
+</tr>
+<tr>
+<td style="text-align:right">page</td>
+<td style="text-align:left">类似于Java类中的this关键字</td>
+</tr>
+<tr>
+<td style="text-align:right">Exception</td>
+<td style="text-align:left">Exception类的对象，代表发生错误的JSP页面中对应的异常对象</td>
+</tr>
+</tbody>
+</table>
+<h2 id="指令"><a href="#指令" class="headerlink" title="指令"></a>指令</h2><p>指令可以有很多个属性，它们以键值对的形式存在，并用逗号隔开（明明就是空格隔开的）。</p>
+<h3 id="Page指令"><a href="#Page指令" class="headerlink" title="Page指令"></a>Page指令</h3><p>Page指令为容器提供当前页面的使用说明。一个JSP页面可以包含多个page指令。<br>Page指令的语法格式：</p>
+<pre><code>&lt;%@ page attribute=&quot;value&quot; %&gt;
+</code></pre><p>等价的XML格式：</p>
+<pre><code>&lt;jsp:directive.page attribute=&quot;value&quot; /&gt;
+</code></pre><p>例子：</p>
+<pre><code>&lt;%@page autoFlush=&quot;false&quot; buffer=&quot;none&quot; info=&quot;asd&quot; %&gt;
+</code></pre><h3 id="Include指令"><a href="#Include指令" class="headerlink" title="Include指令"></a>Include指令</h3><p>JSP可以通过include指令来包含其他文件。被包含的文件可以是JSP文件、HTML文件或文本文件。包含的文件就好像是该JSP文件的一部分，会被同时编译执行。</p>
+<pre><code>&lt;%@ include file=&quot;relative url&quot; %&gt;
+</code></pre><h3 id="Taglib指令"><a href="#Taglib指令" class="headerlink" title="Taglib指令"></a>Taglib指令</h3><p>JSP API允许用户自定义标签，一个自定义标签库就是自定义标签的集合。<br>Taglib指令引入一个自定义标签集合的定义，包括库路径、自定义标签。<br>Taglib指令的语法：</p>
+<pre><code>&lt;%@ taglib uri=&quot;uri&quot; prefix=&quot;prefixOfTag&quot; %&gt;
+</code></pre><p>uri属性确定标签库的位置，prefix属性指定标签库的前缀。</p>
+<h2 id="注"><a href="#注" class="headerlink" title="注"></a>注</h2><p>我发现JSP的教程很多都是servlet内容，不管是过滤器还是处理请求和相应。因为jsp本质就是servlet。他会先转成一个servlet的java文件，然后再编译，再去执行。所以很多东西都和servlet是类似的。接下来才是真东西，学习一些JSP的高级的用法</p>
+<h3 id="JSP-标准标签库（JSTL）"><a href="#JSP-标准标签库（JSTL）" class="headerlink" title="JSP 标准标签库（JSTL）"></a>JSP 标准标签库（JSTL）</h3><p>JSP标准标签库（JSTL）是一个JSP标签集合，它封装了JSP应用的通用核心功能。<br>JSTL支持通用的、结构化的任务，比如迭代，条件判断，XML文档操作，国际化标签，SQL标签。 除了这些，它还提供了一个框架来使用集成JSTL的自定义标签。<br>根据JSTL标签所提供的功能，可以将其分为5个类别。</p>
+<pre><code>核心标签&lt;c:xxx&gt;&lt;/c:xxx&gt;
+格式化标签&lt;fmt:xxx/&gt;
+SQL 标签  &lt;sql:xxx/&gt;
+XML 标签  &lt;x:xxx/&gt;
+JSTL 函数 &lt;fn:xxx/&gt;
+</code></pre><p>其实就是JAVA的官方的jar包，可以方便我们使用的东西罢了。</p>
+<h3 id="JSP-连接数据库"><a href="#JSP-连接数据库" class="headerlink" title="JSP 连接数据库"></a>JSP 连接数据库</h3><p>通过使用标准标签库可以操作数据库的CRUD<br>一个从数据库取数据的简单的例子</p>
+<pre><code>&lt;%@ page language=&quot;java&quot; contentType=&quot;text/html; charset=UTF-8&quot; pageEncoding=&quot;UTF-8&quot;%&gt;
+&lt;%@ page import=&quot;java.io.*,java.util.*,java.sql.*&quot;%&gt;
+&lt;%@ page import=&quot;javax.servlet.http.*,javax.servlet.*&quot; %&gt;
+&lt;%@ taglib uri=&quot;http://java.sun.com/jsp/jstl/core&quot; prefix=&quot;c&quot;%&gt;
+&lt;%@ taglib uri=&quot;http://java.sun.com/jsp/jstl/sql&quot; prefix=&quot;sql&quot;%&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;SELECT 操作&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;sql:setDataSource var=&quot;snapshot&quot; driver=&quot;com.mysql.jdbc.Driver&quot;
+       url=&quot;jdbc:mysql://localhost/TEST&quot;
+       user=&quot;root&quot;  password=&quot;pass123&quot;/&gt;
+  &lt;sql:query dataSource=&quot;${snapshot}&quot; var=&quot;result&quot;&gt;
+  SELECT * from Employees;
+  &lt;/sql:query&gt;
+  &lt;table border=&quot;1&quot; width=&quot;100%&quot;&gt;
+  &lt;tr&gt;
+     &lt;th&gt;Emp ID&lt;/th&gt;
+     &lt;th&gt;First Name&lt;/th&gt;
+     &lt;th&gt;Last Name&lt;/th&gt;
+     &lt;th&gt;Age&lt;/th&gt;
+  &lt;/tr&gt;
+  &lt;c:forEach var=&quot;row&quot; items=&quot;${result.rows}&quot;&gt;
+  &lt;tr&gt;
+     &lt;td&gt;&lt;c:out value=&quot;${row.id}&quot;/&gt;&lt;/td&gt;
+     &lt;td&gt;&lt;c:out value=&quot;${row.first}&quot;/&gt;&lt;/td&gt;
+     &lt;td&gt;&lt;c:out value=&quot;${row.last}&quot;/&gt;&lt;/td&gt;
+     &lt;td&gt;&lt;c:out value=&quot;${row.age}&quot;/&gt;&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;/c:forEach&gt;
+  &lt;/table&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><h3 id="JSP-XML-数据处理"><a href="#JSP-XML-数据处理" class="headerlink" title="JSP XML 数据处理"></a>JSP XML 数据处理</h3><p>当通过HTTP发送XML数据时，就有必要使用JSP来处理传入和流出的XML文档了，比如RSS文档。作为一个XML文档，它仅仅只是一堆文本而已，使用JSP创建XML文档并不比创建一个HTML文档难。<br><strong>例子：使用JSP发送XML</strong><br>使用JSP发送XML内容就和发送HTML内容一样。唯一的不同就是您需要把页面的context属性设置为text/xml。要设置context属性，使用&lt;%@page % &gt;命令，就像这样：</p>
+<pre><code>&lt;%@ page contentType=&quot;text/xml&quot; %&gt;
+</code></pre><p>接下来这个例子向浏览器发送XML内容：</p>
+<pre><code>&lt;%@ page contentType=&quot;text/xml&quot; %&gt;
+&lt;books&gt;
+   &lt;book&gt;
+      &lt;name&gt;Padam History&lt;/name&gt;
+      &lt;author&gt;ZARA&lt;/author&gt;
+      &lt;price&gt;100&lt;/price&gt;
+   &lt;/book&gt;
+&lt;/books&gt;
+</code></pre><h3 id="JSP-JavaBean"><a href="#JSP-JavaBean" class="headerlink" title="JSP JavaBean"></a>JSP JavaBean</h3><p>先来回顾一下什么是JavaBean<br>JavaBean是特殊的Java类，是用Java语言写成的可重用组件，并且遵守JavaBeans API规范。<br>接下来给出的是JavaBean与其它Java类相比而言独一无二的特征：</p>
+<pre><code>提供一个默认的无参构造函数。
+需要被序列化并且实现了Serializable接口。
+可能有一系列可读写属性。
+可能有一系列的&quot;getter&quot;或&quot;setter&quot;方法。
+</code></pre><h3 id="访问JavaBeans"><a href="#访问JavaBeans" class="headerlink" title="访问JavaBeans"></a>访问JavaBeans</h3><p>&lt;jsp:useBean&gt;标签可以在JSP中声明一个JavaBean，然后使用。声明后，JavaBean对象就成了脚本变量，可以通过脚本元素或其他自定义标签来访问。&lt;jsp:useBean&gt;标签的语法格式如下：</p>
+<pre><code>&lt;jsp:useBean id=&quot;bean&apos;s name&quot; scope=&quot;bean&apos;s scope&quot; typeSpec/&gt;;
+</code></pre><p>其中，根据具体情况，scope的值可以是page，request，session或application。id值可任意只要不和同一JSP文件中其它&lt;jsp:useBean&gt;中id值一样就行了。</p>
+<pre><code>&lt;html&gt;
+  &lt;head&gt;
+  &lt;title&gt;useBean Example&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;jsp:useBean id=&quot;date&quot; class=&quot;java.util.Date&quot; /&gt;
+    &lt;p&gt;The date/time is &lt;%= date %&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre><h3 id="访问JavaBeans对象的属性"><a href="#访问JavaBeans对象的属性" class="headerlink" title="访问JavaBeans对象的属性"></a>访问JavaBeans对象的属性</h3><p>在 &lt;jsp:useBean&gt; 标签主体中使用 &lt;jsp:getProperty/&gt; 标签来调用getter方法，使用 &lt;jsp:setProperty/&gt;标签来调用setter方法，语法格式如下：</p>
+<pre><code>&lt;jsp:useBean id=&quot;id&quot; class=&quot;bean&apos;s class&quot; scope=&quot;bean&apos;s scope&quot;&gt;
+   &lt;jsp:setProperty name=&quot;bean&apos;s id&quot; property=&quot;property name&quot; value=&quot;value&quot;/&gt;
+   &lt;jsp:getProperty name=&quot;bean&apos;s id&quot; property=&quot;property name&quot;/&gt;
+   ...........
+&lt;/jsp:useBean&gt;
+</code></pre><p>  name属性指的是Bean的id属性。property属性指的是想要调用的getter或setter方法的名字。</p>
+<p>  接下来给出使用以上语法进行属性访问的一个简单例子：</p>
+<pre><code>&lt;html&gt;
+  &lt;head&gt;
+  &lt;title&gt;get and set properties Example&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;jsp:useBean id=&quot;students&quot; class=&quot;com.tutorialspoint.StudentsBean&quot;&gt;
+       &lt;jsp:setProperty name=&quot;students&quot; property=&quot;firstName&quot; value=&quot;Zara&quot;/&gt;
+       &lt;jsp:setProperty name=&quot;students&quot; property=&quot;lastName&quot; value=&quot;Ali&quot;/&gt;
+       &lt;jsp:setProperty name=&quot;students&quot; property=&quot;age&quot; value=&quot;10&quot;/&gt;
+    &lt;/jsp:useBean&gt;
+    //不在主体中也能调用？
+    &lt;p&gt;Student First Name:
+       &lt;jsp:getProperty name=&quot;students&quot; property=&quot;firstName&quot;/&gt;
+    &lt;/p&gt;
+    &lt;p&gt;Student Last Name:
+       &lt;jsp:getProperty name=&quot;students&quot; property=&quot;lastName&quot;/&gt;
+    &lt;/p&gt;
+    &lt;p&gt;Student Age:
+       &lt;jsp:getProperty name=&quot;students&quot; property=&quot;age&quot;/&gt;
+    &lt;/p&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre><h3 id="JSP-自定义标签"><a href="#JSP-自定义标签" class="headerlink" title="JSP 自定义标签"></a>JSP 自定义标签</h3><p>为了能够更容易理解jsp标签是如何运作的：</p>
+<p>自定义标签是用户定义的JSP语言元素。当JSP页面包含一个自定义标签时将被转化为servlet，标签转化为对被 称为tag handler的对象的操作，即当servlet执行时Web container调用那些操作。<br>JSP标签扩展可以让你创建新的标签并且可以直接插入到一个JSP页面。 JSP 2.0规范中引入Simple Tag Handlers来编写这些自定义标记。<br>你可以继承SimpleTagSupport类并重写的doTag()方法来开发一个最简单的自定义标签。</p>
+<h3 id="创建”Hello”标签"><a href="#创建”Hello”标签" class="headerlink" title="创建”Hello”标签"></a>创建”Hello”标签</h3><p>第一步：</p>
+<pre><code>接下来，我们想创建一个自定义标签叫作&lt;ex:Hello&gt;，标签格式为：
+&lt;ex:Hello /&gt;
+</code></pre><p>第二步：<br>要创建自定义的JSP标签，你首先必须创建处理标签的Java类。所以，让我们创建一个HelloTag类，如下所示：</p>
+<pre><code>package com.tutorialspoint;
+import javax.servlet.jsp.tagext.*;
+import javax.servlet.jsp.*;
+import java.io.*;
+public class HelloTag extends SimpleTagSupport {
+  public void doTag() throws JspException, IOException {
+    JspWriter out = getJspContext().getOut();
+    out.println(&quot;Hello Custom Tag!&quot;);
+  }
+}
+</code></pre><p>以上代码重写了doTag()方法，方法中使用了getJspContext()方法来获取当前的JspContext对象，并将”Hello Custom Tag!”传递给JspWriter对象。</p>
+<p>第三步：<br>编译以上类，并将其复制到环境变量CLASSPATH目录中。最后创建如下标签库：<tomcat安装目录>webapps\ROOT\WEB-INF\custom.tld。</tomcat安装目录></p>
+<pre><code>&lt;taglib&gt;
+  &lt;tlib-version&gt;1.0&lt;/tlib-version&gt;
+  &lt;jsp-version&gt;2.0&lt;/jsp-version&gt;
+  &lt;short-name&gt;Example TLD&lt;/short-name&gt;
+  &lt;tag&gt;
+    &lt;name&gt;Hello&lt;/name&gt;
+    &lt;tag-class&gt;com.tutorialspoint.HelloTag&lt;/tag-class&gt;
+    &lt;body-content&gt;empty&lt;/body-content&gt;
+  &lt;/tag&gt;
+&lt;/taglib&gt;
+</code></pre><p>第四步<br>接下来，我们就可以在JSP文件中使用Hello标签：（注意格式）</p>
+<pre><code>&lt;%@ taglib prefix=&quot;ex&quot; uri=&quot;WEB-INF/custom.tld&quot;%&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;A sample custom tag&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;ex:Hello/&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre><h3 id="JSP-表达式语言"><a href="#JSP-表达式语言" class="headerlink" title="JSP 表达式语言"></a>JSP 表达式语言</h3><p>JSP表达式语言（EL）使得访问存储在JavaBean中的数据变得非常简单。JSP EL既可以用来创建算术表达式也可以用来创建逻辑表达式。在JSP EL表达式内可以使用整型数，浮点数，字符串，常量true、false，还有null。<br>JSP EL允许您指定一个表达式来表示属性值。一个简单的表达式语法如下：</p>
+<pre><code>${expr}
+</code></pre><p>其中，expr指的是表达式。在JSP EL中通用的操作符是”.”和”[]”。这两个操作符允许您通过内嵌的JSP对象访问各种各样的JavaBean属性</p>
+<pre><code>&lt;jsp:setProperty name=&quot;box&quot; property=&quot;perimeter&quot; value=&quot;${2*box.width+2*box.height}&quot;/&gt;
+</code></pre><p>当JSP编译器在属性中见到”${}”格式后，它会产生代码来计算这个表达式，并且产生一个替代品来代替表达式的值。</p>
+<p><strong>JSP EL中的函数</strong><br>JSP EL允许您在表达式中使用函数。这些函数必须被定义在自定义标签库中。函数的使用语法如下：</p>
+<pre><code>${ns:func(param1, param2, ...)}
+</code></pre><p>ns指的是命名空间（namespace），func指的是函数的名称，param1指的是第一个参数，param2指的是第二个参数，以此类推。比如，有函数fn:length，在JSTL库中定义，可以像下面这样来获取一个字符串的长度：</p>
+<pre><code>${fn:length(&quot;Get my length&quot;)}
+</code></pre><p><strong>注意事项：</strong>要使用任何标签库中的函数，您需要将这些库安装在服务器中，然后使用&lt;taglib&gt;标签在JSP文件中包含这些库</p>
+<p><strong>JSP EL隐含对象</strong><br>JSP EL支持下表列出的隐含对象：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:right">隐含对象</th>
+<th style="text-align:left">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right">pageScope</td>
+<td style="text-align:left">page 作用域</td>
+</tr>
+<tr>
+<td style="text-align:right">requestScope</td>
+<td style="text-align:left">request 作用域</td>
+</tr>
+<tr>
+<td style="text-align:right">sessionScope</td>
+<td style="text-align:left">session 作用域</td>
+</tr>
+<tr>
+<td style="text-align:right">applicationScope</td>
+<td style="text-align:left">application 作用域</td>
+</tr>
+<tr>
+<td style="text-align:right">param</td>
+<td style="text-align:left">Request 对象的参数，字符串</td>
+</tr>
+<tr>
+<td style="text-align:right">paramValues</td>
+<td style="text-align:left">Request对象的参数，字符串集合</td>
+</tr>
+<tr>
+<td style="text-align:right">header</td>
+<td style="text-align:left">HTTP 信息头，字符串</td>
+</tr>
+<tr>
+<td style="text-align:right">headerValues</td>
+<td style="text-align:left">HTTP 信息头，字符串集合</td>
+</tr>
+<tr>
+<td style="text-align:right">initParam</td>
+<td style="text-align:left">上下文初始化参数</td>
+</tr>
+<tr>
+<td style="text-align:right">cookie</td>
+<td style="text-align:left">Cookie值</td>
+</tr>
+<tr>
+<td style="text-align:right">pageContext</td>
+<td style="text-align:left">当前页面的pageContext</td>
+</tr>
+</tbody>
+</table>
+<h3 id="JSP-异常处理"><a href="#JSP-异常处理" class="headerlink" title="JSP 异常处理"></a>JSP 异常处理</h3><h3 id="JSP-调试"><a href="#JSP-调试" class="headerlink" title="JSP 调试"></a>JSP 调试</h3><h3 id="JSP-国际化"><a href="#JSP-国际化" class="headerlink" title="JSP 国际化"></a>JSP 国际化</h3><h3 id="注：全篇内容出自w3cschool"><a href="#注：全篇内容出自w3cschool" class="headerlink" title="注：全篇内容出自w3cschool"></a>注：全篇内容出自w3cschool</h3><p><a href="https://www.w3cschool.cn/jsp/" target="_blank" rel="external">https://www.w3cschool.cn/jsp/</a></p>
+
         </div>
         <div class="post-reply">
             
