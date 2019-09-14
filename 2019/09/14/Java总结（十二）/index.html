@@ -1,0 +1,1272 @@
+<!DOCTYPE html>
+<html class="full-height">
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="//cdn.bootcss.com/bulma/0.4.1/css/bulma.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+  
+  <title>Java总结（十二） | 路要坚持</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="这周开始讲Spring了，讲Spring都是很多没有见过的东西，很多东西都是配置的，目前还不需要懂底层的实现，需要的是知道如何操作，特别是maven。当然Spring也很重要，需要多思考。今天是2019年9月13日星期五，中秋节，在武汉，去了一趟光谷，浏览了一圈武大。现在的年轻人都不行呀，烈日下骑单车就要中暑了。早早地回来，就确定把这周总结写了，虽然只有四天的东西，但是感觉学了好久了，因为东西很多">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java总结（十二）">
+<meta property="og:url" content="http://yoursite.com/2019/09/14/Java总结（十二）/index.html">
+<meta property="og:site_name" content="路要坚持">
+<meta property="og:description" content="这周开始讲Spring了，讲Spring都是很多没有见过的东西，很多东西都是配置的，目前还不需要懂底层的实现，需要的是知道如何操作，特别是maven。当然Spring也很重要，需要多思考。今天是2019年9月13日星期五，中秋节，在武汉，去了一趟光谷，浏览了一圈武大。现在的年轻人都不行呀，烈日下骑单车就要中暑了。早早地回来，就确定把这周总结写了，虽然只有四天的东西，但是感觉学了好久了，因为东西很多">
+<meta property="og:updated_time" content="2019-09-14T13:56:48.911Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java总结（十二）">
+<meta name="twitter:description" content="这周开始讲Spring了，讲Spring都是很多没有见过的东西，很多东西都是配置的，目前还不需要懂底层的实现，需要的是知道如何操作，特别是maven。当然Spring也很重要，需要多思考。今天是2019年9月13日星期五，中秋节，在武汉，去了一趟光谷，浏览了一圈武大。现在的年轻人都不行呀，烈日下骑单车就要中暑了。早早地回来，就确定把这周总结写了，虽然只有四天的东西，但是感觉学了好久了，因为东西很多">
+  
+    <link rel="alternate" href="/" title="路要坚持" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/common.css">
+<link rel="stylesheet" href="/css/nav.css">
+<link rel="stylesheet" href="/css/layout.css">
+  
+
+</head>
+
+<body>
+  <header id="navbar" class="overflow-hidden">
+  <div class="container">
+    <nav class="nav">
+         <div class="nav-left">
+            <a href="/" class="nav-item" style="font-size: 20px;">
+              <span class="logo">王邸</span>'s Blog
+            </a>
+         </div>
+        <div class="nav-center is-hidden position-relative" id="search_container">
+            <div class="nav-item full-width full-height">
+                <i class="fa fa-search has-padding" aria-hidden="true"></i>
+                <input type="text" id="search_input" class="search-input full-height full-width" placeholder="Search post" autofocus>
+                <i id="close_search" class="fa fa-times" aria-hidden="true"></i>
+            </div>
+            <div id="search_result"></div>
+        </div>
+        <div class="nav-right nav-menu">
+            <a class="nav-item" id="search">
+                <i class="fa fa-search" aria-hidden="true"></i>
+            </a>
+            
+            <a class="nav-item" href="/">
+                Home
+            </a>
+            
+            <a class="nav-item" href="/works">
+                My Works
+            </a>
+            
+            <a class="nav-item" href="/about">
+                About
+            </a>
+            
+        </div>
+        <span class="nav-toggle" id="navMenuDropdown">
+            <span></span>
+            <span></span>
+            <span></span>
+        </span>
+        <div class="navbar-menu position-absolute full-width content-box is-hidden-desktop is-flex flex-column center" style="top: 100%;">
+            
+            <a class="nav-item flex-1" href="/">
+                Home
+            </a>
+            
+            <a class="nav-item flex-1" href="/works">
+                My Works
+            </a>
+            
+            <a class="nav-item flex-1" href="/about">
+                About
+            </a>
+            
+        </div>
+    </nav>
+  </div>
+</header>
+
+  <div id="main-wrap" class="position-relative" style="margin-top: 55px;">
+      <div class="main-inner-content">
+          <!--博文页面-->
+
+<style>
+    .header-box {
+        height: 370px;
+        filter: blur(10px);
+        background-size: cover;
+        background-color: lightsteelblue;
+    }
+
+    .post-box {
+        padding: 15px;
+        padding-top: 60px;
+        min-height: 80vh;
+        margin-top: -200px;
+        border-radius: 4px;
+        background-color: rgba(255,255,255,.8);
+    }
+
+    .post-avatar {
+        height: 30px;
+        width: 30px;
+        border-radius: 50%;
+    }
+
+    .flow-chart {
+        text-align: center;
+    }
+
+    img[alt="post-cover"] {
+        display: none;
+    }
+</style>
+<header>
+    <div id="header_box" class="header-box"></div>
+</header>
+<section>
+    <div class="container post-box">
+        <div class="content post-title is-flex center flex-column" style="margin-bottom: 70px; overflow: auto;">
+            <h1 class="has-text-centered" style="padding-bottom: 10px; border-bottom: 3px solid #fff">
+                <strong>Java总结（十二）</strong>
+            </h1>
+            
+            <div class="is-flex align-center">
+                <img class="post-avatar" src="https://q2.qlogo.cn/headimg_dl?bs=996057150&dst_uin=996057150&dst_uin=996057150&;dst_uin=996057150&spec=100&url_enc=0&referer=bu_interface&term_type=PC">
+                <span style="padding:0 10px;"> <span class="sub-title">By</span> 王邸</span>
+                <span class="post-date sub-title">at: 2019-09-14</span>
+            </div>
+            
+                <div>
+                    
+                </div>
+            
+        </div>
+        <div class="content" style="overflow: auto">
+            <p>这周开始讲Spring了，讲Spring都是很多没有见过的东西，很多东西都是配置的，目前还不需要懂底层的实现，需要的是知道如何操作，特别是maven。当然Spring也很重要，需要多思考。今天是2019年9月13日星期五，中秋节，在武汉，去了一趟光谷，浏览了一圈武大。现在的年轻人都不行呀，烈日下骑单车就要中暑了。早早地回来，就确定把这周总结写了，虽然只有四天的东西，但是感觉学了好久了，因为东西很多，就好像刚开始学JavaEE一样，必须要总结，牢记于心！上个礼拜六上午开了一个头，这里一起总结</p>
+<h2 id="星期一（0909）"><a href="#星期一（0909）" class="headerlink" title="星期一（0909）"></a>星期一（0909）</h2><h3 id="maven-（-‘meɪvn-）"><a href="#maven-（-‘meɪvn-）" class="headerlink" title="maven （[‘meɪvn]）"></a>maven （[‘meɪvn]）</h3><p>Maven是Apache下的一个纯java开发的开源项目，它是一个项目管理构建工具，使用maven对java项目进行构建、依赖管理。当前使用Maven的项目在持续增长。<br>Maven主要有两个功能（必须要知道）：</p>
+<pre><code>1、项目构建
+2、依赖管理(重点)
+</code></pre><h3 id="web项目的基础"><a href="#web项目的基础" class="headerlink" title="web项目的基础"></a>web项目的基础</h3><p>这里介绍一些web项目的基础内容，以idea为做项目的编辑器，说一些web项目的内容<br>1.idea 可以给文件夹设置这五种文件夹的类型：</p>
+<pre><code>Sources          (存放编写的Java源文件)
+Tests           （存放测试的文件）
+Resources        (存放一些静态文件)
+Test Resources  （存放一些测试的源文件）
+Excluded        （项目输出的文件类型）
+</code></pre><p>这里有两个注意的点：<br>a.如何设置,一般来说idea在创建项目会自动给你设置，但是你可以自己设置：<br>    1）在左边树形文件夹中右键点击一个文件夹，在菜单中有“Mark Directory as”可以选择不同的文件夹<br>    2）在module文件夹按F4，或者右键菜单选择open module setting,也可设置</p>
+<p>b.项目文件夹的名称，可以不和这些名称一样，比如Sources在idea里面是src，Exculded在maven项目中是target文件夹，在webapp项目中是out文件夹，这些都是在创建项目的时候idea已经设置好了，记住他们层级关系，以及每个文件夹意义就好。</p>
+<p>2.project Structure<br>在module文件夹按F4，或者右键菜单选择open module setting,打开的菜单栏：<br>Project setting</p>
+<pre><code>Project(项目的一些配置SDK，项目名字等等)
+Modules（模块的一些配置，文件夹类型，依赖导入，输出路径等等）
+Libraries（一些已经引用的库文件（依赖）会显示在这里）
+Facets（表示这个module有什么特征，比如 Web，Spring和Hibernate等）
+Artifacts（可以直接运行的web应用，生成的东西）
+</code></pre><p>Platform Settings</p>
+<pre><code>SDKs
+Global Libraries
+</code></pre><p>项目这些配置先知道怎么使用，之后在去思考他们所表示的东西。</p>
+<p>3.src 和 resource目录下的文件编译完成后都会放在classes文件夹的目录下，如果他们的文件名相同，编译完将放在同一个文件夹下。</p>
+<h3 id="项目构建"><a href="#项目构建" class="headerlink" title="项目构建"></a>项目构建</h3><p>项目构建是一个项目从编写源代码到编译、测试、打包、部署、运行的过程<br><strong>传统的构建过程如下：</strong></p>
+<pre><code>1）在IDE 中创建一个java web工程
+2）在工程中编写源代码及配置文件等(配置环境 导包)
+3）对源代码进行编译，java文件编译成class文件
+4）执行Junit单元测试
+5）将工程打成war包部署至tomcat运行
+</code></pre><p><strong>maven项目构建过程</strong><br>maven将项目构建的过程进行标准化，每个阶段使用一个命令完成，下图展示了构建过程的一些阶段，后面章节详细介绍每个阶段，这里先大概了解下：<br>target：</p>
+<pre><code>清理-&gt;编译-&gt;测试-&gt;报告-&gt;打包-&gt;部署
+</code></pre><p>上图中部分阶段对应命令如下：</p>
+<pre><code>清理阶段对应maven的命令是clean，清理输出的class文件
+编译阶段对应maven的命令是compile，将java代码编译成class文件。
+打包阶段对应maven的命令是package，java工程可以打成jar包，web包可以打成war包
+</code></pre><p>maven工程构建的优点：</p>
+<pre><code>1、一个命令完成构建、运行，方便快捷。
+2、maven对每个构建阶段进行规范，非常有利于大型团队协作开发。
+</code></pre><h3 id="依赖管理"><a href="#依赖管理" class="headerlink" title="依赖管理"></a>依赖管理</h3><p>什么是依赖？一个java项目可能要使用一些第三方的jar包才可以运行，那么我们说这个java项目依赖了这些第三方的jar包。<br>什么是依赖管理？就是对项目所有依赖的jar包进行规范化管理。<br><strong>传统项目的依赖管理</strong><br>传统的项目工程要管理所依赖的jar包完全靠人工进行，程序员从网上下载jar包添加到项目工程中，程序员手工将Hibernate、struts2、spring的jar添加到工程中的WEB-INF/lib目录下。<br>手工拷贝jar包添加到工程中的问题是：</p>
+<pre><code>1、没有对jar包的版本统一管理，容易导致版本冲突（版本需一致）。
+2、从网上找jar包非常不方便，有些jar找不到。
+3、jar包添加到工程中导致工程过大。
+</code></pre><p><strong>maven项目的依赖管理</strong><br>maven项目管理所依赖的jar包不需要手动向工程添加jar包，只需要在pom.xml（maven工程的配置文件）添加jar包的坐标，自动从maven仓库中下载jar包、运行<br>使用maven依赖管理添加jar的好处：</p>
+<pre><code>1、通过pom.xml文件对jar包的版本进行统一管理，可避免版本冲突。
+2、maven团队维护了一个非常全的maven仓库，里边包括了当前使用的jar包，maven工程可以自动从maven仓库下载jar包，非常方便。
+</code></pre><p>吹了半天，现在开始使用maven吧！</p>
+<h3 id="开始使用maven！"><a href="#开始使用maven！" class="headerlink" title="开始使用maven！"></a>开始使用maven！</h3><p><strong>下载</strong><br>从该网站 <a href="http://maven.apache.org/download.cgi" target="_blank" rel="external">官方地址</a> 下载，目前使用3.6.1。因为最新版的使用idea会有问题。</p>
+<p><strong>解压</strong><br>将maven解压到一个不含有中文和空格的目录中。<br>目录简介</p>
+<pre><code>bin目录 mvn.bat （以run方式运行项目）、 mvnDebug.bat（以debug方式运行项目 ）
+boot目录 maven运行需要类加载器
+conf目录 settings.xml 整个maven工具核心配置文件
+lib目录 maven运行依赖jar包
+</code></pre><p><strong>环境变量配置</strong><br>MAVEN_HOME:包含bin文件夹的目录<br>Path：%MAVEN_HOME%/bin<br>输入mvn –v的时候出现版本号，意味着安装完成</p>
+<p><strong>配置maven</strong><br>在maven的配置文件中修改一些内容，路径：apache-maven-3.6.1\conf\settings.xml<br>1.添加本地仓库<br>在settings标签下添加如下标签，表示本地仓库地址。</p>
+<pre><code>&lt;localRepository&gt;H:\maven\repository&lt;/localRepository&gt;
+</code></pre><p>如果不设置默认的地址为：</p>
+<pre><code>C:\Users\lenovo\.m2\repository
+</code></pre><p>2.添加远程仓库<br>在mirrors标签下添加标签：</p>
+<pre><code>&lt;mirror&gt;
+  &lt;id&gt;nexus-aliyun&lt;/id&gt;
+  &lt;mirrorOf&gt;central&lt;/mirrorOf&gt;
+  &lt;name&gt;Nexus aliyun&lt;/name&gt;
+  &lt;url&gt;http://maven.aliyun.com/nexus/content/groups/public&lt;/url&gt;
+&lt;/mirror&gt;
+</code></pre><p>一般设置阿里的远程仓库，如果阿里没有，就会去中国区的官方仓库下载，为了安全官方仓库下载很慢就对了。</p>
+<p>3.解决jdk1.5问题<br>在 profiles 标签下面添加：</p>
+<pre><code>&lt;profile&gt;
+  &lt;id&gt;jdk-1.8&lt;/id&gt;
+  &lt;activation&gt;
+    &lt;activeByDefault&gt;true&lt;/activeByDefault&gt;
+    &lt;jdk&gt;1.8&lt;/jdk&gt;
+  &lt;/activation&gt;
+  &lt;properties&gt;
+    &lt;maven.compiler.source&gt;1.8&lt;/maven.compiler.source&gt;
+    &lt;maven.compiler.target&gt;1.8&lt;/maven.compiler.target&gt;
+    &lt;maven.compiler.compilerVersion&gt;1.8&lt;/maven.compiler.compilerVersion&gt;
+  &lt;/properties&gt;
+&lt;/profile&gt;
+</code></pre><h3 id="Maven的工程结构"><a href="#Maven的工程结构" class="headerlink" title="Maven的工程结构"></a>Maven的工程结构</h3><p>Project（必须掌握）</p>
+<pre><code>|-src
+|   |-main
+|   |  |-java        —— 存放项目的.java文件
+|   |  |-resources   —— 存放项目资源文件，如spring, hibernate配置文件
+|   |  |-webapp   —— web项目的webroot文件夹，存放网页资源 如jsp等
+|   |-test
+|   |    |-java        ——存放所有测试.java文件，如JUnit测试类
+|   |    |-resources   —— 测试资源文件
+|-target             —— 目标文件输出位置例如.class、.jar、.war文件(会生成)
+|-pom.xml           ——maven项目核心配置文件
+</code></pre><p>我们就发现了一个有趣的现象，这个project的文件是不是和之前我说设置文件夹类型是很类似的sources,resources,test 等等</p>
+<h3 id="Maven的工程创建"><a href="#Maven的工程创建" class="headerlink" title="Maven的工程创建"></a>Maven的工程创建</h3><p>一般手动创建maven工程很少，都是idea给我们创建好的，就说一下配置pom.xml文件</p>
+<pre><code>&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot;
+xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;&gt;
+  &lt;!-- 版本：4.0.0 --&gt;
+  &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+  &lt;!-- 组织名称：暂时使用 组织名称+项目名称 作为组织名称 --&gt;
+  &lt;!-- 组织名称：实际名称 按照访问路径规范设置，通常以功能作为名称：eg: junit spring --&gt;
+  &lt;groupId&gt;com.cskaoyan.maven&lt;/groupId&gt;
+  &lt;!-- 项目名称 --&gt;
+  &lt;artifactId&gt;HelloWorld&lt;/artifactId&gt;
+  &lt;!-- 当前项目版本号：同一个项目开发过程中可以发布多个版本，此处标示0.0.1版 --&gt;
+  &lt;!-- 当前项目版本号：每个工程发布后可以发布多个版本，依赖时调取不同的版本，使用不同的版本号 --&gt;
+  &lt;version&gt;0.0.1&lt;/version&gt;
+  &lt;!-- 名称：可省略，如果省略，artifactId就是name--&gt;
+  &lt;name&gt;Hello&lt;/name&gt;
+
+  &lt;!-- 可以写一些配置，一般配置的是版本号 --&gt;
+  &lt;properties&gt;
+      &lt;spring.versionw&gt;5.1.9.RELEASE&lt;/spring.versionw&gt;
+  &lt;/properties&gt;
+  &lt;!-- 依赖关系 --&gt;
+  &lt;dependencies&gt;
+    &lt;!-- 依赖设置 --&gt;
+    &lt;dependency&gt;
+      &lt;!-- 依赖组织名称 --&gt;
+      &lt;groupId&gt;junit&lt;/groupId&gt;
+      &lt;!-- 依赖项目名称 --&gt;
+      &lt;artifactId&gt;junit&lt;/artifactId&gt;
+      &lt;!-- 依赖版本名称 --&gt;
+      &lt;version&gt;4.9&lt;/version&gt;
+      &lt;!-- 依赖范围：test包下依赖该设置 --&gt;
+      &lt;scope&gt;test&lt;/scope&gt;
+    &lt;/dependency&gt;
+    &lt;!--通过context去导入5+1--&gt;
+    &lt;dependency&gt;
+      &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+      &lt;artifactId&gt;spring-context&lt;/artifactId&gt;
+      &lt;version&gt;${spring.versionw}&lt;/version&gt;
+    &lt;/dependency&gt;
+  &lt;/dependencies&gt;
+&lt;/project&gt;
+</code></pre><p><strong>注意事项</strong><br>1.Properties标签，引入其他参数 供其他值使用 表达式为${key}</p>
+<h3 id="Maven命令-重点"><a href="#Maven命令-重点" class="headerlink" title="Maven命令(重点)"></a>Maven命令(重点)</h3><p>必须要知道每个指令都进行了哪些操作<br><strong>Clean：target文件夹</strong><br>执行 mvn clean命令<br>执行完毕后，会将target目录删除。</p>
+<p><strong>compile：java和resources文件夹</strong><br>执行 mvn compile命令，完成编译操作<br>（默认编译src/main/java，同时会把src/resources下的资源放在编译的输出目录target/classes）<br>执行完毕后，会生成target目录，该目录中存放了编译后的字节码文件。</p>
+<p><strong>test：</strong><br>执行 mvn test命令，完成单元测试操作，src\test\java所有包含@Test注解的方法，如果单元测试执行失败不会执行后续的操作，执行失败原因：类名，包含Test<br>执行完毕后，会在target目录中生成两个文件夹： surefire-reports（测试报告）、test-classes（测试的字节码文件，包括test/resources的资源文件）</p>
+<p><strong>package：jar war pom</strong><br>执行 mvn package命令，完成打包操作（在打包之前会执行mvn test）执行完毕后，会在target目录中生成一个文件，该文件可能是jar、war、pom</p>
+<pre><code>默认是：jar包
+war包：是我们web项目的包，配置文件修改打包类型&lt;packaging&gt;war&lt;/packaging&gt;,idea会自动把我们module加入到Facts里面
+pom包：出现在父子工程中，接下来会简单介绍
+</code></pre><p><strong>install</strong><br>mvn install<br>将我们的项目安装到本地仓库</p>
+<p><strong>注意事项</strong><br>1.执行：mvn clean 不会执行其他的命令，但其他几个compile,test,package,install。执行后一个指令会先执行前一个指令。例如：<br>如果我们执行的是：mvn install:<br>他会先执行:<br>mvn compile<br>mvn test<br>mvn package<br>之后再执行：<br>mav install;<br>2.关于打包，如果打包的是war包，必须在webapp里面新建WEB-INF,并有web.xml配置文件，才能打包成功。否则将会报错</p>
+<h3 id="关于依赖的作用范围："><a href="#关于依赖的作用范围：" class="headerlink" title="关于依赖的作用范围："></a>关于依赖的作用范围：</h3><p>在我们在pom.xml编写依赖的时候，有时候需要加入依赖的作用范围scope例如：</p>
+<pre><code>&lt;dependencies&gt;
+  &lt;dependency&gt;
+    &lt;groupId&gt;junit&lt;/groupId&gt;
+    &lt;artifactId&gt;junit&lt;/artifactId&gt;
+    &lt;version&gt;4.12&lt;/version&gt;
+    &lt;scope&gt;test&lt;/scope&gt;
+  &lt;/dependency&gt;
+&lt;dependencies&gt;
+</code></pre><p><strong>compile</strong><br>：编译范围，指A在编译时依赖B，此范围为<strong>默认依赖范围</strong>。编译范围的依赖会用在编译、测试、运行，由于运行时需要所以编译范围的依赖会被打包。</p>
+<p><strong>provided</strong><br>：provided依赖在编译和测试时需要，在<strong>运行时不需要</strong>，比如：<strong>servlet api</strong>被tomcat容器提供。provided依赖只有在当JDK或者一个容器已提供该依赖之后才能使用（否则会报错），</p>
+<pre><code>&lt;dependency&gt;
+    &lt;groupId&gt;javax.servlet&lt;/groupId&gt;
+    &lt;artifactId&gt;javax.servlet-api&lt;/artifactId&gt;
+    &lt;version&gt;3.1.0&lt;/version&gt;
+    &lt;scope&gt;provided&lt;/scope&gt;&lt;!--表示依赖范围，运行不需要--&gt;
+&lt;/dependency&gt;
+</code></pre><p><strong>runtime</strong><br>：runtime依赖在运行和测试系统的时候需要，但在编译的时候不需要。比如：jdbc的驱动包。由于运行时需要所以runtime范围的依赖会被打包。</p>
+<p><strong>test</strong><br>：test范围依赖 在编译和运行时都不需要，它们只有在测试编译和测试运行阶段可用，比如：junit。由于运行时不需要所以test范围依赖不会被打包。就是一开始的情况</p>
+<h3 id="IDEA使用maven"><a href="#IDEA使用maven" class="headerlink" title="IDEA使用maven"></a>IDEA使用maven</h3><p>idea默认会给我们配置一个maven，不过强烈建议使用自己的maven，然后在idea里面配置，这里需要配置两个地方:<br>1.进入settings -&gt; build,execution,deployment -&gt; build tools -&gt; maven中配置：<br>    maven home directory<br>    user settings file<br>    Local repository<br>名字已经表示意思，一定要自己配！不然idea就会找到默认的地方去下载，这样C盘就会爆炸哦<br>2.点击左上角的工具栏： file -&gt; other settings -&gt; other settings for new project:<br>修改的内容和1一样，把这两个地方都修改成自己下载的maven即可。再次强调：<strong>不要用idea给你配的maven</strong></p>
+<h3 id="Maven聚合工程（父子工程-并不推荐使用）"><a href="#Maven聚合工程（父子工程-并不推荐使用）" class="headerlink" title="Maven聚合工程（父子工程,并不推荐使用）"></a>Maven聚合工程（父子工程,并不推荐使用）</h3><p>1.建立一个父module<br>2.鼠标点击一下父module使他选中，然后新建一个module就会新建一个module，上面会多出两行</p>
+<pre><code>Add as module to
+Parent
+</code></pre><p>3.可以看到子项目的pom文件，有parent节点。<br>4.同时父项目的module里 有新增 module节点</p>
+<h3 id="聚合工程的作用"><a href="#聚合工程的作用" class="headerlink" title="聚合工程的作用"></a>聚合工程的作用</h3><p>不希望在父工程里编码。具体的代码应该拆分到子工程。父工程的主要职责是把不同的子工程聚合起来，合为一个工程。<br>父工程里集中配置多个子模块里通用的jar包。<br>在父工程的pom.xml中抽取一些重复的配置的，比如：锁定jar包的版本、设置编译版本等。父工程定义的jar包子工程可以引用。</p>
+<h3 id="关于maven常见问题："><a href="#关于maven常见问题：" class="headerlink" title="关于maven常见问题："></a>关于maven常见问题：</h3><p><strong>网络问题</strong><br>一定要在网络良好的情况下使用：如果maven的依赖未下载成功，去删除掉对应的依赖，（会产生lastupdated文件）重新下载。</p>
+<p><strong>寻找依赖问题</strong><br>如何去找对应的依赖？通过groupId和artifactId，百度进入maven repository去寻找，里面会有给maven的标签直接复制</p>
+<p><strong>项目导入问题</strong><br>当你导入别人的maven项目的时候，一定要注意maven的配置是不是自己的配置文件，查看上面idea配置maven。因为别人的maven配置文件可能不同，导入别人的maven项目可能会加载别人的配置文件，当idea找不到对应的maven的时候，会默认启用idea自己的maven,然后他就会去官方仓库下载包到本地仓库，这样C盘就爆炸了。导入别人项目之前，一定要检查配置文件哦。</p>
+<p><strong>pom.xml图标问题</strong><br>如果pom.xml的图标不是显示的是maven项目的图标，每个不同主题图标不一样，默认的maven项目的图标是一个M，这时候需要设置一下<br>右键点击pom.xml  -&gt; Add as Maven Project<br>网上找到另一个方法：<br>1.右键点击我的项目，点击Add Framework Support，<br>2.弹出以下页面，若没有maven，一直下拉，若还没有，检查你的项目中是否已有pom.xml文件，勾选Maven，点击Ok<br>3.pom.xml成功创建(已转变成maven项目)，可以添加你的依赖了</p>
+<h2 id="星期二（0910）"><a href="#星期二（0910）" class="headerlink" title="星期二（0910）"></a>星期二（0910）</h2><p>为了更好的理解Spring，今天讲了几种设计模式，最后讲了下动态代理，动态代理有两种一种是jdk实现的，一种是spring实现的。我打算这里先讲一次，到后面讲到Spring再讲一次，再两者进行比较。言归正传，在说设计模式之前，我觉得要先提一下<strong>设计模式的五个原则</strong></p>
+<h3 id="设计模式的五个原则（solid）"><a href="#设计模式的五个原则（solid）" class="headerlink" title="设计模式的五个原则（solid）"></a>设计模式的五个原则（solid）</h3><p>S - 单一职责原则：<br>O - 开放封闭原则：<br>L - Liskov原则：<br>I - 接口隔离原则：<br>D – 依赖倒置原则：</p>
+<p><strong>单一职责原则</strong>：<br>一个模块负责一个功能<br>一个类负责一个业务<br>一个API去实现一个功能<br>不同的功能分隔开。一个类如果需要变化，最好只能有一个维度的原因。</p>
+<p><strong>开放封闭原则</strong>：<br>对什么开放：对扩展开放</p>
+<p>扩展：新功能—》可以（提倡）去增加代码（增加一个类）<br>项目不断迭代（增加新的需求）</p>
+<p>对什么封闭：对<strong>修改封闭</strong><br>不建议去修改代码 （尤其是一些底层的API）<br>牵一发而动全身。<br>Deprecate （不建议使用了，废弃掉了）</p>
+<p><strong> L - Liskov原则</strong><br>李氏替换原则：任何一个基类可以出现的地方，子类一定可以出现，类似于多态性<br>//写法1</p>
+<pre><code>UserDao dao = new UserDaoImpl2();
+dao.findUserByid();
+dao.findUserByName();
+</code></pre><p>//写法2</p>
+<pre><code>UserDaoImpl2 dao = new UserDaoImpl2 ();
+dao.findUserByid();
+dao.findUserByName();
+</code></pre><p><strong>I - 接口隔离原则</strong>：</p>
+<p>接口：interface （功能）<br>隔离：分开<br>不同功能的接口，最好放在不同的interface里。<br>一个接口里最好不要集成太多的功能，<br>否则用户去实现该接口会比较麻烦。</p>
+<p><strong> D – 依赖倒置原则：（Spring  DI  IOC APSPECTJ）</strong><br>依赖，具体依赖于抽象，而非抽象依赖于具体。<br>先去设计抽象的DAO  （接口）</p>
+<h3 id="常见的设计模式"><a href="#常见的设计模式" class="headerlink" title="常见的设计模式"></a>常见的设计模式</h3><h3 id="单例模式（Singleton-Pattern）"><a href="#单例模式（Singleton-Pattern）" class="headerlink" title="单例模式（Singleton Pattern）"></a>单例模式（Singleton Pattern）</h3><p><strong>概念</strong><br>何为单例？单一实例。全局只有一个。<br>哪些场合需要用到单例？<br>Servlet<br>ServletContext</p>
+<p><strong>特点（必备！）</strong><br>1、单例类只能有一个实例。（自己创建对象）<br>2、单例类必须自己创建自己的唯一实例。（构造方法私有固定）<br>3、单例类必须给所有其他对象提供这一实例。</p>
+<h3 id="单例的种类（六种，先介绍四种，之后介绍设计模式时候再全部进行罗列）"><a href="#单例的种类（六种，先介绍四种，之后介绍设计模式时候再全部进行罗列）" class="headerlink" title="单例的种类（六种，先介绍四种，之后介绍设计模式时候再全部进行罗列）"></a>单例的种类（六种，先介绍四种，之后介绍设计模式时候再全部进行罗列）</h3><p>懒加载（懒汉模式）<br>立即加载（饿汉模式）</p>
+<p><strong>//线程不安全的懒加载 （懒汉模式）</strong></p>
+<pre><code>public class Singleton1 {
+  //1、单例类只能有一个实例。
+  static Singleton1 singleton1;
+  //2、单例类必须自己创建自己的唯一实例。→构造方法私有
+  private Singleton1(){}
+  //3、单例类必须给所有其他对象提供这一实例。
+  public static Singleton1 getSingleton(){
+    if (singleton1 == null) {
+        singleton1 = new Singleton1();
+    }
+    return singleton1;
+  }
+}
+</code></pre><p>线程不安全，所以很可能会出现同时进入<br>if(singleton1 == null) {<br>然后创建多个实例，而不是单例模式。</p>
+<p><strong>//线程安全的懒加载</strong></p>
+<pre><code>public class Singleton2 {
+  //1、单例类只能有一个实例。
+  static Singleton2 singleton2;
+  //2、单例类必须自己创建自己的唯一实例。→构造方法私有
+  private Singleton2(){}
+  //3、单例类必须给所有其他对象提供这一实例。
+  public synchronized static Singleton2 getSingleton(){
+    if (singleton2 == null) {
+        singleton2 = new Singleton2();
+    }
+    return singleton2;
+  }
+}
+</code></pre><p>优点：多线程下依然是单例<br>缺点：加锁会影响执行效率。</p>
+<p><strong>//线程安全的立即加载（恶汉模式）</strong></p>
+<pre><code>public class Singleton3 {
+  //1、单例类只能有一个实例。
+  static Singleton3 singleton3 = new Singleton3();
+  /*static {
+      singleton3 = new Singleton3();
+  }*/
+  //2、单例类必须自己创建自己的唯一实例。→构造方法私有
+  private Singleton3(){}
+  //3、单例类必须给所有其他对象提供这一实例。
+  public static Singleton3 getSingleton(){
+    return singleton3;
+  }
+}
+</code></pre><p>不使用锁，让类在加载的时候，通过隐式初始化，或者静态代码块自行实例化。</p>
+<p><strong>//线程安全的懒加载（内部类，实现懒加载）</strong></p>
+<pre><code>public class Singleton4 {
+  //2、单例类必须自己创建自己的唯一实例。→构造方法私有
+  private Singleton4(){}
+  //3、单例类必须给所有其他对象提供这一实例。
+  public static Singleton4 getSingleton(){
+    System.out.println(&quot;outer getSingleton&quot;);
+    return Inner.getInstance();
+  }
+  //静态内部类
+  static class Inner{
+    //1、单例类只能有一个实例。
+    static Singleton4 singleton4 = new Singleton4();
+    /*static {
+      singleton4 = new Singleton4();
+      System.out.println(&quot;inner static&quot;);
+    }*/
+    public static Singleton4 getInstance() {
+      System.out.println(&quot;inner getInstance&quot;);
+      return singleton4;
+    }
+  }
+}
+</code></pre><h3 id="工厂模式（Factory-Pattern）"><a href="#工厂模式（Factory-Pattern）" class="headerlink" title="工厂模式（Factory Pattern）"></a>工厂模式（Factory Pattern）</h3><p>生成产品的工厂，生产对象<br>在工厂模式中，我们在创建对象时不会对客户端暴露创建逻辑，并且是通过使用一个共同的接口（方法）来指向新创建的对象</p>
+<h3 id="简单工厂"><a href="#简单工厂" class="headerlink" title="简单工厂"></a>简单工厂</h3><p>通过给定的参数的不同，返回不同的实例。<br>举例：我们想生成不同的动物，写一个动物类，让其他具体的动物来继承</p>
+<pre><code>public class Animal {}
+//继承动物类
+public class Cat extends Animal {}
+public class Dog extends Animal {}
+//简单工厂
+public class AnimalFactory {
+  public Animal createAnimal(String animalName){
+    Animal animal = null;
+    /*if (&quot;dog&quot;.equals(animalName)){
+        animal =  new Dog();
+    }else (&quot;cat&quot;.equals(animalName)){
+        animal = new Cat();
+    }*/
+    switch (animalName){
+      case &quot;dog&quot; :
+          animal = new Dog();
+          break;
+    }
+    return animal;
+  }
+}
+</code></pre><p>当我们去新增新的实例的时候，需要修改代码，要么添加if，要么添加switch（和开闭原则有些许出入）这里，让我想起了之前做第一个项目的时候，servlet也是这样，写了好多好多个接口用一个servlet来接收，感觉好像不太友好。</p>
+<h3 id="工厂方法"><a href="#工厂方法" class="headerlink" title="工厂方法"></a>工厂方法</h3><p>工厂方法模式，创建一个<strong>工厂接口</strong>和创建<strong>多个工厂实现类</strong>完全遵从开闭原则，不对任何已有代码进行修改，直接新增一个类，去实现工厂的接口。<br>举例：继续以小动物为例子：<br>动物类：</p>
+<pre><code>Animal.java
+public class Animal {}
+</code></pre><p>继承动物类：</p>
+<pre><code>Cat.java
+public class Cat extends Animal {}
+Dog.java
+public class Dog extends Animal {}
+</code></pre><p>这时我们要写一个工厂的接口：</p>
+<pre><code>AnimalFactory.java
+public interface AnimalFactory{
+  Animal create();
+}
+</code></pre><p>然后为每个动物建一个工厂：（这样建工厂的开销有点大）</p>
+<pre><code>CatFactory.java
+public CatFactory implements AnimalFactory{
+  @Override
+  public Animal create(){
+    return new Cat();
+  }
+}
+DogFactory.java
+public DogFactory implements AnimalFactory{
+  @Override
+  public Animal create(){
+    return new Dog();
+  }
+}
+</code></pre><p>这样满足了开闭原则，同时带来的一个缺点就是，每个实现类，需要一个建造的工厂，感觉开销有点大。虽然说目前遇到的很多别人写的依赖，还有jdk源码里面，感觉大都是用的这种设计模式，可能还是我见识比较少罢了。</p>
+<h3 id="建造者Builder模式"><a href="#建造者Builder模式" class="headerlink" title="建造者Builder模式"></a>建造者Builder模式</h3><p>侧重点：参数的设置。<br>以建造一个人为例，当我们new了一个human对象的时候，我们的head对象，body对象，arm对象，foot对象，都已经创建好了。我们需要做的就是去set这些对象的参数：比如head的IQ,EQ多少，body的各个功能，arm的宽度，foot的脚长等等，<br>代码说明：</p>
+<pre><code>public class Human {
+  //我们创好human的时候，就已经把各个部分创好了
+  Head head = new Head();
+  Arm arm = new Arm();
+  Leg leg = new Leg();
+  int height;
+
+  //对各部件的操作
+  public Head getHead() {return head;}
+  public void setHead(Head head) {this.head = head;}
+  public Arm getArm() {return arm;}
+  public void setArm(Arm arm) {this.arm = arm;}
+  public Leg getLeg() {return leg;}
+  public void setLeg(Leg leg) {this.leg = leg;}
+  public int getHeight() {return height;}
+  public void setHeight(int height) {this.height = height;}
+}
+各部件的对象：
+public class Arm {
+  int length;
+  public int getLength() {return length;}
+  public void setLength(int length) {this.length = length;}
+}
+public class Head {
+  int iq;
+  int eq;
+  public int getIq() {return iq;}
+  public void setIq(int iq) {this.iq = iq;}
+  public int getEq() {return eq;}
+  public void setEq(int eq) {this.eq = eq;}
+}
+。。。。等等
+</code></pre><p>最后引入我们的builder类：</p>
+<pre><code>public class HumanBuilder {
+
+  //创建一个人
+  Human human = new Human();
+
+  //建造者对这些参数进行操作！
+  public void setHeight(){human.setHeight(180);}
+  public void setHeadIq(int iq){human.getHead().setIq(iq);}
+  public void setHeadEq(int eq){ human.getHead().setEq(eq); }
+  public void setArmLength(int length){human.getArm().setLength(length);}
+  public void setLegLength(int length){human.getLeg().setLength(length);}
+  //暴露方法调用
+  public Human build(){ return human; }
+}
+</code></pre><h3 id="代理（重点！！！）"><a href="#代理（重点！！！）" class="headerlink" title="代理（重点！！！）"></a>代理（重点！！！）</h3><p><strong>代理（重点！！！）</strong><br><strong>代理（重点！！！）</strong><br><strong>代理（重点！！！）</strong><br>先要搞清楚：什么是<strong>代理对象</strong>，什么是<strong>委托类对象</strong><br>以租房为例子：<br>代理对象：中介<br>代理类 负责为委托类预处理消息，过滤消息并转发消息，以及进行消息被委托类执行后的后续处理。<br>被代理对象（委托类对象）：业主。<br>可以理解为：<strong>代理类不仅可以和委托类做相同的事情，而且对委托类的事情可以得到增强</strong></p>
+<p>包装对象 和 被包装对象 能不能看成是一种代理？ 可以<br>代理对象：包装对象<br>被代理对象：被包装对象。</p>
+<p><strong>静态代理</strong><br>生成一个中间类（继承）实现委托类的功能<br>举例：租房问题<br>房东直租：</p>
+<pre><code>public class HouseOwner {
+  public boolean rentHouse(int money){
+    System.out.println(&quot;房东收到的钱为：&quot; + money);
+    if (money &gt;= 2000){
+        return true;
+    }
+    return false;
+  }
+}
+</code></pre><p>中介继承了房东，去租房，</p>
+<pre><code>public class HouseProxy extends HouseOwner{
+    //HouseOwner houseOwner = new HouseOwner();
+    @Override
+    public boolean rentHouse(int money){
+        System.out.println(&quot;中介收到的钱为：&quot; + money);
+</code></pre><p>//调用父类房东的方法时，中间可以自己拿走500块！</p>
+<pre><code>        boolean b = super.rentHouse(money - 500);
+        System.out.println(&quot;房东决定租房子吗：&quot; + b);
+        return b;
+    }
+}
+</code></pre><p>单元测试测试两种情况，无中介和有中介</p>
+<pre><code>public class MainTest {
+    @Test
+    public void mytest(){
+        HouseOwner houseOwner = new HouseOwner();
+        boolean b = houseOwner.rentHouse(2000);
+    }
+    @Test
+    public void mytest2(){
+        HouseProxy houseProxy = new HouseProxy();
+        boolean b = houseProxy.rentHouse(2000);
+        System.out.println(b);
+    }
+}
+</code></pre><p><strong>动态代理</strong><br>动态代理它可以直接给某一个目标对象生成一个<strong>代理对象</strong>，而不需要<strong>代理类</strong>存在。<br>Java动态代理<br>Java 动态代理机制的出现，使得 Java 开发人员不用手工编写代理类，只要简单地指定一组接口及委托类对象，便能动态地获得代理类。</p>
+<h3 id="动态代理的实现"><a href="#动态代理的实现" class="headerlink" title="动态代理的实现"></a>动态代理的实现</h3><p>1.jdk提供一个Proxy类可以 实现<strong>接口类</strong>的对象直接生成代理对象。（被代理类要有一个接口的实现）<br>2.cglib  (spring里再学习)</p>
+<h3 id="动态代理的作用"><a href="#动态代理的作用" class="headerlink" title="动态代理的作用"></a>动态代理的作用</h3><p>可以不生成代理类，直接就可以通过委托类不仅实现委托类的方法，而且可以在实现委托类之前和之后都可以做一些其他的操作。例如：事务<br>两个动态代理的区别是jdk动态代理需要实现的是使用接口，而cglib不需要，这里后面会讲到。</p>
+<h3 id="jdk代理实现"><a href="#jdk代理实现" class="headerlink" title="jdk代理实现"></a>jdk代理实现</h3><p>因为使用的是接口，所以委托类自身也要需要接口来实现<br>租房的接口：</p>
+<pre><code>public interface RentHouse {
+  public boolean rentHouse(int money);
+  public boolean rentHouse2(int money);
+}
+</code></pre><p>委托类的实现：</p>
+<pre><code>public class HouseOwner implements RentHouse{
+  public boolean rentHouse(int money){
+    System.out.println(&quot;房东收到的钱为：&quot; + money);
+    if (money &gt;= 2000){
+      return true;
+    }
+    return false;
+  }
+  public boolean rentHouse2(int money){
+    System.out.println(&quot;房东收到的钱为：&quot; + money);
+    if (money &gt;= 2000){
+      return true;
+    }
+    return false;
+  }
+}
+</code></pre><p>//代理对象生成：（使用到jdk自带的Proxy类）我们在单元测试中使用</p>
+<pre><code>@Test
+public void mytest(){
+  RentHouse houseOwner = new HouseOwner();
+  //参数1 委托类类加载器
+  //参数2 委托类的接口
+  //参数3 响应处理器
+  RentHouse houseProxy = (RentHouse) Proxy.newProxyInstance(houseOwner.getClass().getClassLoader(), houseOwner.getClass().getInterfaces(),
+        new InvocationHandler() {
+    //参数1：代理对象
+    //参数2：代理对象正在执行的方法
+    //参数3：代理对象正在执行的方法所对应的参数
+    @Override
+    public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+      if (&quot;toString&quot;.equals(method.getName())){
+          return null;
+      }
+      if (&quot;rentHouse&quot;.equals(method.getName())){
+          args[0] = (int)args[0] - 500;
+      }
+      System.out.println(method.getName() + &quot;委托类执行方法前&quot;);
+      //这一行代码相当于去执行委托类的方法
+      //参数1：委托类的实例（而不是代理类的实例，不要写成proxy）
+      //参数2：想要委托类去执行方法的参数（可以是对args处理后的参数）
+      Object invoke = method.invoke(houseOwner, args);
+      System.out.println(&quot;委托类执行方法后&quot;);
+      return invoke;
+    }
+  });
+
+  //通过代理对象去调用方法
+  boolean b = houseProxy.rentHouse(2000);
+  System.out.println(b);
+  boolean b2 = houseProxy.rentHouse2(2500);
+  System.out.println(b2);
+}
+</code></pre><p><strong>注意事项</strong><br>1.在Porxy中的InnovationHandler的匿名内部类中，反射调用方法时：</p>
+<pre><code>Object invoke = method.invoke(houseOwner, args);
+</code></pre><p>里面的参数是<strong>houseOwner</strong>，是委托类对象，而不是代理对象。注意，如果写成代理对象houseProxy，老师说，就会无限调用这个方法，我来打断点看看，发现根本就用不了houseProxy作为参数invoke 直接就报错了。拿出来就会报空指针异常。<br>java.lang.NullPointerException</p>
+<p>2.idea debug，这个我们知道，因为debug是会调用toString的方法，所以在debug模式下在反射的方法中把toString方法给过滤掉</p>
+<pre><code>if (&quot;toString&quot;.equals(method.getName())){
+  return null;
+}
+</code></pre><h2 id="星期三（0911）"><a href="#星期三（0911）" class="headerlink" title="星期三（0911）"></a>星期三（0911）</h2><p>只有半天，而且讲的东西很少，就简单介绍了一下Spring，核心就是：</p>
+<pre><code>IOC/DI（控制反转/依赖注入）
+AOP   （切面编程）
+</code></pre><h3 id="IOC"><a href="#IOC" class="headerlink" title="IOC"></a>IOC</h3><p>控制反转的意义<br>控制什么？</p>
+<pre><code>之前是程序自己控制
+之后是通过spring控制
+</code></pre><p>其实之前就是我们自己去new一个对象，之后是通过Spring使用反射去创建对象。学了那么久我们知道一般都有两种方法：<br>1）通过配置文件（pom.xml）去注册实例对象<br>2）通过注解去注册实例对象<br><strong>注</strong>：之前的servlet不就是这样？可以写注解，也可以写web.xml的标签。jsp也是。。。。</p>
+<h3 id="DI"><a href="#DI" class="headerlink" title="DI"></a>DI</h3><p>Dependency Injection<br>依赖注入<br>谁依赖谁，为什么需要依赖，谁注入谁，注入了什么（这是理解依赖注入的关键）</p>
+<p>谁依赖了谁：应用程序依赖于IoC容器（Spring）<br>为什么要依赖：应用程序需要IoC容器来提供对象需要的外部资源<br>谁注入谁：IoC容器注入应用程序某个对象，应用程序依赖的对象<br>注入了什么：注入某个对象所需要的外部资源（包括对象、资源、常量数据）</p>
+<p>话不多说，直接开始我们是Spring的例子：一个简单的service + dao的例子<br>dao层：</p>
+<pre><code>UserDao.java
+public interface UserDao {
+  void addUser(String username,String password);
+}
+UserDaoImpl.java
+public class UserDaoImpl implements UserDao {
+  @Override
+  public void addUser(String username, String password) {
+    System.out.println(&quot;注册用户：&quot; + username + &quot;---&quot; + password);
+  }
+}
+</code></pre><p>Service层：</p>
+<pre><code>UserService.java
+public interface UserService {
+  void register(String username,String password);
+}
+UserServiceImpl.java
+public class UserServiceImpl implements UserService {
+  UserDao userDao;//并没有给Dao实例化
+  String abc;
+  public String getAbc() {return abc;}
+  public void setAbc(String abc) {this.abc = abc;}
+  public UserDao getUserDao() {return userDao;}
+  public void setUserDaoaaa(UserDao userDao) {this.userDao = userDao;}
+}
+</code></pre><p>这里我们发现我们并没有给Dao实例化，而是通过Spring(实际上是反射)实例化Service，Dao然后把两者关联起来，<br><strong>我们如何使用Spring呢？</strong><br>1.首先我们需要使用maven来管理我们的项目，所以我们的Spring要放在maven当中.。当然第一步就是创建一个maven的项目。然后在pom.xml中写入我们需要的依赖。</p>
+<pre><code>&lt;properties&gt;
+  &lt;spring.versionz&gt;5.1.9.RELEASE&lt;/spring.versionz&gt;
+&lt;/properties&gt;
+&lt;dependencies&gt;
+  &lt;!--通过context去导入5+1--&gt;
+  &lt;dependency&gt;
+    &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-context&lt;/artifactId&gt;
+    &lt;version&gt;${spring.versionz}&lt;/version&gt;
+  &lt;/dependency&gt;
+  &lt;dependency&gt;
+    &lt;groupId&gt;junit&lt;/groupId&gt;
+    &lt;artifactId&gt;junit&lt;/artifactId&gt;
+    &lt;version&gt;4.12&lt;/version&gt;
+    &lt;scope&gt;test&lt;/scope&gt;
+  &lt;/dependency&gt;
+&lt;/dependencies&gt;
+</code></pre><p>我们的maven配置只需要导入spring-context和junit，idea会给我们导入5+1：<br>spring-context<br>spring-expression<br>spring-core  —-&gt; spring-jcl(+的1)<br>spring-aop<br>spring-beans</p>
+<p>2.如何使用？我们需要配置一下我们的Spring的配置文件，在resources下创建：<strong>application.xml</strong></p>
+<pre><code>application.xml
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;
+       xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+       xmlns:context=&quot;http://www.springframework.org/schema/context&quot; xsi:schemaLocation=&quot;
+        http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd&quot;&gt;
+  &lt;bean id=&quot;userService&quot; class=&quot;com.cskaoyan.service.UserServiceImpl&quot;&gt;
+    &lt;property name=&quot;userDao&quot; ref=&quot;userDao1&quot;/&gt;
+    &lt;property name=&quot;abc&quot; value=&quot;123456&quot;/&gt;
+  &lt;/bean&gt;
+  &lt;bean id=&quot;userDao1&quot; class=&quot;com.cskaoyan.dao.UserDaoImpl&quot;/&gt;
+&lt;/beans&gt;
+</code></pre><p>配置文件有很多内容，之后会介绍。这里我们只需要关注<strong>bean</strong>标签和property标签<br>bean 这里有两个属性： id 和 class</p>
+<pre><code>id:表示的是用一个唯一标识去标识这个注册的bean
+class:表示的是全限定名。就是getClass()的名字运行时类。
+</code></pre><p>property标签：</p>
+<pre><code>name：这里表示的是userService 类中有setXXX中的XXX
+ref:表示它的值是一个引用对象类型
+value:表示是一个值的类型
+</code></pre><p>3.在单元测试中测试</p>
+<pre><code>public class MainTest {
+  @Test
+  public void mytest1(){
+    ApplicationContext applicationContext = new ClassPathXmlApplicationContext(&quot;application.xml&quot;);
+    //通过Spring获取到了对象
+    UserService userService = applicationContext.getBean(UserServiceImpl.class);
+    userService.register(&quot;zhaoge&quot;,&quot;123456&quot;);
+  }
+
+  @Test
+  public void mytest2(){
+    ApplicationContext applicationContext = new ClassPathXmlApplicationContext(&quot;application.xml&quot;);
+    UserServiceImpl userService = applicationContext.getBean(UserServiceImpl.class);
+    //这个是从service中取出的
+    UserDao userDaoFromService = userService.getUserDao();
+    UserDao userDaoFromIoc = applicationContext.getBean(UserDao.class);
+    //两个取出的实例是相同，证明在我们导入application时候，实例其实已经建好了。
+    Assert.assertEquals(userDaoFromIoc,userDaoFromService); true
+  }
+
+  //多个class实现了同一个接口，接下来通过类型从spring容器中取出实例。报错。
+  @Test
+  public void mytest3(){
+    ApplicationContext applicationContext = new ClassPathXmlApplicationContext(&quot;application.xml&quot;);
+    UserServiceImpl bean = applicationContext.getBean(UserServiceImpl.class);
+    //肯定会报错
+    UserService bean1 = applicationContext.getBean(UserService.class);
+  }
+
+  @Test
+  public void mytest4(){
+    ApplicationContext applicationContext = new ClassPathXmlApplicationContext(&quot;application.xml&quot;);
+    ApplicationContext applicationContext2 =
+            new FileSystemXmlApplicationContext(&quot;D:\\Coding Workspace\\j16_workspace\\codes\\ioc\\demo1_ioc\\src\\main\\resources\\application.xml&quot;);
+    UserServiceImpl bean = applicationContext.getBean(UserServiceImpl.class);
+    UserService bean1 = applicationContext.getBean(UserService.class);
+  }
+}
+</code></pre><p><strong>注意事项</strong><br>1.getBean()里面写class一定要写实现类的class,如果写接口的class，当接口的实现类不止一个的时候，会报错。所以建议写实现类的运行时类。<br>2.通过new了一个ClassPathXmlApplicationContext对象来获取到当前上下文的对象。再通过getBean()来获取对象<br>3.ClassPathXmlApplicationContext和ClassPathXmlApplicationContext的效果一样，但是路径不一样。前者是文件的具体位置，后者是<strong>classpath</strong>的位置</p>
+<h3 id="学习了-IOC-和-DI-最大的感触是什么？"><a href="#学习了-IOC-和-DI-最大的感触是什么？" class="headerlink" title="学习了 IOC 和 DI 最大的感触是什么？"></a>学习了 IOC 和 DI 最大的感触是什么？</h3><p>控制反转IoC(Inversion of Control)，是一种设计思想，DI(依赖注入)是实现IoC的一种方法<br>依赖注入的目的并非为软件系统带来更多功能，而是为了提升组件重用的频率，并为系统搭建一个灵活、可扩展的平台。</p>
+<h2 id="星期四（0912）"><a href="#星期四（0912）" class="headerlink" title="星期四（0912）"></a>星期四（0912）</h2><p>正式开始学习Spring的知识</p>
+<h3 id="bean的实例化的方式"><a href="#bean的实例化的方式" class="headerlink" title="bean的实例化的方式"></a>bean的实例化的方式</h3><p><strong>构造方法</strong></p>
+<h3 id="无参构造（默认）"><a href="#无参构造（默认）" class="headerlink" title="无参构造（默认）"></a>无参构造（默认）</h3><p>bean</p>
+<pre><code>public class User {
+  String username;
+  String password;
+  int age;
+  /**
+   * 使用无参构造获取bean
+   */
+  public User() {}
+  public String getUsername() {
+      return username;
+  }
+
+  public void setUsername(String username) { System.out.println(&quot;set方法&quot;); this.username = username;}
+  public void setPassword(String password) {this.password = password;}
+  public void setAge(int age) {this.age = age;}
+}
+</code></pre><p>application.xml</p>
+<pre><code>&lt;!--无参构造(默认就是这种获取实例)--&gt;
+&lt;bean id=&quot;userNoConstructor&quot; class=&quot;com.cskaoyan.bean.User&quot;&gt;
+  &lt;property name=&quot;username&quot; value=&quot;wangdi&quot;/&gt;
+  &lt;property name=&quot;age&quot; value=&quot;24&quot;/&gt;
+  &lt;property name=&quot;password&quot; value=&quot;admin&quot;/&gt;
+&lt;/bean&gt;
+</code></pre><p>text.java单元测试</p>
+<pre><code>@Before
+public void init() {
+  applicationContext= new ClassPathXmlApplicationContext(&quot;application.xml&quot;);
+}
+@Test
+public void test1(){
+  User userNoConstructor = (User) applicationContext.getBean(&quot;userNoConstructor&quot;);
+  System.out.println(userNoConstructor);
+}
+</code></pre><h3 id="有参构造"><a href="#有参构造" class="headerlink" title="有参构造"></a>有参构造</h3><pre><code>public class User {
+  String username;
+  String password;
+  int age;
+  /**
+   * 有参构造
+   * @param username
+   * @param password
+   * @param age
+   */
+   public User(String username, String password, int age) {
+     this.username = username;
+     this.password = password;
+     this.age = age;
+   }
+  public void setUsername(String username) { System.out.println(&quot;set方法&quot;); this.username = username;}
+  public void setPassword(String password) {this.password = password;}
+  public void setAge(int age) {this.age = age;}
+}
+</code></pre><p>application.xml</p>
+<pre><code>&lt;!--有参构造，这需要自己写好构造函数--&gt;
+&lt;bean id=&quot;createUserByConstructor&quot; class=&quot;com.cskaoyan.bean.User&quot;&gt;
+  &lt;constructor-arg name=&quot;username&quot; value=&quot;wangdi&quot;/&gt;
+  &lt;constructor-arg name=&quot;age&quot; value=&quot;24&quot;/&gt;
+  &lt;constructor-arg name=&quot;password&quot; value=&quot;admin2&quot;/&gt;
+&lt;/bean&gt;
+</code></pre><p>text.java</p>
+<pre><code>@Test
+public void test2(){
+  User createUserByConstructor = (User) applicationContext.getBean(&quot;createUserByConstructor&quot;);
+  System.out.println(createUserByConstructor);
+}
+</code></pre><p><strong>注意事项</strong><br>这里的constructor-arg顾名思义，就是构造方法的参数</p>
+<pre><code>&lt;constructor-arg name=&quot;age&quot; value=&quot;24&quot;/&gt;
+</code></pre><p>所以这里的name表示的就是构造方法里面参数的名字，而不是property中name表示的是setXXX中的XXX。这里要注意。</p>
+<p><strong>静态工厂</strong><br>常用于Spring整合其他框架（或者工具类）<br>为了使用spring重构之前的代码，用Spring来进行解耦，我们之前的类里可能是用静态工厂来提供javabean的，现在加入spring之后就可以用spring的静态工厂去构造。<br>用于生产实例对象的方法都必须是<strong>静态方法</strong>注意这里只需要注册实现car的bean<br>bean</p>
+<pre><code>public class StaticFactory {
+    public static Car create(){
+        return new Car();
+    }
+}
+</code></pre><p>application.xml</p>
+<pre><code>&lt;bean id=&quot;carFromStatic&quot; class=&quot;com.cskaoyan.factory.StaticFactory&quot; factory-method=&quot;create&quot;/&gt;
+</code></pre><p>text</p>
+<pre><code>@Test
+public void mytest(){
+  ApplicationContext applicationContext = new ClassPathXmlApplicationContext(&quot;application.xml&quot;);
+  Car carFromStatic = (Car) applicationContext.getBean(&quot;carFromStatic&quot;);
+  Car carFromStatic2 = (Car) applicationContext.getBean(&quot;carFromStatic&quot;);
+  //创建的两个汽车是相同的
+  Assert.assertEquals(carFromStatic,carFromStatic2);
+}
+</code></pre><p><strong>实例工厂</strong><br>必须先实例化工厂，通过工厂实例来产生bean。提供的方法是非静态的。这就必须Car和工厂都注册<br>Bean</p>
+<pre><code>public class InstanceFactory {
+    public Car create(){
+        return new Car();
+    }
+}
+</code></pre><p>application.xml</p>
+<pre><code>&lt;!--实例工厂--&gt;
+&lt;bean id=&quot;instanceFactory&quot; class=&quot;com.cskaoyan.factory.InstanceFactory&quot;/&gt;
+&lt;bean id=&quot;carFromInstance&quot; factory-bean=&quot;instanceFactory&quot; factory-method=&quot;create&quot;/&gt;
+</code></pre><p>test</p>
+<pre><code>@Test
+public void mytest2(){
+  ApplicationContext applicationContext = new ClassPathXmlApplicationContext(&quot;application.xml&quot;);
+  Object carFromStatic = applicationContext.getBean(&quot;carFromInstance&quot;);
+  System.out.println(carFromStatic);
+}
+</code></pre><p><strong>注意事项</strong><br>1.通过比较发现静态工厂和实力工厂除了bean的create方法一个是static一个是非静态方法外，唯一的区别就是applicaiton.xml</p>
+<pre><code>&lt;!--静态工厂--&gt;
+&lt;bean id=&quot;carFromStatic&quot; class=&quot;com.cskaoyan.factory.StaticFactory&quot; factory-method=&quot;create&quot;/&gt;
+&lt;!--实例工厂--&gt;
+&lt;bean id=&quot;instanceFactory&quot; class=&quot;com.cskaoyan.factory.InstanceFactory&quot;/&gt;
+&lt;bean id=&quot;carFromInstance&quot; factory-bean=&quot;instanceFactory&quot; factory-method=&quot;create&quot;/&gt;
+</code></pre><p>这里有个特别的地方，老师讲过，当我们使用bean标签的时候，百分之99的情况都要写class属性来表示这个bean是哪个运行时类的。但是这里我们发现，实例工厂的factory的bean有class，而要造的东西却没有class。这就是百分之一的情况。bean没有写class属性。</p>
+<p><strong>2.这里有个疑问，如果使用注解，如何使用静态工厂和实例工厂？</strong></p>
+<h3 id="bean作用域"><a href="#bean作用域" class="headerlink" title="bean作用域"></a>bean作用域</h3><p>老师作用域只讲了两个<br>一个singleton : 表示在Spring ioc 容器中仅存在一个Bean的实例，Bean以单例的方式存在。是默认值<br>一个prototype 每次从容器中调用bean的时候，都返回一个新的实例。既每次调用getBean()时，相当于执行了new Bean();</p>
+<h3 id="Bean的生命周期"><a href="#Bean的生命周期" class="headerlink" title="Bean的生命周期"></a>Bean的生命周期</h3><table>
+<thead>
+<tr>
+<th style="text-align:right">Spring容器中的bean的生命周期</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right">1、Bean的建立</td>
+<td style="text-align:left">由BeanFactory读取Bean定义文件，并生成各个实例。</td>
+</tr>
+<tr>
+<td style="text-align:right">2、Setter注入</td>
+<td style="text-align:left">执行Bean的属性依赖注入。</td>
+</tr>
+<tr>
+<td style="text-align:right">3、BeanNameAware的setBeanName()</td>
+<td style="text-align:left">如果Bean类实现了org.springframework.beans.factory.BeanNameAware接口，则执行其setBeanName()方法。 没有name情况id =  name</td>
+</tr>
+<tr>
+<td style="text-align:right">4、BeanFactoryAware的setBeanFactory()</td>
+<td style="text-align:left">如果Bean类实现了org.springframework.beans.factory.BeanFactoryAware接口，则执行其setBeanFactory()方法。</td>
+</tr>
+<tr>
+<td style="text-align:right">5、BeanPostProcessor的processBeforeInitialization()</td>
+<td style="text-align:left">容器中如果有实现org.springframework.beans.factory.BeanPostProcessor接口的实例，则任何Bean在初始化之前都会执行这个实例的processBeforeInitialization()方法。</td>
+</tr>
+<tr>
+<td style="text-align:right">6、InitializingBean的afterPropertiesSet()</td>
+<td style="text-align:left">如果Bean类实现了org.springframework.beans.factory.InitializingBean接口，则执行其afterPropertiesSet()方法。</td>
+</tr>
+<tr>
+<td style="text-align:right">7、Bean定义文件中定义init-method</td>
+<td style="text-align:left">在Bean定义文件中使用“init-method”属性设定方法名称，这时会执行initMethod()方法，注意，这个方法是不带参数的。</td>
+</tr>
+<tr>
+<td style="text-align:right">8、BeanPostProcessor的processAfterInitialization()</td>
+<td style="text-align:left">容器中如果有实现org.springframework.beans.factory.BeanPostProcessors接口的实例，则任何Bean在初始化之前都会执行这个实例的processAfterInitialization()方法。</td>
+</tr>
+<tr>
+<td style="text-align:right">9、DisposableBean的destroy()</td>
+<td style="text-align:left">在容器关闭时，如果Bean类实现了org.springframework.beans.factory.DisposableBean接口，则执行它的destroy()方法。</td>
+</tr>
+<tr>
+<td style="text-align:right">10、Bean定义文件中定义destroy-method</td>
+<td style="text-align:left">在容器关闭时，可以在Bean定义文件中使用“destory-method”定义的方法 context.close();</td>
+</tr>
+</tbody>
+</table>
+<p><strong>注意事项</strong><br>大多是都是直接Bean继承接口即可，但是有例外。BeanPostProcessor，他说的是：</p>
+<pre><code>容器中如果有实现org.springframework.beans.factory.BeanPostProcessor接口的实例，则任何Bean在初始化之前都会执行这个实例的processBeforeInitialization()方法。
+</code></pre><p>注意是有一个实现的实例，其他的所有实例都会调用这个方法。也就是相当于一个给其他所有实例初始化的一个实例，这个就是<strong>后置处理器</strong></p>
+<h3 id="上代码"><a href="#上代码" class="headerlink" title="上代码"></a>上代码</h3><p>在上代码之前，我们之前学习前端的时候也有VUE的生命周期，其实这些生命周期的方法，就像钩子函数一样，我们通过在这个地方调用这个钩子方法，达到我们想要的效果罢了。例子将会依次打印：</p>
+<pre><code>* 1.bean建立
+* 2.setter的注入
+* 3.BeanNameAware的setBeanName()
+* 4.BeanFactoryAware的setBeanFactory()
+* 5.BeanPostProcessor的processBeforeInitialization()
+* 6.InitializingBean 的 afterPropertiesSet()
+* 7.Bean定义文件中定义init-method
+* 8.BeanPostProcessor的processAfterInitialization()
+* 9.DisposableBean 的destroy()
+* 10.Bean定义文件中定义destroy-method
+</code></pre><p>先写后置处理器，因为他很特别（继承BeanPostProcessor），</p>
+<h3 id="这里有个很特别的地方一定要说："><a href="#这里有个很特别的地方一定要说：" class="headerlink" title="这里有个很特别的地方一定要说："></a>这里有个很特别的地方一定要说：</h3><p>就是当我们 implements BeanPostProcessor的时候，发现IDEA并没有提示要求我们一定要实现这个接口的方法，这就很奇怪了。他不是一个接口吗？为什么不用实现这个接口的方法？当我们点进这个接口的源码中我们发现：</p>
+<pre><code>public interface BeanPostProcessor {
+  @Nullable
+  default Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
+      return bean;
+  }
+  @Nullable
+  default Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
+      return bean;
+  }
+}
+</code></pre><p>发现他里面的两个方法都有一个注解：@Nullable，百度了一下发现：</p>
+<pre><code>@NonNull可以标注在方法、字段、参数之上，表示对应的值不可以为空
+@Nullable注解可以标注在方法、字段、参数之上，表示对应的值可以为空
+</code></pre><p>以上两个注解在程序运行的过程中不会起任何作用，只会在IDE、编译器、FindBugs检查、生成文档的时候有做提示；</p>
+<p>好像和我们的问题没有什么关系。仔细看了一下这个接口的两个方法，是用<strong>default</strong>修饰的，表示只能是该接口的实现才能使用。那么不能为null的意思应该是传进来的bean不能为null。而这个接口已经实现好了一个备份的方法。我们实现这个接口就可以直接用。或者再重写他的方法。这里的这个接口应该是类没有区别。<br><strong>到底这么做是为什么呢？</strong>希望有一天我会懂</p>
+<p>CustomBeanPostProcessor.java重写了postProcessBeforeInitialization，postProcessAfterInitialization方法。</p>
+<pre><code>public class CustomBeanPostProcessor implements BeanPostProcessor {
+  @Override
+  public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
+    System.out.println(&quot;5、BeanPostProcessor的before方法:&quot; + bean.getClass().getName());
+    return bean;
+  }
+  @Override
+  public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
+    System.out.println(&quot;8、BeanPostProcessor的after方法:&quot; + bean.getClass().getName());
+    return bean;
+  }
+}
+</code></pre><p>LifeCycleBean.java</p>
+<pre><code>public class LifeCycleBean implements BeanNameAware , BeanFactoryAware , InitializingBean, DisposableBean {
+    String parameter;
+
+    public LifeCycleBean(){
+      System.out.println(&quot;1.bean建立&quot;);
+    }
+
+    public void setParameter(String parameter){
+      System.out.println(&quot;2.setter的注入&quot;);
+      this.parameter = parameter;
+    }
+
+    @Override
+    public void setBeanName(String s) {
+      //s是你在spring的配置文件中定义的name ,没有name 默认就是id
+      System.out.println(&quot;3、beanNameAware的setBeanName方法：&quot; + s);
+    }
+
+    /**
+     * 注意我们没有写工厂函数默认也会有一个工厂函数
+     * @param beanFactory
+     * @throws BeansException
+     */
+    @Override
+    public void setBeanFactory(BeanFactory beanFactory) throws BeansException {
+      System.out.println(&quot;4、beanFactory的setBeanFactory方法：&quot; + beanFactory );
+    }
+
+    @Override
+    public void afterPropertiesSet() throws Exception {
+      System.out.println(&quot;6、afterPropertiesSet（）&quot;);
+    }
+
+    public void myinit(){
+      System.out.println(&quot;7、my init method&quot;);
+    }
+
+    @Override
+    public void destroy() throws Exception {
+      System.out.println(&quot;9、DisposableBean&quot;);
+    }
+
+    public void mydestroy(){
+      System.out.println(&quot;10、mydestroy&quot;);
+    }
+}
+</code></pre><p>application.xml</p>
+<pre><code>&lt;bean id=&quot;lifeCycleBeanz&quot; class=&quot;com.cskaoyan.LifeCycleBean&quot; init-method=&quot;myinit&quot; destroy-method=&quot;mydestroy&quot;&gt;
+    &lt;property name=&quot;parameter&quot; value=&quot;myparameter&quot;/&gt;
+&lt;/bean&gt;
+&lt;!-- 初始化用的bean --&gt;
+&lt;bean class=&quot;com.cskaoyan.CustomBeanPostProcessor&quot;/&gt;
+</code></pre><p>text.java</p>
+<pre><code>public class LifeCycleTest {
+  @Test
+  public void mytest(){
+    ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext(&quot;application.xml&quot;);
+    applicationContext.close();
+  }
+}
+</code></pre><h3 id="属性的注入（-property-）"><a href="#属性的注入（-property-）" class="headerlink" title="属性的注入（ property ）"></a>属性的注入（ property ）</h3><p>属性注入一般可以分为</p>
+<pre><code>手动装配
+自动装配
+</code></pre><p>一般情况下我们进行配置信息都是属于手动装配,基于xml的注入：</p>
+<pre><code>一类叫做构造方法，
+一类叫做set方法
+</code></pre><p>之前已经演示过了这里就不演示了</p>
+<h3 id="集合bean"><a href="#集合bean" class="headerlink" title="集合bean"></a>集合bean</h3><p>直接上代码吧<br>bean.java</p>
+<pre><code>public class CollectionBean {
+  List&lt;String&gt; stringList;
+  List&lt;User&gt; userList;
+  String[] array;
+  Set&lt;String&gt; setData;
+  Map&lt;String,String&gt; mapData;
+  Properties properties;
+  public void setUserList(List&lt;User&gt; userList) {this.userList = userList;}
+  public void setStringList(List&lt;String&gt; stringList) {this.stringList = stringList;}
+  public void setArray(String[] array) { this.array = array; }
+  public void setSetData(Set&lt;String&gt; setData) {this.setData = setData;}
+  public void setMapData(Map&lt;String, String&gt; mapData) {this.mapData = mapData;}
+  public void setProperties(Properties properties) {this.properties = properties;}
+}
+</code></pre><p>只要记住标签就好主要是application.xml</p>
+<pre><code>&lt;bean id=&quot;collectionBean&quot; class=&quot;com.cskaoyan.bean.CollectionBean&quot;&gt;
+</code></pre><p>这是StringList注册的标签：里面有一层list标签，再套一层value</p>
+<pre><code>&lt;property name=&quot;stringList&quot; &gt;
+  &lt;list&gt;
+    &lt;value&gt;list1&lt;/value&gt;
+    &lt;value&gt;list2&lt;/value&gt;
+    &lt;value&gt;list3&lt;/value&gt;
+  &lt;/list&gt;
+&lt;/property&gt;
+</code></pre><p>List里面是bean的时候，（说引用类型并不合适，因为String就不符合这种情况）就是下面这种情况。有两种写法：<br>1.直接在里面写bean标签，和之前的一样。<br>2.里面写的是ref标签。bean属性指的是对应bean的id值。</p>
+<pre><code>&lt;property name=&quot;userList&quot;&gt;
+  &lt;list&gt;
+    &lt;bean class=&quot;com.cskaoyan.bean.User&quot; &gt;
+      &lt;property name=&quot;username&quot; value=&quot;admin&quot;/&gt;
+      &lt;property name=&quot;password&quot; value=&quot;admin&quot;/&gt;
+    &lt;/bean&gt;
+    &lt;bean class=&quot;com.cskaoyan.bean.User&quot; &gt;
+      &lt;property name=&quot;username&quot; value=&quot;admin2&quot;/&gt;
+      &lt;property name=&quot;password&quot; value=&quot;admin2&quot;/&gt;
+    &lt;/bean&gt;
+    &lt;ref bean=&quot;user2&quot;/&gt;
+  &lt;/list&gt;
+&lt;/property&gt;
+
+//ref标签使用的bean，不应该写在这里，为了好看才写这里的注意！！！！
+&lt;bean id=&quot;user2&quot; class=&quot;com.cskaoyan.bean.User&quot;&gt;
+  &lt;property name=&quot;username&quot; value=&quot;user2&quot;/&gt;
+  &lt;property name=&quot;password&quot; value=&quot;password2&quot;/&gt;
+&lt;/bean&gt;
+</code></pre><p>当实例是一个数组的时候：里面是array标签</p>
+<pre><code>&lt;property name=&quot;array&quot;&gt;
+  &lt;array&gt;
+    &lt;value&gt;arr1&lt;/value&gt;
+    &lt;value&gt;arr2&lt;/value&gt;
+    &lt;value&gt;arr3&lt;/value&gt;
+  &lt;/array&gt;
+&lt;/property&gt;
+</code></pre><p>当然如果是一个对象数组的时候。array里面也是bean标签啦</p>
+<p>当实例是一个set集合（不能有重复值）当然这里写出了一个问题：反射生成的set是什么set？已经给出答案</p>
+<pre><code>&lt;property name=&quot;setData&quot;&gt;
+    &lt;set&gt;
+      &lt;!--看看可以存重复的值吗？--&gt;
+      &lt;!-- 生成的hashSet 还是treeSet --&gt;
+      &lt;!--答案是linkHashSet,而且不存储重复值--&gt;
+      &lt;value&gt;set1&lt;/value&gt;
+      &lt;value&gt;set1&lt;/value&gt;//测试是否可以存重复值
+      &lt;value&gt;set3&lt;/value&gt;
+    &lt;/set&gt;
+&lt;/property&gt;
+</code></pre><p>实例是一个map，里面是map标签，每个字标签是entry,使用属性值表示key value</p>
+<pre><code>&lt;property name=&quot;mapData&quot;&gt;
+  &lt;map&gt;
+    &lt;!--生成的是hashMap 还是 treeMap--&gt;
+    &lt;!--答案是linkHashMap--&gt;
+    &lt;entry key=&quot;key1&quot; value=&quot;value1&quot;/&gt;
+    &lt;entry key=&quot;key2&quot; value=&quot;value2&quot;/&gt;
+    &lt;entry key=&quot;key3&quot; value=&quot;value3&quot;/&gt;
+  &lt;/map&gt;
+&lt;/property&gt;
+</code></pre><p>实例是一个properties,里面是props标签，虽然是特殊的map但是写法和map不同。props里的prop只有key属性，value写成里面的文本结点</p>
+<pre><code>    &lt;property name=&quot;properties&quot;&gt;
+      &lt;props&gt;
+        &lt;prop key=&quot;propKey1&quot;&gt;value1&lt;/prop&gt;
+        &lt;prop key=&quot;propKey2&quot;&gt;value2&lt;/prop&gt;
+        &lt;prop key=&quot;propKey3&quot;&gt;value3&lt;/prop&gt;
+      &lt;/props&gt;
+    &lt;/property&gt;
+&lt;/bean&gt;
+</code></pre><h3 id="注解使用Spring-重点"><a href="#注解使用Spring-重点" class="headerlink" title="注解使用Spring(重点)"></a>注解使用Spring(重点)</h3><p>这里我要说一句，上面说的都是实际不会用的，这里开始才是我们真正需要掌握的东西。上面的写法虽然没用，但是注解却是以上面的知识点为基础的。从现在开始不用写bean标签了，需要加一个扫描标签：</p>
+<pre><code>&lt;!--打开注解的扫描开关--&gt;
+&lt;!--aop tx mvc transaction--&gt;
+&lt;!--这个包以及这个包下的所有的目录--&gt;
+&lt;context:component-scan base-package=&quot;com.cskaoyan&quot;/&gt;
+</code></pre><h3 id="Setter方法注入属性"><a href="#Setter方法注入属性" class="headerlink" title="Setter方法注入属性"></a>Setter方法注入属性</h3><pre><code>@Component取代&lt;bean class=&quot;&quot;&gt;
+@Component(&quot;id&quot;) 取代 &lt;bean id=&quot;&quot; class=&quot;&quot;&gt;
+</code></pre><p>.web开发，提供3个@Component注解衍生注解（功能一样）取代 &lt;bean class=””&gt;</p>
+<pre><code>@Repository ：dao层
+@Service：service层
+@Controller：web层
+</code></pre><h3 id="属性的依赖注入。"><a href="#属性的依赖注入。" class="headerlink" title="属性的依赖注入。"></a>属性的依赖注入。</h3><p>给私有字段设置，也可以给setter方法设置<br>普通值：@Value(“”)<br>bean：</p>
+<pre><code>@Autowired   单独使用，根据类型***。class(使用最多的，如果有两个实现类就会报错)
+@Autowired    @Qualifier(&quot;名称&quot;) 两个连用
+@Resource(name = &quot;名称&quot;)一个注解表示上面两个注解
+</code></pre><p><strong> 不再需要set方法了！ </strong><br>举例<br>AutowiredBean.java</p>
+<pre><code>@Component
+public class AutowiredBean {
+  @Autowired
+  UserDao userDao;
+}
+</code></pre><p>userDaoImpl.java</p>
+<pre><code>@Repository(&quot;userDao2&quot;)
+public class UserDaoImpl implements UserDao {
+    @Value(&quot;ADMIN&quot;)
+    String name;
+}
+</code></pre><p>test.java</p>
+<pre><code>@Test
+public void test2(){
+    ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext(&quot;application.xml&quot;);
+    AutowiredBean bean = applicationContext.getBean(AutowiredBean.class);
+    UserDao userDao2 = (UserDao) applicationContext.getBean(&quot;userDao2&quot;);
+    Assert.assertEquals(bean.userDao,userDao2); //相同的userDao
+}
+</code></pre><p>当userDao有两个实现类时，只写@Autowired会报错<br>需要配合@Qualifier(“id”)</p>
+<pre><code>@Component
+public class AutowiredBean {
+    @Autowired
+            @Qualifier(&quot;userDao2&quot;)
+    UserDao userDao;
+}
+</code></pre><p>两条注解也可以换成@Resource（name = “id”）</p>
+<pre><code>@Component
+public class AutowiredBean {
+//    @Autowired
+//            @Qualifier(&quot;userDao2&quot;)
+    @Resource(name = &quot;userDao2&quot;)
+    UserDao userDao;
+}
+</code></pre><h3 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h3><p>初始化：@PostConstruct<br>销毁：  @PreDestroy</p>
+<h3 id="作用域"><a href="#作用域" class="headerlink" title="作用域"></a>作用域</h3><p>@Scope(“singleton”) 单例（默认）</p>
+<p>@Scope(“prototype”) 多例<br>举例：</p>
+<pre><code>@Component(&quot;user2&quot;)
+@Scope(&quot;prototype&quot;)
+public class User2 {
+}
+</code></pre><h3 id="更简便的Test"><a href="#更简便的Test" class="headerlink" title="更简便的Test"></a>更简便的Test</h3><p>也不过是节约写了applicationContext而已，需要引入一个spring的test的依赖<br>pom.xml(建议和spring的版本号是一样的!)</p>
+<pre><code>&lt;dependency&gt;
+  &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+  &lt;artifactId&gt;spring-test&lt;/artifactId&gt;
+  &lt;version&gt;5.1.9.RELEASE&lt;/version&gt;
+  &lt;scope&gt;test&lt;/scope&gt;
+&lt;/dependency&gt;
+</code></pre><p>test.java</p>
+<pre><code>@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(&quot;classpath:application.xml&quot;)
+public class AnnotationTest2 {
+  @Autowired
+  AutowiredBean bean;
+
+  @Resource(name = &quot;userDao2&quot;)
+  UserDao userDao2;
+
+  @Test
+  public  void test3(){
+    Assert.assertEquals(bean.userDao,userDao2);//true
+  }
+}
+</code></pre><p>这其实也没有什么用，只是直接可以获得实例罢了，把上面的单元测试改写了一下就是下面这个了。</p>
+<h3 id="动态代理之cglib"><a href="#动态代理之cglib" class="headerlink" title="动态代理之cglib"></a>动态代理之cglib</h3><p>Spring自己自带的动态代理，这就不需要再写接口来进行代理了，继续是之前的转账的例子：<br>HouseOwner.java</p>
+<pre><code>public class HouseOwner {
+  public boolean rentHouse(int money){
+    System.out.println(&quot;rentHOuse :&quot; + money);
+    if (money &gt;= 2000){
+        return true;
+    }
+    return false;
+  }
+}
+</code></pre><p>Test.java</p>
+<pre><code>public class CglibTest {
+  @Test
+  public void mytest(){
+    HouseOwner houseOwner = new HouseOwner();
+    HouseOwner houseOwnerProxy = (HouseOwner) Enhancer.create(HouseOwner.class, new InvocationHandler() {
+      @Override
+      public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+        System.out.println(&quot;before &quot;);
+        args[0] = args[0]-500;//当场拿走中介费
+        Object invoke = method.invoke(houseOwner, args);
+        System.out.println(&quot;after&quot;);
+        return invoke;
+      }
+    });
+    boolean b = houseOwnerProxy.rentHouse(2000);
+  }
+}
+</code></pre><h3 id="这有什么用？"><a href="#这有什么用？" class="headerlink" title="这有什么用？"></a>这有什么用？</h3><p>只需要通过Spring的Enhancer.create来创建动态代理的对象。你想问我代理对象有什么用？这其实就是我们可以添加事务的方式。在每一个需要启动的事务的对象，给他加一层代理，代理就是一个汉堡包的上下层，给他加上开启事务，然后提交事务。</p>
+
+        </div>
+        <div class="post-reply">
+            
+                <!-- 来必力City版安装代码 -->
+                <div id="lv-container" data-id="city" data-uid="MTAyMC8yOTE4Ni81NzUz">
+                    <script type="text/javascript">
+                        (function(d, s) {
+                            var j, e = d.getElementsByTagName(s)[0];
+
+                            if (typeof LivereTower === 'function') { return; }
+
+                            j = d.createElement(s);
+                            j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+                            j.async = true;
+
+                            e.parentNode.insertBefore(j, e);
+                        })(document, 'script');
+                    </script>
+                    <noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+                </div>
+                <!-- City版安装代码已完成 -->
+            
+            
+        </div>
+    </div>
+</section>
+<script>
+    // 获取第一张图, 用以当封面背景图
+    var img = document.querySelectorAll('img')[1]
+
+    if (img) {
+        var header_box = document.querySelector('#header_box')
+        header_box.style.backgroundImage = 'url('+ img.src +')'
+    }
+</script>
+      </div>
+  </div>
+  <style>
+  #footer {
+    min-height: 10vh;
+    background: black;
+    color: #fff;
+  }
+
+  #footer a {
+    color: #e1e1e1;
+  }
+</style>
+<footer id="footer" class="has-text-centered is-flex center">
+  <div class="container has-padding">
+    <div>
+      <div>
+        <!--请您保留作者署名, 主题制作来之不易-->
+        主题来自 <a href="http://haojen.github.io/">Haojen Ma</a>
+        <br>
+        Copyright © 王邸 2019
+        <!--
+          Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+        -->
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="/js/search_core.js"></script>
+<script src="/js/script.js"></script>
+
+</body>
+</html>
