@@ -14,7 +14,7 @@
 <meta property="og:url" content="http://yoursite.com/2019/09/14/Java总结（十二）/index.html">
 <meta property="og:site_name" content="路要坚持">
 <meta property="og:description" content="这周开始讲Spring了，讲Spring都是很多没有见过的东西，很多东西都是配置的，目前还不需要懂底层的实现，需要的是知道如何操作，特别是maven。当然Spring也很重要，需要多思考。今天是2019年9月13日星期五，中秋节，在武汉，去了一趟光谷，浏览了一圈武大。现在的年轻人都不行呀，烈日下骑单车就要中暑了。早早地回来，就确定把这周总结写了，虽然只有四天的东西，但是感觉学了好久了，因为东西很多">
-<meta property="og:updated_time" content="2019-09-14T13:56:48.911Z">
+<meta property="og:updated_time" content="2019-09-14T14:22:22.097Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java总结（十二）">
 <meta name="twitter:description" content="这周开始讲Spring了，讲Spring都是很多没有见过的东西，很多东西都是配置的，目前还不需要懂底层的实现，需要的是知道如何操作，特别是maven。当然Spring也很重要，需要多思考。今天是2019年9月13日星期五，中秋节，在武汉，去了一趟光谷，浏览了一圈武大。现在的年轻人都不行呀，烈日下骑单车就要中暑了。早早地回来，就确定把这周总结写了，虽然只有四天的东西，但是感觉学了好久了，因为东西很多">
@@ -1200,6 +1200,7 @@ public class AnnotationTest2 {
   }
 }
 </code></pre><h3 id="这有什么用？"><a href="#这有什么用？" class="headerlink" title="这有什么用？"></a>这有什么用？</h3><p>只需要通过Spring的Enhancer.create来创建动态代理的对象。你想问我代理对象有什么用？这其实就是我们可以添加事务的方式。在每一个需要启动的事务的对象，给他加一层代理，代理就是一个汉堡包的上下层，给他加上开启事务，然后提交事务。</p>
+<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><p>这周好像没有什么问题啊，感觉很菜啊，慌得一批，其实问题还是有的，就是需要自己去找答案罢了<br>1.为什么反射形成集合的对象都是 linkHashSet linkHashMap ,数值型是double等等<br>2.为什么那个后置控制器的接口是已经实现好的default的方法，而不需要自己去实现？我以为之前的HttpServlet的doGet和doPost方法也是这种情况，后来发现这两个是他实现好的类。并不是接口。</p>
 
         </div>
         <div class="post-reply">

@@ -1,0 +1,2738 @@
+<!DOCTYPE html>
+<html class="full-height">
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="//cdn.bootcss.com/bulma/0.4.1/css/bulma.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+  
+  <title>Java总结（十三） | 路要坚持</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="从这周开始，总结分为两类，一类是总结知识点，一类是每天遇到的问题。思考填坑等等 总结部分 周日（9月15日）星期日（0915）AOP 切面编程介绍在软件业，面向切面编程，是指通过预编译方式和运行期动态代理实现程序功能的统一维护的一种技术。AOP是OOP（面向对象编程）的延续，是软件开发中的一个热点，也是Spring框架中的一个重要内容。利用AOP可以对业务逻辑的各个部分进行隔离，从而使得业务逻辑各">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java总结（十三）">
+<meta property="og:url" content="http://yoursite.com/2019/09/22/Java总结（十三）/index.html">
+<meta property="og:site_name" content="路要坚持">
+<meta property="og:description" content="从这周开始，总结分为两类，一类是总结知识点，一类是每天遇到的问题。思考填坑等等 总结部分 周日（9月15日）星期日（0915）AOP 切面编程介绍在软件业，面向切面编程，是指通过预编译方式和运行期动态代理实现程序功能的统一维护的一种技术。AOP是OOP（面向对象编程）的延续，是软件开发中的一个热点，也是Spring框架中的一个重要内容。利用AOP可以对业务逻辑的各个部分进行隔离，从而使得业务逻辑各">
+<meta property="og:image" content="https://s2.ax1x.com/2019/09/18/noL8sI.png">
+<meta property="og:updated_time" content="2019-09-22T15:31:08.302Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java总结（十三）">
+<meta name="twitter:description" content="从这周开始，总结分为两类，一类是总结知识点，一类是每天遇到的问题。思考填坑等等 总结部分 周日（9月15日）星期日（0915）AOP 切面编程介绍在软件业，面向切面编程，是指通过预编译方式和运行期动态代理实现程序功能的统一维护的一种技术。AOP是OOP（面向对象编程）的延续，是软件开发中的一个热点，也是Spring框架中的一个重要内容。利用AOP可以对业务逻辑的各个部分进行隔离，从而使得业务逻辑各">
+<meta name="twitter:image" content="https://s2.ax1x.com/2019/09/18/noL8sI.png">
+  
+    <link rel="alternate" href="/" title="路要坚持" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/common.css">
+<link rel="stylesheet" href="/css/nav.css">
+<link rel="stylesheet" href="/css/layout.css">
+  
+
+</head>
+
+<body>
+  <header id="navbar" class="overflow-hidden">
+  <div class="container">
+    <nav class="nav">
+         <div class="nav-left">
+            <a href="/" class="nav-item" style="font-size: 20px;">
+              <span class="logo">王邸</span>'s Blog
+            </a>
+         </div>
+        <div class="nav-center is-hidden position-relative" id="search_container">
+            <div class="nav-item full-width full-height">
+                <i class="fa fa-search has-padding" aria-hidden="true"></i>
+                <input type="text" id="search_input" class="search-input full-height full-width" placeholder="Search post" autofocus>
+                <i id="close_search" class="fa fa-times" aria-hidden="true"></i>
+            </div>
+            <div id="search_result"></div>
+        </div>
+        <div class="nav-right nav-menu">
+            <a class="nav-item" id="search">
+                <i class="fa fa-search" aria-hidden="true"></i>
+            </a>
+            
+            <a class="nav-item" href="/">
+                Home
+            </a>
+            
+            <a class="nav-item" href="/works">
+                My Works
+            </a>
+            
+            <a class="nav-item" href="/about">
+                About
+            </a>
+            
+        </div>
+        <span class="nav-toggle" id="navMenuDropdown">
+            <span></span>
+            <span></span>
+            <span></span>
+        </span>
+        <div class="navbar-menu position-absolute full-width content-box is-hidden-desktop is-flex flex-column center" style="top: 100%;">
+            
+            <a class="nav-item flex-1" href="/">
+                Home
+            </a>
+            
+            <a class="nav-item flex-1" href="/works">
+                My Works
+            </a>
+            
+            <a class="nav-item flex-1" href="/about">
+                About
+            </a>
+            
+        </div>
+    </nav>
+  </div>
+</header>
+
+  <div id="main-wrap" class="position-relative" style="margin-top: 55px;">
+      <div class="main-inner-content">
+          <!--博文页面-->
+
+<style>
+    .header-box {
+        height: 370px;
+        filter: blur(10px);
+        background-size: cover;
+        background-color: lightsteelblue;
+    }
+
+    .post-box {
+        padding: 15px;
+        padding-top: 60px;
+        min-height: 80vh;
+        margin-top: -200px;
+        border-radius: 4px;
+        background-color: rgba(255,255,255,.8);
+    }
+
+    .post-avatar {
+        height: 30px;
+        width: 30px;
+        border-radius: 50%;
+    }
+
+    .flow-chart {
+        text-align: center;
+    }
+
+    img[alt="post-cover"] {
+        display: none;
+    }
+</style>
+<header>
+    <div id="header_box" class="header-box"></div>
+</header>
+<section>
+    <div class="container post-box">
+        <div class="content post-title is-flex center flex-column" style="margin-bottom: 70px; overflow: auto;">
+            <h1 class="has-text-centered" style="padding-bottom: 10px; border-bottom: 3px solid #fff">
+                <strong>Java总结（十三）</strong>
+            </h1>
+            
+            <div class="is-flex align-center">
+                <img class="post-avatar" src="https://q2.qlogo.cn/headimg_dl?bs=996057150&dst_uin=996057150&dst_uin=996057150&;dst_uin=996057150&spec=100&url_enc=0&referer=bu_interface&term_type=PC">
+                <span style="padding:0 10px;"> <span class="sub-title">By</span> 王邸</span>
+                <span class="post-date sub-title">at: 2019-09-22</span>
+            </div>
+            
+                <div>
+                    
+                </div>
+            
+        </div>
+        <div class="content" style="overflow: auto">
+            <p>从这周开始，总结分为两类，一类是总结知识点，一类是每天遇到的问题。思考填坑等等</p>
+<p><strong><em>总结部分</em></strong></p>
+<h2 id="周日（9月15日）"><a href="#周日（9月15日）" class="headerlink" title="周日（9月15日）"></a>周日（9月15日）</h2><h2 id="星期日（0915）"><a href="#星期日（0915）" class="headerlink" title="星期日（0915）"></a>星期日（0915）</h2><h3 id="AOP-切面编程介绍"><a href="#AOP-切面编程介绍" class="headerlink" title="AOP 切面编程介绍"></a>AOP 切面编程介绍</h3><p>在软件业，面向切面编程，是指通过预编译方式和运行期动态代理实现程序功能的统一维护的一种技术。AOP是OOP（面向对象编程）的延续，是软件开发中的一个热点，也是Spring框架中的一个重要内容。<br>利用AOP可以对业务逻辑的各个部分进行隔离，从而使得业务逻辑各部分之间的耦合度降低，提高程序的可重用性，同时提高了开发的效率。</p>
+<h3 id="AOP的特点"><a href="#AOP的特点" class="headerlink" title="AOP的特点"></a>AOP的特点</h3><p>AOP采取<strong>横向抽取</strong>机制，取代了传统纵向继承体系重复性代码<br>Spring AOP使用纯Java实现，不需要专门的编译过程和类加载器，在运行期通过代理方式向目标类织入增强代码</p>
+<h3 id="经典应用："><a href="#经典应用：" class="headerlink" title="经典应用："></a>经典应用：</h3><pre><code>事务管理、性能监视、安全检查、缓存 、日志等
+</code></pre><p>这些系统服务通常被称为横切关注点<br>想象一下如果每个组件都单独去实现这些系统功能</p>
+<pre><code>改变这些关注点的逻辑，修改各个模块当中的实现，方法的调用就会重复出现在各个模块中
+组件会因为那些与自身核心业务无关的代码而变得混乱
+</code></pre><h3 id="AOP编程术语"><a href="#AOP编程术语" class="headerlink" title="AOP编程术语"></a>AOP编程术语</h3><p><strong>Target</strong>：目标类，委托类，举例：房东<br><strong>Pointcut</strong>：切入点，通过切入点 指定要等增强：谁<br><strong>Advice</strong>：通知：在什么时机 做什么事情<br><strong>切面</strong>：切入点+通知。通知 谁 在什么时机 做什么事情</p>
+<h3 id="aop底层将采用代理机制进行实现。"><a href="#aop底层将采用代理机制进行实现。" class="headerlink" title="aop底层将采用代理机制进行实现。"></a>aop底层将采用代理机制进行实现。</h3><p>动态代理的两种机制<br>A:jdk<br>接口 + 实现类 ：spring采用 jdk 的动态代理Proxy。<br>怎么做的？基于接口去实现。<br>缺点：如果目标类没有实现任何接口呢？jkd动态代理就无能为力。<br>B:cglib<br>实现类：spring 采用 cglib字节码增强。<br>怎么做的？基于继承。也可以实现动态代理。<br>建立切面</p>
+<p><strong>SpringAOP的本质就是动态代理，那么Spring到底使用的是JDK代理，还是cglib代理呢？</strong></p>
+<pre><code>答：混合使用。如果被代理对象实现了接口，就优先使用JDK代理，如果没有实现接口，就用用cglib代理。
+</code></pre><h3 id="AOP实战"><a href="#AOP实战" class="headerlink" title="AOP实战"></a>AOP实战</h3><p>三种方式<br>1.手动方式(自己实现)</p>
+<pre><code>JDK动态代理
+CGLib动态代理
+</code></pre><p>2.半自动方式(SpringAOP了解)<br><strong>3.自动方式（AspectJ掌握重点！）</strong></p>
+<p>第一种方式之前我们就已经讲过了在上周的复习中就已经写了手动动态代理，</p>
+<h3 id="手动方式"><a href="#手动方式" class="headerlink" title="手动方式"></a>手动方式</h3><p>jdk动态代理 Proxy.newProxyInstance</p>
+<pre><code>@Test
+public void mytest(){
+  RentHouse houseOwner = new HouseOwner();
+  //参数1 委托类类加载器
+  //参数2 委托类的接口
+  //参数3 响应处理器
+  RentHouse houseProxy = (RentHouse) Proxy.newProxyInstance(houseOwner.getClass().getClassLoader(), houseOwner.getClass().getInterfaces(),
+        new InvocationHandler() {
+    //参数1：代理对象
+    //参数2：代理对象正在执行的方法
+    //参数3：代理对象正在执行的方法所对应的参数
+    @Override
+    public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+      if (&quot;toString&quot;.equals(method.getName())){
+        return null;
+      }
+      if (&quot;rentHouse&quot;.equals(method.getName())){
+        args[0] = (int)args[0] - 500;
+      }
+      System.out.println(method.getName() + &quot;委托类执行方法前&quot;);
+      //这一行代码相当于去执行委托类的方法
+      //参数1：委托类的实例（而不是代理类的实例，不要写成proxy）
+      //参数2：想要委托类去执行方法的参数（可以是对args处理后的参数）
+      Object invoke = method.invoke(houseOwner, args);
+      System.out.println(&quot;委托类执行方法后&quot;);
+      return invoke;
+    }
+  });
+</code></pre><p>cglib动态代理（需要引入Spring-context）Enhancer.create</p>
+<pre><code>public class CglibTest {
+  @Test
+  public void mytest(){
+    HouseOwner houseOwner = new HouseOwner();
+    HouseOwner houseOwnerProxy = (HouseOwner) Enhancer.create(HouseOwner.class, new InvocationHandler() {
+      @Override
+      public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+        System.out.println(&quot;before &quot;);
+        args[0] = args[0]-500;//当场拿走中介费
+        Object invoke = method.invoke(houseOwner, args);
+        System.out.println(&quot;after&quot;);
+        return invoke;
+      }
+    });
+    boolean b = houseOwnerProxy.rentHouse(2000);
+  }
+}
+</code></pre><p>这里主要就讲解第二种和第三种。当然最重要的还是使用AspectJ来实现</p>
+<h3 id="AOP实战——SpringAOP"><a href="#AOP实战——SpringAOP" class="headerlink" title="AOP实战——SpringAOP"></a>AOP实战——SpringAOP</h3><p>核心：就是userSerive通过 proxyFactory 和通知的实例去获取 userServiceProxy 对象，然后从容器中取出代理对象的实例，调用实例的方法。</p>
+<p>关键点1： UserServiceImpl</p>
+<pre><code>@Service(&quot;userService&quot;)
+public class UserServiceImpl implements UserService {
+  @Override
+  public int register(String username, String password) {
+    System.out.println(&quot;username = &quot; + username + &quot;|| password = &quot; + password);
+    return 0;
+  }
+}
+</code></pre><p>关键点二：一个 <strong>advice 对象</strong>，起通知的作用（ 其实也就是和动态代理很相似的部分 ）<br>Advice通知的实例（实现MethodInterceptor的接口，通过invoke方法通知在什么之间做什么事情）</p>
+<pre><code>@Component(&quot;myadvice&quot;)
+public class CustomAdvice implements MethodInterceptor {
+  @Override
+  public Object invoke(MethodInvocation methodInvocation) throws Throwable {
+    System.out.println(&quot;before&quot;);
+    //这一行执行的是委托类的方法，类似于动态代理中的method.invoke
+    Object proceed = methodInvocation.proceed();
+    System.out.println(&quot;after&quot;);
+    return proceed;
+  }
+}
+</code></pre><p>关键点三：获取代理的对象(<strong>ProxyFactoryBean</strong>)<br>UserServiceProxy代理对象的实例（通过<strong>目标对象</strong>和<strong>interceptorName</strong>→容器中通知）<br>在application.xml中编写下面代码：</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;
+       xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+       xmlns:context=&quot;http://www.springframework.org/schema/context&quot; xsi:schemaLocation=&quot;
+        http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd&quot;&gt;
+  &lt;!-- bean definitions here --&gt;
+  &lt;context:component-scan base-package=&quot;com.cskaoyan&quot;/&gt;
+  &lt;bean id=&quot; userServiceProxy &quot; class=&quot;org.springframework.aop.framework.ProxyFactoryBean&quot;&gt;
+    &lt;!-- 目标对象 --&gt;
+    &lt;property name=&quot;target&quot; ref=&quot;userService&quot;/&gt;
+    &lt;!--容器中这个通知的名称（id）--&gt;
+    &lt;property name=&quot;interceptorNames&quot; value=&quot;myadvice&quot;/&gt;
+  &lt;/bean&gt;
+&lt;/beans&gt;
+</code></pre><p>最后再进行单元测试</p>
+<pre><code>@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(&quot;classpath:application.xml&quot;)
+public class AopTest {
+  @Resource(name = &quot;userService&quot;)
+  UserService userService;
+  @Resource(name = &quot;userServiceProxy&quot;)
+  UserService userServiceProxy;
+  @Test
+  public void mytest(){
+    //不会调用通知的方法
+    userService.register(&quot;songge&quot;,&quot;123456&quot;);
+  }
+  @Test
+  public void mytest2(){
+    userServiceProxy.register(&quot;songge&quot;,&quot;123456&quot;);
+  }
+}
+</code></pre><p>特点：target的所有方法，全部带上了增强，这就和手动的区别不大，直接给所有方法增强</p>
+<p>不足之处</p>
+<pre><code>1.哪些方法被增强需要写代码判断
+2.增强的代码有要求，必须实现一些接口
+3.如果多个对象增强，那么就要多个ProxyFactoryBean来构建增强的对象
+</code></pre><h3 id="AOP实战–AspectJ（先以aop-advisor为例）"><a href="#AOP实战–AspectJ（先以aop-advisor为例）" class="headerlink" title="AOP实战–AspectJ（先以aop:advisor为例）"></a>AOP实战–AspectJ（先以aop:advisor为例）</h3><h3 id="3-1-导包"><a href="#3-1-导包" class="headerlink" title="3.1 导包"></a>3.1 导包</h3><pre><code>&lt;dependencies&gt;
+  &lt;dependency&gt;
+    &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-context&lt;/artifactId&gt;
+    &lt;version&gt;5.1.9.RELEASE&lt;/version&gt;
+  &lt;/dependency&gt;
+  &lt;dependency&gt;
+    &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-test&lt;/artifactId&gt;
+    &lt;version&gt;5.1.9.RELEASE&lt;/version&gt;
+    &lt;scope&gt;test&lt;/scope&gt;
+  &lt;/dependency&gt;
+  &lt;dependency&gt;
+    &lt;groupId&gt;junit&lt;/groupId&gt;
+    &lt;artifactId&gt;junit&lt;/artifactId&gt;
+    &lt;version&gt;4.12&lt;/version&gt;
+    &lt;scope&gt;test&lt;/scope&gt;
+  &lt;/dependency&gt;
+</code></pre><p><strong>导入织入包</strong>要使用切入点表达式，就要导入织入包</p>
+<pre><code>  &lt;!--织入包--&gt;
+  &lt;dependency&gt;
+    &lt;groupId&gt;org.aspectj&lt;/groupId&gt;
+    &lt;artifactId&gt;aspectjweaver&lt;/artifactId&gt;
+    &lt;version&gt;1.6.12&lt;/version&gt;
+  &lt;/dependency&gt;
+&lt;/dependencies&gt;
+</code></pre><h3 id="配置文件配置（切入点表达式和通知）"><a href="#配置文件配置（切入点表达式和通知）" class="headerlink" title="配置文件配置（切入点表达式和通知）"></a>配置文件配置（切入点表达式和通知）</h3><pre><code>&lt;!-- bean definitions here --&gt;
+&lt;context:component-scan base-package=&quot;com.cskaoyan&quot;/&gt;
+&lt;!--使用aspectJ--&gt;
+&lt;aop:config&gt;
+  &lt;!--pointcut--&gt;
+  &lt;!--切入点的表达式：指定的是方法→容器中组件的方法--&gt;
+  &lt;aop:pointcut id=&quot;mypointcut&quot; expression=&quot;execution(com.cskaoyan.bean.User *.cs*..*(..))&quot;/&gt;
+  &lt;!--advisor--&gt;
+  &lt;aop:advisor advice-ref=&quot;myadvice&quot; pointcut-ref=&quot;mypointcut&quot; /&gt;
+&lt;/aop:config&gt;
+</code></pre><p><strong>注意事项</strong>这里用了expression = “execution()”这里用了切入表达式之后会介绍</p>
+<h3 id="业务逻辑模块组件注册"><a href="#业务逻辑模块组件注册" class="headerlink" title="业务逻辑模块组件注册"></a>业务逻辑模块组件注册</h3><pre><code>@Service(&quot;userService&quot;)
+public class UserServiceImpl implements UserService {
+  @Override
+  public User register(String username, String password) {
+    System.out.println(&quot;username = &quot; + username + &quot;|| password = &quot; + password);
+    return new User();
+  }
+}
+</code></pre><h3 id="Advisor-需要实现-MethodInterceptor（方法拦截器）类"><a href="#Advisor-需要实现-MethodInterceptor（方法拦截器）类" class="headerlink" title="Advisor 需要实现 MethodInterceptor（方法拦截器）类"></a>Advisor 需要实现 MethodInterceptor（方法拦截器）类</h3><pre><code>@Component(&quot;myadvice&quot;)
+public class CustomAdvice implements MethodInterceptor {
+    @Override
+    public Object invoke(MethodInvocation methodInvocation) throws Throwable {
+        System.out.println(&quot;before&quot;);
+        //这一行执行的是委托类的方法，类似于动态代理中的method。invoke
+        Object proceed = methodInvocation.proceed();
+        System.out.println(&quot;after&quot;);
+        return proceed;
+    }
+}
+</code></pre><h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><pre><code>@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(&quot;classpath:application.xml&quot;)
+public class AspectjTest {
+    @Autowired
+    UserService userService;
+    @Test
+    public void myteste(){
+        userService.register(&quot;zhangsong&quot;,&quot;123456&quot;);
+    }
+}
+</code></pre><p><strong>使用切入点表达式之后，再也不用全部都加强了，哪里需要点哪里！</strong></p>
+<h3 id="Aspect介绍用法（最重要的）"><a href="#Aspect介绍用法（最重要的）" class="headerlink" title="Aspect介绍用法（最重要的）"></a>Aspect介绍用法（最重要的）</h3><p>切面类：切入点 和 通知，两点分别讨论</p>
+<h3 id="切入点pointcut"><a href="#切入点pointcut" class="headerlink" title="切入点pointcut"></a>切入点pointcut</h3><p>切入点最主要就是:切入点表达式<br>指定要被增强的方法</p>
+<h3 id="格式"><a href="#格式" class="headerlink" title="格式"></a>格式</h3><p><strong>execution（修饰符 返回值 包名.类名.方法名（参数））</strong></p>
+<h3 id="3-4-1-修饰符"><a href="#3-4-1-修饰符" class="headerlink" title="3.4.1 修饰符"></a>3.4.1 修饰符</h3><p>（public,provided,default,private,static,finnal…..）<br>不写 == 通配<br>通常我们也不写修饰符</p>
+<h3 id="3-4-2-返回值"><a href="#3-4-2-返回值" class="headerlink" title="3.4.2 返回值"></a>3.4.2 返回值</h3><p>能不能省略？ 不能省略，省略还知道是哪个方法？<br>能不能通配？ 可以通配，使用*代表任意类型的返回值<br>特殊情况：返回值要写类的<strong>全类名</strong>。除了java.lang包下的类和基本类型可以直接写。</p>
+<h3 id="3-4-3-包名-类名-方法名"><a href="#3-4-3-包名-类名-方法名" class="headerlink" title="3.4.3 包名+类名+方法名"></a>3.4.3 包名+类名+方法名</h3><p>能不能省略？ 可以省略（有条件），除了头和尾，使用<strong>..</strong>省略中间的部分,头尾不能省<br>能不能通配？ 可以通配，使用*通配，代表一个单词或者一个单词的一部分，最多通配一级目录。 头和尾都可以进行通配</p>
+<h3 id="3-4-4-参数"><a href="#3-4-4-参数" class="headerlink" title="3.4.4 参数"></a>3.4.4 参数</h3><p>能不能省略？（）对应的是无参的方法<br>能不能写一个东西代表任意类型任意个数的参数呢？使用<strong>..</strong> method_name(..)。有点像可变参数，但是可变参数三个.<br>能不能通配？* 进行通配，一个*通配一个任意类型的参数，如果多个参数就多个*<br>特殊情况：特定的参数类型需要写类的全类名。除了java.lang包下的类和基本类型可以直接写</p>
+<h3 id="通知（advisor）"><a href="#通知（advisor）" class="headerlink" title="通知（advisor）"></a>通知（advisor）</h3><p>我们在&lt;aop:config&gt;标签中看到里面可以写三个aop的标签：</p>
+<pre><code>&lt;aop:pointcut id=&quot;mypointcut1&quot; expression=&quot;execution(* com..impl..*(..))&quot;/&gt;
+&lt;aop:advisor advice-ref=&quot;myadvice&quot; pointcut-ref=&quot;mypointcut&quot; /&gt;
+&lt;aop:aspect ref=&quot;customAspect&quot;&gt;
+  &lt;!--通知类型before、after、around、afterThrowing、afterReturning--&gt;
+  &lt;!--method写切面类中所包含的方法--&gt;
+  &lt;aop:around method=&quot;around&quot; pointcut-ref=&quot;mypointcut1&quot;/&gt;
+  &lt;aop:before method=&quot;mybefore&quot; pointcut-ref=&quot;mypointcut1&quot;/&gt;
+  &lt;aop:after method=&quot;after&quot; pointcut-ref=&quot;mypointcut1&quot;/&gt;
+  &lt;aop:after-throwing method=&quot;myAfterThrowing&quot; pointcut-ref=&quot;mypointcut1&quot; throwing=&quot;myexception&quot;/&gt;
+  &lt;aop:after-returning method=&quot;myAfterReturning&quot; pointcut-ref=&quot;mypointcut1&quot; returning=&quot;myreturnResult&quot;/&gt;
+&lt;/aop:aspect&gt;
+</code></pre><p>在之前的例子中已经说了前面两个怎么使用：<br>一个是切入点，expression写切入点表达式<br>还有一个是aop:advisor，这里需要两个东西：一个是切入点表达式，一个是通知的方法（也就是动态代理的方法）<br>这里介绍第三个：<strong>aop:aspect</strong>—–里面写的是通知类型<br>我们看到这里面也有很多通知的类型</p>
+<h3 id="AspectJ通知类型"><a href="#AspectJ通知类型" class="headerlink" title="AspectJ通知类型"></a>AspectJ通知类型</h3><p>Before<br>    在切入点之前执行。 参数类型的校验。 前置通知。</p>
+<p>AtterReturning<br>    周在切入点之后执行。。后置通知，可以对结果进行检查。增加log</p>
+<p>Around<br>    环绕通知 在切入点之前和之后都会执行。增加事务。等等。</p>
+<p>AfterThrowing<br>    抛出异常的时候执行通知。正常情况下走不到。只有发生异常的情况下才会去通知。记录一些日志。</p>
+<p>After<br>    在finally语句里。不管切入点是否有异常发生都会执行。类似finally</p>
+<p>我们可以看出around类型的通知类型，很像之前的aop:advisor，可以在之前之后搞事情。</p>
+<p>接下来我们通过例子来使用这种AOP<br>service</p>
+<pre><code>@Service(&quot;userService&quot;)
+public class UserServiceImpl implements UserService {
+  @Override
+  public User register(String username, String password) {
+      System.out.println(&quot;username = &quot; + username + &quot;|| password = &quot; + password);
+      //int i = 1/0;
+      return new User(username,password);
+  }
+  @Override
+  public void myvoid() {
+      System.out.println(&quot;myvoid&quot;);
+  }
+}
+</code></pre><p>application.xml</p>
+<pre><code>&lt;!-- spring注解扫描开关 --&gt;
+&lt;context:component-scan base-package=&quot;com.cskaoyan&quot;/&gt;
+&lt;aop:config&gt;
+    &lt;aop:pointcut id=&quot;mypointcut1&quot; expression=&quot;execution(* com..impl..*(..))&quot;/&gt;
+    &lt;aop:aspect ref=&quot;customAspect&quot;&gt;
+      &lt;!--通知类型before、after、around、afterThrowing、afterReturning--&gt;
+      &lt;!--method写切面类中所包含的方法--&gt;
+      &lt;aop:around method=&quot;around&quot; pointcut-ref=&quot;mypointcut1&quot;/&gt;
+      &lt;aop:before method=&quot;mybefore&quot; pointcut-ref=&quot;mypointcut1&quot;/&gt;
+      &lt;aop:after method=&quot;after&quot; pointcut-ref=&quot;mypointcut1&quot;/&gt;
+      &lt;aop:after-throwing method=&quot;myAfterThrowing&quot; pointcut-ref=&quot;mypointcut1&quot; throwing=&quot;myexception&quot;/&gt;
+      &lt;aop:after-returning method=&quot;myAfterReturning&quot; pointcut-ref=&quot;mypointcut1&quot; returning=&quot;myreturnResult&quot;/&gt;
+    &lt;/aop:aspect&gt;
+&lt;/aop:config&gt;
+</code></pre><p><strong>aop:aspect ref=”customAspect”</strong> customAspect,就是我们的通知的对象，作用类似于之前的:CustomAdvice</p>
+<pre><code>//不需要实现接口，也不需要继承类
+//如果注解组件注册时没有指定id，使用类名首字母小写的形式
+//必须要注册（@Component），要不然application.xml找不到这个引用
+@Component
+public class CustomAspect {
+
+  public void mybefore(JoinPoint joinPoint){
+    Object[] args = joinPoint.getArgs();
+    System.out.println(Arrays.toString(args));
+    String methodName = joinPoint.getSignature().getName();
+    System.out.println(&quot;method = &quot; + methodName);
+    System.out.println(&quot;aspect的before&quot;);
+  }
+  public void after(JoinPoint joinPoint){
+    System.out.println(&quot;aspect的after&quot;);
+  }
+
+  public Object around(ProceedingJoinPoint joinPoint) throws Throwable {
+    System.out.println(&quot;around 的before&quot;);
+    //这一行做的是执行目标类的方法
+    Object proceed = joinPoint.proceed();
+    System.out.println(&quot;around的after&quot;);
+    return proceed;
+  }
+  public void myAfterThrowing(Throwable myexception){
+    System.out.println(&quot;myexception =&quot; + myexception.getMessage());
+  }
+
+  public void myAfterReturning(Object myreturnResult){
+    System.out.println(&quot;returning&quot; + myreturnResult);
+  }
+}
+</code></pre><p>测试我们就略过了。我们看到这里面通知的类型的方法里面有一个joinPoint的参数</p>
+<h3 id="JointPoint"><a href="#JointPoint" class="headerlink" title="JointPoint"></a>JointPoint</h3><p>作为通知方法的形参，可以通过joinPoint拿到代理对象、目标对象、方法、参数</p>
+<h3 id="ProceedingJoinPoint"><a href="#ProceedingJoinPoint" class="headerlink" title="ProceedingJoinPoint"></a>ProceedingJoinPoint</h3><p>在public Object around(ProceedingJoinPoint joinPoint) throws Throwable {}<br>我们发现这里的返回值是一个Object,然后传入的参数并不是JointPoint类型的，而是ProceedingJoinPoint。</p>
+<pre><code>public interface ProceedingJoinPoint extends JoinPoint {
+  void set$AroundClosure(AroundClosure var1);
+  Object proceed() throws Throwable;
+  Object proceed(Object[] var1) throws Throwable;
+}
+</code></pre><p>就这点东西，继承了JoinPoint</p>
+<pre><code>//这两个方法做的是执行目标类的方法
+Object proceed() throws Throwable;
+Object proceed(Object[] var1) throws Throwable;
+</code></pre><p>然后我发现在<strong>spring-aop.java</strong>中实现了这两个方法：</p>
+<pre><code>public Object proceed() throws Throwable {
+      return this.methodInvocation.invocableClone().proceed();
+  }
+public Object proceed(Object[] arguments) throws Throwable {
+  Assert.notNull(arguments, &quot;Argument array passed to proceed cannot be null&quot;);
+  if (arguments.length != this.methodInvocation.getArguments().length) {
+      throw new IllegalArgumentException(&quot;Expecting &quot; + this.methodInvocation.getArguments().length + &quot; arguments to proceed, but was passed &quot; + arguments.length + &quot; arguments&quot;);
+  } else {
+      this.methodInvocation.setArguments(arguments);
+      return this.methodInvocation.invocableClone(arguments).proceed();
+  }
+}
+</code></pre><h2 id="通过注解去实现切面-AspectJ-太重要了给一个二级标签"><a href="#通过注解去实现切面-AspectJ-太重要了给一个二级标签" class="headerlink" title="通过注解去实现切面 AspectJ (太重要了给一个二级标签)"></a>通过注解去实现切面 AspectJ (太重要了给一个二级标签)</h2><p>因为以后最常用的就是AspectJ的AOP。所以为了更方便，我们必须要选择使用注解代。<br>每次我们使用注解都要思考一个问题：<br><strong>我们使用注解的目的是什么？到底代替的是什么东西</strong><br>仔细看我们到底哪些文件用了AspectJ？</p>
+<h3 id="application-xml"><a href="#application-xml" class="headerlink" title="application.xml"></a>application.xml</h3><pre><code>&lt;!--通过注解的形式 实现aspect--&gt;
+&lt;!--打开aspectJ的注解开关--&gt;
+&lt;aop:aspectj-autoproxy/&gt;
+</code></pre><p>代替之前的：&lt;aop:config&gt;</p>
+<pre><code>&lt;aop:config&gt;
+  &lt;aop:pointcut id=&quot;mypointcut1&quot; expression=&quot;execution(* com..impl..*(..))&quot;/&gt;
+  &lt;aop:aspect ref=&quot;customAspect&quot;&gt;
+    &lt;!--通知类型before、after、around、afterThrowing、afterReturning--&gt;
+    &lt;!--method写切面类中所包含的方法--&gt;
+    &lt;aop:around method=&quot;around&quot; pointcut-ref=&quot;mypointcut1&quot;/&gt;
+    &lt;aop:before method=&quot;mybefore&quot; pointcut-ref=&quot;mypointcut1&quot;/&gt;
+    &lt;aop:after method=&quot;after&quot; pointcut-ref=&quot;mypointcut1&quot;/&gt;
+    &lt;aop:after-throwing method=&quot;myAfterThrowing&quot; pointcut-ref=&quot;mypointcut1&quot; throwing=&quot;myexception&quot;/&gt;
+    &lt;aop:after-returning method=&quot;myAfterReturning&quot; pointcut-ref=&quot;mypointcut1&quot; returning=&quot;myreturnResult&quot;/&gt;
+  &lt;/aop:aspect&gt;
+&lt;/aop:config&gt;
+</code></pre><p>aop:pointcut和aop:aspect要怎么替换呢？直接去ref=”customAspect”里面去改就好了。</p>
+<h3 id="CustomAspect-java"><a href="#CustomAspect-java" class="headerlink" title="CustomAspect.java"></a>CustomAspect.java</h3><p>修改后的文件：</p>
+<pre><code>//不需要实现接口，也不需要继承类
+//如果注解组件注册时没有指定id，使用类名首字母小写的形式
+@Component
+@Aspect//这是一个切面类的注解
+public class CustomAspect {
+
+    // 通过一个方法去写切入点表达式
+    @Pointcut(&quot;execution(* com..impl..*(..))&quot;)
+    public void mypointcut(){}
+
+    @Before(&quot;mypointcut()&quot;)
+    public void mybefore(JoinPoint joinPoint){
+        Object[] args = joinPoint.getArgs();
+        System.out.println(Arrays.toString(args));
+        String methodName = joinPoint.getSignature().getName();
+        System.out.println(&quot;method = &quot; + methodName);
+        System.out.println(&quot;aspect的before&quot;);
+    }
+    @After(value = &quot;mypointcut()&quot;)
+    public void after(){
+        System.out.println(&quot;aspect的after&quot;);
+    }
+
+    @Around(&quot;mypointcut()&quot;)
+    public Object around(ProceedingJoinPoint joinPoint) throws Throwable {
+        System.out.println(&quot;around 的before&quot;);
+        //这一行做的是执行目标类的方法
+        Object proceed = joinPoint.proceed();
+        System.out.println(&quot;around的after&quot;);
+        return proceed;
+    }
+    @AfterThrowing(value = &quot;mypointcut()&quot;,throwing = &quot;myexception&quot;)
+    public void myAfterThrowing(Throwable myexception){
+        System.out.println(&quot;myexception =&quot; + myexception.getMessage());
+    }
+
+    @AfterReturning(value = &quot;mypointcut()&quot;,returning = &quot;myreturnResult&quot;)
+    public void myAfterReturning(Object myreturnResult){
+        System.out.println(&quot;returning&quot; + myreturnResult);
+    }
+}
+</code></pre><p>有三个地方要修改：<br>1.首先要通过注解表示这是一个Aspect的对象</p>
+<pre><code>@Aspect
+</code></pre><p>2.要定义我们的<strong>切入点</strong>，注解写在一个方法上，方法名就是我们pointcut的名字，注解的内容就是切入点表达式</p>
+<pre><code>// 通过一个方法去写切入点表达式
+@Pointcut(&quot;execution(* com..impl..*(..))&quot;)
+public void mypointcut(){}
+</code></pre><p>3.需要在我们的通知类型的对应的方法上加上注解</p>
+<pre><code>@Before(&quot;mypointcut()&quot;)
+@After(value = &quot;mypointcut()&quot;)
+@Around(&quot;mypointcut()&quot;)
+</code></pre><p><strong>下面两个要加上returning 和throwing,value就是pointcut的名字</strong></p>
+<pre><code>@AfterThrowing(value = &quot;mypointcut()&quot; ,throwing = &quot;myexception&quot;)
+@AfterReturning(value = &quot;mypointcut()&quot;,returning = &quot;myreturnResult&quot;)
+</code></pre><h3 id="通过自定义注解只给一个方法进行加强"><a href="#通过自定义注解只给一个方法进行加强" class="headerlink" title="通过自定义注解只给一个方法进行加强"></a>通过自定义注解只给一个方法进行加强</h3><h2 id="先对之前的AOP写一个小结"><a href="#先对之前的AOP写一个小结" class="headerlink" title="先对之前的AOP写一个小结"></a>先对之前的AOP写一个小结</h2><p>我们一开始是通过手动的动态代理，Spring-AOP给一个类的<strong>所有方法进行加强</strong><br>然后使用了Apectj，设置切面类（切点+通知）我们可以给<strong>任意类的任意一些方法进行加强</strong>，切点表达式切到哪个方法哪个方法就加强<br>现在我们使用自定义注解，给<strong>一个方法</strong>进行加强。</p>
+<h3 id="如何操作自定义注解？"><a href="#如何操作自定义注解？" class="headerlink" title="如何操作自定义注解？"></a>如何操作自定义注解？</h3><p>application不变</p>
+<h3 id="先创建一个自定义的注解"><a href="#先创建一个自定义的注解" class="headerlink" title="先创建一个自定义的注解"></a>先创建一个自定义的注解</h3><p>我们知道一个自定义的注解需要两个元注解:<strong>@Target,@Retention</strong></p>
+<pre><code>@Target(ElementType.METHOD)         //这个注解写在方法上
+@Retention(RetentionPolicy.RUNTIME) //这个注解需要在运行时使用一般自定义注解都是RUNTIME
+public @interface CountingTime{}
+</code></pre><h3 id="然后在Aspect对象中设置切入点和通知"><a href="#然后在Aspect对象中设置切入点和通知" class="headerlink" title="然后在Aspect对象中设置切入点和通知"></a>然后在Aspect对象中设置切入点和通知</h3><p>CustomAspect.java</p>
+<pre><code>@Component
+@Aspect
+public class CustomAspect {
+  //注解注册一个切入点
+  @Pointcut(&quot;@annotation(com.cskaoyan.anno.CountingTime)&quot;)
+  public void mypointcut(){}
+
+  //通知类型的方法（也就是加强的方法）
+  @Around(&quot;mypointcut()&quot;)
+  public Object around(ProceedingJoinPoint joinPoint) throws Throwable{
+    long start = System.currentTimeMillis();
+    Object proceed = joinPoint.proceed();
+    long end = System.currentTimeMillis();
+    System.out.println(&quot;time cost: &quot; + (end - start));
+    return proceed;
+  }
+}
+</code></pre><p><strong>相当于把切入点表达式，换成一个单一的标记去标记一个方法</strong></p>
+<h3 id="在我们的需要加强的方法上去加注解"><a href="#在我们的需要加强的方法上去加注解" class="headerlink" title="在我们的需要加强的方法上去加注解"></a>在我们的需要加强的方法上去加注解</h3><p>UserServiceImpl</p>
+<pre><code>@Service(&quot;userService&quot;)
+public class UserServiceImpl implements UserService {
+  @CountingTime//这个方法需要加强
+  @Override
+  public User register(String username, String password) {
+    System.out.println(&quot;username = &quot; + username + &quot;|| password = &quot; + password);
+    //int i = 1/0;
+    return new User(username,password);
+  }
+  @Override
+  public void myvoid() {
+    System.out.println(&quot;myvoid&quot;);
+  }
+}
+</code></pre><h3 id="测试中使用"><a href="#测试中使用" class="headerlink" title="测试中使用"></a>测试中使用</h3><pre><code>@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(&quot;classpath:application.xml&quot;)
+public class AnnotationTest {
+  @Autowired
+  UserService userService;
+  @Test
+  public void mytest(){
+    userService.register(&quot;zhangsong&quot;,&quot;123456&quot;);
+  }
+}
+</code></pre><h3 id="JdbcTemplate"><a href="#JdbcTemplate" class="headerlink" title="JdbcTemplate"></a>JdbcTemplate</h3><p><strong>实质就是se代码和配置文件相互转换</strong></p>
+<h3 id="一个简单的jdbcTemplate的例子"><a href="#一个简单的jdbcTemplate的例子" class="headerlink" title="一个简单的jdbcTemplate的例子"></a>一个简单的jdbcTemplate的例子</h3><p><strong>导包</strong></p>
+<pre><code>&lt;!--spring-jdbc--&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-jdbc&lt;/artifactId&gt;
+    &lt;version&gt;5.1.9.RELEASE&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre><p>就直接在Test.java里面写的</p>
+<pre><code>public class JdbcTest {
+  @Test
+  public void mytest(){
+    DruidDataSource druidDataSource = new DruidDataSource();
+    //driverClass
+    druidDataSource.setDriverClassName(&quot;com.mysql.jdbc.Driver&quot;);
+    //jdbcUrl
+    druidDataSource.setUrl(&quot;jdbc:mysql://localhost:3306/j16_db?useSSL=false&amp;useUnicode=true&amp;characterEncoding=utf-8&quot;);
+    //username
+    druidDataSource.setUsername(&quot;root&quot;);
+    //password
+    druidDataSource.setPassword(&quot;123456&quot;);
+
+    //获得jdbcTemplate的实例
+    JdbcTemplate jdbcTemplate = new JdbcTemplate();
+    jdbcTemplate.setDataSource(druidDataSource);
+
+    //通过jdbcTemplate执行crud
+    String sql = &quot;select username from j16_user_t where id = ?&quot;;
+    String username = jdbcTemplate.queryForObject(sql, String.class, 1);
+
+  }
+}
+</code></pre><p>首先知道 jdbcTemplate 是怎么用的：</p>
+<p>1.需要设置一个DataSource<br>    配置Driver  （启动的驱动）<br>    配置Url     （设置url）<br>    配置UserName（数据库账号）<br>    配置PassWord（数据库密码）</p>
+<p>2.需要给一个JdbcTemplate设置一个DataSource</p>
+<p><strong>注意事项</strong>就是CRUD的操作，这些操作和dbUtil有一些不同，这里单独有一个文档，单独写一篇文章</p>
+<h2 id="星期一（0916）"><a href="#星期一（0916）" class="headerlink" title="星期一（0916）"></a>星期一（0916）</h2><p>这里有好几个例子，必须要掌握的是使用注解使用jdbcTemplate 还有javaConfig，代替application.xml（@Configuration)</p>
+<h3 id="JdbcTemplate-1"><a href="#JdbcTemplate-1" class="headerlink" title="JdbcTemplate"></a>JdbcTemplate</h3><p>上一次我们直接在单元测试里面直接跑了一次JdbcTemplate，回顾一下一个JdbcTemplate需要什么<br>1.需要设置一个DataSource</p>
+<pre><code>配置Driver  （启动的驱动）
+配置Url     （设置url）
+配置UserName（数据库账号）
+配置PassWord（数据库密码）
+</code></pre><p>2.需要给一个JdbcTemplate设置一个DataSource</p>
+<h3 id="实现一：一个简单的jdbcTemplate注册到Spring中"><a href="#实现一：一个简单的jdbcTemplate注册到Spring中" class="headerlink" title="实现一：一个简单的jdbcTemplate注册到Spring中"></a>实现一：一个简单的jdbcTemplate注册到Spring中</h3><p><strong>配置文件application.xml</strong></p>
+<pre><code>&lt;context:component-scan base-package=&quot;com.cskaoyan&quot;/&gt;
+&lt;!--        &amp;--&gt;
+&lt;!--        &amp;nbsp;--&gt;
+&lt;!--        &amp;gt; greater than--&gt;
+&lt;!--        &amp;lt; less than--&gt;
+&lt;!--datasource--&gt;
+&lt;bean id=&quot;druidDatasource&quot; class=&quot;com.alibaba.druid.pool.DruidDataSource&quot;&gt;
+  &lt;property name=&quot;driverClassName&quot; value=&quot;com.mysql.jdbc.Driver&quot;/&gt;
+  &lt;property name=&quot;url&quot; value=&quot;jdbc:mysql://localhost:3306/j16_db?useUnicode=true&amp;amp;characterEncoding=utf-8&quot;/&gt;
+  &lt;property name=&quot;username&quot; value=&quot;root&quot;/&gt;
+  &lt;property name=&quot;password&quot; value=&quot;123456&quot;/&gt;
+ &lt;/bean&gt;
+
+&lt;!--注册jdbcTemplate--&gt;
+&lt;bean id=&quot;jdbcTemplate&quot; class=&quot;org.springframework.jdbc.core.JdbcTemplate&quot;&gt;
+    &lt;property name=&quot;dataSource&quot; ref=&quot;druidDatasource&quot;/&gt;
+&lt;/bean&gt;
+</code></pre><p><strong>AccountDaoImpl.java</strong></p>
+<pre><code>@Repository
+public class AccountDaoImpl implements AccountDao {
+  @Autowired
+  JdbcTemplate jdbcTemplate;
+
+  @Override
+  public int queryMoneyById(int id) {
+    String sql = &quot;select money from j16_account_t where id = ?&quot;;
+    Integer money = jdbcTemplate.queryForObject(sql, Integer.class, id);
+    return money;
+  }
+
+  @Override
+  public int updateMoneyById(int id, int money) {
+    String sql = &quot;update j16_account_t set money = ? where id = ?&quot;;
+    int update = jdbcTemplate.update(sql, money, id);
+    return update;
+  }
+}
+</code></pre><p><strong>单元测试使用</strong></p>
+<pre><code>@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(&quot;classpath:applicaiton.xml&quot;)
+public class JdbcTemplateTest {
+  @AutoWired
+  AccountDao accountDao;
+
+  @Test
+  public void mytest(){
+    int i = accountDao.queryMoneyById(1);
+    System.out.println(i);
+    accountDao.updateMoneyById(1,500);
+  }
+}
+</code></pre><h3 id="实现二：不需要在-AccountDaoImpl-中创建成员-jdbcTemplate"><a href="#实现二：不需要在-AccountDaoImpl-中创建成员-jdbcTemplate" class="headerlink" title="实现二：不需要在 AccountDaoImpl 中创建成员 jdbcTemplate"></a>实现二：不需要在 AccountDaoImpl 中创建成员 jdbcTemplate</h3><p>我们需要在AccountDaoImpl 中 <strong>extends JdbcDaoSupport</strong><br>这样就能直接调用父类的jdbcTemplate，但是我们要帮父类实现获取dataSource（setDataSource()方法），在set的同时,<strong>父类还会帮我们初始化我们需要的用的JdbcTemplate对象</strong>，这样就不能使用注解来注册这个类，需要在application.xml中注册</p>
+<p><strong>application.xml</strong></p>
+<pre><code>&lt;context:component-scan base-package=&quot;com.cskaoyan&quot;/&gt;
+&lt;bean id=&quot;druidDatasource&quot; class=&quot;com.alibaba.druid.pool.DruidDataSource&quot;&gt;
+  &lt;property name=&quot;driverClassName&quot; value=&quot;com.mysql.jdbc.Driver&quot;/&gt;
+  &lt;property name=&quot;url&quot; value=&quot;jdbc:mysql://localhost:3306/j16_db?useUnicode=true&amp;amp;characterEncoding=utf-8&quot;/&gt;
+  &lt;property name=&quot;username&quot; value=&quot;root&quot;/&gt;
+  &lt;property name=&quot;password&quot; value=&quot;123456&quot;/&gt;
+&lt;/bean&gt;
+
+&lt;!--jdbcTemplate--&gt;
+&lt;bean id=&quot;jdbcTemplate&quot; class=&quot;org.springframework.jdbc.core.JdbcTemplate&quot;&gt;
+  &lt;property name=&quot;dataSource&quot; ref=&quot;druidDatasource&quot;/&gt;
+&lt;/bean&gt;
+
+&lt;bean class=&quot;com.cskaoyan.dao.AccountDaoImpl&quot;&gt;
+  &lt;!-- 为的是调用父类的setDataSource,就会初始化一个getJdbcTemplate，然后直接用父类定义好的jdbcTemplate进行操作 --&gt;
+  &lt;property name=&quot;dataSource&quot; ref=&quot;druidDatasource&quot;/&gt;
+&lt;/bean&gt;
+</code></pre><p>AccountDaoImpl.java直接写：this.getJdbcTemplate()</p>
+<pre><code>//@Repository不需要注解去注册，已经在application.xml中注册了
+//继承JdbcDaoSupport
+public class AccountDaoImpl extends JdbcDaoSupport implements AccountDao {
+  @Override
+  public int queryMoneyById(int id) {
+    String sql = &quot;select money from j16_account_t where id = ?&quot;;
+    Integer money = this.getJdbcTemplate().queryForObject(sql, Integer.class, id);
+    return money;
+  }
+
+  @Override
+  public int updateMoneyById(int id, int money) {
+    String sql = &quot;update j16_account_t set money = ? where id = ?&quot;;
+    int update = this.getJdbcTemplate().update(sql, money, id);
+    return update;
+  }
+}
+</code></pre><h3 id="实现三-AutoWired的新的用法"><a href="#实现三-AutoWired的新的用法" class="headerlink" title="实现三 AutoWired的新的用法"></a>实现三 AutoWired的新的用法</h3><p>通过这个例子我们知道AutoWired不仅仅可以写在类上<br>还可以写在方法上：</p>
+<pre><code>//组件初始化的调用到这个方法
+//从容器中给所有形参注入值
+</code></pre><p>这样就不需要在application.xml中注册AccountDaoImpl,使用注解注册即可，就能设置一个 datasource</p>
+<pre><code>@Repository
+public class AccountDaoImpl extends JdbcDaoSupport implements AccountDao {
+
+  //从容器中给方法的所有形参注入值
+  //组件初始化的调用到这个方法
+  @Autowired
+  public void setDaoDatasource(@Qualifier(&quot;druidDatasource&quot;) DataSource datasource){
+    //调用自己的setDataSource方法，也能得到一个jdbcTemplate
+    this.setDataSource(datasource);
+  }
+
+  @Override
+  public int queryMoneyById(int id) {
+    String sql = &quot;select money from j16_account_t where id = ?&quot;;
+    Integer money = this.getJdbcTemplate().queryForObject(sql, Integer.class, id);
+    return money;
+  }
+  @Override
+  public int updateMoneyById(int id, int money) {
+    String sql = &quot;update j16_account_t set money = ? where id = ?&quot;;
+    int update = this.getJdbcTemplate().update(sql, money, id);
+    return update;
+  }
+}
+</code></pre><p><strong>注意事项</strong><br>1.从容器中给方法的所有形参注入值,这个形参的对象默认情况在容器中注册只能有一个,不过可以通过对应的形参前面加：</p>
+<pre><code>@Qualifier(&quot;id&quot;)
+</code></pre><p>这样就能唯一指向。这样就可以指向不同的组件。不过一般就只有一个。</p>
+<h3 id="实现方法四：写javaConfig代替application-xml"><a href="#实现方法四：写javaConfig代替application-xml" class="headerlink" title="实现方法四：写javaConfig代替application.xml"></a>实现方法四：写javaConfig代替application.xml</h3><p>我们之前在使用application时候里面有一些什么内容呢？<br>1.开启了一个Spring的扫描</p>
+<pre><code>&lt;context:component-scan base-package=&quot;com.cskaoyan&quot;/&gt;
+</code></pre><p>里面注册了一个 datasource 和 JdbcTemplate</p>
+<pre><code>&lt;!--datasource--&gt;
+&lt;bean id=&quot;druidDatasource&quot; class=&quot;com.alibaba.druid.pool.DruidDataSource&quot;&gt;
+    &lt;property name=&quot;driverClassName&quot; value=&quot;com.mysql.jdbc.Driver&quot;/&gt;
+
+    &lt;property name=&quot;url&quot; value=&quot;jdbc:mysql://localhost:3306/j16_db?useUnicode=true&amp;amp;characterEncoding=utf-8&quot;/&gt;
+    &lt;property name=&quot;username&quot; value=&quot;root&quot;/&gt;
+    &lt;property name=&quot;password&quot; value=&quot;123456&quot;/&gt;
+ &lt;/bean&gt;
+&lt;!--jdbcTemplate--&gt;
+&lt;bean id=&quot;jdbcTemplate&quot; class=&quot;org.springframework.jdbc.core.JdbcTemplate&quot;&gt;
+    &lt;property name=&quot;dataSource&quot; ref=&quot;druidDatasource&quot;/&gt;
+&lt;/bean&gt;
+</code></pre><p>那么我们可以写一个 javaConfig 来代表这个application.xml</p>
+<pre><code>@Configuration                              //表示这是一个javaConfig
+@ComponentScan(backPackages=&quot;com.cskaoyan&quot;) //开启Spring的扫描
+public class SpringConfig {
+  //注册一个datasource
+  @Bean
+  public DruidDataSource druidDataSource(){
+    DruidDataSource druidDataSource = new DruidDataSource();
+    //driverClass
+    druidDataSource.setDriverClassName(&quot;com.mysql.jdbc.Driver&quot;);
+    //jdbcUrl
+    druidDataSource.setUrl(&quot;jdbc:mysql://localhost:3306/j16_db?useSSL=false&amp;useUnicode=true&amp;characterEncoding=utf-8&quot;);
+    //username
+    druidDataSource.setUsername(&quot;root&quot;);
+    //password
+    druidDataSource.setPassword(&quot;123456&quot;);
+    return druidDataSource;
+  }
+  //注册一个 JdbcTemplate
+  @Bean
+  public JdbcTemplate jdbcTemplate(/*@Qualifier*/ DataSource dataSource){
+    JdbcTemplate jdbcTemplate = new JdbcTemplate();
+    jdbcTemplate.setDataSource(dataSource);
+    return jdbcTemplate;
+  }
+}
+</code></pre><p><strong>对于之前的的（Spring-AOP）例子我们也可以使用JavaConfig来写</strong><br>那时我们需要一个userServiceProxy</p>
+<p>通知类CustomAdvice（不变）：</p>
+<pre><code>@Component(&quot;myadvice&quot;)
+public class CustomAdvice implements MethodInterceptor {
+    @Override
+    public Object invoke(MethodInvocation methodInvocation) throws Throwable {
+      System.out.println(&quot;before&quot;);
+      //这一行执行的是委托类的方法，类似于动态代理中的method。invoke
+      Object proceed = methodInvocation.proceed();
+      System.out.println(&quot;after&quot;);
+      return proceed;
+    }
+}
+</code></pre><p>Service</p>
+<pre><code>@Service(&quot;userService&quot;)
+public class UserServiceImpl implements UserService {
+  @Override
+  public int register(String username, String password) {
+    System.out.println(&quot;username = &quot; + username + &quot;|| password = &quot; + password);
+    return 0;
+  }
+}
+</code></pre><p>之前的配置文件：</p>
+<pre><code>&lt;!-- bean definitions here --&gt;
+&lt;context:component-scan base-package=&quot;com.cskaoyan&quot;/&gt;
+&lt;bean id=&quot;userServiceProxy&quot; class=&quot;org.springframework.aop.framework.ProxyFactoryBean&quot;&gt;
+  &lt;property name=&quot;target&quot; ref=&quot;userService&quot;/&gt;
+  &lt;!--容器中这个通知的名称（id）--&gt;
+  &lt;property name=&quot;interceptorNames&quot; value=&quot;myadvice&quot;/&gt;
+&lt;/bean&gt;
+</code></pre><p>同样我们可以写成JavaConfig<br>SpringConfig.java</p>
+<pre><code>@Configuration
+@ComponentScan(basePackages = &quot;com.cskaoyan&quot;)
+&lt;!-- @EnableAspectJAutoProxy 需要使用ASPECT注解时使用--&gt;
+public class SpringConfig {
+  //Spring-Aop
+  @Bean
+  public ProxyFactoryBean proxyFactoryBean(UserService userService){
+    ProxyFactoryBean proxyFactoryBean = new ProxyFactoryBean();
+    proxyFactoryBean.setTarget(userService);
+    proxyFactoryBean.setInterceptorNames(&quot;myadvice&quot;);
+    return proxyFactoryBean;
+  }
+  public SpringConfig(){
+    System.out.println(&quot;初始化&quot;);
+  }
+}
+</code></pre><p><strong>注意事项</strong><br>1.@Bean注册组件的时候，其实就是还原了JAVASE的代码，然后返回一个对象。@Bean(“id”)可以设置一个id。如果不设置默认方法名就是id。<br>2.这个SpringConfig会在运行的时候，自动创建一个对象，然后初始化里面的方法注册好我们需要的组间，何以见得？看我们的测试代码<br><strong>单元测试：</strong></p>
+<pre><code>@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(classes = SpringConfig.class) //加载我们的SpringConfig文件
+public class ConfigTest {
+  @Resource(name = &quot;proxyFactoryBean&quot;)
+  UserService userService;
+
+  @Test
+  public void mytest(){
+    int zhangsong = userService.register(&quot;zhangsong&quot;, &quot;123456&quot;);
+  }
+
+  @Autowired
+  AccountService accountService;
+  @Test
+  public void mytest2(){
+    accountService.transferMoney(1,2,100);
+  }
+
+}
+</code></pre><p>这里测试有一个@ContextConfiguration，已经写的不是之前的</p>
+<pre><code>@ContextConfiguration(&quot;classpath:application.xml&quot;)
+</code></pre><p>而是：</p>
+<pre><code>@ContextConfiguration(classes = SpringConfig.class)
+</code></pre><h3 id="实现五（没有代码）"><a href="#实现五（没有代码）" class="headerlink" title="实现五（没有代码）"></a>实现五（没有代码）</h3><p>但是我们要说一下怎么加入事务</p>
+<h3 id="Spring事务管理常用对象（山大对象）"><a href="#Spring事务管理常用对象（山大对象）" class="headerlink" title="Spring事务管理常用对象（山大对象）"></a>Spring事务管理常用对象（山大对象）</h3><pre><code>PlatformTransactionManager
+TransactionDefinition
+TransactionStatus
+</code></pre><h3 id="PlatformTransactionManager-（事务的核心）"><a href="#PlatformTransactionManager-（事务的核心）" class="headerlink" title="PlatformTransactionManager （事务的核心）"></a>PlatformTransactionManager （事务的核心）</h3><pre><code>平台事务管理器，spring要管理事务，必须使用事务管理器
+进行事务配置时，必须配置事务管理器。
+有多种实现，通过实现此接口，Spring可以管理任何实现了这些接口的事务。开发人员可以使用统一的编程模型来控制管理事务。
+</code></pre><p>常见的事务管理器的实现<br>DataSourceTransactionManager，jdbc开发时事务管理器，采用JdbcTemplate</p>
+<h3 id="PlatformTransactionManager常用API"><a href="#PlatformTransactionManager常用API" class="headerlink" title="PlatformTransactionManager常用API"></a>PlatformTransactionManager常用API</h3><pre><code>TransactionStatus getTransaction(TransactionDefinition definition) ，
+    事务管理器 通过“事务详情”，获得“事务状态”，从而管理事务。 获取事务状态后，Spring根据传播行为来决定如何开启事务；
+void commit(TransactionStatus status)  根据状态提交
+void rollback(TransactionStatus status) 根据状态回滚
+</code></pre><h3 id="TransactionStatus"><a href="#TransactionStatus" class="headerlink" title="TransactionStatus"></a>TransactionStatus</h3><p>这个接口的作用就是获取事务的状态（回滚点、是否完成、是否新事物、是否回滚）属性<br>通常这个是对我们来说是透明，我们不需要去设置状态。而是通过定义属性的名称去控制</p>
+<h3 id="TransactionDefinition"><a href="#TransactionDefinition" class="headerlink" title="TransactionDefinition"></a>TransactionDefinition</h3><p>这个接口的作用就是定义事务的名称、隔离级别、传播行为、超时时间长短、只读属性等。</p>
+<pre><code>REQUIRED: 支持当前事务，如果当前没有事务，就新建一个事务。
+SUPPORTS：支持当前事务，如果当前没有事务，就以非事务方式执行。
+MANDATORY： 支持当前事务，如果当前没有事务，就抛出异常
+REQUIRES_NEW：新建事务，如果当前存在事务，把当前事务挂起
+NOT_SUPPORTED: 以非事务方式执行操作，如果当前存在事务，就把当前事务挂起
+NEVER: 以非事务方式执行，如果当前存在事务，则抛出异常
+NESTED: 支持当前事务，如果当前事务存在，则执行一个嵌套事务，如果当前没有事务，就新建一个事务
+</code></pre><p>怎么使用？看下面的例子</p>
+<p><strong>注意事项</strong>我们不需要再导包了 Spring自动给我们导入了spring-tx</p>
+<h3 id="实现六-加入事务实现JdbcTemplate"><a href="#实现六-加入事务实现JdbcTemplate" class="headerlink" title="实现六 加入事务实现JdbcTemplate"></a>实现六 加入事务实现JdbcTemplate</h3><p>继续以转账的例子为例：<br>在写例子之前，我们需要知道我们在哪里加上事务?<br>当然是给 service 加上事务，一个service会调用多个dao,在我们需要加事务的方法上加事务</p>
+<p><strong>AccountDaoImpl（没有什么变化，也可以加上面的方法改写一些获取jdbcTemplate的方式）</strong></p>
+<pre><code>@Repository
+public class AccountDaoImpl implements AccountDao{
+  @Autowired
+  JdbcTemplate jdbcTemplate;
+  @Override
+  public int queryMoneyById(int id) {
+    Integer money = jdbcTemplate.queryForObject(&quot;select money from j16_account_t where id = ?&quot;, Integer.class, id);
+    return money;
+  }
+  @Override
+  public int updateMoneyById(int id, int money) {
+    int update = jdbcTemplate.update(&quot;update j16_account_t set money = ? where id = ?&quot;, money, id);
+    return update;
+  }
+}
+</code></pre><p><strong>JavaConfig中注册事务</strong></p>
+<pre><code>@Configuration
+@ComponentScan(basePackages = &quot;com.cskaoyan&quot;)
+public class SpringConfig {
+  @Bean
+  public DataSource druidDatasource(){
+    DruidDataSource druidDataSource = new DruidDataSource();
+    druidDataSource.setDriverClassName(&quot;com.mysql.jdbc.Driver&quot;);
+    druidDataSource.setUrl(&quot;jdbc:mysql://localhost:3306/j16_db?useUnicode=true&amp;characterEncoding=utf-8&quot;);
+    druidDataSource.setUsername(&quot;root&quot;);
+    druidDataSource.setPassword(&quot;123456&quot;);
+    return druidDataSource;
+  }
+  @Bean
+  public JdbcTemplate jdbcTemplate(DataSource dataSource){
+    JdbcTemplate jdbcTemplate = new JdbcTemplate();
+    jdbcTemplate.setDataSource(dataSource);
+    return jdbcTemplate;
+  }
+
+  /*TransactionTemplate  需要引入设置transactionManager*/
+  @Bean
+  public TransactionTemplate transactionTemplate(PlatformTransactionManager transactionManager){
+    TransactionTemplate transactionTemplate = new TransactionTemplate();
+    transactionTemplate.setTransactionManager(transactionManager);
+    return transactionTemplate;
+  }
+  /*TransactionManager*/
+  @Bean
+  public DataSourceTransactionManager dataSourceTransactionManager(DataSource dataSource){
+    DataSourceTransactionManager dataSourceTransactionManager = new DataSourceTransactionManager();
+    dataSourceTransactionManager.setDataSource(dataSource);
+    return dataSourceTransactionManager;
+  }
+}
+</code></pre><p>上面两个组件的注册这里不再说了，这里主要说一下怎么用事务。这里我们需要注册两个组件；<br>1.transactionTemplate<br>2.dataSourceTransactionManager</p>
+<p><strong>transactionTemplate</strong></p>
+<pre><code>transactionTemplate需要一个transactionManager
+</code></pre><p><strong>dataSourceTransactionManager</strong></p>
+<pre><code>transactionManager 注册需要设置一个DataSource。因为我们需要使用DataSource拿到同一个Connection去控制事务
+</code></pre><p><strong>接下来就在我们Serive里面使用—–需要注册transactionTemplate</strong><br>transactionTemplate.execute方法里面可以写两种匿名对象TransactionCallback，TransactionCallbackWithoutResult，通过名字我们知道一个是有返回值的事务，一个是没有返回值的事务。就对应着操作数据局的增删改（不需要返回值），查（需要返回值）</p>
+<pre><code>@Service
+public class AccountServiceImpl implements AccountService {
+    @Autowired
+    AccountDao accountDao;
+
+    //这里就需要注册一下我们的transactionTemplate
+    @Autowired
+    TransactionTemplate transactionTemplate;
+    @Override
+    public void transfer(int fromId, int destId, int money) {
+        int fromMoney = accountDao.queryMoneyById(fromId) - money;
+        int destMoney = accountDao.queryMoneyById(destId) + money;
+        //两种写法：一种可以有返回的结果，查询类的，一种没有返回值，更新类的
+        /*String execute = transactionTemplate.execute(new TransactionCallback&lt;String&gt;() {
+            @Override
+            public String doInTransaction(TransactionStatus transactionStatus) {
+                accountDao.updateMoneyById(fromId, fromMoney);
+                //int i = 1/0;
+                accountDao.updateMoneyById(destId, destMoney);
+                return &quot;ok&quot;;
+            }
+        });*/
+        transactionTemplate.execute(new TransactionCallbackWithoutResult() {
+            @Override
+            protected void doInTransactionWithoutResult(TransactionStatus transactionStatus) {
+                accountDao.updateMoneyById(fromId, fromMoney);
+               // int i = 1/0;
+                accountDao.updateMoneyById(destId, destMoney);
+            }
+        });
+    }
+}
+</code></pre><p><strong>最后进行测试</strong></p>
+<pre><code>@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(classes = SpringConfig.class)
+public class TxTest {
+  @Autowired
+  AccountService accountService;
+  @Test
+  public void mytest(){
+      accountService.transfer(1,2,100);
+  }
+}
+</code></pre><p>这是第一次使用transaction,和第一次使用jdbc一样，一定要知道我们需要注册什么组件<br>1.TransactionTemplate（需要一个TransactionManager）<br>2.TransactionManager(需要一个DataSource)</p>
+<p><strong>注意</strong><br>我们发现一个很严重的问题， 每次使用事务，我们都要在每个service类里面都要创建一个TransactionTemplate的对象，进行execute方法。<br>这种写法就很像动态代理的写法。需要在我们原来的代码上进行修改，这感觉就不是很友好，所以一般不用。</p>
+<h3 id="实现七使用动态代理（proxy）实现（Spring-aop实现）"><a href="#实现七使用动态代理（proxy）实现（Spring-aop实现）" class="headerlink" title="实现七使用动态代理（proxy）实现（Spring-aop实现）"></a>实现七使用动态代理（proxy）实现（Spring-aop实现）</h3><p>在上个例子中使用了transactionTemplate。这个例子将不再使用，而是使用动态代理，proxy作为代理对象。<br><strong>AccountDaoImpl没有变化</strong>，还是要使用JdbcTemplate去操作DAO</p>
+<p><strong>而在service里面我们不需要再创建TransactionTemplate对象，从而把他抽离出来了</strong>使用代理对象<br>还原我们的service</p>
+<pre><code>@Service
+public class AccountServiceImpl implements AccountService {
+  @Autowired
+  AccountDao accountDao;
+  @Override
+  public void transfer(int fromId, int destId, int money) {
+    int fromMoney = accountDao.queryMoneyById(fromId) - money;
+    int destMoney = accountDao.queryMoneyById(destId) + money;
+    accountDao.updateMoneyById(fromId, fromMoney);
+    // int i = 1/0;
+    accountDao.updateMoneyById(destId, destMoney);
+  }
+}
+</code></pre><p><strong>关键点当然就是我们的 JavaConfig —-怎么去配置proxy</strong></p>
+<pre><code>@Configuration
+@ComponentScan(basePackages = &quot;com.cskaoyan&quot;)
+public class SpringConfig {
+
+    @Bean
+    public DataSource druidDatasource(){
+        DruidDataSource druidDataSource = new DruidDataSource();
+        druidDataSource.setDriverClassName(&quot;com.mysql.jdbc.Driver&quot;);
+        druidDataSource.setUrl(&quot;jdbc:mysql://localhost:3306/j16_db?useUnicode=true&amp;characterEncoding=utf-8&quot;);
+        druidDataSource.setUsername(&quot;root&quot;);
+        druidDataSource.setPassword(&quot;123456&quot;);
+        return druidDataSource;
+    }
+    @Bean
+    public JdbcTemplate jdbcTemplate(DataSource dataSource){
+        JdbcTemplate jdbcTemplate = new JdbcTemplate();
+        jdbcTemplate.setDataSource(dataSource);
+        return jdbcTemplate;
+    }
+    /*txManager*/
+    @Bean
+    public DataSourceTransactionManager dataSourceTransactionManager(DataSource dataSource){
+        DataSourceTransactionManager dataSourceTransactionManager = new DataSourceTransactionManager();
+        dataSourceTransactionManager.setDataSource(dataSource);
+        return dataSourceTransactionManager;
+    }
+</code></pre><p>上面都是一样的，注意这里需要注册代理的对象（TransactionProxyFactoryBean）来代替了transactionTemplate。 这个代理对象需要两个参数一个是<strong>目标对象</strong>，一个是<strong>dataSourceTransactionManager</strong>传进去.而之前的transactionTemplate需要的是transactionManager，因为每个目标对象都要自己创建，相当于抽离出来了。<br>需要给这个代理的对象设置四个参数：<br>1）设置目标对象(传进去的)   —-  setTarget<br>2）设置目标对象的接口？（从这我们可以大胆猜测底层是<strong>jdk</strong>的动态代理）    —-  setProxyInterfaces<br>3）设置transactionManager(传进去的)    —-  setTransactionManager<br>4）设置事务的一些属性(需要写成properties的类型,key就是要代理的方法名)    —-  setTransactionAttributes</p>
+<pre><code>    /*根据目标对象生成代理对象*/
+    @Bean
+    public TransactionProxyFactoryBean serviceProxy(AccountService accountService,
+                                                    DataSourceTransactionManager dataSourceTransactionManager){
+        TransactionProxyFactoryBean transactionProxyFactoryBean = new TransactionProxyFactoryBean();
+        //需要设置四个东西：
+        //1.target 目标对象
+        transactionProxyFactoryBean.setTarget(accountService);
+
+        //2.setProxyInterfaces
+        transactionProxyFactoryBean.setProxyInterfaces(new Class[]{AccountService.class});
+        //3.setTransactionManager
+        transactionProxyFactoryBean.setTransactionManager(dataSourceTransactionManager);
+
+        //设置transactionDefinition需要写成properties的方式，key就是目标对象的方法名
+        Properties transactionAttributes = new Properties();
+        transactionAttributes.setProperty(&quot;transfer&quot;,&quot;PROPAGATION_REQUIRED,ISOLATION_DEFAULT&quot;);
+
+        //4.设置一些transactionDefinition的东西
+        transactionProxyFactoryBean.setTransactionAttributes(transactionAttributes);
+        return transactionProxyFactoryBean;
+    }
+}
+</code></pre><p><strong>注意事项：</strong>这个也可以写成配置文件的形式，这里主要想说明TransactionProxyFactoryBean的标签应该怎么写</p>
+<pre><code>&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;
+       xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+       xmlns:context=&quot;http://www.springframework.org/schema/context&quot;
+       xmlns:aop=&quot;http://www.springframework.org/schema/aop&quot;
+       xmlns:tx=&quot;http://www.springframework.org/schema/tx&quot;
+       xsi:schemaLocation=&quot;
+        http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/aop https://www.springframework.org/schema/aop/spring-aop.xsd
+        http://www.springframework.org/schema/tx https://www.springframework.org/schema/tx/spring-tx.xsd
+        http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd&quot;&gt;
+
+    &lt;context:component-scan base-package=&quot;com.cskaoyan&quot;/&gt;
+
+    &lt;bean id=&quot;serviceProxy&quot; class=&quot;org.springframework.transaction.interceptor.TransactionProxyFactoryBean&quot;&gt;
+        &lt;property name=&quot;target&quot; ref=&quot;accountServiceImpl&quot;/&gt;
+        &lt;property name=&quot;proxyInterfaces&quot; value=&quot;com.cskaoyan.service.AccountService&quot;/&gt;
+        &lt;property name=&quot;transactionManager&quot; ref=&quot;txManager&quot;/&gt;
+        &lt;property name=&quot;transactionAttributes&quot;&gt;
+          &lt;props&gt;
+            &lt;prop key=&quot;transfer&quot;&gt;PROPAGATION_REQUIRED,ISOLATION_DEFAULT&lt;/prop&gt;
+          &lt;/props&gt;
+        &lt;/property&gt;
+    &lt;/bean&gt;
+    &lt;bean id=&quot;txManager&quot; class=&quot;org.springframework.jdbc.datasource.DataSourceTransactionManager&quot;&gt;
+        &lt;property name=&quot;dataSource&quot; ref=&quot;datasource&quot;/&gt;
+    &lt;/bean&gt;
+    &lt;bean id=&quot;datasource&quot; class=&quot;com.alibaba.druid.pool.DruidDataSource&quot;&gt;
+        &lt;property name=&quot;driverClassName&quot; value=&quot;com.mysql.jdbc.Driver&quot;/&gt;
+        &lt;property name=&quot;url&quot; value=&quot;jdbc:mysql://localhost:3306/j16_db?useUnicode=true&amp;amp;characterEncoding=utf-8&quot;/&gt;
+        &lt;property name=&quot;username&quot; value=&quot;root&quot;/&gt;
+        &lt;property name=&quot;password&quot; value=&quot;123456&quot;/&gt;
+    &lt;/bean&gt;
+    &lt;bean class=&quot;org.springframework.jdbc.core.JdbcTemplate&quot;&gt;
+        &lt;property name=&quot;dataSource&quot; ref=&quot;datasource&quot;/&gt;
+    &lt;/bean&gt;
+&lt;/beans&gt;
+</code></pre><p>最后是测试：拿出的是代理的对象</p>
+<pre><code>@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(classes = SpringConfig.class)
+public class ProxyTest {
+    @Resource(name = &quot;serviceProxy&quot;)
+    AccountService accountService;
+    @Test
+    public void mytest(){
+        accountService.transfer(1,2,100);
+    }
+}
+</code></pre><h3 id="实现八：使用ASPECT实现-记得导入weaver包"><a href="#实现八：使用ASPECT实现-记得导入weaver包" class="headerlink" title="实现八：使用ASPECT实现(记得导入weaver包)"></a>实现八：使用ASPECT实现(记得导入weaver包)</h3><p>使用application来导入aspect，注意这里记得导入<strong>tx的schema</strong><br>需要在application中配置tx:advice给到aop:advsor，通知就应该由tx来控制。tx:advice ，需要设置一个<br>dataSourceTransactionManager</p>
+<pre><code>&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;
+     xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+     xmlns:context=&quot;http://www.springframework.org/schema/context&quot;
+     xmlns:aop=&quot;http://www.springframework.org/schema/aop&quot;
+     xmlns:tx=&quot;http://www.springframework.org/schema/tx&quot;
+     xsi:schemaLocation=&quot;
+      http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+      http://www.springframework.org/schema/aop https://www.springframework.org/schema/aop/spring-aop.xsd
+      http://www.springframework.org/schema/tx https://www.springframework.org/schema/tx/spring-tx.xsd
+      http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd&quot;&gt;
+
+    &lt;context:component-scan base-package=&quot;com.cskaoyan&quot;/&gt;
+    &lt;!--同时使用xml配置文件和javaConfig、配置类要在扫描包范围内--&gt;
+    &lt;aop:config&gt;
+        &lt;aop:pointcut id=&quot;txpointcut&quot; expression=&quot;execution(* com.cskaoyan.service..*(..))&quot;/&gt;
+        &lt;aop:advisor advice-ref=&quot;txAdvisor&quot; pointcut-ref=&quot;txpointcut&quot;/&gt;
+    &lt;/aop:config&gt;
+    &lt;!-- transaction给我们提供了一个advice来给aspect用 --&gt;
+    &lt;tx:advice id=&quot;txAdvisor&quot; transaction-manager=&quot;dataSourceTransactionManager&quot;&gt;
+        &lt;tx:attributes&gt;
+            &lt;!--增加事务的方法--&gt;
+            &lt;tx:method name=&quot;transfer&quot; isolation=&quot;DEFAULT&quot; propagation=&quot;REQUIRED&quot;/&gt;
+        &lt;/tx:attributes&gt;
+    &lt;/tx:advice&gt;
+&lt;/beans&gt;
+</code></pre><p>虽然我们写了application。但是<strong>我们写的springConfig也需要注册到spring中</strong>，application.xml会自动来注册这个SpringConfig 从构造函数初始化可以知道。这里也印证我们之前说的application.xml应该和Annotation一起使用才是效率最高的。</p>
+<pre><code>@Configuration
+//@ComponentScan(basePackages = &quot;com.cskaoyan&quot;)不需要在这里写
+public class SpringConfig {
+
+  @Bean
+  public DataSource druidDatasource(){
+      DruidDataSource druidDataSource = new DruidDataSource();
+      druidDataSource.setDriverClassName(&quot;com.mysql.jdbc.Driver&quot;);
+      druidDataSource.setUrl(&quot;jdbc:mysql://localhost:3306/j16_db?useUnicode=true&amp;characterEncoding=utf-8&quot;);
+      druidDataSource.setUsername(&quot;root&quot;);
+      druidDataSource.setPassword(&quot;123456&quot;);
+      return druidDataSource;
+  }
+
+  @Bean
+  public JdbcTemplate jdbcTemplate(DataSource dataSource){
+      JdbcTemplate jdbcTemplate = new JdbcTemplate();
+      jdbcTemplate.setDataSource(dataSource);
+      return jdbcTemplate;
+  }
+
+  /*txManager*/
+  @Bean
+  public DataSourceTransactionManager dataSourceTransactionManager(DataSource dataSource){
+      DataSourceTransactionManager dataSourceTransactionManager = new DataSourceTransactionManager();
+      dataSourceTransactionManager.setDataSource(dataSource);
+      return dataSourceTransactionManager;
+  }
+
+  //检测有没有注册
+  public SpringConfig() {
+      System.out.println(&quot;springconfig init&quot;);
+  }
+}
+</code></pre><p>测试和service，dao代码省略了。都一样的</p>
+<h3 id="注解-声明式-实现事务（重点中的重点）"><a href="#注解-声明式-实现事务（重点中的重点）" class="headerlink" title="注解(声明式)实现事务（重点中的重点）"></a>注解(声明式)实现事务（重点中的重点）</h3><p>还是那个问题：我们使用注解到底代替了哪些东西？<br>1.application.xml，在springConfig中我们也没有注册新的组件但是我们加了一个新的注解：</p>
+<pre><code>@EnableTransactionManagement 开启事务的开关
+</code></pre><p>这是声明式的事务可以写成application.xml的形式，或者在application.xml添加：<br>（<strong>以下两种配置方法二选一即可，建议直接写javaConfig的注解</strong>）</p>
+<pre><code>&amp;lt;!&amp;ndash;开启一个声明事务的开关&amp;ndash;&amp;gt;
+&lt;tx:annotation-driven transaction-manager=&quot;dataSourceTransactionManager&quot;/&gt;--&gt;
+</code></pre><p>SpringConfig.java</p>
+<pre><code>@Configuration
+@ComponentScan(basePackages = &quot;com.cskaoyan&quot;)
+@EnableTransactionManagement
+public class SpringConfig {
+  @Bean
+  public DataSource druidDatasource(){
+      DruidDataSource druidDataSource = new DruidDataSource();
+      druidDataSource.setDriverClassName(&quot;com.mysql.jdbc.Driver&quot;);
+      druidDataSource.setUrl(&quot;jdbc:mysql://localhost:3306/j16_db?useUnicode=true&amp;characterEncoding=utf-8&quot;);
+      druidDataSource.setUsername(&quot;root&quot;);
+      druidDataSource.setPassword(&quot;123456&quot;);
+      return druidDataSource;
+  }
+
+  @Bean
+  public JdbcTemplate jdbcTemplate(DataSource dataSource){
+      JdbcTemplate jdbcTemplate = new JdbcTemplate();
+      jdbcTemplate.setDataSource(dataSource);
+      return jdbcTemplate;
+  }
+
+  /*txManager*/
+  @Bean
+  public DataSourceTransactionManager dataSourceTransactionManager(DataSource dataSource){
+      DataSourceTransactionManager dataSourceTransactionManager = new DataSourceTransactionManager();
+      dataSourceTransactionManager.setDataSource(dataSource);
+      return dataSourceTransactionManager;
+  }
+
+  public SpringConfig() {
+      System.out.println(&quot;springconfig init&quot;);
+  }
+}
+</code></pre><p>2.service 层的修改<br>我们需要在哪个方法添加事务，就在哪个方法上添加注解(@Transactional)，他自动给我们做好了。不需要我们自己去动态代理等等。</p>
+<pre><code>@Service
+public class AccountServiceImpl implements AccountService {
+    @Autowired
+    AccountDao accountDao;
+    @Transactional(propagation = Propagation.REQUIRED,isolation = Isolation.DEFAULT)
+    @Override
+    public void transfer(int fromId, int destId, int money) {
+        int fromMoney = accountDao.queryMoneyById(fromId) - money;
+        int destMoney = accountDao.queryMoneyById(destId) + money;
+        accountDao.updateMoneyById(fromId, fromMoney);
+        //int i = 1/0;
+        accountDao.updateMoneyById(destId, destMoney);
+    }
+}
+</code></pre><p>@Transactional<br>可以通过这个注解实现一些definition的东西，当然我们看到不写也有一个默认值。</p>
+<pre><code>@Target({ElementType.TYPE, ElementType.METHOD})
+@Retention(RetentionPolicy.RUNTIME)
+@Inherited
+@Documented
+public @interface Transactional {
+    @AliasFor(&quot;transactionManager&quot;)
+    String value() default &quot;&quot;;
+    @AliasFor(&quot;value&quot;)
+    String transactionManager() default &quot;&quot;;
+    Propagation propagation() default Propagation.REQUIRED;
+    Isolation isolation() default Isolation.DEFAULT;
+    int timeout() default -1;
+    boolean readOnly() default false;
+    Class&lt;? extends Throwable&gt;[] rollbackFor() default {};
+    String[] rollbackForClassName() default {};
+    Class&lt;? extends Throwable&gt;[] noRollbackFor() default {};
+    String[] noRollbackForClassName() default {};
+}
+</code></pre><h3 id="AliasFor"><a href="#AliasFor" class="headerlink" title="@AliasFor"></a>@AliasFor</h3><p>单独写这个注解，因为这个注解很多地方都遇到</p>
+<pre><code>@Retention(RetentionPolicy.RUNTIME)
+@Target({ElementType.METHOD})
+@Documented
+public @interface AliasFor {
+    @AliasFor(&quot;attribute&quot;)
+    String value() default &quot;&quot;;
+
+    @AliasFor(&quot;value&quot;)
+    String attribute() default &quot;&quot;;
+    Class&lt;? extends Annotation&gt; annotation() default Annotation.class;
+}
+</code></pre><p>这个注解老牛皮了：字面意思就是表示为别名</p>
+<pre><code>* @AliasFor 用法：&lt;br&gt;
+* &lt;li&gt;用到注解 属性上，表示两个属性互相为别名，互相为别名的属性值必须相同，若设置成不同，则会报错&lt;/li&gt;
+* &lt;li&gt;注解是可以继承的，但是注解是不能继承父注解的属性的,也就是说,我在类扫描的时候,拿到的注解的属性值,依然是父注解的属性值,而不是你定义的注解的属性值&lt;br&gt;
+* 所以此时可以在子注解对应的属性上加上@AliasFor&lt;br&gt;
+</code></pre><p>用法：<br>1、同个注解中的两个属性互为别名<br>2、继承父注解的属性，使其拥有更强大的功能</p>
+<p><a href="https://www.cnblogs.com/sandyflower/p/10877291.html" target="_blank" rel="external">https://www.cnblogs.com/sandyflower/p/10877291.html</a><br><a href="https://blog.csdn.net/wolfcode_cn/article/details/80654730" target="_blank" rel="external">https://blog.csdn.net/wolfcode_cn/article/details/80654730</a></p>
+<h2 id="周二（9月17日）"><a href="#周二（9月17日）" class="headerlink" title="周二（9月17日）"></a>周二（9月17日）</h2><h2 id="星期二（0917）"><a href="#星期二（0917）" class="headerlink" title="星期二（0917）"></a>星期二（0917）</h2><h2 id="今天上课对之前的知识点进行回顾"><a href="#今天上课对之前的知识点进行回顾" class="headerlink" title="今天上课对之前的知识点进行回顾"></a>今天上课对之前的知识点进行回顾</h2><h3 id="动态代理"><a href="#动态代理" class="headerlink" title="动态代理"></a>动态代理</h3><p>1.jdk<br>2.cglib</p>
+<h3 id="Ioc-Di"><a href="#Ioc-Di" class="headerlink" title="Ioc/Di"></a>Ioc/Di</h3><p>组件注册<br>依赖注入<br>生命周期（10个部分）</p>
+<h3 id="AOP"><a href="#AOP" class="headerlink" title="AOP"></a>AOP</h3><p>切入点表达 execution （）<br>修饰符<br>返回值<br>包名+类名+方法名<br>参数</p>
+<h3 id="标签"><a href="#标签" class="headerlink" title="标签"></a>标签</h3><pre><code>&lt;bean id=&quot;&quot; class=&quot;&quot; factory-bean factory-method scope init-method destroy-method/&gt;
+&lt;constructor-arg  name value
+&lt;property name value/ref&gt;
+&lt;array&gt;
+&lt;bean&gt;
+&lt;value&gt;
+&lt;ref&gt;
+&lt;list&gt;
+&lt;set&gt;
+&lt;map&gt;
+&lt;props&gt;
+
+扫描包(注解)功能
+&lt;context:component-scan base-package=””/&gt;
+&lt;aop:aspectj-autoproxy/&gt; → 织入包
+&lt;tx:annotation-driver transaction-manager=/&gt;
+
+Aop
+&lt;aop:Config&gt;
+&lt;aop:pointcut id expression/&gt;
+&lt;aop:advisor advice-ref pointcut(-ref)/&gt; 类实现MethodInterceptor
+&lt;aop:aspect ref/&gt;
+&lt;aop:before method pointccut(-ref)
+&lt;aop:after method pointccut(-ref)
+&lt;aop:around method pointccut(-ref)
+&lt;aop:after-returning method pointccut(-ref) returning
+&lt;aop:after-throwing method pointccut(-ref) throwing
+
+Tx：
+&lt;tx:advice id transaction-manager/&gt;
+&lt;tx:attributes&gt;
+&lt;tx:method name definition的属性
+</code></pre><h3 id="5-注解"><a href="#5-注解" class="headerlink" title="5 注解"></a>5 注解</h3><p>5.1 组件注册：<br>类上的：</p>
+<pre><code>@Component（）
+@Service @Repository @Controller
+@Configuration
+@ContextConfiguration(特殊的)
+@Aspect
+方法上：@Bean @Qualifier
+</code></pre><p>5.2 注入<br>成员变量：</p>
+<pre><code>@Autowired
+@Autowired + @Qualifier
+@Resource（name）
+@Value
+</code></pre><p>执行方法：</p>
+<pre><code>@Autowired （+@Qualifier）
+</code></pre><p>5.3 生命周期<br>被@PostConstruct修饰的方法会在服务器加载Servlet的时候运行，并且只会被服务器执行一次。PostConstruct在构造函数之后执行，init（）方法之前执行。<br>PreDestroy（）方法在destroy（）方法执行之后执行<br>Constructor &gt;&gt; @Autowired &gt;&gt; @PostConstruct<br>如果想在生成对象时完成某些初始化操作，而偏偏这些初始化操作又依赖于依赖注入，那么久无法在构造函数中实现。为此，可以使用@PostConstruct注解一个方法来完成初始化，@PostConstruct注解的方法将会在依赖注入完成后被自动调用。</p>
+<pre><code>@PostConstruct
+@PreDestroy
+</code></pre><p>5.4 Scope<br>5.5 开关类</p>
+<pre><code>@ComponentScan（basePackages ={}）
+@EnableAspectJAutoProxy
+@EnableTransactionManagement
+</code></pre><p>5.6 单元测试</p>
+<pre><code>@Runwith（SpringJUnit4ClassRunner.class）
+@ContextConfiguration(“”) classes
+</code></pre><p>5.7 Aop</p>
+<pre><code>@Aspect
+@Pointcut
+@Before
+@After
+@Around
+@AfterThrowing
+@AfterReturning
+</code></pre><h2 id="今天学习的内容—SpringMVC"><a href="#今天学习的内容—SpringMVC" class="headerlink" title="今天学习的内容—SpringMVC"></a>今天学习的内容—SpringMVC</h2><p>它是Spring框架的一部分，负责表示层，这里有一张图比较直观的表示出每一个部分的功能<br><img src="https://s2.ax1x.com/2019/09/18/noL8sI.png" alt="noL8sI.png"></p>
+<h3 id="使用SpringMVC"><a href="#使用SpringMVC" class="headerlink" title="使用SpringMVC"></a>使用SpringMVC</h3><p>不管那么多，先用起来，入门案例一，</p>
+<h3 id="第一步导包"><a href="#第一步导包" class="headerlink" title="第一步导包"></a>第一步导包</h3><p>在pom.xml</p>
+<pre><code>&lt;packaging&gt;war&lt;/packaging&gt;
+&lt;dependencies&gt;
+  &lt;dependency&gt;
+    &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-webmvc&lt;/artifactId&gt;
+    &lt;version&gt;5.1.9.RELEASE&lt;/version&gt;
+  &lt;/dependency&gt;
+  &lt;dependency&gt;
+    &lt;groupId&gt;javax.servlet&lt;/groupId&gt;
+    &lt;artifactId&gt;servlet-api&lt;/artifactId&gt;
+    &lt;version&gt;3.0-alpha-1&lt;/version&gt;
+    &lt;scope&gt;provided&lt;/scope&gt;
+  &lt;/dependency&gt;
+&lt;/dependencies&gt;
+</code></pre><p>这里注意，只需要导入spring-webmvc，就可以了。就导入了5+2+1,5+1就是之前的导入spring-context的五个。剩下两个是<br>spring-web和spring-mvc</p>
+<h3 id="第二步-web-xml配置前端控制器"><a href="#第二步-web-xml配置前端控制器" class="headerlink" title="第二步 web.xml配置前端控制器"></a>第二步 web.xml配置前端控制器</h3><p>配置一个dispatchServlet去接收所有的请求，然后在分发</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;web-app xmlns=&quot;http://xmlns.jcp.org/xml/ns/javaee&quot;
+         xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+         xsi:schemaLocation=&quot;http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd&quot;
+         version=&quot;4.0&quot;&gt;
+    &lt;servlet&gt;
+        &lt;servlet-name&gt;dispatcherServlet&lt;/servlet-name&gt;
+        &lt;servlet-class&gt;org.springframework.web.servlet.DispatcherServlet&lt;/servlet-class&gt;
+        &lt;init-param&gt;
+            &lt;param-name&gt;contextConfigLocation&lt;/param-name&gt;
+            &lt;param-value&gt;classpath:application.xml&lt;/param-value&gt;
+        &lt;/init-param&gt;
+    &lt;/servlet&gt;
+    &lt;servlet-mapping&gt;
+    &lt;servlet-name&gt;dispatcherServlet&lt;/servlet-name&gt;
+    &lt;url-pattern&gt;/&lt;/url-pattern&gt;
+&lt;/servlet-mapping&gt;
+&lt;/web-app&gt;
+</code></pre><h3 id="第三步-springmvc-xml配置springmvc依赖的bean"><a href="#第三步-springmvc-xml配置springmvc依赖的bean" class="headerlink" title="第三步 springmvc.xml配置springmvc依赖的bean"></a>第三步 springmvc.xml配置springmvc依赖的bean</h3><p>配置处理器映射器 handlerMapping<br>配置处理器适配器 HandlerAdapter<br>注册bean</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;
+       xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+       xmlns:context=&quot;http://www.springframework.org/schema/context&quot;
+       xmlns:aop=&quot;http://www.springframework.org/schema/aop&quot;
+       xsi:schemaLocation=&quot;
+        http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/aop https://www.springframework.org/schema/aop/spring-aop.xsd
+        http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd&quot;&gt;
+    &lt;!--映射器--&gt;
+    &lt;bean class=&quot;org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping&quot;/&gt;
+    &lt;!--适配器--&gt;
+    &lt;!--适配一个实现Controller接口的Handler--&gt;
+    &lt;bean class=&quot;org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter&quot;/&gt;
+    &lt;!-- 注册controller组件 id就是url --&gt;
+    &lt;bean id=&quot;/hello&quot; class=&quot;com.cskaoyan.controller.HelloController&quot;/&gt;
+&lt;/beans&gt;
+</code></pre><h3 id="第四步-实现请求处理类并配置访问url"><a href="#第四步-实现请求处理类并配置访问url" class="headerlink" title="第四步 实现请求处理类并配置访问url"></a>第四步 实现请求处理类并配置访问url</h3><p>modelAndView是数据和view，model返回给jsp的数据，而view是设置viewName获取视图的路径。</p>
+<pre><code>public class HelloController implements Controller {
+    @Override
+    public ModelAndView handleRequest(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws Exception {
+        ModelAndView modelAndView = new ModelAndView();
+        //model和数据相关
+        modelAndView.addObject(&quot;content&quot;,&quot; springmvc&quot; );
+        //相对于webroot(webapp)下的路径
+        modelAndView.setViewName(&quot;/WEB-INF/hello.jsp&quot;);
+        return modelAndView;
+    }
+}
+</code></pre><h3 id="第五步-实现结果视图"><a href="#第五步-实现结果视图" class="headerlink" title="第五步 实现结果视图"></a>第五步 实现结果视图</h3><pre><code>&lt;%@ page contentType=&quot;text/html;charset=UTF-8&quot; language=&quot;java&quot; %&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;Title&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    hello ${content}
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><h3 id="入门案例二（使用注解，我们要用的形式）"><a href="#入门案例二（使用注解，我们要用的形式）" class="headerlink" title="入门案例二（使用注解，我们要用的形式）"></a>入门案例二（使用注解，我们要用的形式）</h3><p>前面都要配置。从第三步开始使用注解</p>
+<h3 id="第三步配置application-xml"><a href="#第三步配置application-xml" class="headerlink" title="第三步配置application.xml"></a>第三步配置application.xml</h3><p>schema引入：</p>
+<pre><code>xmlns:mvc=&quot;http://www.springframework.org/schema/mvc&quot;
+http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd
+
+&lt;!-- 开起spring的扫描标签 --&gt;
+&lt;context:component-scan base-package=&quot;com.cskaoyan&quot;/&gt;
+
+&lt;!-- 开启mvc的注解 --&gt;
+&lt;mvc:annotation-driven/&gt;
+</code></pre><h3 id="第四步-controller类–加入-Controller标签，不需要再实现Controller类了"><a href="#第四步-controller类–加入-Controller标签，不需要再实现Controller类了" class="headerlink" title="第四步 controller类–加入@Controller标签，不需要再实现Controller类了"></a>第四步 controller类–加入@Controller标签，不需要再实现Controller类了</h3><pre><code>@Controller
+public class Hello2Controller {
+    @RequestMapping(&quot;/hello2&quot;)
+    public ModelAndView hello2z(){
+        ModelAndView modelAndView = new ModelAndView();
+        //model和数据相关
+        modelAndView.addObject(&quot;content&quot;,&quot; springmvc hello2&quot; );
+        //相对于webroot(webapp)下的路径
+        modelAndView.setViewName(&quot;/WEB-INF/hello.jsp&quot;);
+        return modelAndView;
+    }
+}
+</code></pre><h3 id="第五步-显示-一样的"><a href="#第五步-显示-一样的" class="headerlink" title="第五步 显示 一样的"></a>第五步 显示 一样的</h3><p>这里有三个是新的东西：</p>
+<pre><code>application.xml
+&lt;mvc:annotation-driven/&gt;  //开启mcv的注解扫描标签
+
+controller.java
+@RequestMapping()    //设置请求的url以及参数的限制，请求的限制等等（比较重要）
+@Controller          //表示这是一个controller类
+</code></pre><h3 id="RequestMapping用法"><a href="#RequestMapping用法" class="headerlink" title="@RequestMapping用法"></a>@RequestMapping用法</h3><p><strong>URL路径映射</strong><br>我们上面例子用的就是这种情况，在方法名上写：</p>
+<pre><code>@RequestMapping(&quot;/hello2&quot;)
+public ModelAndView hello2z()
+</code></pre><p><strong>窄化请求映射</strong><br>我们有三个请求：</p>
+<pre><code>User/query
+User/insert
+User/delete
+</code></pre><p>难道我们要在每个方法上面都写这些url吗？<br>答案是可以把相同的部分提取出来：<br>通过在类上增加 @RequestMapping 的注解进行请求的窄化</p>
+<pre><code>@Controller(&quot;user&quot;)
+@RequestMapping(&quot;user&quot;)
+public class UserController
+</code></pre><p><strong>注意事项</strong><br>这里我故意在@Controller上也加了一个user，注意@Controller是告诉Spring我这里是一个组件，这个组件的id叫做user，而要请求窄化：设置的是@RequestMapping(“user”)（后来总结时候，发现我真的写错了= =）</p>
+<p><strong>请求方法限定（405错误）</strong></p>
+<p>通过@RequestMapping中的method属性进行请求方法的限定，上面写URL路径映射，其实也就是value属性，因为我们之前讲过<strong>注解的value属性名在只写一个属性的时候可以省略，有多个就不能省略</strong></p>
+<pre><code>/*请求方法的限定*/
+@RequestMapping(value = &quot;method/limit&quot;, method = RequestMethod.POST)
+public ModelAndView methodLimit(){
+    ModelAndView modelAndView = new ModelAndView();
+    modelAndView.setViewName(&quot;/WEB-INF/view/limit.jsp&quot;);
+    return modelAndView;
+}
+/*请求方法的限定 or*/
+/*method:多个method之间的关系是or*/
+@RequestMapping(value = &quot;method/limit/multi&quot;, method = {RequestMethod.POST,RequestMethod.GET})
+public ModelAndView methodLimitMulti(){
+    ModelAndView modelAndView = new ModelAndView();
+    modelAndView.setViewName(&quot;/WEB-INF/view/limit.jsp&quot;);
+    return modelAndView;
+}
+</code></pre><p><strong><em>注意：</em></strong>请求方法也可以通过注解@PostMapping 和 @GetMapping</p>
+<p><strong>请求参数的限定（400）params— 最常见的报错</strong><br><strong>回来总结时候就是这个错误最常见！，其次就是500。就发生在今天文件上传上，忘记配置MultipartResolver就一直500</strong><br>Params属性</p>
+<pre><code>/*参数中要包含*/
+/*多个参数之间的关系是and,传过来的请求参数可以多，但是不能少*/
+@RequestMapping(value = &quot;param/limit&quot;,params = {&quot;username!=songge&quot;,&quot;password&quot;})
+public ModelAndView paramLimit(String username ,String password){
+    ModelAndView modelAndView = new ModelAndView();
+    modelAndView.setViewName(&quot;/WEB-INF/view/limit.jsp&quot;);
+    modelAndView.addObject(&quot;value&quot;, &quot;param limit&quot;);
+    return modelAndView;
+}
+</code></pre><p><strong>请求的Content-type的限定（415）consumes</strong><br>不匹配时出现的异常</p>
+<pre><code>@RequestMapping(value = &quot;consume/limit&quot;,consumes = &quot;application/json&quot;)
+public ModelAndView cusumeLimit(){
+    ModelAndView modelAndView = new ModelAndView();
+    modelAndView.setViewName(&quot;/WEB-INF/view/limit.jsp&quot;);
+    modelAndView.addObject(&quot;value&quot;, &quot;consume limit&quot;);
+    return modelAndView;
+}
+</code></pre><p><strong>请求Accept的限定（406）produces</strong></p>
+<pre><code>@RequestMapping(value = &quot;produces/limit&quot;,produces = &quot;application/json&quot;)
+public ModelAndView producesLimit(){
+    ModelAndView modelAndView = new ModelAndView();
+    modelAndView.setViewName(&quot;/WEB-INF/view/limit.jsp&quot;);
+    modelAndView.addObject(&quot;value&quot;, &quot;produces limit&quot;);
+    return modelAndView;
+}
+</code></pre><h3 id="Controller方法返回值-处理ModelAndView的时候"><a href="#Controller方法返回值-处理ModelAndView的时候" class="headerlink" title="Controller方法返回值(处理ModelAndView的时候)"></a>Controller方法返回值(处理ModelAndView的时候)</h3><p>在我们没有引入json前，目前返回就这三种</p>
+<pre><code>返回ModelAndView
+返回void
+返回字符串
+</code></pre><h3 id="返回ModelAndView"><a href="#返回ModelAndView" class="headerlink" title="返回ModelAndView"></a>返回ModelAndView</h3><p>也就是之前我们的情况。ModelAndView就是Model和view，控制数据和控制viewName，<br>通过addObject，和setViewName来控制。</p>
+<h3 id="返回void"><a href="#返回void" class="headerlink" title="返回void"></a>返回void</h3><p>这种就相当于直接去操作之前的servlet，不推荐，而且有点蠢，毕竟有了Spring还要去自己操作servlet</p>
+<pre><code>@RequestMapping(&quot;return/void&quot;)
+public void returnVoid(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    request.getRequestDispatcher(&quot;/WEB-INF/view/void.jsp&quot;).forward(request, response);
+}
+</code></pre><h3 id="返回字符串（String）"><a href="#返回字符串（String）" class="headerlink" title="返回字符串（String）"></a>返回字符串（String）</h3><p>基础用法：返回一个viewName</p>
+<pre><code>@RequestMapping(&quot;return/string&quot;)
+public String returnString(Model model){
+    //返回值变为ModelAndView中的ViewName
+    model.addAttribute(&quot;value&quot;,&quot;string&quot;);
+    //viewName开头包含/的时候对应的是相对webroot（webapp）下的文件
+    return &quot;/WEB-INF/view/string.jsp&quot;;
+}
+</code></pre><p><strong>注意</strong>为了控制model这里引入了一个model对象，这个对象有一个addAttribute来添加数据。和ModelAndView略微有点差别。<br>物理视图，逻辑视图这些不会用到不讲了，但是后面会讲到jsp的解析器什么的。后面再说</p>
+<h3 id="通过String返回值请求跳转"><a href="#通过String返回值请求跳转" class="headerlink" title="通过String返回值请求跳转"></a>通过String返回值请求跳转</h3><pre><code>Forward redirect
+对应的是请求之间的转发和重定向，也就是RequestMapping所对应方法之间的跳转
+
+@Controller
+public class RequestStringController {
+    @RequestMapping(&quot;request/forward&quot;)
+    public String requestForward(){
+        System.out.println(&quot;forward&quot;);
+        return &quot;forward:/receive&quot;;
+    }
+    @RequestMapping(&quot;request/redirect&quot;)
+    public String requestRedirect(){
+        System.out.println(&quot;redirect&quot;);
+        return &quot;redirect:/receive&quot;;
+    }
+    @RequestMapping(&quot;receive&quot;)
+    public String receive(){
+        System.out.println(&quot;receive&quot;);
+        return &quot;receive&quot;;
+    }
+}
+</code></pre><h3 id="请求参数的封装"><a href="#请求参数的封装" class="headerlink" title="请求参数的封装"></a>请求参数的封装</h3><p>也就是简单介绍一下，过两天使用到json才是重头戏，反正就是可以用bean来接收参数，他会自动把json转成Bean就不需要用什么工具啦。</p>
+<pre><code>@RequestMapping(&quot;parameter/javabean&quot;)
+public String getBeanParameter(User user, Model model){
+    System.out.println(user);
+    return &quot;/WEB-INF/view/request.jsp&quot;;
+}
+</code></pre><h2 id="周三（9月18日）"><a href="#周三（9月18日）" class="headerlink" title="周三（9月18日）"></a>周三（9月18日）</h2><h2 id="星期三（0918）"><a href="#星期三（0918）" class="headerlink" title="星期三（0918）"></a>星期三（0918）</h2><h3 id="数据接收"><a href="#数据接收" class="headerlink" title="数据接收"></a>数据接收</h3><p>昨天说到了数据的接收，可以用bean来接收。其实也可以用数组接收，<strong>但是不能直接用list</strong>想了好几种方法都不行，虽然可以接收，但是list接收到的都是空的。不知要name应该怎么写，最终的用法是使用bean中的list接收。</p>
+<p><strong>数组接收：可以单独接收，也可以通过bean接收</strong></p>
+<pre><code>@RequestMapping(&quot;parameter/array&quot;)
+public String getArrayParameter(String[] hobbys, Model model){
+    for (String hobby : hobbys) {
+        System.out.println(hobby);
+    }
+    return &quot;/WEB-INF/view/request.jsp&quot;;
+}
+
+表单提交，是相同的name
+ &lt;form action=&quot;/parameter/array&quot; method=&quot;post&quot;&gt;
+    爱好的数组&lt;br&gt;
+    &lt;input type=&quot;checkbox&quot; name=&quot;hobbys&quot; value=&quot;sing&quot;&gt;唱&lt;br&gt;
+    &lt;input type=&quot;checkbox&quot; name=&quot;hobbys&quot; value=&quot;jump&quot;&gt;跳&lt;br&gt;
+    &lt;input type=&quot;checkbox&quot; name=&quot;hobbys&quot; value=&quot;rap&quot;&gt;rap&lt;br&gt;
+    &lt;input type=&quot;checkbox&quot; name=&quot;hobbys&quot; value=&quot;basketball&quot;&gt;篮球&lt;br&gt;
+    &lt;input type=&quot;submit&quot;&gt;
+ &lt;/form&gt;
+</code></pre><p><strong>bean接收list，只能通过bean接收</strong></p>
+<pre><code>@RequestMapping(&quot;/parameter/javabean/list&quot;)
+public String getListInBeanParameter(User userz){
+    return &quot;/WEB-INF/view/request.jsp&quot;;
+}
+&lt;form action=&quot;/parameter/javabean/list&quot; method=&quot;post&quot;&gt;
+    username:&lt;input type=&quot;text&quot; name=&quot;username&quot;&gt;&lt;br&gt;
+    password:&lt;input type=&quot;text&quot; name=&quot;password&quot;&gt;&lt;br&gt;
+    age:&lt;input type=&quot;text&quot; name=&quot;age&quot;&gt;&lt;br&gt;
+    married:&lt;input type=&quot;text&quot; name=&quot;married&quot;&gt;&lt;br&gt;
+    value:&lt;input type=&quot;text&quot; name=&quot;value&quot;&gt;&lt;br&gt;
+    userdetail.email&lt;input type=&quot;text&quot; name=&quot;userDetail.email&quot;&gt;&lt;br&gt;
+爱好&lt;br&gt;
+    &lt;input type=&quot;checkbox&quot; name=&quot;hobbys&quot; value=&quot;sing&quot;&gt;唱&lt;br&gt;
+    &lt;input type=&quot;checkbox&quot; name=&quot;hobbys&quot; value=&quot;jump&quot;&gt;跳&lt;br&gt;
+    &lt;input type=&quot;checkbox&quot; name=&quot;hobbys&quot; value=&quot;rap&quot;&gt;rap&lt;br&gt;
+    &lt;input type=&quot;checkbox&quot; name=&quot;hobbys&quot; value=&quot;basketball&quot;&gt;篮球&lt;br&gt;
+    car&lt;br&gt;
+    &lt;!-- 使用bean中的carList接收 --&gt;
+    汽车1&lt;br&gt;
+    &lt;input type=&quot;text&quot; name=&quot;carList[0].name&quot;&gt;
+    &lt;input type=&quot;text&quot; name=&quot;carList[0].price&quot;&gt;
+    汽车2&lt;br&gt;
+    &lt;input type=&quot;text&quot; name=&quot;carList[1].name&quot;&gt;
+    &lt;input type=&quot;text&quot; name=&quot;carList[1].price&quot;&gt;
+    &lt;input type=&quot;submit&quot;&gt;
+&lt;/form&gt;
+</code></pre><h3 id="中文乱码问题，编解码不一致问题"><a href="#中文乱码问题，编解码不一致问题" class="headerlink" title="中文乱码问题，编解码不一致问题"></a>中文乱码问题，编解码不一致问题</h3><p>需要在web.xml中配置一个filter</p>
+<pre><code>&lt;filter&gt;
+    &lt;filter-name&gt;characterEncodingFilter&lt;/filter-name&gt;
+    &lt;filter-class&gt;org.springframework.web.filter.CharacterEncodingFilter&lt;/filter-class&gt;
+    &lt;init-param&gt;
+        &lt;param-name&gt;encoding&lt;/param-name&gt;
+        &lt;param-value&gt;utf-8&lt;/param-value&gt;
+    &lt;/init-param&gt;
+&lt;/filter&gt;
+&lt;filter-mapping&gt;
+    &lt;filter-name&gt;characterEncodingFilter&lt;/filter-name&gt;
+    &lt;url-pattern&gt;/*&lt;/url-pattern&gt;
+&lt;/filter-mapping&gt;
+</code></pre><h3 id="转换器（converter）"><a href="#转换器（converter）" class="headerlink" title="转换器（converter）"></a>转换器（converter）</h3><p>从前端默认传过来的就是一个字符串的数据。如果我们想用Date对象来接收，Spring默认没有给我们实现，我们需要自己的去实现这个功能，就要使用一个叫转换器的东西。</p>
+<pre><code>&lt;h1&gt;接收日期&lt;/h1&gt;
+&lt;form action=&quot;/parameter/date&quot; method=&quot;post&quot;&gt;
+  &lt;input type=&quot;text&quot; name=&quot;date&quot;&gt;
+  &lt;input type=&quot;submit&quot;&gt;
+&lt;/form&gt;
+
+@RequestMapping(&quot;parameter/date&quot;)
+public String getDateParameter(Date date){
+  return &quot;/WEB-INF/view/request.jsp&quot;;
+}
+</code></pre><p>默认是不能直接转换的，需要我们去spring中配置一个转换器，然后我们手动去实现这个转换。<br>1.在application.xml中需要配置：转换器是一个set的集合，不能重复。</p>
+<pre><code>&lt;!-- 不写转换器会报400错误 --&gt;
+&lt;mvc:annotation-driven conversion-service=&quot;customConversionService&quot;/&gt;
+
+&lt;!-- 设置转换器 --&gt;
+&lt;bean id=&quot;customConversionService&quot; class=&quot;org.springframework.format.support.FormattingConversionServiceFactoryBean&quot;&gt;
+    &lt;property name=&quot;converters&quot;&gt;
+      &lt;set&gt;
+        &lt;!-- 可以写多个转换器 --&gt;
+        &lt;bean class=&quot;com.cskaoyan.converter.String2DateConverter&quot;/&gt;
+        &lt;ref bean=&quot;String2DateConverter2&quot;&gt;
+      &lt;/set&gt;
+    &lt;/property&gt;
+&lt;/bean&gt;
+&lt;bean id=&quot;String2DateConverter2&quot; class=&quot;com.cskaoyan.converter.String2DateConverter2&quot;/&gt;
+</code></pre><p>2.写一个转换器的组间String2DateConverter</p>
+<pre><code>public class String2DateConverter implements Converter&lt;String, Date&gt; {
+  @Override
+  public Date convert(String s) {
+    //转换成date类型的业务逻辑1931-09-18
+    SimpleDateFormat simpleDateFormat = new SimpleDateFormat(&quot;yyyy-MM-dd&quot;);
+    try {
+        Date parse = simpleDateFormat.parse(s);
+        //返回一个日期对象
+        return parse;
+    } catch (ParseException e) {
+        e.printStackTrace();
+    }
+    return null;
+  }
+}
+</code></pre><p><strong>其实我们可以想到，之前的直接转成bean，数组，或者bean里面的bean，这些都是通过反射Spring的转换器给我们转好了。</strong></p>
+<h3 id="文件上传（重点）"><a href="#文件上传（重点）" class="headerlink" title="文件上传（重点）"></a>文件上传（重点）</h3><p>同样我们需要导包（pom.xml）</p>
+<pre><code>&lt;!--文件上传的支持--&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;commons-io&lt;/groupId&gt;
+    &lt;artifactId&gt;commons-io&lt;/artifactId&gt;
+    &lt;version&gt;2.6&lt;/version&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;commons-fileupload&lt;/groupId&gt;
+    &lt;artifactId&gt;commons-fileupload&lt;/artifactId&gt;
+    &lt;version&gt;1.3.3&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre><p>在application中配置组间，注意<strong>id是固定</strong>的</p>
+<pre><code>&lt;!--id一定要写multipartResolver，可以写一些文件设置--&gt;
+&lt;bean id=&quot;multipartResolver&quot; class=&quot;org.springframework.web.multipart.commons.CommonsMultipartResolver&quot;&gt;
+    &lt;property name=&quot;maxUploadSize&quot; value=&quot;5242880&quot;/&gt;
+&lt;/bean&gt;
+</code></pre><p>html/jsp中</p>
+<pre><code>&lt;!-- 注意事项：一定要post请求（足够大上传文件），一个是enctype=&quot;multipart/form-data&quot; --&gt;
+&lt;form action=&quot;${pageContext.request.contextPath}/file/upload&quot; enctype=&quot;multipart/form-data&quot; method=&quot;post&quot;&gt;
+    &lt;input type=&quot;file&quot; name=&quot;myfile&quot;&gt;&lt;input type=&quot;submit&quot;&gt;
+&lt;/form&gt;
+</code></pre><p>最后controller，MultipartFile myfile接收，这个参数名，要和上传的文件的name相同</p>
+<pre><code>@Controller
+public class FileUploadController {
+    @RequestMapping(&quot;file/upload&quot;)
+    public String fileUpload(MultipartFile myfile, User user) throws IOException {
+//        myfile.getOriginalFilename()
+        File file = new File(&quot;d://myfile.jpg&quot;);
+        myfile.transferTo(file);
+        return &quot;/WEB-INF/view/success.jsp&quot;;
+    }
+}
+</code></pre><h2 id="周四（9月19日）"><a href="#周四（9月19日）" class="headerlink" title="周四（9月19日）"></a>周四（9月19日）</h2><h2 id="星期四（0919）"><a href="#星期四（0919）" class="headerlink" title="星期四（0919）"></a>星期四（0919）</h2><h3 id="1-REST"><a href="#1-REST" class="headerlink" title="1 REST"></a>1 REST</h3><p>1.1 获得请求url中的参数<strong>@PathVariable</strong><br>controller.java</p>
+<pre><code>@RequestMapping(&quot;user/{method}/id/{idz}&quot;)
+public String queryUserById(@PathVariable(&quot;idz&quot;) int id,
+                            @PathVariable(&quot;method&quot;)String method,
+                            Model model){
+  User user = userService.queryUserById(id);
+  System.out.println(&quot;method=&quot; + method);
+  model.addAttribute(&quot;user&quot;,user);
+  return &quot;/WEB-INF/user.jsp&quot;;
+}
+</code></pre><p>1.2 获得请求头（RequestHeaders）中的值<strong>@RequestHeader</strong></p>
+<pre><code>@RequestMapping(&quot;hello&quot;)
+public String getRequestHeader(@RequestHeader(&quot;Accept-Language&quot;)String[] language,
+                               @RequestHeader(&quot;student&quot;)String student,
+                               Model model){
+    System.out.println(&quot;language = &quot; + language);
+    model.addAttribute(&quot;language&quot;,language);
+    System.out.println(&quot;student = &quot; + student);
+    return &quot;/WEB-INF/show.jsp&quot;;
+}
+</code></pre><p>1.3 限定请求参数<strong>@RequestParam</strong></p>
+<pre><code>//通过@RequestParam设置
+//@RequestMapping(&quot;parameter/limit&quot;)
+//public String parameterLimit(@RequestParam(&quot;username&quot;) String username,String password,Model model){
+
+//通过@RequestMapping限制
+@RequestMapping(value = &quot;parameter/limit&quot;, params = {&quot;username&quot;})
+public String parameterLimit(String username,String password,Model model){
+    model.addAttribute(&quot;username&quot;,username);
+    return &quot;/WEB-INF/limit.jsp&quot;;
+}
+</code></pre><h3 id="2-静态资源的处理"><a href="#2-静态资源的处理" class="headerlink" title="2 静态资源的处理"></a>2 静态资源的处理</h3><p>2.1 Default-servlet<br>在web.xml中添加：</p>
+<pre><code>&lt;servlet-mapping&gt;
+  &lt;servlet-name&gt;default&lt;/servlet-name&gt;
+  &lt;url-pattern&gt;*.html&lt;/url-pattern&gt;
+&lt;/servlet-mapping&gt;
+&lt;servlet-mapping&gt;
+  &lt;servlet-name&gt;default&lt;/servlet-name&gt;
+  &lt;url-pattern&gt;*.gif&lt;/url-pattern&gt;
+&lt;/servlet-mapping&gt;
+&lt;servlet-mapping&gt;
+  &lt;servlet-name&gt;default&lt;/servlet-name&gt;
+  &lt;url-pattern&gt;*.js&lt;/url-pattern&gt;
+&lt;/servlet-mapping&gt;
+&lt;servlet-mapping&gt;
+  &lt;servlet-name&gt;default&lt;/servlet-name&gt;
+  &lt;url-pattern&gt;*.css&lt;/url-pattern&gt;
+&lt;/servlet-mapping&gt;
+</code></pre><p>2.2 Default servlet handler<br>Springmvc 提供了一种方式让默认的servlet去处理静态资源</p>
+<pre><code>&lt;mvc:default-servlet-handler/&gt;
+</code></pre><p>2.3 Springmvc的静态资源处理</p>
+<pre><code>&lt;!--mapping对应的是请求url--&gt;
+&lt;!--location：静态资源存放的路径--&gt;
+&lt;!--pic1/abc.jpg pic1/abc/abc.jpg--&gt;
+&lt;mvc:resources mapping=&quot;/pic1/**&quot; location=&quot;classpath:/pic1/&quot;/&gt;&lt;!--classpath--&gt;
+&lt;mvc:resources mapping=&quot;/pic2/**&quot; location=&quot;/WEB-INF/jpg/&quot;/&gt;&lt;!--web根目录、没有前缀--&gt;
+&lt;mvc:resources mapping=&quot;/pic3/**&quot; location=&quot;file:D:/spring/file/pic3/&quot;/&gt;&lt;!--文件路径 file：的前缀--&gt;
+</code></pre><p>注意这里 mapping 映射里的</p>
+<pre><code>mapping = &quot;/pic3/**&quot;
+</code></pre><p>就是/pic3/下的任意路径。<br>1.配置classpath在maven就是在resource的目录会和src合并到classes文件夹中<br>2.配置/ 就是在webroot下面<br>3.配置文件系统，这个应该是最常用的 file:/.. /</p>
+<p><strong>注意事项:</strong>这里每个location后面一定要加”/“”</p>
+<h3 id="3-Interceptor"><a href="#3-Interceptor" class="headerlink" title="3 Interceptor"></a>3 Interceptor</h3><p>SpringMVC 的处理器拦截器类似于 Servlet 开发中的过滤器Filter，用于对处理器进行预处理和后处理</p>
+<h3 id="常见使用场景"><a href="#常见使用场景" class="headerlink" title="常见使用场景"></a>常见使用场景</h3><pre><code>1、日志记录：记录请求信息的日志，以便进行信息监控、信息统计、计算PV（Page View）等。
+2、权限检查：如登录检测，进入处理器检测检测是否登录，如果没有直接返回到登录页面；
+3、性能监控：有时候系统在某段时间莫名其妙的慢，可以通过拦截器在进入处理器之前记录开始时间，在处理完后记录结束时间，从而得到该请求的处理时间 ；
+4、通用行为：读取cookie得到用户信息并将用户对象放入请求，从而方便后续流程使用，还有如提取Locale、Theme信息等，只要是多个处理器都需要的即可使用拦截器实现。
+5、OpenSessionInView：如Hibernate，在进入处理器打开Session，在完成后关闭Session。
+</code></pre><h3 id="能不能用，用起来再说"><a href="#能不能用，用起来再说" class="headerlink" title="能不能用，用起来再说"></a>能不能用，用起来再说</h3><p>（简单案例，对所有的访问controller都进行拦截）</p>
+<p>第一步：需要写一个类继承 HandlerInterceptor（需要重写三个方法）<br><strong><em>3.1.1 preHandle</em></strong><br>返回值是boolean，当为true可以执行到Handler（RequestMapping所对应的的方法），如果为false则执行不到handler。<br><strong>注意当前类的prehandle返回值为true，一定可以执行到它所对应的afterCompletion</strong></p>
+<p><strong><em>3.1.2 PostHandle</em></strong><br>执行是在Handler返回ModelAndView给dispatcherServlet之间执行<br>形参中包含一个ModelAndView，来源于@RequestMapping所对应的的Handler，并且可以对ModelAndView做进一步的处理</p>
+<p><strong><em>3.1.3 afterCompletion</em></strong><br>在dispatcherServlet处理完ModelAndView之后执行，通常做一些流的关闭</p>
+<pre><code>public class CustomInterceptor implements HandlerInterceptor {
+  @Override
+  public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+    System.out.println(&quot;preHandle&quot;);
+    return true;
+  }
+  @Override
+  public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
+    System.out.println(&quot;postHandle&quot;);
+  }
+  @Override
+  public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
+    System.out.println(&quot;afterCompletion&quot;);
+  }
+}
+</code></pre><p>第二步：在application中配置</p>
+<pre><code>&lt;mvc:interceptors&gt;
+  &lt;bean class=&quot;com.cskaoyan.interceptor.CustomInterceptor&quot;/&gt;
+&lt;mvc:interceptors&gt;
+</code></pre><p>然后访问到controller里面有的请求，就会触发拦截器，这也是写作业才发现的<br>当然问题就来了：<br><strong>怎么拦截controller中没有的请求？</strong></p>
+<h3 id="3-4-多个interceptor的执行关系"><a href="#3-4-多个interceptor的执行关系" class="headerlink" title="3.4 多个interceptor的执行关系"></a>3.4 多个interceptor的执行关系</h3><p>这里多个请求，就好像汉堡一样一层包着一层，先注册的是外层，后注册的是内层。<br>1.正常走完prehandle全是true<br>2.多个interceptor，当第一个preHandle返回false，下面所有的流程都走不到<br>3.多个interceptor第一个为true，第二个为false，后面都走不到，但可以走到第一个的afterCompletion</p>
+<p>结论：<br>当prehandle返回值为true，嵌套结构这部分可以继续往下走，<br>并且当prehandle返回值为true，一定可以指定到其对应的afterCompletion</p>
+<h3 id="Interceptor的作用范围"><a href="#Interceptor的作用范围" class="headerlink" title="Interceptor的作用范围"></a>Interceptor的作用范围</h3><p>可以设置成拦截固定的url，<br>在application中设置</p>
+<pre><code>&lt;mvc:interceptors&gt;
+  &lt;bean class=&quot;com.cskaoyan.interceptor.CustomInterceptor&quot;/&gt;
+  &lt;ref bean=&quot;customInterceptor2&quot;/&gt;
+  &lt;mvc:interceptor&gt;
+    &lt;mvc:mapping path=&quot;/user/**&quot;/&gt;
+    &lt;bean class=&quot;com.cskaoyan.interceptor.UserInterceptor&quot;/&gt;
+  &lt;/mvc:interceptor&gt;
+&lt;/mvc:interceptors&gt;
+</code></pre><h3 id="4-异常处理器"><a href="#4-异常处理器" class="headerlink" title="4 异常处理器"></a>4 异常处理器</h3><h3 id="第一步自定义的异常的实现"><a href="#第一步自定义的异常的实现" class="headerlink" title="第一步自定义的异常的实现"></a>第一步自定义的异常的实现</h3><p>通过继承异常类实现自定义的异常</p>
+<pre><code>public class CustomException extends Exception {
+    //可以自定义参数
+    String customParam;
+    public String getCustomParam() {
+        return customParam;
+    }
+    public void setCustomParam(String customParam) {
+        this.customParam = customParam;
+    }
+    public CustomException(String message, String customParam) {
+        super(message);
+        this.customParam = customParam;
+    }
+}
+</code></pre><h3 id="第二步编写-exceptionHandler"><a href="#第二步编写-exceptionHandler" class="headerlink" title="第二步编写 exceptionHandler"></a>第二步编写 exceptionHandler</h3><p>我们的异常向上抛出，抛出到dispatcherServlet就可以通过我们的handlerException来接收，然后再进行不同的业务逻辑</p>
+<pre><code>@Component//注册到spring
+public class CustomExceptionHandler implements HandlerExceptionResolver {
+  @Override
+  public ModelAndView resolveException(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o, Exception e) {
+    ModelAndView modelAndView = new ModelAndView();
+    if (e instanceof CustomException){
+      modelAndView.addObject(&quot;message&quot;,e.getMessage());
+      modelAndView.setViewName(&quot;/WEB-INF/view/exception.jsp&quot;);
+    }else if (e instanceof ParamException){
+      modelAndView.addObject(&quot;message&quot;,e.getMessage());
+      ParamException paramException = (ParamException) e;
+      modelAndView.addObject(&quot;paramz&quot;,paramException.getParam());
+      modelAndView.setViewName(&quot;/WEB-INF/view/param.jsp&quot;);
+    }
+    return modelAndView;
+  }
+}
+</code></pre><p><strong>注意事项</strong>这里其实我们也发现了，这种做法很蠢，写成if else 和之前的没学SpringMVC之前一个servlet，接收多个请求的一样，有问题。后面会说怎么解决</p>
+<h3 id="5-Json"><a href="#5-Json" class="headerlink" title="5 Json"></a>5 Json</h3><p>主要解决两个问题：<br>接收前端发送的json数据<br>返回json数据给到前端<br>5.1 导包<br>一拖三<br>Jackson core databind annotation</p>
+<pre><code>&lt;!--jackson--&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;com.fasterxml.jackson.core&lt;/groupId&gt;
+    &lt;artifactId&gt;jackson-databind&lt;/artifactId&gt;
+    &lt;version&gt;2.9.9&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre><p>@ResponseBody 以json数据的形式返回值（<strong>位置：写在方法名上</strong>）<br>@RequestBody 接收json数据（<strong>位置：写在方法的形参前面</strong>）<br>@RestController = @Controller + @ResponseBody 当前类下全部方法都返回json数据（位置写在类名上）</p>
+<pre><code>@RequestMapping(value = &quot;user/insert&quot;,method = RequestMethod.POST)
+//@ResponseBody
+public BaseResultVo queryUser(@RequestBody User user){
+    //使用bean封装返回结果
+    BaseResultVo&lt;User&gt; baseResultVo = new BaseResultVo&lt;&gt;();
+
+    baseResultVo.setData(user);
+    return baseResultVo;
+}
+</code></pre><p>这里使用了一个结果包装类</p>
+<p>5.4.1 同一个url映射到不同的方法<br>通过不同的请求方法，或者请求头等等，但是很蠢</p>
+<pre><code>@RequestMapping(value = &quot;user/insert&quot;,method = RequestMethod.POST)
+//@ResponseBody
+public BaseResultVo queryUser(@RequestBody User user){
+    //使用bean封装返回结果
+    BaseResultVo&lt;User&gt; baseResultVo = new BaseResultVo&lt;&gt;();
+    baseResultVo.setData(user);
+    return baseResultVo;
+}
+
+@RequestMapping(value = &quot;user/insert&quot;,method = RequestMethod.GET)
+public BaseResultVo queryUser2(){
+    return new BaseResultVo();
+}
+</code></pre><p>5.4.2 多个url映射到同一个方法上</p>
+<pre><code>@RequestMapping(value = {&quot;hello1&quot;,&quot;hello2&quot;})
+public String helloMulti(){
+    return &quot;hello Multi&quot;;
+}
+@RequestMapping(value = {&quot;hello3*&quot;})
+public String helloMulti2(){
+    return &quot;hello Multi2&quot;;
+}
+</code></pre><h2 id="周五（9月20日）"><a href="#周五（9月20日）" class="headerlink" title="周五（9月20日）"></a>周五（9月20日）</h2><h2 id="星期五（0920）"><a href="#星期五（0920）" class="headerlink" title="星期五（0920）"></a>星期五（0920）</h2><h3 id="exception的真正用法"><a href="#exception的真正用法" class="headerlink" title="exception的真正用法"></a>exception的真正用法</h3><p>一般exception配合json传送给前端，也不需要导包</p>
+<p>先写一个异常：</p>
+<pre><code>public class CustomException extends Exception {
+  public CustomException(String message) {
+      super(message);
+  }
+}
+</code></pre><p>写业务逻辑<br>在 controller.java</p>
+<pre><code>@RestController
+public class ExceptionController {
+  @RequestMapping(&quot;hello&quot;)
+  public String hello() throws CustomException {
+    if (true) {
+      throw new CustomException(&quot;你发生异常了&quot;);
+    }
+    return &quot;hello exception&quot;;
+  }
+}
+</code></pre><p>再写一个异常控制器，不需要继承什么类，只要写三个注解</p>
+<pre><code>@ControllerAdvice   //里面有@Component
+public class JsonExceptionHandler {
+  @ExceptionHandler(CustomException.class)
+  @ResponseBody//发送一个json数据
+  public BaseResultVo resolveCustomException(CustomException e){
+    BaseResultVo baseResultVo = new BaseResultVo();
+    baseResultVo.setErrorMsg(e.getMessage());
+    return baseResultVo;
+  }
+}
+</code></pre><p>@ControllerAdvice 里面有@Component注册成组件，然后这是一个通知，我们可以大胆猜测这个excepti<br>@ExceptionHandler 表示要handler哪个Exception.class<br>@ResponseBody  之前讲过</p>
+<p>再来是转给前端的bean</p>
+<pre><code>public class BaseResultVo&lt;T&gt; {
+  int errorNo;
+  String errorMsg;
+  T data;
+}
+</code></pre><h3 id="Freemarker"><a href="#Freemarker" class="headerlink" title="Freemarker"></a>Freemarker</h3><p>两种用法：一种是后端自己渲染一些模板，一种是后端渲染好网页给前端显示。</p>
+<p>自从前后端分离之后，可能用来渲染一些其他的东西。前端也有自己的模板引擎。<br>而且控制更加方便。</p>
+<p>首先老规矩：导包</p>
+<pre><code>&lt;packaging&gt;war&lt;/packaging&gt;
+&lt;dependencies&gt;
+  &lt;dependency&gt;
+      &lt;groupId&gt;junit&lt;/groupId&gt;
+      &lt;artifactId&gt;junit&lt;/artifactId&gt;
+      &lt;version&gt;4.12&lt;/version&gt;
+      &lt;scope&gt;test&lt;/scope&gt;
+  &lt;/dependency&gt;
+  &lt;dependency&gt;
+    &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-webmvc&lt;/artifactId&gt;
+    &lt;version&gt;5.1.9.RELEASE&lt;/version&gt;
+  &lt;/dependency&gt;
+  &lt;dependency&gt;
+    &lt;groupId&gt;javax.servlet&lt;/groupId&gt;
+    &lt;artifactId&gt;servlet-api&lt;/artifactId&gt;
+    &lt;version&gt;3.0-alpha-1&lt;/version&gt;
+    &lt;scope&gt;provided&lt;/scope&gt;
+  &lt;/dependency&gt;
+  &lt;!--整合freemarker--&gt;
+  &lt;dependency&gt;
+    &lt;groupId&gt;org.freemarker&lt;/groupId&gt;
+    &lt;artifactId&gt;freemarker&lt;/artifactId&gt;
+    &lt;version&gt;2.3.28&lt;/version&gt;
+  &lt;/dependency&gt;
+  &lt;dependency&gt;
+    &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-context-support&lt;/artifactId&gt;
+    &lt;version&gt;5.1.9.RELEASE&lt;/version&gt;
+  &lt;/dependency&gt;
+&lt;/dependencies&gt;
+</code></pre><h3 id="后端自己渲染一些模板"><a href="#后端自己渲染一些模板" class="headerlink" title="后端自己渲染一些模板"></a>后端自己渲染一些模板</h3><p>就在测试类里面写</p>
+<pre><code>第一步：创建一个Configuration对象，直接new一个对象。构造方法的参数就是freemarker的版本号。
+第二步：设置模板文件所在的路径。
+第三步：设置模板文件使用的字符集。一般就是utf-8.
+第四步：加载一个模板，创建一个模板对象。
+第五步：创建一个模板使用的数据集，Map对象。
+第六步：创建一个Writer对象，一般创建一FileWriter对象，指定生成的文件名。
+第七步：调用模板对象的process方法输出文件。
+第八步：关闭流。
+</code></pre><p>测试：</p>
+<pre><code>public class MainTest {
+  @Test
+  public void mytest() throws IOException, TemplateException {
+    //第一步：创建一个Configuration对象，直接new一个对象。构造方法的参数就是freemarker的版本号。
+    Configuration configuration = new Configuration(Configuration.getVersion());
+    //第二步：设置模板文件所在的路径。
+    File templatePath = new File(&quot;src/main/resources/template&quot;);
+    configuration.setDirectoryForTemplateLoading(templatePath);
+    //第三步：设置模板文件使用的字符集。一般就是utf-8.
+    configuration.setDefaultEncoding(&quot;utf-8&quot;);
+    //第四步：加载一个模板，创建一个模板对象。
+    Template template = configuration.getTemplate(&quot;hello.ftl&quot;);
+    //第五步：创建一个模板使用的数据集，Map对象。
+    Map&lt;String,Object&gt; dataMap = new HashMap&lt;&gt;();
+    dataMap.put(&quot;content&quot;,&quot;freemarker&quot;);
+    //第六步：创建一个Writer对象，一般创建一FileWriter对象，指定生成的文件名。
+    File destFile = new File(&quot;src/main/resources/hello.html&quot;);
+    FileWriter fileWriter = new FileWriter(destFile);
+    //第七步：调用模板对象的process方法输出文件。
+    template.process(dataMap,fileWriter);
+    //第八步：关闭流。
+    fileWriter.close();
+  }
+}
+</code></pre><p>模板文件.ftl,看起来很像网页</p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;title&gt;Title&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    hello ${content}
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><h3 id="传给前端显示页面-SpringMVC中使用"><a href="#传给前端显示页面-SpringMVC中使用" class="headerlink" title="传给前端显示页面(SpringMVC中使用)"></a>传给前端显示页面(SpringMVC中使用)</h3><p>导包：除了需要一个freeMarker还需要spring-context-support<br>controller写法给前端很像jsp,为了使得两个不打架我们需要把用jsp渲染和用freeMarker渲染分开<br>可以通过<br>1）顺序，使得先让freemarker渲染，再让jsp渲染。因为jsp渲染不了会强制渲染。很难受<br>2）通过分发，设置viewNames这样就能分开了；<br>看下面的例子：<br>配置application:</p>
+<pre><code>&lt;!--jsp视图解析器配置--&gt;
+&lt;bean class=&quot;org.springframework.web.servlet.view.InternalResourceViewResolver&quot;&gt;
+    &lt;property name=&quot;prefix&quot; value=&quot;/WEB-INF/view/&quot;/&gt;
+    &lt;property name=&quot;suffix&quot; value=&quot;.jsp&quot;/&gt;
+    &lt;!--&lt;property name=&quot;order&quot; value=&quot;2&quot;/&gt;--&gt;
+    &lt;property name=&quot;viewNames&quot; value=&quot;*jsp&quot;/&gt;
+&lt;/bean&gt;
+&lt;!--配置--&gt;
+&lt;bean class=&quot;org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer&quot;&gt;
+    &lt;!--相对于webroot(webapp)的路径--&gt;
+    &lt;property name=&quot;templateLoaderPath&quot; value=&quot;/WEB-INF/template&quot;/&gt;
+    &lt;property name=&quot;defaultEncoding&quot; value=&quot;utf-8&quot;/&gt;
+&lt;/bean&gt;
+&lt;!--freeMarker视图解析器--&gt;
+&lt;bean class=&quot;org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver&quot;&gt;
+    &lt;property name=&quot;suffix&quot; value=&quot;.ftl&quot;/&gt;
+    &lt;property name=&quot;contentType&quot; value=&quot;text/html;charset=utf-8&quot;/&gt;
+    &lt;!--&lt;property name=&quot;order&quot; value=&quot;1&quot;/&gt;--&gt;
+    &lt;property name=&quot;viewNames&quot; value=&quot;*fm&quot;/&gt;
+&lt;/bean&gt;
+</code></pre><p>Controller中测试<br><strong>使用freeMarker时候。model对象，就是dataMap来用</strong></p>
+<pre><code>@Controller
+public class HelloController {
+  @RequestMapping(&quot;hello_fm&quot;)
+  public String hello(Model model){
+      model.addAttribute(&quot;content&quot;,&quot; freemarker&quot;);
+      /*对应的viewName：模板的加载路径+返回值+suffix*/
+      return &quot;hellofm&quot;;
+  }
+  @RequestMapping(&quot;hello_jsp&quot;)
+  public String hello2(Model model){
+      /*对应的viewName：模板的加载路径+返回值+suffix*/
+      return &quot;hellojsp&quot;;
+  }
+}
+</code></pre><p>注意模板加载路径即可；</p>
+<h3 id="freemark渲染的语法"><a href="#freemark渲染的语法" class="headerlink" title="freemark渲染的语法"></a>freemark渲染的语法</h3><p>说了半天没说渲染的语法，这里就简单介绍一下一些渲染，判断之类都放在Java中判断吧<br>para.ftl</p>
+<pre><code>&lt;h1&gt;使用map中的key&lt;/h1&gt;
+hello ${content}
+&lt;h1&gt;使用pojo中的属性&lt;/h1&gt;
+用户名：${user.username}
+密码：${user.password}
+邮箱：${user.userDetail.email}
+&lt;h1&gt;集合中的数据&lt;/h1&gt;
+&lt;#list userList as userz&gt;
+    &lt;h3&gt;下标：${userz_index+1} ||用户名：${userz.username}|| 密码： ${userz.password}&lt;/h3&gt;
+&lt;/#list&gt;
+&lt;h1&gt;特殊值&lt;/h1&gt;
+${abc! &quot;&quot;}
+日期：${date?string(&quot;MM月dd日&quot;)}
+文件引入
+&lt;#include &quot;inner.ftl&quot;&gt;
+</code></pre><p><strong>1.${content}</strong>,对应的在dataMap中   dataMap.put(“content”,”freemarker”);</p>
+<p><strong>2.显示bean</strong><br>    ${user.username}<br>    ${user.password}<br>    ${user.userDetail.email}</p>
+<p>在java中</p>
+<pre><code>/*放入pojo类型的数据*/
+UserDetail userDetail = new UserDetail(&quot;cskaoyan123@qq.com&quot;);
+User user = new User(&quot;zhangsong&quot;, &quot;123456&quot;,userDetail);
+dataMap.put(&quot;user&quot;,user);
+</code></pre><p><strong>3.遍历</strong></p>
+<pre><code>&lt;#list userList as userz&gt;
+    &lt;h3&gt;下标：${userz_index+1} ||用户名：${userz.username}|| 密码： ${userz.password}&lt;/h3&gt;
+&lt;/#list&gt;
+</code></pre><p><strong>4.设置默认值</strong><br>因为出现异常模板默认是直接渲染到你生成文件上就很丑，所以必须要给一个默认值，这样就不会让用户看到一大堆异常信息</p>
+<pre><code>${abc! &quot;&quot;}
+</code></pre><p><strong>5.日期</strong>：${date?string(“MM月dd日”)}</p>
+<p><strong>6.文件引入</strong></p>
+<pre><code>&lt;#include &quot;inner.ftl&quot;&gt;
+</code></pre><h3 id="JavaConfig代替web-xml和application-xml（重要！？）"><a href="#JavaConfig代替web-xml和application-xml（重要！？）" class="headerlink" title="JavaConfig代替web.xml和application.xml（重要！？）"></a>JavaConfig代替web.xml和application.xml（重要！？）</h3><p>导包是一定要导包的。需要知道我们的目的是什么:就是不写web.xml和application.xml<br>我们先配置好，之后再加上不同的组间的功能</p>
+<p>第一步：配置启动项<br>我们导完包就之后就是创建webapp的文件夹，然后再创建web.xml，那么我们肯定是先配置web.xml<br>需要写一个类继承AACDSI<br>这三个方法必须配置，就是配置Spring的配置文件，SpringMVC的配置文件，和dispatcherServlet的url-pattern</p>
+<pre><code>public class WebApplicationInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
+  /*Spring容器的配置类*/
+  @Override
+  protected Class&lt;?&gt;[] getRootConfigClasses() {
+    return new Class[]{SpringConfig.class};
+  }
+
+  /*Springmvc的配置*/
+  @Override
+  protected Class&lt;?&gt;[] getServletConfigClasses() {
+    return new Class[]{MvcConfig.class};
+  }
+
+  /*dispatcherServlet对应的urlpattern*/
+  @Override
+  protected String[] getServletMappings() {
+    return new String[]{&quot;/&quot;};
+  }
+}
+</code></pre><p>写Spring的配置文件</p>
+<pre><code>@Configuration
+@ComponentScan(basePackages = &quot;com.cskaoyan&quot;,
+  excludeFilters = @ComponentScan.Filter(type = FilterType.ANNOTATION,value = {Controller.class, EnableWebMvc.class}))
+public class SpringConfig {
+}
+</code></pre><p><strong>注意：</strong>因为我们知道SpringMVC继承Spring所以配置的组间写在SpringMVC这样更好的使用。</p>
+<p>SpringMVC的配置文件，需要实现一个接口WebMvcConfigurer</p>
+<pre><code>@EnableWebMvc
+@ComponentScan(basePackages = &quot;com.cskaoyan.controller&quot;)
+public class MvcConfig implements WebMvcConfigurer {
+}
+</code></pre><p>如何告诉Spring我需要用哪个configuration去扫描呢。SpringMVC只需要去扫描controller的包下的文件。而Spring如何设置使得controller包下的文件不会扫两次。这里就需要：</p>
+<pre><code>excludeFilters = @ComponentScan.Filter(type = FilterType.ANNOTATION,value = {Controller.class, EnableWebMvc.class}))
+</code></pre><p>表示带着这个@Controller注解，@EnableWebMvc注解的类不会扫描到。</p>
+<p>这样我们就完全替代了web.xml和application.xml<br>我觉得： Spring 的做法肯定是读取这两个xml然后转成我们写的形式罢了。</p>
+<h3 id="为我们的javaConfig添加新东西"><a href="#为我们的javaConfig添加新东西" class="headerlink" title="为我们的javaConfig添加新东西"></a>为我们的javaConfig添加新东西</h3><h3 id="全局编码格式"><a href="#全局编码格式" class="headerlink" title="全局编码格式"></a>全局编码格式</h3><p>我们之前是写在web.xml中的，所以我们要写 javaConfig 形式就要写在WebApplicationInitializer</p>
+<pre><code>//默认设置全局的编码格式
+@Override
+protected Filter[] getServletFilters() {
+    CharacterEncodingFilter characterEncodingFilter = new CharacterEncodingFilter();
+    characterEncodingFilter.setEncoding(&quot;utf-8&quot;);
+    return new Filter[]{characterEncodingFilter};
+}
+</code></pre><h3 id="设置其他的组件，写在mvcConfig中"><a href="#设置其他的组件，写在mvcConfig中" class="headerlink" title="设置其他的组件，写在mvcConfig中"></a>设置其他的组件，写在mvcConfig中</h3><pre><code>@EnableWebMvc
+@ComponentScan(basePackages = &quot;com.cskaoyan.controller&quot;)
+public class MvcConfig implements WebMvcConfigurer {
+</code></pre><p><strong>配置转换器</strong>：需要在原先的转换器上加一个我们自定义的转换器</p>
+<pre><code>/**
+ * 配置converter
+ * 1、从容器中取出conversionService
+ * 2、添加自定义的converter
+ * 3、重新注册回容器中
+ */
+
+@Autowired
+ConfigurableConversionService conversionService;
+
+@PostConstruct
+public void addConverter(){
+    String2DateConverter string2DateConverter = new String2DateConverter();
+    conversionService.addConverter(string2DateConverter);
+}
+
+//重新注册回去
+@Bean
+@Primary //唯一性
+public ConfigurableConversionService configurableConversionService(){
+    return conversionService;
+}
+</code></pre><p><strong>JSP视图解析器</strong></p>
+<pre><code>/**
+ * 创建jsp视图解析器
+ */
+@Bean
+public InternalResourceViewResolver internalResourceViewResolver(){
+    InternalResourceViewResolver internalResourceViewResolver = new InternalResourceViewResolver();
+    internalResourceViewResolver.setPrefix(&quot;/WEB-INF/view/&quot;);
+    internalResourceViewResolver.setSuffix(&quot;.jsp&quot;);
+    internalResourceViewResolver.setViewNames(&quot;*.jsp&quot;);
+    return internalResourceViewResolver;
+}
+</code></pre><p><strong>拦截器</strong>也是在默认的拦截器中添加我们自定义的拦截器<br>用法：拦截器拦截OPTIONS请求</p>
+<pre><code>/**
+ * 添加拦截器
+ * @param registry
+ */
+@Override
+public void addInterceptors(InterceptorRegistry registry) {
+    registry.addInterceptor(new CustomInterceptor());
+}
+</code></pre><p><strong>文件上传</strong></p>
+<pre><code>/**
+ * 创建文件上传组件
+ * id必须固定multipartResolver
+ */
+@Bean
+public CommonsMultipartResolver multipartResolver(){
+    CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver();
+    //中间可以设置一些参数
+    return multipartResolver;
+}
+</code></pre><p><strong>访问静态资源</strong>：在原先的配置中添加</p>
+<pre><code>/**
+ * 添加静态文件访问
+ * @param registry
+ */
+@Override
+public void addResourceHandlers(ResourceHandlerRegistry registry) {
+    registry.addResourceHandler(&quot;/pic/**&quot;).addResourceLocations(&quot;/&quot;);
+}
+</code></pre><p><strong>异常</strong></p>
+<pre><code>/**
+ * 异常不需要写在config里面，昨天的写法，
+ * 需要继承的HandlerExceptionResolver估计要写
+ *
+ */
+</code></pre><p><strong>freeMarker配置</strong></p>
+<pre><code>    /**
+     * freeMark注册
+     */
+    @Bean
+    public FreeMarkerConfigurer freeMarkerConfigurer(){
+        FreeMarkerConfigurer freeMarkerConfigurer = new FreeMarkerConfigurer();
+        freeMarkerConfigurer.setTemplateLoaderPath(&quot;/WEB-INF/template&quot;);
+        freeMarkerConfigurer.setDefaultEncoding(&quot;utf-8&quot;);
+        return freeMarkerConfigurer;
+    }
+
+    /**
+     * freeMark的视图解析器
+     */
+    @Bean
+    public FreeMarkerViewResolver freeMarkerViewResolver(){
+        FreeMarkerViewResolver freeMarkerViewResolver = new FreeMarkerViewResolver();
+        freeMarkerViewResolver.setSuffix(&quot;.ftl&quot;);
+        freeMarkerViewResolver.setContentType(&quot;text/html;charset=utf-8&quot;);
+        freeMarkerViewResolver.setViewNames(&quot;*fm&quot;);
+        return freeMarkerViewResolver;
+    }
+}
+</code></pre><p><strong>注意事项</strong><br>1.这里我们发现如果我们要用的是springMVC初始化好的东西，我们就是去重写方法，例如converter，intercepter,filtere,addResourceHandlers<br>2.如果我们用到组件是SpringMVC中没有的，我们就必须写@Bean标签去注册在SpringMVC的容器中<br>3.转换器，拦截器。controller的请求的代码，之前都写过了。这里就不写了。关键是javaConfig应该怎么写</p>
+<h2 id="周六（9月21日）"><a href="#周六（9月21日）" class="headerlink" title="周六（9月21日）"></a>周六（9月21日）</h2><h2 id="星期六"><a href="#星期六" class="headerlink" title="星期六"></a>星期六</h2><h2 id="Mybatis（dao层）"><a href="#Mybatis（dao层）" class="headerlink" title="Mybatis（dao层）"></a>Mybatis（dao层）</h2><p>Orm 对象关系映射<br>特点：</p>
+<pre><code>自定义Sql
+灵活（相对于Hibernate）
+动态sql：
+高级的输入映射：javabean、其他类型的参数 作为sql语句的参数
+</code></pre><p>输出映射：</p>
+<pre><code>查询结果封装成javabean或其他类型，做的是封装查询结果
+</code></pre><h3 id="入门案例"><a href="#入门案例" class="headerlink" title="入门案例"></a>入门案例</h3><h3 id="导包"><a href="#导包" class="headerlink" title="导包"></a>导包</h3><p>Mybatis<br>Mysql-connector-java</p>
+<pre><code>&lt;dependency&gt;
+    &lt;groupId&gt;org.mybatis&lt;/groupId&gt;
+    &lt;artifactId&gt;mybatis&lt;/artifactId&gt;
+    &lt;version&gt;3.4.6&lt;/version&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;mysql&lt;/groupId&gt;
+    &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;
+    &lt;version&gt;5.1.47&lt;/version&gt;
+    &lt;scope&gt;runtime&lt;/scope&gt;
+&lt;/dependency&gt;
+</code></pre><h3 id="配置文件-mybatis-xml"><a href="#配置文件-mybatis-xml" class="headerlink" title="配置文件 mybatis.xml"></a>配置文件 mybatis.xml</h3><p>Mappers：mybatis存放sql语句的映射文件，文件名通常都叫XXXMapper.xml<br>需要的配置项：<br>1.Datasource：4大核心配置<br>2.映射文件</p>
+<pre><code>&lt;!DOCTYPE configuration
+        PUBLIC &quot;-//mybatis.org//DTD Config 3.0//EN&quot;
+        &quot;http://mybatis.org/dtd/mybatis-3-config.dtd&quot;&gt;
+&lt;configuration&gt;
+    &lt;environments default=&quot;development&quot;&gt;
+        &lt;environment id=&quot;development&quot;&gt;
+            &lt;transactionManager type=&quot;JDBC&quot;/&gt;
+            &lt;dataSource type=&quot;POOLED&quot;&gt;
+                &lt;property name=&quot;driver&quot; value=&quot;com.mysql.jdbc.Driver&quot;/&gt;
+                &lt;property name=&quot;url&quot; value=&quot;jdbc:mysql://localhost:3306/j16_db?useUnicode=true&amp;amp;characterEncoding=utf-8&quot;/&gt;
+                &lt;property name=&quot;username&quot; value=&quot;root&quot;/&gt;
+                &lt;property name=&quot;password&quot; value=&quot;root&quot;/&gt;
+            &lt;/dataSource&gt;
+        &lt;/environment&gt;
+    &lt;/environments&gt;
+    &lt;!--mybatis的映射文件 sql和代码进行分离--&gt;
+    &lt;mappers&gt;
+        &lt;mapper resource=&quot;com/UserMapper.xml&quot;/&gt;
+    &lt;/mappers&gt;
+&lt;/configuration&gt;
+</code></pre><h3 id="映射文件"><a href="#映射文件" class="headerlink" title="映射文件"></a>映射文件</h3><p>放sql语句的—为了解耦<br>com/UserMapper.xml</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;
+&lt;!DOCTYPE mapper
+        PUBLIC &quot;-//mybatis.org//DTD Mapper 3.0//EN&quot;
+        &quot;http://mybatis.org/dtd/mybatis-3-mapper.dtd&quot;&gt;
+
+&lt;mapper namespace=&quot;mynamespace&quot;&gt;
+    &lt;select id=&quot;selectUserById&quot; resultType=&quot;com.cskaoyan.bean.User&quot;&gt;
+        select id,username,password,age from user where id = #{renYi}
+    &lt;/select&gt;
+
+    &lt;select id=&quot;selectAllUser&quot; resultType=&quot;com.cskaoyan.bean.User&quot;&gt;
+        select id,username,password,age from user
+    &lt;/select&gt;
+
+    &lt;select id=&quot;selectAllUserName&quot; resultType=&quot;string&quot;&gt;
+        select username from user
+    &lt;/select&gt;
+
+    &lt;insert id=&quot;insertUser&quot;&gt;
+        insert into user (username,password,age) values (#{username},#{password},#{age})
+    &lt;/insert&gt;
+
+    &lt;update id=&quot;updateUser&quot;&gt;
+        update user set username = #{username}, password = #{password}, age = #{age} where id = #{id}
+    &lt;/update&gt;
+
+    &lt;delete id=&quot;deleteUser&quot;&gt;
+        delete from user where id = #{shabi}
+    &lt;/delete&gt;
+&lt;/mapper&gt;
+</code></pre><h3 id="测试代码"><a href="#测试代码" class="headerlink" title="测试代码"></a>测试代码</h3><p>sqlSession←SqlSessionFactory←SqlSessionFactoryBuilder<br>（inputstream←Resources.getResourceAsStream）<br><strong>注意事项</strong> 进行数据库查询语句的第一个参数都是字符串形式的： namespace.id（sql语句）</p>
+<pre><code>@Test
+public void mytest() throws IOException {
+    //SqlSessionFactoryBuider
+    SqlSessionFactoryBuilder builder = new SqlSessionFactoryBuilder();
+    //SqlSessionFactory
+    InputStream resourceAsStream = Resources.getResourceAsStream(&quot;mybatis.xml&quot;);
+    SqlSessionFactory sqlSessionFactory = builder.build(resourceAsStream);
+    //SqlSession
+    SqlSession sqlSession = sqlSessionFactory.openSession();
+
+    //通过sql调用sql语句执行查询
+    User user = sqlSession.selectOne(&quot;mynamespace.selectUserById&quot;, 1);
+    System.out.println(user);
+}
+</code></pre><p>映射文件.xml</p>
+<pre><code>&lt;select id=&quot;selectUserById&quot; resultType=&quot;com.cskaoyan.bean.User&quot;&gt;
+    select id,username,password,age from user where id = #{renYi}
+&lt;/select&gt;
+</code></pre><h3 id="Before"><a href="#Before" class="headerlink" title="@Before"></a>@Before</h3><pre><code>/**
+ * 配置一些初始化测试的参数
+ */
+SqlSession sqlSession;
+SqlSessionFactory sqlSessionFactory;
+@Before
+public void init() throws IOException {
+  SqlSessionFactoryBuilder builder = new SqlSessionFactoryBuilder();
+  //配置sqlSessionFactory
+  InputStream resourceAsStream = Resources.getResourceAsStream(&quot;mybatis.xml&quot;);
+  sqlSessionFactory = builder.build(resourceAsStream);
+}
+</code></pre><h3 id="查询"><a href="#查询" class="headerlink" title="查询"></a>查询</h3><pre><code>/**
+ * 查询bean
+ */
+@Test
+public void mybatisTest(){
+    SqlSession sqlSession = sqlSessionFactory.openSession();
+    User user = sqlSession.selectOne(&quot;mynamespace.selectUserById&quot;, 1);
+    System.out.println(user);
+}
+
+/**
+ * 查询List&lt;User&gt;
+ */
+@Test
+public void test2(){
+    sqlSession = sqlSessionFactory.openSession();
+    List&lt;User&gt; list = sqlSession.selectList(&quot;mynamespace.selectAllUser&quot;);
+    for (User user : list) {
+        System.out.println(user);
+    }
+}
+
+/**
+ * 查询List&lt;String&gt;
+ */
+@Test
+public void test3(){
+    sqlSession = sqlSessionFactory.openSession();
+    List&lt;String&gt; list = sqlSession.selectList(&quot;mynamespace.selectAllUserName&quot;);
+    for (String s : list) {
+        System.out.println(s);
+    }
+}
+</code></pre><h3 id="新增"><a href="#新增" class="headerlink" title="新增"></a>新增</h3><pre><code>/**
+ * 插入一个bean
+ */
+@Test
+public void test_insert(){
+    sqlSession = sqlSessionFactory.openSession();
+    User user = new User(&quot;ersha&quot;, &quot;shazi&quot;, 24);
+    int insert = sqlSession.insert(&quot;mynamespace.insertUser&quot;, user);
+    System.out.println(insert);
+    //不能这样执行test2，会直接开启另一个事务，所以之前插入的数据就没有真正插入。
+    //test2();
+}
+
+&lt;insert id=&quot;insertUser&quot;&gt;
+    insert into user (username,password,age) values (#{username},#{password},#{age})
+&lt;/insert&gt;
+</code></pre><h3 id="修改"><a href="#修改" class="headerlink" title="修改"></a>修改</h3><pre><code>@Test
+public void test_update(){
+    sqlSession = sqlSessionFactory.openSession();
+    User user = new User(&quot;阿飞&quot;, &quot;铁剑&quot;, 17);
+    user.setId(5);
+    int update = sqlSession.update(&quot;mynamespace.updateUser&quot;, user);
+}
+
+&lt;update id=&quot;updateUser&quot;&gt;
+    update user set username = #{username}, password = #{password}, age = #{age} where id = #{id}
+&lt;/update&gt;
+</code></pre><h3 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h3><pre><code>@Test
+public void test_delete(){
+    sqlSession = sqlSessionFactory.openSession();
+    int delete = sqlSession.delete(&quot;mynamespace.deleteUser&quot;, 5);
+}
+
+&lt;delete id=&quot;deleteUser&quot;&gt;
+    delete from user where id = #{shabi}
+&lt;/delete&gt;
+</code></pre><h3 id="After—测试（一定要提交事务）"><a href="#After—测试（一定要提交事务）" class="headerlink" title="@After—测试（一定要提交事务）"></a>@After—测试（一定要提交事务）</h3><pre><code>@After
+public void destroy(){
+
+    if(sqlSession!=null) {
+        sqlSession.commit(); //这句话放外面会出现空指针异常吧？
+        sqlSession.close();
+    }
+}
+</code></pre><h3 id="技术总结"><a href="#技术总结" class="headerlink" title="技术总结"></a>技术总结</h3><p>sqlSession→ selectOne selectList（select标签）、insert（insert标签）、update（update）、delete（delete标签）</p>
+<p>共同点：<br>• 都可以传入两个参数：<br>参数1（String）：</p>
+<pre><code>对应的命名空间+id
+</code></pre><p>参数2（Object）：</p>
+<pre><code>基本类型→#{任意写}
+Javabean→#{javabean的成员变量名}
+</code></pre><p>• parameterType可以不写<br>Insert、delete、update：没有resultType、提交sqlSession</p>
+<p>不同点：使用的标签不同<br>    查询的resultType是必须写的</p>
+<p><strong>注意事项</strong>——-必须要提交事务</p>
+<h2 id="周日（9月22）"><a href="#周日（9月22）" class="headerlink" title="周日（9月22）"></a>周日（9月22）</h2><p>1.今天突然想把交作业实现了。需要后端像服务器发送请求。那么我们本地开两个服务器来测试一下服务器提交给服务器。<br>需要用到HttpClient，这讲的很详细</p>
+<p><a href="https://blog.csdn.net/justry_deng/article/details/81042379" target="_blank" rel="external">使用HttpClient</a><br>需要做的就是HttpClient 发送multipart/form-data的请求，网上一大堆。<br>那么我们开始吧：</p>
+<h3 id="第一步-两个服务器先跑通"><a href="#第一步-两个服务器先跑通" class="headerlink" title="第一步:两个服务器先跑通"></a>第一步:两个服务器先跑通</h3><h3 id="第二步：文件上传跑通"><a href="#第二步：文件上传跑通" class="headerlink" title="第二步：文件上传跑通"></a>第二步：文件上传跑通</h3><p>问题一：</p>
+<p>发现出现了错误：浏览器返回的是<strong>400</strong>错误</p>
+<pre><code>Unable to process parts as no multi-part configuration has been provided
+</code></pre><p>因为文件上传组件没有配置（MutipartResolver），但是居然不是先报（500）的错误- -<br>在我一步一步的排查下，终于爆了500错误- -从而知道是自己服务器配置出现了问题。<br>而且要注意：文件上传的那个name，一定要和后端接受的MutipartFile的名字相同。</p>
+<p>问题二：</p>
+<p>这里上传文件中文是？。因为中文名字一定是要的，所以必须要解决这个问题。<br>教程在是文件名使用Unicode.encode转码再发送的，我觉得老师后端肯定没有解码的。</p>
+<p>看了很多解决方案都不行<br><a href="https://blog.csdn.net/xinjianwuhen1991/article/details/49949089" target="_blank" rel="external">https://blog.csdn.net/xinjianwuhen1991/article/details/49949089</a></p>
+<p>更多的人家问题是：</p>
+<p>  SpringCloud 上传文件，经过Zuul，中文文件名乱码解决办法</p>
+<p>我都没用到SpringCloud- -</p>
+<p>后来脑水一转直接搜索：</p>
+<pre><code>httpClient上传文件乱码
+</code></pre><p>就直接收到解决办法。还是自己太蠢了，问题都不知是什么问题就乱搜索。明明是httpClient的问题。却去搜索文件上传名字乱码问题<br>创建multipartEntityBuilder时候设置下面两个属性值:</p>
+<pre><code>multipartEntityBuilder.setCharset(Charset.forName(&quot;utf-8&quot;));
+multipartEntityBuilder.setMode(HttpMultipartMode.BROWSER_COMPATIBLE)
+</code></pre><p>完美解决<br>来自：第一是怎么解决，第二个是原理<br><a href="https://blog.csdn.net/u012685794/article/details/51755799" target="_blank" rel="external">https://blog.csdn.net/u012685794/article/details/51755799</a><br><a href="https://blog.csdn.net/youshounianhua123/article/details/81100778" target="_blank" rel="external">https://blog.csdn.net/youshounianhua123/article/details/81100778</a></p>
+<h3 id="第三步：文件能自动打包成压缩包"><a href="#第三步：文件能自动打包成压缩包" class="headerlink" title="第三步：文件能自动打包成压缩包"></a>第三步：文件能自动打包成压缩包</h3><p>因为不会，所以感觉有点难<br>找到一篇文章看看：<br><a href="https://www.cnblogs.com/zeng1994/p/7862288.html" target="_blank" rel="external">https://www.cnblogs.com/zeng1994/p/7862288.html</a><br>写的挺详细的<br>直接拿了人家的工具来用。很感谢</p>
+<h3 id="第四步：全部结合起来"><a href="#第四步：全部结合起来" class="headerlink" title="第四步：全部结合起来"></a>第四步：全部结合起来</h3><p>删除文件夹中的target<br>忘记了：<br>delete() 删除此抽象路径名表示的文件或目录，如果文件夹中有文件存在，则该文件夹不能被删除。</p>
+<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>代码我会放在github上，感觉还是要多用才记得住啊！</p>
+<p><strong><em>填坑部分</em></strong></p>
+<h2 id="周日（9月15日）-1"><a href="#周日（9月15日）-1" class="headerlink" title="周日（9月15日）"></a>周日（9月15日）</h2><p>1.application.xml中这些通知的类型写的顺序是执行的顺序吗？</p>
+<pre><code>&lt;aop:aspect ref=&quot;customAspect&quot;&gt;
+  &lt;!--通知类型before、after、around、afterThrowing、afterReturning--&gt;
+  &lt;!--method写切面类中所包含的方法--&gt;
+  &lt;aop:around method=&quot;around&quot; pointcut-ref=&quot;mypointcut1&quot;/&gt;
+  &lt;aop:before method=&quot;mybefore&quot; pointcut-ref=&quot;mypointcut1&quot;/&gt;
+  &lt;aop:after-throwing method=&quot;myAfterThrowing&quot; pointcut-ref=&quot;mypointcut1&quot; throwing=&quot;myexception&quot;/&gt;
+  &lt;aop:after method=&quot;after&quot; pointcut-ref=&quot;mypointcut1&quot;/&gt;
+  &lt;aop:after-returning method=&quot;myAfterReturning&quot; pointcut-ref=&quot;mypointcut1&quot; returning=&quot;myreturnResult&quot;/&gt;
+&lt;/aop:aspect&gt;
+</code></pre><p>答：不是，只是显示的顺序，最终的执行的顺序就和我们上课的图相同，after就是类似于finally在最后才执行。</p>
+<p>2.以下两个是否相同？</p>
+<pre><code>&lt;aop:around method=&quot;around&quot; pointcut-ref=&quot;mypointcut1&quot;/&gt;
+&lt;aop:advisor advice-ref=&quot;myadvice&quot; pointcut-ref=&quot;mypointcut&quot; /&gt;
+</code></pre><p>第二种更灵活一点，但是后面用jdbc的时候使用是第一种。事务的使用也是第一种，可能都不太常用</p>
+<p>3.复制项目的问题<br>复制了一个小项目一直运行不了显示<br>java.lang.SecurityException: Prohibited package name: java.servlet<br>发现复制的时候复制错了。把java文件夹也复制过来了。导致java文件夹下还有java文件夹，一定要小心！</p>
+<p>4.切入点总是抓不住方法的问题<br>我直接在java下面就写<br>dao service servlet文件夹，然后在application里面的</p>
+<pre><code>&lt;context:component-scan base-package=&quot;service&quot;/&gt;
+&lt;aop:aspectj-autoproxy/&gt;
+</code></pre><p>这就拉闸了，因为aspect根本没有扫到，需要把你的aspect的@Component扫到。<strong>一定要写包名！不写包名就扫描不到</strong></p>
+<pre><code>@Component
+@Aspect
+public class CustomAspect {
+    public void myPointCut(){}*/
+    @Pointcut(&quot;execution(* com.cskaoyan.service.TransformServiceImpl..*(..))&quot;)
+    public void mypointcut(){}
+    @Around(&quot;mypointcut()&quot;)
+    public Object around(ProceedingJoinPoint joinPoint) throws Throwable {
+        System.out.println(&quot;around 的before&quot;);
+        //这一行做的是执行目标类的方法
+        Object proceed = joinPoint.proceed();
+        System.out.println(&quot;around的after&quot;);
+        return proceed;
+    }
+}
+</code></pre><p>5.注解的原理<br>曾经我们写过注解，先来回顾一下之前学习注解的过程；</p>
+<p>注意事项：</p>
+<pre><code>a. @必不可少
+b. 自定义注解继承了Annotation这个接口，由编译期完成细节
+c. 不能继承任何接口
+</code></pre><p>说明：</p>
+<pre><code>方法的名称就是参数的名称，返回值类型就是参数的类型（返回值类型只能是基本类型、Class、String、enum, 以及它们的数组类型）。
+方法不用写具体实现
+一个方法表示一个配置
+当只需要给 value 配置的时候，可以省略名称
+方法之后可以使用 default 默认值
+</code></pre><p>简单例子1：</p>
+<pre><code>public @interface MyAnnotation  {
+    int value() default 18;
+    String method() default &quot;Henson_z&quot;;
+    //...
+}
+
+@MyAnnotation()     // 创建了注解对象
+public class AnnotationTest {
+}
+</code></pre><p>例子2：通过反射来拿到student注解上的参数</p>
+<pre><code>public class Student {
+    @NameConstraint(minLength = 2, maxLength = 10)
+    private String name;
+
+    @AgeConstraint(minAge = 6, maxAge = 1000)
+    private int age;
+}
+</code></pre><p>test：通过成员属性对象，拿到属性对象上面的注解对象</p>
+<pre><code>Class&lt;Student&gt; cl = Student.class;
+int minLength = 0;
+int maxLength = Integer.MAX_VALUE;
+int minAge = 0;
+int maxAge = Integer.MAX_VALUE;
+try {
+    //拿到成员属性对象
+    Field nameField = cl.getDeclaredField(&quot;name&quot;);
+    Field ageField = cl.getDeclaredField(&quot;age&quot;);
+    //拿到注解对象
+    NameConstraint nameAnnotation = nameField.getAnnotation(NameConstraint.class);
+    AgeConstraint ageAnnotation = ageField.getAnnotation(AgeConstraint.class);
+
+    minLength = nameAnnotation.minLength();
+    maxLength = nameAnnotation.maxLength();
+    minAge = ageAnnotation.minAge();
+    maxAge = ageAnnotation.maxAge();
+} catch (Exception e) {
+    e.printStackTrace();
+}
+</code></pre><p><strong>注</strong>注解本身就为了定义一些东西，不影响代码运行。当我们使用xml文件配置的时候，是把代码解耦了。但是项目太大之后，就很难维护所以就使用注解。使得代码又耦合起来。就像Spring 有application的形式，也有注解的形式，定义说明。</p>
+<h2 id="周一（9月16日）"><a href="#周一（9月16日）" class="headerlink" title="周一（9月16日）"></a>周一（9月16日）</h2><p>1.实现三为什么application.xml要</p>
+<pre><code>&lt;aop:aspectj-autoproxy/&gt;
+</code></pre><p>老师写错了- -</p>
+<p>那么问题来了</p>
+<pre><code>&lt;aop:aspectj-autoproxy/&gt;
+</code></pre><p>怎么写javaConfig的注解？</p>
+<pre><code>@EnableAspectJAutoProxy
+</code></pre><h2 id="周二（9月17日）-1"><a href="#周二（9月17日）-1" class="headerlink" title="周二（9月17日）"></a>周二（9月17日）</h2><p>1.今天发现new String不能构造了，发现导错包了，这里有个包：</p>
+<pre><code>import com.sun.org.apache.xpath.internal.operations.String;
+</code></pre><p>当我复制new String进来的时候，会默认导入这个包，总结时候我TM自己去创建String对象的时候也会导这个包好奇怪。<br>导致String的构造方法用不了,当发现印象当中的方法用不了时候，一定要注意看导的包是否正常</p>
+<p>2.@RequestMapping的源码</p>
+<pre><code>@Target({ElementType.TYPE, ElementType.METHOD})
+@Retention(RetentionPolicy.RUNTIME)
+@Documented
+@Mapping
+public @interface RequestMapping {
+    String name() default &quot;&quot;;
+    @AliasFor(&quot;path&quot;)
+    String[] value() default {};
+    @AliasFor(&quot;value&quot;)
+    String[] path() default {};
+    RequestMethod[] method() default {};
+    String[] params() default {};
+    String[] headers() default {};
+    String[] consumes() default {};
+    String[] produces() default {};
+}
+</code></pre><p>直接去找实现<br>去到RequestMappingHandlerMapping.class<br>找到：createRequestMappingInfo</p>
+<pre><code>@Nullable
+protected RequestMappingInfo getMappingForMethod(Method method, Class&lt;?&gt; handlerType) {
+    RequestMappingInfo info = this.createRequestMappingInfo(method);
+    if (info != null) {
+        RequestMappingInfo typeInfo = this.createRequestMappingInfo(handlerType);
+        if (typeInfo != null) {
+            info = typeInfo.combine(info);
+        }
+
+        String prefix = this.getPathPrefix(handlerType);
+        if (prefix != null) {
+            info = RequestMappingInfo.paths(new String[]{prefix}).build().combine(info);
+        }
+    }
+
+    return info;
+}
+</code></pre><p>应该是这里反射创建了RequestMapping对象，然后拿到@RequestMapping里面的值</p>
+<pre><code>@Nullable
+private RequestMappingInfo createRequestMappingInfo(AnnotatedElement element) {
+    RequestMapping requestMapping = (RequestMapping)AnnotatedElementUtils.findMergedAnnotation(element, RequestMapping.class);
+    RequestCondition&lt;?&gt; condition = element instanceof Class ? this.getCustomTypeCondition((Class)element) : this.getCustomMethodCondition((Method)element);
+    return requestMapping != null ? this.createRequestMappingInfo(requestMapping, condition) : null;
+}
+</code></pre><p><strong>this.createRequestMappingInfo(requestMapping, condition)</strong></p>
+<pre><code>protected RequestMappingInfo createRequestMappingInfo(RequestMapping requestMapping, @Nullable RequestCondition&lt;?&gt; customCondition) {
+    Builder builder = RequestMappingInfo.paths(this.resolveEmbeddedValuesInPatterns(requestMapping.path())).methods(requestMapping.method()).params(requestMapping.params()).headers(requestMapping.headers()).consumes(requestMapping.consumes()).produces(requestMapping.produces()).mappingName(requestMapping.name());
+    if (customCondition != null) {
+        builder.customCondition(customCondition);
+    }
+
+    return builder.options(this.config).build();
+}
+</code></pre><p><strong>创建了一个builder，然后注解就能生效了</strong></p>
+<p>3.设计模式总结完<br>（拉闸–下礼拜尽量写完）</p>
+<h2 id="周三（9月18日）-1"><a href="#周三（9月18日）-1" class="headerlink" title="周三（9月18日）"></a>周三（9月18日）</h2><p>1.文件上传接收多个参数<br>可以通过接收多个参数就能接收，他已经给我们切好了</p>
+<p>2.文件上传的相对路径<br>以后通过文件系统进行管理</p>
+<p>3.前端传过来的参数都是以字符串的参数传过来的吗？而且传过来都是key=value&amp;key=value?<br>就算前端设置input type=date也是吗？</p>
+<pre><code>&lt;input type=&quot;date&quot;&gt;
+</code></pre><p>经过验证后端传过来的就是string 格式是1992-02-02</p>
+<p>4.list能不能直接通过转换器在后端接收？—-<strong>根本走不到converter里面</strong><br>用List接收报错：</p>
+<pre><code>Cannot generate variable name for non-typed Collection parameter type
+</code></pre><p>然后使用ArrayList linkedList 接收拿到的都是空值，经过百般折腾，根本不可行，以后也不会用。那么就这样吧。</p>
+<p>FormattingConversionServiceFactoryBean</p>
+<pre><code>&lt;mvc:annotation-driven conversion-service=&quot;customConversionService&quot;/&gt;
+&lt;!--    配置转换器--&gt;
+    &lt;bean id=&quot;customConversionService&quot; class=&quot;org.springframework.format.support.FormattingConversionServiceFactoryBean&quot;&gt;
+        &lt;property name=&quot;converters&quot;&gt;
+            &lt;set&gt;
+                &lt;!-- 可以写多个转换器 --&gt;
+                &lt;bean class=&quot;com.cskaoyan.converter.String2List&quot;/&gt;
+                &lt;bean class=&quot;com.cskaoyan.converter.String2DateConverter&quot;/&gt;
+            &lt;/set&gt;
+        &lt;/property&gt;
+    &lt;/bean&gt;
+</code></pre><p>网上查看了一些资料，确实没有发现转换list的例子</p>
+<p>5.关于静态资源<br>因为设置了dispatcherServlet的url-pattern是/所以所有的静态资源都访问不到。这里有一个问题<br><a href="https://blog.csdn.net/crazylai1996/article/details/75142818" target="_blank" rel="external">静态资源访问困难问题</a><br>解决这个问题。<br>明天老师讲的方法更加牛皮</p>
+<h2 id="周四（9月19日）-1"><a href="#周四（9月19日）-1" class="headerlink" title="周四（9月19日）"></a>周四（9月19日）</h2><p>1.rest风格的大致理解<br><a href="https://www.jianshu.com/p/c5c83872dad2" target="_blank" rel="external">https://www.jianshu.com/p/c5c83872dad2</a></p>
+<p>2.interceptor的三个问题<br>a.三个方法中的handler对象是什么？<br>handler对象就是我们controller里面的@RequestMapping里面的那个方法，也就是说拦截器是知道要调用的是哪个方法的</p>
+<p>b.拦截器是拦截所有还是可以设置拦截个别请求。<br>拦截所有请求，可以设置拦截特定请求，但是没有注解的形式写，可以通过javaConfig形式编写拦截器</p>
+<p>c.通过流程发现，走完postHandler会走回到dispatchServlet那我们是否需要再控制dispatchServlet？<br>老师说不需要。</p>
+<p>3.下午问题（拿到代码再说）<br>1.对于我们数据的bean，例如一些User是否需要使用Spring去注册？<br>仔细想想到底哪些bean需要我们去注册。当然是功能性的工具类，为了复用所以可以写成组件的形式。<br>而那些从数据库拿到的数据之类的，这些不是功能，而是数据。我们自己写的工具类，或者controller，service，repository之类的，需要复用，经常需要一个service里面需要用到好几个DAO的实例去调用方法，这时候还需要我们去复用自定义组件的功能。</p>
+<p>2.对于自定义的异常处理器，我们能否可以像servlet一样，处理不同的自定义异常时候，不写成if。。。else的形式吗？写在不同的方法上面。<br>现在是这样的：</p>
+<pre><code>@Component
+public class CustomExceptionHandler implements HandlerExceptionResolver {
+  @Override
+  public ModelAndView resolveException(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o, Exception e) {
+    ModelAndView modelAndView = new ModelAndView();
+    if (e instanceof CustomException){
+        modelAndView.addObject(&quot;message&quot;,e.getMessage());
+        modelAndView.setViewName(&quot;/WEB-INF/view/exception.jsp&quot;);
+    }else if (e instanceof ParamException){
+        modelAndView.addObject(&quot;message&quot;,e.getMessage());
+        ParamException paramException = (ParamException) e;
+        modelAndView.addObject(&quot;paramz&quot;,paramException.getParam());
+        modelAndView.setViewName(&quot;/WEB-INF/view/param.jsp&quot;);
+    }
+    return modelAndView;
+  }
+}
+</code></pre><p>答案是可以的，明天讲到。</p>
+<p>3.原始前后端数据的传输格式是什么？<br>就是String类型的name = value 的形式，不是json 也不是xml</p>
+<p>4.一个url对应多个不同的请求，是通过请求培新的不同来区分的，（POST,GET请求）那么能否通过其他的@RequestMapping来控制不同的参数呢？<br>可以通过不同的请求头可以，但是想通过传送不同的数据来确定进入不同的方法，这是不现实的。因为用户的数据不可靠，而且这是会变的。而请求的方法，请求头，请求接收类型，浏览器接收的类型，这些都是固定的，所以可以用来区分不同的请求。但是<strong>通过不同的数据来区分，不可能</strong></p>
+<h3 id="作业"><a href="#作业" class="headerlink" title="作业"></a>作业</h3><p>1.在WEB-INF下面创建目录，一定要在maven把target全删了，然后在再进行重新启动</p>
+<p>2.配置静态文件时候，如果mapping写一样，只对第一个有效，并不是第二个覆盖第一个。不像map key相同会覆盖之前的值，这个就不是。就是写前面的才起作用，</p>
+<pre><code>&lt;!--第二种，放在web根目录或者WEB-INF下  两个相同的mapping第一个有效，第二个无效--&gt;
+&lt;mvc:resources mapping=&quot;/pic2/**&quot; location=&quot;/WEB-INF/jpg/&quot;/&gt;
+&lt;mvc:resources mapping=&quot;/pic2/**&quot; location=&quot;/&quot;/&gt;
+</code></pre><p>3.return “forward:/page/success.html”;<br>提交表单是post请求，跳转的时候是post请求，是不能直接去跳转页面的，<strong>错误代码405</strong>所以肯定会报错。请求页面（静态资源文件）就是get请求，<br>如果要成功必须return “redirect:/page/success.html”;从定向是GET，请求</p>
+<h2 id="周五（9月20日）-1"><a href="#周五（9月20日）-1" class="headerlink" title="周五（9月20日）"></a>周五（9月20日）</h2><p>今天不够认真- -</p>
+<h2 id="周六（9月21日）-1"><a href="#周六（9月21日）-1" class="headerlink" title="周六（9月21日）"></a>周六（9月21日）</h2><p>1.org.springframework.web.servlet.DispatcherServlet.noHandlerFound No mapping for OPTIONS<br>老师说的话真的应验了，我TM真的写成了：</p>
+<p>@RestController(“/api/admin/“)<br>实际是：才能窄化请求<br>@RequestMapping(“/api/admin/“)<br>@RestController</p>
+<p>2.解决跨域问题。<br>最主要的原因：之前项目需要用到Cookie，所以加了</p>
+<pre><code>response.setHeader(&quot;Access-Control-Allow-Credentials&quot;, &quot;true&quot;);
+</code></pre><p>注解没有配置，不行</p>
+<p>尝试一：加注解<br>//解决跨域失败<br>//在类上加：<br>@CrossOrigin(origins = “<a href="http://localhost:8080" target="_blank" rel="external">http://localhost:8080</a>“)</p>
+<p>尝试二：直接在全局拦截器上加</p>
+<pre><code>@Override
+public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler,
+                            Exception ex) throws Exception {
+    System.out.println(&quot;afterCompletion&quot;);
+    //这三个头与跨域访问有关，如果不设置，则访问不成功
+    //配置文件获取origin
+    InputStream resourceAsStream = CustomInterceptor.class.getClassLoader().getResourceAsStream(&quot;main.properties&quot;);
+    Properties properties = new Properties();
+    properties.load(resourceAsStream);
+    String origin = properties.getProperty(&quot;origin&quot;);
+
+    response.addHeader(&quot;Access-Control-Allow-Origin&quot;, origin);
+    response.addHeader(&quot;Access-Control-Allow-Methods&quot;, &quot;POST,GET,OPTIONS,PUT,DELETE&quot;);
+    response.addHeader(&quot;Access-Control-Allow-Headers&quot;, &quot;x-requested-with,Authorization,Content-Type&quot;);
+    response.setHeader(&quot;Access-Control-Allow-Credentials&quot;, &quot;true&quot;);
+}
+</code></pre><p>都不行，报错：</p>
+<pre><code>Response to preflight request doesn&apos;t pass access control check: It does not have HTTP ok status.
+</code></pre><p>可能是因为之前的项目要加cookie，现在一直请求不到。<br>实际上的原因是：<strong>要给Option请求返回一个statusOk.他才会发一个get请求过来。</strong></p>
+<p>尝试三：使用filter 因为之前使用的是filter，而不是拦截器。所以设置filter来试一下</p>
+<pre><code>@Override
+public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
+    System.out.println(&quot;filter success&quot;);
+    //这样就出问题了，我后面会说
+    filterChain.doFilter(servletRequest, servletResponse);
+
+    HttpServletResponse response = (HttpServletResponse) servletResponse;
+    //这三个头与跨域访问有关，如果不设置，则访问不成功
+    //配置文件获取origin
+    InputStream resourceAsStream = CORSFilter.class.getClassLoader().getResourceAsStream(&quot;main.properties&quot;);
+    Properties properties = new Properties();
+    properties.load(resourceAsStream);
+    String origin = properties.getProperty(&quot;origin&quot;);
+
+    response.addHeader(&quot;Access-Control-Allow-Origin&quot;, origin);
+    response.addHeader(&quot;Access-Control-Allow-Methods&quot;, &quot;POST,GET,OPTIONS,PUT,DELETE&quot;);
+    response.addHeader(&quot;Access-Control-Allow-Headers&quot;, &quot;x-requested-with,Authorization,Content-Type&quot;);
+    response.setHeader(&quot;Access-Control-Allow-Credentials&quot;, &quot;true&quot;);
+}
+</code></pre><p>发现还是不行。报错还是：</p>
+<pre><code>Response to preflight request doesn&apos;t pass access control check: It does not have HTTP ok status.
+</code></pre><p>最终百度发现答案：</p>
+<pre><code>https://majing.io/posts/10000010111185
+</code></pre><p>需要再自己手动处理Options，dispatcherServlet不会帮你处理。所以你要自己处理。</p>
+<p>两种：<br>1.自己再写拦截器</p>
+<pre><code>public class CrosDomainAllowInterceptor implements HandlerInterceptor {
+    @Override
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response,
+                             Object handler) throws Exception {
+        if(request.getMethod().equals(RequestMethod.OPTIONS.name())) {
+            response.setStatus(HttpStatus.OK.value());
+            return false;
+        }
+        return true;
+    }
+    @Override
+    public void postHandle(HttpServletRequest request, HttpServletResponse response,
+                           Object handler, ModelAndView modelAndView) throws Exception {
+    }
+    @Override
+    public void afterCompletion(HttpServletRequest request, HttpServletResponse response,
+                                Object handler, Exception ex) throws Exception {
+    }
+}
+</code></pre><p>或者写一个handler专门处理option</p>
+<pre><code>@RequestMapping(value = &quot;/*&quot;,method = RequestMethod.OPTIONS)
+public ResponseEntity handleOptions(){
+    return ResponseEntity.noContent();
+}
+</code></pre><p>数据是走通了，但是还是有问题：就算数据正确传给前端，数据格式也是前端可以接受的。也显示不了，显示这个</p>
+<pre><code>No &apos;Access-Control-Allow-Origin&apos; header is present on the requested resource.
+</code></pre><p>我很明确在filter里面我已经设置相应头了。但是没反应，<strong>我以为是Options请求没走到这个doFilter，在拦截Options后面我加了设置请求头，之后报错是重复设置了请求头。<br>打断点发现还是走到了</strong>就在快要崩溃的时候：<br><strong>我突然想起来网上写的是设置相应头要放在doFilter前面</strong>要写成这个样子。先设置相应头，再执行doFilter，居然奇迹般的可以了！</p>
+<pre><code>response.addHeader(&quot;Access-Control-Allow-Origin&quot;, origin);
+response.addHeader(&quot;Access-Control-Allow-Methods&quot;, &quot;POST,GET,OPTIONS,PUT,DELETE&quot;);
+response.addHeader(&quot;Access-Control-Allow-Headers&quot;, &quot;x-requested-with,Authorization,Content-Type&quot;);
+response.setHeader(&quot;Access-Control-Allow-Credentials&quot;, &quot;true&quot;);
+//再执行doFilter
+filterChain.doFilter(servletRequest, servletResponse);
+</code></pre><p>原因可能就在请求要带cookie上。他会发送两个Options请求，一个是为了发送Post请求的，一个是为了请求带Cookie的，肯定是有一个请求执行完servlet里面的方法后，就没有执行dofilter。所以就没设置好响应头。把设置相应头放前面就没问题了。</p>
+<p><strong>搞完了发现一篇文章</strong>说注解解决跨域的配置的<br><a href="https://www.cnblogs.com/mmzs/p/9167743.html" target="_blank" rel="external">https://www.cnblogs.com/mmzs/p/9167743.html</a></p>
+<p>3.mybatis 里面的sql语句不能有name 有name 取不出来</p>
+<p>我用*取出全部代替了。<br>但是name设置值却可以设置，有点奇怪。</p>
+
+        </div>
+        <div class="post-reply">
+            
+                <!-- 来必力City版安装代码 -->
+                <div id="lv-container" data-id="city" data-uid="MTAyMC8yOTE4Ni81NzUz">
+                    <script type="text/javascript">
+                        (function(d, s) {
+                            var j, e = d.getElementsByTagName(s)[0];
+
+                            if (typeof LivereTower === 'function') { return; }
+
+                            j = d.createElement(s);
+                            j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+                            j.async = true;
+
+                            e.parentNode.insertBefore(j, e);
+                        })(document, 'script');
+                    </script>
+                    <noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+                </div>
+                <!-- City版安装代码已完成 -->
+            
+            
+        </div>
+    </div>
+</section>
+<script>
+    // 获取第一张图, 用以当封面背景图
+    var img = document.querySelectorAll('img')[1]
+
+    if (img) {
+        var header_box = document.querySelector('#header_box')
+        header_box.style.backgroundImage = 'url('+ img.src +')'
+    }
+</script>
+      </div>
+  </div>
+  <style>
+  #footer {
+    min-height: 10vh;
+    background: black;
+    color: #fff;
+  }
+
+  #footer a {
+    color: #e1e1e1;
+  }
+</style>
+<footer id="footer" class="has-text-centered is-flex center">
+  <div class="container has-padding">
+    <div>
+      <div>
+        <!--请您保留作者署名, 主题制作来之不易-->
+        主题来自 <a href="http://haojen.github.io/">Haojen Ma</a>
+        <br>
+        Copyright © 王邸 2019
+        <!--
+          Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+        -->
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="/js/search_core.js"></script>
+<script src="/js/script.js"></script>
+
+</body>
+</html>
