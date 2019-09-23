@@ -1,14 +1,85 @@
 <!DOCTYPE html>
-<html class="full-height">
-<head>
-  <meta charset="utf-8">
-  <link rel="stylesheet" href="//cdn.bootcss.com/bulma/0.4.1/css/bulma.min.css">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-  <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+
+
+
   
-  <title>Java总结（十二） | 路要坚持</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="这周开始讲Spring了，讲Spring都是很多没有见过的东西，很多东西都是配置的，目前还不需要懂底层的实现，需要的是知道如何操作，特别是maven。当然Spring也很重要，需要多思考。今天是2019年9月13日星期五，中秋节，在武汉，去了一趟光谷，浏览了一圈武大。现在的年轻人都不行呀，烈日下骑单车就要中暑了。早早地回来，就确定把这周总结写了，虽然只有四天的东西，但是感觉学了好久了，因为东西很多">
+
+
+<html class="theme-next muse use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="这周开始讲Spring了，讲Spring都是很多没有见过的东西，很多东西都是配置的，目前还不需要懂底层的实现，需要的是知道如何操作，特别是maven。当然Spring也很重要，需要多思考。今天是2019年9月13日星期五，中秋节，在武汉，去了一趟光谷，浏览了一圈武大。现在的年轻人都不行呀，烈日下骑单车就要中暑了。早早地回来，就确定把这周总结写了，虽然只有四天的东西，但是感觉学了好久了，因为东西很多">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java总结（十二）">
 <meta property="og:url" content="http://yoursite.com/2019/09/14/Java总结（十二）/index.html">
@@ -18,139 +89,226 @@
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java总结（十二）">
 <meta name="twitter:description" content="这周开始讲Spring了，讲Spring都是很多没有见过的东西，很多东西都是配置的，目前还不需要懂底层的实现，需要的是知道如何操作，特别是maven。当然Spring也很重要，需要多思考。今天是2019年9月13日星期五，中秋节，在武汉，去了一趟光谷，浏览了一圈武大。现在的年轻人都不行呀，烈日下骑单车就要中暑了。早早地回来，就确定把这周总结写了，虽然只有四天的东西，但是感觉学了好久了，因为东西很多">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/09/14/Java总结（十二）/"/>
+
+
+
+
+
+  <title>Java总结（十二） | 路要坚持</title>
   
-    <link rel="alternate" href="/" title="路要坚持" type="application/atom+xml">
-  
-  
-    <link rel="icon" href="/favicon.png">
-  
-  
-    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
-  
-  <link rel="stylesheet" href="/css/common.css">
-<link rel="stylesheet" href="/css/nav.css">
-<link rel="stylesheet" href="/css/layout.css">
-  
+
+
+
+
+
+
+
 
 </head>
 
-<body>
-  <header id="navbar" class="overflow-hidden">
-  <div class="container">
-    <nav class="nav">
-         <div class="nav-left">
-            <a href="/" class="nav-item" style="font-size: 20px;">
-              <span class="logo">王邸</span>'s Blog
-            </a>
-         </div>
-        <div class="nav-center is-hidden position-relative" id="search_container">
-            <div class="nav-item full-width full-height">
-                <i class="fa fa-search has-padding" aria-hidden="true"></i>
-                <input type="text" id="search_input" class="search-input full-height full-width" placeholder="Search post" autofocus>
-                <i id="close_search" class="fa fa-times" aria-hidden="true"></i>
-            </div>
-            <div id="search_result"></div>
-        </div>
-        <div class="nav-right nav-menu">
-            <a class="nav-item" id="search">
-                <i class="fa fa-search" aria-hidden="true"></i>
-            </a>
-            
-            <a class="nav-item" href="/">
-                Home
-            </a>
-            
-            <a class="nav-item" href="/works">
-                My Works
-            </a>
-            
-            <a class="nav-item" href="/about">
-                About
-            </a>
-            
-        </div>
-        <span class="nav-toggle" id="navMenuDropdown">
-            <span></span>
-            <span></span>
-            <span></span>
-        </span>
-        <div class="navbar-menu position-absolute full-width content-box is-hidden-desktop is-flex flex-column center" style="top: 100%;">
-            
-            <a class="nav-item flex-1" href="/">
-                Home
-            </a>
-            
-            <a class="nav-item flex-1" href="/works">
-                My Works
-            </a>
-            
-            <a class="nav-item flex-1" href="/about">
-                About
-            </a>
-            
-        </div>
-    </nav>
+<body itemscope itemtype="http://schema.org/WebPage" lang="">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">路要坚持</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
   </div>
-</header>
 
-  <div id="main-wrap" class="position-relative" style="margin-top: 55px;">
-      <div class="main-inner-content">
-          <!--博文页面-->
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
 
-<style>
-    .header-box {
-        height: 370px;
-        filter: blur(10px);
-        background-size: cover;
-        background-color: lightsteelblue;
-    }
+<nav class="site-nav">
+  
 
-    .post-box {
-        padding: 15px;
-        padding-top: 60px;
-        min-height: 80vh;
-        margin-top: -200px;
-        border-radius: 4px;
-        background-color: rgba(255,255,255,.8);
-    }
-
-    .post-avatar {
-        height: 30px;
-        width: 30px;
-        border-radius: 50%;
-    }
-
-    .flow-chart {
-        text-align: center;
-    }
-
-    img[alt="post-cover"] {
-        display: none;
-    }
-</style>
-<header>
-    <div id="header_box" class="header-box"></div>
-</header>
-<section>
-    <div class="container post-box">
-        <div class="content post-title is-flex center flex-column" style="margin-bottom: 70px; overflow: auto;">
-            <h1 class="has-text-centered" style="padding-bottom: 10px; border-bottom: 3px solid #fff">
-                <strong>Java总结（十二）</strong>
-            </h1>
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
             
-            <div class="is-flex align-center">
-                <img class="post-avatar" src="https://q2.qlogo.cn/headimg_dl?bs=996057150&dst_uin=996057150&dst_uin=996057150&;dst_uin=996057150&spec=100&url_enc=0&referer=bu_interface&term_type=PC">
-                <span style="padding:0 10px;"> <span class="sub-title">By</span> 王邸</span>
-                <span class="post-date sub-title">at: 2019-09-14</span>
-            </div>
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
-                <div>
-                    
-                </div>
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
             
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/14/Java总结（十二）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="王邸">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="路要坚持">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Java总结（十二）</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-14T21:56:43+08:00">
+                2019-09-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/09/14/Java总结（十二）/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/09/14/Java总结（十二）/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
         </div>
-        <div class="content" style="overflow: auto">
-            <p>这周开始讲Spring了，讲Spring都是很多没有见过的东西，很多东西都是配置的，目前还不需要懂底层的实现，需要的是知道如何操作，特别是maven。当然Spring也很重要，需要多思考。今天是2019年9月13日星期五，中秋节，在武汉，去了一趟光谷，浏览了一圈武大。现在的年轻人都不行呀，烈日下骑单车就要中暑了。早早地回来，就确定把这周总结写了，虽然只有四天的东西，但是感觉学了好久了，因为东西很多，就好像刚开始学JavaEE一样，必须要总结，牢记于心！上个礼拜六上午开了一个头，这里一起总结</p>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>这周开始讲Spring了，讲Spring都是很多没有见过的东西，很多东西都是配置的，目前还不需要懂底层的实现，需要的是知道如何操作，特别是maven。当然Spring也很重要，需要多思考。今天是2019年9月13日星期五，中秋节，在武汉，去了一趟光谷，浏览了一圈武大。现在的年轻人都不行呀，烈日下骑单车就要中暑了。早早地回来，就确定把这周总结写了，虽然只有四天的东西，但是感觉学了好久了，因为东西很多，就好像刚开始学JavaEE一样，必须要总结，牢记于心！上个礼拜六上午开了一个头，这里一起总结</p>
 <h2 id="星期一（0909）"><a href="#星期一（0909）" class="headerlink" title="星期一（0909）"></a>星期一（0909）</h2><h3 id="maven-（-‘meɪvn-）"><a href="#maven-（-‘meɪvn-）" class="headerlink" title="maven （[‘meɪvn]）"></a>maven （[‘meɪvn]）</h3><p>Maven是Apache下的一个纯java开发的开源项目，它是一个项目管理构建工具，使用maven对java项目进行构建、依赖管理。当前使用Maven的项目在持续增长。<br>Maven主要有两个功能（必须要知道）：</p>
 <pre><code>1、项目构建
 2、依赖管理(重点)
@@ -1202,72 +1360,393 @@ public class AnnotationTest2 {
 </code></pre><h3 id="这有什么用？"><a href="#这有什么用？" class="headerlink" title="这有什么用？"></a>这有什么用？</h3><p>只需要通过Spring的Enhancer.create来创建动态代理的对象。你想问我代理对象有什么用？这其实就是我们可以添加事务的方式。在每一个需要启动的事务的对象，给他加一层代理，代理就是一个汉堡包的上下层，给他加上开启事务，然后提交事务。</p>
 <h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><p>这周好像没有什么问题啊，感觉很菜啊，慌得一批，其实问题还是有的，就是需要自己去找答案罢了<br>1.为什么反射形成集合的对象都是 linkHashSet linkHashMap ,数值型是double等等<br>2.为什么那个后置控制器的接口是已经实现好的default的方法，而不需要自己去实现？我以为之前的HttpServlet的doGet和doPost方法也是这种情况，后来发现这两个是他实现好的类。并不是接口。</p>
 
-        </div>
-        <div class="post-reply">
-            
-                <!-- 来必力City版安装代码 -->
-                <div id="lv-container" data-id="city" data-uid="MTAyMC8yOTE4Ni81NzUz">
-                    <script type="text/javascript">
-                        (function(d, s) {
-                            var j, e = d.getElementsByTagName(s)[0];
-
-                            if (typeof LivereTower === 'function') { return; }
-
-                            j = d.createElement(s);
-                            j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
-                            j.async = true;
-
-                            e.parentNode.insertBefore(j, e);
-                        })(document, 'script');
-                    </script>
-                    <noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
-                </div>
-                <!-- City版安装代码已完成 -->
-            
-            
-        </div>
+      
     </div>
-</section>
-<script>
-    // 获取第一张图, 用以当封面背景图
-    var img = document.querySelectorAll('img')[1]
+    
+    
+    
 
-    if (img) {
-        var header_box = document.querySelector('#header_box')
-        header_box.style.backgroundImage = 'url('+ img.src +')'
-    }
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/09/08/正则表达式初学/" rel="next" title="正则表达式初学">
+                <i class="fa fa-chevron-left"></i> 正则表达式初学
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/09/22/Java总结（十三）/" rel="prev" title="Java总结（十三）">
+                Java总结（十三） <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">王邸</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">28</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#星期一（0909）"><span class="nav-number">1.</span> <span class="nav-text">星期一（0909）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#maven-（-‘meɪvn-）"><span class="nav-number">1.1.</span> <span class="nav-text">maven （[‘meɪvn]）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#web项目的基础"><span class="nav-number">1.2.</span> <span class="nav-text">web项目的基础</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#项目构建"><span class="nav-number">1.3.</span> <span class="nav-text">项目构建</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#依赖管理"><span class="nav-number">1.4.</span> <span class="nav-text">依赖管理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#开始使用maven！"><span class="nav-number">1.5.</span> <span class="nav-text">开始使用maven！</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Maven的工程结构"><span class="nav-number">1.6.</span> <span class="nav-text">Maven的工程结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Maven的工程创建"><span class="nav-number">1.7.</span> <span class="nav-text">Maven的工程创建</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Maven命令-重点"><span class="nav-number">1.8.</span> <span class="nav-text">Maven命令(重点)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关于依赖的作用范围："><span class="nav-number">1.9.</span> <span class="nav-text">关于依赖的作用范围：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IDEA使用maven"><span class="nav-number">1.10.</span> <span class="nav-text">IDEA使用maven</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Maven聚合工程（父子工程-并不推荐使用）"><span class="nav-number">1.11.</span> <span class="nav-text">Maven聚合工程（父子工程,并不推荐使用）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#聚合工程的作用"><span class="nav-number">1.12.</span> <span class="nav-text">聚合工程的作用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关于maven常见问题："><span class="nav-number">1.13.</span> <span class="nav-text">关于maven常见问题：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#星期二（0910）"><span class="nav-number">2.</span> <span class="nav-text">星期二（0910）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#设计模式的五个原则（solid）"><span class="nav-number">2.1.</span> <span class="nav-text">设计模式的五个原则（solid）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常见的设计模式"><span class="nav-number">2.2.</span> <span class="nav-text">常见的设计模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#单例模式（Singleton-Pattern）"><span class="nav-number">2.3.</span> <span class="nav-text">单例模式（Singleton Pattern）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#单例的种类（六种，先介绍四种，之后介绍设计模式时候再全部进行罗列）"><span class="nav-number">2.4.</span> <span class="nav-text">单例的种类（六种，先介绍四种，之后介绍设计模式时候再全部进行罗列）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#工厂模式（Factory-Pattern）"><span class="nav-number">2.5.</span> <span class="nav-text">工厂模式（Factory Pattern）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#简单工厂"><span class="nav-number">2.6.</span> <span class="nav-text">简单工厂</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#工厂方法"><span class="nav-number">2.7.</span> <span class="nav-text">工厂方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#建造者Builder模式"><span class="nav-number">2.8.</span> <span class="nav-text">建造者Builder模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代理（重点！！！）"><span class="nav-number">2.9.</span> <span class="nav-text">代理（重点！！！）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#动态代理的实现"><span class="nav-number">2.10.</span> <span class="nav-text">动态代理的实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#动态代理的作用"><span class="nav-number">2.11.</span> <span class="nav-text">动态代理的作用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#jdk代理实现"><span class="nav-number">2.12.</span> <span class="nav-text">jdk代理实现</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#星期三（0911）"><span class="nav-number">3.</span> <span class="nav-text">星期三（0911）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#IOC"><span class="nav-number">3.1.</span> <span class="nav-text">IOC</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DI"><span class="nav-number">3.2.</span> <span class="nav-text">DI</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#学习了-IOC-和-DI-最大的感触是什么？"><span class="nav-number">3.3.</span> <span class="nav-text">学习了 IOC 和 DI 最大的感触是什么？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#星期四（0912）"><span class="nav-number">4.</span> <span class="nav-text">星期四（0912）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#bean的实例化的方式"><span class="nav-number">4.1.</span> <span class="nav-text">bean的实例化的方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#无参构造（默认）"><span class="nav-number">4.2.</span> <span class="nav-text">无参构造（默认）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#有参构造"><span class="nav-number">4.3.</span> <span class="nav-text">有参构造</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#bean作用域"><span class="nav-number">4.4.</span> <span class="nav-text">bean作用域</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Bean的生命周期"><span class="nav-number">4.5.</span> <span class="nav-text">Bean的生命周期</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#上代码"><span class="nav-number">4.6.</span> <span class="nav-text">上代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#这里有个很特别的地方一定要说："><span class="nav-number">4.7.</span> <span class="nav-text">这里有个很特别的地方一定要说：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#属性的注入（-property-）"><span class="nav-number">4.8.</span> <span class="nav-text">属性的注入（ property ）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#集合bean"><span class="nav-number">4.9.</span> <span class="nav-text">集合bean</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#注解使用Spring-重点"><span class="nav-number">4.10.</span> <span class="nav-text">注解使用Spring(重点)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Setter方法注入属性"><span class="nav-number">4.11.</span> <span class="nav-text">Setter方法注入属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#属性的依赖注入。"><span class="nav-number">4.12.</span> <span class="nav-text">属性的依赖注入。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#生命周期"><span class="nav-number">4.13.</span> <span class="nav-text">生命周期</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#作用域"><span class="nav-number">4.14.</span> <span class="nav-text">作用域</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#更简便的Test"><span class="nav-number">4.15.</span> <span class="nav-text">更简便的Test</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#动态代理之cglib"><span class="nav-number">4.16.</span> <span class="nav-text">动态代理之cglib</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#这有什么用？"><span class="nav-number">4.17.</span> <span class="nav-text">这有什么用？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#小结"><span class="nav-number">4.18.</span> <span class="nav-text">小结</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">王邸</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
 </script>
-      </div>
-  </div>
-  <style>
-  #footer {
-    min-height: 10vh;
-    background: black;
-    color: #fff;
-  }
 
-  #footer a {
-    color: #e1e1e1;
-  }
-</style>
-<footer id="footer" class="has-text-centered is-flex center">
-  <div class="container has-padding">
-    <div>
-      <div>
-        <!--请您保留作者署名, 主题制作来之不易-->
-        主题来自 <a href="http://haojen.github.io/">Haojen Ma</a>
-        <br>
-        Copyright © 王邸 2019
-        <!--
-          Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
-        -->
-      </div>
-    </div>
-  </div>
-</footer>
 
-<script src="/js/search_core.js"></script>
-<script src="/js/script.js"></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'Fn4BuvoixOxjJAhR79TvaD5M-gzGzoHsz',
+        appKey: '1uspTrSwPqkmSBSUr948WqxE',
+        placeholder: 'Just go go',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
 
 </body>
 </html>

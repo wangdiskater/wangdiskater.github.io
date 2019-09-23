@@ -1,14 +1,85 @@
 <!DOCTYPE html>
-<html class="full-height">
-<head>
-  <meta charset="utf-8">
-  <link rel="stylesheet" href="//cdn.bootcss.com/bulma/0.4.1/css/bulma.min.css">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-  <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+
+
+
   
-  <title>Java总结（二） | 路要坚持</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="总结时间：0701-0706 本周主要内容:代码块介绍，对象继承，final（修饰类，方法，变量），对象的多态，抽象类，接口，打包指令，权限修饰符（public default…），内部类（成员内部类，静态内部类，局部内部类，匿名内部类），Object类（注意他的方法，所有类都可以重写），String类（注意byte数组可以构建String（流对象））， 概述这周主要把面向对象的内容讲完了。很多东">
+
+
+<html class="theme-next muse use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="总结时间：0701-0706 本周主要内容:代码块介绍，对象继承，final（修饰类，方法，变量），对象的多态，抽象类，接口，打包指令，权限修饰符（public default…），内部类（成员内部类，静态内部类，局部内部类，匿名内部类），Object类（注意他的方法，所有类都可以重写），String类（注意byte数组可以构建String（流对象））， 概述这周主要把面向对象的内容讲完了。很多东">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java总结（二）">
 <meta property="og:url" content="http://yoursite.com/2019/07/06/Java总结（二）/index.html">
@@ -18,139 +89,226 @@
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java总结（二）">
 <meta name="twitter:description" content="总结时间：0701-0706 本周主要内容:代码块介绍，对象继承，final（修饰类，方法，变量），对象的多态，抽象类，接口，打包指令，权限修饰符（public default…），内部类（成员内部类，静态内部类，局部内部类，匿名内部类），Object类（注意他的方法，所有类都可以重写），String类（注意byte数组可以构建String（流对象））， 概述这周主要把面向对象的内容讲完了。很多东">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/07/06/Java总结（二）/"/>
+
+
+
+
+
+  <title>Java总结（二） | 路要坚持</title>
   
-    <link rel="alternate" href="/" title="路要坚持" type="application/atom+xml">
-  
-  
-    <link rel="icon" href="/favicon.png">
-  
-  
-    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
-  
-  <link rel="stylesheet" href="/css/common.css">
-<link rel="stylesheet" href="/css/nav.css">
-<link rel="stylesheet" href="/css/layout.css">
-  
+
+
+
+
+
+
+
 
 </head>
 
-<body>
-  <header id="navbar" class="overflow-hidden">
-  <div class="container">
-    <nav class="nav">
-         <div class="nav-left">
-            <a href="/" class="nav-item" style="font-size: 20px;">
-              <span class="logo">王邸</span>'s Blog
-            </a>
-         </div>
-        <div class="nav-center is-hidden position-relative" id="search_container">
-            <div class="nav-item full-width full-height">
-                <i class="fa fa-search has-padding" aria-hidden="true"></i>
-                <input type="text" id="search_input" class="search-input full-height full-width" placeholder="Search post" autofocus>
-                <i id="close_search" class="fa fa-times" aria-hidden="true"></i>
-            </div>
-            <div id="search_result"></div>
-        </div>
-        <div class="nav-right nav-menu">
-            <a class="nav-item" id="search">
-                <i class="fa fa-search" aria-hidden="true"></i>
-            </a>
-            
-            <a class="nav-item" href="/">
-                Home
-            </a>
-            
-            <a class="nav-item" href="/works">
-                My Works
-            </a>
-            
-            <a class="nav-item" href="/about">
-                About
-            </a>
-            
-        </div>
-        <span class="nav-toggle" id="navMenuDropdown">
-            <span></span>
-            <span></span>
-            <span></span>
-        </span>
-        <div class="navbar-menu position-absolute full-width content-box is-hidden-desktop is-flex flex-column center" style="top: 100%;">
-            
-            <a class="nav-item flex-1" href="/">
-                Home
-            </a>
-            
-            <a class="nav-item flex-1" href="/works">
-                My Works
-            </a>
-            
-            <a class="nav-item flex-1" href="/about">
-                About
-            </a>
-            
-        </div>
-    </nav>
+<body itemscope itemtype="http://schema.org/WebPage" lang="">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">路要坚持</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
   </div>
-</header>
 
-  <div id="main-wrap" class="position-relative" style="margin-top: 55px;">
-      <div class="main-inner-content">
-          <!--博文页面-->
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
 
-<style>
-    .header-box {
-        height: 370px;
-        filter: blur(10px);
-        background-size: cover;
-        background-color: lightsteelblue;
-    }
+<nav class="site-nav">
+  
 
-    .post-box {
-        padding: 15px;
-        padding-top: 60px;
-        min-height: 80vh;
-        margin-top: -200px;
-        border-radius: 4px;
-        background-color: rgba(255,255,255,.8);
-    }
-
-    .post-avatar {
-        height: 30px;
-        width: 30px;
-        border-radius: 50%;
-    }
-
-    .flow-chart {
-        text-align: center;
-    }
-
-    img[alt="post-cover"] {
-        display: none;
-    }
-</style>
-<header>
-    <div id="header_box" class="header-box"></div>
-</header>
-<section>
-    <div class="container post-box">
-        <div class="content post-title is-flex center flex-column" style="margin-bottom: 70px; overflow: auto;">
-            <h1 class="has-text-centered" style="padding-bottom: 10px; border-bottom: 3px solid #fff">
-                <strong>Java总结（二）</strong>
-            </h1>
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
             
-            <div class="is-flex align-center">
-                <img class="post-avatar" src="https://q2.qlogo.cn/headimg_dl?bs=996057150&dst_uin=996057150&dst_uin=996057150&;dst_uin=996057150&spec=100&url_enc=0&referer=bu_interface&term_type=PC">
-                <span style="padding:0 10px;"> <span class="sub-title">By</span> 王邸</span>
-                <span class="post-date sub-title">at: 2019-07-06</span>
-            </div>
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
-                <div>
-                    
-                </div>
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
             
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/06/Java总结（二）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="王邸">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="路要坚持">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Java总结（二）</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-06T22:10:02+08:00">
+                2019-07-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/07/06/Java总结（二）/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/07/06/Java总结（二）/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
         </div>
-        <div class="content" style="overflow: auto">
-            <p>总结<br>时间：0701-0706</p>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>总结<br>时间：0701-0706</p>
 <p>本周主要内容:<br>代码块介绍，对象继承，final（修饰类，方法，变量），对象的多态，抽象类，接口，打包指令，权限修饰符（public default…），内部类（成员内部类，静态内部类，局部内部类，匿名内部类），Object类（注意他的方法，所有类都可以重写），String类（注意byte数组可以构建String（流对象）），</p>
 <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>这周主要把面向对象的内容讲完了。很多东西虽然很熟悉但是却很多细节的处理很重要。是打好基础的关键。但是万变不离其中，离不开三大特性：继承，封装，多态。现在也只能字面意思上去理解到底这些东西是什么。这些东西的规律是什么，但是他为什么这样实现的？最初的构想是什么？等等问题，这不是老师能教你的，你自己需要去学习。上个礼拜简单的讲了什么是封装，但是封装远远没有private那么简单。接下来将总结一下本周的学习内容：</p>
 <h2 id="星期一"><a href="#星期一" class="headerlink" title="星期一"></a>星期一</h2><h3 id="代码块"><a href="#代码块" class="headerlink" title="代码块"></a>代码块</h3><p>用{}括起来的代码<br>分类：<br>局部代码块<br>  位置：方法里面(局部位置)<br>  作用：限制局部变量的生命周期，及早释放，提高内存利用率</p>
@@ -905,72 +1063,393 @@ class ThirdLevel implements Cloneable{
 <h3 id="markdown格式："><a href="#markdown格式：" class="headerlink" title="markdown格式："></a>markdown格式：</h3><p>表格使用竖杠| 分割，注意要上下都有空格才能显示正确；</p>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>这周的内容比较乱。但是总体还是把类和对象讲完了。脑海也有一个整体的概念。就是内部类的细节和深拷贝有一点难度以外。其他东西都很基础，必须要掌握。对象成员的继承关系，以及子类的初始化过程等等。</p>
 
-        </div>
-        <div class="post-reply">
-            
-                <!-- 来必力City版安装代码 -->
-                <div id="lv-container" data-id="city" data-uid="MTAyMC8yOTE4Ni81NzUz">
-                    <script type="text/javascript">
-                        (function(d, s) {
-                            var j, e = d.getElementsByTagName(s)[0];
-
-                            if (typeof LivereTower === 'function') { return; }
-
-                            j = d.createElement(s);
-                            j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
-                            j.async = true;
-
-                            e.parentNode.insertBefore(j, e);
-                        })(document, 'script');
-                    </script>
-                    <noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
-                </div>
-                <!-- City版安装代码已完成 -->
-            
-            
-        </div>
+      
     </div>
-</section>
-<script>
-    // 获取第一张图, 用以当封面背景图
-    var img = document.querySelectorAll('img')[1]
+    
+    
+    
 
-    if (img) {
-        var header_box = document.querySelector('#header_box')
-        header_box.style.backgroundImage = 'url('+ img.src +')'
-    }
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/06/30/Java总结（一）/" rel="next" title="Java总结（一）">
+                <i class="fa fa-chevron-left"></i> Java总结（一）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/07/14/Java总结（三）上/" rel="prev" title="Java总结（三）上">
+                Java总结（三）上 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">王邸</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">28</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#概述"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#星期一"><span class="nav-number">2.</span> <span class="nav-text">星期一</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#代码块"><span class="nav-number">2.1.</span> <span class="nav-text">代码块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#继承"><span class="nav-number">2.2.</span> <span class="nav-text">继承</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#final"><span class="nav-number">2.3.</span> <span class="nav-text">final</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第二天"><span class="nav-number">3.</span> <span class="nav-text">第二天</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#多态"><span class="nav-number">3.1.</span> <span class="nav-text">多态</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#抽象类"><span class="nav-number">3.2.</span> <span class="nav-text">抽象类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#接口"><span class="nav-number">3.3.</span> <span class="nav-text">接口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#形式参数和返回值的问题"><span class="nav-number">3.4.</span> <span class="nav-text">形式参数和返回值的问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#星期三-拉闸放假"><span class="nav-number">4.</span> <span class="nav-text">星期三(拉闸放假)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#星期四"><span class="nav-number">5.</span> <span class="nav-text">星期四</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#打包"><span class="nav-number">5.1.</span> <span class="nav-text">打包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#执行"><span class="nav-number">5.2.</span> <span class="nav-text">执行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#导包"><span class="nav-number">5.3.</span> <span class="nav-text">导包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#权限修饰符"><span class="nav-number">5.4.</span> <span class="nav-text">权限修饰符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常见的修饰符"><span class="nav-number">5.5.</span> <span class="nav-text">常见的修饰符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#内部类（难）"><span class="nav-number">5.6.</span> <span class="nav-text">内部类（难）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#8-匿名内部类（必须掌握）"><span class="nav-number">5.6.1.</span> <span class="nav-text">(8)匿名内部类（必须掌握）</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#星期五"><span class="nav-number">6.</span> <span class="nav-text">星期五</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Object类"><span class="nav-number">6.1.</span> <span class="nav-text">Object类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#public-final-Class-getClass"><span class="nav-number">6.2.</span> <span class="nav-text">public final Class getClass():</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Class-类类型"><span class="nav-number">6.3.</span> <span class="nav-text">Class: 类类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#public-int-hashCode"><span class="nav-number">6.4.</span> <span class="nav-text">public int hashCode()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#public-String-toString-（简历）"><span class="nav-number">6.5.</span> <span class="nav-text">public String toString(): （简历）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#public-boolean-equals-Object-obj"><span class="nav-number">6.6.</span> <span class="nav-text">public boolean equals(Object obj):</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#protected-void-finalize-throws-Throwable"><span class="nav-number">6.7.</span> <span class="nav-text">protected void finalize() throws Throwable</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#protected-Object-clone-throws-CloneNotSupportedException"><span class="nav-number">6.8.</span> <span class="nav-text">protected Object clone() throws CloneNotSupportedException</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#星期六"><span class="nav-number">7.</span> <span class="nav-text">星期六</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#构造函数"><span class="nav-number">7.1.</span> <span class="nav-text">构造函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#判断功能："><span class="nav-number">7.2.</span> <span class="nav-text">判断功能：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#获取功能："><span class="nav-number">7.3.</span> <span class="nav-text">获取功能：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#转换功能："><span class="nav-number">7.4.</span> <span class="nav-text">转换功能：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#替换功能"><span class="nav-number">7.5.</span> <span class="nav-text">替换功能</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字符串分割："><span class="nav-number">7.6.</span> <span class="nav-text">字符串分割：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#比较功能："><span class="nav-number">7.7.</span> <span class="nav-text">比较功能：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#markdown格式："><span class="nav-number">7.8.</span> <span class="nav-text">markdown格式：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">8.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">王邸</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
 </script>
-      </div>
-  </div>
-  <style>
-  #footer {
-    min-height: 10vh;
-    background: black;
-    color: #fff;
-  }
 
-  #footer a {
-    color: #e1e1e1;
-  }
-</style>
-<footer id="footer" class="has-text-centered is-flex center">
-  <div class="container has-padding">
-    <div>
-      <div>
-        <!--请您保留作者署名, 主题制作来之不易-->
-        主题来自 <a href="http://haojen.github.io/">Haojen Ma</a>
-        <br>
-        Copyright © 王邸 2019
-        <!--
-          Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
-        -->
-      </div>
-    </div>
-  </div>
-</footer>
 
-<script src="/js/search_core.js"></script>
-<script src="/js/script.js"></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'Fn4BuvoixOxjJAhR79TvaD5M-gzGzoHsz',
+        appKey: '1uspTrSwPqkmSBSUr948WqxE',
+        placeholder: 'Just go go',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
 
 </body>
 </html>

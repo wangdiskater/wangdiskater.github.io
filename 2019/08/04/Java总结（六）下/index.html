@@ -1,14 +1,85 @@
 <!DOCTYPE html>
-<html class="full-height">
-<head>
-  <meta charset="utf-8">
-  <link rel="stylesheet" href="//cdn.bootcss.com/bulma/0.4.1/css/bulma.min.css">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-  <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+
+
+
   
-  <title>Java总结（六）下 | 路要坚持</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="接下来JAVAEE，一开始先学习mysql数据库的语言（sql）操作的语言四种（DDL,DML,DQL,DCL(没讲之后我补上),TPL），数据库主要进行的是查询Query一定要会，JDBC（JAVA DB CONNECTIVITY）三连(connection preparedstatement,resultset) 星期四(8.01)MYSQL学习总结指令的编写： 登录本机mysql: mysq">
+
+
+<html class="theme-next muse use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="接下来JAVAEE，一开始先学习mysql数据库的语言（sql）操作的语言四种（DDL,DML,DQL,DCL(没讲之后我补上),TPL），数据库主要进行的是查询Query一定要会，JDBC（JAVA DB CONNECTIVITY）三连(connection preparedstatement,resultset) 星期四(8.01)MYSQL学习总结指令的编写： 登录本机mysql: mysq">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java总结（六）下">
 <meta property="og:url" content="http://yoursite.com/2019/08/04/Java总结（六）下/index.html">
@@ -18,139 +89,226 @@
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java总结（六）下">
 <meta name="twitter:description" content="接下来JAVAEE，一开始先学习mysql数据库的语言（sql）操作的语言四种（DDL,DML,DQL,DCL(没讲之后我补上),TPL），数据库主要进行的是查询Query一定要会，JDBC（JAVA DB CONNECTIVITY）三连(connection preparedstatement,resultset) 星期四(8.01)MYSQL学习总结指令的编写： 登录本机mysql: mysq">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/08/04/Java总结（六）下/"/>
+
+
+
+
+
+  <title>Java总结（六）下 | 路要坚持</title>
   
-    <link rel="alternate" href="/" title="路要坚持" type="application/atom+xml">
-  
-  
-    <link rel="icon" href="/favicon.png">
-  
-  
-    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
-  
-  <link rel="stylesheet" href="/css/common.css">
-<link rel="stylesheet" href="/css/nav.css">
-<link rel="stylesheet" href="/css/layout.css">
-  
+
+
+
+
+
+
+
 
 </head>
 
-<body>
-  <header id="navbar" class="overflow-hidden">
-  <div class="container">
-    <nav class="nav">
-         <div class="nav-left">
-            <a href="/" class="nav-item" style="font-size: 20px;">
-              <span class="logo">王邸</span>'s Blog
-            </a>
-         </div>
-        <div class="nav-center is-hidden position-relative" id="search_container">
-            <div class="nav-item full-width full-height">
-                <i class="fa fa-search has-padding" aria-hidden="true"></i>
-                <input type="text" id="search_input" class="search-input full-height full-width" placeholder="Search post" autofocus>
-                <i id="close_search" class="fa fa-times" aria-hidden="true"></i>
-            </div>
-            <div id="search_result"></div>
-        </div>
-        <div class="nav-right nav-menu">
-            <a class="nav-item" id="search">
-                <i class="fa fa-search" aria-hidden="true"></i>
-            </a>
-            
-            <a class="nav-item" href="/">
-                Home
-            </a>
-            
-            <a class="nav-item" href="/works">
-                My Works
-            </a>
-            
-            <a class="nav-item" href="/about">
-                About
-            </a>
-            
-        </div>
-        <span class="nav-toggle" id="navMenuDropdown">
-            <span></span>
-            <span></span>
-            <span></span>
-        </span>
-        <div class="navbar-menu position-absolute full-width content-box is-hidden-desktop is-flex flex-column center" style="top: 100%;">
-            
-            <a class="nav-item flex-1" href="/">
-                Home
-            </a>
-            
-            <a class="nav-item flex-1" href="/works">
-                My Works
-            </a>
-            
-            <a class="nav-item flex-1" href="/about">
-                About
-            </a>
-            
-        </div>
-    </nav>
+<body itemscope itemtype="http://schema.org/WebPage" lang="">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">路要坚持</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
   </div>
-</header>
 
-  <div id="main-wrap" class="position-relative" style="margin-top: 55px;">
-      <div class="main-inner-content">
-          <!--博文页面-->
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
 
-<style>
-    .header-box {
-        height: 370px;
-        filter: blur(10px);
-        background-size: cover;
-        background-color: lightsteelblue;
-    }
+<nav class="site-nav">
+  
 
-    .post-box {
-        padding: 15px;
-        padding-top: 60px;
-        min-height: 80vh;
-        margin-top: -200px;
-        border-radius: 4px;
-        background-color: rgba(255,255,255,.8);
-    }
-
-    .post-avatar {
-        height: 30px;
-        width: 30px;
-        border-radius: 50%;
-    }
-
-    .flow-chart {
-        text-align: center;
-    }
-
-    img[alt="post-cover"] {
-        display: none;
-    }
-</style>
-<header>
-    <div id="header_box" class="header-box"></div>
-</header>
-<section>
-    <div class="container post-box">
-        <div class="content post-title is-flex center flex-column" style="margin-bottom: 70px; overflow: auto;">
-            <h1 class="has-text-centered" style="padding-bottom: 10px; border-bottom: 3px solid #fff">
-                <strong>Java总结（六）下</strong>
-            </h1>
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
             
-            <div class="is-flex align-center">
-                <img class="post-avatar" src="https://q2.qlogo.cn/headimg_dl?bs=996057150&dst_uin=996057150&dst_uin=996057150&;dst_uin=996057150&spec=100&url_enc=0&referer=bu_interface&term_type=PC">
-                <span style="padding:0 10px;"> <span class="sub-title">By</span> 王邸</span>
-                <span class="post-date sub-title">at: 2019-08-04</span>
-            </div>
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
-                <div>
-                    
-                </div>
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
             
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/04/Java总结（六）下/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="王邸">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="路要坚持">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Java总结（六）下</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-08-04T23:18:31+08:00">
+                2019-08-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/08/04/Java总结（六）下/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/08/04/Java总结（六）下/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
         </div>
-        <div class="content" style="overflow: auto">
-            <p>接下来JAVAEE，一开始先学习mysql数据库的语言（sql）操作的语言四种（DDL,DML,DQL,DCL(没讲之后我补上),TPL），数据库主要进行的是查询Query一定要会，JDBC（JAVA DB CONNECTIVITY）三连(connection preparedstatement,resultset)</p>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>接下来JAVAEE，一开始先学习mysql数据库的语言（sql）操作的语言四种（DDL,DML,DQL,DCL(没讲之后我补上),TPL），数据库主要进行的是查询Query一定要会，JDBC（JAVA DB CONNECTIVITY）三连(connection preparedstatement,resultset)</p>
 <h2 id="星期四-8-01"><a href="#星期四-8-01" class="headerlink" title="星期四(8.01)"></a>星期四(8.01)</h2><h2 id="MYSQL学习"><a href="#MYSQL学习" class="headerlink" title="MYSQL学习"></a>MYSQL学习</h2><p>总结指令的编写：</p>
 <p>登录本机mysql:</p>
 <pre><code>mysql -u 用户名 -p 输入密码。默认的root;
@@ -743,72 +901,393 @@ FLUSH PRIVILEGES;
 </code></pre><p>这个方法需要在jdk1.6以上支持</p>
 <h3 id="如何共享包"><a href="#如何共享包" class="headerlink" title="如何共享包"></a>如何共享包</h3><p>把jar包添加到module中共用可以右键点击module 然后setting把jar添加到module中<br>或者按F4也有相同的效果</p>
 
-        </div>
-        <div class="post-reply">
-            
-                <!-- 来必力City版安装代码 -->
-                <div id="lv-container" data-id="city" data-uid="MTAyMC8yOTE4Ni81NzUz">
-                    <script type="text/javascript">
-                        (function(d, s) {
-                            var j, e = d.getElementsByTagName(s)[0];
-
-                            if (typeof LivereTower === 'function') { return; }
-
-                            j = d.createElement(s);
-                            j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
-                            j.async = true;
-
-                            e.parentNode.insertBefore(j, e);
-                        })(document, 'script');
-                    </script>
-                    <noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
-                </div>
-                <!-- City版安装代码已完成 -->
-            
-            
-        </div>
+      
     </div>
-</section>
-<script>
-    // 获取第一张图, 用以当封面背景图
-    var img = document.querySelectorAll('img')[1]
+    
+    
+    
 
-    if (img) {
-        var header_box = document.querySelector('#header_box')
-        header_box.style.backgroundImage = 'url('+ img.src +')'
-    }
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/08/04/Java总结（六）上/" rel="next" title="Java总结（六）上">
+                <i class="fa fa-chevron-left"></i> Java总结（六）上
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/08/11/Java总结（七）/" rel="prev" title="Java总结（七）">
+                Java总结（七） <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">王邸</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">28</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#星期四-8-01"><span class="nav-number">1.</span> <span class="nav-text">星期四(8.01)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MYSQL学习"><span class="nav-number">2.</span> <span class="nav-text">MYSQL学习</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DDL：Data-Definition-Language"><span class="nav-number">3.</span> <span class="nav-text">DDL：Data Definition Language</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据库"><span class="nav-number">4.</span> <span class="nav-text">数据库</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#创建数据库-create"><span class="nav-number">4.1.</span> <span class="nav-text">创建数据库(create)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查看数据库-show-："><span class="nav-number">4.2.</span> <span class="nav-text">查看数据库(show)：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#删除数据库-DROP"><span class="nav-number">4.3.</span> <span class="nav-text">删除数据库(DROP)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改数据库（ALTER）"><span class="nav-number">4.4.</span> <span class="nav-text">修改数据库（ALTER）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#选择数据库"><span class="nav-number">4.5.</span> <span class="nav-text">选择数据库</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#表"><span class="nav-number">5.</span> <span class="nav-text">表</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#创建表-create"><span class="nav-number">5.1.</span> <span class="nav-text">创建表(create)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#datatype（创建表参数）"><span class="nav-number">5.1.1.</span> <span class="nav-text">datatype（创建表参数）:</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#日期与时间类型"><span class="nav-number">5.2.</span> <span class="nav-text">日期与时间类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查询表-desc"><span class="nav-number">5.3.</span> <span class="nav-text">查询表(desc)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改表-ALTER"><span class="nav-number">5.4.</span> <span class="nav-text">修改表(ALTER)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ALTER-TABLE-table-name-ADD-增加一列"><span class="nav-number">5.5.</span> <span class="nav-text">ALTER TABLE table_name ADD //增加一列</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ALTER-TABLE-table-name-CHANGE-改变一列的name和datatype"><span class="nav-number">5.6.</span> <span class="nav-text">ALTER TABLE table_name CHANGE  改变一列的name和datatype</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ALTER-TABLE-table-name-MODIFY-改变一列的datatype"><span class="nav-number">5.7.</span> <span class="nav-text">ALTER TABLE table_name MODIFY  改变一列的datatype</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ALTER-TABLE-table-name-DROP-删除一列"><span class="nav-number">5.8.</span> <span class="nav-text">ALTER TABLE table_name DROP; 删除一列</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ALTER-TABLE-TABLE-NAME-RENAME-TABLE-table-name-to-new-name-修改表名"><span class="nav-number">5.9.</span> <span class="nav-text">ALTER TABLE TABLE_NAME RENAME TABLE table_name to new_name 修改表名</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改字符集"><span class="nav-number">5.10.</span> <span class="nav-text">修改字符集</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#删除表-DROP"><span class="nav-number">5.11.</span> <span class="nav-text">删除表(DROP)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DML数据操纵语言结合DQL"><span class="nav-number">6.</span> <span class="nav-text">DML数据操纵语言结合DQL</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#插入（INSERT）"><span class="nav-number">6.1.</span> <span class="nav-text">插入（INSERT）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#更新（UPDATE）"><span class="nav-number">6.2.</span> <span class="nav-text">更新（UPDATE）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#删除（DELETE）"><span class="nav-number">6.3.</span> <span class="nav-text">删除（DELETE）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DQL数据查询语言（简单查询）"><span class="nav-number">7.</span> <span class="nav-text">DQL数据查询语言（简单查询）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#查询-SELECT"><span class="nav-number">7.1.</span> <span class="nav-text">查询(SELECT)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用-WHERE-子句过滤记录"><span class="nav-number">7.2.</span> <span class="nav-text">使用 WHERE 子句过滤记录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常见运算符介绍"><span class="nav-number">7.3.</span> <span class="nav-text">常见运算符介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#lt-gt-安全的等于"><span class="nav-number">7.4.</span> <span class="nav-text"><=> 安全的等于</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LIKE"><span class="nav-number">7.5.</span> <span class="nav-text">LIKE</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DISTINCT-过滤相同的记录"><span class="nav-number">7.6.</span> <span class="nav-text">DISTINCT 过滤相同的记录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LIMIT-限制结果-分页"><span class="nav-number">7.7.</span> <span class="nav-text">LIMIT 限制结果(分页)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ORDER-BY-排序"><span class="nav-number">7.8.</span> <span class="nav-text">ORDER BY 排序</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#星期五-8-02"><span class="nav-number">8.</span> <span class="nav-text">星期五(8.02)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#今日学习总结"><span class="nav-number">9.</span> <span class="nav-text">今日学习总结</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#别名"><span class="nav-number">9.1.</span> <span class="nav-text">别名</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#聚合函数"><span class="nav-number">9.2.</span> <span class="nav-text">聚合函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分组查询GROUP-BY"><span class="nav-number">9.3.</span> <span class="nav-text">分组查询GROUP BY</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#having-and-where"><span class="nav-number">9.4.</span> <span class="nav-text">having and where</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SELECT语句执行顺序"><span class="nav-number">9.5.</span> <span class="nav-text">SELECT语句执行顺序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据完整性"><span class="nav-number">9.6.</span> <span class="nav-text">数据完整性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据主键：表中经常有一个列或列的组合，其值能唯一地标识表中的每一行。这样的一列或多列称为表的主键，通过它可强制表的实体完整性。当创建或更改表时可通过定义PRIMARY-KEY-约束来创建主键。一个表只能有一个-PRIMARY-KEY-约束，而且-PRIMARY-KEY-约束中的列不能接受空值。由于-PRIMARY-KEY-约束确保唯一数据，所以经常用来定义标识列。-作用"><span class="nav-number">9.7.</span> <span class="nav-text">数据主键：表中经常有一个列或列的组合，其值能唯一地标识表中的每一行。这样的一列或多列称为表的主键，通过它可强制表的实体完整性。当创建或更改表时可通过定义PRIMARY KEY 约束来创建主键。一个表只能有一个 PRIMARY KEY 约束，而且 PRIMARY KEY 约束中的列不能接受空值。由于 PRIMARY KEY 约束确保唯一数据，所以经常用来定义标识列。 作用 :</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#新建表的时候创建（CREATE）"><span class="nav-number">9.8.</span> <span class="nav-text">新建表的时候创建（CREATE）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改表创建主键-ALTER"><span class="nav-number">9.9.</span> <span class="nav-text">修改表创建主键(ALTER)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#主键的删除"><span class="nav-number">9.10.</span> <span class="nav-text">主键的删除</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#主键的注意事项"><span class="nav-number">9.11.</span> <span class="nav-text">主键的注意事项</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#唯一约束（-UNIQUE-）"><span class="nav-number">9.12.</span> <span class="nav-text">唯一约束（ UNIQUE ）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#unique-的新建表的时候创建"><span class="nav-number">9.13.</span> <span class="nav-text">unique 的新建表的时候创建</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#unique-修改表创建-ALTER"><span class="nav-number">9.14.</span> <span class="nav-text">unique 修改表创建(ALTER)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#unique的删除"><span class="nav-number">9.15.</span> <span class="nav-text">unique的删除</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#非空约束（not-null）"><span class="nav-number">9.16.</span> <span class="nav-text">非空约束（not null）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#非空的新建表的时候创建"><span class="nav-number">9.17.</span> <span class="nav-text">非空的新建表的时候创建</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#非空的修改表创建-ALTER"><span class="nav-number">9.18.</span> <span class="nav-text">非空的修改表创建(ALTER)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#非空的删除"><span class="nav-number">9.19.</span> <span class="nav-text">非空的删除</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#外键约束（constrain）-重点"><span class="nav-number">9.20.</span> <span class="nav-text">外键约束（constrain）!!重点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#外键的新建表的时候创建"><span class="nav-number">9.21.</span> <span class="nav-text">外键的新建表的时候创建</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#外键的修改表创建-ALTER"><span class="nav-number">9.22.</span> <span class="nav-text">外键的修改表创建(ALTER)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#外键的删除"><span class="nav-number">9.23.</span> <span class="nav-text">外键的删除</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#注释"><span class="nav-number">9.24.</span> <span class="nav-text">注释</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DQL数据查询语言（多表）"><span class="nav-number">10.</span> <span class="nav-text">DQL数据查询语言（多表）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#多表查询"><span class="nav-number">10.1.</span> <span class="nav-text">多表查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#交叉连接查询"><span class="nav-number">10.2.</span> <span class="nav-text">交叉连接查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#内部连接查询"><span class="nav-number">10.3.</span> <span class="nav-text">内部连接查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#外连接查询"><span class="nav-number">10.4.</span> <span class="nav-text">外连接查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#左外连接查询"><span class="nav-number">10.5.</span> <span class="nav-text">左外连接查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#右外连接查询"><span class="nav-number">10.6.</span> <span class="nav-text">右外连接查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#子查询"><span class="nav-number">10.7.</span> <span class="nav-text">子查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#联合查询（取并集）"><span class="nav-number">10.8.</span> <span class="nav-text">联合查询（取并集）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#报表查询"><span class="nav-number">10.9.</span> <span class="nav-text">报表查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据库的备份和还原-（-gt-）"><span class="nav-number">10.10.</span> <span class="nav-text">数据库的备份和还原 （ > ）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据库三大范式"><span class="nav-number">10.11.</span> <span class="nav-text">数据库三大范式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第一范式"><span class="nav-number">10.12.</span> <span class="nav-text">第一范式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第二范式"><span class="nav-number">10.13.</span> <span class="nav-text">第二范式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第三范式"><span class="nav-number">10.14.</span> <span class="nav-text">第三范式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#星期六-8-03"><span class="nav-number">11.</span> <span class="nav-text">星期六(8.03)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数据库的访问过程"><span class="nav-number">11.1.</span> <span class="nav-text">数据库的访问过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据库驱动"><span class="nav-number">11.2.</span> <span class="nav-text">数据库驱动</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JDBC第一个程序"><span class="nav-number">11.3.</span> <span class="nav-text">JDBC第一个程序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#程序详解"><span class="nav-number">11.4.</span> <span class="nav-text">程序详解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#程序详解—Connection"><span class="nav-number">11.5.</span> <span class="nav-text">程序详解—Connection</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#程序详解—Statement"><span class="nav-number">11.6.</span> <span class="nav-text">程序详解—Statement</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#程序详解—ResultSet"><span class="nav-number">11.7.</span> <span class="nav-text">程序详解—ResultSet</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据库注入问题"><span class="nav-number">11.8.</span> <span class="nav-text">数据库注入问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PreparedStatement"><span class="nav-number">11.9.</span> <span class="nav-text">PreparedStatement</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一些小总结"><span class="nav-number">11.10.</span> <span class="nav-text">一些小总结</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MQ"><span class="nav-number">11.11.</span> <span class="nav-text">MQ</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JMS"><span class="nav-number">11.12.</span> <span class="nav-text">JMS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JNDI"><span class="nav-number">11.13.</span> <span class="nav-text">JNDI</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mysql5-7设置允许外部访问"><span class="nav-number">11.14.</span> <span class="nav-text">mysql5.7设置允许外部访问</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据库显示链接不上问题"><span class="nav-number">11.15.</span> <span class="nav-text">.数据库显示链接不上问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#命令行执行java用到jar包"><span class="nav-number">11.16.</span> <span class="nav-text">命令行执行java用到jar包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如何共享包"><span class="nav-number">11.17.</span> <span class="nav-text">如何共享包</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">王邸</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
 </script>
-      </div>
-  </div>
-  <style>
-  #footer {
-    min-height: 10vh;
-    background: black;
-    color: #fff;
-  }
 
-  #footer a {
-    color: #e1e1e1;
-  }
-</style>
-<footer id="footer" class="has-text-centered is-flex center">
-  <div class="container has-padding">
-    <div>
-      <div>
-        <!--请您保留作者署名, 主题制作来之不易-->
-        主题来自 <a href="http://haojen.github.io/">Haojen Ma</a>
-        <br>
-        Copyright © 王邸 2019
-        <!--
-          Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
-        -->
-      </div>
-    </div>
-  </div>
-</footer>
 
-<script src="/js/search_core.js"></script>
-<script src="/js/script.js"></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'Fn4BuvoixOxjJAhR79TvaD5M-gzGzoHsz',
+        appKey: '1uspTrSwPqkmSBSUr948WqxE',
+        placeholder: 'Just go go',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
 
 </body>
 </html>

@@ -1,14 +1,85 @@
 <!DOCTYPE html>
-<html class="full-height">
-<head>
-  <meta charset="utf-8">
-  <link rel="stylesheet" href="//cdn.bootcss.com/bulma/0.4.1/css/bulma.min.css">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-  <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+
+
+
   
-  <title>Java总结（六）上 | 路要坚持</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="线程的通讯，阻塞队列（BlockingQue），生产者消费者问题，线程池(Executor)，定时任务，网络编程（UTP传输（DatagramSocket，DatagramPacket）,TCP（Socket，ServerSocket））,反射（重点）,注解，GC回收机制。接下来先讲数据库的一些操作和原理，然后讲了一点JDBC的东西。 概述这周把JAVASE部分都搞完了，接下来需要学习EE的部分，">
+
+
+<html class="theme-next muse use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="线程的通讯，阻塞队列（BlockingQue），生产者消费者问题，线程池(Executor)，定时任务，网络编程（UTP传输（DatagramSocket，DatagramPacket）,TCP（Socket，ServerSocket））,反射（重点）,注解，GC回收机制。接下来先讲数据库的一些操作和原理，然后讲了一点JDBC的东西。 概述这周把JAVASE部分都搞完了，接下来需要学习EE的部分，">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java总结（六）上">
 <meta property="og:url" content="http://yoursite.com/2019/08/04/Java总结（六）上/index.html">
@@ -18,139 +89,226 @@
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java总结（六）上">
 <meta name="twitter:description" content="线程的通讯，阻塞队列（BlockingQue），生产者消费者问题，线程池(Executor)，定时任务，网络编程（UTP传输（DatagramSocket，DatagramPacket）,TCP（Socket，ServerSocket））,反射（重点）,注解，GC回收机制。接下来先讲数据库的一些操作和原理，然后讲了一点JDBC的东西。 概述这周把JAVASE部分都搞完了，接下来需要学习EE的部分，">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/08/04/Java总结（六）上/"/>
+
+
+
+
+
+  <title>Java总结（六）上 | 路要坚持</title>
   
-    <link rel="alternate" href="/" title="路要坚持" type="application/atom+xml">
-  
-  
-    <link rel="icon" href="/favicon.png">
-  
-  
-    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
-  
-  <link rel="stylesheet" href="/css/common.css">
-<link rel="stylesheet" href="/css/nav.css">
-<link rel="stylesheet" href="/css/layout.css">
-  
+
+
+
+
+
+
+
 
 </head>
 
-<body>
-  <header id="navbar" class="overflow-hidden">
-  <div class="container">
-    <nav class="nav">
-         <div class="nav-left">
-            <a href="/" class="nav-item" style="font-size: 20px;">
-              <span class="logo">王邸</span>'s Blog
-            </a>
-         </div>
-        <div class="nav-center is-hidden position-relative" id="search_container">
-            <div class="nav-item full-width full-height">
-                <i class="fa fa-search has-padding" aria-hidden="true"></i>
-                <input type="text" id="search_input" class="search-input full-height full-width" placeholder="Search post" autofocus>
-                <i id="close_search" class="fa fa-times" aria-hidden="true"></i>
-            </div>
-            <div id="search_result"></div>
-        </div>
-        <div class="nav-right nav-menu">
-            <a class="nav-item" id="search">
-                <i class="fa fa-search" aria-hidden="true"></i>
-            </a>
-            
-            <a class="nav-item" href="/">
-                Home
-            </a>
-            
-            <a class="nav-item" href="/works">
-                My Works
-            </a>
-            
-            <a class="nav-item" href="/about">
-                About
-            </a>
-            
-        </div>
-        <span class="nav-toggle" id="navMenuDropdown">
-            <span></span>
-            <span></span>
-            <span></span>
-        </span>
-        <div class="navbar-menu position-absolute full-width content-box is-hidden-desktop is-flex flex-column center" style="top: 100%;">
-            
-            <a class="nav-item flex-1" href="/">
-                Home
-            </a>
-            
-            <a class="nav-item flex-1" href="/works">
-                My Works
-            </a>
-            
-            <a class="nav-item flex-1" href="/about">
-                About
-            </a>
-            
-        </div>
-    </nav>
+<body itemscope itemtype="http://schema.org/WebPage" lang="">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">路要坚持</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
   </div>
-</header>
 
-  <div id="main-wrap" class="position-relative" style="margin-top: 55px;">
-      <div class="main-inner-content">
-          <!--博文页面-->
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
 
-<style>
-    .header-box {
-        height: 370px;
-        filter: blur(10px);
-        background-size: cover;
-        background-color: lightsteelblue;
-    }
+<nav class="site-nav">
+  
 
-    .post-box {
-        padding: 15px;
-        padding-top: 60px;
-        min-height: 80vh;
-        margin-top: -200px;
-        border-radius: 4px;
-        background-color: rgba(255,255,255,.8);
-    }
-
-    .post-avatar {
-        height: 30px;
-        width: 30px;
-        border-radius: 50%;
-    }
-
-    .flow-chart {
-        text-align: center;
-    }
-
-    img[alt="post-cover"] {
-        display: none;
-    }
-</style>
-<header>
-    <div id="header_box" class="header-box"></div>
-</header>
-<section>
-    <div class="container post-box">
-        <div class="content post-title is-flex center flex-column" style="margin-bottom: 70px; overflow: auto;">
-            <h1 class="has-text-centered" style="padding-bottom: 10px; border-bottom: 3px solid #fff">
-                <strong>Java总结（六）上</strong>
-            </h1>
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
             
-            <div class="is-flex align-center">
-                <img class="post-avatar" src="https://q2.qlogo.cn/headimg_dl?bs=996057150&dst_uin=996057150&dst_uin=996057150&;dst_uin=996057150&spec=100&url_enc=0&referer=bu_interface&term_type=PC">
-                <span style="padding:0 10px;"> <span class="sub-title">By</span> 王邸</span>
-                <span class="post-date sub-title">at: 2019-08-04</span>
-            </div>
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
-                <div>
-                    
-                </div>
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
             
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/04/Java总结（六）上/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="王邸">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="路要坚持">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Java总结（六）上</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-08-04T23:17:39+08:00">
+                2019-08-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/08/04/Java总结（六）上/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/08/04/Java总结（六）上/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
         </div>
-        <div class="content" style="overflow: auto">
-            <p>线程的通讯，阻塞队列（BlockingQue），生产者消费者问题，线程池(Executor)，定时任务，网络编程（UTP传输（DatagramSocket，DatagramPacket<br>）,TCP（Socket，ServerSocket））,反射（重点）,注解，GC回收机制。接下来先讲数据库的一些操作和原理，然后讲了一点JDBC的东西。</p>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>线程的通讯，阻塞队列（BlockingQue），生产者消费者问题，线程池(Executor)，定时任务，网络编程（UTP传输（DatagramSocket，DatagramPacket<br>）,TCP（Socket，ServerSocket））,反射（重点）,注解，GC回收机制。接下来先讲数据库的一些操作和原理，然后讲了一点JDBC的东西。</p>
 <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>这周把JAVASE部分都搞完了，接下来需要学习EE的部分，SE的知识决定是否能找一个好的工作，所以这一部分是非常非常重要的。并不是简简单单的知识点，涵盖了所有Java底层的东西，虽然没有全都弄懂，但是任重而道远。而且为了赶课程，这周的最后SE的部分并没有讲的很详细，所以主要总结的还是SE的内容：线程、网络编程、反射、GC回收机制。EE的内容就讲了数据库的一些操作和原理，然后讲了一点JDBC的东西。知识都比较乱和复杂，所以必须每天都总结，要不然容易忘记。</p>
 <h2 id="星期一-7-29"><a href="#星期一-7-29" class="headerlink" title="星期一(7.29)"></a>星期一(7.29)</h2><h3 id="线程间通信："><a href="#线程间通信：" class="headerlink" title="线程间通信："></a>线程间通信：</h3><pre><code>只有在同步的情况下，线程间才有必要通信。
 </code></pre><h3 id="等待唤醒机制："><a href="#等待唤醒机制：" class="headerlink" title="等待唤醒机制："></a>等待唤醒机制：</h3><p>Object (锁) :</p>
@@ -1132,72 +1290,393 @@ D．一个class只能定义一个constructor
 }
 </code></pre><h3 id="JAVASE结束"><a href="#JAVASE结束" class="headerlink" title="JAVASE结束"></a>JAVASE结束</h3><pre><code>考试完了SE部分结束了，接下来的部分更加重要和需要总结，不要慌，虽然很累但是学习就是逆水行舟。加油，后面的总结放在下期
 </code></pre>
-        </div>
-        <div class="post-reply">
-            
-                <!-- 来必力City版安装代码 -->
-                <div id="lv-container" data-id="city" data-uid="MTAyMC8yOTE4Ni81NzUz">
-                    <script type="text/javascript">
-                        (function(d, s) {
-                            var j, e = d.getElementsByTagName(s)[0];
-
-                            if (typeof LivereTower === 'function') { return; }
-
-                            j = d.createElement(s);
-                            j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
-                            j.async = true;
-
-                            e.parentNode.insertBefore(j, e);
-                        })(document, 'script');
-                    </script>
-                    <noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
-                </div>
-                <!-- City版安装代码已完成 -->
-            
-            
-        </div>
+      
     </div>
-</section>
-<script>
-    // 获取第一张图, 用以当封面背景图
-    var img = document.querySelectorAll('img')[1]
+    
+    
+    
 
-    if (img) {
-        var header_box = document.querySelector('#header_box')
-        header_box.style.backgroundImage = 'url('+ img.src +')'
-    }
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/07/28/Java总结（五）下/" rel="next" title="Java总结（五）下">
+                <i class="fa fa-chevron-left"></i> Java总结（五）下
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/08/04/Java总结（六）下/" rel="prev" title="Java总结（六）下">
+                Java总结（六）下 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">王邸</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">28</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#概述"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#星期一-7-29"><span class="nav-number">2.</span> <span class="nav-text">星期一(7.29)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#线程间通信："><span class="nav-number">2.1.</span> <span class="nav-text">线程间通信：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#等待唤醒机制："><span class="nav-number">2.2.</span> <span class="nav-text">等待唤醒机制：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解决死锁问题—-拿到全部资源"><span class="nav-number">2.3.</span> <span class="nav-text">解决死锁问题—-拿到全部资源</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#阻塞队列"><span class="nav-number">2.4.</span> <span class="nav-text">阻塞队列</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#自己手写的阻塞队列"><span class="nav-number">2.4.1.</span> <span class="nav-text">自己手写的阻塞队列</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BlockingQue-类"><span class="nav-number">2.5.</span> <span class="nav-text">BlockingQue 类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解决办法1-上锁"><span class="nav-number">2.6.</span> <span class="nav-text">解决办法1 上锁</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解决办法2（同步方法）"><span class="nav-number">2.7.</span> <span class="nav-text">解决办法2（同步方法）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解决办法3"><span class="nav-number">2.8.</span> <span class="nav-text">解决办法3</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#线程池的初步了解"><span class="nav-number">2.9.</span> <span class="nav-text">线程池的初步了解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JAVA简单线程池ThreadPoolExecutor"><span class="nav-number">2.10.</span> <span class="nav-text">JAVA简单线程池ThreadPoolExecutor:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Executors"><span class="nav-number">2.11.</span> <span class="nav-text">Executors:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Executor"><span class="nav-number">2.12.</span> <span class="nav-text">Executor:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ExecutorService"><span class="nav-number">2.13.</span> <span class="nav-text">ExecutorService</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Future"><span class="nav-number">2.14.</span> <span class="nav-text">Future:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Callable-有返回值的任务"><span class="nav-number">2.15.</span> <span class="nav-text">Callable: (有返回值的任务)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#注意事项"><span class="nav-number">2.16.</span> <span class="nav-text">注意事项</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#中场休息时间："><span class="nav-number">2.17.</span> <span class="nav-text">中场休息时间：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#定时器（Timer）和定时任务（TimerTask）"><span class="nav-number">2.18.</span> <span class="nav-text">定时器（Timer）和定时任务（TimerTask）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#星期二-7-30"><span class="nav-number">3.</span> <span class="nav-text">星期二(7.30)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#网络编程"><span class="nav-number">4.</span> <span class="nav-text">网络编程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#网络模型"><span class="nav-number">4.1.</span> <span class="nav-text">网络模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#网络通信三要素"><span class="nav-number">4.2.</span> <span class="nav-text">网络通信三要素</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IP地址：-InetAddress类"><span class="nav-number">4.3.</span> <span class="nav-text">IP地址： InetAddress类:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#端口号"><span class="nav-number">4.4.</span> <span class="nav-text">端口号</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#协议UDP和TCP-传输层协议"><span class="nav-number">4.5.</span> <span class="nav-text">协议UDP和TCP(传输层协议)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实现网络编程"><span class="nav-number">4.6.</span> <span class="nav-text">实现网络编程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Socket（所有的高级语言都支持）"><span class="nav-number">4.7.</span> <span class="nav-text">Socket（所有的高级语言都支持）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实现UDP传输"><span class="nav-number">4.8.</span> <span class="nav-text">实现UDP传输</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#套接字：DatagramSocket"><span class="nav-number">4.9.</span> <span class="nav-text">套接字：DatagramSocket</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DatagramPacket-数据报包"><span class="nav-number">4.10.</span> <span class="nav-text">DatagramPacket:数据报包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实现TCP传输"><span class="nav-number">4.11.</span> <span class="nav-text">实现TCP传输</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#客户端套接字：Socket"><span class="nav-number">4.12.</span> <span class="nav-text">客户端套接字：Socket</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ServerSocket-服务器套接字"><span class="nav-number">4.13.</span> <span class="nav-text">ServerSocket: 服务器套接字</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#反射reflection"><span class="nav-number">4.14.</span> <span class="nav-text">反射reflection</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#类的加载"><span class="nav-number">4.15.</span> <span class="nav-text">类的加载</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#类加载时机"><span class="nav-number">4.16.</span> <span class="nav-text">类加载时机</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#类的加载器"><span class="nav-number">4.17.</span> <span class="nav-text">类的加载器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Bootstrap-ClassLoader-根类加载器"><span class="nav-number">4.18.</span> <span class="nav-text">Bootstrap ClassLoader 根类加载器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Extension-ClassLoader-扩展类加载器"><span class="nav-number">4.19.</span> <span class="nav-text">Extension ClassLoader 扩展类加载器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#System-ClassLoader-系统类加载器"><span class="nav-number">4.20.</span> <span class="nav-text">System  ClassLoader  系统类加载器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#反射（非常重要）"><span class="nav-number">5.</span> <span class="nav-text">反射（非常重要）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#通过反射获取构造的对象"><span class="nav-number">5.1.</span> <span class="nav-text">通过反射获取构造的对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#反射获取构造器-Constructor"><span class="nav-number">5.2.</span> <span class="nav-text">反射获取构造器(Constructor)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#反射获取成员变量-Field"><span class="nav-number">5.3.</span> <span class="nav-text">反射获取成员变量(Field)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#反射获取成员方法-Method"><span class="nav-number">5.4.</span> <span class="nav-text">反射获取成员方法(Method)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#说了这么多到底反射的作用是什么？"><span class="nav-number">5.5.</span> <span class="nav-text">说了这么多到底反射的作用是什么？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#注解-不是注释"><span class="nav-number">5.6.</span> <span class="nav-text">注解(不是注释)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#两个我们见过的注解"><span class="nav-number">5.7.</span> <span class="nav-text">两个我们见过的注解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#元注解-meta-描述注解的注解"><span class="nav-number">5.8.</span> <span class="nav-text">元注解(meta): 描述注解的注解</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#星期三-7-31"><span class="nav-number">6.</span> <span class="nav-text">星期三(7.31)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#自定义注解"><span class="nav-number">6.1.</span> <span class="nav-text">自定义注解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#properties-和-自定义注解？"><span class="nav-number">6.2.</span> <span class="nav-text">properties 和 自定义注解？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#properties存放判断配置文件"><span class="nav-number">6.3.</span> <span class="nav-text">properties存放判断配置文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#自定义注解实现判断功能"><span class="nav-number">6.4.</span> <span class="nav-text">自定义注解实现判断功能</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#两者的优劣"><span class="nav-number">6.5.</span> <span class="nav-text">两者的优劣</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GC与内存泄漏。。"><span class="nav-number">6.6.</span> <span class="nav-text">GC与内存泄漏。。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#垃圾回收"><span class="nav-number">6.7.</span> <span class="nav-text">垃圾回收</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#内存泄露-VS-内存溢出"><span class="nav-number">6.8.</span> <span class="nav-text">内存泄露 VS 内存溢出</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JAVASE考试总结"><span class="nav-number">6.9.</span> <span class="nav-text">JAVASE考试总结</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JAVASE结束"><span class="nav-number">6.10.</span> <span class="nav-text">JAVASE结束</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">王邸</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
 </script>
-      </div>
-  </div>
-  <style>
-  #footer {
-    min-height: 10vh;
-    background: black;
-    color: #fff;
-  }
 
-  #footer a {
-    color: #e1e1e1;
-  }
-</style>
-<footer id="footer" class="has-text-centered is-flex center">
-  <div class="container has-padding">
-    <div>
-      <div>
-        <!--请您保留作者署名, 主题制作来之不易-->
-        主题来自 <a href="http://haojen.github.io/">Haojen Ma</a>
-        <br>
-        Copyright © 王邸 2019
-        <!--
-          Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
-        -->
-      </div>
-    </div>
-  </div>
-</footer>
 
-<script src="/js/search_core.js"></script>
-<script src="/js/script.js"></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'Fn4BuvoixOxjJAhR79TvaD5M-gzGzoHsz',
+        appKey: '1uspTrSwPqkmSBSUr948WqxE',
+        placeholder: 'Just go go',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
 
 </body>
 </html>
