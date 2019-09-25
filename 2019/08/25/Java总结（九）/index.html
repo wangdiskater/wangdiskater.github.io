@@ -2,127 +2,83 @@
 
 
 
-  
 
 
-<html class="theme-next muse use-motion" lang="">
+<html lang="zh-Hans">
 <head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.3.8">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.4.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.4.0" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.4.0">
+
+<link rel="stylesheet" href="//fonts.proxy.ustclug.org/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
 
 
-
-
-
-
-
-
-
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
-
-
-
-
-
-
-
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
-
-<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
-
-
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
-
-
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
-
-
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
-
-
-  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
-
-
-
-
-
-  <meta name="keywords" content="Hexo, NexT" />
-
-
-
-
-
-
-
-
-
-
-<meta name="description" content="本周又回到了JAVAEE讲了：http协议，tomcat使用，Servlet 请求和相应,文件的上传和下载等等。主要考虑的还是乱码的问题，其他的东西在SE阶段就已经接触过了，网络编程那一段，其实就是socket封装的response和request。根本就没有什么新东西 星期一（0819）今天学习HTTP协议 和 TOMCAT的一些基本用法 HTTPHTTP是JavaEE的基础，所以必须要好好掌握">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Java总结（九）">
-<meta property="og:url" content="http://yoursite.com/2019/08/25/Java总结（九）/index.html">
-<meta property="og:site_name" content="路要坚持">
-<meta property="og:description" content="本周又回到了JAVAEE讲了：http协议，tomcat使用，Servlet 请求和相应,文件的上传和下载等等。主要考虑的还是乱码的问题，其他的东西在SE阶段就已经接触过了，网络编程那一段，其实就是socket封装的response和request。根本就没有什么新东西 星期一（0819）今天学习HTTP协议 和 TOMCAT的一些基本用法 HTTPHTTP是JavaEE的基础，所以必须要好好掌握">
-<meta property="og:updated_time" content="2019-08-29T01:44:10.843Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Java总结（九）">
-<meta name="twitter:description" content="本周又回到了JAVAEE讲了：http协议，tomcat使用，Servlet 请求和相应,文件的上传和下载等等。主要考虑的还是乱码的问题，其他的东西在SE阶段就已经接触过了，网络编程那一段，其实就是socket封装的response和request。根本就没有什么新东西 星期一（0819）今天学习HTTP协议 和 TOMCAT的一些基本用法 HTTPHTTP是JavaEE的基础，所以必须要好好掌握">
-
-
-
-<script type="text/javascript" id="hexo.configurations">
+<script id="hexo-configurations">
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
-    scheme: 'Muse',
-    version: '5.1.4',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
-    fancybox: true,
-    tabs: true,
-    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
-    duoshuo: {
-      userId: '0',
-      author: 'Author'
-    },
+    scheme: 'Gemini',
+    version: '7.4.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
     algolia: {
-      applicationID: '',
+      appID: '',
       apiKey: '',
       indexName: '',
       hits: {"per_page":10},
       labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
-    }
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    },
+    sidebarPadding: 40
   };
 </script>
 
+  <meta name="description" content="本周又回到了JAVAEE讲了：http协议，tomcat使用，Servlet 请求和相应,文件的上传和下载等等。主要考虑的还是乱码的问题，其他的东西在SE阶段就已经接触过了，网络编程那一段，其实就是socket封装的response和request。根本就没有什么新东西星期一（0819）今天学习HTTP协议 和 TOMCAT的一些基本用法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java总结（九）">
+<meta property="og:url" content="http://yoursite.com/2019/08/25/Java总结（九）/index.html">
+<meta property="og:site_name" content="路要坚持">
+<meta property="og:description" content="本周又回到了JAVAEE讲了：http协议，tomcat使用，Servlet 请求和相应,文件的上传和下载等等。主要考虑的还是乱码的问题，其他的东西在SE阶段就已经接触过了，网络编程那一段，其实就是socket封装的response和request。根本就没有什么新东西星期一（0819）今天学习HTTP协议 和 TOMCAT的一些基本用法">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-08-29T01:44:10.843Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java总结（九）">
+<meta name="twitter:description" content="本周又回到了JAVAEE讲了：http协议，tomcat使用，Servlet 请求和相应,文件的上传和下载等等。主要考虑的还是乱码的问题，其他的东西在SE阶段就已经接触过了，网络编程那一段，其实就是socket封装的response和request。根本就没有什么新东西星期一（0819）今天学习HTTP协议 和 TOMCAT的一些基本用法">
+  <link rel="canonical" href="http://yoursite.com/2019/08/25/Java总结（九）/">
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/08/25/Java总结（九）/"/>
-
-
-
-
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
 
   <title>Java总结（九） | 路要坚持</title>
   
@@ -134,37 +90,51 @@
 
 
 
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="">
-
-  
-  
-    
-  
-
-  <div class="container sidebar-position-left page-post-detail">
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+  <div class="container use-motion">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-wrapper">
-  <div class="site-meta ">
-    
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
 
-    <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
+    <div>
+      <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
         <span class="site-title">路要坚持</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
-      
-        <p class="site-subtitle"></p>
-      
   </div>
 
   <div class="site-nav-toggle">
-    <button>
+    <button aria-label="切换导航栏">
       <span class="btn-bar"></span>
       <span class="btn-bar"></span>
       <span class="btn-bar"></span>
@@ -172,143 +142,129 @@
   </div>
 </div>
 
+
 <nav class="site-nav">
   
-
-  
-    <ul id="menu" class="menu">
+  <ul id="menu" class="menu">
+      
+      
       
         
         <li class="menu-item menu-item-home">
-          <a href="/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
-            
-            Startseite
-          </a>
-        </li>
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+      
+      
       
         
         <li class="menu-item menu-item-archives">
-          <a href="/archives/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
-            
-            Archiv
-          </a>
-        </li>
       
+    
 
-      
-    </ul>
-  
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
 
-  
+  </li>
+  </ul>
+
 </nav>
-
-
-
- </div>
+</div>
     </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
 
     <main id="main" class="main">
       <div class="main-inner">
         <div class="content-wrap">
+            
+
           <div id="content" class="content">
             
 
   <div id="posts" class="posts-expand">
-    
-
-  
-
+      <article itemscope itemtype="http://schema.org/Article">
   
   
   
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
+  <div class="post-block post">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/25/Java总结（九）/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="王邸">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/head.jpeg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="路要坚持">
     </span>
-
-    
       <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">Java总结（九）
 
-        
-        
-          <h1 class="post-title" itemprop="name headline">Java总结（九）</h1>
-        
+          
+        </h1>
 
         <div class="post-meta">
-          <span class="post-time">
-            
+            <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
               </span>
+              <span class="post-meta-item-text">发表于</span>
+
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-08-25T23:24:08+08:00">
-                2019-08-25
-              </time>
-            
 
-            
-
-            
-          </span>
-
-          
-
+              <time title="创建时间：2019-08-25 23:24:08" itemprop="dateCreated datePublished" datetime="2019-08-25T23:24:08+08:00">2019-08-25</time>
+            </span>
           
             
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
+
+            
+              <span class="post-meta-item">
                 <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
+                  <i class="fa fa-calendar-check-o"></i>
                 </span>
-                <a href="/2019/08/25/Java总结（九）/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/08/25/Java总结（九）/" itemprop="commentCount"></span>
-                </a>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-08-29 09:44:10" itemprop="dateModified" datetime="2019-08-29T09:44:10+08:00">2019-08-29</time>
               </span>
             
           
 
           
+            <span id="/2019/08/25/Java总结（九）/" class="post-meta-item leancloud_visitors" data-flag-title="Java总结（九）" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
           
-             <span id="/2019/08/25/Java总结（九）/" class="leancloud_visitors" data-flag-title="Java总结（九）">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">Visitors&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2019/08/25/Java总结（九）/#comments" itemprop="discussionUrl"><span class="post-comments-count valine-comment-count" data-xid="/2019/08/25/Java总结（九）/" itemprop="commentCount"></span></a>
+  </span>
+  
+  
 
         </div>
       </header>
-    
 
     
     
@@ -316,11 +272,8 @@
     <div class="post-body" itemprop="articleBody">
 
       
-      
+        <p>本周又回到了JAVAEE讲了：http协议，tomcat使用，Servlet 请求和相应,文件的上传和下载等等。<br>主要考虑的还是乱码的问题，其他的东西在SE阶段就已经接触过了，网络编程那一段，其实就是socket封装的response和request。根本就没有什么新东西</p><h2 id="星期一（0819）"><a href="#星期一（0819）" class="headerlink" title="星期一（0819）"></a>星期一（0819）</h2><p>今天学习HTTP协议 和 TOMCAT的一些基本用法</p><a id="more"></a>
 
-      
-        <p>本周又回到了JAVAEE讲了：http协议，tomcat使用，Servlet 请求和相应,文件的上传和下载等等。<br>主要考虑的还是乱码的问题，其他的东西在SE阶段就已经接触过了，网络编程那一段，其实就是socket封装的response和request。根本就没有什么新东西</p>
-<h2 id="星期一（0819）"><a href="#星期一（0819）" class="headerlink" title="星期一（0819）"></a>星期一（0819）</h2><p>今天学习HTTP协议 和 TOMCAT的一些基本用法</p>
 <h3 id="HTTP"><a href="#HTTP" class="headerlink" title="HTTP"></a>HTTP</h3><p>HTTP是JavaEE的基础，所以必须要好好掌握，请求和响应将伴随javaEE<br>HyperText Transport Protocol超文本传输协议<br>协议：规范。两台计算机之间进行通信需要遵循的一个规范<br>传输：双向的。浏览器（发送方）和服务器（接收方）之间进行传输。<br>超文本：区别于普通文本。还有音频，视频，图片等资源。</p>
 <p>HyperText Markup Language 超文本标记语言<br>有千丝万缕的关系。http其实最早产生就是用来传输html的。<br>HTTP/0.9  HTTP/1.0  HTTP/1.1  HTTP/2（google）  HTTP/3（google）<br>长连接，短连接</p>
 <h3 id="一次完整的http请求"><a href="#一次完整的http请求" class="headerlink" title="一次完整的http请求"></a>一次完整的http请求</h3><p>1.域名解析<br>2.客户端发起TCP的三次握手 （客户端先发送一个数据包给服务端）<br>3.发起HTTP请求（连接成功后）<br>4.服务器响应HTTP（请求）<br>5.浏览器解析HTML代码并请求HTML中需要的css 等静态文件<br>6.浏览器对页面进行渲染</p>
@@ -1007,79 +960,56 @@ response.addCookie(cookie);
 </code></pre><p>直接提交也会保存文件，这样感觉不太科学<br>就会上传一个空的文件类型的文件。<br>2) 设置了这个enctype。request.getParaMeterValues()..这一类的就无效了</p>
 <p>10.JAVA 使用转json的jar包<a href="https://www.w3cschool.cn/fastjson/fastjson-quickstart.html" target="_blank" rel="external">https://www.w3cschool.cn/fastjson/fastjson-quickstart.html</a><br>11.在 bean里面添加成员变量的问题，一定要记得重写toString 的方法，<br>12.第一次创建session 设置 cookie时间问题： <a href="https://www.cnblogs.com/jarl/p/5892996.html" target="_blank" rel="external">https://www.cnblogs.com/jarl/p/5892996.html</a></p>
 
-      
     </div>
-    
-    
-    
 
     
-
     
-
     
-
-    <footer class="post-footer">
+        
       
 
-      
-      
-      
+      <footer class="post-footer">
 
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2019/08/18/Java总结（八）/" rel="next" title="Java总结（八）">
-                <i class="fa fa-chevron-left"></i> Java总结（八）
-              </a>
-            
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2019/08/18/Java总结（八）/" rel="next" title="Java总结（八）">
+                  <i class="fa fa-chevron-left"></i> Java总结（八）
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+                <a href="/2019/08/25/乱码问题大总结/" rel="prev" title="乱码问题大总结">
+                  乱码问题大总结 <i class="fa fa-chevron-right"></i>
+                </a>
+              
+            </div>
           </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/08/25/乱码问题大总结/" rel="prev" title="乱码问题大总结">
-                乱码问题大总结 <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
-      
-    </footer>
+        
+      </footer>
+    
   </div>
   
   
   
   </article>
 
-
-
-    <div class="post-spread">
-      
-    </div>
   </div>
 
 
           </div>
           
-
-
-          
-
+    
+    <div class="comments" id="comments"></div>
   
-    <div class="comments" id="comments">
-    </div>
-  
-
-
 
         </div>
-        
           
   
   <div class="sidebar-toggle">
@@ -1090,129 +1020,184 @@ response.addCookie(cookie);
     </div>
   </div>
 
-  <aside id="sidebar" class="sidebar">
-    
+  <aside class="sidebar">
     <div class="sidebar-inner">
-
+        
+        
+        
+        
       
 
-      
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Inhaltsverzeichnis
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Übersicht
-          </li>
-        </ul>
-      
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
 
-      <section class="site-overview-wrap sidebar-panel">
-        <div class="site-overview">
-          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-            
-              <p class="site-author-name" itemprop="name">王邸</p>
-              <p class="site-description motion-element" itemprop="description"></p>
-          </div>
-
-          <nav class="site-state motion-element">
-
-            
-              <div class="site-state-item site-state-posts">
-              
-                <a href="/archives/">
-              
-                  <span class="site-state-item-count">28</span>
-                  <span class="site-state-item-name">Artikel</span>
-                </a>
-              </div>
-            
-
-            
-
-            
-              
-              
-              <div class="site-state-item site-state-tags">
-                
-                  <span class="site-state-item-count">3</span>
-                  <span class="site-state-item-name">Tags</span>
-                
-              </div>
-            
-
-          </nav>
-
-          
-
-          
-
-          
-          
-
-          
-          
-
-          
-
-        </div>
-      </section>
-
-      
       <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#星期一（0819）"><span class="nav-number">1.</span> <span class="nav-text">星期一（0819）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#HTTP"><span class="nav-number">1.1.</span> <span class="nav-text">HTTP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一次完整的http请求"><span class="nav-number">1.2.</span> <span class="nav-text">一次完整的http请求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HTTP请求报文"><span class="nav-number">1.3.</span> <span class="nav-text">HTTP请求报文</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#request请求"><span class="nav-number">1.4.</span> <span class="nav-text">request请求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#请求行"><span class="nav-number">1.5.</span> <span class="nav-text">请求行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#请求方式"><span class="nav-number">1.6.</span> <span class="nav-text">请求方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#请求头"><span class="nav-number">1.7.</span> <span class="nav-text">请求头</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HTTP消息头（HTTP请求或相应的头部的公共规则）"><span class="nav-number">1.8.</span> <span class="nav-text">HTTP消息头（HTTP请求或相应的头部的公共规则）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#请求报文的格式"><span class="nav-number">1.9.</span> <span class="nav-text">请求报文的格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HTTP响应消息response"><span class="nav-number">1.10.</span> <span class="nav-text">HTTP响应消息response</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#响应报文的格式"><span class="nav-number">1.11.</span> <span class="nav-text">响应报文的格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#状态行"><span class="nav-number">1.12.</span> <span class="nav-text">状态行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常用状态码"><span class="nav-number">1.13.</span> <span class="nav-text">常用状态码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常用响应头1"><span class="nav-number">1.14.</span> <span class="nav-text">常用响应头1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HTTPS"><span class="nav-number">1.15.</span> <span class="nav-text">HTTPS</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Tomcat-Java-WebServer"><span class="nav-number">2.</span> <span class="nav-text">2. Tomcat (Java WebServer)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#修改端口号"><span class="nav-number">2.1.</span> <span class="nav-text">修改端口号</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#认识Tomcat目录结构"><span class="nav-number">2.2.</span> <span class="nav-text">认识Tomcat目录结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#部署项目"><span class="nav-number">2.3.</span> <span class="nav-text">部署项目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#直接部署"><span class="nav-number">2.4.</span> <span class="nav-text">直接部署</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#打成war包，扔进webapps目录下"><span class="nav-number">2.5.</span> <span class="nav-text">打成war包，扔进webapps目录下</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#虚拟映射"><span class="nav-number">2.6.</span> <span class="nav-text">虚拟映射</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#星期二（0820）"><span class="nav-number">3.</span> <span class="nav-text">星期二（0820）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Servlet"><span class="nav-number">3.1.</span> <span class="nav-text">Servlet</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#手动实现-servlet-（不用IDEA）"><span class="nav-number">3.2.</span> <span class="nav-text">手动实现 servlet （不用IDEA）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Servlet执行过程"><span class="nav-number">3.3.</span> <span class="nav-text">Servlet执行过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#我自己的理解"><span class="nav-number">3.4.</span> <span class="nav-text">我自己的理解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Servlet的运行过程"><span class="nav-number">3.5.</span> <span class="nav-text">Servlet的运行过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Servlet实现"><span class="nav-number">3.6.</span> <span class="nav-text">Servlet实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如何使用servlet"><span class="nav-number">3.7.</span> <span class="nav-text">如何使用servlet?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么一个servlet可以对应多个url-pattern-而不能多个servlet去对应一个url-pattern？"><span class="nav-number">3.8.</span> <span class="nav-text">为什么一个servlet可以对应多个url_pattern 而不能多个servlet去对应一个url_pattern？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关于url-pattern冲突匹配的问题"><span class="nav-number">3.9.</span> <span class="nav-text">关于url_pattern冲突匹配的问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关于-和"><span class="nav-number">4.</span> <span class="nav-text">关于/ 和 /*</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Servlet的生命周期"><span class="nav-number">4.1.</span> <span class="nav-text">Servlet的生命周期</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如何让servlet自己动起来？"><span class="nav-number">4.2.</span> <span class="nav-text">如何让servlet自己动起来？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ServletConfig对象（没什么卵用，你要取出来又不能修改）"><span class="nav-number">4.3.</span> <span class="nav-text">ServletConfig对象（没什么卵用，你要取出来又不能修改）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ServletContext"><span class="nav-number">4.4.</span> <span class="nav-text">ServletContext</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ServletContext用法"><span class="nav-number">4.5.</span> <span class="nav-text">ServletContext用法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#星期三（0821）"><span class="nav-number">5.</span> <span class="nav-text">星期三（0821）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#request（请求）"><span class="nav-number">5.1.</span> <span class="nav-text">request（请求）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HttpServletRequest"><span class="nav-number">5.2.</span> <span class="nav-text">HttpServletRequest</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#API"><span class="nav-number">5.3.</span> <span class="nav-text">API</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关于request的三个资源名字："><span class="nav-number">5.4.</span> <span class="nav-text">关于request的三个资源名字：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常用参数"><span class="nav-number">5.5.</span> <span class="nav-text">常用参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第三方库将用户的参数保存在bean中"><span class="nav-number">5.6.</span> <span class="nav-text">第三方库将用户的参数保存在bean中</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#前端form表单书写的问题"><span class="nav-number">5.7.</span> <span class="nav-text">前端form表单书写的问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#转发和包含-request-getRequestDispatcher"><span class="nav-number">5.8.</span> <span class="nav-text">转发和包含 request.getRequestDispatcher()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#转发forward"><span class="nav-number">5.9.</span> <span class="nav-text">转发forward</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#包含include"><span class="nav-number">5.10.</span> <span class="nav-text">包含include</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#转发和包含的共同点"><span class="nav-number">5.11.</span> <span class="nav-text">转发和包含的共同点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#转发和包含之间又有什么样的区别"><span class="nav-number">5.12.</span> <span class="nav-text">转发和包含之间又有什么样的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#转发和包含的用途"><span class="nav-number">5.13.</span> <span class="nav-text">转发和包含的用途</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#request域"><span class="nav-number">5.14.</span> <span class="nav-text">request域</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#请求范围"><span class="nav-number">5.15.</span> <span class="nav-text">请求范围</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#星期四（0822）"><span class="nav-number">6.</span> <span class="nav-text">星期四（0822）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#response"><span class="nav-number">6.1.</span> <span class="nav-text">response</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常见的API"><span class="nav-number">6.2.</span> <span class="nav-text">常见的API</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#应用"><span class="nav-number">6.3.</span> <span class="nav-text">应用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-传输文件"><span class="nav-number">6.4.</span> <span class="nav-text">1.传输文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-定时刷新"><span class="nav-number">6.5.</span> <span class="nav-text">2.定时刷新</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-重定向（）"><span class="nav-number">6.6.</span> <span class="nav-text">3.重定向（）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#重定向、定时刷新页面、转发和包含区别"><span class="nav-number">6.7.</span> <span class="nav-text">重定向、定时刷新页面、转发和包含区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文件下载"><span class="nav-number">6.8.</span> <span class="nav-text">文件下载</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#response注意事项"><span class="nav-number">6.9.</span> <span class="nav-text">response注意事项</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#星期五（0823）"><span class="nav-number">7.</span> <span class="nav-text">星期五（0823）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#会话"><span class="nav-number">7.1.</span> <span class="nav-text">会话</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HTTP是无状态的协议"><span class="nav-number">7.2.</span> <span class="nav-text">HTTP是无状态的协议</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#保存会话数据的两种技术"><span class="nav-number">7.3.</span> <span class="nav-text">保存会话数据的两种技术</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Cookie"><span class="nav-number">7.4.</span> <span class="nav-text">Cookie</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Cookie基本API"><span class="nav-number">7.5.</span> <span class="nav-text">Cookie基本API</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Cookie-细节"><span class="nav-number">7.6.</span> <span class="nav-text">Cookie 细节</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用-cookie"><span class="nav-number">7.7.</span> <span class="nav-text">使用 cookie</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#问题"><span class="nav-number">7.8.</span> <span class="nav-text">问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Session"><span class="nav-number">7.9.</span> <span class="nav-text">Session</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Session的创建"><span class="nav-number">7.10.</span> <span class="nav-text">Session的创建</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#流程"><span class="nav-number">7.11.</span> <span class="nav-text">流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关闭浏览器，重新再访问，会创建新的session吗"><span class="nav-number">7.12.</span> <span class="nav-text">关闭浏览器，重新再访问，会创建新的session吗</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#假如重新打开浏览器，仍然可以看到原来的数据，应该做哪些操作。？？？"><span class="nav-number">7.13.</span> <span class="nav-text">假如重新打开浏览器，仍然可以看到原来的数据，应该做哪些操作。？？？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Session-生命周期"><span class="nav-number">7.14.</span> <span class="nav-text">Session 生命周期</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Session的生命周期"><span class="nav-number">7.15.</span> <span class="nav-text">Session的生命周期</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Session数据的生命周期"><span class="nav-number">7.16.</span> <span class="nav-text">Session数据的生命周期</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Session域"><span class="nav-number">7.17.</span> <span class="nav-text">Session域</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Session和Cookie的主要区别在于："><span class="nav-number">7.18.</span> <span class="nav-text">Session和Cookie的主要区别在于：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#星期六（0824）"><span class="nav-number">8.</span> <span class="nav-text">星期六（0824）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#文件上传-FileUpload"><span class="nav-number">8.1.</span> <span class="nav-text">文件上传 FileUpload</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#问题一：仅上传文件名，不上传文件内容，这TM怎么办？"><span class="nav-number">8.2.</span> <span class="nav-text">问题一：仅上传文件名，不上传文件内容，这TM怎么办？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#问题二：写代码处理上传，图片无法打开"><span class="nav-number">8.3.</span> <span class="nav-text">问题二：写代码处理上传，图片无法打开?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文件上传面临的问题"><span class="nav-number">8.4.</span> <span class="nav-text">文件上传面临的问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Commons-FileUpload"><span class="nav-number">8.5.</span> <span class="nav-text">Commons-FileUpload</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#isMultipart判断上传的表单是否有写enctype-”multipart-form-data”"><span class="nav-number">8.6.</span> <span class="nav-text">isMultipart判断上传的表单是否有写enctype=”multipart/form-data”</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#The-simplest-case"><span class="nav-number">8.7.</span> <span class="nav-text">The simplest case</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Processing-the-uploaded-items-处理上传的表单的数据"><span class="nav-number">8.8.</span> <span class="nav-text">Processing the uploaded items 处理上传的表单的数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文件上传的问题："><span class="nav-number">8.9.</span> <span class="nav-text">文件上传的问题：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-同名文件上传问题"><span class="nav-number">8.10.</span> <span class="nav-text">1.同名文件上传问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-文件过多查找难度问题"><span class="nav-number">8.11.</span> <span class="nav-text">2.文件过多查找难度问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实现前面写的两个问题"><span class="nav-number">8.12.</span> <span class="nav-text">实现前面写的两个问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#小总结"><span class="nav-number">9.</span> <span class="nav-text">小总结</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#星期一（0819）"><span class="nav-number">1.</span> <span class="nav-text">星期一（0819）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#HTTP"><span class="nav-number">1.1.</span> <span class="nav-text">HTTP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一次完整的http请求"><span class="nav-number">1.2.</span> <span class="nav-text">一次完整的http请求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HTTP请求报文"><span class="nav-number">1.3.</span> <span class="nav-text">HTTP请求报文</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#request请求"><span class="nav-number">1.4.</span> <span class="nav-text">request请求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#请求行"><span class="nav-number">1.5.</span> <span class="nav-text">请求行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#请求方式"><span class="nav-number">1.6.</span> <span class="nav-text">请求方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#请求头"><span class="nav-number">1.7.</span> <span class="nav-text">请求头</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HTTP消息头（HTTP请求或相应的头部的公共规则）"><span class="nav-number">1.8.</span> <span class="nav-text">HTTP消息头（HTTP请求或相应的头部的公共规则）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#请求报文的格式"><span class="nav-number">1.9.</span> <span class="nav-text">请求报文的格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HTTP响应消息response"><span class="nav-number">1.10.</span> <span class="nav-text">HTTP响应消息response</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#响应报文的格式"><span class="nav-number">1.11.</span> <span class="nav-text">响应报文的格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#状态行"><span class="nav-number">1.12.</span> <span class="nav-text">状态行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常用状态码"><span class="nav-number">1.13.</span> <span class="nav-text">常用状态码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常用响应头1"><span class="nav-number">1.14.</span> <span class="nav-text">常用响应头1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HTTPS"><span class="nav-number">1.15.</span> <span class="nav-text">HTTPS</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Tomcat-Java-WebServer"><span class="nav-number">2.</span> <span class="nav-text">2. Tomcat (Java WebServer)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#修改端口号"><span class="nav-number">2.1.</span> <span class="nav-text">修改端口号</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#认识Tomcat目录结构"><span class="nav-number">2.2.</span> <span class="nav-text">认识Tomcat目录结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#部署项目"><span class="nav-number">2.3.</span> <span class="nav-text">部署项目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#直接部署"><span class="nav-number">2.4.</span> <span class="nav-text">直接部署</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#打成war包，扔进webapps目录下"><span class="nav-number">2.5.</span> <span class="nav-text">打成war包，扔进webapps目录下</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#虚拟映射"><span class="nav-number">2.6.</span> <span class="nav-text">虚拟映射</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#星期二（0820）"><span class="nav-number">3.</span> <span class="nav-text">星期二（0820）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Servlet"><span class="nav-number">3.1.</span> <span class="nav-text">Servlet</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#手动实现-servlet-（不用IDEA）"><span class="nav-number">3.2.</span> <span class="nav-text">手动实现 servlet （不用IDEA）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Servlet执行过程"><span class="nav-number">3.3.</span> <span class="nav-text">Servlet执行过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#我自己的理解"><span class="nav-number">3.4.</span> <span class="nav-text">我自己的理解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Servlet的运行过程"><span class="nav-number">3.5.</span> <span class="nav-text">Servlet的运行过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Servlet实现"><span class="nav-number">3.6.</span> <span class="nav-text">Servlet实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如何使用servlet"><span class="nav-number">3.7.</span> <span class="nav-text">如何使用servlet?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么一个servlet可以对应多个url-pattern-而不能多个servlet去对应一个url-pattern？"><span class="nav-number">3.8.</span> <span class="nav-text">为什么一个servlet可以对应多个url_pattern 而不能多个servlet去对应一个url_pattern？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关于url-pattern冲突匹配的问题"><span class="nav-number">3.9.</span> <span class="nav-text">关于url_pattern冲突匹配的问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关于-和"><span class="nav-number">4.</span> <span class="nav-text">关于/ 和 /*</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Servlet的生命周期"><span class="nav-number">4.1.</span> <span class="nav-text">Servlet的生命周期</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如何让servlet自己动起来？"><span class="nav-number">4.2.</span> <span class="nav-text">如何让servlet自己动起来？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ServletConfig对象（没什么卵用，你要取出来又不能修改）"><span class="nav-number">4.3.</span> <span class="nav-text">ServletConfig对象（没什么卵用，你要取出来又不能修改）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ServletContext"><span class="nav-number">4.4.</span> <span class="nav-text">ServletContext</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ServletContext用法"><span class="nav-number">4.5.</span> <span class="nav-text">ServletContext用法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#星期三（0821）"><span class="nav-number">5.</span> <span class="nav-text">星期三（0821）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#request（请求）"><span class="nav-number">5.1.</span> <span class="nav-text">request（请求）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HttpServletRequest"><span class="nav-number">5.2.</span> <span class="nav-text">HttpServletRequest</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#API"><span class="nav-number">5.3.</span> <span class="nav-text">API</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关于request的三个资源名字："><span class="nav-number">5.4.</span> <span class="nav-text">关于request的三个资源名字：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常用参数"><span class="nav-number">5.5.</span> <span class="nav-text">常用参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第三方库将用户的参数保存在bean中"><span class="nav-number">5.6.</span> <span class="nav-text">第三方库将用户的参数保存在bean中</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#前端form表单书写的问题"><span class="nav-number">5.7.</span> <span class="nav-text">前端form表单书写的问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#转发和包含-request-getRequestDispatcher"><span class="nav-number">5.8.</span> <span class="nav-text">转发和包含 request.getRequestDispatcher()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#转发forward"><span class="nav-number">5.9.</span> <span class="nav-text">转发forward</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#包含include"><span class="nav-number">5.10.</span> <span class="nav-text">包含include</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#转发和包含的共同点"><span class="nav-number">5.11.</span> <span class="nav-text">转发和包含的共同点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#转发和包含之间又有什么样的区别"><span class="nav-number">5.12.</span> <span class="nav-text">转发和包含之间又有什么样的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#转发和包含的用途"><span class="nav-number">5.13.</span> <span class="nav-text">转发和包含的用途</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#request域"><span class="nav-number">5.14.</span> <span class="nav-text">request域</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#请求范围"><span class="nav-number">5.15.</span> <span class="nav-text">请求范围</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#星期四（0822）"><span class="nav-number">6.</span> <span class="nav-text">星期四（0822）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#response"><span class="nav-number">6.1.</span> <span class="nav-text">response</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常见的API"><span class="nav-number">6.2.</span> <span class="nav-text">常见的API</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#应用"><span class="nav-number">6.3.</span> <span class="nav-text">应用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-传输文件"><span class="nav-number">6.4.</span> <span class="nav-text">1.传输文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-定时刷新"><span class="nav-number">6.5.</span> <span class="nav-text">2.定时刷新</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-重定向（）"><span class="nav-number">6.6.</span> <span class="nav-text">3.重定向（）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#重定向、定时刷新页面、转发和包含区别"><span class="nav-number">6.7.</span> <span class="nav-text">重定向、定时刷新页面、转发和包含区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文件下载"><span class="nav-number">6.8.</span> <span class="nav-text">文件下载</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#response注意事项"><span class="nav-number">6.9.</span> <span class="nav-text">response注意事项</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#星期五（0823）"><span class="nav-number">7.</span> <span class="nav-text">星期五（0823）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#会话"><span class="nav-number">7.1.</span> <span class="nav-text">会话</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HTTP是无状态的协议"><span class="nav-number">7.2.</span> <span class="nav-text">HTTP是无状态的协议</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#保存会话数据的两种技术"><span class="nav-number">7.3.</span> <span class="nav-text">保存会话数据的两种技术</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Cookie"><span class="nav-number">7.4.</span> <span class="nav-text">Cookie</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Cookie基本API"><span class="nav-number">7.5.</span> <span class="nav-text">Cookie基本API</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Cookie-细节"><span class="nav-number">7.6.</span> <span class="nav-text">Cookie 细节</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用-cookie"><span class="nav-number">7.7.</span> <span class="nav-text">使用 cookie</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#问题"><span class="nav-number">7.8.</span> <span class="nav-text">问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Session"><span class="nav-number">7.9.</span> <span class="nav-text">Session</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Session的创建"><span class="nav-number">7.10.</span> <span class="nav-text">Session的创建</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#流程"><span class="nav-number">7.11.</span> <span class="nav-text">流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关闭浏览器，重新再访问，会创建新的session吗"><span class="nav-number">7.12.</span> <span class="nav-text">关闭浏览器，重新再访问，会创建新的session吗</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#假如重新打开浏览器，仍然可以看到原来的数据，应该做哪些操作。？？？"><span class="nav-number">7.13.</span> <span class="nav-text">假如重新打开浏览器，仍然可以看到原来的数据，应该做哪些操作。？？？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Session-生命周期"><span class="nav-number">7.14.</span> <span class="nav-text">Session 生命周期</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Session的生命周期"><span class="nav-number">7.15.</span> <span class="nav-text">Session的生命周期</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Session数据的生命周期"><span class="nav-number">7.16.</span> <span class="nav-text">Session数据的生命周期</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Session域"><span class="nav-number">7.17.</span> <span class="nav-text">Session域</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Session和Cookie的主要区别在于："><span class="nav-number">7.18.</span> <span class="nav-text">Session和Cookie的主要区别在于：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#星期六（0824）"><span class="nav-number">8.</span> <span class="nav-text">星期六（0824）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#文件上传-FileUpload"><span class="nav-number">8.1.</span> <span class="nav-text">文件上传 FileUpload</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#问题一：仅上传文件名，不上传文件内容，这TM怎么办？"><span class="nav-number">8.2.</span> <span class="nav-text">问题一：仅上传文件名，不上传文件内容，这TM怎么办？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#问题二：写代码处理上传，图片无法打开"><span class="nav-number">8.3.</span> <span class="nav-text">问题二：写代码处理上传，图片无法打开?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文件上传面临的问题"><span class="nav-number">8.4.</span> <span class="nav-text">文件上传面临的问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Commons-FileUpload"><span class="nav-number">8.5.</span> <span class="nav-text">Commons-FileUpload</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#isMultipart判断上传的表单是否有写enctype-”multipart-form-data”"><span class="nav-number">8.6.</span> <span class="nav-text">isMultipart判断上传的表单是否有写enctype=”multipart/form-data”</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#The-simplest-case"><span class="nav-number">8.7.</span> <span class="nav-text">The simplest case</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Processing-the-uploaded-items-处理上传的表单的数据"><span class="nav-number">8.8.</span> <span class="nav-text">Processing the uploaded items 处理上传的表单的数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文件上传的问题："><span class="nav-number">8.9.</span> <span class="nav-text">文件上传的问题：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-同名文件上传问题"><span class="nav-number">8.10.</span> <span class="nav-text">1.同名文件上传问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-文件过多查找难度问题"><span class="nav-number">8.11.</span> <span class="nav-text">2.文件过多查找难度问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实现前面写的两个问题"><span class="nav-number">8.12.</span> <span class="nav-text">实现前面写的两个问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#小总结"><span class="nav-number">9.</span> <span class="nav-text">小总结</span></a></li></ol></div>
+        
+      </div>
       <!--/noindex-->
-      
 
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/images/head.jpeg"
+      alt="王邸">
+  <p class="site-author-name" itemprop="name">王邸</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">28</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
       
+      
+      <div class="site-state-item site-state-tags">
+        
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">标签</span>
+        
+      </div>
+    
+  </nav>
+
+
+
+      </div>
 
     </div>
   </aside>
+  <div id="sidebar-dimmer"></div>
 
 
-        
       </div>
     </main>
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
         <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
-  <span class="with-love">
+  <span class="with-love" id="animate">
     <i class="fa fa-user"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">王邸</span>
-
-  
 </div>
-
-
-  <div class="powered-by">Erstellt mit  <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
-
-
-
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.3.8</div>
   <span class="post-meta-divider">|</span>
-
-
-
-  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
-
-
-
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.4.0</div>
 
         
 
+
+
+
+
+
+  
+  <script>
+  function leancloudSelector(url) {
+    return document.getElementById(url).querySelector('.leancloud-visitors-count');
+  }
+  if (CONFIG.page.isPost) {
+    function addCount(Counter) {
+      var visitors = document.querySelector('.leancloud_visitors');
+      var url = visitors.getAttribute('id').trim();
+      var title = visitors.getAttribute('data-flag-title').trim();
+
+      Counter('get', `/classes/Counter?where=${JSON.stringify({ url })}`)
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length > 0) {
+            var counter = results[0];
+            Counter('put', '/classes/Counter/' + counter.objectId, { time: { '__op': 'Increment', 'amount': 1 } })
+              .then(response => response.json())
+              .then(() => {
+                leancloudSelector(url).innerText = counter.time + 1;
+              })
+            
+              .catch(error => {
+                console.log('Failed to save visitor count', error);
+              })
+          } else {
+              leancloudSelector(url).innerText = 'Counter not initialized! More info at console err msg.';
+              console.error('ATTENTION! LeanCloud counter has security bug, see how to solve it here: https://github.com/theme-next/hexo-leancloud-counter-security. \n However, you can still use LeanCloud without security, by setting `security` option to `false`.');
+            
+          }
+        })
+        .catch(error => {
+          console.log('LeanCloud Counter Error', error);
+        });
+    }
+  } else {
+    function showTime(Counter) {
+      var visitors = document.querySelectorAll('.leancloud_visitors');
+      var entries = [...visitors].map(element => {
+        return element.getAttribute('id').trim();
+      });
+
+      Counter('get', `/classes/Counter?where=${JSON.stringify({ url: { '$in': entries } })}`)
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length === 0) {
+            document.querySelectorAll('.leancloud_visitors .leancloud-visitors-count').forEach(element => {
+              element.innerText = 0;
+            });
+            return;
+          }
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.url;
+            var time = item.time;
+            leancloudSelector(url).innerText = time;
+          }
+          for (var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = leancloudSelector(url);
+            if (element.innerText == '') {
+              element.innerText = 0;
+            }
+          }
+        })
+        .catch(error => {
+          console.log('LeanCloud Counter Error', error);
+        });
+    }
+  }
+
+  fetch('https://app-router.leancloud.cn/2/route?appId=Fn4BuvoixOxjJAhR79TvaD5M-gzGzoHsz')
+    .then(response => response.json())
+    .then(({ api_server }) => {
+      var Counter = (method, url, data) => {
+        return fetch(`https://${api_server}/1.1${url}`, {
+          method: method,
+          headers: {
+            'X-LC-Id': 'Fn4BuvoixOxjJAhR79TvaD5M-gzGzoHsz',
+            'X-LC-Key': '1uspTrSwPqkmSBSUr948WqxE',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+      };
+      if (CONFIG.page.isPost) {
+        const localhost = /http:\/\/(localhost|127.0.0.1|0.0.0.0)/;
+        if (localhost.test(document.URL)) return;
+        addCount(Counter);
+      } else if (document.querySelectorAll('.post-title-link').length >= 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
 
 
 
@@ -1222,285 +1207,73 @@ response.addCookie(cookie);
         
       </div>
     </footer>
-
-    
-      <div class="back-to-top">
-        <i class="fa fa-arrow-up"></i>
-        
-      </div>
-    
-
-    
-
   </div>
 
   
 
-<script type="text/javascript">
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
-  }
+
+  <script src="/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.4.0"></script><script src="/js/motion.js?v=7.4.0"></script>
+<script src="/js/schemes/pisces.js?v=7.4.0"></script>
+
+<script src="/js/next-boot.js?v=7.4.0"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+
+<script>
+NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(item => {
+    return GUEST.includes(item);
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: false,
+    appId: 'Fn4BuvoixOxjJAhR79TvaD5M-gzGzoHsz',
+    appKey: '1uspTrSwPqkmSBSUr948WqxE',
+    placeholder: 'Just go go',
+    avatar: 'mm',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: false,
+    lang: '' || 'zh-cn',
+    path: location.pathname
+  });
+}, window.Valine);
 </script>
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  
-    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-  
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
-
-
-
-  
-  
-
-  
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
-
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
-
-
-
-  
-
-
-  
-
-
-
-
-	
-
-
-
-
-
-  
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
-  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
-  
-  <script type="text/javascript">
-    var GUEST = ['nick','mail','link'];
-    var guest = 'nick,mail,link';
-    guest = guest.split(',').filter(item=>{
-      return GUEST.indexOf(item)>-1;
-    });
-    new Valine({
-        el: '#comments' ,
-        verify: false,
-        notify: false,
-        appId: 'Fn4BuvoixOxjJAhR79TvaD5M-gzGzoHsz',
-        appKey: '1uspTrSwPqkmSBSUr948WqxE',
-        placeholder: 'Just go go',
-        avatar:'mm',
-        guest_info:guest,
-        pageSize:'10' || 10,
-    });
-  </script>
-
-
-
-  
-
-
-
-
-
-  
-
-  
-  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
-  <script>AV.initialize("Fn4BuvoixOxjJAhR79TvaD5M-gzGzoHsz", "1uspTrSwPqkmSBSUr948WqxE");</script>
-  <script>
-    function showTime(Counter) {
-      var query = new AV.Query(Counter);
-      var entries = [];
-      var $visitors = $(".leancloud_visitors");
-
-      $visitors.each(function () {
-        entries.push( $(this).attr("id").trim() );
-      });
-
-      query.containedIn('url', entries);
-      query.find()
-        .done(function (results) {
-          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
-
-          if (results.length === 0) {
-            $visitors.find(COUNT_CONTAINER_REF).text(0);
-            return;
-          }
-
-          for (var i = 0; i < results.length; i++) {
-            var item = results[i];
-            var url = item.get('url');
-            var time = item.get('time');
-            var element = document.getElementById(url);
-
-            $(element).find(COUNT_CONTAINER_REF).text(time);
-          }
-          for(var i = 0; i < entries.length; i++) {
-            var url = entries[i];
-            var element = document.getElementById(url);
-            var countSpan = $(element).find(COUNT_CONTAINER_REF);
-            if( countSpan.text() == '') {
-              countSpan.text(0);
-            }
-          }
-        })
-        .fail(function (object, error) {
-          console.log("Error: " + error.code + " " + error.message);
-        });
-    }
-
-    function addCount(Counter) {
-      var $visitors = $(".leancloud_visitors");
-      var url = $visitors.attr('id').trim();
-      var title = $visitors.attr('data-flag-title').trim();
-      var query = new AV.Query(Counter);
-
-      query.equalTo("url", url);
-      query.find({
-        success: function(results) {
-          if (results.length > 0) {
-            var counter = results[0];
-            counter.fetchWhenSave(true);
-            counter.increment("time");
-            counter.save(null, {
-              success: function(counter) {
-                var $element = $(document.getElementById(url));
-                $element.find('.leancloud-visitors-count').text(counter.get('time'));
-              },
-              error: function(counter, error) {
-                console.log('Failed to save Visitor num, with error message: ' + error.message);
-              }
-            });
-          } else {
-            var newcounter = new Counter();
-            /* Set ACL */
-            var acl = new AV.ACL();
-            acl.setPublicReadAccess(true);
-            acl.setPublicWriteAccess(true);
-            newcounter.setACL(acl);
-            /* End Set ACL */
-            newcounter.set("title", title);
-            newcounter.set("url", url);
-            newcounter.set("time", 1);
-            newcounter.save(null, {
-              success: function(newcounter) {
-                var $element = $(document.getElementById(url));
-                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
-              },
-              error: function(newcounter, error) {
-                console.log('Failed to create');
-              }
-            });
-          }
-        },
-        error: function(error) {
-          console.log('Error:' + error.code + " " + error.message);
-        }
-      });
-    }
-
-    $(function() {
-      var Counter = AV.Object.extend("Counter");
-      if ($('.leancloud_visitors').length == 1) {
-        addCount(Counter);
-      } else if ($('.post-title-link').length > 1) {
-        showTime(Counter);
-      }
-    });
-  </script>
-
-
-
-  
-
-  
-
-  
-  
-
-  
-
-  
-
-  
 
 </body>
 </html>

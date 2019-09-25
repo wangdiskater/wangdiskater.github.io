@@ -2,127 +2,83 @@
 
 
 
-  
 
 
-<html class="theme-next muse use-motion" lang="">
+<html lang="zh-Hans">
 <head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.3.8">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.4.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.4.0" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.4.0">
+
+<link rel="stylesheet" href="//fonts.proxy.ustclug.org/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
 
 
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.4.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    },
+    sidebarPadding: 40
+  };
+</script>
 
-
-
-
-
-
-
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
-
-
-
-
-
-
-
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
-
-<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
-
-
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
-
-
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
-
-
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
-
-
-  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
-
-
-
-
-
-  <meta name="keywords" content="Hexo, NexT" />
-
-
-
-
-
-
-
-
-
-
-<meta name="description" content="这周开始讲Spring了，讲Spring都是很多没有见过的东西，很多东西都是配置的，目前还不需要懂底层的实现，需要的是知道如何操作，特别是maven。当然Spring也很重要，需要多思考。今天是2019年9月13日星期五，中秋节，在武汉，去了一趟光谷，浏览了一圈武大。现在的年轻人都不行呀，烈日下骑单车就要中暑了。早早地回来，就确定把这周总结写了，虽然只有四天的东西，但是感觉学了好久了，因为东西很多">
+  <meta name="description" content="这周开始讲Spring了，讲Spring都是很多没有见过的东西，很多东西都是配置的，目前还不需要懂底层的实现，需要的是知道如何操作，特别是maven。当然Spring也很重要，需要多思考。今天是2019年9月13日星期五，中秋节，在武汉，去了一趟光谷，浏览了一圈武大。现在的年轻人都不行呀，烈日下骑单车就要中暑了。早早地回来，就确定把这周总结写了，虽然只有四天的东西，但是感觉学了好久了，因为东西很多">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java总结（十二）">
 <meta property="og:url" content="http://yoursite.com/2019/09/14/Java总结（十二）/index.html">
 <meta property="og:site_name" content="路要坚持">
 <meta property="og:description" content="这周开始讲Spring了，讲Spring都是很多没有见过的东西，很多东西都是配置的，目前还不需要懂底层的实现，需要的是知道如何操作，特别是maven。当然Spring也很重要，需要多思考。今天是2019年9月13日星期五，中秋节，在武汉，去了一趟光谷，浏览了一圈武大。现在的年轻人都不行呀，烈日下骑单车就要中暑了。早早地回来，就确定把这周总结写了，虽然只有四天的东西，但是感觉学了好久了，因为东西很多">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2019-09-14T14:22:22.097Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java总结（十二）">
 <meta name="twitter:description" content="这周开始讲Spring了，讲Spring都是很多没有见过的东西，很多东西都是配置的，目前还不需要懂底层的实现，需要的是知道如何操作，特别是maven。当然Spring也很重要，需要多思考。今天是2019年9月13日星期五，中秋节，在武汉，去了一趟光谷，浏览了一圈武大。现在的年轻人都不行呀，烈日下骑单车就要中暑了。早早地回来，就确定把这周总结写了，虽然只有四天的东西，但是感觉学了好久了，因为东西很多">
+  <link rel="canonical" href="http://yoursite.com/2019/09/14/Java总结（十二）/">
 
 
-
-<script type="text/javascript" id="hexo.configurations">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    root: '/',
-    scheme: 'Muse',
-    version: '5.1.4',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
-    fancybox: true,
-    tabs: true,
-    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
-    duoshuo: {
-      userId: '0',
-      author: 'Author'
-    },
-    algolia: {
-      applicationID: '',
-      apiKey: '',
-      indexName: '',
-      hits: {"per_page":10},
-      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
-    }
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
   };
 </script>
-
-
-
-  <link rel="canonical" href="http://yoursite.com/2019/09/14/Java总结（十二）/"/>
-
-
-
-
 
   <title>Java总结（十二） | 路要坚持</title>
   
@@ -134,37 +90,51 @@
 
 
 
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="">
-
-  
-  
-    
-  
-
-  <div class="container sidebar-position-left page-post-detail">
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+  <div class="container use-motion">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-wrapper">
-  <div class="site-meta ">
-    
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
 
-    <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
+    <div>
+      <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
         <span class="site-title">路要坚持</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
-      
-        <p class="site-subtitle"></p>
-      
   </div>
 
   <div class="site-nav-toggle">
-    <button>
+    <button aria-label="切换导航栏">
       <span class="btn-bar"></span>
       <span class="btn-bar"></span>
       <span class="btn-bar"></span>
@@ -172,143 +142,121 @@
   </div>
 </div>
 
+
 <nav class="site-nav">
   
-
-  
-    <ul id="menu" class="menu">
+  <ul id="menu" class="menu">
+      
+      
       
         
         <li class="menu-item menu-item-home">
-          <a href="/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
-            
-            Startseite
-          </a>
-        </li>
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+      
+      
       
         
         <li class="menu-item menu-item-archives">
-          <a href="/archives/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
-            
-            Archiv
-          </a>
-        </li>
       
+    
 
-      
-    </ul>
-  
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
 
-  
+  </li>
+  </ul>
+
 </nav>
-
-
-
- </div>
+</div>
     </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
 
     <main id="main" class="main">
       <div class="main-inner">
         <div class="content-wrap">
+            
+
           <div id="content" class="content">
             
 
   <div id="posts" class="posts-expand">
-    
-
-  
-
+      <article itemscope itemtype="http://schema.org/Article">
   
   
   
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
+  <div class="post-block post">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/14/Java总结（十二）/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="王邸">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/head.jpeg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="路要坚持">
     </span>
-
-    
       <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">Java总结（十二）
 
-        
-        
-          <h1 class="post-title" itemprop="name headline">Java总结（十二）</h1>
-        
+          
+        </h1>
 
         <div class="post-meta">
-          <span class="post-time">
-            
+            <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
               </span>
+              <span class="post-meta-item-text">发表于</span>
+
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-14T21:56:43+08:00">
-                2019-09-14
-              </time>
+
+              <time title="创建时间：2019-09-14 21:56:43 / 修改时间：22:22:22" itemprop="dateCreated datePublished" datetime="2019-09-14T21:56:43+08:00">2019-09-14</time>
+            </span>
+          
             
 
             
-
-            
-          </span>
-
           
 
           
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/09/14/Java总结（十二）/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/09/14/Java总结（十二）/" itemprop="commentCount"></span>
-                </a>
+            <span id="/2019/09/14/Java总结（十二）/" class="post-meta-item leancloud_visitors" data-flag-title="Java总结（十二）" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
               </span>
-            
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
           
-
-          
-          
-             <span id="/2019/09/14/Java总结（十二）/" class="leancloud_visitors" data-flag-title="Java总结（十二）">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">Visitors&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2019/09/14/Java总结（十二）/#comments" itemprop="discussionUrl"><span class="post-comments-count valine-comment-count" data-xid="/2019/09/14/Java总结（十二）/" itemprop="commentCount"></span></a>
+  </span>
+  
+  
 
         </div>
       </header>
-    
 
     
     
@@ -316,10 +264,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-      
-
-      
-        <p>这周开始讲Spring了，讲Spring都是很多没有见过的东西，很多东西都是配置的，目前还不需要懂底层的实现，需要的是知道如何操作，特别是maven。当然Spring也很重要，需要多思考。今天是2019年9月13日星期五，中秋节，在武汉，去了一趟光谷，浏览了一圈武大。现在的年轻人都不行呀，烈日下骑单车就要中暑了。早早地回来，就确定把这周总结写了，虽然只有四天的东西，但是感觉学了好久了，因为东西很多，就好像刚开始学JavaEE一样，必须要总结，牢记于心！上个礼拜六上午开了一个头，这里一起总结</p>
+        <p>这周开始讲Spring了，讲Spring都是很多没有见过的东西，很多东西都是配置的，目前还不需要懂底层的实现，需要的是知道如何操作，特别是maven。当然Spring也很重要，需要多思考。今天是2019年9月13日星期五，中秋节，在武汉，去了一趟光谷，浏览了一圈武大。现在的年轻人都不行呀，烈日下骑单车就要中暑了。早早地回来，就确定把这周总结写了，虽然只有四天的东西，但是感觉学了好久了，因为东西很多，就好像刚开始学JavaEE一样，必须要总结，牢记于心！上个礼拜六上午开了一个头，这里一起总结</p><a id="more"></a>
 <h2 id="星期一（0909）"><a href="#星期一（0909）" class="headerlink" title="星期一（0909）"></a>星期一（0909）</h2><h3 id="maven-（-‘meɪvn-）"><a href="#maven-（-‘meɪvn-）" class="headerlink" title="maven （[‘meɪvn]）"></a>maven （[‘meɪvn]）</h3><p>Maven是Apache下的一个纯java开发的开源项目，它是一个项目管理构建工具，使用maven对java项目进行构建、依赖管理。当前使用Maven的项目在持续增长。<br>Maven主要有两个功能（必须要知道）：</p>
 <pre><code>1、项目构建
 2、依赖管理(重点)
@@ -1371,79 +1316,56 @@ public class AnnotationTest2 {
 </code></pre><h3 id="这有什么用？"><a href="#这有什么用？" class="headerlink" title="这有什么用？"></a>这有什么用？</h3><p>只需要通过Spring的Enhancer.create来创建动态代理的对象。你想问我代理对象有什么用？这其实就是我们可以添加事务的方式。在每一个需要启动的事务的对象，给他加一层代理，代理就是一个汉堡包的上下层，给他加上开启事务，然后提交事务。</p>
 <h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><p>这周好像没有什么问题啊，感觉很菜啊，慌得一批，其实问题还是有的，就是需要自己去找答案罢了<br>1.为什么反射形成集合的对象都是 linkHashSet linkHashMap ,数值型是double等等<br>2.为什么那个后置控制器的接口是已经实现好的default的方法，而不需要自己去实现？我以为之前的HttpServlet的doGet和doPost方法也是这种情况，后来发现这两个是他实现好的类。并不是接口。</p>
 
-      
     </div>
-    
-    
-    
 
     
-
     
-
     
-
-    <footer class="post-footer">
+        
       
 
-      
-      
-      
+      <footer class="post-footer">
 
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2019/09/08/正则表达式初学/" rel="next" title="正则表达式初学">
-                <i class="fa fa-chevron-left"></i> 正则表达式初学
-              </a>
-            
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2019/09/08/正则表达式初学/" rel="next" title="正则表达式初学">
+                  <i class="fa fa-chevron-left"></i> 正则表达式初学
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+                <a href="/2019/09/22/Java总结（十三）/" rel="prev" title="Java总结（十三）">
+                  Java总结（十三） <i class="fa fa-chevron-right"></i>
+                </a>
+              
+            </div>
           </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/09/22/Java总结（十三）/" rel="prev" title="Java总结（十三）">
-                Java总结（十三） <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
-      
-    </footer>
+        
+      </footer>
+    
   </div>
   
   
   
   </article>
 
-
-
-    <div class="post-spread">
-      
-    </div>
   </div>
 
 
           </div>
           
-
-
-          
-
+    
+    <div class="comments" id="comments"></div>
   
-    <div class="comments" id="comments">
-    </div>
-  
-
-
 
         </div>
-        
           
   
   <div class="sidebar-toggle">
@@ -1454,129 +1376,184 @@ public class AnnotationTest2 {
     </div>
   </div>
 
-  <aside id="sidebar" class="sidebar">
-    
+  <aside class="sidebar">
     <div class="sidebar-inner">
-
+        
+        
+        
+        
       
 
-      
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Inhaltsverzeichnis
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Übersicht
-          </li>
-        </ul>
-      
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
 
-      <section class="site-overview-wrap sidebar-panel">
-        <div class="site-overview">
-          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-            
-              <p class="site-author-name" itemprop="name">王邸</p>
-              <p class="site-description motion-element" itemprop="description"></p>
-          </div>
-
-          <nav class="site-state motion-element">
-
-            
-              <div class="site-state-item site-state-posts">
-              
-                <a href="/archives/">
-              
-                  <span class="site-state-item-count">28</span>
-                  <span class="site-state-item-name">Artikel</span>
-                </a>
-              </div>
-            
-
-            
-
-            
-              
-              
-              <div class="site-state-item site-state-tags">
-                
-                  <span class="site-state-item-count">3</span>
-                  <span class="site-state-item-name">Tags</span>
-                
-              </div>
-            
-
-          </nav>
-
-          
-
-          
-
-          
-          
-
-          
-          
-
-          
-
-        </div>
-      </section>
-
-      
       <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#星期一（0909）"><span class="nav-number">1.</span> <span class="nav-text">星期一（0909）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#maven-（-‘meɪvn-）"><span class="nav-number">1.1.</span> <span class="nav-text">maven （[‘meɪvn]）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#web项目的基础"><span class="nav-number">1.2.</span> <span class="nav-text">web项目的基础</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#项目构建"><span class="nav-number">1.3.</span> <span class="nav-text">项目构建</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#依赖管理"><span class="nav-number">1.4.</span> <span class="nav-text">依赖管理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#开始使用maven！"><span class="nav-number">1.5.</span> <span class="nav-text">开始使用maven！</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Maven的工程结构"><span class="nav-number">1.6.</span> <span class="nav-text">Maven的工程结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Maven的工程创建"><span class="nav-number">1.7.</span> <span class="nav-text">Maven的工程创建</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Maven命令-重点"><span class="nav-number">1.8.</span> <span class="nav-text">Maven命令(重点)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关于依赖的作用范围："><span class="nav-number">1.9.</span> <span class="nav-text">关于依赖的作用范围：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IDEA使用maven"><span class="nav-number">1.10.</span> <span class="nav-text">IDEA使用maven</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Maven聚合工程（父子工程-并不推荐使用）"><span class="nav-number">1.11.</span> <span class="nav-text">Maven聚合工程（父子工程,并不推荐使用）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#聚合工程的作用"><span class="nav-number">1.12.</span> <span class="nav-text">聚合工程的作用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关于maven常见问题："><span class="nav-number">1.13.</span> <span class="nav-text">关于maven常见问题：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#星期二（0910）"><span class="nav-number">2.</span> <span class="nav-text">星期二（0910）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#设计模式的五个原则（solid）"><span class="nav-number">2.1.</span> <span class="nav-text">设计模式的五个原则（solid）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常见的设计模式"><span class="nav-number">2.2.</span> <span class="nav-text">常见的设计模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#单例模式（Singleton-Pattern）"><span class="nav-number">2.3.</span> <span class="nav-text">单例模式（Singleton Pattern）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#单例的种类（六种，先介绍四种，之后介绍设计模式时候再全部进行罗列）"><span class="nav-number">2.4.</span> <span class="nav-text">单例的种类（六种，先介绍四种，之后介绍设计模式时候再全部进行罗列）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#工厂模式（Factory-Pattern）"><span class="nav-number">2.5.</span> <span class="nav-text">工厂模式（Factory Pattern）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#简单工厂"><span class="nav-number">2.6.</span> <span class="nav-text">简单工厂</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#工厂方法"><span class="nav-number">2.7.</span> <span class="nav-text">工厂方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#建造者Builder模式"><span class="nav-number">2.8.</span> <span class="nav-text">建造者Builder模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代理（重点！！！）"><span class="nav-number">2.9.</span> <span class="nav-text">代理（重点！！！）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#动态代理的实现"><span class="nav-number">2.10.</span> <span class="nav-text">动态代理的实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#动态代理的作用"><span class="nav-number">2.11.</span> <span class="nav-text">动态代理的作用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#jdk代理实现"><span class="nav-number">2.12.</span> <span class="nav-text">jdk代理实现</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#星期三（0911）"><span class="nav-number">3.</span> <span class="nav-text">星期三（0911）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#IOC"><span class="nav-number">3.1.</span> <span class="nav-text">IOC</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DI"><span class="nav-number">3.2.</span> <span class="nav-text">DI</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#学习了-IOC-和-DI-最大的感触是什么？"><span class="nav-number">3.3.</span> <span class="nav-text">学习了 IOC 和 DI 最大的感触是什么？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#星期四（0912）"><span class="nav-number">4.</span> <span class="nav-text">星期四（0912）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#bean的实例化的方式"><span class="nav-number">4.1.</span> <span class="nav-text">bean的实例化的方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#无参构造（默认）"><span class="nav-number">4.2.</span> <span class="nav-text">无参构造（默认）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#有参构造"><span class="nav-number">4.3.</span> <span class="nav-text">有参构造</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#bean作用域"><span class="nav-number">4.4.</span> <span class="nav-text">bean作用域</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Bean的生命周期"><span class="nav-number">4.5.</span> <span class="nav-text">Bean的生命周期</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#上代码"><span class="nav-number">4.6.</span> <span class="nav-text">上代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#这里有个很特别的地方一定要说："><span class="nav-number">4.7.</span> <span class="nav-text">这里有个很特别的地方一定要说：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#属性的注入（-property-）"><span class="nav-number">4.8.</span> <span class="nav-text">属性的注入（ property ）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#集合bean"><span class="nav-number">4.9.</span> <span class="nav-text">集合bean</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#注解使用Spring-重点"><span class="nav-number">4.10.</span> <span class="nav-text">注解使用Spring(重点)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Setter方法注入属性"><span class="nav-number">4.11.</span> <span class="nav-text">Setter方法注入属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#属性的依赖注入。"><span class="nav-number">4.12.</span> <span class="nav-text">属性的依赖注入。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#生命周期"><span class="nav-number">4.13.</span> <span class="nav-text">生命周期</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#作用域"><span class="nav-number">4.14.</span> <span class="nav-text">作用域</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#更简便的Test"><span class="nav-number">4.15.</span> <span class="nav-text">更简便的Test</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#动态代理之cglib"><span class="nav-number">4.16.</span> <span class="nav-text">动态代理之cglib</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#这有什么用？"><span class="nav-number">4.17.</span> <span class="nav-text">这有什么用？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#小结"><span class="nav-number">4.18.</span> <span class="nav-text">小结</span></a></li></ol></li></ol></div>
-            
-
-          </div>
-        </section>
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#星期一（0909）"><span class="nav-number">1.</span> <span class="nav-text">星期一（0909）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#maven-（-‘meɪvn-）"><span class="nav-number">1.1.</span> <span class="nav-text">maven （[‘meɪvn]）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#web项目的基础"><span class="nav-number">1.2.</span> <span class="nav-text">web项目的基础</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#项目构建"><span class="nav-number">1.3.</span> <span class="nav-text">项目构建</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#依赖管理"><span class="nav-number">1.4.</span> <span class="nav-text">依赖管理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#开始使用maven！"><span class="nav-number">1.5.</span> <span class="nav-text">开始使用maven！</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Maven的工程结构"><span class="nav-number">1.6.</span> <span class="nav-text">Maven的工程结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Maven的工程创建"><span class="nav-number">1.7.</span> <span class="nav-text">Maven的工程创建</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Maven命令-重点"><span class="nav-number">1.8.</span> <span class="nav-text">Maven命令(重点)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关于依赖的作用范围："><span class="nav-number">1.9.</span> <span class="nav-text">关于依赖的作用范围：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IDEA使用maven"><span class="nav-number">1.10.</span> <span class="nav-text">IDEA使用maven</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Maven聚合工程（父子工程-并不推荐使用）"><span class="nav-number">1.11.</span> <span class="nav-text">Maven聚合工程（父子工程,并不推荐使用）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#聚合工程的作用"><span class="nav-number">1.12.</span> <span class="nav-text">聚合工程的作用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关于maven常见问题："><span class="nav-number">1.13.</span> <span class="nav-text">关于maven常见问题：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#星期二（0910）"><span class="nav-number">2.</span> <span class="nav-text">星期二（0910）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#设计模式的五个原则（solid）"><span class="nav-number">2.1.</span> <span class="nav-text">设计模式的五个原则（solid）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常见的设计模式"><span class="nav-number">2.2.</span> <span class="nav-text">常见的设计模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#单例模式（Singleton-Pattern）"><span class="nav-number">2.3.</span> <span class="nav-text">单例模式（Singleton Pattern）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#单例的种类（六种，先介绍四种，之后介绍设计模式时候再全部进行罗列）"><span class="nav-number">2.4.</span> <span class="nav-text">单例的种类（六种，先介绍四种，之后介绍设计模式时候再全部进行罗列）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#工厂模式（Factory-Pattern）"><span class="nav-number">2.5.</span> <span class="nav-text">工厂模式（Factory Pattern）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#简单工厂"><span class="nav-number">2.6.</span> <span class="nav-text">简单工厂</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#工厂方法"><span class="nav-number">2.7.</span> <span class="nav-text">工厂方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#建造者Builder模式"><span class="nav-number">2.8.</span> <span class="nav-text">建造者Builder模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代理（重点！！！）"><span class="nav-number">2.9.</span> <span class="nav-text">代理（重点！！！）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#动态代理的实现"><span class="nav-number">2.10.</span> <span class="nav-text">动态代理的实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#动态代理的作用"><span class="nav-number">2.11.</span> <span class="nav-text">动态代理的作用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#jdk代理实现"><span class="nav-number">2.12.</span> <span class="nav-text">jdk代理实现</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#星期三（0911）"><span class="nav-number">3.</span> <span class="nav-text">星期三（0911）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#IOC"><span class="nav-number">3.1.</span> <span class="nav-text">IOC</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DI"><span class="nav-number">3.2.</span> <span class="nav-text">DI</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#学习了-IOC-和-DI-最大的感触是什么？"><span class="nav-number">3.3.</span> <span class="nav-text">学习了 IOC 和 DI 最大的感触是什么？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#星期四（0912）"><span class="nav-number">4.</span> <span class="nav-text">星期四（0912）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#bean的实例化的方式"><span class="nav-number">4.1.</span> <span class="nav-text">bean的实例化的方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#无参构造（默认）"><span class="nav-number">4.2.</span> <span class="nav-text">无参构造（默认）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#有参构造"><span class="nav-number">4.3.</span> <span class="nav-text">有参构造</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#bean作用域"><span class="nav-number">4.4.</span> <span class="nav-text">bean作用域</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Bean的生命周期"><span class="nav-number">4.5.</span> <span class="nav-text">Bean的生命周期</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#上代码"><span class="nav-number">4.6.</span> <span class="nav-text">上代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#这里有个很特别的地方一定要说："><span class="nav-number">4.7.</span> <span class="nav-text">这里有个很特别的地方一定要说：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#属性的注入（-property-）"><span class="nav-number">4.8.</span> <span class="nav-text">属性的注入（ property ）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#集合bean"><span class="nav-number">4.9.</span> <span class="nav-text">集合bean</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#注解使用Spring-重点"><span class="nav-number">4.10.</span> <span class="nav-text">注解使用Spring(重点)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Setter方法注入属性"><span class="nav-number">4.11.</span> <span class="nav-text">Setter方法注入属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#属性的依赖注入。"><span class="nav-number">4.12.</span> <span class="nav-text">属性的依赖注入。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#生命周期"><span class="nav-number">4.13.</span> <span class="nav-text">生命周期</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#作用域"><span class="nav-number">4.14.</span> <span class="nav-text">作用域</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#更简便的Test"><span class="nav-number">4.15.</span> <span class="nav-text">更简便的Test</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#动态代理之cglib"><span class="nav-number">4.16.</span> <span class="nav-text">动态代理之cglib</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#这有什么用？"><span class="nav-number">4.17.</span> <span class="nav-text">这有什么用？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#小结"><span class="nav-number">4.18.</span> <span class="nav-text">小结</span></a></li></ol></li></ol></div>
+        
+      </div>
       <!--/noindex-->
-      
 
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/images/head.jpeg"
+      alt="王邸">
+  <p class="site-author-name" itemprop="name">王邸</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">28</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
       
+      
+      <div class="site-state-item site-state-tags">
+        
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">标签</span>
+        
+      </div>
+    
+  </nav>
+
+
+
+      </div>
 
     </div>
   </aside>
+  <div id="sidebar-dimmer"></div>
 
 
-        
       </div>
     </main>
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
         <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
-  <span class="with-love">
+  <span class="with-love" id="animate">
     <i class="fa fa-user"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">王邸</span>
-
-  
 </div>
-
-
-  <div class="powered-by">Erstellt mit  <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
-
-
-
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.3.8</div>
   <span class="post-meta-divider">|</span>
-
-
-
-  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
-
-
-
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.4.0</div>
 
         
 
+
+
+
+
+
+  
+  <script>
+  function leancloudSelector(url) {
+    return document.getElementById(url).querySelector('.leancloud-visitors-count');
+  }
+  if (CONFIG.page.isPost) {
+    function addCount(Counter) {
+      var visitors = document.querySelector('.leancloud_visitors');
+      var url = visitors.getAttribute('id').trim();
+      var title = visitors.getAttribute('data-flag-title').trim();
+
+      Counter('get', `/classes/Counter?where=${JSON.stringify({ url })}`)
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length > 0) {
+            var counter = results[0];
+            Counter('put', '/classes/Counter/' + counter.objectId, { time: { '__op': 'Increment', 'amount': 1 } })
+              .then(response => response.json())
+              .then(() => {
+                leancloudSelector(url).innerText = counter.time + 1;
+              })
+            
+              .catch(error => {
+                console.log('Failed to save visitor count', error);
+              })
+          } else {
+              leancloudSelector(url).innerText = 'Counter not initialized! More info at console err msg.';
+              console.error('ATTENTION! LeanCloud counter has security bug, see how to solve it here: https://github.com/theme-next/hexo-leancloud-counter-security. \n However, you can still use LeanCloud without security, by setting `security` option to `false`.');
+            
+          }
+        })
+        .catch(error => {
+          console.log('LeanCloud Counter Error', error);
+        });
+    }
+  } else {
+    function showTime(Counter) {
+      var visitors = document.querySelectorAll('.leancloud_visitors');
+      var entries = [...visitors].map(element => {
+        return element.getAttribute('id').trim();
+      });
+
+      Counter('get', `/classes/Counter?where=${JSON.stringify({ url: { '$in': entries } })}`)
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length === 0) {
+            document.querySelectorAll('.leancloud_visitors .leancloud-visitors-count').forEach(element => {
+              element.innerText = 0;
+            });
+            return;
+          }
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.url;
+            var time = item.time;
+            leancloudSelector(url).innerText = time;
+          }
+          for (var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = leancloudSelector(url);
+            if (element.innerText == '') {
+              element.innerText = 0;
+            }
+          }
+        })
+        .catch(error => {
+          console.log('LeanCloud Counter Error', error);
+        });
+    }
+  }
+
+  fetch('https://app-router.leancloud.cn/2/route?appId=Fn4BuvoixOxjJAhR79TvaD5M-gzGzoHsz')
+    .then(response => response.json())
+    .then(({ api_server }) => {
+      var Counter = (method, url, data) => {
+        return fetch(`https://${api_server}/1.1${url}`, {
+          method: method,
+          headers: {
+            'X-LC-Id': 'Fn4BuvoixOxjJAhR79TvaD5M-gzGzoHsz',
+            'X-LC-Key': '1uspTrSwPqkmSBSUr948WqxE',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+      };
+      if (CONFIG.page.isPost) {
+        const localhost = /http:\/\/(localhost|127.0.0.1|0.0.0.0)/;
+        if (localhost.test(document.URL)) return;
+        addCount(Counter);
+      } else if (document.querySelectorAll('.post-title-link').length >= 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
 
 
 
@@ -1586,285 +1563,73 @@ public class AnnotationTest2 {
         
       </div>
     </footer>
-
-    
-      <div class="back-to-top">
-        <i class="fa fa-arrow-up"></i>
-        
-      </div>
-    
-
-    
-
   </div>
 
   
 
-<script type="text/javascript">
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
-  }
+
+  <script src="/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.4.0"></script><script src="/js/motion.js?v=7.4.0"></script>
+<script src="/js/schemes/pisces.js?v=7.4.0"></script>
+
+<script src="/js/next-boot.js?v=7.4.0"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+
+<script>
+NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(item => {
+    return GUEST.includes(item);
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: false,
+    appId: 'Fn4BuvoixOxjJAhR79TvaD5M-gzGzoHsz',
+    appKey: '1uspTrSwPqkmSBSUr948WqxE',
+    placeholder: 'Just go go',
+    avatar: 'mm',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: false,
+    lang: '' || 'zh-cn',
+    path: location.pathname
+  });
+}, window.Valine);
 </script>
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  
-    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-  
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
-
-
-
-  
-  
-
-  
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
-
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
-
-
-
-  
-
-
-  
-
-
-
-
-	
-
-
-
-
-
-  
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
-  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
-  
-  <script type="text/javascript">
-    var GUEST = ['nick','mail','link'];
-    var guest = 'nick,mail,link';
-    guest = guest.split(',').filter(item=>{
-      return GUEST.indexOf(item)>-1;
-    });
-    new Valine({
-        el: '#comments' ,
-        verify: false,
-        notify: false,
-        appId: 'Fn4BuvoixOxjJAhR79TvaD5M-gzGzoHsz',
-        appKey: '1uspTrSwPqkmSBSUr948WqxE',
-        placeholder: 'Just go go',
-        avatar:'mm',
-        guest_info:guest,
-        pageSize:'10' || 10,
-    });
-  </script>
-
-
-
-  
-
-
-
-
-
-  
-
-  
-  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
-  <script>AV.initialize("Fn4BuvoixOxjJAhR79TvaD5M-gzGzoHsz", "1uspTrSwPqkmSBSUr948WqxE");</script>
-  <script>
-    function showTime(Counter) {
-      var query = new AV.Query(Counter);
-      var entries = [];
-      var $visitors = $(".leancloud_visitors");
-
-      $visitors.each(function () {
-        entries.push( $(this).attr("id").trim() );
-      });
-
-      query.containedIn('url', entries);
-      query.find()
-        .done(function (results) {
-          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
-
-          if (results.length === 0) {
-            $visitors.find(COUNT_CONTAINER_REF).text(0);
-            return;
-          }
-
-          for (var i = 0; i < results.length; i++) {
-            var item = results[i];
-            var url = item.get('url');
-            var time = item.get('time');
-            var element = document.getElementById(url);
-
-            $(element).find(COUNT_CONTAINER_REF).text(time);
-          }
-          for(var i = 0; i < entries.length; i++) {
-            var url = entries[i];
-            var element = document.getElementById(url);
-            var countSpan = $(element).find(COUNT_CONTAINER_REF);
-            if( countSpan.text() == '') {
-              countSpan.text(0);
-            }
-          }
-        })
-        .fail(function (object, error) {
-          console.log("Error: " + error.code + " " + error.message);
-        });
-    }
-
-    function addCount(Counter) {
-      var $visitors = $(".leancloud_visitors");
-      var url = $visitors.attr('id').trim();
-      var title = $visitors.attr('data-flag-title').trim();
-      var query = new AV.Query(Counter);
-
-      query.equalTo("url", url);
-      query.find({
-        success: function(results) {
-          if (results.length > 0) {
-            var counter = results[0];
-            counter.fetchWhenSave(true);
-            counter.increment("time");
-            counter.save(null, {
-              success: function(counter) {
-                var $element = $(document.getElementById(url));
-                $element.find('.leancloud-visitors-count').text(counter.get('time'));
-              },
-              error: function(counter, error) {
-                console.log('Failed to save Visitor num, with error message: ' + error.message);
-              }
-            });
-          } else {
-            var newcounter = new Counter();
-            /* Set ACL */
-            var acl = new AV.ACL();
-            acl.setPublicReadAccess(true);
-            acl.setPublicWriteAccess(true);
-            newcounter.setACL(acl);
-            /* End Set ACL */
-            newcounter.set("title", title);
-            newcounter.set("url", url);
-            newcounter.set("time", 1);
-            newcounter.save(null, {
-              success: function(newcounter) {
-                var $element = $(document.getElementById(url));
-                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
-              },
-              error: function(newcounter, error) {
-                console.log('Failed to create');
-              }
-            });
-          }
-        },
-        error: function(error) {
-          console.log('Error:' + error.code + " " + error.message);
-        }
-      });
-    }
-
-    $(function() {
-      var Counter = AV.Object.extend("Counter");
-      if ($('.leancloud_visitors').length == 1) {
-        addCount(Counter);
-      } else if ($('.post-title-link').length > 1) {
-        showTime(Counter);
-      }
-    });
-  </script>
-
-
-
-  
-
-  
-
-  
-  
-
-  
-
-  
-
-  
 
 </body>
 </html>

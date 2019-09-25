@@ -2,123 +2,79 @@
 
 
 
-  
 
 
-<html class="theme-next muse use-motion" lang="">
+<html lang="zh-Hans">
 <head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.3.8">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.4.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.4.0" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.4.0">
+
+<link rel="stylesheet" href="//fonts.proxy.ustclug.org/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
 
 
-
-
-
-
-
-
-
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
-
-
-
-
-
-
-
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
-
-<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
-
-
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
-
-
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
-
-
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
-
-
-  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
-
-
-
-
-
-  <meta name="keywords" content="Hexo, NexT" />
-
-
-
-
-
-
-
-
-
-
-<meta property="og:type" content="website">
-<meta property="og:title" content="路要坚持">
-<meta property="og:url" content="http://yoursite.com/page/3/index.html">
-<meta property="og:site_name" content="路要坚持">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="路要坚持">
-
-
-
-<script type="text/javascript" id="hexo.configurations">
+<script id="hexo-configurations">
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
-    scheme: 'Muse',
-    version: '5.1.4',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
-    fancybox: true,
-    tabs: true,
-    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
-    duoshuo: {
-      userId: '0',
-      author: 'Author'
-    },
+    scheme: 'Gemini',
+    version: '7.4.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
     algolia: {
-      applicationID: '',
+      appID: '',
       apiKey: '',
       indexName: '',
       hits: {"per_page":10},
       labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
-    }
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    },
+    sidebarPadding: 40
   };
 </script>
 
+  <meta property="og:type" content="website">
+<meta property="og:title" content="路要坚持">
+<meta property="og:url" content="http://yoursite.com/page/3/index.html">
+<meta property="og:site_name" content="路要坚持">
+<meta property="og:locale" content="zh-Hans">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="路要坚持">
+  <link rel="canonical" href="http://yoursite.com/page/3/">
 
 
-  <link rel="canonical" href="http://yoursite.com/page/3/"/>
-
-
-
-
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: true,
+    isPost: false,
+    isPage: false,
+    isArchive: false
+  };
+</script>
 
   <title>路要坚持</title>
   
@@ -130,38 +86,51 @@
 
 
 
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="">
-
-  
-  
-    
-  
-
-  <div class="container sidebar-position-left 
-  page-home">
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+  <div class="container use-motion">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-wrapper">
-  <div class="site-meta ">
-    
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
 
-    <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
+    <div>
+      <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
         <span class="site-title">路要坚持</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
-      
-        <p class="site-subtitle"></p>
-      
   </div>
 
   <div class="site-nav-toggle">
-    <button>
+    <button aria-label="切换导航栏">
       <span class="btn-bar"></span>
       <span class="btn-bar"></span>
       <span class="btn-bar"></span>
@@ -169,145 +138,129 @@
   </div>
 </div>
 
+
 <nav class="site-nav">
   
-
-  
-    <ul id="menu" class="menu">
+  <ul id="menu" class="menu">
+      
+      
       
         
         <li class="menu-item menu-item-home">
-          <a href="/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
-            
-            Startseite
-          </a>
-        </li>
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+      
+      
       
         
         <li class="menu-item menu-item-archives">
-          <a href="/archives/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
-            
-            Archiv
-          </a>
-        </li>
       
+    
 
-      
-    </ul>
-  
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
 
-  
+  </li>
+  </ul>
+
 </nav>
-
-
-
- </div>
+</div>
     </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
 
     <main id="main" class="main">
       <div class="main-inner">
         <div class="content-wrap">
+            
+
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
-    
-      
-
-  
-
+  <div id="posts" class="posts-expand">
+        <article itemscope itemtype="http://schema.org/Article">
   
   
   
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
+  <div class="post-block home">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/30/Java总结（一）/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="王邸">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/head.jpeg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="路要坚持">
     </span>
-
-    
       <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/06/30/Java总结（一）/" itemprop="url">Java总结（一）</a></h1>
-        
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/2019/06/30/Java总结（一）/" class="post-title-link" itemprop="url">Java总结（一）</a>
+          
+        </h1>
 
         <div class="post-meta">
-          <span class="post-time">
-            
+            <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
               </span>
+              <span class="post-meta-item-text">发表于</span>
+
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-06-30T23:17:16+08:00">
-                2019-06-30
-              </time>
-            
 
-            
-
-            
-          </span>
-
-          
-
+              <time title="创建时间：2019-06-30 23:17:16" itemprop="dateCreated datePublished" datetime="2019-06-30T23:17:16+08:00">2019-06-30</time>
+            </span>
           
             
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
+
+            
+              <span class="post-meta-item">
                 <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
+                  <i class="fa fa-calendar-check-o"></i>
                 </span>
-                <a href="/2019/06/30/Java总结（一）/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/06/30/Java总结（一）/" itemprop="commentCount"></span>
-                </a>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-08-17 10:36:15" itemprop="dateModified" datetime="2019-08-17T10:36:15+08:00">2019-08-17</time>
               </span>
             
           
 
           
+            <span id="/2019/06/30/Java总结（一）/" class="post-meta-item leancloud_visitors" data-flag-title="Java总结（一）" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
           
-             <span id="/2019/06/30/Java总结（一）/" class="leancloud_visitors" data-flag-title="Java总结（一）">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">Visitors&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2019/06/30/Java总结（一）/#comments" itemprop="discussionUrl"><span class="post-comments-count valine-comment-count" data-xid="/2019/06/30/Java总结（一）/" itemprop="commentCount"></span></a>
+  </span>
+  
+  
 
         </div>
       </header>
-    
 
     
     
@@ -315,791 +268,110 @@
     <div class="post-body" itemprop="articleBody">
 
       
-      
-
-      
-        
+          <p>本周是JAVA的第一周，JAVA最基础的基础知识：标识符，命名规范，数据类型，强制数据类型转换，JAVA关于余数的处理，自增自减的问题，运算符，控制语句，方法，数组，参数传递，递归，对象的介绍，封装，static（修饰成员，或者类），帮助文档的制作</p><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>我发现之前还有一部分的基础知识还没有中总结，直到复习的时候才发现。已经过去一个月了。但是前面的知识还是很重要的，所以，把所有的JAVASE的知识点补充完整很重要。今天还要考试，加油吧！</p>
+          <!--noindex-->
           
-            <p>本周是JAVA的第一周，JAVA最基础的基础知识：标识符，命名规范，数据类型，强制数据类型转换，JAVA关于余数的处理，自增自减的问题，运算符，控制语句，方法，数组，参数传递，递归，对象的介绍，封装，static（修饰成员，或者类），帮助文档的制作</p>
-<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>我发现之前还有一部分的基础知识还没有中总结，直到复习的时候才发现。已经过去一个月了。但是前面的知识还是很重要的，所以，把所有的JAVASE的知识点补充完整很重要。今天还要考试，加油吧！</p>
-<h2 id="预备知识"><a href="#预备知识" class="headerlink" title="预备知识"></a>预备知识</h2><h3 id="标识符："><a href="#标识符：" class="headerlink" title="标识符："></a>标识符：</h3><p>概述：就是给类,接口,方法,变量等起名字时使用的字符序列<br>组成规则：</p>
-<pre><code>英文大小写字母
-数字
-$和_
-</code></pre><p>注意事项：</p>
-<pre><code>不能以数字开头
-不能是java中的关键字
-区分大小写
-</code></pre><h3 id="命名规范：见名知义（非常重要）"><a href="#命名规范：见名知义（非常重要）" class="headerlink" title="命名规范：见名知义（非常重要）"></a>命名规范：见名知义（非常重要）</h3><p>  包：(其实就是文件夹,用于解决相同类名问题)<br>    单级包: 全部小写</p>
-<pre><code>henson
-</code></pre><p>  多级包：单词全部小写, 域名反转,单词之间以.分隔</p>
-<pre><code>cskaoyan.com --&gt; com.cskaoyan
-</code></pre><p>类和接口：<br>  一个单词：首字母大写，其余字母小写</p>
-<pre><code>Student, Cloneable
-</code></pre><p>  多个单词：所有单词首字母大写 (驼峰命名法)</p>
-<pre><code>HelloWorld
-</code></pre><p>方法和变量<br>  一个单词：全部小写</p>
-<pre><code>main() age
-</code></pre><p>  多个单词：第一个单词首字母小写，其余单词首字母大写</p>
-<pre><code>showAllNames() maxAge
-</code></pre><p>常量<br>  一个单词：全部大写</p>
-<pre><code>PI
-</code></pre><p>  多个单词：全部大写，单词之间以_分隔</p>
-<pre><code>MAX_VALUE
-</code></pre><h3 id="常量："><a href="#常量：" class="headerlink" title="常量："></a>常量：</h3><p>概述：在程序运行过程中，值不会发生改变的量。<br>分类：</p>
-<pre><code>字面值常量
-字符串常量：用双引号括起来的内容 &quot;Hello, world!&quot;
-整数常量：0, 1, 100 (默认是int类型)
-浮点数常量： 3.14, 2.67
-字符常量： &apos;A&apos;, &apos;0&apos;, &apos;中&apos;
-布尔常量： true, false
-空常量： null
-自定义常量(final)
-</code></pre><h3 id="整数常量的四种表现形式"><a href="#整数常量的四种表现形式" class="headerlink" title="整数常量的四种表现形式"></a>整数常量的四种表现形式</h3><pre><code>二进制：0b100
-八进制: 0100
-十进制: 100
-十六进制：0x100
-</code></pre><p>注意事项：<br>  a.默认表现形式是十进制<br>  b.在JAVA是以补码的方式计算的，所以你<strong>输进去的时候就必须是补码</strong>看下面例子</p>
-<pre><code>class homework3{
-  public static void main(String[] args){
-    System.out.println(Long.toHexString(0x100000000L + 0xcafebabe));//打印出cafebabe 并不需要转
-  }
-}
-</code></pre><h3 id="数据类型："><a href="#数据类型：" class="headerlink" title="数据类型："></a>数据类型：</h3><p>  Java语言是强类型语言，对于每一种数据都定义了明确的具体数据类型。<br>  分类：<br>  <strong>基本数据类型(8种)</strong></p>
-<table>
-<thead>
-<tr>
-<th>整数</th>
-<th style="text-align:center">字节</th>
-<th style="text-align:center">范围</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>byte</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">-128 ~ 127</td>
-</tr>
-<tr>
-<td>short</td>
-<td style="text-align:center">2</td>
-<td style="text-align:center">65536</td>
-</tr>
-<tr>
-<td>int</td>
-<td style="text-align:center">4</td>
-<td style="text-align:center">43亿(int不能表示全体人类)</td>
-</tr>
-<tr>
-<td>long</td>
-<td style="text-align:center">8</td>
-<td style="text-align:center"></td>
-</tr>
-</tbody>
-</table>
-<p>表示方式：</p>
-<pre><code>二进制：0b
-八进制：0
-十进制：
-十六进制：0x
-</code></pre><table>
-<thead>
-<tr>
-<th>浮点数</th>
-<th style="text-align:center">字节</th>
-<th style="text-align:center">范围</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>float</td>
-<td style="text-align:center">4</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td>double</td>
-<td style="text-align:center">8</td>
-<td style="text-align:center"></td>
-</tr>
-</tbody>
-</table>
-<p>表示方式：</p>
-<pre><code>十进制数形式，如: 3.14   314.0
-科学记数法：如：3.14e0  3.14e2
-</code></pre><table>
-<thead>
-<tr>
-<th>类型</th>
-<th style="text-align:center">字节</th>
-<th style="text-align:center">举例</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>字符char</td>
-<td style="text-align:center">2</td>
-<td style="text-align:center">‘中’</td>
-</tr>
-<tr>
-<td>布尔boolean</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">true, false。</td>
-</tr>
-</tbody>
-</table>
-<p>引用数据类型</p>
-<pre><code>类, 接口, 数组
-</code></pre><p>注意事项：</p>
-<pre><code>char占用两个字节，在Java中char采用是Unicode编码。
-在Java中不能用0表示false, 非0表示true。
-整数字面值常量默认是int类型，如果要表示long类型的整数，后面要加l或L, 最好使用大写L.
-浮点数字面值常量默认是double类型。如果要表示float类型，后面要加f或F，double类型后面可以加d表示double类型例如:4.0d;
-</code></pre><p>看例子：</p>
-<pre><code>/*
-猜测答案：66666
-实际答案：17777
-注意数的类型
-*/
-class DataTypeDemo3 {
-  public static void main(String[] args) {
-    System.out.println(12345 + 5432l); //这是小写的L
-    System.out.println(12345 + 5432L);
-  }
-}
-</code></pre><h3 id="隐式转化："><a href="#隐式转化：" class="headerlink" title="隐式转化："></a>隐式转化：</h3><pre><code>byte --&gt; short --&gt; int --&gt; long --&gt; float --&gt; double.
-char --&gt; int
-</code></pre><p>注意事项：</p>
-<pre><code>byte b = 10;编译器会判断常量值是否超出byte的表示范围，如果超出了就编译不通过，否则就赋值成功。
-boolean 不能和其他基本类型转换。
-char能够转换成int类型。(把char看成特殊的整型)
-</code></pre><p>问题：long占用8个字节, float占用4个字节, 为什么 long –&gt; float？</p>
-<pre><code>原因是整数和浮点数在计算机中存储的方式不一样。float的表数范围是比long类型大的。
-2^63 &lt; 8^21 &lt; 3.4*10^38
-</code></pre><p>面试题</p>
-<pre><code>byte b1=3,  b2=4, b;
-b = b1 + b2; (1)
-b = 3 + 4;   (2)
-</code></pre><p>哪句是编译失败的呢？为什么呢？<br>第一句编译失败，加法会隐式转化成int类型相加<br>第二句两个常量值相加为7没有超过byte的范围不会报错</p>
-<p>注意事项：</p>
-<pre><code>byte, short, char 参与运算的会自动提升为int类型。即使是同一种数据类型参与运算。
-</code></pre><h3 id="强制类型转换："><a href="#强制类型转换：" class="headerlink" title="强制类型转换："></a>强制类型转换：</h3><p>  目标类型 变量名= (目标类型)(被转换的数据);<br>  一般建议，最好不要随意使用强制类型转换，容易造成数据精度的损失。<br>  1) 表数范围大的数据类型转换为表数范围小的数据类型时，要加上强制转换符，但可能造成精度损失；使用时要格外注意。<br>  2) 有多种类型的数据混合运算时，系统首先自动的将所有数据转换成容量最大的那一种数据类型，然后再进行计算。</p>
-<p><strong>看题目（注意强制类型转换是否有符号位转换）</strong></p>
-<pre><code>class DataTypeDemo4 {
-  public static void main(String[] args) {
-    /*int i = -1;
-    System.out.println(i);*/
-    int i = (int)(char)(byte) -1;
-    System.out.println(i); //65535
-  }
-}
-
-int： 1111 1111 1111 1111 1111 1111 1111 1111
-byte: 1111 1111(有符号的整数, 符号位扩展)
-char: 1111 1111 1111 1111 (无符号的整数, 执行0扩展)
-int:  0000 0000 0000 0000 1111 1111 1111 1111
-
-/*
-猜测结果：1000000
-答案：-21
-原因：nanosPerday超出int的表示范围。
-1. 把nanosPerDay声明成long类型。
-  结果还是-21. 为什么？因为计算的结果int 之后在转成long的。所以应该在第一个数开始加L
-2. 24 * 60 * 60 * 1000 * 1000 * 1000它的结果就已经出现了精度损失。怎么改进？在后面添加L.
-  答案是5794.
-3. 24 * 60 * 60 * 1000 * 1000 就已经超出int的表数范围，出现了精度损失
-建议在第一个数前面加L这样计算就都以long类型来计算了
-*/
-class DataTypeDemo5 {
-  public static void main(String[] args) {
-    int millisPerDay = 24 * 60 * 60 * 1000;
-    //int nanosPerDay = 24 * 60 * 60 * 1000 * 1000 * 1000;
-    long nanosPerDay = 24L * 60 * 60 * 1000 * 1000 * 1000;
-    System.out.println(nanosPerDay / millisPerDay); // 1000*1000
-  }
-}
-</code></pre><p>请写出下列程序结果</p>
-<pre><code>System.out.println(‘a’);
-System.out.println(‘a’+1);  //98
-System.out.println(“hello”+’a’+1);   //helloa1
-System.out.println(‘a’+1+”hello”);   //98hello
-System.out.println(“5+5=”+5+5);
-System.out.println(5+5+”=5+5”);
-</code></pre><p>char 就是特殊的整型，可以转换成无符号的int<br>+都是从左到右结合</p>
-<h3 id="JAVA关于余数的处理"><a href="#JAVA关于余数的处理" class="headerlink" title="JAVA关于余数的处理"></a>JAVA关于余数的处理</h3><pre><code>/*
-算术运算符：
-  + - * / % ++ --
-  +：
-    a. 加法操作
-    b. 表示正数
-    c. 表示字符串的拼接 (运算符的重载)
-
-  /: 整数之间相除，结果是整数。(向0取整)
-    四舍五入, 向上取整, 向下取整, 向0取整
-    如果想得到浮点数，怎么办？
-    在前面乘以1.0即可
-
-  %：定义： a % b = a - (a / b) * b;
-    取余%操作是一个复杂的操作，比较耗时。在一些对性能要求比较高的应用中，最好不要用取余操作。
-
-注意取余数：
-  JAVA取余数和现实取余数是不同的。
-  现实的余数都是正的，
-  JAVA的余数可是是负数
-*/
-class OperatorDemo3 {
-  public static void main(String[] args) {
-    int a = 3;
-    int b = 4;
-    System.out.println(a + b); // 7
-    System.out.println(a - b); // -1
-    System.out.println(a * b); // 12
-    System.out.println(a / b); // 0
-    System.out.println(1.0 * a b); // 0.75
-
-    System.out.println(&quot;--------------------------&quot;);
-    //%：java定义： a % b = a - (a / b) * b;
-    System.out.println(a % b);  // 3 mod 4 = 3,     3 % 4 = 3 - (3 / 4) * 4 = 3;
-    System.out.println(-a % b); // -3 mod 4 = 1,    -3 % 4 = -3 - (-3 / 4) * 4 = -3
-    System.out.println(a % -b); // 3 mod -4 = 3     3 % -4 = 3 - (3 / -4) * -4 = 3;
-    System.out.println(-a % -b); // -3 mod -4 = 1   -3 % -4 = -3 - (-3 / -4) * -4 = -3;
-  }
-}
-</code></pre><h3 id="关于自增自减的问题"><a href="#关于自增自减的问题" class="headerlink" title="关于自增自减的问题"></a>关于自增自减的问题</h3><p>自增：++</p>
-<pre><code>前自增：++a; 先自增再参与计算
-后自增：a++; 先参与计算，再自增
-</code></pre><p>自减：–</p>
-<pre><code>前自减：--a; 先自减再参与计算
-后自减：a--; 先参与计算，再自减
-</code></pre><p>注意事项：</p>
-<pre><code>单独使用效果相同
-参与运算使用，在操作数的前后效果不同
-
-
-class OperatorDemo4 {
-  public static void main(String[] args) {
-    int a = 10;
-    int b = 10;
-    int c = 10;
-
-    a = b++; // a=10, b=11, c=10
-    c = --a; // a=9, b=11, c=9
-    b = ++a;// a=10, b=10, c=9
-    a = c--;// a=9, b=10, c=8
-
-    System.out.println(&quot;a=&quot; + a); // a=9
-    System.out.println(&quot;b=&quot; + b); // b=10
-    System.out.println(&quot;c=&quot; + c); // c=8
-</code></pre><p>//算数运算符是从左到右结合的；</p>
-<pre><code>int a = 4;
-int b = (a++) + (++a) + (a*10); // b = 4 + 6 + 60 = 70
-</code></pre><p><strong> 注意运算符的优先级，自增自减优先级是大于乘除和加减的</strong></p>
-<p>答案：</p>
-<pre><code>b = a++ = 4   (a = 5)
-b = 4 + (++a) = 4 + 6 = 10 (a = 6)
-b = 10 + a* 10 = 70
-</code></pre><p>问题二</p>
-<pre><code>    int i = 12;
-    System.out.println(i+=i-=i*=i) ; //-120
-
-    //先写成：
-    i = i + i
-    i = i - i
-    i = i * i
-    //然后把每行的结果放到上一行
-    i = i + i - i*i;
-    // 12+12-（12*12）= -120
-
-  }
-}
-</code></pre><p>//问题三</p>
-<pre><code>class OperatorDemo5 {
-  public static void main(String[] args) {
-    int a = 3;
-    a = a++;
-    a = a++;
-    a = a++;
-    a = a++;  // 3
-    // a = ++a;
-    // a = ++a;
-    // a = ++a;
-    // a = ++a; //7
-    System.out.println(a);
-  }
-}
-</code></pre><p>问题三解释：</p>
-<pre><code>int b = a++;
-  int temp = a;
-  a = a + 1;
-  b = temp;
-a = a++
-  int temp = a; //先赋值
-  a = a + 1;   //再加加了
-  a = temp;
-先加加再赋值
-int b = ++a;
-  a = a + 1;
-  b = a;
-</code></pre><h2 id="星期一"><a href="#星期一" class="headerlink" title="星期一"></a>星期一</h2><h3 id="赋值运算符："><a href="#赋值运算符：" class="headerlink" title="赋值运算符："></a>赋值运算符：</h3><p>基本运算符 =<br>拓展赋值运算符： += -= 等<br>a = b = 10<br>1.赋值表达式是有值的<br>  a + b<br>  b = 10; //它的值等于赋值运算符右边表达式的值；<br>2.赋值运算符从右向左结合的； 但是算数运算符是从左到右结合的；<br>  a += 20; –&gt; a = a + 20;  不能写a = 20 + a;<br>  左边一定要放在左边；a -= b –&gt; a = a-b; 只改变a的值；</p>
-<p>注意事项：<br>    扩展的赋值运算符隐含了强制类型转换；<br>    btye b1 = 10;<br>    btye b2 = 20;<br>    <strong>b1 = b1 + b2;  //会报错，运算换变成int进行计算，再赋值回给byte肯定不行</strong><br>    b1 += b2;  –&gt;（byte）(b1+b2);//不会报错；<br>    System.out.println(b1); //不会报错</p>
-<h3 id="关系运算符："><a href="#关系运算符：" class="headerlink" title="关系运算符："></a>关系运算符：</h3><pre><code>== ！= &lt; &gt; &lt;= &gt;= instanceof
-</code></pre><p>注意事项：</p>
-<pre><code>instanceof 运算符不能用于基本数据类型;用于判断两个类是否相同
-比较运算符结果是布尔型 true or  false;
-比较运算符不要写成赋值运算符，特别在if的判断中;
-</code></pre><h3 id="逻辑运算符："><a href="#逻辑运算符：" class="headerlink" title="逻辑运算符："></a>逻辑运算符：</h3><p>&amp;&amp;:第一个是false，第二个表达式就不会被计算<br>||：第一个是true, 第二个表达式也不会计算；</p>
-<p>在以后开发中，我们可以&amp; ，| 还是&amp;&amp; ||<br>答：使用&amp;&amp; || 节约时间 方便编码，看下面的例子</p>
-<pre><code>if(i &lt; arr.length &amp;&amp;  arr[i] &lt; arr[arr.length])
-</code></pre><p>这样写就不会出现数组下标越界的异常，如果写&amp; 两个都判断就可能出现数组下标越界的异常</p>
-<h3 id="位运算-难-："><a href="#位运算-难-：" class="headerlink" title="位运算(难)："></a>位运算(<strong><em>难</em></strong>)：</h3><pre><code>&lt;&lt;   &gt;&gt;   &gt;&gt;&gt; （无符号右移） &amp; | ^ ~
-</code></pre><p>按位与： &amp;  同时为1 结果为1；<br>按位或： |  同时为0 结果为0 否则为1<br>按位异或： ^ 不同为1 其余为0<br>按位取反： ~  单目运算符</p>
-<p>注意事项：<br>    位运算只能用于整数和char(char类型可以看成无符号的整数)；<br>    位运算的效率是最高的</p>
-<p>一些用位运算题目：</p>
-<h4 id="1-对2的n次幂取余-都可以转成位运算"><a href="#1-对2的n次幂取余-都可以转成位运算" class="headerlink" title="1.对2的n次幂取余 都可以转成位运算"></a>1.对2的n次幂取余 都可以转成位运算</h4><p>a % 64 == a &amp;（2^n-1）;<br>2^n:<br>    1101 1101<br>%<br>    0100 0000</p>
-<p>可以转换成：<br>    1101 1101<br>&amp;<br>    0011 1111</p>
-<p>应用1：判断一个数是奇数还是偶数</p>
-<pre><code>a &amp; 1 = 1 -&gt; 奇数
-a &amp; 1 = 0 -&gt; 偶数
-</code></pre><p>应用2：在hashMap的数组中，在求index时候就会求余数的操作。而且hashMap的数组长度是2^n就是为了方便取余数。使用的就是这里的方法；</p>
-<h4 id="2-判断一个数是否是2的n次幂？"><a href="#2-判断一个数是否是2的n次幂？" class="headerlink" title="2.判断一个数是否是2的n次幂？"></a>2.判断一个数是否是2的n次幂？</h4><p>  2^n :因子都是2；<br>  时间复杂度：log n;</p>
-<p>能否在常量时间复杂度内，判断一个数是否是2^n;<br>  2^n的存储特点：只有一个1 ，后面全部0；<br>  a &amp; (a-1) == 0;</p>
-<p>  0100 0000<br>&amp; 0011 1111<br>  0000 0000</p>
-<h4 id="3-两个整数变量的交换"><a href="#3-两个整数变量的交换" class="headerlink" title="3.两个整数变量的交换"></a>3.两个整数变量的交换</h4><p>int a = 4;<br>int b = 3;<br>a = a ^ b;  //  a = 4 ^ 3 ,b = 3<br>b = a ^ b;  //  a = 4 ^ 3 ,b = 4^3^3= 4<br>a = a ^ b;  //  a = 4 ^ 3 ^ 4 = 3 ,b = 4</p>
-<h4 id="4-有一堆数字，都是成对出现了。只有一个是单独出现的。找出那个单独的整数"><a href="#4-有一堆数字，都是成对出现了。只有一个是单独出现的。找出那个单独的整数" class="headerlink" title="4.有一堆数字，都是成对出现了。只有一个是单独出现的。找出那个单独的整数"></a>4.有一堆数字，都是成对出现了。只有一个是单独出现的。找出那个单独的整数</h4><p>  可以不是排序的<br>  1,1,2,2,a,a+1,a+1,a+2,a+2….</p>
-<p>  0 ^ 1 ^ 1 ^ 2 ^ 2 ….</p>
-<p>因为a^a = 0<br>0 ^ 任何数 = 任何数 所以能直接找出单独的数。<br>但是这里有个问题，如果a = 0能否找出?<br>如果最后的结果是0是有两种答案：<br>1）没有单独的数<br>2）单独的数就是0</p>
-<p>&lt;&lt; 左移： 低位补0 高位丢失<br>&gt;&gt; 右移： 高位补符号位 低位丢弃<br>&gt;&gt;&gt;无符号右移：高位补0 低位丢弃</p>
-<p>注意事项：<br>    左移：左移N个单位，相当乘以2^n;<br>    右移：右移n个单位，相当于除以2^n;<br>    对于移位运算符来说，当操作数超出字长时；实际移动n mod 字长<br>    int a = 64<br>    a&gt;&gt; 32 = a</p>
-<h2 id="星期二"><a href="#星期二" class="headerlink" title="星期二"></a>星期二</h2><h3 id="switch"><a href="#switch" class="headerlink" title="switch"></a>switch</h3><p>  switch表示这是switch语句<br>  表达式的取值：byte, short, int, char<br>  JDK5以后可以是：枚举<br>  JDK7以后可以是：String<br>  case后面跟的是要和表达式进行比较的值<br>  语句体部分可以是一条或多条语句<br>  break表示中断，结束的意思，可以结束switch语句<br>  default语句表示所有情况都不匹配的时候，就执行该处的内容，和if语句的else相似。</p>
-<p>注意事项:<br>  a. case后面只能是常量，不能是变量，而且，多个case后面的值不能出现相同的<br>  b. default可以省略吗?<br>    可以省略。一般不建议。除非判断的值是固定的。(单选题)<br>  c. break可以省略吗?<br>    可以省略，一般不建议。否则结果可能不是你想要的 (case穿越)<br>  d. default的位置一定要在最后吗?<br>    可以出现在switch语句任意位置。<br>  e. switch语句的结束条件<br>    遇到break<br>    执行到程序的末尾</p>
-<p>使用场景<br>  a. if语句是通用的。<br>  b. case只有几种常量的情况, 对于常量还有一些限制。(比较单一)<br>    byte, short, int, char, enum, String</p>
-<h3 id="循环语句"><a href="#循环语句" class="headerlink" title="循环语句"></a>循环语句</h3><p>死循环,注意下面这个例子</p>
-<pre><code>for(int i = Integer.MAX_VALUE - 10; i &lt;= Integer.MAX_VALUE; i++) {
-  System.out.println(&quot;我爱刘亦菲!&quot;);
-}
-</code></pre><p><strong>上面这个for循环会一直出不了。因为整数最大值加到最大，就变成了最小值。然后再加上来，又循环</strong></p>
-<pre><code>// for(;;);
-// System.out.println(&quot;我爱学JAVA!&quot;); 无法访问的语句
-
-// while(true);
-// System.out.println(&quot;我爱学JAVA!&quot;); 无法访问的语句
-</code></pre><p>循环的题目：<br>请统计1-1000之间同时满足如下条件的数据有多少个：<br>  对3整除余2<br>  对5整除余3<br>  对7整除余2</p>
-<p>分析：</p>
-<ol>
-<li>定义统计变量 count = 0;</li>
-<li>循环：1 ~ 1000;<br>判断这个数是够满足：<br> 对3整除余2<br> 对5整除余3<br> 对7整除余2<br>满足：输出这个数,count++</li>
-<li>输出count</li>
-</ol>
-<p>小学生的痛苦：<br>  求满足这个条件最小正整数：<br>    对3整除余2<br>    对5整除余3<br>    对7整除余2</p>
-<p>（注意这个思路）<br>  a. 假设s满足条件, 下一个满足条件的数是多少？<br>    下一个数：s + 105n (n = 1,2,3,4…)也满足条件<br>  b. 构建一个数满足这个条件<br>    3 X 5 = 15<br>      15 % 7 == 1<br>    3 X 7 = 21<br>      21 % 5 == 1<br>    5 X 7 =35<br>      35 % 3 == 2<br>    p = 15a + 21b + 35c (a,b,c为余数)<br>      p % 7 == a<br>      p % 5 == b<br>      p % 3 == 2c<br>      a = 2, b = 3, c=1<br>    p = 30 + 63 + 35 = 128;<br>    p - 105 =23;</p>
-<p>while语句和for语句的区别：</p>
-<ol>
-<li>变量的作用范围</li>
-<li>使用场景<br>for更适合循环次数确定情况。<br>while更适合循环次数不明确的情况。</li>
-</ol>
-<h3 id="跳转控制语句："><a href="#跳转控制语句：" class="headerlink" title="跳转控制语句："></a>跳转控制语句：</h3><p>  break: 中断<br>  continue: 继续<br>  return: 返回</p>
-<p>break<br>使用场景：<br>  a. switch语句<br>  b. 循环语句</p>
-<p>  break会跳出离他最近的外层循环。<br>  如果想跳出多层循环怎么办呢？</p>
-<p>标签:<br>  格式<br>    标签名: 要标识的语句</p>
-<p>  标签可以标识任意语句<br>标签害人不浅看下面的代码</p>
-<pre><code>class TagDemo {
-  public static void main(String[] args) {
-    https://www.cskaoyan.com
-    System.out.println(&quot;我爱中华!&quot;);
-  }
-}
-</code></pre><p>编译能通过而且运行不会报错问题就是：</p>
-<pre><code>https:被当成了标签
-//www.cskaoyan.com被当成了注释
-</code></pre><h3 id="方法（上）："><a href="#方法（上）：" class="headerlink" title="方法（上）："></a>方法（上）：</h3><p>  概述：完成特定功能的代码块。<br>    类比：数学中的函数<br>    在其他语言里面都有函数(function)的定义<br>    函数在Java中被称为方法 (method)</p>
-<p>  格式：<br>    修饰符 返回值类型 方法名(参数类型 参数名1, 参数类型 参数名2…) {<br>      函数体;<br>      return 返回值;<br>    }</p>
-<p>  方法格式解释<br>    修饰符 比较多，后面会详细介绍。目前 public static<br>    返回值类型 用于限定返回值的数据类型<br>    方法名 标识符，为了方便我们调用方法<br>    参数类型 限定调用方法时传入参数的数据类型<br>    参数名 是一个变量，接收调用方法时传入的参数<br>    方法体 完成功能的代码<br>    return 结束方法以及返回方法指定类型的值<br>    返回值 程序被return带回的结果，返回给调用者</p>
-<p>  如何写一个方法：<br>    a. 明确功能<br>    b. 返回值类型<br>    c. 参数列表</p>
-<p>  练习：求两个数据之和</p>
-<pre><code>/*
-  功能：求两个数据的和
-  返回值类型：int
-  参数列表： int int
-*/
-</code></pre><p>  返回值类型不为void方法的调用：<br>    a. 单独调用<br>    b. 输出调用<br>    c. 赋值调用</p>
-<p>注意事项：<br>  方法不调用不执行。</p>
-<h2 id="星期三："><a href="#星期三：" class="headerlink" title="星期三："></a>星期三：</h2><h3 id="方法-下"><a href="#方法-下" class="headerlink" title="方法(下)"></a>方法(下)</h3><p>包：同一个包下面能够有两个名字相同的类吗？<br>    不能<br>同一个类下面能有两个名字相同的方法吗？<br>    可以。方法的重载。</p>
-<p>方法重载：<br>  a. 在同一个类<br>  b. 方法名字相同<br>  c. 参数列表不同(参数类型, 参数个数, 参数顺序)</p>
-<p>术语：方法的签名(signature) 方法名 + 参数列表<br>  同一个类中方法名字可以相同，但是方法的签名不能相同</p>
-<p>问题：方法的签名为什么与返回值类型无关？<br>  如果包括返回值类型，那么函数运行就不知道应该是走去void 的 还是去int返回值的方法。<br>  但是感觉再智能一点就能判断；<br>  单独调用时，就不能区分到底使用哪个方法。</p>
-<p>问题2：求两个数据的和。参数类型分别为两个byte类型，两个short类型，两个int类型，两个long类型，并在main方法中进行测试。</p>
-<p>问题： 如果传入的参数类型不同会怎么样,如下代码：</p>
-<pre><code>public int add(int a, int b) {
-  return a+b;
-}
-public double add(double a, double b) {
-  reuturn a+b;
-}
-add(10,10.111);
-</code></pre><p>  A 编译不通过<br>  B 运行报错<br>  C 可以运行</p>
-<p>答案：C 结果是double类型</p>
-<p>建议：<br>  如果方法实现一样，但是数据类型兼容。就没有必要使用方法的重载。<br>  他会默认选择大的范围进行调用</p>
-<h3 id="数组："><a href="#数组：" class="headerlink" title="数组："></a>数组：</h3><p>数组的初始化：<br>  就是为数组中的数组元素分配内存空间，并为每个数组元素赋初值。</p>
-<p>动态初始化：<br>  由程序员指定长度，系统决定初始值。<br>  格式：<br>    数据类型[] 数组名 = new 数据类型[数组的长度];<br>  举例：<br>    int[] arr = new int[3];</p>
-<p>解释：<br>  [I@15db9742<br>  [: 一维数组<br>  I: 数组元素是int类型<br>  @: 表示分隔符<br>  15db9742：16进制的数, 内存地址的映射<br>实际是一个哈希值：</p>
-<pre><code>public String toString() {
-  return getClass().getName() + &quot;@&quot; + Integer.toHexString(hashCode());
-}
-</code></pre><p>打印一个对象时，默认调用toString()方法，可以看到其实就是把对象名转成哈希值然后转成16进制。</p>
-<p>java的内存分配<br>  栈：局部变量, 执行方法<br>  堆：new出来的东西 (对象)<br>  方法区<br>  本地方法栈<br>  程序计数器：字节码的行号指示器</p>
-<p>怎么引用数组中的元素值呢？<br>  索引(从0开始编号)<br>  数组名[索引]</p>
-<p>堆上的数据都会有默认初始值<br>  向堆申请空间的时候，都会把这片内存空间清0<br>  默认值：<br>    byte    0<br>    short   0<br>    int     0<br>    long    0L<br>    float   0.0f<br>    double    0.0<br>    boolean   false<br>    char    \u0000<br>    引用数据  null</p>
-<p>注意事项：<br>  如果数组索引超出范围，会报 java.lang.ArrayIndexOutOfBoundsException.</p>
-<p>空常量：null<br>  可以给所有的引用数据类型赋值<br>空指针异常：<br>  java.lang.NullPointerException</p>
-<h2 id="星期四："><a href="#星期四：" class="headerlink" title="星期四："></a>星期四：</h2><h3 id="参数传递"><a href="#参数传递" class="headerlink" title="参数传递"></a>参数传递</h3><p>结论：<br>  a. Java中只有值传递。<br>  b. 基本数据类型传递参数的时候相当于c语言中值传递。<br>  c. 引用数据类型传递参数的时候相当于c语言中地址传递。</p>
-<p>需要注意以下问题：</p>
-<pre><code>int[] arr1 = {1, 2, 3};
-int[] arr2 = {4, 5, 6};
-System.out.println(Arrays.toString(arr1)); //[1, 2, 3]
-System.out.println(Arrays.toString(arr2)); //[4, 5, 6]
-change(arr1, arr2);
-System.out.println(Arrays.toString(arr1)); //[1, 2, 3]
-System.out.println(Arrays.toString(arr2)); //[4, 5, 6]
-
-public static void change(int[] arr1, int[] arr2) {
-  int[] temp = arr1;
-  arr1 = arr2;
-  arr2 = temp;
-}
-</code></pre><p>这里并不会交换数组。不要死记硬背说引用类型会修改。这里只是在调用change函数时，<br>把两个数组位置变化。并没有影响main函数中的值。所以打印出来自然就不会变了</p>
-<h3 id="递归"><a href="#递归" class="headerlink" title="递归"></a>递归</h3><p>  方法定义中调用方法本身的现象<br>  java.lang.StackOverflowError：死递归, 递归太深了<br>  递归小心重复计算的问题</p>
-<p>递归和循环在某些情况下可以相互转换。</p>
-<pre><code>class RecursionDemo3 {
-  public static void main(String[] args) {
-    System.out.println(factorial(4));
-  }
-
-  /*public static long factorial(int n) {
-    long result = 1;
-    for(int i = 2; i &lt;= n; i++) {
-      result *= i;
-    }
-    return result;
-  }*/
-
-  public static long factorial(int n) {
-    if(n == 1) return 1;
-    return n * factorial(n-1);
-  }
-}
-</code></pre><h3 id="递归经典问题-难"><a href="#递归经典问题-难" class="headerlink" title="递归经典问题(难)"></a>递归经典问题(<strong><em>难</em></strong>)</h3><p><strong>汉诺塔问题</strong>：<br>汉诺塔是根据一个传说形成的数学问题：</p>
-<p>有三根杆子A，B，C。A杆上有 N 个 (N&gt;1) 穿孔圆盘，盘的尺寸由下到上依次变小。要求按下列规则将所有圆盘移至 C 杆：</p>
-<p>每次只能移动一个圆盘；<br>大盘不能叠在小盘上面。<br>提示：可将圆盘临时置于 B 杆，也可将从 A 杆移出的圆盘重新移回 A 杆，但都必须遵循上述两条规则。</p>
-<p>问：最少要移动多少次？如何移？</p>
-<p>分析：<br>n=1:<br>  A –&gt; C<br>  count = 1</p>
-<p>n=2:<br>  A –&gt; B<br>  A –&gt; C<br>  B –&gt; C<br>  count = 3</p>
-<p>n=3:<br>  A –&gt; C<br>  A –&gt; B<br>  C –&gt; B<br>  A –&gt; C<br>  B –&gt; A<br>  B –&gt; C<br>  A –&gt; C<br>  count=7;</p>
-<p>分析：<br>  假设移动n个圆盘最小需要count(n)次，递归的公式：<br>  count(1) = 1;<br>  count(n) = 2* count(n-1) + 1 （n &gt; 1）; // 两个count(n-1)次 一次是把上面n-1个移动到B 第二次是把n-1个从B移动到C</p>
-<p>  h(1) = 1;<br>  h(n) = 2h(n-1) + 1;<br>  h(n) + 1 = 2 (h(n-1) + 1);<br>  h(n) + 1 = 2 * 2^(n-1) = 2^n;<br>  h(n) = 2^n - 1;</p>
-<p><strong>结论：从以上可以看出，递归解决的不是计算移动多少次的问题。而是要去解决如何去移动的问题</strong></p>
-<p>  如何移？<br>  定义一个函数表示把n个盘子从begin,通过middle,移动到end上面。<br>  返回值类型: void<br>  参数列表：int n, char begin, char middle, char end</p>
-<p>  递推公式：<br>    把n-1盘子从begin,经过end,移动到middle<br>    把最大的盘子从begin移动到end.<br>    把n-1盘子从middle,经过begin,移动到end</p>
-<p>可以使用递归的条件：</p>
-<ol>
-<li>大问题可以分解成子问题。</li>
-<li>子问题的解决方法和大问题一模一样，只是数据规模不一样。</li>
-<li>有终止条件。</li>
-</ol>
-<p>使用递归需要注意事项：<br>  a.StackOverflowError<br>  b.警惕重复计算的问题</p>
-<pre><code>class RecursionDemo5 {
-  public static void main(String[] args) {
-    System.out.println(&quot;请输入盘子的个数：&quot;);
-    Scanner sc = new Scanner(System.in);
-    int n = sc.nextInt();
-    /*long count = count(n);
-    System.out.println(&quot;count=&quot; + count);*/
-    hanoi(n, &apos;A&apos;, &apos;B&apos;, &apos;C&apos;);
-  }
-
-  public static long count(int n) {  //移动多少次，使用递归效率低下
-    //使用递归效率低下
-    /*if(n==1) return 1;
-    return 2 * count(n-1) + 1;*/
-
-    //可以直接通过得到的递归公式求出答案更快h(n) = 2^n - 1;
-    return (long)Math.pow(2, n) - 1;
-  }
-
-  //定义一个函数表示把n个盘子从begin,通过middle,移动到end上面
-  //递归要解决的不是最后的结果，而是过程是怎么算的
-  public static void hanoi(int n, char begin, char middle, char end) {
-    if(n == 1) {
-      System.out.println(begin + &quot; --&gt; &quot; + end);
-      return ;
-    }
-    hanoi(n-1, begin, end, middle);
-    System.out.println(begin + &quot; --&gt; &quot; + end);
-    hanoi(n-1, middle, begin, end);
-  }
-}
-</code></pre><p><strong>计算n条直线最多能把平面分成多少部分？</strong><br>分析：<br>  第一条线:可以分成两个平面<br>  第二条线：出现一个交点将分多两个平面<br>  第三条线：多分出两个焦点 两个交点分出多3个平面；<br>  。。。。<br>  之后多产生的n个焦点就多出n+1个平面<br>  第n条线时将在原来的基础上多产生n-1个焦点，即在原来的基础上多产生n个面，所以递推公式为：<br>  f(n) = f(n-1) + n;</p>
-<p>  f(1) = 2;<br>  f(n) = f(n-1) + n;</p>
-<p>  f(n) = f(n-1) + n<br>     = f(n-2) + n-1 + n<br>     = f(n-3) + n-2 + n<br>     = f(1) + 2 + 3 + … + n = n(n+1)/2 + 1;</p>
-<pre><code>import java.util.Scanner;
-class RecursionDemo6 {
-  public static void main(String[] args) {
-    System.out.println(&quot;请输入直线的条数：&quot;);
-    Scanner sc = new Scanner(System.in);
-    int n = sc.nextInt();
-    System.out.println(f(n));
-  }
-  public static int f(int n) {
-    /*if(n == 1) return 2;
-    return f(n-1) + n;*/
-    return n * (n+1) / 2 + 1;
-  }
-}
-</code></pre><p><strong>约瑟夫环</strong><br>  有n个人站成一个环,每个一个人,干掉一个人,直到只有一个人。<br>  问编号为几的人会活下来？</p>
-<p>  返回值类型: int<br>  参数列表: int</p>
-<p>分析：<br>  joseph(1) = 1<br>  joseph(2) = 1 = 2 <em> 1 - 1 = 1;<br>  joseph(3) = 3 = 2 </em> 1 + 1 = 3<br>  joseph(4) = 1 = 2 <em> 1 - 1 = 1<br>  joseph(5) = 3 = 2 </em> 1 + 1 = 3<br>  joseph(6) = 2 * 3 - 1 = 5</p>
-<p>  递推公式：<br>  joseph(1) = 1;<br>  joseph(2n) = 2 <em> joseph(n) - 1;<br>  joseph(2n+1) = 2 </em> joseph(n) + 1;</p>
-<p>  解释：<br>  这和网上看到n和n-1的关系式子不一样。网上的是：<br>  f(N,M) = (f(N-1,M) + M) % N;<br>  N表示N个人，M表示叫到M的人出列；<br>  正着推就是：<br>  N个人当叫到M的人出列时，就会重新开始报数，这样就变成N-1个人的游戏。所有的没出列的人的下标都会减M。<br>  反过来说，<br>  当N-1个人参加时，要变成N个人的比赛，就要加上M，就是之前往前走的下标。但是可能会出现溢出情况。所以要对N取余数</p>
-<p>  而老师给的递推式：<br>  先来看偶数的情况：第一轮结束：<br>  1,2,3,4,5,6 = 》 1,3,5（剩下三个人）<br>  而我们知道只有三个人时：<br>  1,2,3 =》 3 最后幸存的就是3 对应上面 1 3 5 最后活着的就是 5。<br>  1,3,5 =》 5<br>  这里就有关系就是 f(6) = f(3)<em>2 - 1 即 5 = 3</em>2 -1；</p>
-<p>  再来看奇数的情况：<br>  1,2,3,4,5,6,7 =》 1,3,5,7 =》 3,5,7 =》 7<br>  这里我要说明的是，1,3,5,7并不是第一轮剩下的人，因为奇数个的情况，所以第一轮结束1一定会死,因为剩下最后一个奇数位置的人，而在理解时候相当于在最后一个人和1之间还有一个人，这时一轮下来1就死了。接下去继续<br>  这里3,5,7 就相当于上面的 1,2,3=》3<br>  那么最后活着的就是7<br>  f(7) = f(3)<em>2 + 1 即 7 = 3</em>2 +1</p>
-<pre><code>import java.util.Scanner;
-class RecursionDemo7 {
-  public static void main(String[] args) {
-    Scanner scan = new Scanner(System.in);
-    int n = scan.nextInt();
-    System.out.println(joseph(n));
-  }
-  public static int joseph(int n) {
-    if(n &lt;= 0) return 0; //n=0会一直循环
-    if(n == 1) return 1;
-    if (n % 2 == 0) {  //偶数的情况
-      return 2 * joseph(n / 2) - 1;
-    }
-    return 2 * joseph(n / 2) + 1;  //奇数的情况
-  }
-}
-</code></pre><h2 id="星期五"><a href="#星期五" class="headerlink" title="星期五"></a>星期五</h2><h3 id="面向对象部分"><a href="#面向对象部分" class="headerlink" title="面向对象部分"></a>面向对象部分</h3><p>变量<br>成员变量和局部变量的区别<br>  a.在内存中位置不同</p>
-<pre><code>局部变量: 栈
-成员变量：堆
-</code></pre><p>  b.初始化值不同(局部变量必须初始化)</p>
-<pre><code>局部变量: 没有默认值, 没有初始化，就不能使用。
-成员变量：有默认值。
-  byte, short, int, long  0
-  float, double     0.0
-  char          &apos;\u0000&apos;
-  boolean         false
-  引用类型        null
-</code></pre><p><strong>局部变量一定要记得给初始化的值，并不像成员变量。这点很容易忘记，所以你要记得！</strong></p>
-<p>  c.在类中位置不同</p>
-<pre><code>局部变量: 方法内或者方法声明上
-成员变量：类中,方法外
-</code></pre><p>  d.生命周期不同</p>
-<pre><code>局部变量: 随着方法的入栈而开始，随着方法的出栈而消亡
-成员变量：随着对象的创建而开始, 随着对象的死亡而消亡
-</code></pre><p>  匿名对象：</p>
-<pre><code>就是没有名字的对象。
-是对象的一种简化表示形式
-</code></pre><p>  匿名对象的两种使用情况</p>
-<pre><code>对象仅仅使用一次的时候
-作为实际参数传递
-</code></pre><p>封装：<br>封装(encapsulation)<br>  封装是一种信息隐藏技术。</p>
-<p>  好处：<br>    a. 隐藏类的实现细节,实现了信息的隐藏及安全性；<br>    b. 提高了程序的模块化，且易于维护；<br>    c. 保证了数据的安全和系统的严密性;<br>    d. 将类的设计者和类的使用者分开。<br>  封装的技术包括：包, 类, 方法, 访问权限修饰符。</p>
-<p>private:<br>  私有的。是一种访问权限修饰符。<br>  被private修饰的成员变量或者成员方法只能在本类进行访问.</p>
-<p>  最常见的用法：<br>    把成员变量用private修饰<br>    然后提供getXxx()/setXxx()方法   getter &amp; setter</p>
-<p>构造方法：<br>  作用：给对象的数据进行初始化<br>  格式：<br>    方法名与类名相同<br>    没有返回值类型<br>  注意事项：</p>
-<pre><code>a. 如果没写构造方法,系统会提供无参构造方法(默认的构造方法)。
-b. 如果提供了构造方法, 系统将不再提供无参的构造方法。(建议: 自己写一个无参的构造方法)
-c. 构造方法也是可以重载的
-</code></pre><h2 id="星期六"><a href="#星期六" class="headerlink" title="星期六"></a>星期六</h2><h3 id="static"><a href="#static" class="headerlink" title="static:"></a>static:</h3><p>  静态的, 可以修饰成员<br>  特点：</p>
-<pre><code>a.随着类的加载而加载
-b.优先于对象存在
-c.被类的所有对象共享，这也是我们判断是否使用静态关键字的条件
-d.可以通过类名调用(推荐使用类名调用, 不要用对象名调用)
-</code></pre><p>  静态的成员是类所有<br>  非静态成员是对象所有</p>
-<p>注意事项：<br>  在静态方法中是没有this关键字的<br>  静态方法只能访问静态的成员<br>  非静态的方法可以访问静态的成员也可以访问非静态的成员。<br>  但是静态方法只能访问静态成员。静态上下文只能访问静态的东西。<br>  比如：静态内部类就只能访问外部类静态的属性或者方法。</p>
-<h3 id="成员变量和静态变量区别"><a href="#成员变量和静态变量区别" class="headerlink" title="成员变量和静态变量区别"></a>成员变量和静态变量区别</h3><p>  a.所属不同</p>
-<pre><code>成员变量：对象
-静态变量：类
-</code></pre><p>  b.内存中位置不同：</p>
-<pre><code>成员变量：堆
-静态变量：方法区
-</code></pre><p>  c.生命周期不同：</p>
-<pre><code>成员变量：随着对象的创建而开始, 随着对象的死亡而消失
-静态变量：随着类的加载而开始, 随着类的卸载而消失
-</code></pre><p>  d.调用方法不同：</p>
-<pre><code>成员变量：只能通过对象调用
-静态变量：可以通过对象调用，也可以用类名调用(推荐使用类名调用)
-</code></pre><h3 id="帮助文档"><a href="#帮助文档" class="headerlink" title="帮助文档"></a>帮助文档</h3><h4 id="以Scanner为例"><a href="#以Scanner为例" class="headerlink" title="以Scanner为例:"></a>以Scanner为例:</h4><p>包：java.util<br>  如果不再java.lang包下，就需要导包<br>类的层次结构：public final class Scanner extends Object implements Iterator<string><br>  继承关系<br>简单的概述：<br>   一个可以使用正则表达式来解析基本类型和字符串的简单文本扫描器。<br>版本信息：<br>  1.5（JDK的发展历史）<br>构造方法：<br>  创建对象<br>方法：查看简要信息以及详细信息<br>  String nextLine()</string></p>
-<h4 id="制作帮助文档："><a href="#制作帮助文档：" class="headerlink" title="制作帮助文档："></a>制作帮助文档：</h4><p>首先你要写好一个工具类：<br>公共类的名字必须和文件的名字一致<br>一个文件里面最多只能有一个公共类<br>默认只解析 public 和 protected 的文档注释信息</p>
-<pre><code>/**
-这是一个基本的数学工具类, 提供简单的加减乘除运算
-@author Henson_z
-@version v1.0
-*/
-public class MyMath {
-  /**
-    将构造方法私有化, 外界不能创建对象
-  */
-  private MyMath(){
-
-  }
-  /**
-  求两个数之和
-  */
-  public static int add(int a, int b) {
-    return a + b;
-  }
-  /**
-  求两个数之差
-  */
-  public static int minus(int a, int b) {
-    return a - b;
-  }
-  /**
-  求两个数之积
-  */
-  public static long multiply(int a, int b) {
-    return a * b;
-  }
-  /**
-  求两个数之商
-  */
-  public static double divide(int a, int b) {
-    return 1.0 * a / b;
-  }
-}
-</code></pre><p>然后到命令行输入：</p>
-<pre><code>javadoc -d 目录 -author -version MyMath.java
-</code></pre><h2 id="markdown一些使用格式问题"><a href="#markdown一些使用格式问题" class="headerlink" title="markdown一些使用格式问题"></a>markdown一些使用格式问题</h2><p>表示大于号小于号不能直接写要</p>
-<pre><code>大于&amp;gt;小于号是&amp;lt;
-</code></pre><p>大于&gt;小于号&lt;</p>
-<h2 id="总结最后"><a href="#总结最后" class="headerlink" title="总结最后"></a>总结最后</h2><p>这是一周的内容，感觉还是很多的，还有一些东西需要消化。知道不是很难但是需要踏实的去运用。而不是瞎几把死记硬背。<br>纸上得来终觉浅，绝知此事要躬行。加油吧</p>
-
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/06/30/Java总结（一）/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
           
+          <!--/noindex-->
         
       
     </div>
-    
-    
-    
 
     
-
     
-
     
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
   </div>
   
   
   
   </article>
 
-
     
-      
-
-  
-
+        <article itemscope itemtype="http://schema.org/Article">
   
   
   
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
+  <div class="post-block home">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/09/JAVA基础50题小结/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="王邸">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/head.jpeg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="路要坚持">
     </span>
-
-    
       <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/06/09/JAVA基础50题小结/" itemprop="url">JAVA基础50题小结</a></h1>
-        
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/2019/06/09/JAVA基础50题小结/" class="post-title-link" itemprop="url">JAVA基础50题小结</a>
+          
+        </h1>
 
         <div class="post-meta">
-          <span class="post-time">
-            
+            <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
               </span>
+              <span class="post-meta-item-text">发表于</span>
+
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-06-09T15:48:04+08:00">
-                2019-06-09
-              </time>
-            
 
-            
-
-            
-          </span>
-
-          
-
+              <time title="创建时间：2019-06-09 15:48:04" itemprop="dateCreated datePublished" datetime="2019-06-09T15:48:04+08:00">2019-06-09</time>
+            </span>
           
             
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
+
+            
+              <span class="post-meta-item">
                 <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
+                  <i class="fa fa-calendar-check-o"></i>
                 </span>
-                <a href="/2019/06/09/JAVA基础50题小结/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/06/09/JAVA基础50题小结/" itemprop="commentCount"></span>
-                </a>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-06-17 11:58:29" itemprop="dateModified" datetime="2019-06-17T11:58:29+08:00">2019-06-17</time>
               </span>
             
           
 
           
+            <span id="/2019/06/09/JAVA基础50题小结/" class="post-meta-item leancloud_visitors" data-flag-title="JAVA基础50题小结" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
           
-             <span id="/2019/06/09/JAVA基础50题小结/" class="leancloud_visitors" data-flag-title="JAVA基础50题小结">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">Visitors&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2019/06/09/JAVA基础50题小结/#comments" itemprop="discussionUrl"><span class="post-comments-count valine-comment-count" data-xid="/2019/06/09/JAVA基础50题小结/" itemprop="commentCount"></span></a>
+  </span>
+  
+  
 
         </div>
       </header>
-    
 
     
     
@@ -1107,156 +379,102 @@ public class MyMath {
     <div class="post-body" itemprop="articleBody">
 
       
-      
-
-      
-        
+          <h2 id="开头"><a href="#开头" class="headerlink" title="开头"></a>开头</h2><p>为了去培训，最近在写JAVA基础的50题。这些题目不算太难，有一些思路总结一下，涉及到一些JAVA的知识。使用输入输出等等。那我们就开始吧！</p><h3 id="50题精选"><a href="#50题精选" class="headerlink" title="50题精选"></a>50题精选</h3><p>古典问题：有一对兔子，从出生后第3个月起每个月都生一对兔子，小兔子长到第三个月后每个月又生一对兔子，假如兔子都不死，问每个月的兔子对数为多少？<br>答： 这个问题看起来很复杂 但是把每个月兔子数写出来就很容易发现规律 1 1 2 3 5 8 13 21….从第三个月开始每个月都是前两个月兔子的加和。这里就用递归来实现就好；</p>
+          <!--noindex-->
           
-            <h2 id="开头"><a href="#开头" class="headerlink" title="开头"></a>开头</h2><p>为了去培训，最近在写JAVA基础的50题。这些题目不算太难，有一些思路总结一下，涉及到一些JAVA的知识。使用输入输出等等。那我们就开始吧！</p>
-<h3 id="50题精选"><a href="#50题精选" class="headerlink" title="50题精选"></a>50题精选</h3><p>古典问题：有一对兔子，从出生后第3个月起每个月都生一对兔子，小兔子长到第三个月后每个月又生一对兔子，假如兔子都不死，问每个月的兔子对数为多少？<br>答： 这个问题看起来很复杂 但是把每个月兔子数写出来就很容易发现规律 1 1 2 3 5 8 13 21….从第三个月开始每个月都是前两个月兔子的加和。这里就用递归来实现就好；</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">public class prog1 &#123;</div><div class="line"></div><div class="line">  public static void main(String[] args) &#123;</div><div class="line">    int n = 10;</div><div class="line">    int sum = rabbits(n);</div><div class="line">    System.out.println(n + &quot;个月一共有：&quot; + sum + &quot;只兔子&quot;);</div><div class="line"></div><div class="line">  &#125;</div><div class="line">  private static int rabbits(int n) &#123;</div><div class="line">    if (n==1 || n==2) &#123;   //先判断出口</div><div class="line">      return 1;</div><div class="line">    &#125;</div><div class="line">    else &#123;</div><div class="line">      return rabbits(n-1)+rabbits(n-2);</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>题目：输入三个整数x,y,z，请把这三个数由小到大输出。<br>自己写起来就比较难受，题目参考答案直接交换两个数这就变得很简单了<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">private static String sort(int x,int y,int z)&#123;</div><div class="line">    String s = null;</div><div class="line">    if(x&gt;y)&#123;</div><div class="line">      int t = x;</div><div class="line">      x = y;</div><div class="line">      y = t;</div><div class="line">    &#125;</div><div class="line">    if(x&gt;z)&#123;</div><div class="line">      int t = x;</div><div class="line">      x = z;</div><div class="line">      z = t;</div><div class="line">    &#125;</div><div class="line">    if(y&gt;z)&#123;</div><div class="line">      int t = z;</div><div class="line">      z = y;</div><div class="line">      y = t;</div><div class="line">    &#125;</div><div class="line">    s = x+&quot; &quot;+y+&quot; &quot;+z;</div><div class="line">    return s;</div><div class="line">  &#125;</div></pre></td></tr></table></figure></p>
-<p>题目：两个乒乓球队进行比赛，各出三人。甲队为a,b,c三人，乙队为x,y,z三人。已抽签决定比赛名单。有人向队员打听比赛的名单。a说他不和x比，c说他不和x,z比，请编程序找出三队赛手的名单。<br>思路：这一题是一个简单的条件找答案的问题。三层循环找到符合条件</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">public class prog18 &#123;</div><div class="line"></div><div class="line">  public static void main(String[] args) &#123;</div><div class="line">      char arr1[] = new char[] &#123;&apos;x&apos;,&apos;y&apos;,&apos;z&apos;&#125;;</div><div class="line">      // i,j,k用来表示a,b,c三个人；</div><div class="line">      for(int i=0; i&lt;arr1.length; i++) &#123;</div><div class="line">        for(int j=0; j&lt;arr1.length; j++) &#123;</div><div class="line">          for(int k=0; k&lt;arr1.length; k++) &#123;</div><div class="line">            if(i!=j&amp;&amp;j!=k&amp;&amp;k!=i) &#123;  // 防止重复比赛</div><div class="line">              if(arr1[i]!=&apos;x&apos; &amp;&amp; arr1[k]!=&apos;x&apos;&amp;&amp; arr1[k]!=&apos;z&apos;) &#123;</div><div class="line">                System.out.println(&quot;a和&quot; + arr1[i] + &quot;，b和&quot; + arr1[j] + &quot;，c和&quot; + arr1[k] + &quot;进行比赛&quot;);</div><div class="line">              &#125;</div><div class="line">            &#125;</div><div class="line">          &#125;</div><div class="line">        &#125;</div><div class="line">      &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>题目：打印出如下图案（菱形<br>&nbsp;&nbsp;&nbsp;&nbsp;*<br>&nbsp;&nbsp;***<br>&nbsp;*****<br>*******<br>&nbsp;*****<br>&nbsp;&nbsp;***<br>&nbsp;&nbsp;&nbsp;&nbsp;*<br>思路就是：把上半部分和下半部分别输出i，j分别表示行和列 ，上四行一次输出。下三行依次输出。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">public class prog19 &#123;</div><div class="line"></div><div class="line">  public static void main(String[] args) &#123;</div><div class="line">    for(int i=0; i &lt; 4; i++) &#123;</div><div class="line">      for(int j=0; j &lt; 8; j++) &#123;</div><div class="line">        if(j &lt; 3-i) &#123;</div><div class="line">          System.out.print(&quot; &quot;);</div><div class="line">        &#125;else if(j&gt;=3-i &amp;&amp; j&lt;=i+3) &#123;</div><div class="line">          System.out.print(&quot;*&quot;);</div><div class="line">        &#125;</div><div class="line">      &#125;</div><div class="line">      System.out.println(&quot;&quot;);//换行</div><div class="line">    &#125;</div><div class="line">    for(int i=1;i&lt;4;i++) &#123;</div><div class="line">      for(int j=0;j&lt;8;j++) &#123;</div><div class="line">        if(j&lt;i) &#123;</div><div class="line">          System.out.print(&quot; &quot;);</div><div class="line">        &#125;else if(j&gt;=i &amp;&amp; j&lt;=6-i) &#123;</div><div class="line">          System.out.print(&quot;*&quot;);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">      &#125;</div><div class="line">      System.out.println(&quot;&quot;);  //换行</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>题目：打印出杨辉三角形（要求打印出10行如下图）<br>思路：通过分析得出杨辉三角的一个规律：<br>第n行就有n个数，第一个和第n个数都是为1的，如果我们用i表示行数；j表示列数<br>arr[i][j]=arr[i-1][j]+arr[i-1][j-1]</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div></pre></td><td class="code"><pre><div class="line">public class prog33 &#123;</div><div class="line"></div><div class="line">  public static void main(String[] args) &#123;</div><div class="line"></div><div class="line">    int n = 10;</div><div class="line">    int arr[][] = new int[n][n];</div><div class="line">    CreateNum(arr);</div><div class="line">    ShowNum(arr);</div><div class="line">    //findNum();</div><div class="line">  &#125;</div><div class="line">  private static void CreateNum(int arr[][]) &#123;</div><div class="line"></div><div class="line">    for(int i = 0; i &lt; arr.length; i++) &#123;</div><div class="line">      for(int j = 0;j &lt;= i; j++) &#123;</div><div class="line">        if(j == i || j == 0) &#123;//判断每行两端的数</div><div class="line">          arr[i][j] = 1;</div><div class="line">        &#125; else &#123;</div><div class="line">          arr[i][j] = arr[i-1][j]+arr[i-1][j-1];</div><div class="line">        &#125;</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  private static void ShowNum(int arr[][]) &#123;</div><div class="line">    for(int i = 0;i &lt; arr.length;i++) &#123;</div><div class="line"></div><div class="line">      int k = i;    //输出空格</div><div class="line">      while(k&lt;arr.length) &#123;</div><div class="line">        System.out.print(&quot; &quot;);</div><div class="line">        k++;</div><div class="line">      &#125;</div><div class="line"></div><div class="line">      for(int j = 0;j&lt;arr[i].length;j++) &#123;</div><div class="line">        if(arr[i][j]!=0) &#123;</div><div class="line">          System.out.print(arr[i][j]+&quot; &quot;);</div><div class="line">        &#125;</div><div class="line">      &#125;</div><div class="line">      System.out.println();</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>题目：有n个人围成一圈，顺序排号。从第一个人开始报数（从1到3报数），凡报到3的人退出圈子，问最后留下的是原来第几号的那位。<br>思路：递归判断最后一个人,用下标代表一个人的位置实现不行。需要设置一个变量来进行判断第几个人<br>发现自己理解错了因为要循环报数 所以不能直接迭代 要一直循环数组到数组就剩下一个人<br>需要设置几个标志：<br>isIn[n] :表示这个人是否还是圈子里面<br>flag: 表示报数 报到3就把isIn变成false 重新置0在<br>index: 表示下标。当扫描完一遍从新把index置0<br>count:记录圈子里还有多少个人<br>循环就是<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">while(count&gt;1)&#123;</div><div class="line">  if(isIn(index))&#123;</div><div class="line">    flag++;</div><div class="line">    if(flag == 3)&#123;</div><div class="line">      isIn[index] = false;</div><div class="line">      count--;</div><div class="line">      flag = 0;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">  index++;</div><div class="line">  if(index == arr.length)&#123;</div><div class="line">    index = 0;//重新开始查找</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>整个题目代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line">import java.util.Scanner;</div><div class="line">public class prog37 &#123;</div><div class="line"></div><div class="line">  public static void main(String[] args) &#123;</div><div class="line">    Scanner scan = new Scanner(System.in);</div><div class="line">    System.out.println(&quot;请输入人数： &quot;);</div><div class="line">    int m = scan.nextInt();</div><div class="line"></div><div class="line">    scan.close();</div><div class="line">    boolean isIn[]  = new boolean[m]; //表示在数组里面</div><div class="line">    for(int i = 0; i &lt; m; i++) &#123;</div><div class="line">      isIn[i] = true;</div><div class="line">    &#125;</div><div class="line">    int count = m;     //圈内人数</div><div class="line">    int flag = 0;      //表示报号</div><div class="line">    int index = 0;     //下标</div><div class="line">    while(count &gt; 1) &#123;</div><div class="line">      if(isIn[index]) &#123;</div><div class="line">        flag++;</div><div class="line">        if(flag == 3) &#123;</div><div class="line">          isIn[index] = false;</div><div class="line">          flag = 0;</div><div class="line">          count--;</div><div class="line">        &#125;</div><div class="line">      &#125;</div><div class="line">      index++;</div><div class="line">      if(index == m) &#123;   //最后又加了一次</div><div class="line">        index = 0;</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">    for(int j=0;j&lt;m;j++) &#123;</div><div class="line">      if(isIn[j]) &#123;</div><div class="line">        System.out.print(&quot;数为&quot;+(j+1));</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>题目：有五个学生，每个学生有3门课的成绩，从键盘输入以上数据（包括学生号，姓名，三门课成绩），<br>计算出平均成绩，将原有的数据和计算出的平均分数存放在磁盘文件”stud”中。<br>思路： 创建一个类把数据存在里面<br>主要是用了两个没用过的类<br>BufferedReader buf = new BufferedReader(new InputStreamReader(System.in));<br>FileWriter fw = new FileWriter(“E://test//stud.txt”,true);  // 内容写入文件末尾处<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div></pre></td><td class="code"><pre><div class="line">import java.io.*;</div><div class="line">class Student&#123;</div><div class="line">  private String name;</div><div class="line">  private String Id;</div><div class="line">  private int[] grade;</div><div class="line">  private int average;</div><div class="line">  public String getName() &#123;</div><div class="line">    return name;</div><div class="line">  &#125;</div><div class="line">  public void setName(String name) &#123;</div><div class="line">    this.name = name;</div><div class="line">  &#125;</div><div class="line">  public String getId() &#123;</div><div class="line">    return Id;</div><div class="line">  &#125;</div><div class="line">  public void setId(String id) &#123;</div><div class="line">    Id = id;</div><div class="line">  &#125;</div><div class="line">  public int[] getGrade() &#123;</div><div class="line">    return grade;</div><div class="line">  &#125;</div><div class="line">  public int getGradeEle(int i) &#123;</div><div class="line">    return grade[i];</div><div class="line">  &#125;</div><div class="line">  public void setGrade(int[] grade) &#123;</div><div class="line">    this.grade = grade;</div><div class="line">  &#125;</div><div class="line">  public int getAverage() &#123;</div><div class="line">    return average;</div><div class="line">  &#125;</div><div class="line">  public void setAverage(int average) &#123;</div><div class="line">    this.average = average;</div><div class="line">  &#125;</div><div class="line">  public void getInfo() &#123;</div><div class="line">    System.out.println(&quot;姓名：&quot;+this.name+&quot;学号：&quot;+this.Id+&quot;平均分：&quot;+this.average);</div><div class="line">  &#125;</div><div class="line"></div><div class="line"></div><div class="line">&#125;</div><div class="line">public class prog50 &#123;</div><div class="line"></div><div class="line">  public static void main(String[] args) throws Exception&#123;</div><div class="line">    prog50 stud = new prog50();</div><div class="line">    Student s1 = new Student();</div><div class="line">    Student s2 = new Student();</div><div class="line">    Student s3 = new Student();</div><div class="line">    Student s4 = new Student();</div><div class="line">    Student s5 = new Student();</div><div class="line">    stud.input(s1);</div><div class="line">    stud.output(s1);</div><div class="line">    stud.input(s2);</div><div class="line">    stud.output(s2);</div><div class="line">    stud.input(s3);</div><div class="line">    stud.output(s3);</div><div class="line">    stud.input(s4);</div><div class="line">    stud.output(s4);</div><div class="line">    stud.input(s5);</div><div class="line">    stud.output(s5);</div><div class="line">    System.out.print(&quot;输入完成&quot;);</div><div class="line"></div><div class="line">  &#125;</div><div class="line">  private void input(Student s) throws Exception&#123;</div><div class="line">    BufferedReader buf = new BufferedReader(new InputStreamReader(System.in));</div><div class="line">    boolean flag = true;// 标志位</div><div class="line">    while(flag) &#123;</div><div class="line"></div><div class="line">      System.out.println(&quot;输入你的名字&quot;);</div><div class="line">      String str1 = buf.readLine();</div><div class="line">      s.setName(str1);</div><div class="line"></div><div class="line">      System.out.println(&quot;输入你的学号&quot;);</div><div class="line">      String str2 = buf.readLine();</div><div class="line">      s.setId(str2);</div><div class="line"></div><div class="line">      int sum = 0;</div><div class="line">      int countArr[] = new int[3];</div><div class="line">      for(int i = 0;i &lt; 3 ; i++) &#123;</div><div class="line">        System.out.println(&quot;输入你的第&quot;+(i+1)+&quot;科成绩&quot;);</div><div class="line">        String s3 = buf.readLine();</div><div class="line">        sum += Integer.valueOf(s3);</div><div class="line">          countArr[i]= Integer.valueOf(s3);</div><div class="line">      &#125;</div><div class="line">      s.setGrade(countArr);</div><div class="line">      s.setAverage(sum/3);</div><div class="line"></div><div class="line">      flag = false;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">  private void output(Student s1) throws Exception&#123;</div><div class="line">    FileWriter fw = new FileWriter(&quot;E://test//stud.txt&quot;,true);  // 内容写入文件末尾处</div><div class="line">    BufferedWriter bw = new BufferedWriter(fw);</div><div class="line">    bw.write(&quot;Id.  &quot;+&quot;Name  &quot;+&quot;第一科成绩  &quot;+&quot;第二课成绩  &quot;+&quot;第三科成绩  &quot;+&quot;三科平均分  &quot;);</div><div class="line">    bw.newLine();</div><div class="line">    bw.write(s1.getId()+&quot;  &quot;+s1.getName()+&quot;  &quot;+s1.getGradeEle(0)+&quot;  &quot;+s1.getGradeEle(1)+&quot;  &quot;+s1.getGradeEle(2)+&quot;  &quot;+s1.getAverage());</div><div class="line">    bw.newLine();</div><div class="line">    bw.close();</div><div class="line">  &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>题目：输入两个正整数m和n，求其最大公约数和最小公倍数。<br>思路：求最大公因数有三种每种分别实现以下：相减法穷举法和辗除法<br>      最小公倍数：两个数相乘除以最大公因数即为最小公倍数<br>总结： 相减法和辗除法原理并不清楚。而穷举法比较像之前中学数学求公因数的方法</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div></pre></td><td class="code"><pre><div class="line">public class prog6 &#123;</div><div class="line">  public static void main(String[] args) &#123;</div><div class="line">    int a= 99;</div><div class="line">    int b= 33;</div><div class="line">    findCommon1(a,b);</div><div class="line">    findCommon2(a,b);</div><div class="line">    findCommon3(a,b);</div><div class="line">    findCommonMulti(a,b,findCommon3(a,b));</div><div class="line"></div><div class="line"></div><div class="line">  &#125;</div><div class="line">  //方法一：相减法</div><div class="line">  //if a&gt;b a=a-b   if b&gt;a b = b-a  if a=b 求出结果</div><div class="line">  private static void findCommon1(int a,int b) &#123;</div><div class="line">    while(a!=b) &#123;</div><div class="line">      if(a&gt;b) &#123;</div><div class="line">        a = a-b;</div><div class="line">      &#125; else if(a&lt;b) &#123;</div><div class="line">        b = b-a;</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">    if(a == b) &#123;</div><div class="line">      System.out.println(&quot;最大公因数：&quot;+ a);</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">  //方法二:穷举法</div><div class="line">  //思路：1.选出a，b中最小的一个数字放到c中  2.分别用a，b对c求余数，即看是否能被c整除</div><div class="line">    //      3.直到a，b同时都能被c整除，c是最大公因数 4.如不能整除，c-- (c的值减一) 继续从第二步开始执行</div><div class="line"></div><div class="line">  private static void findCommon2(int a,int b) &#123;</div><div class="line">    int c = (a&gt;b)?b:a;</div><div class="line">    while(a%c != 0 || b%c !=0) &#123;</div><div class="line">      c--;</div><div class="line">    &#125;</div><div class="line">    if(a%c == 0 &amp;&amp; b%c ==0) &#123;</div><div class="line">      System.out.println(&quot;最大公因数：&quot;+ c);</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">  //方法三：辗除法</div><div class="line">  //思路；1.将两整数求余 a%b = c    2.如果c = 0;则b为最大公约数</div><div class="line">    //      3.如果c != 0,则 a = b；b = c；继续从1开始执行4.也就是说该循环的是否继续的判断条件就是c是否为0</div><div class="line"></div><div class="line">  private static int findCommon3(int a, int b) &#123;</div><div class="line">    int c = a%b;</div><div class="line">    while(c!=0) &#123;</div><div class="line">      a=b;</div><div class="line">      b=c;</div><div class="line">      c=a%b;</div><div class="line">    &#125;</div><div class="line">    System.out.println(&quot;最大公因数：&quot;+ b);</div><div class="line">    return b;</div><div class="line">  &#125;</div><div class="line">  private static void findCommonMulti(int a,int b,int c) &#123;</div><div class="line">    System.out.println(&quot;最小公倍数：&quot;+ (a*b)/c);</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>题目：一个数如果恰好等于它的因子之和，这个数就称为”完数”。例如6=1＋2＋3.编程找出1000以内的所有完数。<br>思路：一开始思路错了以为是：先找出因数然后再+1，后来才知道原来是对完数的定义错了<br>完数的定义是所有的约数除去自身之外的所有的数的和。<br>例如：28 = 1X2X2X7  2,2,7是因数 。 但是完数要的是所有能被整除的数有 1,2,4,7,14<br>先求出所有能被整除的数放在数组，然后再加和<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">private static void findPerfect(int n) &#123;</div><div class="line">  //先找因数</div><div class="line">  int arr[] = new int[100];//存放因数</div><div class="line">  int index = 0;</div><div class="line">  int num =  n;           //保存n用于比较</div><div class="line">  int sum = 0;</div><div class="line">  String s = &quot;&quot;;</div><div class="line">  for(int i=1; i &lt; n/2+1; i++) &#123;     // 这里只用扫描一半约数的范围除了自身以外其他均小于等于一半;</div><div class="line">    if(n%i == 0) &#123;               // 求质因数这里是for循环为了就是怕错过相同的因数例如4 = 2*2;</div><div class="line">      arr[index++] = i;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  for(int k=0; k&lt;index; k++) &#123;</div><div class="line">    sum += arr[k];</div><div class="line">    if(k == 0) &#123;</div><div class="line">      s += arr[k];</div><div class="line">    &#125; else &#123;</div><div class="line">      s += &quot;+&quot; + arr[k];</div><div class="line">    &#125;</div><div class="line"></div><div class="line">  &#125;</div><div class="line"></div><div class="line">  if(sum == num) &#123;</div><div class="line">    System.out.println(&quot;完数：&quot;+num + &quot;=&quot; + s);</div><div class="line">  &#125;</div><div class="line"></div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>马上就要去武汉学习了。希望能成为自己想成为的样子。写代码要坚持!总会有好结果的</p>
-
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/06/09/JAVA基础50题小结/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
           
+          <!--/noindex-->
         
       
     </div>
-    
-    
-    
 
     
-
     
-
     
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
   </div>
   
   
   
   </article>
 
-
     
-      
-
-  
-
+        <article itemscope itemtype="http://schema.org/Article">
   
   
   
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
+  <div class="post-block home">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/27/hexoHelp/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="王邸">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/head.jpeg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="路要坚持">
     </span>
-
-    
       <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/05/27/hexoHelp/" itemprop="url">hexoHelp</a></h1>
-        
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/2019/05/27/hexoHelp/" class="post-title-link" itemprop="url">hexoHelp</a>
+          
+        </h1>
 
         <div class="post-meta">
-          <span class="post-time">
-            
+            <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
               </span>
+              <span class="post-meta-item-text">发表于</span>
+
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-27T15:53:35+08:00">
-                2019-05-27
-              </time>
+
+              <time title="创建时间：2019-05-27 15:53:35 / 修改时间：16:02:43" itemprop="dateCreated datePublished" datetime="2019-05-27T15:53:35+08:00">2019-05-27</time>
+            </span>
+          
             
 
             
-
-            
-          </span>
-
           
 
           
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/05/27/hexoHelp/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/05/27/hexoHelp/" itemprop="commentCount"></span>
-                </a>
+            <span id="/2019/05/27/hexoHelp/" class="post-meta-item leancloud_visitors" data-flag-title="hexoHelp" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
               </span>
-            
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
           
-
-          
-          
-             <span id="/2019/05/27/hexoHelp/" class="leancloud_visitors" data-flag-title="hexoHelp">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">Visitors&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2019/05/27/hexoHelp/#comments" itemprop="discussionUrl"><span class="post-comments-count valine-comment-count" data-xid="/2019/05/27/hexoHelp/" itemprop="commentCount"></span></a>
+  </span>
+  
+  
 
         </div>
       </header>
-    
 
     
     
@@ -1264,145 +482,102 @@ public class MyMath {
     <div class="post-body" itemprop="articleBody">
 
       
-      
-
-      
-        
+          <h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>这是一个简单的hexo使用技巧的总结。两年不玩了，最近从新搞出来，是不要要总结一下呢</p><h2 id="一些指令的用法"><a href="#一些指令的用法" class="headerlink" title="一些指令的用法"></a>一些指令的用法</h2><p>生成一个新的日志文档:在blog的目录下面输入:<br><code>hexo new filename</code></p><p>要清除本地生成的文件在blog的目录下面输入:<br><code>hexo clean</code></p><p>要重新生成文件在blog的目录下面输入:<br><code>hexo g</code></p>
+          <!--noindex-->
           
-            <h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>这是一个简单的hexo使用技巧的总结。两年不玩了，最近从新搞出来，是不要要总结一下呢</p>
-<h2 id="一些指令的用法"><a href="#一些指令的用法" class="headerlink" title="一些指令的用法"></a>一些指令的用法</h2><p>生成一个新的日志文档:在blog的目录下面输入:<br><code>hexo new filename</code></p>
-<p>要清除本地生成的文件在blog的目录下面输入:<br><code>hexo clean</code></p>
-<p>要重新生成文件在blog的目录下面输入:<br><code>hexo g</code></p>
-<p>想发布在git在blog的目录下面输入:<br><code>hexo d</code></p>
-<p>当然可以通过help来查看还有什么命令可以用，因为太久不用了。所以可能多了很多功能都没用</p>
-
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/05/27/hexoHelp/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
           
+          <!--/noindex-->
         
       
     </div>
-    
-    
-    
 
     
-
     
-
     
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
   </div>
   
   
   
   </article>
 
-
     
-      
-
-  
-
+        <article itemscope itemtype="http://schema.org/Article">
   
   
   
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
+  <div class="post-block home">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/27/仰望天空，脚踏实地/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="王邸">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/head.jpeg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="路要坚持">
     </span>
-
-    
       <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/05/27/仰望天空，脚踏实地/" itemprop="url">仰望天空，脚踏实地</a></h1>
-        
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/2019/05/27/仰望天空，脚踏实地/" class="post-title-link" itemprop="url">仰望天空，脚踏实地</a>
+          
+        </h1>
 
         <div class="post-meta">
-          <span class="post-time">
-            
+            <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
               </span>
+              <span class="post-meta-item-text">发表于</span>
+
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-27T12:50:38+08:00">
-                2019-05-27
-              </time>
+
+              <time title="创建时间：2019-05-27 12:50:38 / 修改时间：15:47:07" itemprop="dateCreated datePublished" datetime="2019-05-27T12:50:38+08:00">2019-05-27</time>
+            </span>
+          
             
 
             
-
-            
-          </span>
-
           
 
           
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/05/27/仰望天空，脚踏实地/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/05/27/仰望天空，脚踏实地/" itemprop="commentCount"></span>
-                </a>
+            <span id="/2019/05/27/仰望天空，脚踏实地/" class="post-meta-item leancloud_visitors" data-flag-title="仰望天空，脚踏实地" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
               </span>
-            
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
           
-
-          
-          
-             <span id="/2019/05/27/仰望天空，脚踏实地/" class="leancloud_visitors" data-flag-title="仰望天空，脚踏实地">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">Visitors&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2019/05/27/仰望天空，脚踏实地/#comments" itemprop="discussionUrl"><span class="post-comments-count valine-comment-count" data-xid="/2019/05/27/仰望天空，脚踏实地/" itemprop="commentCount"></span></a>
+  </span>
+  
+  
 
         </div>
       </header>
-    
 
     
     
@@ -1410,181 +585,102 @@ public class MyMath {
     <div class="post-body" itemprop="articleBody">
 
       
-      
-
-      
-        
+          <h2 id="从头就是开始"><a href="#从头就是开始" class="headerlink" title="从头就是开始"></a>从头就是开始</h2><p>看到上一次写博客已经是很久很久之前了：2017年8月18日。那是两年前的夏天，刚刚毕业而且还做着<strong>第一份正式的工作：一个前端的开发工程师</strong>。一切以为都是新的开始。但是后来才发现是我自己太紧张了。很多事情都看的格外的重要。还没在社会上走几步就病倒了。在家休息，也放松了好久好久。还顺便考了次研究生。但是却没有什么收获，身体也是基本处在一个水平。之后在过年前去找了<strong>第二份工作：ICT测试工程师</strong>。这是和硬件相关的一个职业。所有的技能都是在工作中积累的。上手并不困难。因为并不需要自己去创造什么东西。只需要去制作一些测试文件，自动生成测试代码。你需要做的就是去编写测试的参数。和解决一些测试的异常这些东西我也有记录。理论上只用到了模电、数电和单片机等会有涉及到相关的元器件的内容。虽然领导带我很好，但是这个行业并不喜欢。而且没有创造出一些我自己的东西。于是又回去考研，这次也失败了。现在准备要去培训，去学习JAVA。看来是一定要走计算机这条路了。然而你要做的事情就是不要想太多了。学会冥想学会去放下那些痛苦和折磨。只有你自己才能救自己出来。</p>
+          <!--noindex-->
           
-            <h2 id="从头就是开始"><a href="#从头就是开始" class="headerlink" title="从头就是开始"></a>从头就是开始</h2><p>看到上一次写博客已经是很久很久之前了：2017年8月18日。那是两年前的夏天，刚刚毕业而且还做着<strong>第一份正式的工作：一个前端的开发工程师</strong>。一切以为都是新的开始。但是后来才发现是我自己太紧张了。很多事情都看的格外的重要。还没在社会上走几步就病倒了。在家休息，也放松了好久好久。还顺便考了次研究生。但是却没有什么收获，身体也是基本处在一个水平。之后在过年前去找了<strong>第二份工作：ICT测试工程师</strong>。这是和硬件相关的一个职业。所有的技能都是在工作中积累的。上手并不困难。因为并不需要自己去创造什么东西。只需要去制作一些测试文件，自动生成测试代码。你需要做的就是去编写测试的参数。和解决一些测试的异常这些东西我也有记录。理论上只用到了模电、数电和单片机等会有涉及到相关的元器件的内容。虽然领导带我很好，但是这个行业并不喜欢。而且没有创造出一些我自己的东西。于是又回去考研，这次也失败了。现在准备要去培训，去学习JAVA。看来是一定要走计算机这条路了。然而你要做的事情就是不要想太多了。学会冥想学会去放下那些痛苦和折磨。只有你自己才能救自己出来。</p>
-<h2 id="这两年的一个时间表"><a href="#这两年的一个时间表" class="headerlink" title="这两年的一个时间表"></a>这两年的一个时间表</h2><p>回顾一下这两年的时间。原本今天是要开始写JAVA的题目的。但是我还是选择先把自己过去的两年整理一下。毕竟低落了太长时间了。昨天刚重新看了《头文字D》周杰伦的电影。里面最经典的台词：<strong>人最重要的是要找到属于自己的世界，只有找到属于自己的世界，人生才有意义。</strong>我就一直在问自己计算机真的是我自己人生的世界吗？或许是或许不是。每天起床记得的只是打游戏和睡觉。就像行尸走肉一样。一点生活的气息都没有。虽然身体还是很不好。但是这个世界上每个人都应该有自己存在的意义。而不是在游戏中寻找短暂的快乐吧。很多东西只是我不想前进的借口罢了。</p>
-<table>
-<thead>
-<tr>
-<th>时间</th>
-<th style="text-align:center">内容</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>2017/07/01</td>
-<td style="text-align:center">正式从华工毕业了</td>
-</tr>
-<tr>
-<td>2017/09/01</td>
-<td style="text-align:center">在工作了快半年的公司辞职回家休息</td>
-</tr>
-<tr>
-<td>2017/12/23</td>
-<td style="text-align:center">参加了人生中的第一次考研，没什么心情考研导致失败</td>
-</tr>
-<tr>
-<td>2018/03/04</td>
-<td style="text-align:center">正式加入工作，一名ICT测试工程师</td>
-</tr>
-<tr>
-<td>2018/08/01</td>
-<td style="text-align:center">正式决定要去考研，辞职备考</td>
-</tr>
-<tr>
-<td>2018/12/25</td>
-<td style="text-align:center">参加了人生第二次计算机考试，最终还是倒下了</td>
-</tr>
-<tr>
-<td>2019/06/01</td>
-<td style="text-align:center">准备去武汉学习JAVA计算机</td>
-</tr>
-</tbody>
-</table>
-<p>时间是非常宝贵的，转眼已经过去两年了。然而我的人生还是像少年一样空白无比。虽然生病会使我们心不在焉。很多事情都缺乏了勇气。只有放平心态，走好自己的路。才能实现自己，自信的活着。你要做的就是不要想太多其他的东西。而是为了自己的目标努力奋斗。</p>
-<h2 id="思考在最后"><a href="#思考在最后" class="headerlink" title="思考在最后"></a>思考在最后</h2><p>今天2019年5月27日。把自己的博客又翻出来了，可以继续在里面记录一些自己的故事。记录一些感慨，问题，技术，等等。这两年的收获，我会陆陆续续的补上的。也许这两年不能说很好，但是我却总结出了一个非常简单的道理。<strong>坚持就是胜利。</strong>很多事情失败都因为自己的半途而废而失败的，这句话用在我自己身上一点不为过。这个世界有太多的东西来影响我们思考；吸收我们的精力。导致很多东西认知永远停留在表面。一定要坚持。不管是早睡早起、每天背单词、每天运动、每天练字、还是每天保持冷静。只有坚持才能成功。</p>
-
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/05/27/仰望天空，脚踏实地/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
           
+          <!--/noindex-->
         
       
     </div>
-    
-    
-    
 
     
-
     
-
     
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
   </div>
   
   
   
   </article>
 
-
     
-      
-
-  
-
+        <article itemscope itemtype="http://schema.org/Article">
   
   
   
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
+  <div class="post-block home">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/14/08-14-code-style/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="王邸">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/head.jpeg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="路要坚持">
     </span>
-
-    
       <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/08/14/08-14-code-style/" itemprop="url">08-14 code style</a></h1>
-        
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/2017/08/14/08-14-code-style/" class="post-title-link" itemprop="url">08-14 code style</a>
+          
+        </h1>
 
         <div class="post-meta">
-          <span class="post-time">
-            
+            <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
               </span>
+              <span class="post-meta-item-text">发表于</span>
+
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-08-14T00:58:36+08:00">
-                2017-08-14
-              </time>
+
+              <time title="创建时间：2017-08-14 00:58:36 / 修改时间：01:35:04" itemprop="dateCreated datePublished" datetime="2017-08-14T00:58:36+08:00">2017-08-14</time>
+            </span>
+          
             
 
             
-
-            
-          </span>
-
           
 
           
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/08/14/08-14-code-style/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2017/08/14/08-14-code-style/" itemprop="commentCount"></span>
-                </a>
+            <span id="/2017/08/14/08-14-code-style/" class="post-meta-item leancloud_visitors" data-flag-title="08-14 code style" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
               </span>
-            
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
           
-
-          
-          
-             <span id="/2017/08/14/08-14-code-style/" class="leancloud_visitors" data-flag-title="08-14 code style">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">Visitors&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2017/08/14/08-14-code-style/#comments" itemprop="discussionUrl"><span class="post-comments-count valine-comment-count" data-xid="/2017/08/14/08-14-code-style/" itemprop="commentCount"></span></a>
+  </span>
+  
+  
 
         </div>
       </header>
-    
 
     
     
@@ -1592,314 +688,110 @@ public class MyMath {
     <div class="post-body" itemprop="articleBody">
 
       
-      
-
-      
-        
+          <h2 id="开始"><a href="#开始" class="headerlink" title="开始"></a>开始</h2><p>最近真的生活有点混乱，还是身体比较要紧。这周看了《中国有嘻哈》MCJIN离开了。但是他的精神有点触动到我。人到了一定的年纪就会忘记自己的梦想。为了家庭为了其他的东西而活着。最初的梦想就慢慢的不见了。但是回到嘻哈的视野里。他说他自己好像找回了16岁的自己。那股子对嘻哈的热情又回来了，虽然中途变了好多。但是回到这个地方，和年轻热rapper在一起又重回了斗志。人生就是这样—-<strong>为了梦想，永远年轻。前端加油</strong></p>
+          <!--noindex-->
           
-            <h2 id="开始"><a href="#开始" class="headerlink" title="开始"></a>开始</h2><p>最近真的生活有点混乱，还是身体比较要紧。这周看了《中国有嘻哈》MCJIN离开了。但是他的精神有点触动到我。人到了一定的年纪就会忘记自己的梦想。为了家庭为了其他的东西而活着。最初的梦想就慢慢的不见了。但是回到嘻哈的视野里。他说他自己好像找回了16岁的自己。那股子对嘻哈的热情又回来了，虽然中途变了好多。但是回到这个地方，和年轻热rapper在一起又重回了斗志。人生就是这样—-<strong>为了梦想，永远年轻。前端加油</strong></p>
-<h2 id="规范"><a href="#规范" class="headerlink" title="规范"></a>规范</h2><p>这周也没有特别多的事情，做的也是code style，没有freestyle和new style。哈哈哈 直接进入正题吧</p>
-<p>================================================================================</p>
-<h1 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h1><ol>
-<li>添加适当的空行</li>
-<li>文档头部注释<br>良好的注释是非常重要的。请留出时间来描述组件（component）的工作方式、局限性和构建它们的方法。不要让你的团队其它成员来猜测一段不通用或不明显的代码的目的。<br>HTML、CSS、Javascript 使用同样格式的文件注释<br>注释的风格应当简洁，并在代码库中保持统一<br>控制每行长度在合理的范围内，比如80个字符<br>注释的大小写应当与普通句子相同，并且使用一致的文本缩进<br>对于较长的注释，务必书写完整的句子；对于一般性注解，可以书写简洁的短语</li>
-</ol>
-<pre><code>&lt;!-- (如果是 HTML 就加上这个)
-
-/**
- * ===========================================================
- *  文件标题
- * ===========================================================
- *
- *  从这里开始写这个文件的简要说明。
- *
- *  当需要进行更细致的解释说明、提供文档文本时，较长的说明文本就很
- *  有用了。这种长长的说明文本，可以包括示例 HTML、链接 等等其他你
- *  认为重要或者有用的东西。
- *
- * ===========================================================
- *
- * @author (作者)
- * @create (创建时间)
- *
- * @update (修改时间) (修改者)
- *   1. (修改内容)
- * @update (修改时间) (修改者)
- *   ...
- *
- * @todo: 这个“‘需做’陈述”描述了一个接下来要去做的小工作。这种文本，
- *       如果超长了的话，应该在80个半角字符（如英文）或40个全角字符
- *       （如中文）后便换行，并且保持对齐。
- */
---&gt;
-</code></pre><p>================================================================================</p>
-<h1 id="HTML"><a href="#HTML" class="headerlink" title="HTML"></a>HTML</h1><ol>
-<li>文档类型  &lt;!DOCTYPE html&gt;</li>
-<li>语言属性：强烈建议为 html 根元素指定 lang 属性，从而为文档设置正确的语言。这将有助于语音合成工具确定其所应该采用的发音，有助于翻译工具确定其翻译时所应遵守的规则等等。&lt; html lang=”zh-CN”&gt;</li>
-<li>字符编码 &lt; meta charset=”UTF-8” &gt;</li>
-<li>兼容模式  &lt; meta http-equiv=”X-UA-Compatible” content=”IE=Edge”&gt;</li>
-<li>视觉区域<br>视觉区域（viewport）指的是浏览器（包括桌面浏览器和移动浏览器）显示页面的区域。它不包含浏览器地址栏、按钮这样的东西，只是浏览区域。为了让页面适应拥有不同大小视觉区域的浏览器，需要在 &lt; head&gt; 元素中添加视觉区域 &lt; meta&gt; 元素</li>
-</ol>
-<p>&lt; meta name=”viewport” content=”width=device-width, initial-scale=1.0”&gt;<br>其中，width=device-width 用以将视觉区域的宽度会被设成与设备宽度相同的值，从而保证媒体查询的 min-width 和 max-width 特性拥有预期的效果。initial-scale=1.0 用以将页面的默认缩放级别设成100%。</p>
-<ol>
-<li>标签规则<br>标签名统一使用小写，不要用大写<br>不要在自闭（self-closing）元素的尾部添加斜线 –HTML5 规范 表示可选<br>不要省略可选的结束标签（closing tag）（例如，&lt; /li&gt;或&lt; /body&gt;）<br>除非必要，不要使用字符实体<br>尽量遵循 HTML 标准和语义，但是不要以牺牲实用性为代价。任何时候都要尽量使用最少的标签并保持最小的复杂度。</li>
-</ol>
-<p><strong>以上标签为了显示我在开头加了一个空格，实际是没有的</strong></p>
-<p>7.属性</p>
-<ol>
-<li><p>属性顺序<br>class<br>id,name<br>data-<em><br>src,for,type,href<br>title,alt<br>aria-</em>,role</p>
-</li>
-<li><p>布尔属性值在声明时不赋值H5的规范</p>
-</li>
-</ol>
-<p>================================================================================</p>
-<h1 id="CSS"><a href="#CSS" class="headerlink" title="CSS"></a>CSS</h1><p>1.声明规则（注意空格）</p>
-<ol>
-<li>选择器每个独占一行，多个选择器多行用“，”</li>
-<li>左花括号前一个空格</li>
-<li>右花括号}独占一行</li>
-<li>声明独占一行;结尾</li>
-<li>属性的“：”后面有一个空格</li>
-</ol>
-<pre><code>.selector,
-.selector-secondary,
-.selector[type=&quot;text&quot;] {
-  padding: 15px;
-}
-</code></pre><p>注意：单行声明左花括号右边和右花括号左边都要多至少一个空格，而且需要<strong>控制相同属性才写到一行哦！！！</strong></p>
-<pre><code>.icon         { background-position: 0 0; }
-.icon-home    { background-position: 0 -20px; }
-.icon-account { background-position: 0 -40px; }
-</code></pre><p>2.声明顺序</p>
-<ol>
-<li>相关属性声明应该放在一起，并按照下面排列<br>1) Positioning 定位<br>2) Box model  模型<br>3) Visual  视图<br>4) Typographic  文本</li>
-</ol>
-<p>例子：</p>
-<pre><code>.declaration-order {
-   /* Positioning */
-   position: absolute;
-   top: 0;
-   right: 0;
-   bottom: 0;
-   left: 0;
-   z-index: 100;
-
-   /* Box-model */
-   display: block;
-   float: right;
-   width: 100px;
-   height: 100px;
-
-   /* Visual */
-   background-color: #f5f5f5;
-   border: 1px solid #e5e5e5;
-   border-radius: 3px;
-
-   /* Typography */
-   font: normal 13px &quot;Helvetica Neue&quot;, sans-serif;
-   line-height: 1.5;
-   color: #333;
-   text-align: center;
-
-   /* Misc */
-   opacity: 1;
- }
-</code></pre><p>3.简写属性形式</p>
-<ol>
-<li>padding</li>
-<li>margin</li>
-<li>font</li>
-<li>background</li>
-<li>border</li>
-<li>border-radius</li>
-</ol>
-<p><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Shorthand_properties" target="_blank" rel="external">传送门:缩写秘籍</a>这篇文章介绍了每个顺序，比较容易忽视的是border顺序和border-radius的顺序。<br>border的顺序是：1px(width) solid(style) #f00(color)<br>border-radius顺序是： 左上角是1，右上角是2。右下角是3 左下角是4。设置属性和margin<br>padding一样。</p>
-<p>font的属性值比较多，简写情况比较少见。主要用font-size 和 font-weight</p>
-<p>4.Class的命名</p>
-<ol>
-<li>使用小写的命名方式</li>
-<li>使用”-“来连接</li>
-<li>子组件要以父组件命名为基础 选择器&gt; 两边都要空格哦</li>
-<li><strong>描述内容的性质，不要描述表现形式（presentational）</strong></li>
-<li>类名尽量少写</li>
-</ol>
-<p>5.带前缀的属性<br>当使用特定厂商的带有前缀的属性时，通过缩进的方式，让每个属性的值在垂直方向对齐，这样便于多行编辑。</p>
-<pre><code>.selector {
-  -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.15);
-          box-shadow: 0 1px 2px rgba(0,0,0,.15);
-}
-</code></pre><p>================================================================================</p>
-<h1 id="JS"><a href="#JS" class="headerlink" title="JS"></a>JS</h1><p>================================================================================</p>
-<h1 id="SVN提交"><a href="#SVN提交" class="headerlink" title="SVN提交"></a>SVN提交</h1><pre><code>1.标题
-  1.Change list:
-  2.Release
-
-2.每一点格式
-  1.Add: (target) - (detail)
-  2.Update: (target) - (detail)
-  3.Delete: (target) - (detail)
-  4.Rename: (from) to (target)
-  5.Fixed: (target) - (bugs)
-  6.(etc..)
-</code></pre><p>注意：开始空两空格，每一小点的”:”之后有一个空格。每一点认为可以更详细的编写，可以以层级显示编写，最后编写结束不要剩下多余的空行。例子如下：</p>
-<pre><code>Change list!
-  1.Add: &quot;mock&quot; data laye r !!
-  2.Update: project structure !
-    1.Rename: &quot;arrial&quot; to &quot;arrival&quot;
-    2.Rename: &quot;photo&quot; to &quot;cert&quot;
-    3.Rename: &quot;home/nickName&quot; to &quot;home/nickname&quot;
-    4.Rename: &quot;cart/choseCertificate&quot; to &quot;cart/certType&quot;
-    5.Rename: &quot;map/choseCity&quot; to &quot;map/cityList&quot;
-    6.Update: &quot;router.js&quot;
-  3.Update: &quot;theme/&quot; !
-    1.Update: default font size 14px to 12px !
-    3.Update: .media, .panel
-    4.Update: .mint-searchbar
-    5.Add: a[href=&quot;javascript:;&quot;]
-    6.Add: .tag-red
-  4.Update: &quot;service/index.js&quot;
-    1.Move: mock datas to &quot;mock/&quot;
-    2.Rename: &quot;serviceDetailInfo&quot; to &quot;goodsInfo&quot;
-    3.Rename: &quot;commentDetailInfo&quot; to &quot;reviewList&quot;
-    4.Rename: &quot;licenseLibList&quot; to &quot;certList&quot;
-    5.Rename: &quot;personalInfo&quot; to &quot;ucenterInfo&quot;
-    6.Add: getShopList()
-  5.Rebuild: &quot;arrival/shopList&quot;
-
-Release 0.2.0:
-  1.Add: &quot;mock/images&quot; !
-  2.Move: some images from &quot;assets/&quot; to &quot;mock/images&quot; !
-  3.Move &amp; Rebuild: &quot;subsites/index.vue&quot; - from &quot;enter/index.vue&quot;
-  4.Rebuild: &quot;subsites/home/index.vue&quot; !
-</code></pre><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>今天看了《数学之美》感觉到了一个很重要的一点。外国人都喜欢用机器来解决问题。而我们中国人却比较踏实肯干。自己动手丰衣足食。也许我也要换一种思维了。对了，还有这周的鸡汤也写在这把：还是要好好的给自己一点压力，克制自己的惰性和玩性，就像高三那样，不断的为着一个亮光前进。内心不能放松，大学就是一个最好的教训。</p>
-
+            <div class="post-button text-center">
+              <a class="btn" href="/2017/08/14/08-14-code-style/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
           
+          <!--/noindex-->
         
       
     </div>
-    
-    
-    
 
     
-
     
-
     
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
   </div>
   
   
   
   </article>
 
-
     
-      
-
-  
-
+        <article itemscope itemtype="http://schema.org/Article">
   
   
   
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
+  <div class="post-block home">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/06/node总结走起/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="王邸">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/head.jpeg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="路要坚持">
     </span>
-
-    
       <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/08/06/node总结走起/" itemprop="url">node总结</a></h1>
-        
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/2017/08/06/node总结走起/" class="post-title-link" itemprop="url">node总结</a>
+          
+        </h1>
 
         <div class="post-meta">
-          <span class="post-time">
-            
+            <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
               </span>
+              <span class="post-meta-item-text">发表于</span>
+
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-08-06T23:26:35+08:00">
-                2017-08-06
-              </time>
-            
 
-            
-
-            
-          </span>
-
-          
-
+              <time title="创建时间：2017-08-06 23:26:35" itemprop="dateCreated datePublished" datetime="2017-08-06T23:26:35+08:00">2017-08-06</time>
+            </span>
           
             
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
+
+            
+              <span class="post-meta-item">
                 <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
+                  <i class="fa fa-calendar-check-o"></i>
                 </span>
-                <a href="/2017/08/06/node总结走起/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2017/08/06/node总结走起/" itemprop="commentCount"></span>
-                </a>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-07-31 16:04:12" itemprop="dateModified" datetime="2019-07-31T16:04:12+08:00">2019-07-31</time>
               </span>
             
           
 
           
+            <span id="/2017/08/06/node总结走起/" class="post-meta-item leancloud_visitors" data-flag-title="node总结" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
           
-             <span id="/2017/08/06/node总结走起/" class="leancloud_visitors" data-flag-title="node总结">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">Visitors&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2017/08/06/node总结走起/#comments" itemprop="discussionUrl"><span class="post-comments-count valine-comment-count" data-xid="/2017/08/06/node总结走起/" itemprop="commentCount"></span></a>
+  </span>
+  
+  
 
         </div>
       </header>
-    
 
     
     
@@ -1907,149 +799,110 @@ Release 0.2.0:
     <div class="post-body" itemprop="articleBody">
 
       
-      
-
-      
-        
+          <h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>这一周过的一般般吧。也许刚开始起步就是那么安静的。还是那句话：不以物喜不以己悲。上升到一种状态就很好了。这一周在公司也没有特别重的开发项目。主要还是以学习为主。但是学习了一些和工作无关的东西，所以不是很好。自己动脑想想也就知道。这不是一个好的开始。一定要站在公司角度想想。这周做了什么呢？看标题啊<strong>node！！！！</strong>这周其实做了挺多东西的。主要还是做了Node + vue + mysql/mongodb，在宿舍走了一波老路node + koa 微信公众号的开发。除了技术上的，其实对时间管理还是已经慢慢开始使用了。这是一个我非常喜欢的。这样过的才有价值了兄弟。</p>
+          <!--noindex-->
           
-            <h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>这一周过的一般般吧。也许刚开始起步就是那么安静的。还是那句话：不以物喜不以己悲。上升到一种状态就很好了。这一周在公司也没有特别重的开发项目。主要还是以学习为主。但是学习了一些和工作无关的东西，所以不是很好。自己动脑想想也就知道。这不是一个好的开始。一定要站在公司角度想想。这周做了什么呢？看标题啊<strong>node！！！！</strong>这周其实做了挺多东西的。主要还是做了Node + vue + mysql/mongodb，在宿舍走了一波老路node + koa 微信公众号的开发。除了技术上的，其实对时间管理还是已经慢慢开始使用了。这是一个我非常喜欢的。这样过的才有价值了兄弟。</p>
-<h2 id="VUE-node-mongodb-mysql"><a href="#VUE-node-mongodb-mysql" class="headerlink" title="VUE+node+mongodb/mysql"></a>VUE+node+mongodb/mysql</h2><p>使用了VUE + vue-resource + mongodb，地址<a href="http://blog.csdn.net/qq_26598303/article/details/53468399" target="_blank" rel="external">传送门</a>,这个地址就是整个任务具体流程。我也就是走通了一遍。并没有什么特别大的问题。之前自学node.js的开发指南时候就是这样的一个类似的demo。使用的是bootrap+express+mongodb。这个小项目目的是走通和数据库的连接数据流程。了解现在常用的库等等</p>
-<h3 id="VUE"><a href="#VUE" class="headerlink" title="VUE"></a>VUE</h3><p>VUE没什么好说的都没有写vue-router可以搞点事情</p>
-<h3 id="node"><a href="#node" class="headerlink" title="node"></a>node</h3><p>这里使用了<strong>express</strong>框架<a href="http://www.expressjs.com.cn/" target="_blank" rel="external">中文文档</a>,node博大精深。还是需要很多知识支撑的。作为一个入流的前端node的知识需要学习的。其他的一些body-parser、fs、mongoose、path的库看看官网知道用这些来做什么就好的。有些已经集成在node里了有些还是package。</p>
-<p>experss主要还是使用了路由的功能。路由就好像控球后卫一样，之前学习时候的比喻一直生动形象。把请求分发给不同的接口去处理web服务器的请求。这些请求对应就是需要返回给前端的。其他的一些库会用就行了。</p>
-<h3 id="mongodb"><a href="#mongodb" class="headerlink" title="mongodb"></a>mongodb</h3><p>参照之前的博客写的mongodb的安装入门教程就能入门啦<a href="https://e110110eee.github.io/2016/12/01/MongoDB%E6%9E%81%E7%AE%80%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8/" target="_blank" rel="external">mongodb</a>。非关系型数据库存储的就是json。引入mongodb插件最好看看mongodb的文档。连接nodeJS还是贼爽的。</p>
-<h3 id="mysql"><a href="#mysql" class="headerlink" title="mysql"></a>mysql</h3><p>最后使用了mysql去实现一下同样的功能，其实也不是特别的炸吧。不过使用mysql的库的时候,使用连接池的方式连接比较好。因为不能调一次就开关一次数据库，有同伴公司是用连接池的方式实现的。mysql对于大型的数据保存还是比较友好的。但是安装起来还是比较蛋疼的。出现了很多小bug。主要还是需要的mysql安装要安装microsoft visual c++ 2013的32位.一直安装64位的就是不行。原来是需要32位的。好像也没别的。</p>
-<h2 id="node-koa-实现微信公众号"><a href="#node-koa-实现微信公众号" class="headerlink" title="node + koa 实现微信公众号"></a>node + koa 实现微信公众号</h2><h3 id="koa"><a href="#koa" class="headerlink" title="koa"></a>koa</h3><p>koa已经支持ES7的语法格式了，使用的是async函数，但是现在微信这个项目还没有深入下去。这周继续做的是代码风格的事情<br>所以 这周的总结写的是代码风格的事情。</p>
-<h3 id="ngrok"><a href="#ngrok" class="headerlink" title="ngrok"></a>ngrok</h3><p>这是内网映射的一个功能。把本地的服务印刷到公网上</p>
-<h3 id="各种包"><a href="#各种包" class="headerlink" title="各种包"></a>各种包</h3><p>这里主要说bluebird把所有的对象包装成promise对象。</p>
-
+            <div class="post-button text-center">
+              <a class="btn" href="/2017/08/06/node总结走起/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
           
+          <!--/noindex-->
         
       
     </div>
-    
-    
-    
 
     
-
     
-
     
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
   </div>
   
   
   
   </article>
 
-
     
-      
-
-  
-
+        <article itemscope itemtype="http://schema.org/Article">
   
   
   
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
+  <div class="post-block home">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/30/总结（技术和鸡汤）/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="王邸">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/head.jpeg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="路要坚持">
     </span>
-
-    
       <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/07/30/总结（技术和鸡汤）/" itemprop="url">总结（技术和鸡汤）</a></h1>
-        
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/2017/07/30/总结（技术和鸡汤）/" class="post-title-link" itemprop="url">总结（技术和鸡汤）</a>
+          
+        </h1>
 
         <div class="post-meta">
-          <span class="post-time">
-            
+            <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
               </span>
+              <span class="post-meta-item-text">发表于</span>
+
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-30T21:26:20+08:00">
-                2017-07-30
-              </time>
-            
 
-            
-
-            
-          </span>
-
-          
-
+              <time title="创建时间：2017-07-30 21:26:20" itemprop="dateCreated datePublished" datetime="2017-07-30T21:26:20+08:00">2017-07-30</time>
+            </span>
           
             
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
+
+            
+              <span class="post-meta-item">
                 <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
+                  <i class="fa fa-calendar-check-o"></i>
                 </span>
-                <a href="/2017/07/30/总结（技术和鸡汤）/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2017/07/30/总结（技术和鸡汤）/" itemprop="commentCount"></span>
-                </a>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-07-31 16:03:11" itemprop="dateModified" datetime="2019-07-31T16:03:11+08:00">2019-07-31</time>
               </span>
             
           
 
           
+            <span id="/2017/07/30/总结（技术和鸡汤）/" class="post-meta-item leancloud_visitors" data-flag-title="总结（技术和鸡汤）" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
           
-             <span id="/2017/07/30/总结（技术和鸡汤）/" class="leancloud_visitors" data-flag-title="总结（技术和鸡汤）">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">Visitors&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2017/07/30/总结（技术和鸡汤）/#comments" itemprop="discussionUrl"><span class="post-comments-count valine-comment-count" data-xid="/2017/07/30/总结（技术和鸡汤）/" itemprop="commentCount"></span></a>
+  </span>
+  
+  
 
         </div>
       </header>
-    
 
     
     
@@ -2057,175 +910,110 @@ Release 0.2.0:
     <div class="post-body" itemprop="articleBody">
 
       
-      
-
-      
-        
+          <h1 id="技术"><a href="#技术" class="headerlink" title="技术"></a>技术</h1><p>这一周其实也没有特别多的技术的总结。打游戏打得天昏地暗，技术倒是没有增进多少。算了吧别说那些没有用的话。今天我的总结就讲讲前端编程实践指南。这个也是别人总结的，直接上传送门吧。<a href="https://dondevi.github.io/web-frontend-guide/style-guide/practice.html" target="_blank" rel="external">前端实践指南</a>。今天分享一下css命名的方式</p><h3 id="bem（block-element-modifier）"><a href="#bem（block-element-modifier）" class="headerlink" title="bem（block element modifier）"></a>bem（block element modifier）</h3><p>这是一种非常格式化的元素的class的命名方式,这种命名方式看起来非常的分明。什么是block 什么是element 什么是修饰词modifier。这个规则最早还和大漠老师有问到。不过还是自己去了解清楚了。是一种很规范的命名方式。接下来还会介绍另外两种。<strong>最主要的是统一</strong>。这种用法优点就是类看起来比较清晰就像下面这样：</p>
+          <!--noindex-->
           
-            <h1 id="技术"><a href="#技术" class="headerlink" title="技术"></a>技术</h1><p>这一周其实也没有特别多的技术的总结。打游戏打得天昏地暗，技术倒是没有增进多少。算了吧别说那些没有用的话。今天我的总结就讲讲前端编程实践指南。这个也是别人总结的，直接上传送门吧。<a href="https://dondevi.github.io/web-frontend-guide/style-guide/practice.html" target="_blank" rel="external">前端实践指南</a>。今天分享一下css命名的方式</p>
-<h3 id="bem（block-element-modifier）"><a href="#bem（block-element-modifier）" class="headerlink" title="bem（block element modifier）"></a>bem（block element modifier）</h3><p>这是一种非常格式化的元素的class的命名方式,这种命名方式看起来非常的分明。什么是block 什么是element 什么是修饰词modifier。这个规则最早还和大漠老师有问到。不过还是自己去了解清楚了。是一种很规范的命名方式。接下来还会介绍另外两种。<strong>最主要的是统一</strong>。这种用法优点就是类看起来比较清晰就像下面这样：</p>
-<pre><code>&lt;div class=&quot;block&quot;&gt;
-  &lt;div class=&quot;block-head&quot;&gt;
-    &lt;div class=&quot;block-head-navbar&quot;&gt;&lt;/div&gt;
-    &lt;div class=&quot;block-head-logo&quot;&gt;&lt;/div&gt;
-  &lt;/div&gt;
-  &lt;div class=&quot;block-body&quot;&gt;&lt;/div&gt;
-  &lt;div class=&quot;block-footer&quot;&gt;&lt;/div&gt;
-&lt;/div&gt;
-</code></pre><p>而传统的一般我会这样命名</p>
-<pre><code>&lt;div class=&quot;block&quot;&gt;
-  &lt;div class=&quot;blockHead&quot;&gt;
-    &lt;div class=&quot;narbar&quot;&gt;&lt;/div&gt;
-    &lt;div class=&quot;narbarLogo&quot;&gt;&lt;/div&gt;
-  &lt;/div&gt;
-  &lt;div class=&quot;blockBody&quot;&gt;&lt;/div&gt;
-  &lt;div class=&quot;blockFooter&quot;&gt;&lt;/div&gt;
-&lt;/div&gt;
-</code></pre><p>他这种写法在写css样式表时，能够很清楚的知道控制的是哪个标签。当然缺点也是显而易见的，就是双击并不能全部选中。只能选中某一部分，如果使用下划线“_”来命名也不是特别的友好。对于爬虫等等来说。接下来介绍两个很类似的命名方式。</p>
-<h3 id="OOCSS-（Object-Oriented-CSS）and-SMACSS（Scalable-and-Modular-Architecture-for-CSS）"><a href="#OOCSS-（Object-Oriented-CSS）and-SMACSS（Scalable-and-Modular-Architecture-for-CSS）" class="headerlink" title="OOCSS （Object Oriented CSS）and SMACSS（Scalable and Modular Architecture for CSS）"></a>OOCSS （Object Oriented CSS）and SMACSS（Scalable and Modular Architecture for CSS）</h3><hr>
-<p>这两个的思想很类似的，就是把CSS抽离出来<strong>各司其职</strong>。因为css有很多部分有的控制布局，有的控制样式。为了工作更加的高效，搞得都是模块化的思想来做。OOCSS思想是：<br><strong>结构域外观分离、容器与内容分离。</strong>这就是结构的block就写结构外观skin就写外观。容器就好定位。内容就单独设置样式。</p>
-<hr>
-<p>另一种SMACSS这是一种更加分离的，我个人也比较喜欢这种样式编写方式，把样式分成五个部分</p>
-<ul>
-<li>Base（基本），定义元素的默认样式。可以把 Normalize.css 放在这里</li>
-<li>Layout（布局），可以参考一下 Susy 这种基于列宽而又独立于模块的类名</li>
-<li>Module（模块），定义模块时应全部使用类名选择器，不要使用元素选择器</li>
-<li>State（状态），注意要与模块的修饰器区分</li>
-<li>Theme（皮肤）<br>分离出来以上五种，并在相应的部分注释上这五种分类，也会很清楚看出css控制的是哪个。大家开发才会更加高效。这礼拜主要也是修改样式并没有特别多的内容。下礼拜着重回顾element的那些用法。</li>
-</ul>
-<h1 id="鸡汤"><a href="#鸡汤" class="headerlink" title="鸡汤"></a>鸡汤</h1><p>其实也不是鸡汤啦。就是 有道笔记上一个礼拜都总结的东西。如果不回顾一下，就会很快的飘走啦<br>7.24<br>不要一天笑嘻嘻，给人一种很轻浮的状态，虽然很友善。但是态度就不显得有威严。当然今天找到一种适合自己的入睡的方法。就是不断的转换睡觉的状态。不能专一的盯着一个东西。还是要分散注意力的。首先先把睡觉前眼前的东西全部归类放在书本里，确定大脑已经不再乱想东西就进入下一个状态。然而这个状态是分散的。而不是集中的，不说了，说的我都想睡觉了。</p>
-<p>7.25<br>对“不以物喜，不以己悲”的思考。结合状态的思想来认为，这句话并不是简单的意识上的认知。而是上升到状态。一种冷静的状态。就存在大脑里。不管做什么事情。都会伴随的一种状态。才能让自己更加冷静的去做事情。</p>
-<p>7.26<br>安排好每天的事情，这其实说了很多次的。一定要好好安排自己的时间，之后几天就**的在玩游戏。并没有好好的安排好自己的时间。</p>
-<p>7.29<br>目标，这个问题已经讲了很多次了。只有目标才能让你全身心的投入进去。当然游戏有目标所以才会无脑的玩那么久。这就很好的告诉自己，一定要有目标。也不应该停止在意识。而是上升到状态。并且<strong>结合上礼拜说的价值观的排列</strong>来安排好自己的时间。加油，需要一种全身心的投入。</p>
-<h1 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h1><p>下礼拜估计工作会比较简单。但是这就是我的机会。好好学习一下java和前端链接的。</p>
-
+            <div class="post-button text-center">
+              <a class="btn" href="/2017/07/30/总结（技术和鸡汤）/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
           
+          <!--/noindex-->
         
       
     </div>
-    
-    
-    
 
     
-
     
-
     
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
   </div>
   
   
   
   </article>
 
-
     
-      
-
-  
-
+        <article itemscope itemtype="http://schema.org/Article">
   
   
   
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
+  <div class="post-block home">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/23/come-back/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="王邸">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/head.jpeg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="路要坚持">
     </span>
-
-    
       <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/07/23/come-back/" itemprop="url">我回来了</a></h1>
-        
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/2017/07/23/come-back/" class="post-title-link" itemprop="url">我回来了</a>
+          
+        </h1>
 
         <div class="post-meta">
-          <span class="post-time">
-            
+            <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
               </span>
+              <span class="post-meta-item-text">发表于</span>
+
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-23T19:09:51+08:00">
-                2017-07-23
-              </time>
-            
 
-            
-
-            
-          </span>
-
-          
-
+              <time title="创建时间：2017-07-23 19:09:51" itemprop="dateCreated datePublished" datetime="2017-07-23T19:09:51+08:00">2017-07-23</time>
+            </span>
           
             
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
+
+            
+              <span class="post-meta-item">
                 <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
+                  <i class="fa fa-calendar-check-o"></i>
                 </span>
-                <a href="/2017/07/23/come-back/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2017/07/23/come-back/" itemprop="commentCount"></span>
-                </a>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2017-07-30 21:25:33" itemprop="dateModified" datetime="2017-07-30T21:25:33+08:00">2017-07-30</time>
               </span>
             
           
 
           
+            <span id="/2017/07/23/come-back/" class="post-meta-item leancloud_visitors" data-flag-title="我回来了" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
           
-             <span id="/2017/07/23/come-back/" class="leancloud_visitors" data-flag-title="我回来了">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">Visitors&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2017/07/23/come-back/#comments" itemprop="discussionUrl"><span class="post-comments-count valine-comment-count" data-xid="/2017/07/23/come-back/" itemprop="commentCount"></span></a>
+  </span>
+  
+  
 
         </div>
       </header>
-    
 
     
     
@@ -2233,74 +1021,46 @@ Release 0.2.0:
     <div class="post-body" itemprop="articleBody">
 
       
-      
-
-      
-        
+          <h2 id="重新上路"><a href="#重新上路" class="headerlink" title="重新上路"></a>重新上路</h2><p>不知不觉大学毕业已经快一个月了，好像一切都还没开始过一样。 但是其实都已经结束了。不如不觉就进入了社会的大家庭，很多东西都是那么新鲜但是是那么黑暗。也许这就是社会吧，这就是我们人类赖以生存的环境。一个人生活的环境还是很重要的。 也许是我一开始急着上路还没有想清楚吧。只是想忘了大学的遗憾和最后的悲伤吧。不过美好的人生也才正式开始。我需要做的就是踏实的走接下来的路。不要再一股脑的浪费时间做一些效率很低的事情。现在从新架起来了博客，就是要好好记录自己以前踩得坑好好的前进。记录自己的一些心得体会，好好反省自己的过失。</p>
+          <!--noindex-->
           
-            <h2 id="重新上路"><a href="#重新上路" class="headerlink" title="重新上路"></a>重新上路</h2><p>不知不觉大学毕业已经快一个月了，好像一切都还没开始过一样。 但是其实都已经结束了。不如不觉就进入了社会的大家庭，很多东西都是那么新鲜但是是那么黑暗。也许这就是社会吧，这就是我们人类赖以生存的环境。一个人生活的环境还是很重要的。 也许是我一开始急着上路还没有想清楚吧。只是想忘了大学的遗憾和最后的悲伤吧。不过美好的人生也才正式开始。我需要做的就是踏实的走接下来的路。不要再一股脑的浪费时间做一些效率很低的事情。现在从新架起来了博客，就是要好好记录自己以前踩得坑好好的前进。记录自己的一些心得体会，好好反省自己的过失。</p>
-<h2 id="价值的排列"><a href="#价值的排列" class="headerlink" title="价值的排列"></a>价值的排列</h2><p>最近做事情总是特别的感性去做。这样做事情虽然看起来很有干劲，但是其实是非常低效的。因为没有认真的去思考事情的轻重缓急。这也许和价值观有关。在今天我把我觉得事情的轻重进行排列。虽然有一些还是最近比较感性才会排的，但是从长远的角度出发，有一些还是一定要摆在前面。</p>
-<ol>
-<li>身体的健康</li>
-<li>一颗强大的心</li>
-<li>好好把前端做好</li>
-<li>各种复杂的感情</li>
-<li>其他各种杂事</li>
-</ol>
-<p>我觉得活着要做的事情就在上面这些了，第三点和第四点其实还是比较难排列的。但是第一第二点是我近期的目标。也是活着必须要具备的能力。可以说没有前两个后面都是假的。好好休息好好锻炼身体，一个强大的心面对外界的压力，不要太在意外界的看法，耐得住寂寞，好好实现自己的目标，不要急躁。前端，这件事情。不简单，一定要想清楚再开始行动，要不然很容易翻车。最近的例子就是教训，这么低级的失误下次请你再也不要犯了。各种感情，比如父母亲朋好友等等。最后杂事，各种游玩放松。浪荡的浪费时间。<strong> 做每件事情之前，参考价值的排序，一定要想清楚到底要不要做 ，怎么做比较好 </strong></p>
-<h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><p>最近在用VUE和element做一个桌面端的网页。逻辑有很多小坑，但是最主要的是想清楚自己应该怎么做。并不要太浮躁的去做，以为差不多就行了。还是要思考怎么做才比较好。本来想记录一些这个礼拜做的一些东西。但是感觉都在写样式这个礼拜。也没有特别大的坑，好好把样式实现。慢慢来吧。</p>
-
+            <div class="post-button text-center">
+              <a class="btn" href="/2017/07/23/come-back/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
           
+          <!--/noindex-->
         
       
     </div>
-    
-    
-    
 
     
-
     
-
     
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
   </div>
   
   
   
   </article>
 
-
     
-  </section>
+  </div>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
+    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
   </nav>
-
 
 
           </div>
           
 
-
-          
-
         </div>
-        
           
   
   <div class="sidebar-toggle">
@@ -2311,104 +1071,177 @@ Release 0.2.0:
     </div>
   </div>
 
-  <aside id="sidebar" class="sidebar">
-    
+  <aside class="sidebar">
     <div class="sidebar-inner">
 
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/images/head.jpeg"
+      alt="王邸">
+  <p class="site-author-name" itemprop="name">王邸</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">28</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
       
-
       
+      <div class="site-state-item site-state-tags">
+        
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">标签</span>
+        
+      </div>
+    
+  </nav>
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
-        <div class="site-overview">
-          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-            
-              <p class="site-author-name" itemprop="name">王邸</p>
-              <p class="site-description motion-element" itemprop="description"></p>
-          </div>
 
-          <nav class="site-state motion-element">
 
-            
-              <div class="site-state-item site-state-posts">
-              
-                <a href="/archives/">
-              
-                  <span class="site-state-item-count">28</span>
-                  <span class="site-state-item-name">Artikel</span>
-                </a>
-              </div>
-            
-
-            
-
-            
-              
-              
-              <div class="site-state-item site-state-tags">
-                
-                  <span class="site-state-item-count">3</span>
-                  <span class="site-state-item-name">Tags</span>
-                
-              </div>
-            
-
-          </nav>
-
-          
-
-          
-
-          
-          
-
-          
-          
-
-          
-
-        </div>
-      </section>
-
-      
-
-      
+      </div>
 
     </div>
   </aside>
+  <div id="sidebar-dimmer"></div>
 
 
-        
       </div>
     </main>
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
         <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
-  <span class="with-love">
+  <span class="with-love" id="animate">
     <i class="fa fa-user"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">王邸</span>
-
-  
 </div>
-
-
-  <div class="powered-by">Erstellt mit  <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
-
-
-
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.3.8</div>
   <span class="post-meta-divider">|</span>
-
-
-
-  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
-
-
-
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.4.0</div>
 
         
 
+
+
+
+
+
+  
+  <script>
+  function leancloudSelector(url) {
+    return document.getElementById(url).querySelector('.leancloud-visitors-count');
+  }
+  if (CONFIG.page.isPost) {
+    function addCount(Counter) {
+      var visitors = document.querySelector('.leancloud_visitors');
+      var url = visitors.getAttribute('id').trim();
+      var title = visitors.getAttribute('data-flag-title').trim();
+
+      Counter('get', `/classes/Counter?where=${JSON.stringify({ url })}`)
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length > 0) {
+            var counter = results[0];
+            Counter('put', '/classes/Counter/' + counter.objectId, { time: { '__op': 'Increment', 'amount': 1 } })
+              .then(response => response.json())
+              .then(() => {
+                leancloudSelector(url).innerText = counter.time + 1;
+              })
+            
+              .catch(error => {
+                console.log('Failed to save visitor count', error);
+              })
+          } else {
+              leancloudSelector(url).innerText = 'Counter not initialized! More info at console err msg.';
+              console.error('ATTENTION! LeanCloud counter has security bug, see how to solve it here: https://github.com/theme-next/hexo-leancloud-counter-security. \n However, you can still use LeanCloud without security, by setting `security` option to `false`.');
+            
+          }
+        })
+        .catch(error => {
+          console.log('LeanCloud Counter Error', error);
+        });
+    }
+  } else {
+    function showTime(Counter) {
+      var visitors = document.querySelectorAll('.leancloud_visitors');
+      var entries = [...visitors].map(element => {
+        return element.getAttribute('id').trim();
+      });
+
+      Counter('get', `/classes/Counter?where=${JSON.stringify({ url: { '$in': entries } })}`)
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length === 0) {
+            document.querySelectorAll('.leancloud_visitors .leancloud-visitors-count').forEach(element => {
+              element.innerText = 0;
+            });
+            return;
+          }
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.url;
+            var time = item.time;
+            leancloudSelector(url).innerText = time;
+          }
+          for (var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = leancloudSelector(url);
+            if (element.innerText == '') {
+              element.innerText = 0;
+            }
+          }
+        })
+        .catch(error => {
+          console.log('LeanCloud Counter Error', error);
+        });
+    }
+  }
+
+  fetch('https://app-router.leancloud.cn/2/route?appId=Fn4BuvoixOxjJAhR79TvaD5M-gzGzoHsz')
+    .then(response => response.json())
+    .then(({ api_server }) => {
+      var Counter = (method, url, data) => {
+        return fetch(`https://${api_server}/1.1${url}`, {
+          method: method,
+          headers: {
+            'X-LC-Id': 'Fn4BuvoixOxjJAhR79TvaD5M-gzGzoHsz',
+            'X-LC-Key': '1uspTrSwPqkmSBSUr948WqxE',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+      };
+      if (CONFIG.page.isPost) {
+        const localhost = /http:\/\/(localhost|127.0.0.1|0.0.0.0)/;
+        if (localhost.test(document.URL)) return;
+        addCount(Counter);
+      } else if (document.querySelectorAll('.post-title-link').length >= 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
 
 
 
@@ -2418,281 +1251,73 @@ Release 0.2.0:
         
       </div>
     </footer>
-
-    
-      <div class="back-to-top">
-        <i class="fa fa-arrow-up"></i>
-        
-      </div>
-    
-
-    
-
   </div>
 
   
 
-<script type="text/javascript">
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
-  }
+
+  <script src="/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.4.0"></script><script src="/js/motion.js?v=7.4.0"></script>
+<script src="/js/schemes/pisces.js?v=7.4.0"></script>
+
+<script src="/js/next-boot.js?v=7.4.0"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+
+<script>
+NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(item => {
+    return GUEST.includes(item);
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: false,
+    appId: 'Fn4BuvoixOxjJAhR79TvaD5M-gzGzoHsz',
+    appKey: '1uspTrSwPqkmSBSUr948WqxE',
+    placeholder: 'Just go go',
+    avatar: 'mm',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: false,
+    lang: '' || 'zh-cn',
+    path: location.pathname
+  });
+}, window.Valine);
 </script>
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  
-    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-  
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
-
-
-
-  
-  
-
-  
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
-
-
-
-  
-
-
-  
-
-
-
-
-	
-
-
-
-
-
-  
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
-  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
-  
-  <script type="text/javascript">
-    var GUEST = ['nick','mail','link'];
-    var guest = 'nick,mail,link';
-    guest = guest.split(',').filter(item=>{
-      return GUEST.indexOf(item)>-1;
-    });
-    new Valine({
-        el: '#comments' ,
-        verify: false,
-        notify: false,
-        appId: 'Fn4BuvoixOxjJAhR79TvaD5M-gzGzoHsz',
-        appKey: '1uspTrSwPqkmSBSUr948WqxE',
-        placeholder: 'Just go go',
-        avatar:'mm',
-        guest_info:guest,
-        pageSize:'10' || 10,
-    });
-  </script>
-
-
-
-  
-
-
-
-
-
-  
-
-  
-  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
-  <script>AV.initialize("Fn4BuvoixOxjJAhR79TvaD5M-gzGzoHsz", "1uspTrSwPqkmSBSUr948WqxE");</script>
-  <script>
-    function showTime(Counter) {
-      var query = new AV.Query(Counter);
-      var entries = [];
-      var $visitors = $(".leancloud_visitors");
-
-      $visitors.each(function () {
-        entries.push( $(this).attr("id").trim() );
-      });
-
-      query.containedIn('url', entries);
-      query.find()
-        .done(function (results) {
-          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
-
-          if (results.length === 0) {
-            $visitors.find(COUNT_CONTAINER_REF).text(0);
-            return;
-          }
-
-          for (var i = 0; i < results.length; i++) {
-            var item = results[i];
-            var url = item.get('url');
-            var time = item.get('time');
-            var element = document.getElementById(url);
-
-            $(element).find(COUNT_CONTAINER_REF).text(time);
-          }
-          for(var i = 0; i < entries.length; i++) {
-            var url = entries[i];
-            var element = document.getElementById(url);
-            var countSpan = $(element).find(COUNT_CONTAINER_REF);
-            if( countSpan.text() == '') {
-              countSpan.text(0);
-            }
-          }
-        })
-        .fail(function (object, error) {
-          console.log("Error: " + error.code + " " + error.message);
-        });
-    }
-
-    function addCount(Counter) {
-      var $visitors = $(".leancloud_visitors");
-      var url = $visitors.attr('id').trim();
-      var title = $visitors.attr('data-flag-title').trim();
-      var query = new AV.Query(Counter);
-
-      query.equalTo("url", url);
-      query.find({
-        success: function(results) {
-          if (results.length > 0) {
-            var counter = results[0];
-            counter.fetchWhenSave(true);
-            counter.increment("time");
-            counter.save(null, {
-              success: function(counter) {
-                var $element = $(document.getElementById(url));
-                $element.find('.leancloud-visitors-count').text(counter.get('time'));
-              },
-              error: function(counter, error) {
-                console.log('Failed to save Visitor num, with error message: ' + error.message);
-              }
-            });
-          } else {
-            var newcounter = new Counter();
-            /* Set ACL */
-            var acl = new AV.ACL();
-            acl.setPublicReadAccess(true);
-            acl.setPublicWriteAccess(true);
-            newcounter.setACL(acl);
-            /* End Set ACL */
-            newcounter.set("title", title);
-            newcounter.set("url", url);
-            newcounter.set("time", 1);
-            newcounter.save(null, {
-              success: function(newcounter) {
-                var $element = $(document.getElementById(url));
-                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
-              },
-              error: function(newcounter, error) {
-                console.log('Failed to create');
-              }
-            });
-          }
-        },
-        error: function(error) {
-          console.log('Error:' + error.code + " " + error.message);
-        }
-      });
-    }
-
-    $(function() {
-      var Counter = AV.Object.extend("Counter");
-      if ($('.leancloud_visitors').length == 1) {
-        addCount(Counter);
-      } else if ($('.post-title-link').length > 1) {
-        showTime(Counter);
-      }
-    });
-  </script>
-
-
-
-  
-
-  
-
-  
-  
-
-  
-
-  
-
-  
 
 </body>
 </html>
