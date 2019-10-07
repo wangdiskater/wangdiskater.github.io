@@ -1,0 +1,1132 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.3.8">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.4.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.4.0" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.4.0">
+
+<link rel="stylesheet" href="//fonts.proxy.ustclug.org/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.4.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="本周继续在做项目，国庆节就看了一个阅兵。大部分时间都在写bug，其实还是自己的问题比较大。总是想着快点把项目完成，却缺少很多思考的东西。同样是CRUD你如何才能做得更优雅，更有深度。这是一个工程师必须要做好的。本周主要知识点：1.CORS解决跨域问题2.swagger 自动生成接口文档3.druid监控4.#{} 和${}区别5.typeHandler 在数据库中存数组，bean等类型6.Page">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java总结（十五）">
+<meta property="og:url" content="http://yoursite.com/2019/10/07/Java总结（十五）/index.html">
+<meta property="og:site_name" content="路要坚持">
+<meta property="og:description" content="本周继续在做项目，国庆节就看了一个阅兵。大部分时间都在写bug，其实还是自己的问题比较大。总是想着快点把项目完成，却缺少很多思考的东西。同样是CRUD你如何才能做得更优雅，更有深度。这是一个工程师必须要做好的。本周主要知识点：1.CORS解决跨域问题2.swagger 自动生成接口文档3.druid监控4.#{} 和${}区别5.typeHandler 在数据库中存数组，bean等类型6.Page">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-10-07T07:52:42.095Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java总结（十五）">
+<meta name="twitter:description" content="本周继续在做项目，国庆节就看了一个阅兵。大部分时间都在写bug，其实还是自己的问题比较大。总是想着快点把项目完成，却缺少很多思考的东西。同样是CRUD你如何才能做得更优雅，更有深度。这是一个工程师必须要做好的。本周主要知识点：1.CORS解决跨域问题2.swagger 自动生成接口文档3.druid监控4.#{} 和${}区别5.typeHandler 在数据库中存数组，bean等类型6.Page">
+  <link rel="canonical" href="http://yoursite.com/2019/10/07/Java总结（十五）/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>Java总结（十五） | 路要坚持</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">路要坚持</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+      <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block post">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/07/Java总结（十五）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="王邸">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/head.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="路要坚持">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">Java总结（十五）
+
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-10-07 15:52:19 / 修改时间：15:52:42" itemprop="dateCreated datePublished" datetime="2019-10-07T15:52:19+08:00">2019-10-07</time>
+            </span>
+          
+            
+
+            
+          
+
+          
+            <span id="/2019/10/07/Java总结（十五）/" class="post-meta-item leancloud_visitors" data-flag-title="Java总结（十五）" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2019/10/07/Java总结（十五）/#comments" itemprop="discussionUrl"><span class="post-comments-count valine-comment-count" data-xid="/2019/10/07/Java总结（十五）/" itemprop="commentCount"></span></a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>本周继续在做项目，国庆节就看了一个阅兵。大部分时间都在写bug，其实还是自己的问题比较大。总是想着快点把项目完成，却缺少很多思考的东西。同样是CRUD你如何才能做得更优雅，更有深度。这是一个工程师必须要做好的。<br>本周主要知识点：<br>1.CORS解决跨域问题<br>2.swagger 自动生成接口文档<br>3.druid监控<br>4.#{} 和${}区别<br>5.typeHandler 在数据库中存数组，bean等类型<br>6.PageHelper 分页<br>7.Hibernate validator 校验器<br>8.权限控制（shiro） 重要<br>9.oos 阿里云文件上传<br>10.发送短信</p><a id="more"></a>
+<h2 id="知识点总结"><a href="#知识点总结" class="headerlink" title="知识点总结"></a>知识点总结</h2><h2 id="星期一（9月30日）"><a href="#星期一（9月30日）" class="headerlink" title="星期一（9月30日）"></a>星期一（9月30日）</h2><h3 id="解决跨域"><a href="#解决跨域" class="headerlink" title="解决跨域"></a>解决跨域</h3><p>今天项目刚刚开始，也没说什么，就加入了一个解决跨域的filter，这个filter感觉和项目一我自己写的有坑的filter有点类似。但是这个没有出现问题，可能的原因是因为这个项目没有需要浏览器带cookie的请求。之前是设置了这样的请求头：</p>
+<pre><code>axios.defaults.withCredentials = true;
+</code></pre><p>这里就没有，随便一个简单的filter就能通过。因为有shiro的权限控制。所以设置了可以接受所有的请求，感觉还是有点不安全的样子。<br>filter文件：</p>
+<pre><code>@Configuration
+public class CorsConfig {
+  private CorsConfiguration buildConfig() {
+    CorsConfiguration corsConfiguration = new CorsConfiguration();
+    corsConfiguration.addAllowedOrigin(&quot;*&quot;); // 1 设置访问源地址
+    corsConfiguration.addAllowedHeader(&quot;*&quot;); // 2 设置访问源请求头
+    corsConfiguration.addAllowedMethod(&quot;*&quot;); // 3 设置访问源请求方法
+    return corsConfiguration;
+  }
+  @Bean
+  public CorsFilter corsFilter() {
+    UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+    source.registerCorsConfiguration(&quot;/**&quot;, buildConfig()); // 4 对接口配置跨域设置
+    return new CorsFilter(source);
+  }
+}
+</code></pre><h2 id="星期二（10月01日）"><a href="#星期二（10月01日）" class="headerlink" title="星期二（10月01日）"></a>星期二（10月01日）</h2><h3 id="分页"><a href="#分页" class="headerlink" title="分页"></a>分页</h3><p>在数据库查找的分页，有一个专门的依赖使用的PageHelper,这就是非常好用的一个依赖，可以获取所有的条数，然后通过你给的页数(page)，和每页显示的个数（limit）就能分页，也能得通过一个PageInfo的对象，拿到total和page的页数。<br>先在maven中导包：</p>
+<pre><code>&lt;dependency&gt;
+    &lt;groupId&gt;com.github.pagehelper&lt;/groupId&gt;
+    &lt;artifactId&gt;pagehelper-spring-boot-starter&lt;/artifactId&gt;
+    &lt;version&gt;1.2.5&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre><p>然后需要在springBoot的配置文件中配置一下。</p>
+<pre><code>pagehelper:
+  helper-dialect: mysql
+</code></pre><p>然后就可以使用了。在我们业务代码中使用：</p>
+<pre><code>PageHelper.startPage(1,5);
+List&lt;User&gt; users = userMapper.selectUsers();
+PageInfo&lt;User&gt; userPageInfo = new PageInfo&lt;&gt;(users);
+long total = userPageInfo.getTotal();
+</code></pre><p>实质上这个pageHelper就是一个动态代理。就在你去数据库查找之前，他在你的sql语句上面拼接了limit，但是他应该是会先查找一次你自己输入的没有limit的sql语句，查找出来总共的条数。也就是说他查找了两次。这些我们可以从控制台的日志看出来。<br>pageinfo对象其实继承了PageSerializable</p>
+<pre><code>public class PageInfo&lt;T&gt; extends PageSerializable&lt;T&gt;
+</code></pre><p>自己也加强了一些方法，其实我们可以从<strong>成员变量就能看出来他有什么方法了（以后我们看源码就先看成员变量，心里就有点数了）</strong><br>顾名思义，PageInfo可以拿到这些属性的值</p>
+<pre><code>private int pageNum;
+private int pageSize;
+private int size;
+private int startRow;
+private int endRow;
+private int pages;
+private int prePage;
+private int nextPage;
+private boolean isFirstPage;
+private boolean isLastPage;
+private boolean hasPreviousPage;
+private boolean hasNextPage;
+private int navigatePages;
+private int[] navigatepageNums;
+private int navigateFirstPage;
+private int navigateLastPage;
+</code></pre><p>PageSerializable</p>
+<pre><code>private static final long serialVersionUID = 1L;
+protected long total;
+</code></pre><p>可以拿到所有的条数。</p>
+<h2 id="星期三（10月02日）"><a href="#星期三（10月02日）" class="headerlink" title="星期三（10月02日）"></a>星期三（10月02日）</h2><h3 id="typeHandler"><a href="#typeHandler" class="headerlink" title="typeHandler"></a>typeHandler</h3><p>今天讲的东西感觉也很便利，虽然不是说有质变。但是当工作越来越高效我们的效率就会发生质变了。<br>这个东西的功能就是，我们存入数据库，和从数据库中取出来一个数组，或者一个json类型的bean时，我们不是使用String去接收他。而是使用一个bean或者使用数组去接收。<br>其实就是什么，我们之前使用的Gson,或者是fastJson的功能都差不多，我们可以把数据从json转成bean，或者bean转成json。只不过这个工具就是把我们的功能从两步合成了一步（我们也可以从数据库先把数据取出来用String接收，然后我们自己再转成对应的bean或者数组），然而这个工具最方便的是，他结合了Spring的特性（控制翻转（ioc）：<strong>不需要我们自己去管理</strong>.当我们从数据库接收参数时候，当我们的bean的参数类型和数据库不同的时候，他会自动调用typeHandler来进行转换。当然转换的逻辑需要我们自己写，有点像之前的Convertor。<br>接下来我们就开始使用吧<br><strong>第一步：先导包</strong><br>这个功能不需要导包,<br>在我们导入spring-boot-starter-web  里面就有jackson的依赖我们可以直接使用<br><strong>第二步：配置文件</strong><br>需要在配置文件里面配置一下：</p>
+<pre><code>mybatis:
+  type-handlers-package: com.cskaoyan.mybatis
+</code></pre><p>表示的是一个扫描包，写了这个就不需要在xml文件里面写typeHandler的属性了：<br>不写这个扫描包<br>每个需要转换的获取结果result都要这样写：</p>
+<pre><code>&lt;result column=&quot;hobbys&quot; property=&quot;hobbys&quot; typeHandler=&quot;com.cskaoyan.mybatis.TransferStringArrayHandler&quot;/&gt;
+</code></pre><p>插入数据要这样写：<br> insert into j16_user_t (username,password,age,gender,hobbys,user_detail) value<br>        (#{user.username},#{user.password},#{user.age},#{user.gender},</p>
+<pre><code>#{user.hobbys,typeHandler=com.cskaoyan.mybatis.TransferStringArrayHandler},
+#{user.userDetail,typeHandler=com.cskaoyan.mybatis.TransferUserDetailHandler})
+</code></pre><p>如果写了这个扫描包，就不需要了。</p>
+<p><strong>第三步：写我们的转换的组间（重要）</strong><br>其实也就是把String转bean/数组 或者 bean/数组转String的json。就在这里设置罢了。<br>通过上面的全类名我们知道：把这个TypeHandler放在了mybatis的文件夹下：<br>创一个TransferStringArrayHandler.java（以字符数组和String<strong>相互转换</strong>为例）</p>
+<p>1）需要实现TypeHandler</p>
+<pre><code>public class TransferStringArrayHandler implements TypeHandler&lt;String[]&gt; {
+</code></pre><p>2）需要加上注解@MappedTypes表示这个handler能转什么类型</p>
+<pre><code>@MappedTypes(String[].class)
+</code></pre><p>3）需要从写四个方法：<br>一个是插入数据的，三个是拿出数据的方法。<br><strong>插入数据</strong></p>
+<pre><code>//import com.fasterxml.jackson.databind.ObjectMapper;
+ObjectMapper objectMapper = new ObjectMapper(); //jackson的对象
+
+/*插入数据 由javabean转换为数据库接收的类型*/
+@Override
+public void setParameter(PreparedStatement preparedStatement, int index, String[] strings, JdbcType jdbcType) throws SQLException {
+    try {
+        String jsonArray = objectMapper.writeValueAsString(strings);
+        preparedStatement.setString(index,jsonArray);
+    } catch (JsonProcessingException e) {
+        e.printStackTrace();
+    }
+}
+</code></pre><p>这里参数解释一下<br>preparedStatement：就是我们之前写jdbc的那个statement可以预编译防止数据库注入危险的。<br>index：  表示的就是我们需要转换那个参数在preparedStatement的sql中<strong>第几个位置</strong>,也就是<strong>？所在的地方</strong>。从一开始，我们不需要管他<br>String[]： strings就是我们的需要存进去的数据，我们现在就是要把String[] 转成String类型的json。</p>
+<p>这里面做的就是通过jackson的objectMapper对象转成String类型的json数据</p>
+<pre><code>String jsonArray = objectMapper.writeValueAsString(strings);
+preparedStatement.setString(index,jsonArray); //和我们手写jdbc一样这一步
+</code></pre><p><strong>获取数据handler</strong><br>和我们之前手写jdbc也一样，就是从resultset中拿出我们的数据罢了。简单说一下吧：</p>
+<pre><code>String value = resultSet.getString(parameterName);//拿出我们的String类型的数据
+return parseString2StringArray(value); //把数据转成String[]
+</code></pre><p>parseString2StringArray这个方法很简单，就是我们用gson写的方法如出一辙<strong>就是调用jason的的objectMapper给我们转</strong></p>
+<pre><code>private String[] parseString2StringArray(String value) {
+    String[] strings = new String[0]; //初始化
+    if (value == null){
+        return strings;
+    }
+    try {
+        strings = objectMapper.readValue(value, String[].class);
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+    return strings;
+}
+</code></pre><p>//三个重写的方法</p>
+<pre><code>@Override
+public String[] getResult(ResultSet resultSet, String parameterName) throws SQLException {
+    String value = resultSet.getString(parameterName);
+    return parseString2StringArray(value);
+}
+
+@Override
+public String[] getResult(ResultSet resultSet, int index) throws SQLException {
+    String value = resultSet.getString(index);
+    return parseString2StringArray(value);
+}
+
+@Override
+public String[] getResult(CallableStatement callableStatement, int index) throws SQLException {
+    String value = callableStatement.getString(index);
+    return parseString2StringArray(value);
+}
+</code></pre><p><strong>第四步：使用</strong><br>假如我们user表有这样一条数据</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:right">id</th>
+<th style="text-align:center">name</th>
+<th style="text-align:center">password</th>
+<th style="text-align:center">age</th>
+<th style="text-align:center">gender</th>
+<th style="text-align:left">hobbys</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right">1</td>
+<td style="text-align:center">25zai123123</td>
+<td style="text-align:center">123456</td>
+<td style="text-align:center">16</td>
+<td style="text-align:center">male</td>
+<td style="text-align:left">[“sing”,”dance”,”rap”]</td>
+</tr>
+</tbody>
+</table>
+<p>我们需要把hobbys拿出来时候就是数组，所以我们使用一个String数组接收</p>
+<pre><code>public class User {
+    int id;
+    String username;
+    String password;
+    int age;
+    String gender;
+    //由varchar
+    String[] hobbys;
+get.set。。。。
+}
+</code></pre><p>我们去数据取数据</p>
+<pre><code>@Autowired
+UserMapper usermapper;
+List&lt;User&gt; users = userMapper.queryUsers();
+
+UserMapper.xml
+&lt;resultMap id=&quot;userMap&quot; type=&quot;com.cskaoyan.bean.User&quot;&gt;
+    &lt;result column=&quot;id&quot; property=&quot;id&quot;/&gt;
+    &lt;result column=&quot;username&quot; property=&quot;username&quot;/&gt;
+    &lt;result column=&quot;password&quot; property=&quot;password&quot;/&gt;
+    &lt;result column=&quot;age&quot; property=&quot;age&quot;/&gt;
+    &lt;result column=&quot;gender&quot; property=&quot;gender&quot;/&gt;
+    &lt;result column=&quot;hobbys&quot; property=&quot;hobbys&quot;/&gt;
+&lt;/resultMap&gt;
+&lt;select id=&quot;queryUsers&quot; resultMap=&quot;userMap&quot;&gt;
+    select id,username,password,age,gender,hobbys from j16_user_t
+&lt;/select&gt;
+</code></pre><p>就可以拿到数据。</p>
+<h3 id="JsonFormat-pattern-“yyyy-MM-dd-HH-mm-ss”"><a href="#JsonFormat-pattern-“yyyy-MM-dd-HH-mm-ss”" class="headerlink" title="@JsonFormat(pattern = “yyyy-MM-dd HH:mm:ss”)"></a>@JsonFormat(pattern = “yyyy-MM-dd HH:mm:ss”)</h3><p>这个注解写在我们的bean上，就可以从前端接收json数据，或者发送给前端的json数据的日期类型，就可以格式化一下。<br>最常用的是在日期上使用，当然还有别的使用方式。</p>
+<pre><code>public class WxOrderDetailGoods {
+    int id;
+    int orderId;
+    int goodsId;
+    String goodsName;
+    String goodsSn;
+    int productId;
+    int number;
+    double price;
+    String[] specifications;
+    String picUrl;
+    int comment;  //表示评论的状态
+    @JsonFormat(pattern = &quot;yyyy-MM-dd HH:mm:ss&quot;)
+    Date addTime;
+    @JsonFormat(pattern = &quot;yyyy-MM-dd HH:mm:ss&quot;)
+    Date updateTime;
+    boolean deleted;
+}
+</code></pre><h2 id="星期四（10月03日）"><a href="#星期四（10月03日）" class="headerlink" title="星期四（10月03日）"></a>星期四（10月03日）</h2><h3 id="shiro"><a href="#shiro" class="headerlink" title="shiro"></a>shiro</h3><p>这个功能也非常的简单，<br>需要理解两个操作：<strong>授权</strong>、<strong>认证</strong>。<br>三个对象：<strong>subject</strong>、<strong>realm</strong>、<strong>SecurityManager</strong><br>两个名词：<strong>角色</strong>、<strong>权限</strong></p>
+<p>我们坐的操作就是认证和授权，而这两个操作，需要通过subject和realm来完成。<br>我们肯定是要先认真，表示是自己人，然后才授权，你能做什么事情。直接上代码：</p>
+<h3 id="案例一：SE代码完成自定义realm的shiro验证"><a href="#案例一：SE代码完成自定义realm的shiro验证" class="headerlink" title="案例一：SE代码完成自定义realm的shiro验证"></a>案例一：SE代码完成自定义realm的shiro验证</h3><p><strong>第一步导包</strong></p>
+<pre><code>&lt;dependency&gt;
+    &lt;groupId&gt;org.apache.shiro&lt;/groupId&gt;
+    &lt;artifactId&gt;shiro-core&lt;/artifactId&gt;
+    &lt;version&gt;1.4.0&lt;/version&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;commons-logging&lt;/groupId&gt;
+    &lt;artifactId&gt;commons-logging&lt;/artifactId&gt;
+    &lt;version&gt;1.2&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre><p><strong>第二步配置文件</strong><br>我们在resources目录下创建一个shiro-custom.ini的文件告诉shiro用我们自己的realm</p>
+<pre><code>customRealm=com.cskaoyan.shiro.CustomRealm
+securityManager.realm=$customRealm
+</code></pre><p><strong>第三步编写我们的realm</strong></p>
+<pre><code>public class CustomRealm extends AuthorizingRealm {
+</code></pre><p>需要继承AuthorizingRealm，然后需要重写两个方法：我们可以很容易的想到一个方法是为了验证，一个方法是为了授权。<br>认证的方法：doGetAuthenticationInfo</p>
+<pre><code>/**
+ * 获得你的用户信息（通常来源于数据库）
+ * @param authenticationToken
+ * @return
+ * @throws AuthenticationException
+ */
+@Override
+protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
+    //subject执行login时传入的usernamePasswordToken中的username
+    String principal = (String) authenticationToken.getPrincipal();
+    //根据principle也就是用户名去数据库查询用户名所对应的密码信息
+    String passwordFromDb = null; //应该要去数据库找，这里就直接显示了
+    if (&quot;songge&quot;.equals(principal)){
+        passwordFromDb = &quot;123456&quot;;
+    } else {
+        passwordFromDb = &quot;654321&quot;;
+    }
+    //第一个参数在处理授权信息时可以获得
+    //第二个参数 该用户正确的密码（来源于数据库的）
+    SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(principal, passwordFromDb, this.getName());
+    return authenticationInfo;
+}
+</code></pre><p>授权的方法：doGetAuthorizationInfo</p>
+<pre><code>    /**
+     * 完成认证之后
+     * 获得授权信息
+     * @param principalCollection
+     * @return
+     */
+    @Override
+    protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
+        //获得doGetAuthenticationInfo方法的返回值的第一个参数
+        String primaryPrincipal = (String) principalCollection.getPrimaryPrincipal();
+        SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
+//        authorizationInfo.addStringPermission(&quot;user:insert&quot;);
+//        authorizationInfo.addStringPermission(&quot;user:delete&quot;);
+//        authorizationInfo.addStringPermission(&quot;user:update&quot;);
+//        authorizationInfo.addStringPermission(&quot;user:query&quot;);
+        //权限信息时根据认证时的用户信息去数据库中查询获得的
+        List&lt;String&gt; permissions = new ArrayList&lt;&gt;();
+        permissions.add(&quot;user:insert&quot;);
+        permissions.add(&quot;user:delete&quot;);
+//        permissions.add(&quot;user:update&quot;);
+//        permissions.add(&quot;user:query&quot;);
+        authorizationInfo.addStringPermissions(permissions);
+        authorizationInfo.addRole(&quot;utilMan&quot;);
+        return authorizationInfo;
+    }
+}
+</code></pre><h3 id="输入参数讲解"><a href="#输入参数讲解" class="headerlink" title="输入参数讲解"></a>输入参数讲解</h3><p>1.AuthenticationToken authenticationToken 就是需要认证的token，我们使用的是UsernamePasswordToken来传入进行判断。也可以自己分发通过集成usernamepassword类。<br>2.PrincipalCollection principalCollection 拿到了需要授权的collection从而拿到token第一个参数进行判断。其实也不怎样用。</p>
+<p><strong>第四步</strong>进行测试</p>
+<pre><code>@Test
+public void mytest1(){
+    //首先获得securityManager的实例
+    IniSecurityManagerFactory factory = new IniSecurityManagerFactory(&quot;classpath:shiro-custom.ini&quot;);
+    SecurityManager instance = factory.getInstance();
+    //获得主体subject
+    SecurityUtils.setSecurityManager(instance);
+    Subject subject = SecurityUtils.getSubject();
+    //主体执行认证
+    //传入要执行认证的token
+    //token中封装来源于用户的用户名和密码
+    UsernamePasswordToken token = new UsernamePasswordToken(&quot;linguoqing&quot;, &quot;654321&quot;);
+    subject.login(token);
+    //使用到realm 获得认证授权信息 IniRealm
+    //主体是否完成认证
+    boolean authenticated = subject.isAuthenticated();
+    System.out.println(authenticated);
+</code></pre><p>下面进行授权的判断。</p>
+<pre><code>    //////////////////////////////////////////
+    //进行授权
+    //权限全部满足返回true
+    //鉴权
+    boolean permittedAll = subject.isPermittedAll(&quot;user:query&quot;, &quot;user:insert&quot;, &quot;user:delete&quot;, &quot;user:update&quot;);
+    boolean[] permitted = subject.isPermitted(&quot;user:query&quot;, &quot;user:insert&quot;, &quot;user:delete&quot;, &quot;user:update&quot;);
+    boolean permitted1 = subject.isPermitted(&quot;user:query&quot;);
+    boolean permitted2 = subject.isPermitted(&quot;user:insert&quot;);
+    boolean utilMan = subject.hasRole(&quot;utilMan2&quot;);
+    System.out.println(123);
+}
+</code></pre><p><strong>注意事项</strong><br>1.当我们调用subject.login方法时，我们就会进入认证的方法<br>2.当我们调用subject.isPermitted（）就会进入授权的方法，isPermitted()里面写的是用户需要的权限，授权方法里面写的是，用户可以拿到什么权限，如果用户拿到的权限不包含<strong>isPermitted中的权限</strong>返回的就会有false。<br>3.当然也可以授权角色，但是我们知道授权权限要不授权角色好维护的多</p>
+<h3 id="案例二-整合spingboot"><a href="#案例二-整合spingboot" class="headerlink" title="案例二 整合spingboot"></a>案例二 整合spingboot</h3><p><strong>第一步导包</strong></p>
+<pre><code>&lt;!--shiro对spring的支持--&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;org.apache.shiro&lt;/groupId&gt;
+    &lt;artifactId&gt;shiro-spring&lt;/artifactId&gt;
+    &lt;version&gt;1.4.0&lt;/version&gt;
+&lt;/dependency&gt;
+
+&lt;!--使用声明式的授权，需要导入织入包--&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;org.aspectj&lt;/groupId&gt;
+    &lt;artifactId&gt;aspectjweaver&lt;/artifactId&gt;
+&lt;/dependency&gt;
+</code></pre><p><strong>第二步配置</strong><br>我们使用javaConfig进行配置。需要配置两个东西，我们知道shiro其实做的就是filter的事情那么我们肯定要注册一个类似filter的东西<br>1.<strong>shiroFilterFactoryBean</strong></p>
+<pre><code>/*shiroFilter*/
+@Bean
+public ShiroFilterFactoryBean shiroFilterFactoryBean(SecurityManager securityManager){
+    ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
+    //如果访问url没有通过认证，会重定向到loginUrl
+    shiroFilterFactoryBean.setLoginUrl(&quot;/fail&quot;);
+    //安全控制器
+    shiroFilterFactoryBean.setSecurityManager(securityManager);
+    //拦截器配置
+    //请求的url
+    //anon匿名的
+    //authc认证
+    //perms权限
+    //linkedHashMap需要是有顺序的
+    HashMap&lt;String, String&gt; filterChainDefinitionMap = new LinkedHashMap&lt;&gt;();
+    filterChainDefinitionMap.put(&quot;/admin/auth/login&quot;,&quot;anon&quot;);
+    filterChainDefinitionMap.put(&quot;/fail&quot;,&quot;anon&quot;);
+    filterChainDefinitionMap.put(&quot;/jpg/**&quot;,&quot;anon&quot;);
+    filterChainDefinitionMap.put(&quot;/admin/**&quot;,&quot;authc&quot;);
+    //filterChainDefinitionMap.put(&quot;/admin/logout&quot;,&quot;logout&quot;);
+    filterChainDefinitionMap.put(&quot;/admin/auth/info&quot;,&quot;perms[user:query,user:delete]&quot;);
+    shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
+    return shiroFilterFactoryBean;
+}
+</code></pre><p>我们有一个<strong>shiroChain</strong>这笔和filterChain一毛一样啊。写在上面的就是先进行判断，这里我们put三种拦截器的配置</p>
+<pre><code>//anon匿名的  请求不需要验证
+//authc认证   请求需要验证通过才能
+//perms权限   请求不仅需要验证通过，而且会进入到授权的方法中去判断是否有权限
+</code></pre><p>前面的url-patthern <strong>必须要以/开头，不然就会出事，就算你没有应用名也会出事</strong></p>
+<p>然后就是我们的securitymanager来配置realm<br>2.securityManager</p>
+<pre><code>/*securityManager*/
+@Bean
+public DefaultWebSecurityManager securityManager(CustomRealm realm){
+    DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
+    securityManager.setRealm(realm);
+    return securityManager;
+}
+</code></pre><p>3.自定义的realm，就是我们上面的CustomRealm realm。一样的参考上面写的记得加上<strong>@Component</strong></p>
+<pre><code>@Component
+public class CustomRealm extends AuthorizingRealm {
+    /**
+     * 获得你的用户信息（通常来源于数据库）
+     * @param authenticationToken
+     * @return
+     * @throws AuthenticationException
+     */
+    @Override
+    protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
+        //subject执行login时传入的usernamePasswordToken中的username
+        String principal = (String) authenticationToken.getPrincipal();
+        //根据principle也就是用户名去数据库查询用户名所对应的密码信息
+        String passwordFromDb = null;
+        if (&quot;songge&quot;.equals(principal)){
+            passwordFromDb = &quot;123456&quot;;
+        }else {
+            passwordFromDb = &quot;654321&quot;;
+        }
+        //第一个参数在处理授权信息时可以获得
+        //第二个参数 该用户正确的密码（来源于数据库的）
+        SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(principal, passwordFromDb, this.getName());
+        return authenticationInfo;
+    }
+    /**
+     * 完成认证之后
+     * 获得授权信息
+     * @param principalCollection
+     * @return
+     */
+    @Override
+    protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
+        //获得doGetAuthenticationInfo方法的返回值的第一个参数
+        String primaryPrincipal = (String) principalCollection.getPrimaryPrincipal();
+        SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
+        //权限信息时根据认证时的用户信息去数据库中查询获得的
+        List&lt;String&gt; permissions = new ArrayList&lt;&gt;();
+        permissions.add(&quot;user:insert&quot;);
+        permissions.add(&quot;user:delete&quot;);
+        authorizationInfo.addStringPermissions(permissions);
+        authorizationInfo.addRole(&quot;utilMan&quot;);//授权角色
+        return authorizationInfo;
+    }
+}
+</code></pre><p>4.需要使用声明是的注解需要配置</p>
+<pre><code>/*声明式使用鉴权注解的开关*/
+@Bean
+public AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor(SecurityManager securityManager){
+    AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor = new AuthorizationAttributeSourceAdvisor();
+    authorizationAttributeSourceAdvisor.setSecurityManager(securityManager);
+    return authorizationAttributeSourceAdvisor;
+}
+</code></pre><p><strong>5.附加内容自定义的sessionManager，需要给前端带上shrio的token，让请求都带上同一个sessionID</strong></p>
+<pre><code>/*自定义的sessionManager*/
+@Bean
+public DefaultWebSessionManager webSessionManager(){
+    MallSessionManager mallSessionManager = new MallSessionManager();
+    return mallSessionManager;
+}
+</code></pre><p>新建一个对象编写MallSessionManager</p>
+<pre><code>public class MallSessionManager extends DefaultWebSessionManager {
+    @Override
+    protected Serializable getSessionId(ServletRequest servletRequest, ServletResponse response) {
+        HttpServletRequest request = (HttpServletRequest) servletRequest;
+        String header = request.getHeader(&quot;X-cskaoyanmall-Admin-Token&quot;);
+        if (header != null &amp;&amp; !&quot;&quot;.equals(header)){
+            return header;  //把请求头中的token反给前端
+        }
+        return super.getSessionId(servletRequest, response);
+    }
+}
+</code></pre><p><strong>第三步测试，在conroller上加注解</strong></p>
+<pre><code>@RequestMapping(&quot;admin/perm/reuqired&quot;)
+@RequiresPermissions(value = {&quot;user:query&quot;,&quot;user:delete&quot;},logical = Logical.AND)
+public String perm(){
+    return &quot;perm pass&quot;;
+}
+</code></pre><p><strong>注意事项</strong><br>1.登陆不需要认证，应该是匿名就能访问<br>2.使用声明式注解必须要导入织入包</p>
+<h2 id="星期五（10月04日）"><a href="#星期五（10月04日）" class="headerlink" title="星期五（10月04日）"></a>星期五（10月04日）</h2><h3 id="druid监控"><a href="#druid监控" class="headerlink" title="druid监控"></a>druid监控</h3><p><strong>第一步导包</strong></p>
+<pre><code>&lt;dependency&gt;
+    &lt;groupId&gt;com.alibaba&lt;/groupId&gt;
+    &lt;artifactId&gt;druid&lt;/artifactId&gt;
+    &lt;version&gt;1.1.12&lt;/version&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;com.alibaba&lt;/groupId&gt;
+    &lt;artifactId&gt;druid-spring-boot-starter&lt;/artifactId&gt;
+    &lt;version&gt;1.1.10&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre><p><strong>第二步配置</strong></p>
+<pre><code>spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/j16_db?useUnicode=true&amp;characterEncoding=utf-8
+    username: root
+    password: 123456
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      filters: stat
+</code></pre><p><strong>第三步使用</strong><br>druid监控页面：</p>
+<pre><code>http://localhost:80/druid/sql.html
+</code></pre><p>就可以看到sql相关的信息</p>
+<h3 id="参数校验"><a href="#参数校验" class="headerlink" title="参数校验"></a>参数校验</h3><p><strong>第一步导包</strong><br>不需要导包，Spring就集成了参数校验</p>
+<p><strong>第二步配置校验</strong></p>
+<pre><code>@Configuration
+public class ValidatorConfig {
+
+    @Bean
+    public LocalValidatorFactoryBean localValidatorFactoryBean(ReloadableResourceBundleMessageSource messageSource){
+        LocalValidatorFactoryBean localValidatorFactoryBean = new LocalValidatorFactoryBean();
+        localValidatorFactoryBean.setProviderClass(HibernateValidator.class);
+        localValidatorFactoryBean.setValidationMessageSource(messageSource);
+        return localValidatorFactoryBean;
+    }
+}
+</code></pre><p><strong>第三步使用</strong><br>我们在接收前端参数的userBean上增加注解</p>
+<pre><code>public class User {
+    int id;
+    //username 长度小于6
+    //@NotNull
+    //密码长度要最大为6
+    @Size(max = 6,message = &quot;{user.username}&quot;)
+    String username;
+    //password 长度大于6
+    @Size(min = 6,message = &quot;{user.password}&quot;)
+    String password;
+    int age;
+    String gender;
+}
+</code></pre><p>Controller.java</p>
+<pre><code>//增加了bindingResult参数后能够进入到RequestMapping所对应的方法
+@RequestMapping(&quot;/user/login&quot;)
+public String login(@Valid User user, BindingResult bindingResult){
+//public String login(String username,String password){
+    if (bindingResult.hasErrors()){
+        FieldError fieldError = bindingResult.getFieldError();
+        String defaultMessage = fieldError.getDefaultMessage();
+        String field = fieldError.getField();
+        //return BaseRespVo
+        return field + &quot;:&quot; +defaultMessage;
+    }
+    return &quot;ok&quot;;
+}
+</code></pre><h3 id="国际化"><a href="#国际化" class="headerlink" title="国际化"></a>国际化</h3><p><strong>配置</strong></p>
+<pre><code>@Bean
+public ReloadableResourceBundleMessageSource messageSource(){
+    ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
+    messageSource.setBasename(&quot;classpath:mymessage&quot;);
+    messageSource.setDefaultEncoding(&quot;utf-8&quot;);
+    messageSource.setUseCodeAsDefaultMessage(false);
+    return messageSource;
+}
+@Bean
+public CookieLocaleResolver localeResolver(){
+    CookieLocaleResolver cookieLocaleResolver = new CookieLocaleResolver();
+    //默认的语言信息
+    cookieLocaleResolver.setDefaultLocale(Locale.US);
+    cookieLocaleResolver.setCookieName(&quot;language&quot;);
+    return cookieLocaleResolver;
+}
+</code></pre><h2 id="星期六（10月05日）"><a href="#星期六（10月05日）" class="headerlink" title="星期六（10月05日）"></a>星期六（10月05日）</h2><h3 id="分发realm"><a href="#分发realm" class="headerlink" title="分发realm"></a>分发realm</h3><p>我们其实shiro 可以通过不同的realm来处理不同的请求，处理前台和后台<br><strong>第一步:导包</strong><br>同上的spring-boot依赖</p>
+<p><strong>第二步：配置</strong><br>1）我们需要一个自定义的token来表示是admin 的登陆还是wx的登陆。</p>
+<pre><code>public class CustomToken extends UsernamePasswordToken {
+    String type;
+    public CustomToken(String username, String password, String type) {
+        super(username, password);
+        this.type = type;
+    }
+    public String getType() {
+        return type;
+    }
+    public void setType(String type) {
+        this.type = type;
+    }
+}
+</code></pre><p>通过type来判断是wx 还是admin</p>
+<p>2）然后分发到不同的realm</p>
+<pre><code>public class CustomRealm extends AuthorizingRealm {
+    @Override
+    protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
+        //从type拿出admin 或者wx
+        CustomToken token = (CustomToken) authenticationToken;
+        String type = token.getType();
+        return null;
+    }
+    @Override
+    protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
+        return null;
+    }
+}
+</code></pre><p>3）我们如何分发？<strong>需要我们重写RealmAuthenticator</strong>doAuthenticate方法</p>
+<pre><code>public class CustomRealmAuthenticator extends ModularRealmAuthenticator {
+    @Override
+    protected AuthenticationInfo doAuthenticate(AuthenticationToken authenticationToken) throws AuthenticationException {
+        this.assertRealmsConfigured();
+        Collection&lt;Realm&gt; allRealms = this.getRealms();
+        //对realm进行筛选，筛选的标准是token中的type
+        CustomToken token = (CustomToken) authenticationToken;
+        String type = token.getType();
+        Collection&lt;Realm&gt; realms = new ArrayList&lt;&gt;();
+        for (Realm realm : allRealms) {
+            //admin AdminRealm  || wx WxRealm
+            if (realm.getName().toLowerCase().contains(type)){
+                realms.add(realm);
+            }
+        }
+        return realms.size() == 1 ? this.doSingleRealmAuthentication((Realm)realms.iterator().next(), authenticationToken) : this.doMultiRealmAuthentication(realms, authenticationToken);
+    }
+}
+</code></pre><p>4）配置到我们的javaConfig</p>
+<pre><code>@Configuration
+public class ShiroConfig {
+    /*shiroFilterFactoryBean
+    SecurityManager*/
+    @Bean
+    public ShiroFilterFactoryBean shiroFilterFactoryBean(DefaultWebSecurityManager securityManager){
+        ShiroFilterFactoryBean filterFactoryBean = new ShiroFilterFactoryBean();
+        LinkedHashMap&lt;String, String&gt; filterChainDefinitionMap = new LinkedHashMap&lt;&gt;();
+        filterChainDefinitionMap.put(&quot;/admin/login&quot;,&quot;anon&quot;);
+        filterChainDefinitionMap.put(&quot;/wx/login&quot;,&quot;anon&quot;);
+        filterChainDefinitionMap.put(&quot;/admin/**&quot;,&quot;authc&quot;);
+        filterChainDefinitionMap.put(&quot;/wx/**&quot;,&quot;authc&quot;);
+        filterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
+        filterFactoryBean.setSecurityManager(securityManager);
+        return filterFactoryBean;
+    }
+    @Bean
+    public DefaultWebSecurityManager securityManager(@Qualifier(&quot;adminRealm&quot;) AdminRealm adminRealm,
+                                                     @Qualifier(&quot;wxRealm&quot;) WxRealm wxRealm,
+                                                     CustomRealmAuthenticator customRealmAuthenticator){
+        DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
+        ArrayList&lt;Realm&gt; realms = new ArrayList&lt;&gt;();
+        realms.add(adminRealm);
+        realms.add(wxRealm);
+        securityManager.setRealms(realms);
+        securityManager.setAuthenticator(customRealmAuthenticator);
+        return securityManager;
+    }
+    @Bean
+    public CustomRealmAuthenticator customRealmAuthenticator(@Qualifier(&quot;adminRealm&quot;) AdminRealm adminRealm,
+                                                             @Qualifier(&quot;wxRealm&quot;) WxRealm wxRealm){
+        CustomRealmAuthenticator customRealmAuthenticator = new CustomRealmAuthenticator();
+        ArrayList&lt;Realm&gt; realms = new ArrayList&lt;&gt;();
+        realms.add(adminRealm);
+        realms.add(wxRealm);
+        customRealmAuthenticator.setRealms(realms);
+        return customRealmAuthenticator;
+    }
+}
+</code></pre><h3 id="OSS"><a href="#OSS" class="headerlink" title="OSS"></a>OSS</h3><p><strong>第一步导包</strong></p>
+<pre><code>&lt;dependency&gt;
+    &lt;groupId&gt;com.aliyun.oss&lt;/groupId&gt;
+    &lt;artifactId&gt;aliyun-sdk-oss&lt;/artifactId&gt;
+    &lt;version&gt;2.5.0&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre><p><strong>第二部开始使用</strong></p>
+<pre><code>@Test
+public void mytest() throws FileNotFoundException {
+    String bucket = &quot;cskaoyan&quot;;
+    String endPoint = &quot;oss-cn-beijing.aliyuncs.com&quot;;
+    String accessKeyId = &quot;LTAI4Fr5gfYhcVjLMqeRGbuT&quot;;
+    String accessSecret = &quot;IrkcHu6dZyrjPZRushgO76P5392HJ1&quot;;
+    OSSClient ossClient = new OSSClient(endPoint, accessKeyId, accessSecret);
+    File uploadFile = new File(&quot;C:\\Users\\Administrator\\Desktop&quot;, &quot;test2.jpg&quot;);
+    FileInputStream input = new FileInputStream(uploadFile);
+    ossClient.putObject(new PutObjectRequest(bucket,&quot;123456.jpg&quot;, input));
+}
+</code></pre><h3 id="SMS"><a href="#SMS" class="headerlink" title="SMS"></a>SMS</h3><p><strong>第一步导包</strong></p>
+<pre><code>&lt;dependency&gt;
+    &lt;groupId&gt;com.aliyun&lt;/groupId&gt;
+    &lt;artifactId&gt;aliyun-java-sdk-core&lt;/artifactId&gt;
+    &lt;version&gt;4.0.3&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre><p><strong>第二步使用</strong></p>
+<pre><code>@Test
+public void mytest(){
+    DefaultProfile profile = DefaultProfile.getProfile(&quot;cn-hangzhou&quot;,
+            &quot;LTAI4Fr5gfYhcVjLMqeRGbuT&quot;, &quot;IrkcHu6dZyrjPZRushgO76P5392HJ1&quot;);
+    IAcsClient client = new DefaultAcsClient(profile);
+
+    CommonRequest request = new CommonRequest();
+    request.setMethod(MethodType.POST);
+    request.setDomain(&quot;dysmsapi.aliyuncs.com&quot;);
+    request.setVersion(&quot;2017-05-25&quot;);
+    request.setAction(&quot;SendSms&quot;);
+    request.putQueryParameter(&quot;RegionId&quot;, &quot;cn-hangzhou&quot;);
+    request.putQueryParameter(&quot;PhoneNumbers&quot;, &quot;17683788078&quot;);
+    request.putQueryParameter(&quot;SignName&quot;, &quot;你的签名&quot;);
+    request.putQueryParameter(&quot;TemplateCode&quot;, &quot;SMS_173765187&quot;);
+    request.putQueryParameter(&quot;TemplateParam&quot;, &quot;{\&quot;code\&quot;:\&quot;1234\&quot;}&quot;); //验证码
+    try {
+        CommonResponse response = client.getCommonResponse(request);
+        System.out.println(response.getData());
+    } catch (ServerException e) {
+        e.printStackTrace();
+    } catch (ClientException e) {
+        e.printStackTrace();
+    }
+}
+</code></pre><h2 id="星期七（10月06日）"><a href="#星期七（10月06日）" class="headerlink" title="星期七（10月06日）"></a>星期七（10月06日）</h2><p>先这样  做完项目在补上</p>
+<h3 id="问题总结"><a href="#问题总结" class="headerlink" title="问题总结"></a>问题总结</h3><h2 id="星期一（9月30日）-1"><a href="#星期一（9月30日）-1" class="headerlink" title="星期一（9月30日）"></a>星期一（9月30日）</h2><h2 id="星期二（10月01日）-1"><a href="#星期二（10月01日）-1" class="headerlink" title="星期二（10月01日）"></a>星期二（10月01日）</h2><h2 id="星期三（10月02日）-1"><a href="#星期三（10月02日）-1" class="headerlink" title="星期三（10月02日）"></a>星期三（10月02日）</h2><h2 id="星期四（10月03日）-1"><a href="#星期四（10月03日）-1" class="headerlink" title="星期四（10月03日）"></a>星期四（10月03日）</h2><h2 id="星期五（10月04日）-1"><a href="#星期五（10月04日）-1" class="headerlink" title="星期五（10月04日）"></a>星期五（10月04日）</h2><h2 id="星期六（10月05日）-1"><a href="#星期六（10月05日）-1" class="headerlink" title="星期六（10月05日）"></a>星期六（10月05日）</h2><h2 id="星期七（10月06日）-1"><a href="#星期七（10月06日）-1" class="headerlink" title="星期七（10月06日）"></a>星期七（10月06日）</h2>
+    </div>
+
+    
+    
+    
+        
+      
+
+      <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2019/10/03/Java总结（十四）/" rel="next" title="Java总结（十四）">
+                  <i class="fa fa-chevron-left"></i> Java总结（十四）
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+    
+    <div class="comments" id="comments"></div>
+  
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#知识点总结"><span class="nav-number">1.</span> <span class="nav-text">知识点总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#星期一（9月30日）"><span class="nav-number">2.</span> <span class="nav-text">星期一（9月30日）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#解决跨域"><span class="nav-number">2.1.</span> <span class="nav-text">解决跨域</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#星期二（10月01日）"><span class="nav-number">3.</span> <span class="nav-text">星期二（10月01日）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#分页"><span class="nav-number">3.1.</span> <span class="nav-text">分页</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#星期三（10月02日）"><span class="nav-number">4.</span> <span class="nav-text">星期三（10月02日）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#typeHandler"><span class="nav-number">4.1.</span> <span class="nav-text">typeHandler</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JsonFormat-pattern-“yyyy-MM-dd-HH-mm-ss”"><span class="nav-number">4.2.</span> <span class="nav-text">@JsonFormat(pattern = “yyyy-MM-dd HH:mm:ss”)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#星期四（10月03日）"><span class="nav-number">5.</span> <span class="nav-text">星期四（10月03日）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#shiro"><span class="nav-number">5.1.</span> <span class="nav-text">shiro</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#案例一：SE代码完成自定义realm的shiro验证"><span class="nav-number">5.2.</span> <span class="nav-text">案例一：SE代码完成自定义realm的shiro验证</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#输入参数讲解"><span class="nav-number">5.3.</span> <span class="nav-text">输入参数讲解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#案例二-整合spingboot"><span class="nav-number">5.4.</span> <span class="nav-text">案例二 整合spingboot</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#星期五（10月04日）"><span class="nav-number">6.</span> <span class="nav-text">星期五（10月04日）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#druid监控"><span class="nav-number">6.1.</span> <span class="nav-text">druid监控</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参数校验"><span class="nav-number">6.2.</span> <span class="nav-text">参数校验</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#国际化"><span class="nav-number">6.3.</span> <span class="nav-text">国际化</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#星期六（10月05日）"><span class="nav-number">7.</span> <span class="nav-text">星期六（10月05日）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#分发realm"><span class="nav-number">7.1.</span> <span class="nav-text">分发realm</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#OSS"><span class="nav-number">7.2.</span> <span class="nav-text">OSS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SMS"><span class="nav-number">7.3.</span> <span class="nav-text">SMS</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#星期七（10月06日）"><span class="nav-number">8.</span> <span class="nav-text">星期七（10月06日）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#问题总结"><span class="nav-number">8.1.</span> <span class="nav-text">问题总结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#星期一（9月30日）-1"><span class="nav-number">9.</span> <span class="nav-text">星期一（9月30日）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#星期二（10月01日）-1"><span class="nav-number">10.</span> <span class="nav-text">星期二（10月01日）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#星期三（10月02日）-1"><span class="nav-number">11.</span> <span class="nav-text">星期三（10月02日）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#星期四（10月03日）-1"><span class="nav-number">12.</span> <span class="nav-text">星期四（10月03日）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#星期五（10月04日）-1"><span class="nav-number">13.</span> <span class="nav-text">星期五（10月04日）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#星期六（10月05日）-1"><span class="nav-number">14.</span> <span class="nav-text">星期六（10月05日）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#星期七（10月06日）-1"><span class="nav-number">15.</span> <span class="nav-text">星期七（10月06日）</span></a></li></ol></div>
+        
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/images/head.jpeg"
+      alt="王邸">
+  <p class="site-author-name" itemprop="name">王邸</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">30</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">标签</span>
+        
+      </div>
+    
+  </nav>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">王邸</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.3.8</div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.4.0</div>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+
+
+  <script src="/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.4.0"></script><script src="/js/motion.js?v=7.4.0"></script>
+<script src="/js/schemes/pisces.js?v=7.4.0"></script>
+
+<script src="/js/next-boot.js?v=7.4.0"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+
+<script>
+NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(item => {
+    return GUEST.includes(item);
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: false,
+    appId: 'Fn4BuvoixOxjJAhR79TvaD5M-gzGzoHsz',
+    appKey: '1uspTrSwPqkmSBSUr948WqxE',
+    placeholder: 'Just go go',
+    avatar: 'mm',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: true,
+    lang: '' || 'zh-cn',
+    path: location.pathname
+  });
+}, window.Valine);
+</script>
+
+</body>
+</html>
