@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.3.8">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.4.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.4.0" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.4.0">
+
+<link rel="stylesheet" href="//fonts.proxy.ustclug.org/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.4.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="前要本周主要把项目收尾，学习了swagger 自动生成接口文档，MD5还有一些非对称，对称的加密算法。之后进入到最后一部分微服务。学习了linux还有dubbo的使用。星期一(10月7日)今天在写项目也没有什么新鲜的东西。一直在CRUD星期二(10月8日)swagger接口文档其实也就是一个简易的postman，然后图文并茂的用法三部剧：第一步导包">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java总结（十六）">
+<meta property="og:url" content="http://yoursite.com/2019/10/13/Java总结（十六）/index.html">
+<meta property="og:site_name" content="路要坚持">
+<meta property="og:description" content="前要本周主要把项目收尾，学习了swagger 自动生成接口文档，MD5还有一些非对称，对称的加密算法。之后进入到最后一部分微服务。学习了linux还有dubbo的使用。星期一(10月7日)今天在写项目也没有什么新鲜的东西。一直在CRUD星期二(10月8日)swagger接口文档其实也就是一个简易的postman，然后图文并茂的用法三部剧：第一步导包">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-10-13T09:22:46.734Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java总结（十六）">
+<meta name="twitter:description" content="前要本周主要把项目收尾，学习了swagger 自动生成接口文档，MD5还有一些非对称，对称的加密算法。之后进入到最后一部分微服务。学习了linux还有dubbo的使用。星期一(10月7日)今天在写项目也没有什么新鲜的东西。一直在CRUD星期二(10月8日)swagger接口文档其实也就是一个简易的postman，然后图文并茂的用法三部剧：第一步导包">
+  <link rel="canonical" href="http://yoursite.com/2019/10/13/Java总结（十六）/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>Java总结（十六） | 路要坚持</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">路要坚持</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+      <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block post">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/13/Java总结（十六）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="王邸">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/head.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="路要坚持">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">Java总结（十六）
+
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-10-13 17:22:37 / 修改时间：17:22:46" itemprop="dateCreated datePublished" datetime="2019-10-13T17:22:37+08:00">2019-10-13</time>
+            </span>
+          
+            
+
+            
+          
+
+          
+            <span id="/2019/10/13/Java总结（十六）/" class="post-meta-item leancloud_visitors" data-flag-title="Java总结（十六）" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2019/10/13/Java总结（十六）/#comments" itemprop="discussionUrl"><span class="post-comments-count valine-comment-count" data-xid="/2019/10/13/Java总结（十六）/" itemprop="commentCount"></span></a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="前要"><a href="#前要" class="headerlink" title="前要"></a>前要</h2><p>本周主要把项目收尾，学习了swagger 自动生成接口文档，MD5还有一些非对称，对称的加密算法。之后进入到最后一部分微服务。学习了linux还有dubbo的使用。</p><h2 id="星期一-10月7日"><a href="#星期一-10月7日" class="headerlink" title="星期一(10月7日)"></a>星期一(10月7日)</h2><p>今天在写项目也没有什么新鲜的东西。一直在CRUD</p><h2 id="星期二-10月8日"><a href="#星期二-10月8日" class="headerlink" title="星期二(10月8日)"></a>星期二(10月8日)</h2><h3 id="swagger接口文档"><a href="#swagger接口文档" class="headerlink" title="swagger接口文档"></a>swagger接口文档</h3><p>其实也就是一个简易的postman，然后图文并茂的用法三部剧：<br><strong>第一步导包</strong></p><a id="more"></a>
+
+
+<pre><code>&lt;!--生成接口文档--&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;io.springfox&lt;/groupId&gt;
+    &lt;artifactId&gt;springfox-swagger2&lt;/artifactId&gt;
+    &lt;version&gt;2.6.1&lt;/version&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;io.springfox&lt;/groupId&gt;
+    &lt;artifactId&gt;springfox-swagger-ui&lt;/artifactId&gt;
+    &lt;version&gt;2.6.1&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre><p><strong>第二步配置</strong></p>
+<pre><code>.apis(RequestHandlerSelectors.basePackage(&quot;com.swager.demo.controller&quot;))
+</code></pre><p>写controller的包名</p>
+<pre><code>@Configuration
+@EnableSwagger2
+public class SwaggerConfig {
+  @Bean
+  public Docket createRestApi(){
+    Docket docket = new Docket(DocumentationType.SPRING_WEB)
+            .apiInfo(apiInfo())
+            .select()
+            .apis(RequestHandlerSelectors.basePackage(&quot;com.swager.demo.controller&quot;))
+            .paths(PathSelectors.any()).build();
+    return docket;
+  }
+  private ApiInfo apiInfo() {
+    ApiInfo apiInfo = new ApiInfoBuilder()
+            .description(&quot;描述&quot;)
+            .title(&quot;title&quot;)
+            .version(&quot;1.0&quot;)
+            .build();
+    return apiInfo;
+  }
+}
+</code></pre><p><strong>第三步使用</strong><br>运行spring-boot的应用之后，打开<a href="http://localhost:8080(端口号)/swagger-ui.html" target="_blank" rel="external">http://localhost:8080(端口号)/swagger-ui.html</a><br>就能看到了</p>
+<h3 id="加密算法"><a href="#加密算法" class="headerlink" title="加密算法"></a>加密算法</h3><p>常见的加密算法可以分成三类，对称加密算法，非对称加密算法和Hash算法。</p>
+<h3 id="对称加密"><a href="#对称加密" class="headerlink" title="对称加密"></a>对称加密</h3><p>指加密和解密使用相同密钥的加密算法。</p>
+<pre><code>对称加密算法的优点在于加解密的高速度和使用长密钥时的难破解性。对称加密算法的安全性取决于加密密钥的保存情况，但要求企业中每一个持有密钥的人都保守秘密是不可能的，他们通常会有意无意的把密钥泄漏出去——如果一个用户使用的密钥被入侵者所获得，入侵者便可以读取该用户密钥加密的所有文档，如果整个企业共用一个加密密钥，那整个企业文档的保密性便无从谈起。
+</code></pre><p>常见的对称加密算法：DES、3DES、DESX、Blowfish、IDEA、RC4、RC5、RC6和<strong>AES</strong></p>
+<h3 id="非对称加密"><a href="#非对称加密" class="headerlink" title="非对称加密"></a>非对称加密</h3><p>指加密和解密使用不同密钥的加密算法，也称为公私钥加密。</p>
+<pre><code>假设两个用户要加密交换数据，双方交换公钥，使用时一方用对方的公钥加密，另一方即可用自己的私钥解密。非对称加密的缺点是加解密速度要远远慢于对称加密，在某些极端情况下，甚至能比对称加密慢上1000倍。
+</code></pre><p>常见的非对称加密算法：<strong>RSA</strong>、ECC（移动设备用）、Diffie-Hellman、El Gamal、DSA（数字签名用）</p>
+<h3 id="Hash算法"><a href="#Hash算法" class="headerlink" title="Hash算法"></a>Hash算法</h3><p>Hash算法特别的地方在于它是一种<strong>单向算法</strong>，用户可以通过Hash算法对目标信息生成一段特定长度的唯一的Hash值，却不能通过这个Hash值重新获得目标信息。因此Hash算法常用在不可还原的密码存储、信息完整性校验等。<br>散列是信息的提炼，通常其长度要比信息小得多，且为一个固定长度。加密性强的散列一定是<strong>不可逆</strong>的，这就意味着通过散列结果，无法推出任何部分的原始信息。任何输入信息的变化，哪怕仅一位，都将导致散列结果的明显变化，这称之为<strong>雪崩效应</strong>。散列还应该是防冲突的，即找不出具有相同散列结果的两条信息。具有这些特性的散列结果就可以用于验证信息是否被修改。<br>常见的Hash算法：MD2、MD4、<strong>MD5</strong>、HAVAL、SHA、SHA-1、HMAC、HMAC-MD5、HMAC-SHA1</p>
+<h3 id="MD5"><a href="#MD5" class="headerlink" title="MD5"></a>MD5</h3><p>Message Digest Algorithm 5（中文名为消息摘要算法第五版）<br>为计算机安全领域广泛使用的一种散列函数，用以提供消息的完整性保护。该算法的文件号为RFC 1321（R.Rivest,MIT Laboratory for Computer Science and RSA Data Security Inc. April 1992）<br>MD5的作用是让大容量信息在用数字签名软件签署私人密钥前被”压缩”成一种保密的格式（就是把一个任意长度的字节串变换成一定长的<strong>十六进制数字串</strong>）。<br>MD5的md5典型应用是对一段信息（Message）产生信息摘要（Message-Digest），以防止被篡改。</p>
+<h3 id="MD5加盐"><a href="#MD5加盐" class="headerlink" title="MD5加盐"></a>MD5加盐</h3><p>如果直接对密码进行散列，那么黑客可以对通过获得这个密码散列值，然后通过查散列值字典（例如MD5密码破解网站），得到某用户的密码。<br>加Salt可以一定程度上解决这一问题。所谓加Salt方法，就是加点“佐料”。其基本想法是这样的：当用户首次提供密码时（通常是注册时），由系统自动往这个密码里撒一些“佐料”，然后再散列。而当用户登录时，系统为用户提供的代码撒上同样的“佐料”，然后散列，再比较散列值，已确定密码是否正确。<br>这里的“佐料”被称作“Salt值”，这个值是由系统随机生成的，并且只有系统知道。这样，即便两个用户使用了同一个密码，由于系统为它们生成的salt值不同，他们的散列值也是不同的。即便黑客可以通过自己的密码和自己生成的散列值来找具有特定密码的用户，但这个几率太小了（密码和salt值都得和黑客使用的一样才行）。</p>
+<h3 id="AES-私钥加密-私钥解密-对称加密"><a href="#AES-私钥加密-私钥解密-对称加密" class="headerlink" title="AES 私钥加密 私钥解密(对称加密)"></a>AES 私钥加密 私钥解密(对称加密)</h3><p>Advanced Encryption Standard<br>在密码学中又称Rijndael加密法，是美国联邦政府采用的一种区块加密标准。这个标准用来替代原先的DES，已经被多方分析且广为全世界所使用。<br>2006年，高级加密标准已然成为对称密钥加密中最流行的算法之一。<br>AES是一个迭代、对称的分组密码，它的密匙长度分为3种：128位，192位和256位，可以对128位的数据块进行加密和解密。</p>
+<h3 id="RSA"><a href="#RSA" class="headerlink" title="RSA"></a>RSA</h3><p>RSA加密算法是一种非对称加密算法。在公开密钥加密和电子商业中RSA被广泛使用。RSA是1977年由罗纳德·李维斯特（Ron Rivest）、阿迪·萨莫尔（Adi Shamir）和伦纳德·阿德曼（Leonard Adleman）一起提出的。当时他们三人都在麻省理工学院工作。RSA就是他们三人姓氏开头字母拼在一起组成的。<br>公钥和私钥是成对的，它们互相解密。<br>公钥加密，私钥解密。<br>私钥数字签名，公钥验证。</p>
+<p>算法网上一大堆哦</p>
+<h2 id="星期三-10月9日"><a href="#星期三-10月9日" class="headerlink" title="星期三(10月9日)"></a>星期三(10月9日)</h2><p>今天操作linux</p>
+<h2 id="10月9日（星期三）"><a href="#10月9日（星期三）" class="headerlink" title="10月9日（星期三）"></a>10月9日（星期三）</h2><h3 id="shell指令"><a href="#shell指令" class="headerlink" title="shell指令"></a>shell指令</h3><p>hell是系统的用户界面：通俗来说，提供了用户使用操作系统的接口，是一种命令语言，更是我们使用linux的桥梁，通过shell脚本我们还可以使用大部分系统内核的功能。</p>
+<p><strong>注意事项：</strong> linux指令是区分大小写的，所以有些是需要大写的。要注意</p>
+<h3 id="cd指令"><a href="#cd指令" class="headerlink" title="cd指令"></a>cd指令</h3><p>功能：进入指定目录<br>进入家目录：</p>
+<pre><code>cd ~
+</code></pre><p>进入上级目录：</p>
+<pre><code>cd ..
+</code></pre><p>进入上次的目录：-</p>
+<pre><code>cd -
+</code></pre><p>有一些文件名称比较长要经常去使用<strong>tab健</strong>去补全路径的名称</p>
+<h3 id="创建-删除目录以及查看目录命令"><a href="#创建-删除目录以及查看目录命令" class="headerlink" title="创建,删除目录以及查看目录命令"></a>创建,删除目录以及查看目录命令</h3><h3 id="创建目录"><a href="#创建目录" class="headerlink" title="创建目录"></a>创建目录</h3><p>mkdir:功能创建指定目录</p>
+<pre><code>mkdir wangdison/wangdi -p
+</code></pre><p>-p或–parents 若所要建立目录的上层目录目前尚未建立，则会一并建立上层目录；</p>
+<h3 id="删除目录"><a href="#删除目录" class="headerlink" title="删除目录"></a>删除目录</h3><p>rmdir: 删除空目录</p>
+<p>   wangdi/wangdison/wangdi -p<br>-p或–parents：删除指定目录后，若该目录的上层目录已变成空目录，则将其一并删除；</p>
+<p><strong>注意事项</strong>：子目录被删除之前应该是空目录。就是说，该目录中的所有文件必须用rm命令全部，另外，当前工作目录必须在被删除目录之上，不能是被删除目录本身，也不能是被删除目录的子目录。</p>
+<h3 id="查看目录"><a href="#查看目录" class="headerlink" title="查看目录"></a>查看目录</h3><p>1)  <strong>ls   </strong> ： 查看目标目录下的文件或目录名称（不包括隐藏文件）<br>2)  <strong>ls -a</strong> ： 查看目标目录下的文件或目录的名称（包括隐藏文件）<br>3)  <strong>ls -l</strong> ： 查看目标目录下的文件或名称的详细信息<br>4)  <strong>ll   </strong> ： 会列出该文件下的所有文件信息，包括隐藏的文件<br>5)  <strong>ll -h</strong> ： 友好的显示</p>
+<p><strong>pwd</strong>：查看当前目录，通常配合ls (Print Working Directory)</p>
+<h3 id="查看文件内容"><a href="#查看文件内容" class="headerlink" title="查看文件内容"></a>查看文件内容</h3><p><strong>cat命令</strong>：查看整个文件的内容 （配置文件或者是日志文件）</p>
+<pre><code>cat log.log
+</code></pre><p><strong>more命令</strong>：查看文件一屏的内容，即分页查看</p>
+<pre><code>more my.log
+</code></pre><p>空格：下一屏<br>Enter：下一行<br>b：上一页<br>q：退出</p>
+<p><strong>less 命令</strong>：也是分页查看，用法通more<br>Pg UP，Pg Dn:  向上，向下分页查看;<br>上下方向键：  向上，向下按行移动;<br>方向左右还可以左右移动。<br>退出：q</p>
+<p><strong>head命令</strong>：查看文件的前几行<br><strong>tail：</strong>查看文件的后几行</p>
+<pre><code>tail –c 10 查看文件的最后10个字符
+tail -10 查看文件的最后10行
+其中，tail -20f 文件名可动态查看文件Ctrl+c结束查看
+</code></pre><h3 id="文件操作"><a href="#文件操作" class="headerlink" title="文件操作"></a>文件操作</h3><p>创建文件(<strong>或者修改时间</strong>)：</p>
+<p><strong>touch 目标文件</strong><br>-c  文件不存在时不创建新文件，如果存在，就会更新时间，证明它被人动过</p>
+<pre><code>wangdi@wangdi-VirtualBox:~/wangdi$ touch my.log2 -c
+wangdi@wangdi-VirtualBox:~/wangdi$ ll
+</code></pre><p>加了-c 不会新创建一个my.log2文件<br>-c  文件不存在时不创建新文件，如果存在，就会更新时间，证明它被人动过<br>-t  使用指定时间更新作为指定文件相对时间戳记的新值.此处的 time规定为如下形式的十进制数：</p>
+<pre><code>[[CC]YY]MMDDhhmm[.SS]
+</code></pre><p>这里，CC为年数中的前两位，即“世纪数”；YY为年数的后两位，即某世纪中的年数。如果不给出CC的值，则touch 将把年数CCYY限定在1969–2068之内，MM为月数，DD为天数，hh 为小时数，mm为分钟数，SS为秒数。</p>
+<p><strong>cp 复制操作</strong></p>
+<pre><code>cp source destination
+</code></pre><p><strong>注：</strong><br>1)  当source为目录（文件夹）时，必须加参数 -r 即 cp src目录 destination；</p>
+<pre><code>root@wangdi-VirtualBox:/home/wangdi/wangdi# cp test1 test2
+cp: 略过目录&apos;test1&apos;
+root@wangdi-VirtualBox:/home/wangdi/wangdi# cp test1 test2 -r  //成功
+</code></pre><p>2)  当source 为目录时，同时destination中如果有同名目录，则需要加-f 或 -i参数，ubuntu中默认为-f 是 force</p>
+<p><strong>删除操作</strong></p>
+<h3 id="rm-目标文件或目录"><a href="#rm-目标文件或目录" class="headerlink" title="rm 目标文件或目录"></a>rm 目标文件或目录</h3><p><strong>注：</strong><br>1)  rm 在ubuntu中所带的默认参数是-f，即强制删除，若想要询问删除则加参数-i<br>2)  当删除的是目录时必须加参数 -rf，在ubuntu中-r即可<br>不进入回收站</p>
+<pre><code>rm –rf /
+</code></pre><p>移动或者重命名文件<br>mv source(目录或文件名) desc（目录或文件）<br>注：若desc是目录名称就只完成移动功能，否则，可以完成重命名的功能。</p>
+<h3 id="tar命令"><a href="#tar命令" class="headerlink" title="tar命令"></a>tar命令</h3><p>tar 参数 打包生成文件名 要打包文件目录</p>
+<pre><code>tar -cvf test2.tar ./
+./
+./my.log
+./test1Rename/
+./test2/
+./test2/my.txt
+./wangdi.log
+</code></pre><p>注：<br>1.文件名可以通过加全路径的形式指定打包路径<br>2.注意打包的文件是把当前文件夹下的所有文件都打包，并不是要把你打包名字的文件打包，例如上面</p>
+<p>tar 参数 文件名<br>注：默认解开到当前目录下</p>
+<pre><code>1)  -c：创建一个新tar文件
+2)  -v：显示运行过程的信息
+3)  -f：指定文件名
+4)  -z：调用gzip压缩命令进行压缩
+5)  -t：查看压缩文件的内容
+6)  -x：解开tar文件
+</code></pre><p>其常用组合如下：</p>
+<pre><code>1)  -cvf :打包一个文件或者目录
+2)  -zcvf:打包并压缩一个文件或者目录 压缩的格式:gzip
+3)  -xvf:解压或者打开一个tar文件
+</code></pre><p><strong>tar -xvf xxx.tar  解压到当前目录下 （必须会）</strong></p>
+<p>注：若想将当前文件解压或打开到另外目录下时<br><strong>tar -xvf xxx.tar -C yyy (此处C必须大写) （必须会）</strong></p>
+<h3 id="查找命令"><a href="#查找命令" class="headerlink" title="查找命令"></a>查找命令</h3><p>grep:查找内容<br>Pattern 即正则表达式，正则表达式要用 单或双引号括起来。</p>
+<pre><code>grep (查找内容)  my.log
+grep debug my.log
+</code></pre><h3 id="管道命令"><a href="#管道命令" class="headerlink" title="管道命令:"></a>管道命令:</h3><p>管道命令在Linux中十分有用，管道命令操作符是“|”，它能将经由前一个命令的标准输出，作为管道后一个命令的标准输入。<br>我觉得管道命令就有点像连接查询。</p>
+<pre><code>root@wangdi-VirtualBox:/home/wangdi# ll | grep &quot;^d&quot; | grep &quot;\./$&quot;
+</code></pre><h3 id="查找文件find"><a href="#查找文件find" class="headerlink" title="查找文件find"></a>查找文件find</h3><p>find 起始目录 查找条件<br>1)  -name 指明按照文件名查找（可使用正则）—-可以找出当前文件夹所有子目录的文件名</p>
+<pre><code>root@wangdi-VirtualBox:/home/wangdi/wangdi# find -name &quot;test2&quot;
+./test2
+./tartest/test2
+</code></pre><p>2)  -empty 查找大小为0的文件或空目录</p>
+<pre><code>root@wangdi-VirtualBox:/home/wangdi/wangdi# find -empty
+./test1Rename
+./tartest/test1Rename
+./tartest/my2.log
+./my2.log
+</code></pre><p>3)  -type 查找类型为指定类型的文件或目录（类型d代表目录，f代表普通文件）</p>
+<pre><code>root@wangdi-VirtualBox:/home/wangdi/wangdi# find -type f -name test2
+</code></pre><p>4)  -user  ‘xx’ 查找名为xx的用户的所有文件</p>
+<pre><code>root@wangdi-VirtualBox:/home/wangdi/wangdi# find -type d -name test2 -user root
+</code></pre><p>5)  -maxdepth 限制文件查找的范围，即在几层子目录之内查找(maxdepth需要在前面)</p>
+<h3 id="apt-get到底是什么"><a href="#apt-get到底是什么" class="headerlink" title="apt-get到底是什么"></a>apt-get到底是什么</h3><pre><code>Advanced Package Tool，又名apt-get，是一款适用于Unix和Linux系统的应用程序管理器。最初于1998年发布，用于检索应用程序并将其加载到Debian Linux系统。Apt-get成名的原因之一在于其出色的解决软件依赖关系的能力。其通常使用.deb-formatted文件，但经过修改后可以使用apt-rpm处理红帽的Package Manager（RPM）文件。
+</code></pre><p>感觉就有点像npm 和 sublime的package<br>packagename指代为软件包的名称。<br><strong>解释在命令的下面</strong></p>
+<pre><code>apt-get update
+</code></pre><p>在修改/etc/apt/sources.list或/etc/apt/preferences之后运行该命令。此外您需要定期运行这一命令以确保您的软件包列表是最新的。</p>
+<pre><code>apt-get install packagename
+</code></pre><p>安装一个新软件包（参见下文的aptitude）</p>
+<pre><code>apt-get remove packagename
+</code></pre><p>卸载一个已安装的软件包（保留配置文档）</p>
+<pre><code>apt-get remove --purge packagename
+</code></pre><p>卸载一个已安装的软件包（删除配置文档）</p>
+<pre><code>apt-get autoremove packagename
+</code></pre><p>删除包及其依赖的软件包</p>
+<pre><code>apt-get autoremove --purge packagname
+</code></pre><p>删除包及其依赖的软件包+配置文件，比上面的要删除的彻底一点</p>
+<pre><code>dpkg --force-all --purge packagename
+</code></pre><p>有些软件很难卸载，而且还阻止了别的软件的应用，就能够用这个，但是有点冒险。</p>
+<pre><code>apt-get autoclean
+</code></pre><p>apt会把已装或已卸的软件都备份在硬盘上，所以假如需要空间的话，能够让这个命令来删除您已卸载掉的软件的备份。</p>
+<pre><code>apt-get clean
+</code></pre><p>这个命令会把安装的软件的备份也删除，但是这样不会影响软件的使用。</p>
+<pre><code>apt-get upgrade
+</code></pre><p>可以使用这条命令更新软件包，apt-get upgrade不仅可以从相同版本号的发布版中更新软件包，也可以从新版本号的发布版中更新软件包，尽管实现后一种更新的推荐命令为apt-get dist-upgrade。<br>在运行apt-get upgrade命令时加上-u选项很有用（即：apt-get -u upgrade)。这个选项让APT显示完整的可更新软件包列表。不加这个选项，你就只能盲目地更新。APT会下载每个软件包的最新更新版本，然后以合理的次序安装它们。注意在运行该命令前应先运行 apt-get update更新数据库，更新任何已安装的软件包。 [2]</p>
+<pre><code>apt-get dist-upgrade
+</code></pre><p>将系统升级到新版本。</p>
+<pre><code>apt-cache search string
+</code></pre><p>在软件包列表中搜索字符串。</p>
+<pre><code>dpkg -l package-name-pattern列出任何和模式相匹配的软件包。假如您不知道软件包的全名，您能够使用“*package-name-pattern*”。
+</code></pre><h3 id="Vim-编辑器"><a href="#Vim-编辑器" class="headerlink" title="Vim 编辑器"></a>Vim 编辑器</h3><p>Ubuntu上默认没有自带，需要自己安装在apt-get</p>
+<pre><code>sudo  apt-get install vim来安装vim,
+</code></pre><p>输入密码</p>
+<p>如何使用？</p>
+<pre><code>Vim a.txt
+</code></pre><p>1)  Vim编辑器编辑的是普通文件<br>2)  Vim有三种模式：<strong>命令行模式</strong>，<strong>插入模式</strong>，<strong>底行模式</strong><br>3)  命令模式：使用vim命令打开一个文本文件，默认是命令模式。在任何状态下，<strong>按下Esc切换到命令模式</strong>，此模式下可以使用：</p>
+<pre><code>指定插入位置，
+删除指定内容（dd），
+复制（yy），
+粘贴（pp），
+撤销（u）等命令。
+</code></pre><p>4)  底行模式：在命令模式下，按下：（冒号）切换到底行模式，在底行模式下，可以执行保存，退出等命令。<br>5)  插入（编辑）模式：在命令模式下，按a或i或o（大小写都可以，但意义不同）可切换到插入模式，在此模式下，我们可以编辑文件内容。</p>
+<p>命令状态下按下下面的指令将进入插入模式：</p>
+<pre><code>i在关标位置开始插入字符。 Insert
+I在光标所在行的最前面开始加字。
+a在光标位置后开始加字。
+A 在光标所在行的最后面开始加字。
+o在光标下加一空白行并开始加字。
+O 在光标上加一空白行并开始加字。
+Shift+h(H):光标移到屏幕的第一行
+Shift+l(L):光标移到屏幕的最后一行
+w:向后移动一个单词
+:number :指定到某一行
+b:向前移动一个单词
+dd：删除一行
+yy或Y :可以把一行文本拷贝到寄存器中
+Pp或p :粘贴一行
+</code></pre><h3 id="重定向"><a href="#重定向" class="headerlink" title="重定向"></a>重定向</h3><p>感觉就像cin（&lt;） cout（&gt;）</p>
+<pre><code>&gt;:将某命令的标准输出重定向到另外的地方，通常是别的文件中。比如ls -l &gt; a 将当前某目录下的文件或目录的详细信息，保存到a文件中
+&gt;&gt;:和&gt;不同的是，这种重定向表示，在目标原有的基础上，追加新增的内容，而不是覆盖原有的内容（类似append）
+
+&lt;&lt;b表示从键盘输入（标准输入），以&lt;&lt;后面的内容作为结束符 比如 意为键盘输入内容保存到文件d，并且键盘输入以oo结束
+&lt; :将标准输入流即键盘输入，转化为&lt;之后的的数据源，比如文件
+</code></pre><h3 id="常见的系统命令"><a href="#常见的系统命令" class="headerlink" title="常见的系统命令"></a>常见的系统命令</h3><p>1.系统当前时间： date</p>
+<pre><code>root@wangdi-VirtualBox:/home/wangdi/wangdi# date
+2019年 10月 10日 星期四 20:46:23 CST
+</code></pre><p>设置系统当前时间：<br>date -s “yyyy-MM-dd HH:mm:ss”</p>
+<p>2.清屏：clear 或 ctrl+l</p>
+<h3 id="查看进程信息"><a href="#查看进程信息" class="headerlink" title="查看进程信息"></a>查看进程信息</h3><p>ps -ef 查看所有进程  process status<br>ps -ef|grep xxx ：查看所有满足筛选条件的进程</p>
+<pre><code>root@wangdi-VirtualBox:/home/wangdi/wangdi# ps -ef | grep mysql
+mysql    10669     1  0 14:41 ?        00:00:15 /usr/sbin/mysqld
+root     17121 16750  0 20:48 pts/20   00:00:00 grep --color=auto mysql
+</code></pre><h3 id="结束进程"><a href="#结束进程" class="headerlink" title="结束进程"></a>结束进程</h3><p>Kill xxx：结束进程号为xxx的进程<br>Kill -9 xxx：强制结束进程号为xxx的进程</p>
+<h3 id="网络"><a href="#网络" class="headerlink" title="网络"></a>网络</h3><pre><code>ifconfig 网卡名称 down :禁用网卡
+ifconfig 网卡名称 up :启用网卡
+</code></pre><p>测试连通性命令</p>
+<pre><code>ping：
+</code></pre><p>查看网络端口<br>    sudo netstat -anp |grep xxx</p>
+<p>显示进程的名称–查看网络端口</p>
+<pre><code>root@wangdi-VirtualBox:/home/wangdi/wangdi# sudo netstat -nap | grep 3306
+tcp        0      0 0.0.0.0:3306            0.0.0.0:*               LISTEN      10669/mysqld
+tcp        0      0 192.168.3.151:3306      192.168.3.3:42251       ESTABLISHED 10669/mysqld
+tcp        0      0 192.168.3.151:3306      192.168.3.3:42250       ESTABLISHED 10669/mysqld
+</code></pre><h3 id="用户管理和组管理"><a href="#用户管理和组管理" class="headerlink" title="用户管理和组管理"></a>用户管理和组管理</h3><p>注意：这些操作只有root权限才能完成<br>添加用户：</p>
+<pre><code>useradd xxx，此时不会在/home下创建名为xxx的目录
+useradd xxx -m，才会在/home 目录下创建家目录
+passwd xxx，为xxx用户设置密码
+</code></pre><p>删除用户：</p>
+<pre><code>userdel xxx 删除xxx用户，此时并不删除目录/home/xxx
+userdel -r xxx 此时不仅删除xxx用户，还删除目录/home/xxx
+</code></pre><p>切换用户：</p>
+<pre><code>su 用户名   sudo 后面的这条命令  用管理员权限去执行
+注意：安装linux 的时候root用户默认没有设置密码，此时直接su 切换到root用户会失败，应该先给root账号设置密码：如下
+
+sudo passwd root
+</code></pre><h3 id="组管理："><a href="#组管理：" class="headerlink" title="组管理："></a>组管理：</h3><p>创建组：</p>
+<pre><code>groupadd 组名
+</code></pre><p>创建用户的时候同时加入组：</p>
+<pre><code>useradd 用户名 -g 组名
+</code></pre><p>将已经存在的用户加入组：</p>
+<pre><code>usermod -g gid 用户名（修改主组）
+usermod -G 组名 用户名（修改用户所在附属组）
+usermod -aG 组名 用户名（增加用户所在附属组）
+</code></pre><p>将用户从组中删除：</p>
+<pre><code>gpasswd -d 用户名 组名
+</code></pre><p>删除组：</p>
+<pre><code>groupdel 组名 注意：若组下有用户，删除不了。
+</code></pre><p>查看:</p>
+<pre><code>id  用户名
+</code></pre><h3 id="文件权限"><a href="#文件权限" class="headerlink" title="文件权限"></a>文件权限</h3><p>一共10位字母，首位字符的含义：<br> 文件分类：<br>1)  普通文件： <strong>-</strong>  包括文本文件、数据文件、可执行的二进制程序文件等。</p>
+<pre><code>-rw-------  1 wangdi wangdi 1390 10月  9 11:38 .xsession-errors.old
+</code></pre><p>2)  目录文件： <strong>d</strong>  目录文件是一种特殊的文件</p>
+<pre><code>drwxr-xr-x  24 root root  4096 6月  20 23:57 ./
+</code></pre><p>3)  设备文件(快捷方式)： <strong>l</strong>   linux将每一个设备当做文件来看待</p>
+<pre><code>lrwxrwxrwx   1 root root    32 6月  20 23:57 initrd.img -&gt; boot/initrd.img-4.4.0-31-generic
+</code></pre><p>文件的权限 — 对应后面九个字母：<br>R read  可以读<br>W write  可以写<br>X execute  执行</p>
+<p>文件类型后的9个字母，每3个字符1组，分成3个组来看：</p>
+<pre><code>1)  第1组：文件所有者对该文件所拥有的权限 文件创建的作者
+2)  第2组：文件所有者所在的组的其他成员，跟拥有者同组用户对该文件所拥有的权限
+3)  第3组：和文件拥有者不同组的其他成员，对该文件所拥有的权限
+</code></pre><p>例如：</p>
+<pre><code>RWX   111
+---   000
+R-X   101
+4  100  R--
+3  011  -WX
+7  111  RWX
+</code></pre><p>如果把一组权限用3个二进制位来表示则，一组权限，就可以用3个2进制位来表示，比如：</p>
+<pre><code>rwx 对应 111 = 八进制的数字7
+r_x 对应 101 = 八进制的数字5
+</code></pre><h3 id="改变文件的权限："><a href="#改变文件的权限：" class="headerlink" title="改变文件的权限："></a>改变文件的权限：</h3><pre><code>chmod    mode    文件名
+chmod     754     /home/zs/test
+</code></pre><p>第二种可读性更强的</p>
+<pre><code>chmod   [who][+]/[-] mode     文件名
+</code></pre><p>这里：注意 who 的取值有u，g，o 即针对文件拥有者，和文件拥有者所在的组<br>，其他用户，+/-分别表示增加或者删除权限，mode表示权限，这里mode的取值用r，w，x分别表示读，写，执行权限</p>
+<pre><code>例如：chmod    u-r+x，  g+r,  o+w    test
+</code></pre><h3 id="打印历史记录"><a href="#打印历史记录" class="headerlink" title="打印历史记录"></a>打印历史记录</h3><pre><code>history &gt; homework.txt
+</code></pre><h2 id="星期四-10月10日"><a href="#星期四-10月10日" class="headerlink" title="星期四(10月10日)"></a>星期四(10月10日)</h2><p>今天玩的是nginx</p>
+<h3 id="nginx-反向代理"><a href="#nginx-反向代理" class="headerlink" title="nginx 反向代理"></a>nginx 反向代理</h3><p>Nginx (发音为[eng ine x])专为性能优化而开发，其最知名的优点是它的稳定性和低系统资源消耗，以及对并发连接的高处理能力(单台物理服务器可支持30000～50000个并发连接，tomcat通常是几百，不超过1000个)， 是一个高性能的 HTTP 和反向代理服务器，也是一个IMAP/POP3/SMTP 代理服务器。<br>关于Nginx服务器，除了其高效性和稳定性的优点之外，我们最常使用的主要是其反向代理和负载均衡,以及动静分离功能。</p>
+<h3 id="正向代理"><a href="#正向代理" class="headerlink" title="正向代理"></a>正向代理</h3><p>通常，我们可以通过ip地址来直接访问网络中的某台确定的主机（更确切的说应该是通过socket套接字来访问确定中的某个确定的进程）。<br>假设服务器B，能够将客户端的请求转发给服务器A，同时服务器B又能够将服务器A的响应转发给客户端，那么显而易见，我们就可以通过访问服务器B，从而达到访问服务器A的目的。<br>我们再来看客户端访问服务器A的过程，客户端通过服务器B同样达到了访问服务器A的目的，但是，请注意此时:服务器B似乎是作为客户端访问服务器A的一个“媒介”，而发挥作用这种情况下。<br>我们之前学习设计模式的代理模式的时候和这个差不多，我们都把我们要去请求服务器，交给另一个服务器去处理了。但是我们是看不到的。就相当于代理了。</p>
+<h3 id="反向代理"><a href="#反向代理" class="headerlink" title="反向代理"></a>反向代理</h3><p>与正向代理服务器不同，反向代理服务器的作用，不在仅仅是充当能够访问到目标服务器的“媒介”或者说，是作为客户端访问目标服务器的代理。<br>反向代理是在服务器端（如Web服务器）作为代理使用，而不是客户端。客户端通过正向代理可以访问很多不同的资源，而反向代理是很多客户端都通过它访问不同后端服务器上的资源，而不需要知道这些后端服务器的存在，而以为所有资源都来自于<strong>这个反向代理服务器</strong>。<br>也就是说反向代理是服务器弄的，每一个服务对应自己的反向代理。通过反向代理的服务器只能访问对应的服务器，而不是像正向代理一样访问任意服务器。</p>
+<h3 id="负载均衡-load-balancing"><a href="#负载均衡-load-balancing" class="headerlink" title="负载均衡 load balancing"></a>负载均衡 load balancing</h3><p>在上图中，我们可以看到，服务器A，B之间的功能完全相同，可以相互替代，通过将原本由一个服务器负责处理的任务，分担给多台服务器，从而减小了各个服务器的并发压力，同时扩展了服务器的带宽，从而提高了吞吐量——这就是负载均衡。</p>
+<h3 id="集群和分布式的关系"><a href="#集群和分布式的关系" class="headerlink" title="集群和分布式的关系"></a>集群和分布式的关系</h3><p>小饭店原来只有一个厨师，切菜，洗菜，备料，炒菜，全干。后来客人多了，厨房一个厨师忙不过来了，又请了一个厨师，两个厨师都能抄一样的菜，这两个厨师的关系就是<strong>集群</strong>。<br>为了让厨师专心炒菜，把菜做到极致，又请了个配菜师负责切菜，备料，备菜，厨师和配菜师的关系是<strong>分布式</strong>，后来发现，一个配菜师也忙不过来，又请了一个配菜师，这两个配菜师的关系就是集群。</p>
+<h3 id="动静分离"><a href="#动静分离" class="headerlink" title="动静分离"></a>动静分离</h3><p>对于一些基本很少发生变化的静态资源，可以直接放在Nginx服务器上，当客户端访问这些静态资源时，Nginx就可以直接返回给客户端，而不用在访问服务器集群，从而节省了部分请求和响应的时间。<br>这样一来，当客户端访问Nginx服务器时，当客户端访问静态资源时，Nginx就将静态资源直接返回给客户端，当客户端访问的是动态资源的时候，Nginx才会访问集群，这样一来，就实现了动态资源和静态资源的分离，从而提高了系统的吞吐量。<br>CDN<br>Content Delivery Network</p>
+<h3 id="使用nginx"><a href="#使用nginx" class="headerlink" title="使用nginx"></a>使用nginx</h3><p>1.安装nginx<br>2.配置反向代理</p>
+<p>首先得有一个tomcat，比如启动监听8080端口。配置反向代理。<br>可以实现通过nginx来访问tomcat<br>找到nginx的配置文件</p>
+<h2 id="星期五（10月11日）"><a href="#星期五（10月11日）" class="headerlink" title="星期五（10月11日）"></a>星期五（10月11日）</h2><p>今天开始讲微服务，微服务主要有两类一类的dubbo一类是springcloud，两类都很主流，并不应该简单的区分两个。一个是传输层协议，一个是应用层协议。<br>直接用起来吧，老规矩</p>
+<h3 id="spring-dubbo"><a href="#spring-dubbo" class="headerlink" title="spring + dubbo"></a>spring + dubbo</h3><h3 id="第一步先导包"><a href="#第一步先导包" class="headerlink" title="第一步先导包"></a>第一步先导包</h3><pre><code>&lt;dependencies&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+        &lt;artifactId&gt;spring-context&lt;/artifactId&gt;
+        &lt;version&gt;5.1.10.RELEASE&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.apache.dubbo&lt;/groupId&gt;
+        &lt;artifactId&gt;dubbo&lt;/artifactId&gt;
+        &lt;version&gt;2.7.3&lt;/version&gt;
+    &lt;/dependency&gt;
+&lt;/dependencies&gt;
+</code></pre><h3 id="第二步配置两个服务（直连）"><a href="#第二步配置两个服务（直连）" class="headerlink" title="第二步配置两个服务（直连）"></a>第二步配置两个服务（直连）</h3><p>一个是consumer 一个是provider<br>provider的application.xml</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;
+       xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+       xmlns:context=&quot;http://www.springframework.org/schema/context&quot;
+       xmlns:aop=&quot;http://www.springframework.org/schema/aop&quot;
+       xmlns:tx=&quot;http://www.springframework.org/schema/tx&quot;
+       xmlns:dubbo=&quot;http://code.alibabatech.com/schema/dubbo&quot;
+       xsi:schemaLocation=&quot;
+    http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+    http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+    http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+    http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd
+    &quot;
+&gt;
+    &lt;dubbo:application name=&quot;provider&quot;/&gt;
+    &lt;dubbo:protocol name=&quot;dubbo&quot; port=&quot;20880&quot;/&gt;
+    &lt;dubbo:service interface=&quot;com.cskaoyan.demo.DemoService&quot; ref=&quot;demoService&quot; registry=&quot;N/A&quot;/&gt;
+    &lt;bean id=&quot;demoService&quot; class=&quot;com.cskaoyan.demo.impl.DemoServiceImpl&quot;/&gt;
+&lt;/beans&gt;
+</code></pre><p>consumer的application.xml</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;
+       xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+       xmlns:context=&quot;http://www.springframework.org/schema/context&quot;
+       xmlns:aop=&quot;http://www.springframework.org/schema/aop&quot;
+       xmlns:dubbo=&quot;http://code.alibabatech.com/schema/dubbo&quot;
+       xsi:schemaLocation=&quot;
+    http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+    http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+    http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd
+    &quot;&gt;
+
+    &lt;dubbo:application name=&quot;consumer&quot;/&gt;
+    &lt;!--url=&quot;dubbo://localhost:20880&quot;--&gt;
+    &lt;dubbo:reference interface=&quot;com.cskaoyan.demo.DemoService&quot; id=&quot;demoService&quot; url=&quot;dubbo://localhost:20880&quot; /&gt;
+&lt;/beans&gt;
+</code></pre><h3 id="编写代码测试"><a href="#编写代码测试" class="headerlink" title="编写代码测试"></a>编写代码测试</h3><p>配置文件中我们看到我们需要一个DemoService的接口，而且这个接口在两个项目的<strong>目录的位置必须是一样的</strong>。</p>
+<pre><code>package com.cskaoyan.demo;
+public interface DemoService {
+    String sendMsg(String msg);
+}
+</code></pre><p>在provider中还要实现这个接口，</p>
+<pre><code>public class DemoServiceImpl implements DemoService {
+    public String sendMsg(String msg) {
+        return &quot;cskaoyan:&quot; +msg;
+    }
+}
+</code></pre><p>然后先启动provider后启动consumer</p>
+<pre><code>public class Provider {
+    public static void main(String[] args) throws IOException {
+        ApplicationContext applicationContext = new ClassPathXmlApplicationContext(&quot;applicationContext.xml&quot;);
+        ((ClassPathXmlApplicationContext) applicationContext).start();
+        System.in.read(); //为了阻塞
+    }
+}
+
+public class consumer {
+    public static void main(String[] args) {
+        ApplicationContext applicationContext = new ClassPathXmlApplicationContext(&quot;applicationContext.xml&quot;);
+        ((ClassPathXmlApplicationContext) applicationContext).start();
+        DemoService demoService = (DemoService) applicationContext.getBean(&quot;demoService&quot;);
+        String response = demoService.sendMsg(&quot;16th&quot;);
+        System.out.println(response); //打印出cskaoyan + 16th
+    }
+}
+</code></pre><h3 id="第二种，使用注册中心registry"><a href="#第二种，使用注册中心registry" class="headerlink" title="第二种，使用注册中心registry"></a>第二种，使用注册中心registry</h3><p>我们使用的注册中心是<strong>zookeeper</strong></p>
+<h3 id="第一步导包"><a href="#第一步导包" class="headerlink" title="第一步导包"></a>第一步导包</h3><pre><code>&lt;dependency&gt;
+    &lt;groupId&gt;com.101tec&lt;/groupId&gt;
+    &lt;artifactId&gt;zkclient&lt;/artifactId&gt;
+    &lt;version&gt;0.9&lt;/version&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;org.apache.zookeeper&lt;/groupId&gt;
+    &lt;artifactId&gt;zookeeper&lt;/artifactId&gt;
+    &lt;version&gt;3.4.9&lt;/version&gt;
+    &lt;type&gt;pom&lt;/type&gt;
+&lt;/dependency&gt;
+</code></pre><h3 id="第二步配置"><a href="#第二步配置" class="headerlink" title="第二步配置"></a>第二步配置</h3><p>其实也就多配置一个zookeeper 然后使用dubbo协议连接</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;
+。。。
+    &lt;dubbo:application name=&quot;provider&quot;/&gt;
+    &lt;dubbo:protocol name=&quot;dubbo&quot; port=&quot;20880&quot;/&gt;
+    &lt;!--registry=&quot;N/A&quot;--&gt;
+    &lt;dubbo:service interface=&quot;com.cskaoyan.demo.DemoService&quot; ref=&quot;demoService&quot;/&gt;
+    &lt;dubbo:registry address=&quot;zookeeper://localhost:2181&quot;/&gt;
+    &lt;bean id=&quot;demoService&quot; class=&quot;com.cskaoyan.demo.impl.DemoServiceImpl&quot;/&gt;
+&lt;/beans&gt;
+</code></pre><p>把约束去掉了，更直接<br>consumer也就多设置一个连接zookeeper</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;
+  &lt;dubbo:application name=&quot;consumer&quot;/&gt;
+  &lt;!--url=&quot;dubbo://localhost:20880&quot;--&gt;
+  &lt;dubbo:reference interface=&quot;com.cskaoyan.demo.DemoService&quot; id=&quot;demoService&quot; /&gt;
+  &lt;dubbo:registry address=&quot;zookeeper://localhost:2181&quot;/&gt;
+&lt;/beans&gt;
+</code></pre><h3 id="spring-boot中使用dubbo"><a href="#spring-boot中使用dubbo" class="headerlink" title="spring-boot中使用dubbo"></a>spring-boot中使用dubbo</h3><p>我们使用一个公共的服务（common）去共享service这样我们就不需要考虑接口要写在相同的目录下了。</p>
+<h3 id="第一步-导包"><a href="#第一步-导包" class="headerlink" title="第一步 导包"></a>第一步 导包</h3><pre><code>&lt;dependency&gt;
+    &lt;groupId&gt;com.cskaoyan&lt;/groupId&gt;
+    &lt;artifactId&gt;common&lt;/artifactId&gt;
+    &lt;version&gt;0.0.1-SNAPSHOT&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre><p>common中导包：</p>
+<pre><code>&lt;dependency&gt;
+    &lt;groupId&gt;com.alibaba.spring.boot&lt;/groupId&gt;
+    &lt;artifactId&gt;dubbo-spring-boot-starter&lt;/artifactId&gt;
+    &lt;version&gt;2.0.0&lt;/version&gt;
+&lt;/dependency&gt;
+
+&lt;dependency&gt;
+    &lt;groupId&gt;com.101tec&lt;/groupId&gt;
+    &lt;artifactId&gt;zkclient&lt;/artifactId&gt;
+    &lt;version&gt;0.10&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre><h3 id="第二步配置-1"><a href="#第二步配置-1" class="headerlink" title="第二步配置"></a>第二步配置</h3><p>想想我们之前spring的配置<br><strong>consumer的配置</strong></p>
+<pre><code>spring.application.name=consumer
+spring.dubbo.registry=zookeeper://localhost:2181
+spring.dubbo.registry=N/A （直连设置）
+</code></pre><p><strong>provider的配置</strong></p>
+<pre><code>spring.application.name=provider
+spring.dubbo.protocol.name=dubbo
+spring.dubbo.protocol.port=20880
+spring.dubbo.server=true
+spring.dubbo.registry=zookeeper://localhost:2181
+</code></pre><h3 id="第三步使用"><a href="#第三步使用" class="headerlink" title="第三步使用"></a>第三步使用</h3><p>provider配置<br>虽然写的是serviceImpl但是我们这里的注解使用的是@Component 就是怕搞错了</p>
+<pre><code>@Component
+@Service(interfaceClass = DemoService.class)
+public class DemoServiceImpl implements DemoService {
+    @Override
+    public String sendMsg(String msg) {
+        return &quot;cskaoyan:&quot; + msg;
+    }
+}
+</code></pre><p>consumer配置<br>@Reference 和上面的@Service才是我们dubbo的注解</p>
+<pre><code>//,url = &quot;dubbo://localhost:20880&quot;
+@Reference(interfaceClass = DemoService.class,check = false)
+DemoService demoService;
+public String sendMsg(String msg) {
+    return demoService.sendMsg(msg);
+}
+</code></pre><p><strong>最后启动类</strong></p>
+<pre><code>@SpringBootApplication
+@EnableDubboConfiguration
+public class ProviderApplication {
+    public static void main(String[] args) {
+        SpringApplication.run(ProviderApplication.class, args);
+    }
+}
+</code></pre><h2 id="星期六-10月12日"><a href="#星期六-10月12日" class="headerlink" title="星期六(10月12日)"></a>星期六(10月12日)</h2><h3 id="guns"><a href="#guns" class="headerlink" title="guns"></a>guns</h3><p>今天主要讲的是分布式的开发的结构，我们需要使用一个服务作为网关写conroller，作为consumer。剩下的服务都作为provider，然后我们需要一个api的服务来放我们需要共享的文件。然后其他的都一样的。没什么说的<br>guns的用法多玩玩再总结。</p>
+
+    </div>
+
+    
+    
+    
+        
+      
+
+      <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2019/10/07/Java总结（十五）/" rel="next" title="Java总结（十五）">
+                  <i class="fa fa-chevron-left"></i> Java总结（十五）
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+    
+    <div class="comments" id="comments"></div>
+  
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前要"><span class="nav-number">1.</span> <span class="nav-text">前要</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#星期一-10月7日"><span class="nav-number">2.</span> <span class="nav-text">星期一(10月7日)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#星期二-10月8日"><span class="nav-number">3.</span> <span class="nav-text">星期二(10月8日)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#swagger接口文档"><span class="nav-number">3.1.</span> <span class="nav-text">swagger接口文档</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#加密算法"><span class="nav-number">3.2.</span> <span class="nav-text">加密算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#对称加密"><span class="nav-number">3.3.</span> <span class="nav-text">对称加密</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#非对称加密"><span class="nav-number">3.4.</span> <span class="nav-text">非对称加密</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Hash算法"><span class="nav-number">3.5.</span> <span class="nav-text">Hash算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MD5"><span class="nav-number">3.6.</span> <span class="nav-text">MD5</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MD5加盐"><span class="nav-number">3.7.</span> <span class="nav-text">MD5加盐</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AES-私钥加密-私钥解密-对称加密"><span class="nav-number">3.8.</span> <span class="nav-text">AES 私钥加密 私钥解密(对称加密)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RSA"><span class="nav-number">3.9.</span> <span class="nav-text">RSA</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#星期三-10月9日"><span class="nav-number">4.</span> <span class="nav-text">星期三(10月9日)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10月9日（星期三）"><span class="nav-number">5.</span> <span class="nav-text">10月9日（星期三）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#shell指令"><span class="nav-number">5.1.</span> <span class="nav-text">shell指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cd指令"><span class="nav-number">5.2.</span> <span class="nav-text">cd指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建-删除目录以及查看目录命令"><span class="nav-number">5.3.</span> <span class="nav-text">创建,删除目录以及查看目录命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建目录"><span class="nav-number">5.4.</span> <span class="nav-text">创建目录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#删除目录"><span class="nav-number">5.5.</span> <span class="nav-text">删除目录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查看目录"><span class="nav-number">5.6.</span> <span class="nav-text">查看目录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查看文件内容"><span class="nav-number">5.7.</span> <span class="nav-text">查看文件内容</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文件操作"><span class="nav-number">5.8.</span> <span class="nav-text">文件操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#rm-目标文件或目录"><span class="nav-number">5.9.</span> <span class="nav-text">rm 目标文件或目录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#tar命令"><span class="nav-number">5.10.</span> <span class="nav-text">tar命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查找命令"><span class="nav-number">5.11.</span> <span class="nav-text">查找命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#管道命令"><span class="nav-number">5.12.</span> <span class="nav-text">管道命令:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查找文件find"><span class="nav-number">5.13.</span> <span class="nav-text">查找文件find</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#apt-get到底是什么"><span class="nav-number">5.14.</span> <span class="nav-text">apt-get到底是什么</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Vim-编辑器"><span class="nav-number">5.15.</span> <span class="nav-text">Vim 编辑器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#重定向"><span class="nav-number">5.16.</span> <span class="nav-text">重定向</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常见的系统命令"><span class="nav-number">5.17.</span> <span class="nav-text">常见的系统命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查看进程信息"><span class="nav-number">5.18.</span> <span class="nav-text">查看进程信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#结束进程"><span class="nav-number">5.19.</span> <span class="nav-text">结束进程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#网络"><span class="nav-number">5.20.</span> <span class="nav-text">网络</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#用户管理和组管理"><span class="nav-number">5.21.</span> <span class="nav-text">用户管理和组管理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#组管理："><span class="nav-number">5.22.</span> <span class="nav-text">组管理：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文件权限"><span class="nav-number">5.23.</span> <span class="nav-text">文件权限</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#改变文件的权限："><span class="nav-number">5.24.</span> <span class="nav-text">改变文件的权限：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#打印历史记录"><span class="nav-number">5.25.</span> <span class="nav-text">打印历史记录</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#星期四-10月10日"><span class="nav-number">6.</span> <span class="nav-text">星期四(10月10日)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#nginx-反向代理"><span class="nav-number">6.1.</span> <span class="nav-text">nginx 反向代理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#正向代理"><span class="nav-number">6.2.</span> <span class="nav-text">正向代理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#反向代理"><span class="nav-number">6.3.</span> <span class="nav-text">反向代理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#负载均衡-load-balancing"><span class="nav-number">6.4.</span> <span class="nav-text">负载均衡 load balancing</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#集群和分布式的关系"><span class="nav-number">6.5.</span> <span class="nav-text">集群和分布式的关系</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#动静分离"><span class="nav-number">6.6.</span> <span class="nav-text">动静分离</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用nginx"><span class="nav-number">6.7.</span> <span class="nav-text">使用nginx</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#星期五（10月11日）"><span class="nav-number">7.</span> <span class="nav-text">星期五（10月11日）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#spring-dubbo"><span class="nav-number">7.1.</span> <span class="nav-text">spring + dubbo</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第一步先导包"><span class="nav-number">7.2.</span> <span class="nav-text">第一步先导包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第二步配置两个服务（直连）"><span class="nav-number">7.3.</span> <span class="nav-text">第二步配置两个服务（直连）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编写代码测试"><span class="nav-number">7.4.</span> <span class="nav-text">编写代码测试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第二种，使用注册中心registry"><span class="nav-number">7.5.</span> <span class="nav-text">第二种，使用注册中心registry</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第一步导包"><span class="nav-number">7.6.</span> <span class="nav-text">第一步导包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第二步配置"><span class="nav-number">7.7.</span> <span class="nav-text">第二步配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#spring-boot中使用dubbo"><span class="nav-number">7.8.</span> <span class="nav-text">spring-boot中使用dubbo</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第一步-导包"><span class="nav-number">7.9.</span> <span class="nav-text">第一步 导包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第二步配置-1"><span class="nav-number">7.10.</span> <span class="nav-text">第二步配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第三步使用"><span class="nav-number">7.11.</span> <span class="nav-text">第三步使用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#星期六-10月12日"><span class="nav-number">8.</span> <span class="nav-text">星期六(10月12日)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#guns"><span class="nav-number">8.1.</span> <span class="nav-text">guns</span></a></li></ol></li></ol></div>
+        
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/images/head.jpeg"
+      alt="王邸">
+  <p class="site-author-name" itemprop="name">王邸</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">31</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">标签</span>
+        
+      </div>
+    
+  </nav>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">王邸</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.3.8</div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.4.0</div>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+
+
+  <script src="/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.4.0"></script><script src="/js/motion.js?v=7.4.0"></script>
+<script src="/js/schemes/pisces.js?v=7.4.0"></script>
+
+<script src="/js/next-boot.js?v=7.4.0"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+
+<script>
+NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(item => {
+    return GUEST.includes(item);
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: false,
+    appId: 'Fn4BuvoixOxjJAhR79TvaD5M-gzGzoHsz',
+    appKey: '1uspTrSwPqkmSBSUr948WqxE',
+    placeholder: 'Just go go',
+    avatar: 'mm',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: true,
+    lang: '' || 'zh-cn',
+    path: location.pathname
+  });
+}, window.Valine);
+</script>
+
+</body>
+</html>

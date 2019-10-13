@@ -62,7 +62,7 @@
 <meta property="og:site_name" content="路要坚持">
 <meta property="og:description" content="本周继续在做项目，国庆节就看了一个阅兵。大部分时间都在写bug，其实还是自己的问题比较大。总是想着快点把项目完成，却缺少很多思考的东西。同样是CRUD你如何才能做得更优雅，更有深度。这是一个工程师必须要做好的。本周主要知识点：1.CORS解决跨域问题2.swagger 自动生成接口文档3.druid监控4.#{} 和${}区别5.typeHandler 在数据库中存数组，bean等类型6.Page">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-10-07T07:52:42.095Z">
+<meta property="og:updated_time" content="2019-10-13T07:32:56.080Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java总结（十五）">
 <meta name="twitter:description" content="本周继续在做项目，国庆节就看了一个阅兵。大部分时间都在写bug，其实还是自己的问题比较大。总是想着快点把项目完成，却缺少很多思考的东西。同样是CRUD你如何才能做得更优雅，更有深度。这是一个工程师必须要做好的。本周主要知识点：1.CORS解决跨域问题2.swagger 自动生成接口文档3.druid监控4.#{} 和${}区别5.typeHandler 在数据库中存数组，bean等类型6.Page">
@@ -223,11 +223,19 @@
                 
               
 
-              <time title="创建时间：2019-10-07 15:52:19 / 修改时间：15:52:42" itemprop="dateCreated datePublished" datetime="2019-10-07T15:52:19+08:00">2019-10-07</time>
+              <time title="创建时间：2019-10-07 15:52:19" itemprop="dateCreated datePublished" datetime="2019-10-07T15:52:19+08:00">2019-10-07</time>
             </span>
           
             
 
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-10-13 15:32:56" itemprop="dateModified" datetime="2019-10-13T15:32:56+08:00">2019-10-13</time>
+              </span>
             
           
 
@@ -909,8 +917,69 @@ public void mytest(){
         e.printStackTrace();
     }
 }
-</code></pre><h2 id="星期七（10月06日）"><a href="#星期七（10月06日）" class="headerlink" title="星期七（10月06日）"></a>星期七（10月06日）</h2><p>先这样  做完项目在补上</p>
-<h3 id="问题总结"><a href="#问题总结" class="headerlink" title="问题总结"></a>问题总结</h3><h2 id="星期一（9月30日）-1"><a href="#星期一（9月30日）-1" class="headerlink" title="星期一（9月30日）"></a>星期一（9月30日）</h2><h2 id="星期二（10月01日）-1"><a href="#星期二（10月01日）-1" class="headerlink" title="星期二（10月01日）"></a>星期二（10月01日）</h2><h2 id="星期三（10月02日）-1"><a href="#星期三（10月02日）-1" class="headerlink" title="星期三（10月02日）"></a>星期三（10月02日）</h2><h2 id="星期四（10月03日）-1"><a href="#星期四（10月03日）-1" class="headerlink" title="星期四（10月03日）"></a>星期四（10月03日）</h2><h2 id="星期五（10月04日）-1"><a href="#星期五（10月04日）-1" class="headerlink" title="星期五（10月04日）"></a>星期五（10月04日）</h2><h2 id="星期六（10月05日）-1"><a href="#星期六（10月05日）-1" class="headerlink" title="星期六（10月05日）"></a>星期六（10月05日）</h2><h2 id="星期七（10月06日）-1"><a href="#星期七（10月06日）-1" class="headerlink" title="星期七（10月06日）"></a>星期七（10月06日）</h2>
+</code></pre><h2 id="星期七（10月06日）"><a href="#星期七（10月06日）" class="headerlink" title="星期七（10月06日）"></a>星期七（10月06日）</h2><h3 id="问题总结"><a href="#问题总结" class="headerlink" title="问题总结"></a>问题总结</h3><p>这周都在做项目，这个项目难点不是很多，更重要的是熟悉业务常用的组间和一些配置。很多东西都是第一次用，只是停留在会用的阶段，所以还需要更多的思考，现在正好项目做完了。紧接着下个项目又开始了。只是抽空来把这周问题总结完。还要写本周的总结，加油吧</p>
+<h2 id="星期一（9月30日）-1"><a href="#星期一（9月30日）-1" class="headerlink" title="星期一（9月30日）"></a>星期一（9月30日）</h2><p>1.数据返回给前端，后台没有报错也没有显示，前端的问题，这时候我们打开浏览器的控制台就能看到前端的console.log会报错，如果没有前端要显示的字段就会报错。<br>但是页面也会正常显示的，只是数据没有显示出来罢了。</p>
+<p>2.关于前端请求参数问题，请求参数不同传到后端，我以为要写多个接收请求的方法：<br>例如：</p>
+<pre><code>@RequestMapping(value = &quot;/brand/list&quot;,method = RequestMethod.GET)
+public BaseRespVo brandList(int page,int limit,int id, String name, String sort, String order){
+    return mallManageService.brandList(page,limit,sort,order);
+}
+@RequestMapping(value = &quot;/brand/list&quot;,method = RequestMethod.GET,params = {&quot;page&quot;,&quot;limit&quot;,&quot;sort&quot;,&quot;order&quot;})
+public BaseRespVo brandList2(int page,int limit, String sort, String order){
+    return mallManageService.brandList(page,limit,sort,order);
+}
+</code></pre><p>两个方法的请求参数个数不同，但是其实可以直接用包装类来接收。就只用写一个方法即可</p>
+<pre><code>@RequestMapping(value = &quot;/brand/list&quot;,method = RequestMethod.GET)
+public BaseRespVo brandList(Integer page,Integer limit,Integer id, String name, String sort, String order){
+  return mallManageService.brandList(page,limit,sort,order);
+}
+</code></pre><p>如果遇到前端没有传过来的参数，接收的就是null,但是这里要注意我们使用的是<strong>Integer</strong>来接收我们的参数，不要用int请求来接收，如果传过来的是空的就会报错。</p>
+<p>4.select key的select总是忘记MMP</p>
+<pre><code>&lt;selectKey resultType=&quot;int&quot; keyProperty=&quot;user.id&quot; keyColumn=&quot;idz&quot; order=&quot;AFTER&quot;&gt;
+  select last_insert_id() as idz
+&lt;/selectKey&gt;
+</code></pre><p>5.模糊查询%%<br>要写在mapper。xml外面，写在里面虽然也可以，但是容易出问题。</p>
+<h2 id="星期二（10月01日）-1"><a href="#星期二（10月01日）-1" class="headerlink" title="星期二（10月01日）"></a>星期二（10月01日）</h2><p>1.你一定要去思考清楚，在进行sql语句操作的时候：</p>
+<pre><code>哪些字段是需要更新
+哪些字段需要增加
+</code></pre><p>而不是全部一股脑的加进去，很容易出错，一定要想清楚。更新应该怎么做,<strong>很容易因为赶进度而忘记了一些需要更新的地方</strong></p>
+<p>2.idea关于自动生成bean的boolean值的 get set方法（<strong>大坑</strong>）<br>有问题，他生成的get方法是Is，如果你的字段自己也带有is，那is就会被覆盖掉。你传给前端的变量名就变了，因为是通过反射去转成json给前端的<br>如果你的是is_hot ，那传给<strong>前端的就是hot，如果不改变你的get方法的话！</strong></p>
+<p>你的变量名的get，set方法<br>    private int    is_hot;<br>    private int    is_default;</p>
+<pre><code>public boolean getIsHot(){
+    return isHot;
+}
+public void setIsHot(boolean isHot){
+    this.isHot = isHot;
+}
+public boolean getIsDefault(){
+    return isDefault;
+}
+public void setIsDefault(boolean isDefault){
+    this.isDefault = isDefault;
+}
+</code></pre><h2 id="星期三（10月02日）-1"><a href="#星期三（10月02日）-1" class="headerlink" title="星期三（10月02日）"></a>星期三（10月02日）</h2><p>今天学习了typehandler注意json数据，传给钱盾的到底是需要的是int的数组还是String的数组。Int数组是没有引号的。所以从数据库取出来之后就是一个int类型的数组了。关于传给前端json数据，注意看前端需要的是整型数组还是String数组。</p>
+<h2 id="星期四（10月03日）-1"><a href="#星期四（10月03日）-1" class="headerlink" title="星期四（10月03日）"></a>星期四（10月03日）</h2><p>1.注意短路与判断，一定要把能判断的放前面</p>
+<pre><code>if(assignedPermissions.size()!=0  &amp;&amp; assignedPermissions.get(0).equals(&quot;*&quot;)){
+</code></pre><h2 id="星期五（10月04日）-1"><a href="#星期五（10月04日）-1" class="headerlink" title="星期五（10月04日）"></a>星期五（10月04日）</h2><h2 id="星期六（10月05日）-1"><a href="#星期六（10月05日）-1" class="headerlink" title="星期六（10月05日）"></a>星期六（10月05日）</h2><p>1.关于shiro，在添加拦截器配置的时候，写urlpatthern开头一定要写”/“ 不然根本拦截不到</p>
+<pre><code>filterChainDefinitionMap.put(&quot;/admin/perm/required&quot;,&quot;perms[user:query]&quot;);
+</code></pre><p>2.如果需要使用注解，来声明式的去使用shiro的授权判断，需要引入植入包，因为这其实底层应该是aop的编程，而aspect是最常用的动态代理。</p>
+<pre><code>&lt;!--注解使用，需要植入包--&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;aspectj&lt;/groupId&gt;
+    &lt;artifactId&gt;aspectjweaver&lt;/artifactId&gt;
+    &lt;version&gt;1.5.4&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre><p><strong>3.数据库tinyint类型，我们的bean可以使用boolean接收，也可以使用int接收</strong><br>4.判断上传文件是否是图片<br><a href="https://blog.csdn.net/yjw123456/article/details/70312887" target="_blank" rel="external">https://blog.csdn.net/yjw123456/article/details/70312887</a><br>写的挺详细的，他说使用最后一种方法来判断更好。Image对象判断</p>
+<pre><code>File file = new File(&quot;C:\\Users\\lenovo\\Pictures\\一路向北.mp3&quot;);
+File file2 = new File(&quot;C:\\Users\\lenovo\\Pictures\\icon.jpg&quot;);
+Image image1 = ImageIO.read(file);
+Image image2 = ImageIO.read(file2);
+System.out.println(image1 != null);
+System.out.println(image2 != null);
+</code></pre><p>5.微信小程序的提示框<br><a href="https://blog.csdn.net/yingtian648/article/details/80004334" target="_blank" rel="external">简单使用</a></p>
+<h2 id="星期七（10月06日）-1"><a href="#星期七（10月06日）-1" class="headerlink" title="星期七（10月06日）"></a>星期七（10月06日）</h2><p>1.返回给前端的VO的名称尽量和前端需要的字段名称相同，这样就比较好复用,也比较好找<br>2.both method have same erasure<br>不能重载也不能重写，出现之前一个类使用另一个bean作为构造参数时，出现问题。</p>
+<h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><p>一定要注意空指针异常的判断。因为这个问题太常见了，我们很容易就翻了这个错误。但是我们却很容易忽视，必须要采取一种方法来避免空指针异常。</p>
+
     </div>
 
     
@@ -935,6 +1004,10 @@ public void mytest(){
             <span class="post-nav-divider"></span>
 
             <div class="post-nav-prev post-nav-item">
+              
+                <a href="/2019/10/13/Java总结（十六）/" rel="prev" title="Java总结（十六）">
+                  Java总结（十六） <i class="fa fa-chevron-right"></i>
+                </a>
               
             </div>
           </div>
@@ -986,7 +1059,7 @@ public void mytest(){
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#知识点总结"><span class="nav-number">1.</span> <span class="nav-text">知识点总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#星期一（9月30日）"><span class="nav-number">2.</span> <span class="nav-text">星期一（9月30日）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#解决跨域"><span class="nav-number">2.1.</span> <span class="nav-text">解决跨域</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#星期二（10月01日）"><span class="nav-number">3.</span> <span class="nav-text">星期二（10月01日）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#分页"><span class="nav-number">3.1.</span> <span class="nav-text">分页</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#星期三（10月02日）"><span class="nav-number">4.</span> <span class="nav-text">星期三（10月02日）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#typeHandler"><span class="nav-number">4.1.</span> <span class="nav-text">typeHandler</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JsonFormat-pattern-“yyyy-MM-dd-HH-mm-ss”"><span class="nav-number">4.2.</span> <span class="nav-text">@JsonFormat(pattern = “yyyy-MM-dd HH:mm:ss”)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#星期四（10月03日）"><span class="nav-number">5.</span> <span class="nav-text">星期四（10月03日）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#shiro"><span class="nav-number">5.1.</span> <span class="nav-text">shiro</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#案例一：SE代码完成自定义realm的shiro验证"><span class="nav-number">5.2.</span> <span class="nav-text">案例一：SE代码完成自定义realm的shiro验证</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#输入参数讲解"><span class="nav-number">5.3.</span> <span class="nav-text">输入参数讲解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#案例二-整合spingboot"><span class="nav-number">5.4.</span> <span class="nav-text">案例二 整合spingboot</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#星期五（10月04日）"><span class="nav-number">6.</span> <span class="nav-text">星期五（10月04日）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#druid监控"><span class="nav-number">6.1.</span> <span class="nav-text">druid监控</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参数校验"><span class="nav-number">6.2.</span> <span class="nav-text">参数校验</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#国际化"><span class="nav-number">6.3.</span> <span class="nav-text">国际化</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#星期六（10月05日）"><span class="nav-number">7.</span> <span class="nav-text">星期六（10月05日）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#分发realm"><span class="nav-number">7.1.</span> <span class="nav-text">分发realm</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#OSS"><span class="nav-number">7.2.</span> <span class="nav-text">OSS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SMS"><span class="nav-number">7.3.</span> <span class="nav-text">SMS</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#星期七（10月06日）"><span class="nav-number">8.</span> <span class="nav-text">星期七（10月06日）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#问题总结"><span class="nav-number">8.1.</span> <span class="nav-text">问题总结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#星期一（9月30日）-1"><span class="nav-number">9.</span> <span class="nav-text">星期一（9月30日）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#星期二（10月01日）-1"><span class="nav-number">10.</span> <span class="nav-text">星期二（10月01日）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#星期三（10月02日）-1"><span class="nav-number">11.</span> <span class="nav-text">星期三（10月02日）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#星期四（10月03日）-1"><span class="nav-number">12.</span> <span class="nav-text">星期四（10月03日）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#星期五（10月04日）-1"><span class="nav-number">13.</span> <span class="nav-text">星期五（10月04日）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#星期六（10月05日）-1"><span class="nav-number">14.</span> <span class="nav-text">星期六（10月05日）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#星期七（10月06日）-1"><span class="nav-number">15.</span> <span class="nav-text">星期七（10月06日）</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#知识点总结"><span class="nav-number">1.</span> <span class="nav-text">知识点总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#星期一（9月30日）"><span class="nav-number">2.</span> <span class="nav-text">星期一（9月30日）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#解决跨域"><span class="nav-number">2.1.</span> <span class="nav-text">解决跨域</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#星期二（10月01日）"><span class="nav-number">3.</span> <span class="nav-text">星期二（10月01日）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#分页"><span class="nav-number">3.1.</span> <span class="nav-text">分页</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#星期三（10月02日）"><span class="nav-number">4.</span> <span class="nav-text">星期三（10月02日）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#typeHandler"><span class="nav-number">4.1.</span> <span class="nav-text">typeHandler</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JsonFormat-pattern-“yyyy-MM-dd-HH-mm-ss”"><span class="nav-number">4.2.</span> <span class="nav-text">@JsonFormat(pattern = “yyyy-MM-dd HH:mm:ss”)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#星期四（10月03日）"><span class="nav-number">5.</span> <span class="nav-text">星期四（10月03日）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#shiro"><span class="nav-number">5.1.</span> <span class="nav-text">shiro</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#案例一：SE代码完成自定义realm的shiro验证"><span class="nav-number">5.2.</span> <span class="nav-text">案例一：SE代码完成自定义realm的shiro验证</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#输入参数讲解"><span class="nav-number">5.3.</span> <span class="nav-text">输入参数讲解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#案例二-整合spingboot"><span class="nav-number">5.4.</span> <span class="nav-text">案例二 整合spingboot</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#星期五（10月04日）"><span class="nav-number">6.</span> <span class="nav-text">星期五（10月04日）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#druid监控"><span class="nav-number">6.1.</span> <span class="nav-text">druid监控</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参数校验"><span class="nav-number">6.2.</span> <span class="nav-text">参数校验</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#国际化"><span class="nav-number">6.3.</span> <span class="nav-text">国际化</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#星期六（10月05日）"><span class="nav-number">7.</span> <span class="nav-text">星期六（10月05日）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#分发realm"><span class="nav-number">7.1.</span> <span class="nav-text">分发realm</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#OSS"><span class="nav-number">7.2.</span> <span class="nav-text">OSS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SMS"><span class="nav-number">7.3.</span> <span class="nav-text">SMS</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#星期七（10月06日）"><span class="nav-number">8.</span> <span class="nav-text">星期七（10月06日）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#问题总结"><span class="nav-number">8.1.</span> <span class="nav-text">问题总结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#星期一（9月30日）-1"><span class="nav-number">9.</span> <span class="nav-text">星期一（9月30日）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#星期二（10月01日）-1"><span class="nav-number">10.</span> <span class="nav-text">星期二（10月01日）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#星期三（10月02日）-1"><span class="nav-number">11.</span> <span class="nav-text">星期三（10月02日）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#星期四（10月03日）-1"><span class="nav-number">12.</span> <span class="nav-text">星期四（10月03日）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#星期五（10月04日）-1"><span class="nav-number">13.</span> <span class="nav-text">星期五（10月04日）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#星期六（10月05日）-1"><span class="nav-number">14.</span> <span class="nav-text">星期六（10月05日）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#星期七（10月06日）-1"><span class="nav-number">15.</span> <span class="nav-text">星期七（10月06日）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#最后"><span class="nav-number">16.</span> <span class="nav-text">最后</span></a></li></ol></div>
         
       </div>
       <!--/noindex-->
@@ -1004,7 +1077,7 @@ public void mytest(){
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">30</span>
+          <span class="site-state-item-count">31</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
