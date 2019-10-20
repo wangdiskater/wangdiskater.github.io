@@ -1,0 +1,1040 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.3.8">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.4.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.4.0" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.4.0">
+
+<link rel="stylesheet" href="//fonts.proxy.ustclug.org/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.4.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="前要本周讲了很多微服务的东西，也说了很多工具。就想之前一个老哥说的，只知道用其实我们并不知道原理是什么，很多bug都调试半天调试不出来，重启服务器就好了。学习就是逆水行舟，不进则退。所以还要加油知识部分星期一（10月14日）JWT简单说就是一个权限的控制， 但是和shiro不同的是，shiro针对的是一个系统的不同操作的认证和授权。而jwt则是相对于分布式系统的实现统一的单点登录而存在的。他虽然说">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java总结（十七）">
+<meta property="og:url" content="http://yoursite.com/2019/10/20/Java总结（十七）/index.html">
+<meta property="og:site_name" content="路要坚持">
+<meta property="og:description" content="前要本周讲了很多微服务的东西，也说了很多工具。就想之前一个老哥说的，只知道用其实我们并不知道原理是什么，很多bug都调试半天调试不出来，重启服务器就好了。学习就是逆水行舟，不进则退。所以还要加油知识部分星期一（10月14日）JWT简单说就是一个权限的控制， 但是和shiro不同的是，shiro针对的是一个系统的不同操作的认证和授权。而jwt则是相对于分布式系统的实现统一的单点登录而存在的。他虽然说">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://s2.ax1x.com/2019/10/20/KKc3hF.jpg">
+<meta property="og:updated_time" content="2019-10-20T14:17:44.562Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java总结（十七）">
+<meta name="twitter:description" content="前要本周讲了很多微服务的东西，也说了很多工具。就想之前一个老哥说的，只知道用其实我们并不知道原理是什么，很多bug都调试半天调试不出来，重启服务器就好了。学习就是逆水行舟，不进则退。所以还要加油知识部分星期一（10月14日）JWT简单说就是一个权限的控制， 但是和shiro不同的是，shiro针对的是一个系统的不同操作的认证和授权。而jwt则是相对于分布式系统的实现统一的单点登录而存在的。他虽然说">
+<meta name="twitter:image" content="https://s2.ax1x.com/2019/10/20/KKc3hF.jpg">
+  <link rel="canonical" href="http://yoursite.com/2019/10/20/Java总结（十七）/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>Java总结（十七） | 路要坚持</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">路要坚持</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+      <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block post">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/20/Java总结（十七）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="王邸">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/head.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="路要坚持">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">Java总结（十七）
+
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-10-20 22:17:40 / 修改时间：22:17:44" itemprop="dateCreated datePublished" datetime="2019-10-20T22:17:40+08:00">2019-10-20</time>
+            </span>
+          
+            
+
+            
+          
+
+          
+            <span id="/2019/10/20/Java总结（十七）/" class="post-meta-item leancloud_visitors" data-flag-title="Java总结（十七）" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2019/10/20/Java总结（十七）/#comments" itemprop="discussionUrl"><span class="post-comments-count valine-comment-count" data-xid="/2019/10/20/Java总结（十七）/" itemprop="commentCount"></span></a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="前要"><a href="#前要" class="headerlink" title="前要"></a>前要</h2><p>本周讲了很多微服务的东西，也说了很多工具。<br>就想之前一个老哥说的，只知道用其实我们并不知道原理是什么，很多bug都调试半天调试不出来，重启服务器就好了。学习就是逆水行舟，不进则退。所以还要加油</p><p><strong><em>知识部分</em></strong></p><h2 id="星期一（10月14日）"><a href="#星期一（10月14日）" class="headerlink" title="星期一（10月14日）"></a>星期一（10月14日）</h2><h3 id="JWT"><a href="#JWT" class="headerlink" title="JWT"></a>JWT</h3><p>简单说就是一个权限的控制， 但是和shiro不同的是，shiro针对的是一个系统的不同操作的认证和授权。而jwt则是相对于分布式系统的实现统一的单点登录而存在的。他虽然说有<strong>授权</strong>的功能，其实这个授权只是相当于shiro的<strong>认证</strong>的概念。</p><a id="more"></a>
+
+
+<h3 id="JWT的两个功能"><a href="#JWT的两个功能" class="headerlink" title="JWT的两个功能"></a>JWT的两个功能</h3><pre><code>Authorization (授权) : 这是使用JWT的最常见场景。一旦用户登录，后续每个请求都将包含JWT，允许用户访问该令牌允许的路由、服务和资源。单点登录是现在广泛使用的JWT的一个特性，因为它的开销很小，并且可以轻松地跨域 使用。
+
+Information Exchange (信息交换) : 对于安全的在各方之间传输信息而言，JSON Web Tokens无疑是一种很好的方式。因为JWTs可以被签名，例如，用公钥/私钥对，你可以确定发送人就是它们所说的那个人。另外，由于签名是使用头和有效负载计算的，您还可以验证内容有没有被篡改
+</code></pre><h3 id="单点登录的问题"><a href="#单点登录的问题" class="headerlink" title="单点登录的问题"></a>单点登录的问题</h3><p>回顾我们之前集群的案例，就在上个礼拜，当时为了解决识别登录用户的问题，给出的两个解决方案。<br>方案1：nginx负载均衡做iphash，同一个用户的请求永远给到同一个后台服务器。<br>方案2：session复制。<br>都不好。<br>那么如何优化呢？我们来使用token解决这个问题。</p>
+<h3 id="Token"><a href="#Token" class="headerlink" title="Token"></a>Token</h3><p>基于token的身份认证其具体做法是这样的：<br>使用基于 Token 的身份验证方法，在服务端不需要存储用户的登录记录，大概流程如下：</p>
+<pre><code>1）客户端使用用户名、密码请求登录
+2）服务端收到请求、去验证用户名与密码
+3）验证成功后，服务端会签发一个 token ，再把这个 token 发送给客户端
+4）客户端收到 token 以后可以把它存储起来，存到客户端内存或者其他地方。
+5）客户端每次向服务器请求资源的时候需要带着服务器签发的 token
+6）服务端收到请求，然后去验证客户端请求里面带着的 token，如果验证成功，就向客户端返回请求的数据。
+</code></pre><p>这个流程就和我们第一个项目很像，就是那个商城的项目，我们需要手动进行filter的过滤的时候，需要从session中拿出用户名，需要在cookie中存放JSESSIONID。因为跨域的问题使用了一种请求头，使得请求都能带上cookie。而这个token应该就是放在cookie中的信息，能够识别用户</p>
+<pre><code>response.setHeader(&quot;Access-Control-Allow-Credentials&quot;, &quot;true&quot;);
+</code></pre><p>token和session相同点是，它们都是存储用户信息；然而，Session是在服务器端的，而JWT是在客户端的。<br>Session方式存储用户信息的最大问题在于要占用大量服务器内存，增加服务器的开销。<br>而token的方式将用户状态分散到了客户端中，可以明显减轻服务端的内存压力。<br>Session的状态是存储在服务器端，客户端只有session id；而Token的状态是存储在客户端。</p>
+<p>基于Token的身份认证是无状态的，服务器或者Session中不会存储任何用户信息。没有会话信息意味着应用程序可以根据需要扩展和添加更多的机器，而不必担心用户登录的位置。<br>虽然这一实现可能会有所不同，但其主要流程如下：</p>
+<pre><code>1.  用户携带用户名和密码请求访问
+2.  服务器校验用户凭据
+3.  应用提供一个token给客户端
+4.  客户端存储token，并且在随后的每一次请求中都带着它
+5.  服务器校验token并返回数据
+</code></pre><p><strong>注意事项</strong></p>
+<pre><code>1.  每一次请求都需要token
+2.  Token应该放在请求header中
+3.  我们还需要将服务器设置为接受来自所有域的请求，用Access-Control-Allow-Origin：*
+</code></pre><h3 id="用Token的好处"><a href="#用Token的好处" class="headerlink" title="用Token的好处"></a>用Token的好处</h3><p>1.无状态和可扩展性：Tokens存储在客户端。完全无状态，可扩展。我们的负载均衡器可以将用户传递到任意服务器，因为在任何地方都没有状态或会话信息。<br>2.安全：Token不是Cookie。（The token, not a cookie.）每次请求的时候Token都会被发送。而且，由于没有Cookie被发送，还有助于防止CSRF攻击。即使在你的实现中将token存储到客户端的Cookie中，这个Cookie也只是一种存储机制，而非身份认证机制。没有基于会话的信息可以操作，因为我们没有会话!</p>
+<h3 id="JWT-token的基本格式"><a href="#JWT-token的基本格式" class="headerlink" title="JWT token的基本格式"></a>JWT token的基本格式</h3><p>JSON Web Token由三部分组成，它们之间用圆点(.)连接。这三部分分别是：<br>• Header<br>• Payload<br>• Signature<br>因此，一个典型的JWT看起来是这个样子的：<br>xxxxx.yyyyy.zzzzz<br>官方<a href="https://jwt.io/" target="_blank" rel="external">https://jwt.io/</a>就能解析</p>
+<h3 id="guns整合JWT签名机制"><a href="#guns整合JWT签名机制" class="headerlink" title="guns整合JWT签名机制"></a>guns整合JWT签名机制</h3><h3 id="第一步导包guns本来就有"><a href="#第一步导包guns本来就有" class="headerlink" title="第一步导包guns本来就有"></a>第一步导包guns本来就有</h3><pre><code>&lt;dependency&gt;
+    &lt;groupId&gt;io.jsonwebtoken&lt;/groupId&gt;
+    &lt;artifactId&gt;jjwt&lt;/artifactId&gt;
+&lt;/dependency&gt;
+</code></pre><h3 id="第二步开启配置"><a href="#第二步开启配置" class="headerlink" title="第二步开启配置"></a>第二步开启配置</h3><p>在application中开启配置：</p>
+<pre><code>rest:
+  auth-open: true #jwt鉴权机制是否开启(true或者false)
+  sign-open: true #签名机制是否开启(true或false)
+</code></pre><p>签名机制会讲<br>开启配置之后，就会注入一个AuthFilter</p>
+<pre><code>@Bean
+@ConditionalOnProperty(prefix = RestProperties.REST_PREFIX, name = &quot;auth-open&quot;, havingValue = &quot;true&quot;, matchIfMissing = true)
+public AuthFilter jwtAuthenticationTokenFilter() {
+    return new AuthFilter();
+}
+</code></pre><p>我们一起看看这个filter</p>
+<pre><code>public class AuthFilter extends OncePerRequestFilter {
+  private final Log logger = LogFactory.getLog(this.getClass());
+  @Autowired
+  private JwtTokenUtil jwtTokenUtil;
+  @Autowired
+  private JwtProperties jwtProperties;
+  @Override
+  protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
+    if (request.getServletPath().equals(&quot;/&quot; + jwtProperties.getAuthPath())) {
+      chain.doFilter(request, response);
+      return;
+    }
+    final String requestHeader = request.getHeader(jwtProperties.getHeader());
+    String authToken = null;
+    if (requestHeader != null &amp;&amp; requestHeader.startsWith(&quot;Bearer &quot;)) {
+      authToken = requestHeader.substring(7);
+      //验证token是否过期,包含了验证jwt是否正确
+      try {
+          boolean flag = jwtTokenUtil.isTokenExpired(authToken);
+          if (flag) {
+              RenderUtil.renderJson(response, new ErrorTip(BizExceptionEnum.TOKEN_EXPIRED.getCode(), BizExceptionEnum.TOKEN_EXPIRED.getMessage()));
+              return;
+          }
+      } catch (JwtException e) {
+          //有异常就是token解析失败
+          RenderUtil.renderJson(response, new ErrorTip(BizExceptionEnum.TOKEN_ERROR.getCode(), BizExceptionEnum.TOKEN_ERROR.getMessage()));
+          return;
+      }
+    } else {
+        //header没有带Bearer字段
+        RenderUtil.renderJson(response, new ErrorTip(BizExceptionEnum.TOKEN_ERROR.getCode(), BizExceptionEnum.TOKEN_ERROR.getMessage()));
+        return;
+    }
+    chain.doFilter(request, response);
+  }
+}
+</code></pre><p>这个filter放过了</p>
+<pre><code>&quot;/&quot; + jwtProperties.getAuthPath()
+</code></pre><p>的请求其他请求全部进行了判断是否有token，判断token是否过期。是否有token没有怎么办，等等。我们接着看这个放过的请求是什么？jwtProperties是一个配置类对吧，我们还记得springboot的配置理念是<strong>约定大于配置</strong>所以我相信里面肯定有一些默认配置，而需要手动配置的肯定就在application.yml里面进行配置。<br>默认配置：</p>
+<pre><code>@Configuration
+@ConfigurationProperties(prefix = JwtProperties.JWT_PREFIX)
+public class JwtProperties {
+  public static final String JWT_PREFIX = &quot;jwt&quot;;
+  private String header = &quot;Authorization&quot;;
+  private String secret = &quot;defaultSecret&quot;;
+  private Long expiration = 604800L;
+  private String authPath = &quot;auth&quot;;
+  private String md5Key = &quot;randomKey&quot;;
+}
+</code></pre><p>可以看到authPath是/auth 放过了。我们就去controller里面取看看/auth请求到底要干什么吧</p>
+<h3 id="第二步去登录获取钥匙"><a href="#第二步去登录获取钥匙" class="headerlink" title="第二步去登录获取钥匙"></a>第二步去登录获取钥匙</h3><p>这里请求的url也写成了变量的形式，从而我们可以看出<strong>guns的风格是英朗的，一板一眼，可以学习他的架构分割。</strong></p>
+<pre><code>@RequestMapping(value = &quot;${jwt.auth-path}&quot;)
+   public ResponseEntity&lt;?&gt; createAuthenticationToken(AuthRequest authRequest) {
+       boolean validate = reqValidator.validate(authRequest);
+       if (validate) {
+           final String randomKey = jwtTokenUtil.getRandomKey();
+           final String token = jwtTokenUtil.generateToken(authRequest.getUserName(), randomKey);
+           return ResponseEntity.ok(new AuthResponse(token, randomKey));
+       } else {
+           throw new GunsException(BizExceptionEnum.AUTH_REQUEST_ERROR);
+       }
+   }
+</code></pre><p>这个controller做了几件事<br>1.他用了一个AuthRequest authRequest 包装的bean直接接收参数，说明当发送的是GET请求，其实是可以直接拿一个bean来接收，而不用写一大堆参数，作为get请求发送过来的参数。<br>2.然后调用了validate方法去判断数据库是否有这个用户。当然这里涉及到一些加密的算法，我们知道用即可。<br>3.然后验证通过发放token</p>
+<h3 id="使用token"><a href="#使用token" class="headerlink" title="使用token"></a>使用token</h3><h3 id="使用token-—-不带数据签名（没带消息内容）"><a href="#使用token-—-不带数据签名（没带消息内容）" class="headerlink" title="使用token —- 不带数据签名（没带消息内容）"></a>使用token —- 不带数据签名（没带消息内容）</h3><p>后端把签名包装成这样的形式发给了前端：</p>
+<pre><code>{
+&quot;randomKey&quot;: &quot;yvg1ye&quot;,
+&quot;token&quot;: &quot;eyJhbGciOiJIUzUxMiJ9.eyJyYW5kb21LZXkiOiJ5dmcxeWUiLCJzdWIiOiJhZG1pbiIsImV4cCI6MTU1NTg0ODk0MiwiaWF0IjoxNTU1MjQ0MTQyfQ.clEVOLBNQr4dFAeK_4fEpPlzCo-zDjNxEsPxyBftbmjJRLGY9rrdSHUTmeckk-v8XCKmPKlxqXICyWkKGYZ7jA&quot;
+}
+</code></pre><p>前端通过axios包装了这个token和randomKey 然后给每个请求都带上了这个token</p>
+<pre><code>import axios from &apos;axios&apos;
+import Cookies from &apos;js-cookie&apos;
+import qs from &apos;qs&apos;
+export function fetch(config) {
+  //返回promise对象
+  return new Promise((resolve, reject) =&gt; {
+      //创建axios实例，把基本的配置放进去
+      const instance = axios.create();
+      // POST 传参序列化
+      instance.interceptors.request.use(
+          config =&gt; {
+              let token = Cookies.get(&apos;token&apos;);
+              if (token) {
+                config.headers.Authorization = &apos;Bearer &apos; + token
+              }
+              if (config.method === &apos;post&apos;) {
+                  config.data = qs.stringify(config.data);
+              }
+              return config
+          },
+          error =&gt; {
+              return Promise.reject(error)
+          }
+      );
+      // 返回状态判断
+      instance.interceptors.response.use(
+          res =&gt; {
+              if (res &amp;&amp; res.data.status==700) {
+                  alert(&quot;tonken过期!需要重新登录&quot;);
+                  Cookies.remove(&apos;token&apos;);
+                  Cookies.remove(&apos;username&apos;);
+                  Cookies.remove(&apos;cinemaNowPage&apos;);
+                  // _this.$router.push(&apos;/login&apos;);
+                  window.location.href = &apos;/login&apos;;
+              }
+              return res.data
+          },
+          error =&gt; {
+              return Promise.reject(error)
+          }
+      );
+      //请求成功后执行的函数
+      instance(config).then(res =&gt; {
+          resolve(res);
+      })
+      //失败后执行的函数
+      .catch(err =&gt; {
+          reject(err);
+      })
+  });
+}
+// 封装调用的接口 getData
+export function getData(url, type, params) {
+  //如果type为空，默认为get方法，也可以自己改成post
+  return fetch({
+    url: url,
+    method: type,
+    params: params,
+  })
+}
+</code></pre><h3 id="使用token-—-带上数据签名"><a href="#使用token-—-带上数据签名" class="headerlink" title="使用token —- 带上数据签名"></a>使用token —- 带上数据签名</h3><p>先去配置文件里面看到</p>
+<pre><code>sign-open: true #签名机制是否开启(true或false)
+</code></pre><p>配置了一个转换器，spring里面有学过的。注册了一个WithSignMessageConverter</p>
+<pre><code>@Bean
+@ConditionalOnProperty(prefix = RestProperties.REST_PREFIX, name = &quot;sign-open&quot;, havingValue = &quot;true&quot;, matchIfMissing = true)
+public WithSignMessageConverter withSignMessageConverter() {
+    WithSignMessageConverter withSignMessageConverter = new WithSignMessageConverter();
+    DefaultFastjsonConfig defaultFastjsonConfig = new DefaultFastjsonConfig();
+    withSignMessageConverter.setFastJsonConfig(defaultFastjsonConfig.fastjsonConfig());
+    withSignMessageConverter.setSupportedMediaTypes(defaultFastjsonConfig.getSupportedMediaType());
+    return withSignMessageConverter;
+}
+</code></pre><p>看一下这个withSignMessageConverter的代码</p>
+<pre><code>/**
+ * 带签名的http信息转化器
+ *
+ * @author fengshuonan
+ * @date 2017-08-25 15:42
+ */
+public class WithSignMessageConverter extends FastJsonHttpMessageConverter {
+    @Autowired
+    JwtProperties jwtProperties;
+    @Autowired
+    JwtTokenUtil jwtTokenUtil;
+    @Autowired
+    DataSecurityAction dataSecurityAction;
+    @Override
+    public Object read(Type type, Class&lt;?&gt; contextClass, HttpInputMessage inputMessage) throws IOException, HttpMessageNotReadableException {
+        InputStream in = inputMessage.getBody();
+        Object o = JSON.parseObject(in, super.getFastJsonConfig().getCharset(), BaseTransferEntity.class, super.getFastJsonConfig().getFeatures());
+        //先转化成原始的对象
+        BaseTransferEntity baseTransferEntity = (BaseTransferEntity) o;
+        //校验签名
+        String token = HttpKit.getRequest().getHeader(jwtProperties.getHeader()).substring(7);
+        String md5KeyFromToken = jwtTokenUtil.getMd5KeyFromToken(token);
+        String object = baseTransferEntity.getObject();
+        String json = dataSecurityAction.unlock(object);
+        String encrypt = MD5Util.encrypt(object + md5KeyFromToken);
+        if (encrypt.equals(baseTransferEntity.getSign())) {
+            System.out.println(&quot;签名校验成功!&quot;);
+        } else {
+            System.out.println(&quot;签名校验失败,数据被改动过!&quot;);
+            throw new GunsException(BizExceptionEnum.SIGN_ERROR);
+        }
+        //校验签名后再转化成应该的对象
+        return JSON.parseObject(json, type);
+    }
+}
+</code></pre><p>他继承的是FastJsonHttpMessageConverter 我们就能知道当前端传过来的是json的数据的时候，我们就能通过这个类来接收。从而把里面的信息拿出来</p>
+<p>在test里面有一个decrytTest，这个测试相当于前端做的事情，把数据封装成一个json并进行加密</p>
+<pre><code>public class DecryptTest {
+  public static void main(String[] args) {
+    String salt = &quot;0iqwhi&quot;;
+    SimpleObject simpleObject = new SimpleObject();
+    simpleObject.setUser(&quot;stylefeng&quot;);
+    simpleObject.setAge(12);
+    simpleObject.setName(&quot;ffff&quot;);
+    simpleObject.setTips(&quot;code&quot;);
+    String jsonString = JSON.toJSONString(simpleObject);
+    String encode = new Base64SecurityAction().doAction(jsonString);
+    String md5 = MD5Util.encrypt(encode + salt);
+    BaseTransferEntity baseTransferEntity = new BaseTransferEntity();
+    baseTransferEntity.setObject(encode);
+    baseTransferEntity.setSign(md5);
+    System.out.println(JSON.toJSONString(baseTransferEntity));
+  }
+}
+</code></pre><p>运行一下就得到了一个json</p>
+<pre><code>{&quot;object&quot;:&quot;eyJhZ2UiOjEyLCJuYW1lIjoiZmZmZiIsInRpcHMiOiJjb2RlIiwidXNlciI6InN0eWxlZmVuZyJ9&quot;,&quot;sign&quot;:&quot;d737820570c0881e8614272f9792e07d&quot;}
+</code></pre><p>里面有object 也有sign，就是前端发回来的数据。<br><strong>接下来我们把整个流程走一遍</strong><br>1.前端发送过来这个json 带有object 和sign<br>2.进入converter 然后解析出BaseTransferEntity<br>3.然后给他解锁和解密<br>4.如果签名一致那么就把json转成bean对象进行操作</p>
+<h3 id="全局异常处理"><a href="#全局异常处理" class="headerlink" title="全局异常处理"></a>全局异常处理</h3><p>这个之前有介绍过，有时间我回头弄一下</p>
+<h2 id="星期二（10月15日）"><a href="#星期二（10月15日）" class="headerlink" title="星期二（10月15日）"></a>星期二（10月15日）</h2><h3 id="redis"><a href="#redis" class="headerlink" title="redis"></a>redis</h3><p>Redis是一个开源的<strong>内存数据库</strong>，它以键值对的形式存储数据。由于数据存储在内存中，因此Redis的速度很快，但是每次重启Redis服务时，其中的数据也可能会丢失，因此，Redis也提供了持久化存储机制，将数据以某种形式保存在文件中，每次重启时，可以自动从文件加载数据到内存当中.</p>
+<h3 id="存储策略"><a href="#存储策略" class="headerlink" title="存储策略"></a>存储策略</h3><p><a href="https://baijiahao.baidu.com/s?id=1611955931705092609&amp;wfr=spider&amp;for=pc" target="_blank" rel="external">存储策略</a></p>
+<h3 id="RDB"><a href="#RDB" class="headerlink" title="RDB"></a>RDB</h3><p>Redis DataBase<br>Redis 默认的存储策略<br>Redis会定期保存数据快照至一个rbd文件中，并在启动时自动加载rdb文件，恢复之前保存的数据。可以在配置文件中配置Redis进行快照保存的时机</p>
+<h3 id="AOF"><a href="#AOF" class="headerlink" title="AOF"></a>AOF</h3><p>Append-only file<br>保存策略<br>采用AOF持久方式时，Redis会把每一个写请求都记录在一个<strong>日志文件</strong>里。在Redis重启时，会把AOF文件中记录的所有写操作顺序执行一遍，确保数据恢复到最新。AOF默认是关闭的，</p>
+<h3 id="redis的使用"><a href="#redis的使用" class="headerlink" title="redis的使用"></a>redis的使用</h3><p>1.直接解压<br>2.开启redis服务器 redis-server<br>3.可以开启redis客户端进行操作 redis-cli</p>
+<h3 id="基本语法"><a href="#基本语法" class="headerlink" title="基本语法"></a>基本语法</h3><p>redis</p>
+<h3 id="SELECT-index"><a href="#SELECT-index" class="headerlink" title="SELECT index"></a>SELECT index</h3><p>切换到指定的数据库，数据库索引号 index 用数字值指定，以 0 作为起始索引值。<br>默认使用 0 号数据库。<br>默认16个</p>
+<p>Redis 是key value形式的存储系统（nosql数据库）<br>我们所有存的东西，都需要有个key<br>Redis  Vs HashMap<br>1.只是我们之前value 可以存很多对象，Redis里value 默认支持常见的数据结构。<br>2.HashMap<string ,object=""> 可以put任何对象。而redis通过key去保存的值，只能是特定的一些结构。操作不同的数据结构的时候，redis提供了不同的命令。</string></p>
+<h3 id="字符串（value的类型）"><a href="#字符串（value的类型）" class="headerlink" title="字符串（value的类型）"></a>字符串（value的类型）</h3><p>跟之前的map 非常类似。Value是字符串。<br><a href="https://blog.csdn.net/weixin_38111957/article/details/82289644" target="_blank" rel="external">这里比较全</a></p>
+<p>• SET   key value<strong>可以set set set,也就是说redis没有关键字这种说法</strong><br>• GET     key<br>• INCR    可以对应的key的数值（整型的数值）加一<br>• INCRBY  给数值加上一个步长<br>• SETEX   expire 过期<br>• SETNX   not exist  key不存在的时候再去赋值</p>
+<h3 id="LIST-表单集合"><a href="#LIST-表单集合" class="headerlink" title="LIST 表单集合"></a>LIST 表单集合</h3><h3 id="LPUSH"><a href="#LPUSH" class="headerlink" title="LPUSH"></a>LPUSH</h3><p>后面的元素放在栈顶  （）</p>
+<h3 id="LPOP"><a href="#LPOP" class="headerlink" title="LPOP"></a>LPOP</h3><p>返回第一个元素，并且在列表上删除该元素 （栈顶）</p>
+<h3 id="LLEN"><a href="#LLEN" class="headerlink" title="LLEN"></a>LLEN</h3><p>返回当前的list列表的长度</p>
+<h3 id="LINDEX"><a href="#LINDEX" class="headerlink" title="LINDEX"></a>LINDEX</h3><p>返回当前的list的指定index下标的元素。没有返回nil<br>0表示栈顶的元素</p>
+<h3 id="LINSERT"><a href="#LINSERT" class="headerlink" title="LINSERT"></a>LINSERT</h3><p>插入的位置是按照index的顺序<br>Before的话得注意 index的值</p>
+<h3 id="LPUSHX"><a href="#LPUSHX" class="headerlink" title="LPUSHX"></a>LPUSHX</h3><p>如果list存在，再去push</p>
+<h3 id="LRANGE"><a href="#LRANGE" class="headerlink" title="LRANGE"></a>LRANGE</h3><p>可以方便的查看某个index范围内的lislt的值<br>输入的index是从0开始，显示的<strong>标号是从1开始</strong>的。</p>
+<h3 id="LREM"><a href="#LREM" class="headerlink" title="LREM"></a>LREM</h3><p>删除list里的指定的前几个（指定value的）元素<br>比如 lrem  my12list 2  123  意思是删除前两个 123</p>
+<pre><code>lrem key count value
+</code></pre><p>Value表示删除的元素<br>Count表示删除几个该元素 从列表的第一个开始找<br>删除指定位置的元素：<strong>没有</strong></p>
+<h3 id="LSET"><a href="#LSET" class="headerlink" title="LSET"></a>LSET</h3><p>• 设置指定的位置的元素的值 （修改）<br>• 输入的index是从0开始，显示的标号是从1开始的。</p>
+<h3 id="Hash（二维表）"><a href="#Hash（二维表）" class="headerlink" title="Hash（二维表）"></a>Hash（二维表）</h3><p>User{<br>  Username:zhangsan<br>  age :18<br>  Email:zs@163.colm<br>}<br>值哈希表  key value</p>
+<h3 id="HSET"><a href="#HSET" class="headerlink" title="HSET"></a>HSET</h3><pre><code>hset myset username admin
+</code></pre><p><strong>注意：设置同一个哈希的key为另一个value将会覆盖</strong></p>
+<pre><code>192.168.3.151:6379&gt; hset myset username wangdi
+(integer) 0
+192.168.3.151:6379&gt; hget myset username
+&quot;wangdi&quot;
+</code></pre><h3 id="HGET"><a href="#HGET" class="headerlink" title="HGET"></a>HGET</h3><p>给一个hash表的key，返回一个值</p>
+<pre><code>hget myset username
+</code></pre><h3 id="HEXISTS"><a href="#HEXISTS" class="headerlink" title="HEXISTS"></a>HEXISTS</h3><p>表里的key是否存在</p>
+<h3 id="HGETALL"><a href="#HGETALL" class="headerlink" title="HGETALL"></a>HGETALL</h3><p>返回hash表里的所有元素<br><strong>注意：key value都是hash表里面的元素</strong></p>
+<h3 id="HKEYS"><a href="#HKEYS" class="headerlink" title="HKEYS"></a>HKEYS</h3><p>获取所有的keys</p>
+<h3 id="HLEN"><a href="#HLEN" class="headerlink" title="HLEN"></a>HLEN</h3><p>有几个元素（几行数据） 几个feild value</p>
+<h3 id="HVALS"><a href="#HVALS" class="headerlink" title="HVALS"></a>HVALS</h3><h3 id="HINCRBY"><a href="#HINCRBY" class="headerlink" title="HINCRBY"></a>HINCRBY</h3><h3 id="HMGET"><a href="#HMGET" class="headerlink" title="HMGET"></a>HMGET</h3><p>Many<br>给一个hash表的多个key，返回多个值</p>
+<h3 id="HMSET"><a href="#HMSET" class="headerlink" title="HMSET"></a>HMSET</h3><p>给一个hash表的多个key，设置多个值</p>
+<h3 id="HSETNX"><a href="#HSETNX" class="headerlink" title="HSETNX"></a>HSETNX</h3><p>Not exist 不存在会创建一个key，然后设置值</p>
+<p>存在，不改变该key 的值</p>
+<h3 id="Set（无序集合）"><a href="#Set（无序集合）" class="headerlink" title="Set（无序集合）"></a>Set（无序集合）</h3><h3 id="SADD"><a href="#SADD" class="headerlink" title="SADD"></a>SADD</h3><p>往set集合里增加一个或者多个元素</p>
+<h3 id="SMEMBERS"><a href="#SMEMBERS" class="headerlink" title="SMEMBERS"></a>SMEMBERS</h3><p>列出这个集合里的所有元素</p>
+<h3 id="SISMEMBER"><a href="#SISMEMBER" class="headerlink" title="SISMEMBER"></a>SISMEMBER</h3><p>是否存在在当前的集合中</p>
+<h3 id="SCARD"><a href="#SCARD" class="headerlink" title="SCARD"></a>SCARD</h3><p>集合的长度</p>
+<h3 id="SPOP-（弹出并从集合删除）"><a href="#SPOP-（弹出并从集合删除）" class="headerlink" title="SPOP （弹出并从集合删除）"></a>SPOP （弹出并从集合删除）</h3><pre><code>spop myset 5
+</code></pre><p>取出集合里的5个元素</p>
+<h3 id="SRANDMEMBER"><a href="#SRANDMEMBER" class="headerlink" title="SRANDMEMBER"></a>SRANDMEMBER</h3><pre><code>srandmember myset 5
+</code></pre><p><strong>随机</strong>取出 5个元素（不删除）</p>
+<h3 id="SINTER"><a href="#SINTER" class="headerlink" title="SINTER"></a>SINTER</h3><p>求出两个集合的相交部分</p>
+<pre><code>sinter myset1 myset2
+</code></pre><h3 id="SINTERSTORE"><a href="#SINTERSTORE" class="headerlink" title="SINTERSTORE"></a>SINTERSTORE</h3><p>把相交的集合保存起来</p>
+<h3 id="SUNION"><a href="#SUNION" class="headerlink" title="SUNION"></a>SUNION</h3><p>求两个集合的并集</p>
+<pre><code>sunion myset1 myset2
+</code></pre><h3 id="SUNIONSTORE"><a href="#SUNIONSTORE" class="headerlink" title="SUNIONSTORE"></a>SUNIONSTORE</h3><h3 id="SDIFF"><a href="#SDIFF" class="headerlink" title="SDIFF"></a>SDIFF</h3><p>参数1 减去参数1和2的交集—留下的是set1的</p>
+<h3 id="SDIFFSTORE"><a href="#SDIFFSTORE" class="headerlink" title="SDIFFSTORE"></a>SDIFFSTORE</h3><p>同上，SDIFFSTORE destination key1 [key2] 返回给定所有集合的差集并存储在 destination 中</p>
+<h3 id="SMOVE"><a href="#SMOVE" class="headerlink" title="SMOVE"></a>SMOVE</h3><h3 id="SREM-删除"><a href="#SREM-删除" class="headerlink" title="SREM 删除"></a>SREM 删除</h3><h3 id="SortSet有序的集合，它是可以给一个值-赋予一个分值，根据分值来排序"><a href="#SortSet有序的集合，它是可以给一个值-赋予一个分值，根据分值来排序" class="headerlink" title="SortSet有序的集合，它是可以给一个值  赋予一个分值，根据分值来排序"></a>SortSet有序的集合，它是可以给一个值  赋予一个分值，根据分值来排序</h3><h3 id="ZADD"><a href="#ZADD" class="headerlink" title="ZADD"></a>ZADD</h3><h3 id="ZCARD"><a href="#ZCARD" class="headerlink" title="ZCARD"></a>ZCARD</h3><p>长度</p>
+<h3 id="ZSCORE"><a href="#ZSCORE" class="headerlink" title="ZSCORE"></a>ZSCORE</h3><h3 id="ZCOUNT（闭区间）"><a href="#ZCOUNT（闭区间）" class="headerlink" title="ZCOUNT（闭区间）"></a>ZCOUNT（闭区间）</h3><h3 id="ZINCRBY"><a href="#ZINCRBY" class="headerlink" title="ZINCRBY"></a>ZINCRBY</h3><h3 id="ZRANGE"><a href="#ZRANGE" class="headerlink" title="ZRANGE"></a>ZRANGE</h3><p>根据排名给出范围</p>
+<h3 id="ZRANGEBYSCORE"><a href="#ZRANGEBYSCORE" class="headerlink" title="ZRANGEBYSCORE"></a>ZRANGEBYSCORE</h3><p>根据指定的分值范围去查找</p>
+<h3 id="ZRANK-（排名从0开始）"><a href="#ZRANK-（排名从0开始）" class="headerlink" title="ZRANK （排名从0开始）"></a>ZRANK （排名从0开始）</h3><h3 id="ZREVRANGE"><a href="#ZREVRANGE" class="headerlink" title="ZREVRANGE"></a>ZREVRANGE</h3><p>先全部反转，在去对应的index的value</p>
+<h3 id="ZREVRANGEBYSCORE"><a href="#ZREVRANGEBYSCORE" class="headerlink" title="ZREVRANGEBYSCORE"></a>ZREVRANGEBYSCORE</h3><h3 id="ZREVRANK"><a href="#ZREVRANK" class="headerlink" title="ZREVRANK"></a>ZREVRANK</h3><p>返回一个逆序的排名值</p>
+<h3 id="ZREM"><a href="#ZREM" class="headerlink" title="ZREM"></a>ZREM</h3><p>删除</p>
+<h3 id="ZREMRANGEBYRANK"><a href="#ZREMRANGEBYRANK" class="headerlink" title="ZREMRANGEBYRANK"></a>ZREMRANGEBYRANK</h3><p>删除指定排名的成员</p>
+<h3 id="ZREMRANGEBYSCORE"><a href="#ZREMRANGEBYSCORE" class="headerlink" title="ZREMRANGEBYSCORE"></a>ZREMRANGEBYSCORE</h3><p>删除指定分数区间的成员</p>
+<p><strong>注意事项</strong><br>1.不同的结构不能有相同的名字，除非换个数据库，这和我们JAVA起同样的变量名一样，就算是不同的结构，他唯一表示一块内存地址<br>2.对于redis建议使用原子操作。不要把增加和删除操作写成先get减掉再set，最好写成incr 或者decr</p>
+<h3 id="项目中使用redis（三步走）"><a href="#项目中使用redis（三步走）" class="headerlink" title="项目中使用redis（三步走）"></a>项目中使用redis（三步走）</h3><p><strong>第一步先导包</strong></p>
+<pre><code>&lt;!--导入redis--&gt;
+&lt;dependency&gt;
+  &lt;groupId&gt;redis.clients&lt;/groupId&gt;
+  &lt;artifactId&gt;jedis&lt;/artifactId&gt;
+  &lt;version&gt;2.9.0&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre><p><strong>第二步配置</strong><br>在springboot容器中添加组件</p>
+<pre><code>@Configuration
+public class JedisConfig {
+  @Bean
+  public Jedis jedis(){
+    Jedis jedis = new Jedis(&quot;127.0.0.1&quot;,6379);
+    return jedis;
+  }
+}
+</code></pre><p><strong>第三步使用</strong></p>
+<pre><code>@Autowired
+Jedis jedis;
+</code></pre><h2 id="星期三（10月16日）"><a href="#星期三（10月16日）" class="headerlink" title="星期三（10月16日）"></a>星期三（10月16日）</h2><h3 id="阿里的支付-非常简答"><a href="#阿里的支付-非常简答" class="headerlink" title="阿里的支付(非常简答)"></a>阿里的支付(非常简答)</h3><p>这里就写步骤吧，因为代码太多了<br><strong>第一步 使用沙箱环境</strong><br><a href="https://openhome.alipay.com/platform/appDaily.htm?tab=account" target="_blank" rel="external">https://openhome.alipay.com/platform/appDaily.htm?tab=account</a><br><strong>第二步 下载支付宝沙箱的app</strong><br><strong>第三步 下载支付宝的SDK</strong><br>可以查看这里：<br><a href="https://sandbox.alipaydev.com/user/accountDetails.htm?index=4" target="_blank" rel="external">传送门</a><br><strong>注意事项：</strong><br>1.那个demo里面要写的pid是商户ID<br>2.记得把zfbinfo.properties放到resource目录下</p>
+<h3 id="微信支付（略有难度）"><a href="#微信支付（略有难度）" class="headerlink" title="微信支付（略有难度）"></a>微信支付（略有难度）</h3><p>因为必须要有公众号的appId和 商户号的Id才能进行测试，就算是沙箱测试也是如此，微信就是如此的不尽人意- -。<br>这就很难受了，我这里就给出一个下载微信支付SDK的连接好了<br>(sdk下载)[<a href="https://pay.weixin.qq.com/wiki/doc/api/native.php?chapter=11_1" target="_blank" rel="external">https://pay.weixin.qq.com/wiki/doc/api/native.php?chapter=11_1</a>]</p>
+<h2 id="星期四（10月17日）"><a href="#星期四（10月17日）" class="headerlink" title="星期四（10月17日）"></a>星期四（10月17日）</h2><h3 id="整合前端nginx解决跨域问题"><a href="#整合前端nginx解决跨域问题" class="headerlink" title="整合前端nginx解决跨域问题"></a>整合前端nginx解决跨域问题</h3><p>安装好nginx然后作为服务器的反向代理。为了解决跨域我们需要在nginx.conf文件下配置一些选项</p>
+<pre><code>if ($request_method = &apos;OPTIONS&apos;) {
+  add_header &apos;Access-Control-Allow-Origin&apos; &apos;*&apos;;
+  add_header &apos;Access-Control-Allow-Methods&apos; &apos;GET, POST, OPTIONS&apos;;
+  add_header &apos;Access-Control-Allow-Headers&apos; &apos;DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range,Authorization&apos;;
+  add_header &apos;Access-Control-Max-Age&apos; 1728000;
+  add_header &apos;Content-Type&apos; &apos;text/plain; charset=utf-8&apos;;
+  add_header &apos;Content-Length&apos; 0;
+  return 204;
+}
+  if ($request_method = &apos;POST&apos;) {
+  add_header &apos;Access-Control-Allow-Origin&apos; &apos;*&apos;;
+  add_header &apos;Access-Control-Allow-Methods&apos; &apos;GET, POST, OPTIONS&apos;;
+  add_header &apos;Access-Control-Allow-Headers&apos; &apos;DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range,Authorization&apos;;
+  add_header &apos;Access-Control-Expose-Headers&apos; &apos;Content-Length,Content-Range&apos;;
+}
+if ($request_method = &apos;GET&apos;) {
+  add_header &apos;Access-Control-Allow-Origin&apos; &apos;*&apos;;
+  add_header &apos;Access-Control-Allow-Methods&apos; &apos;GET, POST, OPTIONS&apos;;
+  add_header &apos;Access-Control-Allow-Headers&apos; &apos;DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range,Authorization&apos;;
+  add_header &apos;Access-Control-Expose-Headers&apos; &apos;Content-Length,Content-Range&apos;;
+}
+</code></pre><h2 id="星期五（10月18日）"><a href="#星期五（10月18日）" class="headerlink" title="星期五（10月18日）"></a>星期五（10月18日）</h2><h3 id="高并发相关概念介绍"><a href="#高并发相关概念介绍" class="headerlink" title="高并发相关概念介绍"></a>高并发相关概念介绍</h3><p>并发<br>同时拥有两个或多个线程，如果程序在单核处理器上运行，多个线程将交替地换入或者换出内存，这些线程是同时「 存在 」的，每个线程都处于执行过程中的某个状态，如果运行在多核处理器上，此时，程序中每个线程都将分配到一个处理器核上，因此可以同时运行。也就是说，并发就是多个线程操作相同的物理机中的资源，保证其线程安全，合理的利用资源。</p>
+<p>高并发<br>由于分布式系统的问世，高并发（High Concurrency）通常是指通过设计保证系统能够同时并行处理很多请求。通俗来讲，高并发是指在同一个时间点，有很多用户同时的访问同一 API 接口或者 Url 地址。它经常会发生在有大活跃用户量，用户高聚集的业务场景中。（百度词条）</p>
+<p>高并发中有如下概念：</p>
+<h3 id="QPS（Query-Per-Second）"><a href="#QPS（Query-Per-Second）" class="headerlink" title="QPS（Query Per Second）"></a>QPS（Query Per Second）</h3><p>每秒钟处理完请求的次数；注意这里是处理完。具体是指发出请求到服务器处理完成功返回结果。可以理解在server中有个counter，每处理一个请求加1，1秒后counter=QPS。</p>
+<h3 id="TPS（Transaction-Per-Second）"><a href="#TPS（Transaction-Per-Second）" class="headerlink" title="TPS（Transaction Per Second）"></a>TPS（Transaction Per Second）</h3><p>一般来说是针对整个系统来说的，指每秒能够处理完的事物数，针对单个接口来说一般用QPS</p>
+<h3 id="并发量"><a href="#并发量" class="headerlink" title="并发量"></a>并发量</h3><p>系统能够同时处理的请求数</p>
+<h3 id="响应时间"><a href="#响应时间" class="headerlink" title="响应时间"></a>响应时间</h3><p>系统处理一次请求所需要的平均处理时间<br>计算关系：</p>
+<pre><code>QPS = 并发量 / 平均响应时间
+并发量 = QPS * 平均响应时间
+</code></pre><h3 id="高可用"><a href="#高可用" class="headerlink" title="高可用"></a>高可用</h3><p>高可用（High Availability）是系统架构设计中必须考虑的因素之一，它通常是指，通过设计减少系统不能提供服务的时间。计量单位是百分比，常用99%,99.9%,99.99%来表示。一般讲4个9，5个9或者6个9。<br>举个例子：可用性为99%的系统，全年停机时间为3.5天；99.9%的系统；全年停机时间为8.5小时；99.99%的系统全年停机时间为53分钟；99.999%的系统全年停机时间仅仅约为5分钟。</p>
+<h3 id="如何设计高并发系统"><a href="#如何设计高并发系统" class="headerlink" title="如何设计高并发系统"></a>如何设计高并发系统</h3><p>提高并发量<br>如何提高并发量？也就是提高系统能够同时处理的请求数量，例如</p>
+<pre><code>1、提高物理机器性能
+  比如：增强单机硬件性能，例如：增加CPU核数如32核，升级更好的网卡如万兆，升级更好的硬盘如SSD，扩充硬盘容量如2T，扩充系统内存如128G；
+2、增加能够同时处理请求的个数：
+  比如：增加节点、配置tomcat线程池 等等
+</code></pre><p>缩短平均响应时间<br>等于如何提高接口响应速度？<br>  缓存、异步、无锁等等</p>
+<p>高并发系统的三把利器：</p>
+<pre><code>缓存、限流、降级
+缓存：提升系统响应速度、增大系统能够处理的容量
+降级：当服务出问题或者影响到核心流程的性能则需要暂时屏蔽掉，待高峰或者问题解决后再打开
+限流：限流的目的是通过对并发访问/请求进行限速或者一个时间窗口内的的请求进行限速来保护系统，一旦达到限制速率则可以拒绝服务
+</code></pre><h3 id="jmeter使用"><a href="#jmeter使用" class="headerlink" title="jmeter使用"></a>jmeter使用</h3><p><strong>第一步解压工具</strong></p>
+<p><strong>第二步开始使用</strong><br>点击jmeter.bat启动</p>
+<p><strong>第三步添加线程组</strong></p>
+<pre><code>线程数：
+ramp-up时间： 在多长时间内发请求
+循环次数
+</code></pre><p><strong>第四步添加HTTP请求</strong><br>之后就是和POSTMAN如出一辙了</p>
+<h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><p>既然这个工具可以发很多请求，那不是我们可以对同一个服务器不停的发送很多请求，有没有什么措施来避免这种攻击</p>
+<h3 id="大佬回答"><a href="#大佬回答" class="headerlink" title="大佬回答"></a>大佬回答</h3><p>雪茄:是的<br>雪茄:一种是IP白名单<br>雪茄:解决方案有很多<br>雪茄:<strong>IP白名单设置，验证码技术，接口频率设置等等</strong><br>雪茄:例如微信开放平台的接口，支付宝的接口，他的接口都是有说明的，你调用过快的话是会直接返回错误的<br>雪茄:所以我们在以后设计接口的时候也要注意这些风控上的问题，内部接口（admin管理系统的接口） 和前台面向用户的接口设计的安全要求是完全不一样的</p>
+<h2 id="星期六（10月19日）"><a href="#星期六（10月19日）" class="headerlink" title="星期六（10月19日）"></a>星期六（10月19日）</h2><h3 id="异步消息队列"><a href="#异步消息队列" class="headerlink" title="异步消息队列"></a>异步消息队列</h3><p>直接来看概念模型吧</p>
+<h3 id="概念模型"><a href="#概念模型" class="headerlink" title="概念模型"></a>概念模型</h3><h3 id="Producer"><a href="#Producer" class="headerlink" title="Producer:"></a>Producer:</h3><p>消息生成者，负责消息产生，由业务系统负责产生。</p>
+<h3 id="Consumer"><a href="#Consumer" class="headerlink" title="Consumer:"></a>Consumer:</h3><p>消息消费者，负责消费消费，由后台业务系统负责异步消费。</p>
+<h3 id="Topic：消息的逻辑管理单位。"><a href="#Topic：消息的逻辑管理单位。" class="headerlink" title="Topic：消息的逻辑管理单位。"></a>Topic：消息的逻辑管理单位。</h3><p>这三者是RocketMq中最最基本的概念。Producer是消息的生产者。Consumer是消息的消费者。消息通过Topic进行传递。Topic存放的是消息的逻辑地址。<br>具体来说是Producer将消息发往具体的Topic。Consumer订阅Topic，主动拉取或被动接受消息<br>注意：一个Producer可以发送消息给多个topic，一个topic可以接受多个producer的消息<br>可以看图：<br><a href="https://imgchr.com/i/KKc3hF" target="_blank" rel="external"><img src="https://s2.ax1x.com/2019/10/20/KKc3hF.jpg" alt="KKc3hF.jpg"></a></p>
+<h3 id="Broker"><a href="#Broker" class="headerlink" title="Broker:"></a>Broker:</h3><p>消息中转角色，负责存储消息，转发消息，一般也称为server<br>可以理解为一个存放消息的服务，里面可以有多个topic</p>
+<h3 id="MessageQueue："><a href="#MessageQueue：" class="headerlink" title="MessageQueue："></a>MessageQueue：</h3><p>消息的物理管理单位，一个Topic下有多个Queue，默认一个topic创建时会创建四个messageQueue</p>
+<h3 id="ConsumerGroup："><a href="#ConsumerGroup：" class="headerlink" title="ConsumerGroup："></a>ConsumerGroup：</h3><p>具有同样逻辑消费同样消息的consumer，可以归并为一个group</p>
+<h3 id="ProducerGroup："><a href="#ProducerGroup：" class="headerlink" title="ProducerGroup："></a>ProducerGroup：</h3><p>通常具有同样属性的一些producer可以归为同一个group。<br>同样属性是指：发送同样topic的消息</p>
+<h3 id="NameServer"><a href="#NameServer" class="headerlink" title="NameServer"></a>NameServer</h3><p>注册中心<br>作用：</p>
+<pre><code>每个broker启动的时候会向namesrv注册
+Producer发送消息的时候根据topic获取路由到broker的信息
+Consumer根据topic到namesrv获取topic的路由到broker的信息
+</code></pre><p><strong>注意事项：这笔坑有点多要注意</strong></p>
+<h3 id="开始使用MQ"><a href="#开始使用MQ" class="headerlink" title="开始使用MQ"></a>开始使用MQ</h3><p>其实底层就是JAVA的线程再跑。知道这个我们理解MQ就有一些底气了<br><strong>第一步下载</strong><br>下载地址：官网地址：<a href="http://rocketmq.apache.org/release_notes/release-notes-4.4.0/" target="_blank" rel="external">http://rocketmq.apache.org/release_notes/release-notes-4.4.0/</a></p>
+<p><strong>第二步配置环境变量</strong><br>配置一个ROCKETMQ_HOME就是你的地址</p>
+<p><strong>第三步修改配置</strong><br>修改runbroker 和 mqnamesrv的 内存大小<br>runbroker.cmd<br>runservcer.cmd</p>
+<pre><code>set &quot;JAVA_OPT=%JAVA_OPT% -server -Xms512m -Xmx512m -Xmn256m&quot;
+</code></pre><p><strong>第四步启动</strong><br>先启动注册中心namesrv</p>
+<pre><code>start mqnamesrv.cmd
+</code></pre><p>然后启动broker（server）<br>start mqbroker.cmd -n 127.0.0.1:9876 autoCreateTopicEnable=true</p>
+<p>jps -v 产看是否启动，<br>经常出问题我要经常重启这笔= =</p>
+<h3 id="项目中使用："><a href="#项目中使用：" class="headerlink" title="项目中使用："></a>项目中使用：</h3><p><strong>导包</strong></p>
+<pre><code>&lt;dependency&gt;
+    &lt;groupId&gt;org.apache.rocketmq&lt;/groupId&gt;
+    &lt;artifactId&gt;rocketmq-client&lt;/artifactId&gt;
+    &lt;version&gt;4.4.0&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre><p><strong>生产者</strong></p>
+<pre><code>public class MqProducer {
+  public static void main(String[] args) throws MQClientException {
+    DefaultMQProducer producer = new DefaultMQProducer(&quot;producerA&quot;);
+    producer.setNamesrvAddr(&quot;localhost:9876&quot;);
+    producer.start();
+    System.out.println(&quot;mq消息生成者启动成功！ &quot;);
+    HashMap&lt;String, Object&gt; hashMap = new HashMap&lt;&gt;();
+    hashMap.put(&quot;amount&quot;,10);
+    hashMap.put(&quot;promoId&quot;,1);
+    String jsonString = JSON.toJSONString(hashMap);
+    Message message = new Message(&quot;topicA&quot;, &quot;p&quot;, jsonString.getBytes(Charset.forName(&quot;utf-8&quot;)));
+    SendResult sendResult = null;
+    try {
+        sendResult = producer.send(message);
+    } catch (RemotingException e) {
+        e.printStackTrace();
+    } catch (MQBrokerException e) {
+        e.printStackTrace();
+    } catch (InterruptedException e) {
+        e.printStackTrace();
+    }
+    System.out.println(JSON.toJSONString(sendResult));
+  }
+}
+</code></pre><p><strong>消费者</strong></p>
+<pre><code>public class MqConsumer {
+  public static void main(String[] args) throws MQClientException {
+    DefaultMQPushConsumer consumer = new DefaultMQPushConsumer(&quot;consumer&quot;);
+    consumer.setNamesrvAddr(&quot;localhost:9876&quot;);
+    consumer.subscribe(&quot;topicA&quot;,&quot;*&quot;);
+    consumer.registerMessageListener(new MessageListenerConcurrently() {
+      @Override
+      public ConsumeConcurrentlyStatus consumeMessage(List&lt;MessageExt&gt; msgs, ConsumeConcurrentlyContext context) {
+        MessageExt ext = msgs.get(0);
+        byte[] body = ext.getBody();
+        String receiveString = new String(body);
+        HashMap&lt;String,Object&gt; hashMap = JSON.parseObject(receiveString, HashMap.class);
+        Integer promoId =(Integer)hashMap.get(&quot;promoId&quot;);
+        Integer amount =(Integer)hashMap.get(&quot;amount&quot;);
+        System.out.println(&quot;promoId : &quot; + promoId + &quot;, amount: &quot; + amount);
+        return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;
+      }
+    });
+    consumer.start();
+  }
+}
+</code></pre><p><strong><em>填坑部分</em></strong></p>
+<h2 id="星期一（10月14日）-1"><a href="#星期一（10月14日）-1" class="headerlink" title="星期一（10月14日）"></a>星期一（10月14日）</h2><p>今天好像没怎么进入状态没问题</p>
+<h2 id="星期二（10月15日）-1"><a href="#星期二（10月15日）-1" class="headerlink" title="星期二（10月15日）"></a>星期二（10月15日）</h2><p>1.使用mybatisplus 发现自定义的方法找不到<br>记得去加载mapper.xml的扫描</p>
+<pre><code>mybatis-plus:
+  mapper-locations: classpath*:com/stylefeng/guns/rest/**/mapping/*.xml
+</code></pre><p>mybatis 和 mybatisPlus都会出现这个问题！！！</p>
+<p>然后还要注意主方法上的：</p>
+<pre><code>@MapperScan(basePackages =&quot;com.cskaoyan.mtime.persistence.dao&quot;)
+</code></pre><p>这里扫描的是<strong>接口</strong>也就是XXXmapper.java的文件</p>
+<p>发现还是还是报错找不到mapper对应的方法<br>然后看到我的<strong>target的文件夹</strong>下，发现根本没有生成mapper.xml的文件，突然恍然大悟。这里的原因肯定是我没有吧mapper.xml放在resources目录下。但是我看到guns也没有放但是居然可以把mapper文件放到resource里面，这就很奇怪了。<br>后来发现gunsTM 偷偷在guns-parent里面配置了一个东西，就可以把mapper放进去了：</p>
+<pre><code>&lt;resources&gt;
+    &lt;resource&gt;
+        &lt;directory&gt;src/main/resources&lt;/directory&gt;
+        &lt;filtering&gt;true&lt;/filtering&gt;
+    &lt;/resource&gt;
+    &lt;resource&gt;
+        &lt;directory&gt;src/main/java&lt;/directory&gt;
+        &lt;includes&gt;
+            &lt;include&gt;**/*.xml&lt;/include&gt;
+        &lt;/includes&gt;
+    &lt;/resource&gt;
+&lt;/resources&gt;
+</code></pre><p>这里看到的<a href="https://segmentfault.com/q/1010000013418822" target="_blank" rel="external">传送门</a><br>发现还不行，我就纳闷了，感觉是就是这个问题了</p>
+<pre><code>mapper-locations: classpath*:com/cskaoyan/mtime/persistence/dao/mapping/*.xml
+</code></pre><p>最后经过我细致的观察发现：这里TM的路径/写成了.</p>
+<pre><code>mapper-locations: classpath*:com.cskaoyan.mtime.persistence.dao.mapping.*.xml
+</code></pre><p>找不到一定要先检查target里面有没有！</p>
+<p>2.关于set get方法的坑<br>get set方法在如果是Integer的类型时，传给他的是 int 类型就会set不到，依旧还是原来的值，也不会报错。需要写成这样</p>
+<pre><code>mtimeCinemaT.setBrandId(Integer.valueOf(1));
+</code></pre><p>可以大胆推测所有的包装类都有这个问题。</p>
+<p>3.linux 解决端口占用<br><a href="https://blog.csdn.net/weixin_43046653/article/details/85324852" target="_blank" rel="external">https://blog.csdn.net/weixin_43046653/article/details/85324852</a><br>redis在linux上使用<br><a href="https://blog.csdn.net/txj236/article/details/81413407" target="_blank" rel="external">https://blog.csdn.net/txj236/article/details/81413407</a></p>
+<p>4.vim搜索<br>命令模式下“/”<br>按 n 查找下一个<br><a href="https://www.cnblogs.com/z-x-y/p/9198481.html" target="_blank" rel="external">https://www.cnblogs.com/z-x-y/p/9198481.html</a></p>
+<p>5.连不上远程的redis<br>‘protected-mode no’<br>Bad directive or wrong number of arguments<br><strong>旧版的redis不需要设置。 直接连</strong></p>
+<p>6.本地登不上redis 杀死进程，因为redis还开着<br><a href="https://blog.csdn.net/y201314an/article/details/89856145" target="_blank" rel="external">https://blog.csdn.net/y201314an/article/details/89856145</a></p>
+<h2 id="星期三（10月16日）-1"><a href="#星期三（10月16日）-1" class="headerlink" title="星期三（10月16日）"></a>星期三（10月16日）</h2><p>1.分布式锁</p>
+<p>2.如何把项目根目录搞出来<br><a href="http://www.pianshen.com/article/8894680128/" target="_blank" rel="external">http://www.pianshen.com/article/8894680128/</a></p>
+<h2 id="星期四（10月17日）-1"><a href="#星期四（10月17日）-1" class="headerlink" title="星期四（10月17日）"></a>星期四（10月17日）</h2><p>1.nuxt是什么<br>炸了</p>
+<p>2.502 Bad Gateway<br>反向代理失效，网关没找到，说明nginx没有正常开启，一般两个问题，一个防火墙一个是中文路径</p>
+<p>3.如何url生成二维码<br><a href="https://blog.csdn.net/baidu_41660182/article/details/90635771" target="_blank" rel="external">https://blog.csdn.net/baidu_41660182/article/details/90635771</a><br>导包</p>
+<pre><code>&lt;!-- https://mvnrepository.com/artifact/com.google.zxing/core --&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;com.google.zxing&lt;/groupId&gt;
+    &lt;artifactId&gt;core&lt;/artifactId&gt;
+    &lt;version&gt;3.3.0&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre><p>4.mybatisPlus的一个方法的bug<br>moocOrderTMapper.selectById()的问题 必须要组件才能使用这个方法<br>同意没有组件所有的id的方法都不行 update delete</p>
+<p>5.attempted to return null from a method with a primitive return type (int)<br>这个问题出现在手写mapper.xml<br>明明是update 非要写select标签也是没谁了。</p>
+<h2 id="星期五（10月18日）-1"><a href="#星期五（10月18日）-1" class="headerlink" title="星期五（10月18日）"></a>星期五（10月18日）</h2><p>1.前端响应式页面  使用vue来做。<br>发现一个页面同时网页显示和客户端显示，性能还不丢失是非常困难的</p>
+<p>2.nginx闪黑框没启动<br>中文路径问题<br>防火墙问题</p>
+<p>3.让.gitIgnore立即生效<br><a href="https://www.cnblogs.com/AliliWl/p/7880243.html" target="_blank" rel="external">https://www.cnblogs.com/AliliWl/p/7880243.html</a></p>
+<pre><code>git rm -r --cached . // 删除本地缓存
+git add . // 添加要提交的文件
+git commit -m &apos;update .gitignore&apos; // 更新本地的缓存
+</code></pre><p>4.spring 定时任务<br>这个介绍挺详细的<br><a href="https://www.cnblogs.com/mmzs/p/10161936.html" target="_blank" rel="external">https://www.cnblogs.com/mmzs/p/10161936.html</a></p>
+<pre><code>一、基于注解(@Scheduled)
+二、基于接口（SchedulingConfigurer）前者相信大家都很熟悉，但是实际使用中我们往往想从数据库中读取指定时间来动态执行定时任务，这时候基于接口的定时任务就派上用场了。
+三、基于注解设定多线程定时任务
+</code></pre><p>5.sql子查询错误<br> You can’t specify target table ‘mtime_promo_stock’ for update in FROM clause<br><a href="https://www.cnblogs.com/linnuo/p/5879259.html" target="_blank" rel="external">https://www.cnblogs.com/linnuo/p/5879259.html</a><br>解决办法：将select出的结果再通过中间表select一遍，这样就规避了错误。注意，这个问题只出现于mysql，sql server和oracle不会出现此问题。<br><a href="https://www.cnblogs.com/winclpt/articles/5777636.html" target="_blank" rel="external">https://www.cnblogs.com/winclpt/articles/5777636.html</a></p>
+<pre><code>update mtime_promo_stock
+set stock = stock - 1
+where 1 &lt; (
+select stock from
+(select stock from mtime_promo_stock where promo_id = 1 )
+mtime_promo_stock
+)
+AND promo_id = 1
+</code></pre><p>但是这个写法有点蠢，不需要这样写，直接就</p>
+<pre><code>update mtime_promo_stock
+set stock = stock - 1
+where stock &gt; 1
+AND promo_id = 1
+</code></pre><p>就可以了，因为是同一张表。所以可以直接这样写，如果是多张表就可以先找在过来更新</p>
+<p>6.插入数据的时候使用mybatis注意<br>当主键不是数字，不能自增的时候，要自己写主键然后再插入，而不能直接insert进去，以为会自增，这个问题出在太粗心了，主键还是UUID的时候。<br>而且微服务比较难找到，这些一定要注意，细心。</p>
+<p>7.发号器的原理<br>雪花算法的思想，以及简单实现：<br><a href="https://blog.csdn.net/xlgen157387/article/details/80053021" target="_blank" rel="external">https://blog.csdn.net/xlgen157387/article/details/80053021</a><br>根据时间戳，机器，以及数据生成的。</p>
+<p>8.nuxt的移动端适配<br><a href="https://www.cnblogs.com/lewis-messi/p/10723397.html" target="_blank" rel="external">https://www.cnblogs.com/lewis-messi/p/10723397.html</a><br>一开始说使用flexible</p>
+<pre><code>https://github.com/amfe/lib-flexible
+</code></pre><p>但是其实使用起来还是很僵硬的，而且这里的前端也不是我写的，只是想把之前的网页端的转成手机端的罢了。<br>之后开始用elementUI去做：<br><a href="https://www.cnblogs.com/shenyf/p/8361049.html" target="_blank" rel="external">nuxt引入elementUI</a><br>发现在已经写好的vue里面改太难了。最终并没有发现一个两全其美的办法，还是先把后端搞好吧，毕竟后端才是本分</p>
+<p>9.关于redis的语法，在Java中使用的时候，修改值不要set 要icr decrBy，<strong>做原子性的操作</strong><br>就第一次setnx。</p>
+<p>10.分布式秒杀<br><a href="https://my.oschina.net/u/3768341/blog/3114923" target="_blank" rel="external">https://my.oschina.net/u/3768341/blog/3114923</a></p>
+<p>分布式调度elasticjob：<br><a href="http://elasticjob.io/index_zh.html" target="_blank" rel="external">http://elasticjob.io/index_zh.html</a></p>
+<h2 id="星期六（10月19日）-1"><a href="#星期六（10月19日）-1" class="headerlink" title="星期六（10月19日）"></a>星期六（10月19日）</h2><p>1.分布式监控系统，zabbix在百科上找到的</p>
+<pre><code>https://baike.baidu.com/item/zabbix/6780368?fr=aladdin
+
+zabbix（[`zæbiks]）是一个基于WEB界面的提供分布式系统监视以及网络监视功能的企业级的开源解决方案。
+zabbix能监视各种网络参数，保证服务器系统的安全运营；并提供灵活的通知机制以让系统管理员快速定位/解决存在的各种问题。
+zabbix由2部分构成，zabbix server与可选组件zabbix agent。
+zabbix server可以通过SNMP，zabbix agent，ping，端口监视等方法提供对远程服务器/网络状态的监视，数据收集等功能，它可以运行在Linux，Solaris，HP-UX，AIX，Free BSD，Open BSD，OS X等平台上。
+</code></pre><p>要想搭建一个Zabbix的工作环境，需要从服务器入手。与服务器通信，管理员需要使用一个Zabbix前端界面，与Zabbix服务器和数据库进行通信。三个关键（<strong>界面、服务器和数据库</strong>）可以安装在同一台服务器上，但是如果你拥有一个更大更复杂的环境，将它们安装在不同的主机上也是一个选项。Zabbix服务器能够直接监控到同一网络中的设备，如果其他网络的设备也需要被监控，那还需要一台Zabbix代理服务器。 [2]</p>
+<p>2.发现win+r开始运行以后，再次打开就没有任何历史记录了<br><a href="https://www.cnblogs.com/wycc/p/9263553.html" target="_blank" rel="external">https://www.cnblogs.com/wycc/p/9263553.html</a><br>就是在隐私里面-》 设置-隐私-常规-允许Windows跟随应用启动，以改进开始和搜索结果，把这个勾选上.</p>
+<p>3.全局配置中心<br>xdiamond(已经不再维护了)<br><a href="https://github.com/hengyunabc/xdiamond" target="_blank" rel="external">https://github.com/hengyunabc/xdiamond</a><br>使用介绍：<br><a href="https://blog.csdn.net/wufaliang003/article/details/77852115" target="_blank" rel="external">https://blog.csdn.net/wufaliang003/article/details/77852115</a></p>
+<p>4.图形化控制rocketMq<br>中文的说明：<a href="https://github.com/apache/rocketmq-externals/blob/master/rocketmq-console/doc/1_0_0/UserGuide_CN.md" target="_blank" rel="external">rocketmq-console</a></p>
+<p>5.使用rocketMQ<br>一开始就拉闸<br>需要配置环境变量<br><a href="https://www.jb51.net/article/163544.htm" target="_blank" rel="external">https://www.jb51.net/article/163544.htm</a><br>然后：<br>找不到或无法加载主类 org.apache.rocketmq.namesrv.NamesrvStartup<br>网上的办法都没得解决草<br>最后发现，压缩出来只有bin文件其他都没有，然后就拉闸了要细心啊</p>
+<p>开始使用ROCKETMQ的一些bug的解决:<br><a href="http://www.manongjc.com/article/18270.html" target="_blank" rel="external">http://www.manongjc.com/article/18270.html</a></p>
+<h2 id="星期日（10月20日）"><a href="#星期日（10月20日）" class="headerlink" title="星期日（10月20日）"></a>星期日（10月20日）</h2><p>1.什么叫单点登录SSO<br>单点登录（Single Sign On），简称为 SSO，是目前比较流行的企业业务整合的解决方案之一。SSO的定义是在多个应用系统中，用户只需要登录一次就可以访问所有相互信任的应用系统。<br>原来单点登录并不是说只能一个账户登陆。说的是可以访问多个服务。<br>那么对应着我之前理解的单点的意思是，一次只能一个账户登陆。这就理解错了= =这种就好像QQ只能电脑同时只能登陆一个。后登陆的会把之前登陆的挤掉。这个问题2010年就已经有人想解决了。说明是一个比较简单的问题了。就使用session或者listener就好了。</p>
+<p>2.分布式锁<br>目前几乎很多大型网站及应用都是分布式部署的，分布式场景中的数据一致性问题一直是一个比较重要的话题。分布式的CAP理论告诉我们“任何一个分布式系统都无法同时满足<strong>一致性（Consistency）</strong>、<strong>可用性（Availability）</strong>和<strong>分区容错性（Partition tolerance）</strong>，最多只能同时满足两项。”所以，很多系统在设计之初就要对这三者做出取舍。在互联网领域的绝大多数的场景中，都需要牺牲强一致性来换取系统的高可用性，系统往往只需要保证“最终一致性”，只要这个最终时间是在用户可以接受的范围内即可。<br>三种常见的分布式锁</p>
+<pre><code>https://blog.csdn.net/wuzhiwei549/article/details/80692278
+</code></pre><p>数据库<br>缓存（redis）<br>Zookeeper(Curator)</p>
+<p>3.nuxt是什么<br>2016 年 10 月 25 日，zeit.co 背后的团队对外发布了 Next.js，一个 React 的服务端渲染应用框架。几小时后，与 Next.js 异曲同工，一个基于 Vue.js 的服务端渲染应用框架应运而生，我们称之为：Nuxt.js。<br>感觉nuxt官网感觉不是很快不知道是不是不在国内</p>
+<h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><p>最近真的接触了很多工具，也听说了很多工具，到底应该把一个工具用透还是同时把多个工具同时用上。真的有太多东西可以学习啦，编程其实并不简单。我觉得<strong>先把东西会用是最基础的</strong>，想起大学的导师说的，会一样东西很简单，但是要做出成果很难。<br>虽然身体依旧欠佳，但是就这样吧。总会好的，必须要实现自己的价值</p>
+
+    </div>
+
+    
+    
+    
+        
+      
+
+      <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2019/10/13/Java总结（十六）/" rel="next" title="Java总结（十六）">
+                  <i class="fa fa-chevron-left"></i> Java总结（十六）
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+    
+    <div class="comments" id="comments"></div>
+  
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前要"><span class="nav-number">1.</span> <span class="nav-text">前要</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#星期一（10月14日）"><span class="nav-number">2.</span> <span class="nav-text">星期一（10月14日）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#JWT"><span class="nav-number">2.1.</span> <span class="nav-text">JWT</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JWT的两个功能"><span class="nav-number">2.2.</span> <span class="nav-text">JWT的两个功能</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#单点登录的问题"><span class="nav-number">2.3.</span> <span class="nav-text">单点登录的问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Token"><span class="nav-number">2.4.</span> <span class="nav-text">Token</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#用Token的好处"><span class="nav-number">2.5.</span> <span class="nav-text">用Token的好处</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JWT-token的基本格式"><span class="nav-number">2.6.</span> <span class="nav-text">JWT token的基本格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#guns整合JWT签名机制"><span class="nav-number">2.7.</span> <span class="nav-text">guns整合JWT签名机制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第一步导包guns本来就有"><span class="nav-number">2.8.</span> <span class="nav-text">第一步导包guns本来就有</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第二步开启配置"><span class="nav-number">2.9.</span> <span class="nav-text">第二步开启配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第二步去登录获取钥匙"><span class="nav-number">2.10.</span> <span class="nav-text">第二步去登录获取钥匙</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用token"><span class="nav-number">2.11.</span> <span class="nav-text">使用token</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用token-—-不带数据签名（没带消息内容）"><span class="nav-number">2.12.</span> <span class="nav-text">使用token —- 不带数据签名（没带消息内容）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用token-—-带上数据签名"><span class="nav-number">2.13.</span> <span class="nav-text">使用token —- 带上数据签名</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#全局异常处理"><span class="nav-number">2.14.</span> <span class="nav-text">全局异常处理</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#星期二（10月15日）"><span class="nav-number">3.</span> <span class="nav-text">星期二（10月15日）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#redis"><span class="nav-number">3.1.</span> <span class="nav-text">redis</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#存储策略"><span class="nav-number">3.2.</span> <span class="nav-text">存储策略</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RDB"><span class="nav-number">3.3.</span> <span class="nav-text">RDB</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AOF"><span class="nav-number">3.4.</span> <span class="nav-text">AOF</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#redis的使用"><span class="nav-number">3.5.</span> <span class="nav-text">redis的使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基本语法"><span class="nav-number">3.6.</span> <span class="nav-text">基本语法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SELECT-index"><span class="nav-number">3.7.</span> <span class="nav-text">SELECT index</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字符串（value的类型）"><span class="nav-number">3.8.</span> <span class="nav-text">字符串（value的类型）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LIST-表单集合"><span class="nav-number">3.9.</span> <span class="nav-text">LIST 表单集合</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LPUSH"><span class="nav-number">3.10.</span> <span class="nav-text">LPUSH</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LPOP"><span class="nav-number">3.11.</span> <span class="nav-text">LPOP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LLEN"><span class="nav-number">3.12.</span> <span class="nav-text">LLEN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LINDEX"><span class="nav-number">3.13.</span> <span class="nav-text">LINDEX</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LINSERT"><span class="nav-number">3.14.</span> <span class="nav-text">LINSERT</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LPUSHX"><span class="nav-number">3.15.</span> <span class="nav-text">LPUSHX</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LRANGE"><span class="nav-number">3.16.</span> <span class="nav-text">LRANGE</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LREM"><span class="nav-number">3.17.</span> <span class="nav-text">LREM</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LSET"><span class="nav-number">3.18.</span> <span class="nav-text">LSET</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Hash（二维表）"><span class="nav-number">3.19.</span> <span class="nav-text">Hash（二维表）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HSET"><span class="nav-number">3.20.</span> <span class="nav-text">HSET</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HGET"><span class="nav-number">3.21.</span> <span class="nav-text">HGET</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HEXISTS"><span class="nav-number">3.22.</span> <span class="nav-text">HEXISTS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HGETALL"><span class="nav-number">3.23.</span> <span class="nav-text">HGETALL</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HKEYS"><span class="nav-number">3.24.</span> <span class="nav-text">HKEYS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HLEN"><span class="nav-number">3.25.</span> <span class="nav-text">HLEN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HVALS"><span class="nav-number">3.26.</span> <span class="nav-text">HVALS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HINCRBY"><span class="nav-number">3.27.</span> <span class="nav-text">HINCRBY</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HMGET"><span class="nav-number">3.28.</span> <span class="nav-text">HMGET</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HMSET"><span class="nav-number">3.29.</span> <span class="nav-text">HMSET</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HSETNX"><span class="nav-number">3.30.</span> <span class="nav-text">HSETNX</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Set（无序集合）"><span class="nav-number">3.31.</span> <span class="nav-text">Set（无序集合）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SADD"><span class="nav-number">3.32.</span> <span class="nav-text">SADD</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SMEMBERS"><span class="nav-number">3.33.</span> <span class="nav-text">SMEMBERS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SISMEMBER"><span class="nav-number">3.34.</span> <span class="nav-text">SISMEMBER</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SCARD"><span class="nav-number">3.35.</span> <span class="nav-text">SCARD</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SPOP-（弹出并从集合删除）"><span class="nav-number">3.36.</span> <span class="nav-text">SPOP （弹出并从集合删除）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SRANDMEMBER"><span class="nav-number">3.37.</span> <span class="nav-text">SRANDMEMBER</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SINTER"><span class="nav-number">3.38.</span> <span class="nav-text">SINTER</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SINTERSTORE"><span class="nav-number">3.39.</span> <span class="nav-text">SINTERSTORE</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SUNION"><span class="nav-number">3.40.</span> <span class="nav-text">SUNION</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SUNIONSTORE"><span class="nav-number">3.41.</span> <span class="nav-text">SUNIONSTORE</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SDIFF"><span class="nav-number">3.42.</span> <span class="nav-text">SDIFF</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SDIFFSTORE"><span class="nav-number">3.43.</span> <span class="nav-text">SDIFFSTORE</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SMOVE"><span class="nav-number">3.44.</span> <span class="nav-text">SMOVE</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SREM-删除"><span class="nav-number">3.45.</span> <span class="nav-text">SREM 删除</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SortSet有序的集合，它是可以给一个值-赋予一个分值，根据分值来排序"><span class="nav-number">3.46.</span> <span class="nav-text">SortSet有序的集合，它是可以给一个值  赋予一个分值，根据分值来排序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ZADD"><span class="nav-number">3.47.</span> <span class="nav-text">ZADD</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ZCARD"><span class="nav-number">3.48.</span> <span class="nav-text">ZCARD</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ZSCORE"><span class="nav-number">3.49.</span> <span class="nav-text">ZSCORE</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ZCOUNT（闭区间）"><span class="nav-number">3.50.</span> <span class="nav-text">ZCOUNT（闭区间）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ZINCRBY"><span class="nav-number">3.51.</span> <span class="nav-text">ZINCRBY</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ZRANGE"><span class="nav-number">3.52.</span> <span class="nav-text">ZRANGE</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ZRANGEBYSCORE"><span class="nav-number">3.53.</span> <span class="nav-text">ZRANGEBYSCORE</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ZRANK-（排名从0开始）"><span class="nav-number">3.54.</span> <span class="nav-text">ZRANK （排名从0开始）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ZREVRANGE"><span class="nav-number">3.55.</span> <span class="nav-text">ZREVRANGE</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ZREVRANGEBYSCORE"><span class="nav-number">3.56.</span> <span class="nav-text">ZREVRANGEBYSCORE</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ZREVRANK"><span class="nav-number">3.57.</span> <span class="nav-text">ZREVRANK</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ZREM"><span class="nav-number">3.58.</span> <span class="nav-text">ZREM</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ZREMRANGEBYRANK"><span class="nav-number">3.59.</span> <span class="nav-text">ZREMRANGEBYRANK</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ZREMRANGEBYSCORE"><span class="nav-number">3.60.</span> <span class="nav-text">ZREMRANGEBYSCORE</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#项目中使用redis（三步走）"><span class="nav-number">3.61.</span> <span class="nav-text">项目中使用redis（三步走）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#星期三（10月16日）"><span class="nav-number">4.</span> <span class="nav-text">星期三（10月16日）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#阿里的支付-非常简答"><span class="nav-number">4.1.</span> <span class="nav-text">阿里的支付(非常简答)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#微信支付（略有难度）"><span class="nav-number">4.2.</span> <span class="nav-text">微信支付（略有难度）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#星期四（10月17日）"><span class="nav-number">5.</span> <span class="nav-text">星期四（10月17日）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#整合前端nginx解决跨域问题"><span class="nav-number">5.1.</span> <span class="nav-text">整合前端nginx解决跨域问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#星期五（10月18日）"><span class="nav-number">6.</span> <span class="nav-text">星期五（10月18日）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#高并发相关概念介绍"><span class="nav-number">6.1.</span> <span class="nav-text">高并发相关概念介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#QPS（Query-Per-Second）"><span class="nav-number">6.2.</span> <span class="nav-text">QPS（Query Per Second）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TPS（Transaction-Per-Second）"><span class="nav-number">6.3.</span> <span class="nav-text">TPS（Transaction Per Second）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#并发量"><span class="nav-number">6.4.</span> <span class="nav-text">并发量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#响应时间"><span class="nav-number">6.5.</span> <span class="nav-text">响应时间</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#高可用"><span class="nav-number">6.6.</span> <span class="nav-text">高可用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如何设计高并发系统"><span class="nav-number">6.7.</span> <span class="nav-text">如何设计高并发系统</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#jmeter使用"><span class="nav-number">6.8.</span> <span class="nav-text">jmeter使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#问题"><span class="nav-number">6.9.</span> <span class="nav-text">问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#大佬回答"><span class="nav-number">6.10.</span> <span class="nav-text">大佬回答</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#星期六（10月19日）"><span class="nav-number">7.</span> <span class="nav-text">星期六（10月19日）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#异步消息队列"><span class="nav-number">7.1.</span> <span class="nav-text">异步消息队列</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#概念模型"><span class="nav-number">7.2.</span> <span class="nav-text">概念模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Producer"><span class="nav-number">7.3.</span> <span class="nav-text">Producer:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Consumer"><span class="nav-number">7.4.</span> <span class="nav-text">Consumer:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Topic：消息的逻辑管理单位。"><span class="nav-number">7.5.</span> <span class="nav-text">Topic：消息的逻辑管理单位。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Broker"><span class="nav-number">7.6.</span> <span class="nav-text">Broker:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MessageQueue："><span class="nav-number">7.7.</span> <span class="nav-text">MessageQueue：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ConsumerGroup："><span class="nav-number">7.8.</span> <span class="nav-text">ConsumerGroup：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ProducerGroup："><span class="nav-number">7.9.</span> <span class="nav-text">ProducerGroup：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#NameServer"><span class="nav-number">7.10.</span> <span class="nav-text">NameServer</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#开始使用MQ"><span class="nav-number">7.11.</span> <span class="nav-text">开始使用MQ</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#项目中使用："><span class="nav-number">7.12.</span> <span class="nav-text">项目中使用：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#星期一（10月14日）-1"><span class="nav-number">8.</span> <span class="nav-text">星期一（10月14日）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#星期二（10月15日）-1"><span class="nav-number">9.</span> <span class="nav-text">星期二（10月15日）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#星期三（10月16日）-1"><span class="nav-number">10.</span> <span class="nav-text">星期三（10月16日）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#星期四（10月17日）-1"><span class="nav-number">11.</span> <span class="nav-text">星期四（10月17日）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#星期五（10月18日）-1"><span class="nav-number">12.</span> <span class="nav-text">星期五（10月18日）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#星期六（10月19日）-1"><span class="nav-number">13.</span> <span class="nav-text">星期六（10月19日）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#星期日（10月20日）"><span class="nav-number">14.</span> <span class="nav-text">星期日（10月20日）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#最后"><span class="nav-number">15.</span> <span class="nav-text">最后</span></a></li></ol></div>
+        
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/images/head.jpeg"
+      alt="王邸">
+  <p class="site-author-name" itemprop="name">王邸</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">32</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">标签</span>
+        
+      </div>
+    
+  </nav>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">王邸</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.3.8</div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.4.0</div>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+
+
+  <script src="/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.4.0"></script><script src="/js/motion.js?v=7.4.0"></script>
+<script src="/js/schemes/pisces.js?v=7.4.0"></script>
+
+<script src="/js/next-boot.js?v=7.4.0"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+
+<script>
+NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(item => {
+    return GUEST.includes(item);
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: false,
+    appId: 'Fn4BuvoixOxjJAhR79TvaD5M-gzGzoHsz',
+    appKey: '1uspTrSwPqkmSBSUr948WqxE',
+    placeholder: 'Just go go',
+    avatar: 'mm',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: true,
+    lang: '' || 'zh-cn',
+    path: location.pathname
+  });
+}, window.Valine);
+</script>
+
+</body>
+</html>
