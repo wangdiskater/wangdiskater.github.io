@@ -62,7 +62,7 @@
 <meta property="og:site_name" content="路要坚持">
 <meta property="og:description" content="这周开始讲Spring了，讲Spring都是很多没有见过的东西，很多东西都是配置的，目前还不需要懂底层的实现，需要的是知道如何操作，特别是maven。当然Spring也很重要，需要多思考。今天是2019年9月13日星期五，中秋节，在武汉，去了一趟光谷，浏览了一圈武大。现在的年轻人都不行呀，烈日下骑单车就要中暑了。早早地回来，就确定把这周总结写了，虽然只有四天的东西，但是感觉学了好久了，因为东西很多">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-09-14T14:22:22.097Z">
+<meta property="og:updated_time" content="2019-10-26T09:04:07.137Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java总结（十二）">
 <meta name="twitter:description" content="这周开始讲Spring了，讲Spring都是很多没有见过的东西，很多东西都是配置的，目前还不需要懂底层的实现，需要的是知道如何操作，特别是maven。当然Spring也很重要，需要多思考。今天是2019年9月13日星期五，中秋节，在武汉，去了一趟光谷，浏览了一圈武大。现在的年轻人都不行呀，烈日下骑单车就要中暑了。早早地回来，就确定把这周总结写了，虽然只有四天的东西，但是感觉学了好久了，因为东西很多">
@@ -223,11 +223,19 @@
                 
               
 
-              <time title="创建时间：2019-09-14 21:56:43 / 修改时间：22:22:22" itemprop="dateCreated datePublished" datetime="2019-09-14T21:56:43+08:00">2019-09-14</time>
+              <time title="创建时间：2019-09-14 21:56:43" itemprop="dateCreated datePublished" datetime="2019-09-14T21:56:43+08:00">2019-09-14</time>
             </span>
           
             
 
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-10-26 17:04:07" itemprop="dateModified" datetime="2019-10-26T17:04:07+08:00">2019-10-26</time>
+              </span>
             
           
 
@@ -329,7 +337,7 @@ lib目录 maven运行依赖jar包
   &lt;url&gt;http://maven.aliyun.com/nexus/content/groups/public&lt;/url&gt;
 &lt;/mirror&gt;
 </code></pre><p>一般设置阿里的远程仓库，如果阿里没有，就会去中国区的官方仓库下载，为了安全官方仓库下载很慢就对了。</p>
-<p>3.解决jdk1.5问题<br>在 profiles 标签下面添加：</p>
+<p>3.解决jdk1.5问题<br>在 maven的配置文件setting.xml中<br>profiles 标签下面添加：</p>
 <pre><code>&lt;profile&gt;
   &lt;id&gt;jdk-1.8&lt;/id&gt;
   &lt;activation&gt;
@@ -395,7 +403,7 @@ xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xsi:schemaLocati
     &lt;/dependency&gt;
   &lt;/dependencies&gt;
 &lt;/project&gt;
-</code></pre><p><strong>注意事项</strong><br>1.Properties标签，引入其他参数 供其他值使用 表达式为${key}</p>
+</code></pre><p><strong>注意事项</strong><br>1.Properties标签，引入其他参数，供其他值使用，表达式为${key}</p>
 <h3 id="Maven命令-重点"><a href="#Maven命令-重点" class="headerlink" title="Maven命令(重点)"></a>Maven命令(重点)</h3><p>必须要知道每个指令都进行了哪些操作<br><strong>Clean：target文件夹</strong><br>执行 mvn clean命令<br>执行完毕后，会将target目录删除。</p>
 <p><strong>compile：java和resources文件夹</strong><br>执行 mvn compile命令，完成编译操作<br>（默认编译src/main/java，同时会把src/resources下的资源放在编译的输出目录target/classes）<br>执行完毕后，会生成target目录，该目录中存放了编译后的字节码文件。</p>
 <p><strong>test：</strong><br>执行 mvn test命令，完成单元测试操作，src\test\java所有包含@Test注解的方法，如果单元测试执行失败不会执行后续的操作，执行失败原因：类名，包含Test<br>执行完毕后，会在target目录中生成两个文件夹： surefire-reports（测试报告）、test-classes（测试的字节码文件，包括test/resources的资源文件）</p>
@@ -424,8 +432,8 @@ pom包：出现在父子工程中，接下来会简单介绍
 &lt;/dependency&gt;
 </code></pre><p><strong>runtime</strong><br>：runtime依赖在运行和测试系统的时候需要，但在编译的时候不需要。比如：jdbc的驱动包。由于运行时需要所以runtime范围的依赖会被打包。</p>
 <p><strong>test</strong><br>：test范围依赖 在编译和运行时都不需要，它们只有在测试编译和测试运行阶段可用，比如：junit。由于运行时不需要所以test范围依赖不会被打包。就是一开始的情况</p>
-<h3 id="IDEA使用maven"><a href="#IDEA使用maven" class="headerlink" title="IDEA使用maven"></a>IDEA使用maven</h3><p>idea默认会给我们配置一个maven，不过强烈建议使用自己的maven，然后在idea里面配置，这里需要配置两个地方:<br>1.进入settings -&gt; build,execution,deployment -&gt; build tools -&gt; maven中配置：<br>    maven home directory<br>    user settings file<br>    Local repository<br>名字已经表示意思，一定要自己配！不然idea就会找到默认的地方去下载，这样C盘就会爆炸哦<br>2.点击左上角的工具栏： file -&gt; other settings -&gt; other settings for new project:<br>修改的内容和1一样，把这两个地方都修改成自己下载的maven即可。再次强调：<strong>不要用idea给你配的maven</strong></p>
-<h3 id="Maven聚合工程（父子工程-并不推荐使用）"><a href="#Maven聚合工程（父子工程-并不推荐使用）" class="headerlink" title="Maven聚合工程（父子工程,并不推荐使用）"></a>Maven聚合工程（父子工程,并不推荐使用）</h3><p>1.建立一个父module<br>2.鼠标点击一下父module使他选中，然后新建一个module就会新建一个module，上面会多出两行</p>
+<h3 id="IDEA-使用-maven"><a href="#IDEA-使用-maven" class="headerlink" title="IDEA 使用 maven"></a>IDEA 使用 maven</h3><p>idea 默认会给我们配置一个maven，不过强烈建议使用自己的maven，然后在idea里面配置，这里需要配置两个地方:<br>1.进入 settings -&gt; build,execution,deployment -&gt; build tools -&gt; maven中配置：<br>    maven home directory<br>    user settings file<br>    Local repository<br>名字已经表示意思，一定要自己配！不然idea就会找到默认的地方去下载，这样C盘就会爆炸哦<br>2.点击左上角的工具栏： file -&gt; other settings -&gt; other settings for new project:<br>修改的内容和1一样，把这两个地方都修改成自己下载的maven即可。再次强调：<strong>不要用idea给你配的maven</strong></p>
+<h3 id="Maven-聚合工程（父子工程-并不推荐使用）"><a href="#Maven-聚合工程（父子工程-并不推荐使用）" class="headerlink" title="Maven 聚合工程（父子工程,并不推荐使用）"></a>Maven 聚合工程（父子工程,并不推荐使用）</h3><p>1.建立一个父module<br>2.鼠标点击一下父module使他选中，然后新建一个module就会新建一个module，上面会多出两行</p>
 <pre><code>Add as module to
 Parent
 </code></pre><p>3.可以看到子项目的pom文件，有parent节点。<br>4.同时父项目的module里 有新增 module节点</p>
@@ -451,6 +459,7 @@ dao.findUserByName();
 </code></pre><p><strong>I - 接口隔离原则</strong>：</p>
 <p>接口：interface （功能）<br>隔离：分开<br>不同功能的接口，最好放在不同的interface里。<br>一个接口里最好不要集成太多的功能，<br>否则用户去实现该接口会比较麻烦。</p>
 <p><strong> D – 依赖倒置原则：（Spring  DI  IOC APSPECTJ）</strong><br>依赖，具体依赖于抽象，而非抽象依赖于具体。<br>先去设计抽象的DAO  （接口）</p>
+<p><strong>(2019/10/21添加):今天学习了一个叫幂等性的接口设计的模式，说的是不管正确与否返回的结果是一样的，只是实现的内容不一样</strong></p>
 <h3 id="常见的设计模式"><a href="#常见的设计模式" class="headerlink" title="常见的设计模式"></a>常见的设计模式</h3><h3 id="单例模式（Singleton-Pattern）"><a href="#单例模式（Singleton-Pattern）" class="headerlink" title="单例模式（Singleton Pattern）"></a>单例模式（Singleton Pattern）</h3><p><strong>概念</strong><br>何为单例？单一实例。全局只有一个。<br>哪些场合需要用到单例？<br>Servlet<br>ServletContext</p>
 <p><strong>特点（必备！）</strong><br>1、单例类只能有一个实例。（自己创建对象）<br>2、单例类必须自己创建自己的唯一实例。（构造方法私有固定）<br>3、单例类必须给所有其他对象提供这一实例。</p>
 <h3 id="单例的种类（六种，先介绍四种，之后介绍设计模式时候再全部进行罗列）"><a href="#单例的种类（六种，先介绍四种，之后介绍设计模式时候再全部进行罗列）" class="headerlink" title="单例的种类（六种，先介绍四种，之后介绍设计模式时候再全部进行罗列）"></a>单例的种类（六种，先介绍四种，之后介绍设计模式时候再全部进行罗列）</h3><p>懒加载（懒汉模式）<br>立即加载（饿汉模式）</p>
@@ -484,7 +493,7 @@ dao.findUserByName();
   }
 }
 </code></pre><p>优点：多线程下依然是单例<br>缺点：加锁会影响执行效率。</p>
-<p><strong>//线程安全的立即加载（恶汉模式）</strong></p>
+<p><strong>//线程安全的立即加载（饿汉模式）</strong></p>
 <pre><code>public class Singleton3 {
   //1、单例类只能有一个实例。
   static Singleton3 singleton3 = new Singleton3();
@@ -522,7 +531,55 @@ dao.findUserByName();
     }
   }
 }
-</code></pre><h3 id="工厂模式（Factory-Pattern）"><a href="#工厂模式（Factory-Pattern）" class="headerlink" title="工厂模式（Factory Pattern）"></a>工厂模式（Factory Pattern）</h3><p>生成产品的工厂，生产对象<br>在工厂模式中，我们在创建对象时不会对客户端暴露创建逻辑，并且是通过使用一个共同的接口（方法）来指向新创建的对象</p>
+</code></pre><p><strong>双检锁/双重校验锁（DCL，即 double-checked locking）</strong><br>JDK 版本：JDK1.5 起<br>是否 Lazy 初始化：是<br>是否多线程安全：是<br>实现难度：较复杂</p>
+<p>描述：这种方式采用双锁机制，安全且在多线程情况下能保持高性能。<br>getInstance() 的性能对应用程序很关键。<br>实例</p>
+<pre><code>public class Singleton {
+  private volatile static Singleton singleton;
+  private Singleton (){}
+  public static Singleton getSingleton() {
+  if (singleton == null) {
+    synchronized (Singleton.class) {
+      if (singleton == null) {
+          singleton = new Singleton();
+      }
+    }
+  }
+  return singleton;
+  }
+}
+</code></pre><p><strong>6、枚举</strong><br>JDK 版本：JDK1.5 起<br>是否 Lazy 初始化：否<br>是否多线程安全：是<br>实现难度：易</p>
+<p>描述：这种实现方式还没有被广泛采用，但这是实现单例模式的最佳方法。它更简洁，自动支持序列化机制，绝对防止多次实例化。<br>这种方式是 Effective Java 作者 Josh Bloch 提倡的方式，它不仅能避免多线程同步问题，而且还自动支持序列化机制，防止反序列化重新创建新的对象，绝对防止多次实例化。不过，由于 JDK1.5 之后才加入 enum 特性，用这种方式写不免让人感觉生疏，在实际工作中，也很少用。<br>不能通过 reflection attack 来调用私有构造方法。<br>实例</p>
+<pre><code>public enum Singleton {
+  INSTANCE;
+  public void whateverMethod() {
+  }
+}
+</code></pre><p>可以看看这个：</p>
+<pre><code>https://blog.csdn.net/tyn243222791/article/details/77712520
+</code></pre><p>看完豁然开朗，其实就是直接<br>    Singleton singleton = Singleton.INSTANCE;<br>就创建了一个单例了。就只会调用一次Singleton的构造方法。</p>
+<pre><code>// 单例
+public enum BeanContext {
+  Instance;
+  private BeanContext() {
+    System.out.println(&quot;init&quot;);
+  }
+  public void print() {
+    System.out.println(&quot;ffffffffffff&quot;);
+  }
+//测试
+  public static void main(String[] args) {
+    BeanContext b1 = BeanContext.Instance;
+    b1.print();
+    BeanContext b2 = BeanContext.Instance;
+    b2.print();
+    BeanContext b3 = BeanContext.Instance;
+    b3.print();
+    BeanContext b4 = BeanContext.Instance;
+    b4.print();
+  }
+}
+</code></pre><p>打印结果中显示只打印了一次 “init”，说明只初始化了一次该对象；</p>
+<h3 id="工厂模式（Factory-Pattern）"><a href="#工厂模式（Factory-Pattern）" class="headerlink" title="工厂模式（Factory Pattern）"></a>工厂模式（Factory Pattern）</h3><p>生成产品的工厂，生产对象<br>在工厂模式中，我们在创建对象时不会对客户端暴露创建逻辑，并且是通过使用一个共同的接口（方法）来指向新创建的对象</p>
 <h3 id="简单工厂"><a href="#简单工厂" class="headerlink" title="简单工厂"></a>简单工厂</h3><p>通过给定的参数的不同，返回不同的实例。<br>举例：我们想生成不同的动物，写一个动物类，让其他具体的动物来继承</p>
 <pre><code>public class Animal {}
 //继承动物类
@@ -735,9 +792,10 @@ AOP   （切面编程）
 </code></pre><h3 id="IOC"><a href="#IOC" class="headerlink" title="IOC"></a>IOC</h3><p>控制反转的意义<br>控制什么？</p>
 <pre><code>之前是程序自己控制
 之后是通过spring控制
-</code></pre><p>其实之前就是我们自己去new一个对象，之后是通过Spring使用反射去创建对象。学了那么久我们知道一般都有两种方法：<br>1）通过配置文件（pom.xml）去注册实例对象<br>2）通过注解去注册实例对象<br><strong>注</strong>：之前的servlet不就是这样？可以写注解，也可以写web.xml的标签。jsp也是。。。。</p>
+</code></pre><p>其实之前就是我们自己去new一个对象，之后是通过Spring，他自己使用反射去创建对象，我们不用管了。把学了那么久我们知道一般都有两种方法：<br>1）通过配置文件（pom.xml）去注册实例对象<br>2）通过注解去注册实例对象</p>
+<p><strong>注</strong>：之前的servlet不就是这样？可以写注解，也可以写web.xml的标签。jsp也是。。。。</p>
 <h3 id="DI"><a href="#DI" class="headerlink" title="DI"></a>DI</h3><p>Dependency Injection<br>依赖注入<br>谁依赖谁，为什么需要依赖，谁注入谁，注入了什么（这是理解依赖注入的关键）</p>
-<p>谁依赖了谁：应用程序依赖于IoC容器（Spring）<br>为什么要依赖：应用程序需要IoC容器来提供对象需要的外部资源<br>谁注入谁：IoC容器注入应用程序某个对象，应用程序依赖的对象<br>注入了什么：注入某个对象所需要的外部资源（包括对象、资源、常量数据）</p>
+<p>谁依赖了谁：应用程序依赖于IoC容器（Spring）<br>为什么要依赖：应用程序需要IoC容器来提供对象需要的外部资源<br>谁注入谁：IoC容器注入应用程序某个对象，应用程序依赖的对象<br>注入了什么：注入某个对象所需要的外部资源（包括对象、资源、常量数据）<br>注入到哪里？： 注入到spring的容器中</p>
 <p>话不多说，直接开始我们是Spring的例子：一个简单的service + dao的例子<br>dao层：</p>
 <pre><code>UserDao.java
 public interface UserDao {
@@ -1395,7 +1453,7 @@ public class AnnotationTest2 {
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#星期一（0909）"><span class="nav-number">1.</span> <span class="nav-text">星期一（0909）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#maven-（-‘meɪvn-）"><span class="nav-number">1.1.</span> <span class="nav-text">maven （[‘meɪvn]）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#web项目的基础"><span class="nav-number">1.2.</span> <span class="nav-text">web项目的基础</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#项目构建"><span class="nav-number">1.3.</span> <span class="nav-text">项目构建</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#依赖管理"><span class="nav-number">1.4.</span> <span class="nav-text">依赖管理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#开始使用maven！"><span class="nav-number">1.5.</span> <span class="nav-text">开始使用maven！</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Maven的工程结构"><span class="nav-number">1.6.</span> <span class="nav-text">Maven的工程结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Maven的工程创建"><span class="nav-number">1.7.</span> <span class="nav-text">Maven的工程创建</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Maven命令-重点"><span class="nav-number">1.8.</span> <span class="nav-text">Maven命令(重点)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关于依赖的作用范围："><span class="nav-number">1.9.</span> <span class="nav-text">关于依赖的作用范围：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IDEA使用maven"><span class="nav-number">1.10.</span> <span class="nav-text">IDEA使用maven</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Maven聚合工程（父子工程-并不推荐使用）"><span class="nav-number">1.11.</span> <span class="nav-text">Maven聚合工程（父子工程,并不推荐使用）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#聚合工程的作用"><span class="nav-number">1.12.</span> <span class="nav-text">聚合工程的作用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关于maven常见问题："><span class="nav-number">1.13.</span> <span class="nav-text">关于maven常见问题：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#星期二（0910）"><span class="nav-number">2.</span> <span class="nav-text">星期二（0910）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#设计模式的五个原则（solid）"><span class="nav-number">2.1.</span> <span class="nav-text">设计模式的五个原则（solid）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常见的设计模式"><span class="nav-number">2.2.</span> <span class="nav-text">常见的设计模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#单例模式（Singleton-Pattern）"><span class="nav-number">2.3.</span> <span class="nav-text">单例模式（Singleton Pattern）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#单例的种类（六种，先介绍四种，之后介绍设计模式时候再全部进行罗列）"><span class="nav-number">2.4.</span> <span class="nav-text">单例的种类（六种，先介绍四种，之后介绍设计模式时候再全部进行罗列）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#工厂模式（Factory-Pattern）"><span class="nav-number">2.5.</span> <span class="nav-text">工厂模式（Factory Pattern）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#简单工厂"><span class="nav-number">2.6.</span> <span class="nav-text">简单工厂</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#工厂方法"><span class="nav-number">2.7.</span> <span class="nav-text">工厂方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#建造者Builder模式"><span class="nav-number">2.8.</span> <span class="nav-text">建造者Builder模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代理（重点！！！）"><span class="nav-number">2.9.</span> <span class="nav-text">代理（重点！！！）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#动态代理的实现"><span class="nav-number">2.10.</span> <span class="nav-text">动态代理的实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#动态代理的作用"><span class="nav-number">2.11.</span> <span class="nav-text">动态代理的作用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#jdk代理实现"><span class="nav-number">2.12.</span> <span class="nav-text">jdk代理实现</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#星期三（0911）"><span class="nav-number">3.</span> <span class="nav-text">星期三（0911）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#IOC"><span class="nav-number">3.1.</span> <span class="nav-text">IOC</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DI"><span class="nav-number">3.2.</span> <span class="nav-text">DI</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#学习了-IOC-和-DI-最大的感触是什么？"><span class="nav-number">3.3.</span> <span class="nav-text">学习了 IOC 和 DI 最大的感触是什么？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#星期四（0912）"><span class="nav-number">4.</span> <span class="nav-text">星期四（0912）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#bean的实例化的方式"><span class="nav-number">4.1.</span> <span class="nav-text">bean的实例化的方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#无参构造（默认）"><span class="nav-number">4.2.</span> <span class="nav-text">无参构造（默认）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#有参构造"><span class="nav-number">4.3.</span> <span class="nav-text">有参构造</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#bean作用域"><span class="nav-number">4.4.</span> <span class="nav-text">bean作用域</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Bean的生命周期"><span class="nav-number">4.5.</span> <span class="nav-text">Bean的生命周期</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#上代码"><span class="nav-number">4.6.</span> <span class="nav-text">上代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#这里有个很特别的地方一定要说："><span class="nav-number">4.7.</span> <span class="nav-text">这里有个很特别的地方一定要说：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#属性的注入（-property-）"><span class="nav-number">4.8.</span> <span class="nav-text">属性的注入（ property ）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#集合bean"><span class="nav-number">4.9.</span> <span class="nav-text">集合bean</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#注解使用Spring-重点"><span class="nav-number">4.10.</span> <span class="nav-text">注解使用Spring(重点)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Setter方法注入属性"><span class="nav-number">4.11.</span> <span class="nav-text">Setter方法注入属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#属性的依赖注入。"><span class="nav-number">4.12.</span> <span class="nav-text">属性的依赖注入。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#生命周期"><span class="nav-number">4.13.</span> <span class="nav-text">生命周期</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#作用域"><span class="nav-number">4.14.</span> <span class="nav-text">作用域</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#更简便的Test"><span class="nav-number">4.15.</span> <span class="nav-text">更简便的Test</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#动态代理之cglib"><span class="nav-number">4.16.</span> <span class="nav-text">动态代理之cglib</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#这有什么用？"><span class="nav-number">4.17.</span> <span class="nav-text">这有什么用？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#小结"><span class="nav-number">4.18.</span> <span class="nav-text">小结</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#星期一（0909）"><span class="nav-number">1.</span> <span class="nav-text">星期一（0909）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#maven-（-‘meɪvn-）"><span class="nav-number">1.1.</span> <span class="nav-text">maven （[‘meɪvn]）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#web项目的基础"><span class="nav-number">1.2.</span> <span class="nav-text">web项目的基础</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#项目构建"><span class="nav-number">1.3.</span> <span class="nav-text">项目构建</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#依赖管理"><span class="nav-number">1.4.</span> <span class="nav-text">依赖管理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#开始使用maven！"><span class="nav-number">1.5.</span> <span class="nav-text">开始使用maven！</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Maven的工程结构"><span class="nav-number">1.6.</span> <span class="nav-text">Maven的工程结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Maven的工程创建"><span class="nav-number">1.7.</span> <span class="nav-text">Maven的工程创建</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Maven命令-重点"><span class="nav-number">1.8.</span> <span class="nav-text">Maven命令(重点)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关于依赖的作用范围："><span class="nav-number">1.9.</span> <span class="nav-text">关于依赖的作用范围：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IDEA-使用-maven"><span class="nav-number">1.10.</span> <span class="nav-text">IDEA 使用 maven</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Maven-聚合工程（父子工程-并不推荐使用）"><span class="nav-number">1.11.</span> <span class="nav-text">Maven 聚合工程（父子工程,并不推荐使用）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#聚合工程的作用"><span class="nav-number">1.12.</span> <span class="nav-text">聚合工程的作用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关于maven常见问题："><span class="nav-number">1.13.</span> <span class="nav-text">关于maven常见问题：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#星期二（0910）"><span class="nav-number">2.</span> <span class="nav-text">星期二（0910）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#设计模式的五个原则（solid）"><span class="nav-number">2.1.</span> <span class="nav-text">设计模式的五个原则（solid）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常见的设计模式"><span class="nav-number">2.2.</span> <span class="nav-text">常见的设计模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#单例模式（Singleton-Pattern）"><span class="nav-number">2.3.</span> <span class="nav-text">单例模式（Singleton Pattern）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#单例的种类（六种，先介绍四种，之后介绍设计模式时候再全部进行罗列）"><span class="nav-number">2.4.</span> <span class="nav-text">单例的种类（六种，先介绍四种，之后介绍设计模式时候再全部进行罗列）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#工厂模式（Factory-Pattern）"><span class="nav-number">2.5.</span> <span class="nav-text">工厂模式（Factory Pattern）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#简单工厂"><span class="nav-number">2.6.</span> <span class="nav-text">简单工厂</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#工厂方法"><span class="nav-number">2.7.</span> <span class="nav-text">工厂方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#建造者Builder模式"><span class="nav-number">2.8.</span> <span class="nav-text">建造者Builder模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代理（重点！！！）"><span class="nav-number">2.9.</span> <span class="nav-text">代理（重点！！！）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#动态代理的实现"><span class="nav-number">2.10.</span> <span class="nav-text">动态代理的实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#动态代理的作用"><span class="nav-number">2.11.</span> <span class="nav-text">动态代理的作用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#jdk代理实现"><span class="nav-number">2.12.</span> <span class="nav-text">jdk代理实现</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#星期三（0911）"><span class="nav-number">3.</span> <span class="nav-text">星期三（0911）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#IOC"><span class="nav-number">3.1.</span> <span class="nav-text">IOC</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DI"><span class="nav-number">3.2.</span> <span class="nav-text">DI</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#学习了-IOC-和-DI-最大的感触是什么？"><span class="nav-number">3.3.</span> <span class="nav-text">学习了 IOC 和 DI 最大的感触是什么？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#星期四（0912）"><span class="nav-number">4.</span> <span class="nav-text">星期四（0912）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#bean的实例化的方式"><span class="nav-number">4.1.</span> <span class="nav-text">bean的实例化的方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#无参构造（默认）"><span class="nav-number">4.2.</span> <span class="nav-text">无参构造（默认）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#有参构造"><span class="nav-number">4.3.</span> <span class="nav-text">有参构造</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#bean作用域"><span class="nav-number">4.4.</span> <span class="nav-text">bean作用域</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Bean的生命周期"><span class="nav-number">4.5.</span> <span class="nav-text">Bean的生命周期</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#上代码"><span class="nav-number">4.6.</span> <span class="nav-text">上代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#这里有个很特别的地方一定要说："><span class="nav-number">4.7.</span> <span class="nav-text">这里有个很特别的地方一定要说：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#属性的注入（-property-）"><span class="nav-number">4.8.</span> <span class="nav-text">属性的注入（ property ）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#集合bean"><span class="nav-number">4.9.</span> <span class="nav-text">集合bean</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#注解使用Spring-重点"><span class="nav-number">4.10.</span> <span class="nav-text">注解使用Spring(重点)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Setter方法注入属性"><span class="nav-number">4.11.</span> <span class="nav-text">Setter方法注入属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#属性的依赖注入。"><span class="nav-number">4.12.</span> <span class="nav-text">属性的依赖注入。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#生命周期"><span class="nav-number">4.13.</span> <span class="nav-text">生命周期</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#作用域"><span class="nav-number">4.14.</span> <span class="nav-text">作用域</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#更简便的Test"><span class="nav-number">4.15.</span> <span class="nav-text">更简便的Test</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#动态代理之cglib"><span class="nav-number">4.16.</span> <span class="nav-text">动态代理之cglib</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#这有什么用？"><span class="nav-number">4.17.</span> <span class="nav-text">这有什么用？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#小结"><span class="nav-number">4.18.</span> <span class="nav-text">小结</span></a></li></ol></li></ol></div>
         
       </div>
       <!--/noindex-->
@@ -1413,7 +1471,7 @@ public class AnnotationTest2 {
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">32</span>
+          <span class="site-state-item-count">33</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

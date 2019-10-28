@@ -63,7 +63,7 @@
 <meta property="og:description" content="前要本周讲了很多微服务的东西，也说了很多工具。就想之前一个老哥说的，只知道用其实我们并不知道原理是什么，很多bug都调试半天调试不出来，重启服务器就好了。学习就是逆水行舟，不进则退。所以还要加油知识部分星期一（10月14日）JWT简单说就是一个权限的控制， 但是和shiro不同的是，shiro针对的是一个系统的不同操作的认证和授权。而jwt则是相对于分布式系统的实现统一的单点登录而存在的。他虽然说">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://s2.ax1x.com/2019/10/20/KKc3hF.jpg">
-<meta property="og:updated_time" content="2019-10-20T14:17:44.562Z">
+<meta property="og:updated_time" content="2019-10-26T12:23:11.696Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java总结（十七）">
 <meta name="twitter:description" content="前要本周讲了很多微服务的东西，也说了很多工具。就想之前一个老哥说的，只知道用其实我们并不知道原理是什么，很多bug都调试半天调试不出来，重启服务器就好了。学习就是逆水行舟，不进则退。所以还要加油知识部分星期一（10月14日）JWT简单说就是一个权限的控制， 但是和shiro不同的是，shiro针对的是一个系统的不同操作的认证和授权。而jwt则是相对于分布式系统的实现统一的单点登录而存在的。他虽然说">
@@ -225,11 +225,19 @@
                 
               
 
-              <time title="创建时间：2019-10-20 22:17:40 / 修改时间：22:17:44" itemprop="dateCreated datePublished" datetime="2019-10-20T22:17:40+08:00">2019-10-20</time>
+              <time title="创建时间：2019-10-20 22:17:40" itemprop="dateCreated datePublished" datetime="2019-10-20T22:17:40+08:00">2019-10-20</time>
             </span>
           
             
 
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-10-26 20:23:11" itemprop="dateModified" datetime="2019-10-26T20:23:11+08:00">2019-10-26</time>
+              </span>
             
           
 
@@ -791,7 +799,12 @@ set stock = stock - 1
 where stock &gt; 1
 AND promo_id = 1
 </code></pre><p>就可以了，因为是同一张表。所以可以直接这样写，如果是多张表就可以先找在过来更新</p>
-<p>6.插入数据的时候使用mybatis注意<br>当主键不是数字，不能自增的时候，要自己写主键然后再插入，而不能直接insert进去，以为会自增，这个问题出在太粗心了，主键还是UUID的时候。<br>而且微服务比较难找到，这些一定要注意，细心。</p>
+<p>6.插入数据的时候使用mybatis-plus注意</p>
+<p>1.当主键不是数字，不能自增的时候，要自己写主键然后再插入，而不能直接insert进去，以为会自增，这个问题出在太粗心了，主键还是UUID的时候。</p>
+<p>2.当没有主键的时候调用selectById 或者其他的有关组件修改的方法都会报错。看mybatisplus 生成的bean是否有这个注解：</p>
+<pre><code>@TableId(value = &quot;UUID&quot;, type = IdType.AUTO)
+private Integer uuid;
+</code></pre><p>而且微服务比较难找到，这些一定要注意，细心。</p>
 <p>7.发号器的原理<br>雪花算法的思想，以及简单实现：<br><a href="https://blog.csdn.net/xlgen157387/article/details/80053021" target="_blank" rel="external">https://blog.csdn.net/xlgen157387/article/details/80053021</a><br>根据时间戳，机器，以及数据生成的。</p>
 <p>8.nuxt的移动端适配<br><a href="https://www.cnblogs.com/lewis-messi/p/10723397.html" target="_blank" rel="external">https://www.cnblogs.com/lewis-messi/p/10723397.html</a><br>一开始说使用flexible</p>
 <pre><code>https://github.com/amfe/lib-flexible
@@ -817,7 +830,7 @@ zabbix server可以通过SNMP，zabbix agent，ping，端口监视等方法提�
 <pre><code>https://blog.csdn.net/wuzhiwei549/article/details/80692278
 </code></pre><p>数据库<br>缓存（redis）<br>Zookeeper(Curator)</p>
 <p>3.nuxt是什么<br>2016 年 10 月 25 日，zeit.co 背后的团队对外发布了 Next.js，一个 React 的服务端渲染应用框架。几小时后，与 Next.js 异曲同工，一个基于 Vue.js 的服务端渲染应用框架应运而生，我们称之为：Nuxt.js。<br>感觉nuxt官网感觉不是很快不知道是不是不在国内</p>
-<h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><p>最近真的接触了很多工具，也听说了很多工具，到底应该把一个工具用透还是同时把多个工具同时用上。真的有太多东西可以学习啦，编程其实并不简单。我觉得<strong>先把东西会用是最基础的</strong>，想起大学的导师说的，会一样东西很简单，但是要做出成果很难。<br>虽然身体依旧欠佳，但是就这样吧。总会好的，必须要实现自己的价值</p>
+<h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><p>最近真的接触了很多工具，也听说了很多工具，到底应该把一个工具用透还是同时把多个工具同时用上。真的有太多东西可以学习啦，编程其实并不简单。我觉得<strong>先把东西会用是最基础的，然而只看看了解原理是没有什么卵用的</strong>，想起大学的导师说的，会一样东西很简单，但是要做出成果很难。<br>虽然身体依旧欠佳，但是就这样吧。总会好的，必须要实现自己的价值</p>
 
     </div>
 
@@ -843,6 +856,10 @@ zabbix server可以通过SNMP，zabbix agent，ping，端口监视等方法提�
             <span class="post-nav-divider"></span>
 
             <div class="post-nav-prev post-nav-item">
+              
+                <a href="/2019/10/28/Java总结（十八）/" rel="prev" title="Java总结（十八）">
+                  Java总结（十八） <i class="fa fa-chevron-right"></i>
+                </a>
               
             </div>
           </div>
@@ -912,7 +929,7 @@ zabbix server可以通过SNMP，zabbix agent，ping，端口监视等方法提�
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">32</span>
+          <span class="site-state-item-count">33</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
