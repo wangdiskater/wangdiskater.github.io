@@ -62,7 +62,7 @@
 <meta property="og:site_name" content="路要坚持">
 <meta property="og:description" content="线程的通讯，阻塞队列（BlockingQue），生产者消费者问题，线程池(Executor)，定时任务，网络编程（UTP传输（DatagramSocket，DatagramPacket）,TCP（Socket，ServerSocket））,反射（重点）,注解，GC回收机制。接下来先讲数据库的一些操作和原理，然后讲了一点JDBC的东西。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-10-26T08:40:54.633Z">
+<meta property="og:updated_time" content="2019-11-03T03:11:03.634Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java总结（六）上">
 <meta name="twitter:description" content="线程的通讯，阻塞队列（BlockingQue），生产者消费者问题，线程池(Executor)，定时任务，网络编程（UTP传输（DatagramSocket，DatagramPacket）,TCP（Socket，ServerSocket））,反射（重点）,注解，GC回收机制。接下来先讲数据库的一些操作和原理，然后讲了一点JDBC的东西。">
@@ -234,7 +234,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-10-26 16:40:54" itemprop="dateModified" datetime="2019-10-26T16:40:54+08:00">2019-10-26</time>
+                <time title="修改时间：2019-11-03 11:11:03" itemprop="dateModified" datetime="2019-11-03T11:11:03+08:00">2019-11-03</time>
               </span>
             
           
@@ -1068,7 +1068,7 @@ public @interface Deprecated {
 <p>RetentionPolicy</p>
 <pre><code>1.SOURCE:在源文件中有效（即源文件保留）
 2.CLASS:在class文件中有效（即class保留）
-3.RUNTIME:在运行时有效（即运行时保留
+3.RUNTIME:在运行时有效（即运行时保留，一般我们的AOP都是RUNTIME）
 </code></pre><p>明天我们将来介绍一下到底怎么用注解–&gt;自定义注解</p>
 <h2 id="星期三-7-31"><a href="#星期三-7-31" class="headerlink" title="星期三(7.31)"></a>星期三(7.31)</h2><h3 id="自定义注解"><a href="#自定义注解" class="headerlink" title="自定义注解"></a>自定义注解</h3><p>1.声明</p>
 <pre><code>定义注解格式：public @interface 注解名 {
@@ -1150,7 +1150,7 @@ public @interface NameConstraint {
     @AgeConstraint(minAge = 6, maxAge = 1000)
     private int age;
 。。。。
-</code></pre><p>3.如何使用的问题；<br>我们刚刚学过反射，但是之前有个东西没有讲，可以通过反射的以下方法，获取到注释的对象，然后在使用即可。类，构造器，属性，方法都有这个方法</p>
+</code></pre><p>3.如何使用的问题；<br>我们刚刚学过反射，但是之前有个东西没有讲，可以通过反射的以下方法，获取到注解的对象，然后在使用即可。类，构造器，属性，方法都有这个方法</p>
 <pre><code>getAnnotation(Class&lt;A&gt; annotationClass) 如果存在该元素的指定类型的注释，则返回这些注释，否则返回 null。
 </code></pre><p>具体代码如下：</p>
 <pre><code>Class&lt;Student&gt; cl = Student.class;
@@ -1351,7 +1351,7 @@ D．一个class只能定义一个constructor
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">33</span>
+          <span class="site-state-item-count">34</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

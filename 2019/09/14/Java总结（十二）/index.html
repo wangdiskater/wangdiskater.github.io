@@ -62,7 +62,7 @@
 <meta property="og:site_name" content="路要坚持">
 <meta property="og:description" content="这周开始讲Spring了，讲Spring都是很多没有见过的东西，很多东西都是配置的，目前还不需要懂底层的实现，需要的是知道如何操作，特别是maven。当然Spring也很重要，需要多思考。今天是2019年9月13日星期五，中秋节，在武汉，去了一趟光谷，浏览了一圈武大。现在的年轻人都不行呀，烈日下骑单车就要中暑了。早早地回来，就确定把这周总结写了，虽然只有四天的东西，但是感觉学了好久了，因为东西很多">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-10-26T09:04:07.137Z">
+<meta property="og:updated_time" content="2019-11-03T13:42:07.246Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java总结（十二）">
 <meta name="twitter:description" content="这周开始讲Spring了，讲Spring都是很多没有见过的东西，很多东西都是配置的，目前还不需要懂底层的实现，需要的是知道如何操作，特别是maven。当然Spring也很重要，需要多思考。今天是2019年9月13日星期五，中秋节，在武汉，去了一趟光谷，浏览了一圈武大。现在的年轻人都不行呀，烈日下骑单车就要中暑了。早早地回来，就确定把这周总结写了，虽然只有四天的东西，但是感觉学了好久了，因为东西很多">
@@ -234,7 +234,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-10-26 17:04:07" itemprop="dateModified" datetime="2019-10-26T17:04:07+08:00">2019-10-26</time>
+                <time title="修改时间：2019-11-03 21:42:07" itemprop="dateModified" datetime="2019-11-03T21:42:07+08:00">2019-11-03</time>
               </span>
             
           
@@ -311,8 +311,7 @@ Global Libraries
 <pre><code>1、一个命令完成构建、运行，方便快捷。
 2、maven对每个构建阶段进行规范，非常有利于大型团队协作开发。
 </code></pre><h3 id="依赖管理"><a href="#依赖管理" class="headerlink" title="依赖管理"></a>依赖管理</h3><p>什么是依赖？一个java项目可能要使用一些第三方的jar包才可以运行，那么我们说这个java项目依赖了这些第三方的jar包。<br>什么是依赖管理？就是对项目所有依赖的jar包进行规范化管理。<br><strong>传统项目的依赖管理</strong><br>传统的项目工程要管理所依赖的jar包完全靠人工进行，程序员从网上下载jar包添加到项目工程中，程序员手工将Hibernate、struts2、spring的jar添加到工程中的WEB-INF/lib目录下。<br>手工拷贝jar包添加到工程中的问题是：</p>
-<pre><code>1、没有对jar包的版本统一管理，容易导致版本冲突（版本需一致）。
-2、从网上找jar包非常不方便，有些jar找不到。
+<pre><code> 2、从网上找jar包非常不方便，有些jar找不到。
 3、jar包添加到工程中导致工程过大。
 </code></pre><p><strong>maven项目的依赖管理</strong><br>maven项目管理所依赖的jar包不需要手动向工程添加jar包，只需要在pom.xml（maven工程的配置文件）添加jar包的坐标，自动从maven仓库中下载jar包、运行<br>使用maven依赖管理添加jar的好处：</p>
 <pre><code>1、通过pom.xml文件对jar包的版本进行统一管理，可避免版本冲突。
@@ -1471,7 +1470,7 @@ public class AnnotationTest2 {
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">33</span>
+          <span class="site-state-item-count">34</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

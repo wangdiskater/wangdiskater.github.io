@@ -1,0 +1,1666 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.3.8">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.4.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.4.0" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.4.0">
+
+<link rel="stylesheet" href="//fonts.proxy.ustclug.org/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.4.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="星期一（10月28日）高并发三大利器缓存缓存这一块，我们课程已经讲了缓存可以加的几个地方，作为后端来说， 1，服务器redis缓存（掌握redis常见的问题以及各种数据结构适用的场景） 2，本地缓存，本地缓存性能 很高，但是缺点也很明显，用的时候一定要慎重 3，Nginx缓存 一般来说就这三层，如果考虑到前端，那么还有一些优化（了解即可）">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java总结（十九）">
+<meta property="og:url" content="http://yoursite.com/2019/11/03/Java总结（十九）/index.html">
+<meta property="og:site_name" content="路要坚持">
+<meta property="og:description" content="星期一（10月28日）高并发三大利器缓存缓存这一块，我们课程已经讲了缓存可以加的几个地方，作为后端来说， 1，服务器redis缓存（掌握redis常见的问题以及各种数据结构适用的场景） 2，本地缓存，本地缓存性能 很高，但是缺点也很明显，用的时候一定要慎重 3，Nginx缓存 一般来说就这三层，如果考虑到前端，那么还有一些优化（了解即可）">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://s2.ax1x.com/2019/11/03/KXJ9u4.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/11/03/KjFcy8.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/11/03/Kjk0nU.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/11/03/KjEKeS.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/11/03/KjNm6K.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/11/03/KXJ9u4.png">
+<meta property="og:updated_time" content="2019-11-03T14:01:46.242Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java总结（十九）">
+<meta name="twitter:description" content="星期一（10月28日）高并发三大利器缓存缓存这一块，我们课程已经讲了缓存可以加的几个地方，作为后端来说， 1，服务器redis缓存（掌握redis常见的问题以及各种数据结构适用的场景） 2，本地缓存，本地缓存性能 很高，但是缺点也很明显，用的时候一定要慎重 3，Nginx缓存 一般来说就这三层，如果考虑到前端，那么还有一些优化（了解即可）">
+<meta name="twitter:image" content="https://s2.ax1x.com/2019/11/03/KXJ9u4.png">
+  <link rel="canonical" href="http://yoursite.com/2019/11/03/Java总结（十九）/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>Java总结（十九） | 路要坚持</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">路要坚持</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+      <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block post">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/03/Java总结（十九）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="王邸">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/head.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="路要坚持">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">Java总结（十九）
+
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-11-03 22:01:19 / 修改时间：22:01:46" itemprop="dateCreated datePublished" datetime="2019-11-03T22:01:19+08:00">2019-11-03</time>
+            </span>
+          
+            
+
+            
+          
+
+          
+            <span id="/2019/11/03/Java总结（十九）/" class="post-meta-item leancloud_visitors" data-flag-title="Java总结（十九）" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2019/11/03/Java总结（十九）/#comments" itemprop="discussionUrl"><span class="post-comments-count valine-comment-count" data-xid="/2019/11/03/Java总结（十九）/" itemprop="commentCount"></span></a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="星期一（10月28日）"><a href="#星期一（10月28日）" class="headerlink" title="星期一（10月28日）"></a>星期一（10月28日）</h2><h3 id="高并发三大利器"><a href="#高并发三大利器" class="headerlink" title="高并发三大利器"></a>高并发三大利器</h3><h3 id="缓存"><a href="#缓存" class="headerlink" title="缓存"></a>缓存</h3><pre><code>缓存这一块，我们课程已经讲了缓存可以加的几个地方，作为后端来说，
+1，服务器redis缓存（掌握redis常见的问题以及各种数据结构适用的场景）
+2，本地缓存，本地缓存性能 很高，但是缺点也很明显，用的时候一定要慎重
+3，Nginx缓存
+</code></pre><p>一般来说就这三层，如果考虑到前端，那么还有一些优化（了解即可）</p><a id="more"></a>
+<pre><code>1，静态资源放在离用户最近的地方，Nginx、CDN节点等
+2，有些页面可以使用页面静态化技术
+3，前端也应该设置相应的缓存
+</code></pre><h3 id="限流"><a href="#限流" class="headerlink" title="限流"></a>限流</h3><pre><code>令牌桶
+</code></pre><h3 id="降级"><a href="#降级" class="headerlink" title="降级"></a>降级</h3><pre><code>Hystrix原理（等下补上）
+</code></pre><h2 id="星期二（10月29日）"><a href="#星期二（10月29日）" class="headerlink" title="星期二（10月29日）"></a>星期二（10月29日）</h2><h2 id="1-接口优化"><a href="#1-接口优化" class="headerlink" title="1.接口优化"></a>1.接口优化</h2><p>我们为什么要使用接口优化：</p>
+<pre><code>例如微信开放平台的接口，支付宝的接口，他的接口都是有说明的，你调用过快的话是会直接返回错误的
+所以我们在以后设计接口的时候也要注意这些风控上的问题，内部接口（admin管理系统的接口） 和前台面向用户的接口设计的安全要求是完全不一样的
+</code></pre><p>解决方案有很多：IP白名单设置，验证码技术，接口频率设置等等</p>
+<h3 id="IP白名单设置"><a href="#IP白名单设置" class="headerlink" title="IP白名单设置"></a>IP白名单设置</h3><h3 id="第一步获取用户真实IP"><a href="#第一步获取用户真实IP" class="headerlink" title="第一步获取用户真实IP"></a>第一步获取用户真实IP</h3><pre><code>String ip = request.getHeader(&quot;x-forwarded-for&quot;);
+ip = (IsIp(ip)) ? ip : request.getHeader(&quot;Proxy-Client-IP&quot;);
+ip = (IsIp(ip)) ? ip : request.getHeader(&quot;WL-Proxy-Client-IP&quot;);
+ip = (IsIp(ip)) ? ip : request.getHeader(&quot;HTTP_CLIENT_IP&quot;);
+ip = (IsIp(ip)) ? ip : request.getHeader(&quot;HTTP_X_FORWARDED_FOR&quot;);
+ip = (IsIp(ip)) ? ip : request.getRemoteAddr();
+
+//对于通过多个代理的情况，第一个IP为客户端真实IP,多个IP按照&apos;,&apos;分割
+if(ip!=null &amp;&amp; ip.length()&gt;15){ //&quot;***.***.***.***&quot;.length() = 15
+    if(ip.indexOf(&quot;,&quot;)&gt;0){
+        ip = ip.substring(0,ip.indexOf(&quot;,&quot;));
+    }
+}
+
+private boolean IsIp(String ip) {
+    if(ip == null || ip.length() == 0 || &quot;unknown&quot;.equalsIgnoreCase(ip)){
+        return false;
+    }
+    return true;
+}
+</code></pre><h3 id="第二步设置IP白名单即可"><a href="#第二步设置IP白名单即可" class="headerlink" title="第二步设置IP白名单即可"></a>第二步设置IP白名单即可</h3><h3 id="接口频率设置"><a href="#接口频率设置" class="headerlink" title="接口频率设置"></a>接口频率设置</h3><p><a href="https://blog.csdn.net/baiyan3212/article/details/90453765" target="_blank" rel="external">https://blog.csdn.net/baiyan3212/article/details/90453765</a><br>写的挺好的：</p>
+<h3 id="方法一：AOP可以设置"><a href="#方法一：AOP可以设置" class="headerlink" title="方法一：AOP可以设置"></a>方法一：AOP可以设置</h3><p>申明式Aspect<br>需要记得通知类型<br>有一个图加深个印象：<br><img src="https://s2.ax1x.com/2019/11/03/KXJ9u4.png" alt="KXJ9u4.png"></p>
+<p>Before</p>
+<pre><code>在切入点之前执行。 参数类型的校验。 前置通知。
+</code></pre><p>AtterReturning</p>
+<pre><code>周在切入点之后执行。。后置通知，可以对结果进行检查。增加log
+</code></pre><p>Around</p>
+<pre><code>环绕通知 在切入点之前和之后都会执行。增加事务。等等。
+</code></pre><p>AfterThrowing</p>
+<pre><code>抛出异常的时候执行通知。正常情况下走不到。只有发生异常的情况下才会去通知。记录一些日志。
+</code></pre><p>After</p>
+<pre><code>在finally语句里。不管切入点是否有异常发生都会执行。类似finally
+</code></pre><h3 id="第一步先导入织入包"><a href="#第一步先导入织入包" class="headerlink" title="第一步先导入织入包"></a>第一步先导入织入包</h3><pre><code>&lt;dependency&gt;
+    &lt;groupId&gt;org.aspectj&lt;/groupId&gt;
+    &lt;artifactId&gt;aspectjweaver&lt;/artifactId&gt;
+    &lt;version&gt;1.6.12&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre><h3 id="然后写注解"><a href="#然后写注解" class="headerlink" title="然后写注解"></a>然后写注解</h3><pre><code>@Target({ElementType.METHOD})
+@Retention(RetentionPolicy.RUNTIME)
+@Documented
+public @interface MyLimit {
+  long limitTime() default 60000;
+  int num() default 50;
+}
+</code></pre><h3 id="实现切面类"><a href="#实现切面类" class="headerlink" title="实现切面类"></a>实现切面类</h3><pre><code>@Aspect
+@Component
+public class MyLimitAop {
+  @Autowired
+  private LimitByMap limitMap;
+  @Pointcut(&quot;execution(* com.example.controller..*(..))&quot;)
+  public void cutPoint(){}
+  @Around(&quot;cutPoint()&quot;)
+  public Object limit(ProceedingJoinPoint joinPoint) throws Throwable {
+    //signature是什么？
+    //获取封装了署名信息的对象,在该对象中可以获取到目标方法名,所属类的Class等信息
+    MethodSignature signature = (MethodSignature) joinPoint.getSignature();
+    Method method = signature.getMethod();
+    if(method.isAnnotationPresent(MyLimit.class)) {
+      MyLimit limit = method.getAnnotation(MyLimit.class);
+      long limitTime = limit.limitTime();
+      int num = limit.num();
+      String userId = &quot;test&quot;;
+      //拿到Requestattribute？  可以拿到当时的请求
+      ServletRequestAttributes requestAttributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+      HttpServletRequest request = requestAttributes.getRequest();
+      String requestURI = request.getRequestURI();
+      String key = userId + requestURI;
+      String s = limitMap.limitRequest(key, num, limitTime);
+      //如果不是就拉杂
+      if(!&quot;&quot;.equals(s)){
+        return null;
+      }
+    }
+    return  joinPoint.proceed();
+  }
+}
+</code></pre><h3 id="然后在-controller-上写注解"><a href="#然后在-controller-上写注解" class="headerlink" title="然后在 controller 上写注解"></a>然后在 controller 上写注解</h3><pre><code>@MyLimit(num = 5,limitTime = 10000)
+@RequestMapping(&quot;/index2&quot;)
+public String index2() {
+    return &quot;index2&quot;;
+}
+</code></pre><h3 id="最后在启动类上写注解"><a href="#最后在启动类上写注解" class="headerlink" title="最后在启动类上写注解"></a>最后在启动类上写注解</h3><pre><code>@EnableAspectJAutoProxy
+</code></pre><h3 id="方法二：filter可以设置"><a href="#方法二：filter可以设置" class="headerlink" title="方法二：filter可以设置"></a>方法二：filter可以设置</h3><p>自己写一个LimitMap 使用的是currentMap</p>
+<pre><code>@Component
+public class LimitByMap {
+  //全局MAP key为userId+URI  value为CountParam 统计对象 记录时间和次数
+  public static ConcurrentHashMap&lt;String, CountParam&gt; cacheMap = new ConcurrentHashMap&lt;&gt;();
+  /**
+   *
+   * @param key 自定义key userId+URI
+   * @param num 自定义限制请求次数 超出次数后限制访问
+   * @param limitTime 自定义限制时间，限制时间内限制访问次数
+   */
+  public String limitRequest(String key,int num,Long limitTime) {
+    //1通过key获取到countPatam对象
+    CountParam countParam = cacheMap.get(key);
+    //2判断对象是否为空，如果为空则代表第一次访问 如果不为空则代表之前请求过
+    if(countParam!=null){
+        //3获取时间，用当前时间减去最后一次访问时间，如果规定时间则清零访问次数，小于则累加计数
+        Long time = System.currentTimeMillis() - countParam.getTime();
+        int currentCount = countParam.getCount();
+        if(time&lt;limitTime){
+            //4如果累计次数大于10，证明用户在限制时间内访问过多
+            if(currentCount&gt;=num){
+                System.out.println(&quot;访问超出限制次数&quot;);
+                return &quot;访问超出限制次数!&quot;;
+            }else{
+                countParam.setCount(++currentCount);
+            }
+        }else{
+            countParam.setCount(1);
+        }
+        System.out.println(countParam.getCount());
+        countParam.setTime(System.currentTimeMillis());
+    }else{
+        countParam = new CountParam();
+        countParam.setCount(1);
+        countParam.setTime(System.currentTimeMillis());
+    }
+    cacheMap.put(key, countParam);
+    return &quot;&quot;;
+  }
+}
+</code></pre><p>map放置的参数</p>
+<pre><code>public class CountParam {
+  private Long time;
+  private Integer count;
+  public Long getTime() {
+      return time;
+  }
+  public void setTime(Long time) {
+      this.time = time;
+  }
+  public Integer getCount() {
+      return count;
+  }
+  public void setCount(Integer count) {
+      this.count = count;
+  }
+}
+</code></pre><p><strong>过滤器</strong></p>
+<pre><code>@WebFilter(filterName = &quot;MyFilter&quot;,urlPatterns=&quot;/index&quot;)
+public class MyFilter implements Filter {
+  @Value(&quot;${filter.interface.num}&quot;)
+  Integer num;
+
+  @Value(&quot;${filter.interface.limitTime}&quot;)
+  Long limitTime;
+
+  @Autowired
+  LimitByMap limitByMap;
+
+  public void destroy() {
+  }
+
+  public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain) throws ServletException, IOException {
+    HttpServletRequest httpRequest = (HttpServletRequest) req;
+    String requestURI = httpRequest.getRequestURI();
+    String userID = &quot;123456&quot;;
+    String key = userID+requestURI;
+    String s = limitByMap.limitRequest(key, num, limitTime);
+    if (&quot;&quot;.equals(s)){
+        chain.doFilter(req, resp);
+    }
+    resp.setContentType(&quot;text/html;charset=utf-8&quot;);
+    resp.getWriter().write(s);
+  }
+  public void init(FilterConfig config) throws ServletException {
+  }
+}
+</code></pre><p>配置的时间</p>
+<pre><code>#过滤器限制
+filter.interface.num=10
+filter.interface.limitTime=10000
+</code></pre><p>过滤的请求：</p>
+<pre><code>@RestController
+public class MyController {
+  @RequestMapping(&quot;/index&quot;)
+  public String index() {
+      return &quot;index&quot;;
+  }
+}
+</code></pre><p><strong>最后启动类上加注解—ServletComponentScan</strong></p>
+<pre><code>@ServletComponentScan
+@SpringBootApplication
+public class LimitApplication {
+  public static void main(String[] args) {
+    SpringApplication.run(LimitApplication.class, args);
+  }
+}
+</code></pre><h3 id="今日问题"><a href="#今日问题" class="headerlink" title="今日问题"></a>今日问题</h3><p>java.lang.IllegalArgumentException: error at ::0 can’t find referenced point<br>注意包的问题，springBoot只用导入织入包weaver</p>
+<h2 id="星期三（10月30日）"><a href="#星期三（10月30日）" class="headerlink" title="星期三（10月30日）"></a>星期三（10月30日）</h2><h2 id="数据库相关："><a href="#数据库相关：" class="headerlink" title="数据库相关："></a>数据库相关：</h2><ol>
+<li>尽量保持单表查询，不要连接查询，数据库设计要合理，即使有的时候业务较为复杂，字段稍微冗余也没关系</li>
+<li>单表数据量过大应及时分库分表，可以考虑用<strong>数据库中间件来做，mycat、Sharing-JDBC</strong>等</li>
+<li>根据字段建立适当的索引，优化查询，但是单表并不是索引越多越好，面试之前也看看索引这一块的相关知识</li>
+<li>有些并发要求比较高的场景应考虑用缓存优化</li>
+<li>如果查询业务很频繁，应该考虑使用<strong>数据库读写分离</strong>，减轻数据库压力，主库用来写，从库用来读（和前面说的分库类似，一般也使用中间件来做）</li>
+<li>查询业务较多，速度要求很高的情况下可以考虑使用搜索引擎技术</li>
+</ol>
+<h2 id="数据库中间件"><a href="#数据库中间件" class="headerlink" title="数据库中间件"></a>数据库中间件</h2><pre><code>http://www.sohu.com/a/336811296_505827
+</code></pre><p>两种：一种是proxy模式  一种是smart-client。这个可以试试sharing-JDBC</p>
+<pre><code>https://shardingsphere.apache.org/document/current/cn/features/sharding/
+</code></pre><h2 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h2><p>索引的数据结构？</p>
+<pre><code>二叉树、红黑树
+Hash表
+B树
+B+树
+</code></pre><h3 id="B-树"><a href="#B-树" class="headerlink" title="B+树"></a>B+树</h3><p>数据库底层采用的其实是B+树来作为索引。它可以看成是B树的变种。具有以下特点：</p>
+<pre><code>非叶子节点不存储data，只存储key
+所有的叶子节点存储完整的一份key信息以及key对应的data
+每一个父节点都出现在子节点中，是子节点的最大或者最小的元素
+每个叶子节点都有一个指针，指向下一个数据，形成一个链表
+</code></pre><h3 id="索引为什么使用B-树，而不使用其他数据结构比如二叉树、红黑树、hash表、B树？"><a href="#索引为什么使用B-树，而不使用其他数据结构比如二叉树、红黑树、hash表、B树？" class="headerlink" title="索引为什么使用B+树，而不使用其他数据结构比如二叉树、红黑树、hash表、B树？"></a>索引为什么使用B+树，而不使用其他数据结构比如二叉树、红黑树、hash表、B树？</h3><p>初略了解：<a href="https://blog.csdn.net/qq_35923749/article/details/88068659" target="_blank" rel="external">https://blog.csdn.net/qq_35923749/article/details/88068659</a><br>减少IO操作，而且B+树除了叶子结点其他结点不存数据</p>
+<p>Mysql数据库的基本组成架构为：<br>连接器：负责管理连接，权限的验证等。</p>
+<p>解析器：首先mysql需要知道你想做什么。因此需要对输入的sql进行解析。首先进行词法分析，需要识别出里面的字符串代表什么意思。比如select代表查询，T代表某张表，ID代表某张表的列字段叫id；之后进行语法分析，根据语法规则，判断输入的sql语句是否符合mysql语法。</p>
+<p>优化器：经过解析之后，mysql就知道你需要做什么事情了。但是在真正执行之前还需要经过优化器处理。比如当表中存在多个索引的时候，选择哪个索引来使用。或者多表关联的时候，选择各个表的连接先后顺序。</p>
+<p><strong>执行器：开始执行之前首先确认对该表有无执行查询的权限。如果没有，则返回错误的信息提示。如果有权限，则开始执行。首先根据该表的引擎类型，使用这个引擎提供的接口。</strong></p>
+<p>如查询某表，然后利用某字段查找，如果没有添加索引，则调用引擎的接口取出第一行数据，判断结果是不是，如果不是，依次再调用引擎的下一行数据，直至取出这个表中所有的数据。如果该字段有索引，执行过程也大致相似</p>
+<h3 id="引擎是什么？"><a href="#引擎是什么？" class="headerlink" title="引擎是什么？"></a>引擎是什么？</h3><pre><code>具体的数据是保存在引擎中的。在Mysql中，常见的引擎有MyISAM和InnoDB
+</code></pre><p>MyISAM InnoDB</p>
+<pre><code>Innodb支持事务，MyISAM不支持事务，对于Innodb中的每条sql语句都自动封装成事务，自动提交，影响速度
+Innodb支持外键，MyISAM不支持外键
+Innodb是聚集索引，数据文件和索引绑在一起。MyISAM是非聚集索引，索引和数据文件是分开的
+Innodb不保存表的行数，查询某张表的行数会全表扫描。MyISAM会保存整个表的行数，执行速度很快
+Innodb支持表锁和行锁（默认），而MyISAM支持表锁。但是Innodb的表锁是通过索引实现的，如果没有命中索引，则依然会使用表锁Innodb表必须要有一个主键（如果用户不设置，那么引擎会自行设定一列当做主键），MyISAM则可以没有
+Innodb的存储文件是frm和ibd，而MyISAM是frm、myd、myi三个文件。Frm是表定义文件，ibd是数据文件；myd是数据文件、myi是索引文件
+</code></pre><p>如何选择？<br>是否需要事务？如果不需要，则可以使用MyISAM绝大多数操作<br>是否是查询？如果是，可以选择MyISAM，有读也有写，则选择Innodb</p>
+<h3 id="MyISAM"><a href="#MyISAM" class="headerlink" title="MyISAM"></a>MyISAM</h3><p>MyISAM的索引是非聚集索引。什么叫非聚集？MyISAM的索引文件和数据文件是分离<br>MyISAM的文件有三个文件组成：MYI是索引文件。索引文件中存放的是对应数据的文件指针，接着会去MYD文件中去找对应指针的数据。</p>
+<h3 id="InnoDb"><a href="#InnoDb" class="headerlink" title="InnoDb"></a>InnoDb</h3><p>Innodb的文件只有一个表结构文件和数据文件。数据文件本身就是索引文件。Innodb的索引是聚集索引形式。索引和文件数据是存放在一起的。</p>
+<pre><code>1.数据文件本身就是索引文件
+2.数据本身就是按照B+树索引组织起来的一个索引文件
+3.对于主键索引的B+树的叶子节点包含了完整的数据信息,对于非主键索引，叶子节点存放的是主键的id
+</code></pre><h3 id="问题五：为什么Innodb表必须要有主键，同时推荐使用自增的整数作为主键？"><a href="#问题五：为什么Innodb表必须要有主键，同时推荐使用自增的整数作为主键？" class="headerlink" title="问题五：为什么Innodb表必须要有主键，同时推荐使用自增的整数作为主键？"></a>问题五：为什么Innodb表必须要有主键，同时推荐使用自增的整数作为主键？</h3><h3 id="问题六：为什么非主键索引叶子节点存放的是主键的值？"><a href="#问题六：为什么非主键索引叶子节点存放的是主键的值？" class="headerlink" title="问题六：为什么非主键索引叶子节点存放的是主键的值？"></a>问题六：为什么非主键索引叶子节点存放的是主键的值？</h3><h3 id="Mysql-默认的存储引擎是什么？-—-5是InnoDB"><a href="#Mysql-默认的存储引擎是什么？-—-5是InnoDB" class="headerlink" title="Mysql 默认的存储引擎是什么？ —- 5是InnoDB"></a>Mysql 默认的存储引擎是什么？ —- 5是InnoDB</h3><p><a href="https://blog.csdn.net/jswangchang/article/details/79419573" target="_blank" rel="external">https://blog.csdn.net/jswangchang/article/details/79419573</a></p>
+<h3 id="联合索引的实现"><a href="#联合索引的实现" class="headerlink" title="联合索引的实现"></a>联合索引的实现</h3><p>联合索引指的是对多列创建了索引。比如对a，b，c创建了一个联合索引，其实相当于创建了a单列索引、（a，b）联合索引以及（a，b，c）联合索引。索引最左前缀原理。</p>
+<h3 id="重点来了"><a href="#重点来了" class="headerlink" title="重点来了"></a>重点来了</h3><h3 id="索引语法-—-我们可以知道这是对字段添加索引使用的是DML"><a href="#索引语法-—-我们可以知道这是对字段添加索引使用的是DML" class="headerlink" title="索引语法 —- 我们可以知道这是对字段添加索引使用的是DML"></a>索引语法 —- 我们可以知道这是对字段添加索引使用的是DML</h3><pre><code>查看某张表的索引：show index from 表名;
+创建普通索引：alter table 表名 add index 索引名(索引列);
+创建复合索引：alter table 表名 add index 索引名(索引列1，索引列2);
+删除某张表的索引：drop index 索引名 on 表名;
+</code></pre><h3 id="索引实战"><a href="#索引实战" class="headerlink" title="索引实战"></a>索引实战</h3><p>1.创建一个表</p>
+<pre><code>CREATE TABLE `user` (
+  `id` BIGINT ( 20 ) PRIMARY KEY AUTO_INCREMENT,
+  `username` VARCHAR ( 50 ) DEFAULT NULL,
+  `email` VARCHAR ( 30 ) DEFAULT NULL,
+  `password` VARCHAR ( 32 ) DEFAULT NULL,
+`status` TINYINT ( 1 ) NULL DEFAULT 0
+) ENGINE = MyISAM DEFAULT CHARSET = utf8
+</code></pre><p>2.新建PROCEDURE并运行</p>
+<pre><code>CREATE PROCEDURE myproc ( ) BEGIN
+  DECLARE
+    num INT;
+  SET num = 1;
+  WHILE
+      num &lt;= 10000000 DO
+      INSERT INTO `user` ( username, email, PASSWORD )
+    VALUES
+      ( CONCAT( &apos;username_&apos;, num ), CONCAT( num, &apos;@qq.com&apos; ), MD5( num ) );
+    SET num = num + 1;
+  END WHILE;
+END
+</code></pre><h3 id="附加内容：-Stored-Procedure-存储过程，-感觉就是批处理"><a href="#附加内容：-Stored-Procedure-存储过程，-感觉就是批处理" class="headerlink" title="附加内容： Stored Procedure 存储过程， 感觉就是批处理"></a>附加内容： Stored Procedure 存储过程， 感觉就是批处理</h3><p><a href="https://www.cnblogs.com/yuanwanli/p/9022617.html" target="_blank" rel="external">https://www.cnblogs.com/yuanwanli/p/9022617.html</a></p>
+<p>3.添加索引</p>
+<pre><code>alter table user add index username_password_email(username,password,email)
+</code></pre><p>4.添加数据</p>
+<h3 id="Explain详解"><a href="#Explain详解" class="headerlink" title="Explain详解"></a>Explain详解</h3><p>先创建三张表student、course、student_course<br>使用 Explain 可以模拟优化器执行sql语句，从而知道Mysql是如何处理sql的。Explain中的列</p>
+<p>mysql&gt; explain select * from user where username = ‘user_999’;<br>+—-+————-+——-+————+——+————————-+————————-+———+——-+——+———-+——-+<br>| id | select_type | table | partitions | type | possible_keys           | key                     | key_len | ref   | rows | filtered | Extra |<br>+—-+————-+——-+————+——+————————-+————————-+———+——-+——+———-+——-+<br>|  1 | SIMPLE      | user  | NULL       | ref  | username_password_email | username_password_email | 153     | const |    1 |   100.00 | NULL  |<br>+—-+————-+——-+————+——+————————-+————————-+———+——-+——+———-+——-+<br>1 row in set, 1 warning (0.00 sec)</p>
+<h3 id="select-type列"><a href="#select-type列" class="headerlink" title="select_type列"></a>select_type列</h3><p>SIMPLE       简单查询。不包含子查询和union等查询<br>PRIMARY      查询中如果包含子查询，那么最外层的查询叫做PRIMARY。也叫做主查询。查询的主体。<br>SUBQUERY     select中的子查询<br>UNION        union中的后面或者第二个select语句<br>UNION RESULT union的结果</p>
+<h3 id="table列"><a href="#table列" class="headerlink" title="table列"></a>table列</h3><pre><code>这一行explain正在访问的哪张表
+</code></pre><h3 id="type列"><a href="#type列" class="headerlink" title="type列"></a>type列</h3><p>这一列表示关联类型或访问类型，即MySQL决定如何查找表中的行，查找数据行记录的大概范围。<br>最优到最差分别为：const &gt; eq_ref &gt; ref &gt; range &gt; index &gt; ALL一般来说，得保证查询达到range级别，最好达到ref</p>
+<p>const</p>
+<pre><code>const:当MySQL对查询某部分进行优化，并转换为一个常量时，使用这些类型访问。如将主键置于where列表中，MySQL就能将该查询转换为一个常量
+</code></pre><p>eq_refexplain</p>
+<pre><code>select s.sid from student s, student_course sc where s.sid = sc.sid;
+</code></pre><p>唯一性索引。对于每个索引键的查询，返回匹配唯一行数据。（有且仅有一条数据，不能多，不能少）。</p>
+<p>ref</p>
+<pre><code>非唯一性索引，对于每个索引键的查询，返回匹配的所有行数据。
+</code></pre><p>range</p>
+<pre><code>检索指定范围的列，where条件后面是一个范围查询，比如，between、&gt;、&lt;等explain select * from student where sid between 2 and 5;
+</code></pre><p>index、all</p>
+<pre><code>查询全部索引的数据。Index和all的区别在于，index是遍历所有索引中的数据，而all是遍历全部的数据。
+</code></pre><h3 id="possible-keys"><a href="#possible-keys" class="headerlink" title="possible_keys"></a>possible_keys</h3><p>显示可能使用哪些索引来查找。Explain出现possible_keys有列，而key显示null情况，因为表数据不多，mysql认为索引对此查询帮助不大，选择全表扫描。</p>
+<h3 id="key列"><a href="#key列" class="headerlink" title="key列"></a>key列</h3><p>该列显示了mysql实际选择哪个索引来优化该表的访问。</p>
+<h3 id="ref列"><a href="#ref列" class="headerlink" title="ref列"></a>ref列</h3><p>注意与type中ref的区分。两者不是一个意思。表示当前表在利用Key列记录中的索引进行查询时所用到的列或常量。一般用法为：const或者另外表的一个字段。explain select s.sid from student s, student_course sc where s.sid = sc.sid;</p>
+<h3 id="rows列"><a href="#rows列" class="headerlink" title="rows列"></a>rows列</h3><p>表示mysql通过索引的统计信息，预算出来的所需要读取的行数，但是需要注意的是rows的值仅仅是统计学上的一个数据，并不是十分的准确。</p>
+<h3 id="Extra列"><a href="#Extra列" class="headerlink" title="Extra列"></a>Extra列</h3><p>这一列展示的是额外信息。</p>
+<p>Usingindex    (比较好)意思是索引树中就可以获取全部的数据，不需要再额外去进行第二次操作。当查询的列是索引的部分列时（比如索引是一个复合索引，查询的是索引列的几个列）。无需回表查询。</p>
+<p>Usingwhere    意味着全表扫描，或者即便使用索引查找的情况下，仍然有部分查询条件不在索引字段中。查询的列未被索引覆盖，where筛选条件非索引的前导列。查询的列被索引覆盖，但是搜索条件不被索引覆盖。查询的列未被索引覆盖，搜索条件也没被索引覆盖。</p>
+<p>Usingwhere;Using index  查询的列被索引覆盖，where筛选条件是索引列之一但不是索引的前导列。</p>
+<h2 id="索引的使用注意事项"><a href="#索引的使用注意事项" class="headerlink" title="索引的使用注意事项"></a>索引的使用注意事项</h2><h3 id="索引全覆盖"><a href="#索引全覆盖" class="headerlink" title="索引全覆盖"></a>索引全覆盖</h3><p>如果设置了一个复合索引，那么最理想的状态就是索引的全部字段都会使用到。</p>
+<h3 id="索引最左前缀原则"><a href="#索引最左前缀原则" class="headerlink" title="索引最左前缀原则"></a>索引最左前缀原则</h3><p>如果设置了联合索引，那么在使用的时候，从索引的最左开始，中间尽量不要跨列，否则会导致索引的失效。</p>
+<h3 id="不要对索引的列做任何操作，否则会索引失效"><a href="#不要对索引的列做任何操作，否则会索引失效" class="headerlink" title="不要对索引的列做任何操作，否则会索引失效"></a>不要对索引的列做任何操作，否则会索引失效</h3><pre><code>explain select * from user where left(username,5) = &apos;username_9999&apos;;
+</code></pre><p>left()截取字符串</p>
+<h3 id="存储引擎不能使用索引中范围条件右侧的列"><a href="#存储引擎不能使用索引中范围条件右侧的列" class="headerlink" title="存储引擎不能使用索引中范围条件右侧的列"></a>存储引擎不能使用索引中范围条件右侧的列</h3><p>若中间索引使用了范围，则全部的索引全失效</p>
+<pre><code>explain  select *  from  user  where  username  =  &apos;user_999&apos;  and  password  &lt; &apos;b706835de79a2b4e80506f582af3676a&apos; and email = &apos;999@qq.com&apos;;
+</code></pre><h3 id="尽量使用覆盖索引，而减少使用select"><a href="#尽量使用覆盖索引，而减少使用select" class="headerlink" title="尽量使用覆盖索引，而减少使用select*"></a>尽量使用覆盖索引，而减少使用select*</h3><p>什么叫做覆盖索引，意思是select查询的信息或者说字段已经出现在索引中，无需额外再去回表去查询，这样叫做覆盖索引。可以极大得提升查询的效率。在实际查询过程中，应当极力避免出现select*的情形。</p>
+<h3 id="使用！-或者-lt-gt-时会索引失效"><a href="#使用！-或者-lt-gt-时会索引失效" class="headerlink" title="使用！=或者&lt;&gt;时会索引失效"></a>使用！=或者&lt;&gt;时会索引失效</h3><p>以下原理还需要好好的去思考呀</p>
+<h3 id="Like模糊查询索引字段会失效"><a href="#Like模糊查询索引字段会失效" class="headerlink" title="Like模糊查询索引字段会失效"></a>Like模糊查询索引字段会失效</h3><h3 id="字符串如果不加单引号会导致索引失效"><a href="#字符串如果不加单引号会导致索引失效" class="headerlink" title="字符串如果不加单引号会导致索引失效"></a>字符串如果不加单引号会导致索引失效</h3><h3 id="慎用or，可能会导致索引失效"><a href="#慎用or，可能会导致索引失效" class="headerlink" title="慎用or，可能会导致索引失效"></a>慎用or，可能会导致索引失效</h3><h2 id="星期四（10月31日）"><a href="#星期四（10月31日）" class="headerlink" title="星期四（10月31日）"></a>星期四（10月31日）</h2><p>好像啥也没干= =</p>
+<h2 id="星期五（11月01日）"><a href="#星期五（11月01日）" class="headerlink" title="星期五（11月01日）"></a>星期五（11月01日）</h2><p>1.Spring-Boot做了什么事情<br>第一部分进行SpringApplication的初始化模块，配置一些基本的环境变量、资源、构造器、监听器，<br>第二部分实现了应用具体的启动方案，包括启动流程的监听模块、加载配置环境模块、及核心的创建上下文环境模块，<br>第三部分是自动化配置模块，该模块作为springboot自动配置核心，在后面的分析中会详细讨论。在下面的启动程序中我们会串联起结构中的主要功能。<br><a href="https://www.cnblogs.com/trgl/p/7353782.html" target="_blank" rel="external">https://www.cnblogs.com/trgl/p/7353782.html</a> 挺详细的</p>
+<p>2.mybatis怎么注册在Spring上的</p>
+<pre><code>sqlSessionFactory = new SqlSessionFactoryBuilder().build(Resources.getResourceAsStream(&quot;mybatis.xml&quot;));
+sqlSession = sqlSessionFactory.openSession();
+
+if (sqlSession != null){
+    sqlSession.commit();
+    sqlSession.close();
+}
+</code></pre><p>3.redis两种持久化 — 就是存储策略</p>
+<pre><code>RDB：在指定的时间间隔能对你的数据进行快照存储。
+AOF：记录每次对服务器写的操作,当服务器重启的时候会重新执行这些命令来恢复原始的数据。
+</code></pre><p>4.红黑树<br>1）红黑树是什么<br>性质1：每个节点要么是黑色，要么是红色。<br>性质2：根节点是黑色。</p>
+<p>性质3：每个叶子节点（NIL）是黑色。</p>
+<p>性质4：每个红色结点的两个子结点一定都是黑色。</p>
+<p>性质5：任意一结点到每个叶子结点的路径都包含数量相同的黑结点。</p>
+<p>性质5.1：如果一个结点存在黑色的子结点，那么该结点肯定有两个子结点</p>
+<p>图1就是一颗简单的红黑树。其中Nil为叶子结点，并且它是黑色的。(值得提醒注意的是，在Java中，<strong>叶子结点是为null的结点</strong>。)</p>
+<p>前面讲到红黑树能自平衡，它靠的是什么？三种操作：左旋、右旋和变色。</p>
+<p>左旋：以某个结点作为支点(旋转结点)，其右子结点变为旋转结点的父结点，右子结点的左子结点变为旋转结点的右子结点，左子结点保持不变。如图3。<br>右旋：以某个结点作为支点(旋转结点)，其左子结点变为旋转结点的父结点，左子结点的右子结点变为旋转结点的左子结点，右子结点保持不变。如图4。<br>变色：结点的颜色由红变黑或由黑变红。</p>
+<p>2）红黑树的扩容机制<br>DEFAULT_LOAD_FACTOR = 0.75 （默认大小为16，负载因子0.75，阈值12）</p>
+<p>5.Spring<br>复习：</p>
+<h3 id="1bean的生命周期"><a href="#1bean的生命周期" class="headerlink" title="1bean的生命周期"></a>1bean的生命周期</h3><p>1、Bean的建立                      |由BeanFactory读取Bean定义文件，并生成各个实例。<br>2、Setter注入                      |执行Bean的属性依赖注入。</p>
+<p>3、BeanNameAware的setBeanName()    |如果Bean类实现了org.springframework.beans.factory.BeanNameAware接口，则执行其setBeanName()方法。 没有name情况id =  name<br>4、BeanFactoryAware的setBeanFactory()  |如果Bean类实现了org.springframework.beans.factory.BeanFactoryAware接口，则执行其setBeanFactory()方法。</p>
+<p>5、BeanPostProcessor的processBeforeInitialization()  |容器中如果有实现org.springframework.beans.factory.BeanPostProcessor接口的实例，则任何Bean在初始化之前都会执行这个实例的processBeforeInitialization()方法。</p>
+<p>6、InitializingBean的afterPropertiesSet()|如果Bean类实现了org.springframework.beans.factory.InitializingBean接口，则执行其afterPropertiesSet()方法。<br>7、Bean定义文件中定义init-method |在Bean定义文件中使用“init-method”属性设定方法名称，这时会执行initMethod()方法，注意，这个方法是不带参数的。</p>
+<p>8、BeanPostProcessor的processAfterInitialization() |容器中如果有实现org.springframework.beans.factory.BeanPostProcessors接口的实例，则任何Bean在初始化之前都会执行这个实例的processAfterInitialization()方法。</p>
+<p>9、DisposableBean的destroy()     |在容器关闭时，如果Bean类实现了org.springframework.beans.factory.DisposableBean接口，则执行它的destroy()方法。<br>10、Bean定义文件中定义destroy-method |在容器关闭时，可以在Bean定义文件中使用“destory-method”定义的方法 context.close();</p>
+<p><strong>注意事项</strong><br>大多是都是直接Bean继承接口即可，但是有例外。BeanPostProcessor，他说的是：</p>
+<pre><code>容器中如果有实现org.springframework.beans.factory.BeanPostProcessor接口的实例，则任何Bean在初始化之前都会执行这个实例的processBeforeInitialization()方法。
+</code></pre><p>注意是有一个实现的实例，其他的所有实例都会调用这个方法。也就是相当于一个给其他所有实例初始化的一个实例，这个就是<strong>后置处理器</strong></p>
+<p>第一： BeanFactory读取Bean定义文件，并生成各个实例。    和 set属性<br>第二： 意识到有名字、或者有工厂就执行对应的方法<br>第三： 后置控制器<br>第四： 初始化（两个方法）<br>第五： 后置控制器<br>第六： 销毁（两个方法）</p>
+<h3 id="学习Spring源码寻找bean是怎么实例化的"><a href="#学习Spring源码寻找bean是怎么实例化的" class="headerlink" title="学习Spring源码寻找bean是怎么实例化的"></a>学习Spring源码寻找bean是怎么实例化的</h3><pre><code>ApplicationContext applicationContext = new ClassPathXmlApplicationContext(&quot;application.xml&quot;);
+User userz = (User) applicationContext.getBean(&quot;userz&quot;);
+</code></pre><h3 id="ApplicationContext"><a href="#ApplicationContext" class="headerlink" title="ApplicationContext"></a>ApplicationContext</h3><p><img src="https://s2.ax1x.com/2019/11/03/KjFcy8.png" alt="KjFcy8.png"></p>
+<h3 id="都是实现自BeanFactory"><a href="#都是实现自BeanFactory" class="headerlink" title="都是实现自BeanFactory"></a>都是实现自BeanFactory</h3><p>public interface BeanFactory {<br>    String FACTORY_BEAN_PREFIX = “&amp;”;<br>    Object getBean(String var1) throws BeansException;<br>    <t> T getBean(Class<t> var1) throws BeansException;</t></t></p>
+<pre><code>。。。。。很多getBean
+</code></pre><p>}</p>
+<h3 id="getBean方法被AbstractApplicationContext实现"><a href="#getBean方法被AbstractApplicationContext实现" class="headerlink" title="getBean方法被AbstractApplicationContext实现"></a>getBean方法被AbstractApplicationContext实现</h3><p><img src="https://s2.ax1x.com/2019/11/03/Kjk0nU.png" alt="Kjk0nU.png"></p>
+<pre><code>public Object getBean(String name) throws BeansException {
+  this.assertBeanFactoryActive();
+  return this.getBeanFactory().getBean(name);
+}
+</code></pre><h3 id="this-getBeanFactory-如果没写就有一个默认的"><a href="#this-getBeanFactory-如果没写就有一个默认的" class="headerlink" title="this.getBeanFactory() 如果没写就有一个默认的"></a>this.getBeanFactory() 如果没写就有一个默认的</h3><pre><code>public final ConfigurableListableBeanFactory getBeanFactory() {
+     synchronized(this.beanFactoryMonitor) {
+         if (this.beanFactory == null) {
+             throw new IllegalStateException(&quot;BeanFactory not initialized or already closed - call &apos;refresh&apos; before accessing beans via the ApplicationContext&quot;);
+         } else {
+             return this.beanFactory;
+         }
+     }
+ }
+</code></pre><p>没有就会有一个默认的beanFactory defaultListableBeanFactory</p>
+<pre><code>@Nullable
+private DefaultListableBeanFactory beanFactory;
+</code></pre><h3 id="getBean-name-AbstractBeanFactory-实现"><a href="#getBean-name-AbstractBeanFactory-实现" class="headerlink" title="getBean(name)  AbstractBeanFactory 实现"></a>getBean(name)  AbstractBeanFactory 实现</h3><p>public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport implements ConfigurableBeanFactory {</p>
+<pre><code>public Object getBean(String name, Object... args) throws BeansException {
+    return this.doGetBean(name, (Class)null, args, false);
+}
+</code></pre><p><img src="https://s2.ax1x.com/2019/11/03/KjEKeS.png" alt="KjEKeS.png"></p>
+<h3 id="最后的doGetBean-方法"><a href="#最后的doGetBean-方法" class="headerlink" title="最后的doGetBean()方法"></a>最后的doGetBean()方法</h3><pre><code>protected &lt;T&gt; T doGetBean(String name, @Nullable Class&lt;T&gt; requiredType, @Nullable Object[] args, boolean typeCheckOnly) throws BeansException {
+    String beanName = this.transformedBeanName(name);
+    Object sharedInstance = this.getSingleton(beanName);
+    Object bean;
+    if (sharedInstance != null &amp;&amp; args == null) {
+        if (this.logger.isTraceEnabled()) {
+            if (this.isSingletonCurrentlyInCreation(beanName)) {
+                this.logger.trace(&quot;Returning eagerly cached instance of singleton bean &apos;&quot; + beanName + &quot;&apos; that is not fully initialized yet - a consequence of a circular reference&quot;);
+            } else {
+                this.logger.trace(&quot;Returning cached instance of singleton bean &apos;&quot; + beanName + &quot;&apos;&quot;);
+            }
+        }
+
+        bean = this.getObjectForBeanInstance(sharedInstance, name, beanName, (RootBeanDefinition)null);
+    //检查是否是当前线程需要获取的bean
+    } else {
+        if (this.isPrototypeCurrentlyInCreation(beanName)) {
+            throw new BeanCurrentlyInCreationException(beanName);
+        }
+
+        BeanFactory parentBeanFactory = this.getParentBeanFactory();
+        if (parentBeanFactory != null &amp;&amp; !this.containsBeanDefinition(beanName)) {
+            String nameToLookup = this.originalBeanName(name);
+            if (parentBeanFactory instanceof AbstractBeanFactory) {
+                return ((AbstractBeanFactory)parentBeanFactory).doGetBean(nameToLookup, requiredType, args, typeCheckOnly);
+            }
+
+            if (args != null) {
+                return parentBeanFactory.getBean(nameToLookup, args);
+            }
+
+            if (requiredType != null) {
+                return parentBeanFactory.getBean(nameToLookup, requiredType);
+            }
+
+            return parentBeanFactory.getBean(nameToLookup);
+        }
+
+        if (!typeCheckOnly) {
+            this.markBeanAsCreated(beanName);
+        }
+
+        try {
+            RootBeanDefinition mbd = this.getMergedLocalBeanDefinition(beanName);
+            this.checkMergedBeanDefinition(mbd, beanName, args);
+            String[] dependsOn = mbd.getDependsOn();
+            String[] var11;
+            if (dependsOn != null) {
+                var11 = dependsOn;
+                int var12 = dependsOn.length;
+
+                for(int var13 = 0; var13 &lt; var12; ++var13) {
+                    String dep = var11[var13];
+                    if (this.isDependent(beanName, dep)) {
+                        throw new BeanCreationException(mbd.getResourceDescription(), beanName, &quot;Circular depends-on relationship between &apos;&quot; + beanName + &quot;&apos; and &apos;&quot; + dep + &quot;&apos;&quot;);
+                    }
+
+                    this.registerDependentBean(dep, beanName);
+
+                    try {
+                        this.getBean(dep);
+                    } catch (NoSuchBeanDefinitionException var24) {
+                        throw new BeanCreationException(mbd.getResourceDescription(), beanName, &quot;&apos;&quot; + beanName + &quot;&apos; depends on missing bean &apos;&quot; + dep + &quot;&apos;&quot;, var24);
+                    }
+                }
+            }
+            //创建单例
+            if (mbd.isSingleton()) {
+                sharedInstance = this.getSingleton(beanName, () -&gt; {
+                    try {
+                        return this.createBean(beanName, mbd, args);
+                    } catch (BeansException var5) {
+                        this.destroySingleton(beanName);
+                        throw var5;
+                    }
+                });
+                bean = this.getObjectForBeanInstance(sharedInstance, name, beanName, mbd);
+            } else if (mbd.isPrototype()) {
+                var11 = null;
+
+                Object prototypeInstance;
+                try {
+                    this.beforePrototypeCreation(beanName);
+                    prototypeInstance = this.createBean(beanName, mbd, args);
+                } finally {
+                    this.afterPrototypeCreation(beanName);
+                }
+
+                bean = this.getObjectForBeanInstance(prototypeInstance, name, beanName, mbd);
+            } else {
+                String scopeName = mbd.getScope();
+                Scope scope = (Scope)this.scopes.get(scopeName);
+                if (scope == null) {
+                    throw new IllegalStateException(&quot;No Scope registered for scope name &apos;&quot; + scopeName + &quot;&apos;&quot;);
+                }
+
+                try {
+                    Object scopedInstance = scope.get(beanName, () -&gt; {
+                        this.beforePrototypeCreation(beanName);
+
+                        Object var4;
+                        try {
+                            var4 = this.createBean(beanName, mbd, args);
+                        } finally {
+                            this.afterPrototypeCreation(beanName);
+                        }
+
+                        return var4;
+                    });
+                    bean = this.getObjectForBeanInstance(scopedInstance, name, beanName, mbd);
+                } catch (IllegalStateException var23) {
+                    throw new BeanCreationException(beanName, &quot;Scope &apos;&quot; + scopeName + &quot;&apos; is not active for the current thread; consider defining a scoped proxy for this bean if you intend to refer to it from a singleton&quot;, var23);
+                }
+            }
+        } catch (BeansException var26) {
+            this.cleanupAfterBeanCreationFailure(beanName);
+            throw var26;
+        }
+    }
+
+    if (requiredType != null &amp;&amp; !requiredType.isInstance(bean)) {
+        try {
+            T convertedBean = this.getTypeConverter().convertIfNecessary(bean, requiredType);
+            if (convertedBean == null) {
+                throw new BeanNotOfRequiredTypeException(name, requiredType, bean.getClass());
+            } else {
+                return convertedBean;
+            }
+        } catch (TypeMismatchException var25) {
+            if (this.logger.isTraceEnabled()) {
+                this.logger.trace(&quot;Failed to convert bean &apos;&quot; + name + &quot;&apos; to required type &apos;&quot; + ClassUtils.getQualifiedName(requiredType) + &quot;&apos;&quot;, var25);
+            }
+
+            throw new BeanNotOfRequiredTypeException(name, requiredType, bean.getClass());
+        }
+    } else {
+        return bean;
+    }
+}
+</code></pre><p>内容有点多我们看一下这个方法；</p>
+<h3 id="1-getSingleton方法-DefaultSingletonBeanRegistry类中"><a href="#1-getSingleton方法-DefaultSingletonBeanRegistry类中" class="headerlink" title="1.getSingleton方法 DefaultSingletonBeanRegistry类中"></a>1.getSingleton方法 DefaultSingletonBeanRegistry类中</h3><p>单例在Spring的同一个容器内只会被创建一次，后续在获取bean，就直接从单例缓存中获取了。这里也只是尝试获取，首先尝试从缓存中加载，如果加载不成功则再次尝试从singletonFactories中加载。因为在创建单例bean 的时候会存在依赖注入的情况，而在创建依赖的时候为了避免循环依赖，在Spring中创建bean 的原则是不等bean创建完就会将创建bean 的ObjectFactory提早曝光加入到缓存中，一旦下一个bean创建时候需要依赖上一个bean则直接使用ObjectFactory。</p>
+<pre><code>//从缓存中获取单例的bean
+Object sharedInstance = this.getSingleton(beanName);
+</code></pre><h3 id="2-getObjectForBeanInstance-方法-AbstractBeanFactory类中"><a href="#2-getObjectForBeanInstance-方法-AbstractBeanFactory类中" class="headerlink" title="2.getObjectForBeanInstance 方法 AbstractBeanFactory类中"></a>2.getObjectForBeanInstance 方法 AbstractBeanFactory类中</h3><p>如果从缓存中得到了bean的原始状态，则需要对bean进行实例化。缓存中记录的只是最原始的bean状态，并不一定是我们最终想要的bean。<br>假如我们需要对工厂bean进行处理，那么这里得到的其实是工厂bean的初始状态，但是我们正真需要的是工程bean中定义的factory-method方法中返回的bean，而getObjectForBeanInstance就是完成这个工作的</p>
+<pre><code>//从已经加载的object中获取bean
+bean = this.getObjectForBeanInstance(sharedInstance, name, beanName, (RootBeanDefinition)null);
+</code></pre><h3 id="getObjectForBeanInstance"><a href="#getObjectForBeanInstance" class="headerlink" title="getObjectForBeanInstance()"></a>getObjectForBeanInstance()</h3><p>判断的一个函数<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">public static boolean isFactoryDereference(@Nullable String name) &#123;</div><div class="line">    return name != null &amp;&amp; name.startsWith(&quot;&amp;&quot;);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<pre><code>protected Object getObjectForBeanInstance(Object beanInstance, String name, String beanName, @Nullable RootBeanDefinition mbd) {
+  ///如果要获取的bean是BeanFactory的引用
+  if (BeanFactoryUtils.isFactoryDereference(name)) {
+    if (beanInstance instanceof NullBean) {
+      return beanInstance;
+    } else if (!(beanInstance instanceof FactoryBean)) {
+        throw new BeanIsNotAFactoryException(beanName, beanInstance.getClass());
+    } else {
+        if (mbd != null) {
+            mbd.isFactoryBean = true;
+        }
+        return beanInstance;
+    }
+  //如果创建实例不是FactoryBean实例
+  } else if (!(beanInstance instanceof FactoryBean)) {
+    return beanInstance;
+  //是FactoryBean的子类 通过工厂生成实例
+  } else {
+    Object object = null;
+    if (mbd != null) {
+      mbd.isFactoryBean = true;
+    } else {
+      object = this.getCachedObjectForFactoryBean(beanName);
+    }
+
+    if (object == null) {
+      FactoryBean&lt;?&gt; factory = (FactoryBean)beanInstance;
+      if (mbd == null &amp;&amp; this.containsBeanDefinition(beanName)) {
+        mbd = this.getMergedLocalBeanDefinition(beanName);
+      }
+      boolean synthetic = mbd != null &amp;&amp; mbd.isSynthetic();
+      object = this.getObjectFromFactoryBean(factory, beanName, !synthetic);
+    }
+    return object;
+  }
+}
+</code></pre><h3 id="3-获取单例对象时候调用DefaultSingletonBeanRegistry类getSingleton方法的第二个参数ObjectFactory实现了ObjectFactory接口的getObject方法，调用的createBean方法"><a href="#3-获取单例对象时候调用DefaultSingletonBeanRegistry类getSingleton方法的第二个参数ObjectFactory实现了ObjectFactory接口的getObject方法，调用的createBean方法" class="headerlink" title="3.获取单例对象时候调用DefaultSingletonBeanRegistry类getSingleton方法的第二个参数ObjectFactory实现了ObjectFactory接口的getObject方法，调用的createBean方法"></a>3.获取单例对象时候调用DefaultSingletonBeanRegistry类getSingleton方法的第二个参数ObjectFactory实现了ObjectFactory接口的getObject方法，调用的createBean方法</h3><pre><code>//创建单例
+sharedInstance = this.getSingleton(beanName, () -&gt; {
+  try {
+      return this.createBean(beanName, mbd, args);
+  } catch (BeansException var5) {
+      this.destroySingleton(beanName);
+      throw var5;
+  }
+});
+</code></pre><h3 id="4-public-Object-getSingleton-String-beanName-ObjectFactory-lt-gt-singletonFactory-方法"><a href="#4-public-Object-getSingleton-String-beanName-ObjectFactory-lt-gt-singletonFactory-方法" class="headerlink" title="4.public Object getSingleton(String beanName, ObjectFactory&lt;?&gt; singletonFactory) 方法"></a>4.public Object getSingleton(String beanName, ObjectFactory&lt;?&gt; singletonFactory) 方法</h3><p>这个方法与上面的getSingleton不同之处在于这个方法是在创建了bean对象，并初始化之后调用的，作用是从bean对象中获取单例的bean同时放到单例缓存中</p>
+<h3 id="总结一下"><a href="#总结一下" class="headerlink" title="总结一下"></a>总结一下</h3><p>1.首先获得applicationContext,（顶层接口是BeanFactory）<br>2.然后applicationContext.getBean(“String”)<br>3.其实是调用了 return this.getBeanFactory().getBean(name);  BeanFactory默认是DefaultListableBeanFactory<br>4.调用BeanFactory的getBean()方法,接下来几步都是由AbstractBeanFactory实现<br>5.核心四个方法就两种情况<br>1）从缓存中拿出bean，然后放到getObjectForBean(bean)实例化<br>2）直接创建一个bean 然后把bean放到单例的缓存中</p>
+<p><a href="https://www.jianshu.com/p/e8656305d8f8" target="_blank" rel="external">https://www.jianshu.com/p/e8656305d8f8</a></p>
+<h2 id="注入组件"><a href="#注入组件" class="headerlink" title="注入组件"></a>注入组件</h2><h3 id="1-数据源"><a href="#1-数据源" class="headerlink" title="1.数据源"></a>1.数据源</h3><p>xml</p>
+<pre><code>&lt;!--数据源--&gt;
+&lt;bean id=&quot;druidDataSource&quot; class=&quot;com.alibaba.druid.pool.DruidDataSource&quot;&gt;
+    &lt;property name=&quot;driverClassName&quot; value=&quot;com.mysql.jdbc.Driver&quot;/&gt;
+    &lt;property name=&quot;url&quot; value=&quot;jdbc:mysql://localhost:3306/j16_db?useUnicode=true&amp;amp;characterEncoding=utf-8&quot;/&gt;
+    &lt;property name=&quot;username&quot; value=&quot;root&quot;/&gt;
+    &lt;property name=&quot;password&quot; value=&quot;123456&quot;/&gt;
+&lt;/bean&gt;
+</code></pre><p>JavaBean</p>
+<pre><code>@Bean
+public DataSource druidDatasource(){
+    DruidDataSource druidDataSource = new DruidDataSource();
+    druidDataSource.setDriverClassName(&quot;com.mysql.jdbc.Driver&quot;);
+    druidDataSource.setUrl(&quot;jdbc:mysql://localhost:3306/j16_db?useUnicode=true&amp;characterEncoding=utf-8&quot;);
+    druidDataSource.setUsername(&quot;root&quot;);
+    druidDataSource.setPassword(&quot;123456&quot;);
+    return druidDataSource;
+}
+</code></pre><h3 id="2-mybatis（sqlSessionFactory、映射文件扫描包）"><a href="#2-mybatis（sqlSessionFactory、映射文件扫描包）" class="headerlink" title="2.mybatis（sqlSessionFactory、映射文件扫描包）"></a>2.mybatis（sqlSessionFactory、映射文件扫描包）</h3><p>xml</p>
+<pre><code>&lt;!--SqlSessionFactory--&gt;
+&lt;bean id=&quot;sqlSessionFactory&quot; class=&quot;org.mybatis.spring.SqlSessionFactoryBean&quot;&gt;
+    &lt;property name=&quot;dataSource&quot; ref=&quot;druidDataSource&quot;/&gt;
+&lt;/bean&gt;
+&lt;!--映射文件扫描包配置的组件--&gt;
+&lt;bean class=&quot;org.mybatis.spring.mapper.MapperScannerConfigurer&quot;&gt;
+  &lt;property name=&quot;basePackage&quot; value=&quot;com.cskaoyan.mapper&quot;/&gt;
+  &lt;property name=&quot;sqlSessionFactoryBeanName&quot; value=&quot;sqlSessionFactory&quot;/&gt;
+&lt;/bean&gt;
+</code></pre><p>JavaBean</p>
+<pre><code>/*sqlSessionFactorybean*/
+@Bean
+public SqlSessionFactoryBean sqlSessionFactory(DataSource dataSource){
+    SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
+    sqlSessionFactoryBean.setDataSource(dataSource);
+    return sqlSessionFactoryBean;
+}
+/*mapperScannerConfigurer*/
+@Bean
+public MapperScannerConfigurer mapperScannerConfigurer(){
+    MapperScannerConfigurer mapperScannerConfigurer = new MapperScannerConfigurer();
+    mapperScannerConfigurer.setSqlSessionFactoryBeanName(&quot;sqlSessionFactory&quot;);
+    mapperScannerConfigurer.setBasePackage(&quot;com.cskaoyan.mapper&quot;);
+    return mapperScannerConfigurer;
+}
+</code></pre><h3 id="3-transaction-—-配置事务扫描头"><a href="#3-transaction-—-配置事务扫描头" class="headerlink" title="3.transaction — 配置事务扫描头"></a>3.transaction — 配置事务扫描头</h3><p>xml</p>
+<pre><code>&lt;!--spring管理事务--&gt;
+&lt;bean id=&quot;txManager&quot; class=&quot;org.springframework.jdbc.datasource.DataSourceTransactionManager&quot;&gt;
+    &lt;property name=&quot;dataSource&quot; ref=&quot;druidDataSource&quot;/&gt;
+&lt;/bean&gt;
+&lt;tx:annotation-driven transaction-manager=&quot;txManager&quot;/&gt;
+</code></pre><p>JavaBean</p>
+<pre><code>@Bean
+public DataSourceTransactionManager dataSourceTransactionManager(DataSource dataSource){
+    DataSourceTransactionManager dataSourceTransactionManager = new DataSourceTransactionManager();
+    dataSourceTransactionManager.setDataSource(dataSource);
+    return dataSourceTransactionManager;
+}
+</code></pre><h3 id="4-convertor"><a href="#4-convertor" class="headerlink" title="4.convertor"></a>4.convertor</h3><p>编写类</p>
+<pre><code>public class String2DateConverter implements Converter&lt;String, Date&gt; {
+  @Override
+  public Date convert(String s) {
+    SimpleDateFormat simpleDateFormat = new SimpleDateFormat(&quot;yyyy-MM-dd&quot;);
+    try {
+        Date parse = simpleDateFormat.parse(s);
+        return parse;
+    } catch (ParseException e) {
+        e.printStackTrace();
+    }
+    return null;
+  }
+}
+</code></pre><p>编写配置JAVAConfig</p>
+<pre><code>@Autowired
+ConfigurableConversionService conversionService;
+
+@PostConstruct
+public void addConverter(){
+    String2DateConverter string2DateConverter = new String2DateConverter();
+    conversionService.addConverter(string2DateConverter);
+}
+
+/**
+ * converters的配置
+ * 1、从容器中取出conversionService
+ * 2、添加自定义的converter
+ * 3、重新注册回容器中
+ * @return
+ */
+@Bean
+@Primary
+public ConfigurableConversionService conversionService(){
+    return conversionService;
+}
+</code></pre><h3 id="5-interceptor"><a href="#5-interceptor" class="headerlink" title="5.interceptor"></a>5.interceptor</h3><p><strong>注意区分Aspect的通知类型</strong><br><img src="https://s2.ax1x.com/2019/11/03/KjNm6K.png" alt="KjNm6K.png"></p>
+<p>aspect的通知类型<br><img src="https://s2.ax1x.com/2019/11/03/KXJ9u4.png" alt="KXJ9u4.png"></p>
+<p>3.1.1 preHandle<br>返回值是boolean，当为true可以执行到Handler（RequestMapping所对应的的犯法），如果为false则执行不到handler。<br>当前类的prehandle返回值为true，一定可以执行到它所对应的afterCompletion</p>
+<p>3.1.2 PostHandle<br>执行是在Handler返回ModelAndView给dispatcherServlet之间执行<br>形参中包含一个ModelAndView，来源于@RequestMapping所对应的的Handler，并且可以对ModelAndView做进一步的处理</p>
+<p>3.1.3 afterCompletion<br>在dispatcherServlet处理完ModelAndView之后执行，通常做一些流的关闭</p>
+<p>写实现类</p>
+<pre><code>public class CustomInterceptor implements HandlerInterceptor {
+    @Override
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+        System.out.println(&quot;pre&quot;);
+        return true;
+    }
+
+    @Override
+    public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
+        System.out.println(&quot;post&quot;);
+    }
+
+    @Override
+    public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
+        System.out.println(&quot;after&quot;);
+    }
+}
+</code></pre><p>JavaBean配置</p>
+<pre><code>/**
+ * 拦截器
+ * mvc:interceptors
+ * @param registry
+ */
+@Override
+public void addInterceptors(InterceptorRegistry registry) {
+  registry.addInterceptor(new CustomInterceptor());
+  //继续add注册多个interceptor
+  // registry.addInterceptor()
+}
+</code></pre><h3 id="6-ExceptionHandler-—-ControllerAdvice"><a href="#6-ExceptionHandler-—-ControllerAdvice" class="headerlink" title="6.ExceptionHandler —- @ControllerAdvice"></a>6.ExceptionHandler —- @ControllerAdvice</h3><pre><code>@ControllerAdvice
+public class JsonExceptionHandler {
+  @ExceptionHandler(CustomException.class)
+  @ResponseBody
+  public BaseResultVo resolveCustomException(CustomException e){
+      BaseResultVo baseResultVo = new BaseResultVo();
+      baseResultVo.setErrorMsg(e.getMessage());
+      return baseResultVo;
+  }
+}
+</code></pre><h3 id="7-配置TypeHandler（在SpringBoot配置）"><a href="#7-配置TypeHandler（在SpringBoot配置）" class="headerlink" title="7.配置TypeHandler（在SpringBoot配置）"></a>7.配置TypeHandler（在SpringBoot配置）</h3><p>编写转换类：</p>
+<pre><code>@MappedTypes(String[].class)
+public class TransferStringArrayHandler implements TypeHandler&lt;String[]&gt; {
+    ObjectMapper objectMapper = new ObjectMapper();
+
+    /*插入数据 由javabean转换为数据库接收的类型*/
+    @Override
+    public void setParameter(PreparedStatement preparedStatement, int index, String[] strings, JdbcType jdbcType) throws SQLException {
+        try {
+            String jsonArray = objectMapper.writeValueAsString(strings);
+            preparedStatement.setString(index,jsonArray);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+    }
+    //由数据中查询出的结果转换成javabean中的类型
+    @Override
+    public String[] getResult(ResultSet resultSet, String parameterName) throws SQLException {
+        String value = resultSet.getString(parameterName);
+        return parseString2StringArray(value);
+    }
+
+    private String[] parseString2StringArray(String value) {
+
+        String[] strings = new String[0];
+        if (value == null){
+            return strings;
+        }
+        try {
+            strings = objectMapper.readValue(value, String[].class);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return strings;
+    }
+
+    @Override
+    public String[] getResult(ResultSet resultSet, int index) throws SQLException {
+        String value = resultSet.getString(index);
+        return parseString2StringArray(value);
+    }
+
+    @Override
+    public String[] getResult(CallableStatement callableStatement, int index) throws SQLException {
+        String value = callableStatement.getString(index);
+        return parseString2StringArray(value);
+    }
+}
+</code></pre><p>application.yml中配置</p>
+<pre><code>mybatis:
+  type-handlers-package: com.cskaoyan.mybatis
+</code></pre><h3 id="SpringMvcConfig"><a href="#SpringMvcConfig" class="headerlink" title="SpringMvcConfig"></a>SpringMvcConfig</h3><pre><code>@EnableWebMvc
+@ComponentScan(&quot;com.cskaoyan.controller&quot;)
+public class MvcConfig implements WebMvcConfigurer {
+}
+</code></pre><h3 id="SpringConfig"><a href="#SpringConfig" class="headerlink" title="SpringConfig"></a>SpringConfig</h3><pre><code>@ComponentScan(basePackages = &quot;com.cskaoyan&quot;,
+        excludeFilters = @ComponentScan.Filter(type = FilterType.ANNOTATION,value = {Controller.class, EnableWebMvc.class}))
+@Configuration
+@EnableTransactionManagement
+public class SpringConfig {
+
+}
+</code></pre><h2 id="星期六（11月02日）"><a href="#星期六（11月02日）" class="headerlink" title="星期六（11月02日）"></a>星期六（11月02日）</h2><h3 id="今日分享"><a href="#今日分享" class="headerlink" title="今日分享"></a>今日分享</h3><p>分享一：《clean code》   《SICP》</p>
+<p>分享二：<br>基础更重要<br>《Java并发编程》<br>git BAT面试题</p>
+<p>分享五：<br>引入自己擅长的</p>
+<p>分享六：面试<br>1.多用肯定的词，不要用好像，大概。要自信<br>2.</p>
+<pre><code>状态
+逻辑
+</code></pre><p>3.知道工作的流程<br>4.多聊，就像工作状态一样。</p>
+<p>冰伟师兄总结：<br>1.简历不要写太多<br>2.项目解决什么需求？为什么要做这样的项目？解决什么问题？<br>3.项目中证明自己的价值，解决了什么问题<br>4.突出重点<br>5.不要太急，体现思考，而不是乱说的结果<br>6.合作经验<br>7.理解面试官。自信<br>8.结果导向，为了目标</p>
+<h3 id="今日总结"><a href="#今日总结" class="headerlink" title="今日总结"></a>今日总结</h3><p>记录目录：<br>1.StringBuffer 和 StringBuilder</p>
+<p>2.关于异常和错误</p>
+<p>3.说出Servlet 的生命周期，并说出Servlet 和CGI 的区别。</p>
+<p>4.LinkedList 使用双向链表实现存储</p>
+<p>5.sleep() 和 wait() 有什么区别?</p>
+<p>6.抽象类和接口</p>
+<p>7.、接口是否可继承接口? 抽象类是否可实现(implements)接口? 抽象类是否可继承实体类(concrete class)?</p>
+<p>8.垃圾回收机制</p>
+<p>9.线程池</p>
+<p>10.关于可重复进入的锁ReentreLock</p>
+<p>11.Servlet 执行时一般实现哪几个方法？</p>
+<p>12.java 中实现多态的机制是什么？</p>
+<p>13.static，final，static final修饰变量到底有什么区别？</p>
+<p>王道资料Java100题<br>1.StringBuffer 和 StringBuilder<br>StringBuffer 字符串变量（线程安全）<br>StringBuilder 字符串变量（非线程安全）(后面提出的)</p>
+<p>toStringCache：</p>
+<pre><code>/**
+ * A cache of the last value returned by toString. Cleared
+ * whenever the StringBuffer is modified.
+ */
+
+@Override
+public synchronized StringBuffer append(Object obj) {
+    toStringCache = null;
+    super.append(String.valueOf(obj));
+    return this;
+}
+</code></pre><p>StringBuffer的toString方法，他会保存你上一次调用toString没有进行其他操作之后，最后的结果toStringCache。</p>
+<pre><code>@Override
+public synchronized String toString() {
+    if (toStringCache == null) {
+        toStringCache = Arrays.copyOfRange(value, 0, count);
+    }
+    return new String(toStringCache, true);
+}
+
+@Override
+public StringBuilder append(Object obj) {
+    return append(String.valueOf(obj));
+}
+</code></pre><p>2.关于异常</p>
+<p>异常表示程序运行过程中可能出现的非正常状态，运行时异常表示虚拟机的通常操作中可能<br>遇到的异常，是一种常见运行错误。java 编译器要求方法必须声明抛出可能发生的非运行<br>时异常，但是并不要求必须声明抛出未被捕获的运行时异常。</p>
+<p><strong>Throwable 分为异常和错误</strong></p>
+<pre><code>error都是继承自父类java.lang.Error，而exception都继承自java.lang.Exception. 他们都继承 Throwable
+</code></pre><p><strong>异常为什么要分成运行时异常和一般的异常？</strong></p>
+<p>checked: 编译器就会检查你的代码，会不会出现异常，要求你对可能出现的异常必须做出相应的处理。这种异常需要我们去try….catch….<br>unchecked: 运行时异常/错误，不应该被捕获，这就是程序中存在bug才会出现的，一般我们自定义unchecked的异常</p>
+<p>1)  error都是继承自父类java.lang.Error，而exception都继承自java.lang.Exception.<br>2)  再看看JDK中对于java.lang.Error和java.lang.Exception的解释。</p>
+<pre><code>java.lang.Error: An Error is a subclass of Throwable that indicates serious problems that a reasonable application should not try to catch. Most such errors are abnormal conditions. 即：Error是Throwable的子类，用于标记严重错误。合理的应用程序不应该去try/catch这种错误。绝大多数的错误都是非正常的，就根本不该出现的。
+
+java.lang.Exception: The class Exception and its subclasses are a form of Throwable that indicates conditions that a reasonable application might want to catch. 即Exception 是Throwable的一种形式的子类，用于指示一种合理的程序想去catch的条件。即它仅仅是一种程序运行条件，而非严重错误，并且鼓励用户程序去catch它。
+</code></pre><p>3)  Error和RuntimeException 及其子类都是未检查的异常（unchecked exceptions），<br>而所有其他的Exception类都是检查了的异常（checked exceptions）.</p>
+<p>checked exceptions: 通常是从一个可以恢复的程序中抛出来的，并且最好能够从这种异常中使用程序恢复。比如FileNotFoundException, ParseException，SQLException等。<br>unchecked exceptions: 通常是如果一切正常的话本不该发生的异常，但是的确发生了。比如ArrayIndexOutOfBoundException, ClassCastException等。从语言本身的角度讲，程序不该去catch这类异常，虽然能够从诸如RuntimeException这样的异常中catch并恢复，但是并不鼓励终端程序员这么做，因为完全没要必要。因为这类错误本身就是bug，应该被修复，出现此类错误时程序就应该立即停止执行。<br>因此，面对Errors和unchecked exceptions应该让程序自动终止执行，程序员不该做诸如try/catch这样的事情，而是应该查明原因，修改代码逻辑。</p>
+<p>常见的运行时异常：<br>ClassCastException(类转换异常)<br>IndexOutOfBoundsException(数组越界)<br>NullPointerException(空指针)<br>ArrayStoreException(数据存储异常，操作数组时类型不一致)<br>ArithmeticException（算数异常）</p>
+<h3 id="IDEA查看所有子类和层级关系"><a href="#IDEA查看所有子类和层级关系" class="headerlink" title="IDEA查看所有子类和层级关系"></a>IDEA查看所有子类和层级关系</h3><pre><code>ctrl + alt + u 查看所有父级
+ctrl + H(Hierarchy) 查看所有子类
+</code></pre><p>3.说出Servlet 的生命周期，并说出Servlet 和CGI 的区别。</p>
+<p>与cgi 的区别在于servlet 处于服务器进程中，它通过多线程方式运行其service 方法，一<br>个实例可以服务于多个请求，并且其实例一般不会销毁，而CGI 对每个请求都产生新的进程，<br>服务完成后就销毁，所以效率上低于servlet</p>
+<p>4.LinkedList 使用双向链表实现存储</p>
+<pre><code>//内部类
+private static class Node&lt;E&gt; {
+  E item;
+  Node&lt;E&gt; next;
+  Node&lt;E&gt; prev;
+  Node(Node&lt;E&gt; prev, E element, Node&lt;E&gt; next) {
+    this.item = element;
+    this.next = next;
+    this.prev = prev;
+  }
+}
+</code></pre><p>5.sleep() 和wait() 有什么区别?<br>sleep 是线程类（Thread）的方法，导致此线程暂停执行指定时间，给执行机会给<br>其他线程，但是监控状态依然保持，到时后会自动恢复。调用sleep 不会释放对象锁。<br>wait 是Object 类的方法，对此对象调用wait 方法导致本线程放弃对象锁，进入等待此对<br>象的等待锁定池，只有针对此对象发出notify 方法（或notifyAll）后本线程才进入对象<br>锁定池准备获得对象锁进入运行状态。</p>
+<p>线程的生命周期：<br> 创建  —-  就绪 —– 运行 —– 死亡</p>
+<pre><code>阻塞（等待）
+</code></pre><p>线程的控制</p>
+<pre><code>线程睡眠
+static void sleep(long millis)
+
+线程加入-  ----    当前线程等待调用join()方法的线程执行完毕再执行
+他是一个同步的方法：
+
+public final synchronized void join()            当前线程等待调用join()方法的线程执行完毕再执行
+public final synchronized void join(long millis) 指定等待期限
+
+
+线程礼让 ---- 让出当前时间片
+public static void yield()
+
+
+后台线程（守护线程）
+public final void setDaemon(boolean on)
+
+
+中断线程
+public void interrupt()
+public final void stop()
+</code></pre><p>6.抽象类和接口<br>抽象类是单继承，接口可以多实现。可以理解为一个东西有多种功能，但是主体只有一个</p>
+<p>为什么抽象类不能实现静态方法？</p>
+<pre><code>我们可以想到抽象类是没有构造方法的。因为他自己不能创建对象
+抽象类是为了去生成子类对象的。但是静态方法是依存于类。这两者就有违背了
+instanceof 运算符可以用来决定某对象的类是否实现了接口。
+</code></pre><p>7.、接口是否可继承接口? 抽象类是否可实现(implements)接口? 抽象类是否可继承实体类(concrete class)?<br>接口可以继承接口。抽象类可以实现(implements)接口，抽象类是否可继承实体类，但前提<br>是实体类必须有明确的构造函数。</p>
+<p>8.垃圾回收机制<br>判断是不是垃圾：<br>    1）引用计数算法  —- <strong>无法解决循环引用</strong><br>    2）根搜索算法</p>
+<pre><code>1) 判断什么是垃圾
+  垃圾：不能再访问到的对象就是垃圾。
+  算法：
+    a. 引用计数法
+      给堆中的每一个对象增加一个引用计数器，当每一次创建一个对象并赋值给一个变量是，
+      引用计数器就加1.当对象不再使用时（出了作用域），引用计数机减一。一但引用计数器为0，
+      对象就满足了垃圾回收的条件。
+    b. 该算法的基本思路就是通过一系列的名为GC Root的对象作为起始点，从这些节点开始向下搜索，
+      搜索所走的路径称为引用链（Reference chain）。当一个对象到所有的GC root之间没有任何引用链相连
+      （用图论的话来说就是没GC  roots到这些对象不可达）时，证明该对象是不可用的，GC程序即可回收这些对象。
+    GCroots:
+      JAVA虚拟机栈中的引用对象
+      方法区中的静态属性引用的对象
+      方法区中常量引用的对象
+      Shallow size 就是对象本身占用的内存大小，也就是对象头加成员变量占用内存大小的总和
+      Retained size 是该对象自己的shallow size 加上仅可以从该对象访问（直接或者间接访问）的对象的shallow size之和。
+      Retained size是该对象被GC之后所能回收的内存的总和。
+
+2) 回收垃圾
+  a. 标记清除算法
+  b. 标记整理算法   适用于对象多的情况
+  c. 标记复制算法   适用于存活对象较少的情况
+  d. 分代收集算法   年轻的标记复制  老的标记整理
+
+3) GC触发的时机
+  a.申请heap space失败后会触发GC回收
+  b.系统进入idle后一段时间会进行回收
+  c.主动调用GC进行回收 System.gc();
+</code></pre><p>9.线程池<br>线程池是<br>1.由一个存放任务的阻塞队列<br>2.存放一组运行的线程组成。线程和任务是分开的。</p>
+<pre><code>//阻塞队列存放任务
+BlockingQueue&lt;Runnable&gt; bq = new ArrayBlockingQueue&lt;&gt;(10);
+//一个简单的线程池
+Collection&lt;WorkThread&gt; threads
+
+ //构造函数---- 把线程放在存放线程的集合里面
+public MyThreadPool(int size) {
+  threads = new ArrayList&lt;&gt;(size);
+  for (int i = 0; i &lt; size; i++) {
+    //初始化工作线程，并启动线程放入线程池
+    WorkThread wt = new WorkThread();
+    wt.start();
+    threads.add(wt);
+  }
+}
+
+//工作线程
+private class WorkThread extends Thread {
+    @Override
+    public void run() {
+        while (true) { // 一直执行，不会进入死亡状态
+            try {
+                Runnable task = bq.take();
+                task.run();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+}
+
+// 获取任务放进阻塞队列
+public void execute(Runnable task) {
+    try {
+        bq.put(task);
+    } catch (InterruptedException e) {
+        e.printStackTrace();
+    }
+}
+</code></pre><p>//进行调用</p>
+<pre><code>public static void main(String[] args) {
+    MyThreadPool pool = new MyThreadPool(10);
+    Runnable task1 = new Runnable() {
+        @Override
+        public void run() {
+            for (int i = 0; i &lt; 100; i++) {
+                System.out.println(Thread.currentThread().getName() + &quot;: &quot; + i);
+                try {
+                    Thread.sleep(50);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    };
+
+    Runnable task2 = new Runnable() {
+        @Override
+        public void run() {
+            System.out.println(Thread.currentThread().getName() + &quot;: begin&quot;);
+            try {
+                Thread.sleep(500);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            System.out.println(Thread.currentThread().getName() + &quot;: end&quot;);
+        }
+    };
+
+    pool.execute(task1);
+    pool.execute(task2);
+}
+</code></pre><p>JDK实现的线程池，在并发包里面  六个参数</p>
+<pre><code>public ThreadPoolExecutor(int corePoolSize,
+                             int maximumPoolSize,
+                             long keepAliveTime,
+                             TimeUnit unit,
+                             BlockingQueue&lt;Runnable&gt; workQueue,
+                             ThreadFactory threadFactory,
+                             RejectedExecutionHandler handler) {
+</code></pre><p>@param corePoolSize the number of threads to keep in the pool, even</p>
+<pre><code>*        if they are idle, unless {@code allowCoreThreadTimeOut} is set
+* @param maximumPoolSize the maximum number of threads to allow in the
+*        pool                                                          （核心线程数）
+* @param keepAliveTime when the number of threads is greater than
+*        the core, this is the maximum time that excess idle threads
+*        will wait for new tasks before terminating.                 （多余线程的存活时间）
+* @param unit the time unit for the {@code keepAliveTime} argument   （表示存活时间的参数）
+* @param workQueue the queue to use for holding tasks before they are（存放任务队列））
+*        executed.  This queue will hold only the {@code Runnable}
+*        tasks submitted by the {@code execute} method.
+* @param threadFactory the factory to use when the executor           （创建线程的工厂）
+*        creates a new thread
+* @param handler the handler to use when execution is blocked          （任务阻塞的处理）
+*        because the thread bounds and queue capacities are reached
+</code></pre><p>RejectedExecutionHandler：<br>    |– ThreadPoolExecutor.AbortPolicy  抛出一个异常 RejectedExecutionException<br>    |– ThreadPoolExecutor.CallerRunsPolicy 往线程池添加任务的线程执行该任务<br>    |– ThreadPoolExecutor.DiscardOldestPolicy 丢弃最早的任务，添加该任务<br>    |– ThreadPoolExecutor.DiscardPolicy 直接丢弃任务</p>
+<p>比较我们自己创建的线程池和JDK实现的线程池</p>
+<p>我们自己实现的：</p>
+<pre><code>1.一个集合存放线程
+2.一个阻塞队列存放任务
+</code></pre><p>JDK实现：</p>
+<pre><code>1.核心线程数
+2.最大线程数
+3.除了核心线程，多余线程的存活时间
+4.存活时间的单位
+5.阻塞队列
+6.阻塞之后的处理机制
+</code></pre><p>10.关于可重复进入的锁ReentreLock<br>ReentreLock 一个内部类Sync ，继承了抽象同步队列</p>
+<pre><code>abstract static class Sync extends AbstractQueuedSynchronizer {
+</code></pre><p>就能通过lock()方法锁住当前线程</p>
+<pre><code>public void lock() {
+    sync.lock();
+}
+
+public void unlock() {
+    sync.release(1);
+}
+释放方法
+public final boolean release(int arg) {
+    if (tryRelease(arg)) {
+        Node h = head;
+        if (h != null &amp;&amp; h.waitStatus != 0)
+            unparkSuccessor(h);
+        return true;
+    }
+    return false;
+}
+</code></pre><p>从这里我们可以看出其实可重复进入的锁底层通过一个同步的队列实现的</p>
+<p>11.Servlet 执行时一般实现哪几个方法？<br>public void init(ServletConfig config)<br>public ServletConfig getServletConfig()<br>public String getServletInfo()<br>public void service(ServletRequest request,ServletResponse response)<br>public void destroy()</p>
+<p>12.java 中实现多态的机制是什么？<br>方法的重写Overriding 和重载Overloading 是Java 多态性的不同表现。重写Overriding<br>是父类与子类之间多态性的一种表现，重载Overloading 是一个类中多态性的一种表现。</p>
+<p>13.static，final，static final修饰变量到底有什么区别？<br>最终结论，通过实验我们可以得出:</p>
+<pre><code>1.final变量在赋初值后，在后期过程中不可被改变。
+2.static变量在赋初值后，每次修改都可以改变，且在方法区中仅有一份，两个对象共享信息。
+3.static final定义的常量，在dataseg区域存在一份不可修改的常量值。
+</code></pre><p>原文链接：<a href="https://blog.csdn.net/Myuhua/article/details/84873707" target="_blank" rel="external">https://blog.csdn.net/Myuhua/article/details/84873707</a></p>
+<p>14.程序设计的原则SOILD<br>在程序开发过程中，为了让代码更加健壮，更具有复习用性和可维护性，在设计的过程中一般会遵循以下六个原则：</p>
+<p>S 单一原则<br>一个模块只做一件事，责任单一，以便修改和错误定位。</p>
+<p>O 开闭原则 — 对增加开放，对修改关闭</p>
+<p>L 代替原则（里氏替换原则）<br>客户模块不应关心服务模块的是如何工作的；同样的接口模块之间，可以在不知道服务模块代码的情况下，进行替换。—接口或父类出现的地方，实现接口的类或子类可以代入。</p>
+<p>I 接口隔离原则<br>客户模块不应该依赖大的接口，应该裁减为小的接口给客户模块使用，以减少依赖性。如Java中一个类实现多个接口，不同的接口给不用的客户模块使用，而不是提供给客户模块一个大的接口。</p>
+<p>D 依赖原则</p>
+<pre><code>(1)高层模块不要依赖低层模块；
+(2)高层和低层模块都要依赖于抽象；
+(3)抽象不要依赖于具体实现；
+(4)具体实现要依赖于抽象；
+(5)抽象和接口使模块之间的依赖分离。
+</code></pre><p>例子<br><a href="https://www.jdon.com/51826" target="_blank" rel="external">https://www.jdon.com/51826</a></p>
+<p>————————————错题<br>错题1</p>
+<pre><code>public class Something {
+    public static void main(String[] args) {
+        Other o = new Other();
+        new Something().addOne(o);
+    }
+    public void addOne(final Other o) {
+        o.i++;
+    }
+}
+class Other {
+    public int i;
+}
+</code></pre><p>和上面的很相似，都是关于final 的问题，这有错吗?<br>答案: 正确。在addOne method 中，参数o 被修饰成final。如果在addOne method 里我们<br>修改了o 的reference(比如: o = new Other();)，那么如同上例这题也是错的。但这里修改的是o 的member<br>vairable (成员变量)，而o 的reference 并没有改变。</p>
+<p>错题2</p>
+<pre><code>class Something {
+    final int i;
+    public void doSomething() {
+        System.out.println(&quot;i = &quot; + i);
+    }
+}
+和上面一题只有一个地方不同，就是多了一个final。这难道就错了吗?
+答案: 错。final int i 是个final 的instant variable (实例变量，或叫成员变量)。final
+的instant variable 没有default value，必须在constructor (构造器)结束之前被赋予
+一个明确的值。可以修改为&quot;final int i = 0;&quot;。
+</code></pre><p><strong>回顾：对象创建的流程</strong></p>
+<p> 加载Student.class文件进内存<br>    在栈内存为s开辟空间<br>    在堆内存为学生对象开辟空间<br>    对学生对象的成员变量进行默认初始化<br>    对学生对象的成员变量进行显示初始化<br>    通过构造方法对学生对象的成员变量赋值<br>    学生对象初始化完毕，把对象地址赋值给s变量</p>
+<p>错题3：</p>
+<p>此处，Something 类的文件名叫OtherThing.java</p>
+<pre><code>class Something {
+  private static void main(String[] something_to_do) {
+   System.out.println(&quot;Do something ...&quot;);
+  }
+}
+</code></pre><p>这个好像很明显。<br>答案: 正确。从来没有人说过Java 的Class 名字必须和其文件名相同。但public class<br>的名字必须和文件名相同。看出运行的入口main也不一定要写在主类（和文件名相同的类）上</p>
+<p>错题4：</p>
+<pre><code>interface A{
+    int x = 0;
+}
+class B{
+    int x =1;
+}
+class C extends B implements A {
+  public void pX(){
+      System.out.println(x); // 错误
+      System.out.println(super.x); //  表示父类的x
+      System.out.println(A.x);     //  接口默认的成员变量： public static final
+  }
+  public static void main(String[] args) {
+      new C().pX();
+  }
+}
+</code></pre><p>//    答案：错误。在编译时会发生错误(错误描述不同的JVM 有不同的信息，意思就是未明确的<br>//    x 调用，两个x 都匹配（就象在同时import java.util 和java.sql 两个包时直接声明Date<br>//    一样）。对于父类的变量,可以用super.x 来明确，而接口的属性默认隐含为public static final.所以可以通过A.x 来明确。</p>
+<p>错题5： 接口里面的成员默认都是 public static final修饰</p>
+<pre><code>interface Playable {
+    void play();
+}
+interface Bounceable {
+    void play();
+}
+interface Rollable extends Playable, Bounceable {
+    Ball ball = new Ball(&quot;PingPang&quot;);
+}
+class Ball implements Rollable {
+    private String name;
+    public String getName() {
+        return name;
+    }
+    public Ball(String name) {
+        this.name = name;
+    }
+    public void play() {
+        ball = new Ball(&quot;Football&quot;);
+        System.out.println(ball.getName());
+    }
+}
+</code></pre><p>这个错误不容易发现。<br>答案: 错。”interface Rollable extends Playable, Bounceable”没有问题。interface可继承多个interfaces，所以这里没错。</p>
+<p>问题出在interface Rollable 里的”Ball ball =new Ball(“PingPang”);”。<br>任何在interface 里声明的interface variable (接口变量，也可称成员变量)，默认为public static final。也就是说”Ball ball = newBall(“PingPang”);”实际上是”public static final Ball ball = new Ball(“PingPang”);”。在Ball 类的Play()方法中，”ball = new Ball(“Football”);”改变了ball 的reference，而这里的ball 来自Rollable interface，Rollable interface 里的ball 是public staticfinal 的，final 的object 是不能被改变reference 的。因此编译器将在”ball = newBall(“Football”);”这里显示有错。</p>
+<h3 id="今日问题-1"><a href="#今日问题-1" class="headerlink" title="今日问题"></a>今日问题</h3><p>1.归并排序<br>其实就是划分为最小的两个结点。</p>
+<pre><code>public void mergeSort(int[] a,int left,int right){
+    if(left&lt;right){
+        int middle = (left+right)/2;//分解
+        mergeSort(a, left, middle);//治理
+        mergeSort(a,middle+1,right);
+        merge(a,left,middle,right);//合并
+    }
+}
+/**
+ * 合并
+ * @param a
+ * @param left
+ * @param middle
+ * @param right
+ */
+private void merge(int[] a, int left, int middle, int right) {
+    int [] tmpArray = new int[a.length];
+    int rightStart = middle+1;
+    int tmp = left;
+    int third = left;
+    //比较两个小数组相应下标位置的数组大小，小的先放进新数组
+    while(left&lt;=middle &amp;&amp; rightStart&lt;=right){
+        if(a[left]&lt;=a[rightStart]){
+            tmpArray[third++] = a [left++];
+        }else{
+            tmpArray[third++] = a[rightStart++];
+        }
+    }
+    //如果左边还有数据需要拷贝，把左边数组剩下的拷贝到新数组
+    while(left&lt;=middle){
+        tmpArray[third++] = a[left++];
+    }
+    //如果右边还有数据......
+    while(rightStart&lt;=right){
+        tmpArray[third++] = a[rightStart++];
+    }
+    while(tmp&lt;=right){
+        a[tmp] = tmpArray[tmp++];
+    }
+}
+</code></pre><p>2.elasticSearch</p>
+<pre><code>https://es.xiaoleilu.com/010_Intro/05_What_is_it.html
+</code></pre><p>Elasticsearch是一个基于Apache Lucene(TM)的开源搜索引擎。无论在开源还是专有领域，Lucene可以被认为是迄今为止最先进、性能最好的、功能最全的搜索引擎库。<br>3.posix标准<br>4.搜索引擎<br>5.人生规划<br>6.每日站立会议（敏捷开发）</p>
+<p><strong>7.在dubbo实现的时候，调用服务的时候。</strong><br>需要做一层Client的校验，dubbo层调用Client层</p>
+<h2 id="星期日（11月03日）"><a href="#星期日（11月03日）" class="headerlink" title="星期日（11月03日）"></a>星期日（11月03日）</h2><p>最后降级的有空再补上。</p>
+
+    </div>
+
+    
+    
+    
+        
+      
+
+      <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2019/10/28/Java总结（十八）/" rel="next" title="Java总结（十八）">
+                  <i class="fa fa-chevron-left"></i> Java总结（十八）
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+    
+    <div class="comments" id="comments"></div>
+  
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#星期一（10月28日）"><span class="nav-number">1.</span> <span class="nav-text">星期一（10月28日）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#高并发三大利器"><span class="nav-number">1.1.</span> <span class="nav-text">高并发三大利器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#缓存"><span class="nav-number">1.2.</span> <span class="nav-text">缓存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#限流"><span class="nav-number">1.3.</span> <span class="nav-text">限流</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#降级"><span class="nav-number">1.4.</span> <span class="nav-text">降级</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#星期二（10月29日）"><span class="nav-number">2.</span> <span class="nav-text">星期二（10月29日）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-接口优化"><span class="nav-number">3.</span> <span class="nav-text">1.接口优化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#IP白名单设置"><span class="nav-number">3.1.</span> <span class="nav-text">IP白名单设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第一步获取用户真实IP"><span class="nav-number">3.2.</span> <span class="nav-text">第一步获取用户真实IP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第二步设置IP白名单即可"><span class="nav-number">3.3.</span> <span class="nav-text">第二步设置IP白名单即可</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#接口频率设置"><span class="nav-number">3.4.</span> <span class="nav-text">接口频率设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方法一：AOP可以设置"><span class="nav-number">3.5.</span> <span class="nav-text">方法一：AOP可以设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第一步先导入织入包"><span class="nav-number">3.6.</span> <span class="nav-text">第一步先导入织入包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#然后写注解"><span class="nav-number">3.7.</span> <span class="nav-text">然后写注解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实现切面类"><span class="nav-number">3.8.</span> <span class="nav-text">实现切面类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#然后在-controller-上写注解"><span class="nav-number">3.9.</span> <span class="nav-text">然后在 controller 上写注解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#最后在启动类上写注解"><span class="nav-number">3.10.</span> <span class="nav-text">最后在启动类上写注解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方法二：filter可以设置"><span class="nav-number">3.11.</span> <span class="nav-text">方法二：filter可以设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#今日问题"><span class="nav-number">3.12.</span> <span class="nav-text">今日问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#星期三（10月30日）"><span class="nav-number">4.</span> <span class="nav-text">星期三（10月30日）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据库相关："><span class="nav-number">5.</span> <span class="nav-text">数据库相关：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据库中间件"><span class="nav-number">6.</span> <span class="nav-text">数据库中间件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#索引"><span class="nav-number">7.</span> <span class="nav-text">索引</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#B-树"><span class="nav-number">7.1.</span> <span class="nav-text">B+树</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#索引为什么使用B-树，而不使用其他数据结构比如二叉树、红黑树、hash表、B树？"><span class="nav-number">7.2.</span> <span class="nav-text">索引为什么使用B+树，而不使用其他数据结构比如二叉树、红黑树、hash表、B树？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#引擎是什么？"><span class="nav-number">7.3.</span> <span class="nav-text">引擎是什么？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MyISAM"><span class="nav-number">7.4.</span> <span class="nav-text">MyISAM</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#InnoDb"><span class="nav-number">7.5.</span> <span class="nav-text">InnoDb</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#问题五：为什么Innodb表必须要有主键，同时推荐使用自增的整数作为主键？"><span class="nav-number">7.6.</span> <span class="nav-text">问题五：为什么Innodb表必须要有主键，同时推荐使用自增的整数作为主键？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#问题六：为什么非主键索引叶子节点存放的是主键的值？"><span class="nav-number">7.7.</span> <span class="nav-text">问题六：为什么非主键索引叶子节点存放的是主键的值？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Mysql-默认的存储引擎是什么？-—-5是InnoDB"><span class="nav-number">7.8.</span> <span class="nav-text">Mysql 默认的存储引擎是什么？ —- 5是InnoDB</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#联合索引的实现"><span class="nav-number">7.9.</span> <span class="nav-text">联合索引的实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#重点来了"><span class="nav-number">7.10.</span> <span class="nav-text">重点来了</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#索引语法-—-我们可以知道这是对字段添加索引使用的是DML"><span class="nav-number">7.11.</span> <span class="nav-text">索引语法 —- 我们可以知道这是对字段添加索引使用的是DML</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#索引实战"><span class="nav-number">7.12.</span> <span class="nav-text">索引实战</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#附加内容：-Stored-Procedure-存储过程，-感觉就是批处理"><span class="nav-number">7.13.</span> <span class="nav-text">附加内容： Stored Procedure 存储过程， 感觉就是批处理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Explain详解"><span class="nav-number">7.14.</span> <span class="nav-text">Explain详解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#select-type列"><span class="nav-number">7.15.</span> <span class="nav-text">select_type列</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#table列"><span class="nav-number">7.16.</span> <span class="nav-text">table列</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#type列"><span class="nav-number">7.17.</span> <span class="nav-text">type列</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#possible-keys"><span class="nav-number">7.18.</span> <span class="nav-text">possible_keys</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#key列"><span class="nav-number">7.19.</span> <span class="nav-text">key列</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ref列"><span class="nav-number">7.20.</span> <span class="nav-text">ref列</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#rows列"><span class="nav-number">7.21.</span> <span class="nav-text">rows列</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Extra列"><span class="nav-number">7.22.</span> <span class="nav-text">Extra列</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#索引的使用注意事项"><span class="nav-number">8.</span> <span class="nav-text">索引的使用注意事项</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#索引全覆盖"><span class="nav-number">8.1.</span> <span class="nav-text">索引全覆盖</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#索引最左前缀原则"><span class="nav-number">8.2.</span> <span class="nav-text">索引最左前缀原则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#不要对索引的列做任何操作，否则会索引失效"><span class="nav-number">8.3.</span> <span class="nav-text">不要对索引的列做任何操作，否则会索引失效</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#存储引擎不能使用索引中范围条件右侧的列"><span class="nav-number">8.4.</span> <span class="nav-text">存储引擎不能使用索引中范围条件右侧的列</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#尽量使用覆盖索引，而减少使用select"><span class="nav-number">8.5.</span> <span class="nav-text">尽量使用覆盖索引，而减少使用select*</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用！-或者-lt-gt-时会索引失效"><span class="nav-number">8.6.</span> <span class="nav-text">使用！=或者<>时会索引失效</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Like模糊查询索引字段会失效"><span class="nav-number">8.7.</span> <span class="nav-text">Like模糊查询索引字段会失效</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字符串如果不加单引号会导致索引失效"><span class="nav-number">8.8.</span> <span class="nav-text">字符串如果不加单引号会导致索引失效</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#慎用or，可能会导致索引失效"><span class="nav-number">8.9.</span> <span class="nav-text">慎用or，可能会导致索引失效</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#星期四（10月31日）"><span class="nav-number">9.</span> <span class="nav-text">星期四（10月31日）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#星期五（11月01日）"><span class="nav-number">10.</span> <span class="nav-text">星期五（11月01日）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1bean的生命周期"><span class="nav-number">10.1.</span> <span class="nav-text">1bean的生命周期</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#学习Spring源码寻找bean是怎么实例化的"><span class="nav-number">10.2.</span> <span class="nav-text">学习Spring源码寻找bean是怎么实例化的</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ApplicationContext"><span class="nav-number">10.3.</span> <span class="nav-text">ApplicationContext</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#都是实现自BeanFactory"><span class="nav-number">10.4.</span> <span class="nav-text">都是实现自BeanFactory</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#getBean方法被AbstractApplicationContext实现"><span class="nav-number">10.5.</span> <span class="nav-text">getBean方法被AbstractApplicationContext实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#this-getBeanFactory-如果没写就有一个默认的"><span class="nav-number">10.6.</span> <span class="nav-text">this.getBeanFactory() 如果没写就有一个默认的</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#getBean-name-AbstractBeanFactory-实现"><span class="nav-number">10.7.</span> <span class="nav-text">getBean(name)  AbstractBeanFactory 实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#最后的doGetBean-方法"><span class="nav-number">10.8.</span> <span class="nav-text">最后的doGetBean()方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-getSingleton方法-DefaultSingletonBeanRegistry类中"><span class="nav-number">10.9.</span> <span class="nav-text">1.getSingleton方法 DefaultSingletonBeanRegistry类中</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-getObjectForBeanInstance-方法-AbstractBeanFactory类中"><span class="nav-number">10.10.</span> <span class="nav-text">2.getObjectForBeanInstance 方法 AbstractBeanFactory类中</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#getObjectForBeanInstance"><span class="nav-number">10.11.</span> <span class="nav-text">getObjectForBeanInstance()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-获取单例对象时候调用DefaultSingletonBeanRegistry类getSingleton方法的第二个参数ObjectFactory实现了ObjectFactory接口的getObject方法，调用的createBean方法"><span class="nav-number">10.12.</span> <span class="nav-text">3.获取单例对象时候调用DefaultSingletonBeanRegistry类getSingleton方法的第二个参数ObjectFactory实现了ObjectFactory接口的getObject方法，调用的createBean方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-public-Object-getSingleton-String-beanName-ObjectFactory-lt-gt-singletonFactory-方法"><span class="nav-number">10.13.</span> <span class="nav-text">4.public Object getSingleton(String beanName, ObjectFactory<?> singletonFactory) 方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结一下"><span class="nav-number">10.14.</span> <span class="nav-text">总结一下</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#注入组件"><span class="nav-number">11.</span> <span class="nav-text">注入组件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-数据源"><span class="nav-number">11.1.</span> <span class="nav-text">1.数据源</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-mybatis（sqlSessionFactory、映射文件扫描包）"><span class="nav-number">11.2.</span> <span class="nav-text">2.mybatis（sqlSessionFactory、映射文件扫描包）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-transaction-—-配置事务扫描头"><span class="nav-number">11.3.</span> <span class="nav-text">3.transaction — 配置事务扫描头</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-convertor"><span class="nav-number">11.4.</span> <span class="nav-text">4.convertor</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-interceptor"><span class="nav-number">11.5.</span> <span class="nav-text">5.interceptor</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-ExceptionHandler-—-ControllerAdvice"><span class="nav-number">11.6.</span> <span class="nav-text">6.ExceptionHandler —- @ControllerAdvice</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-配置TypeHandler（在SpringBoot配置）"><span class="nav-number">11.7.</span> <span class="nav-text">7.配置TypeHandler（在SpringBoot配置）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SpringMvcConfig"><span class="nav-number">11.8.</span> <span class="nav-text">SpringMvcConfig</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SpringConfig"><span class="nav-number">11.9.</span> <span class="nav-text">SpringConfig</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#星期六（11月02日）"><span class="nav-number">12.</span> <span class="nav-text">星期六（11月02日）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#今日分享"><span class="nav-number">12.1.</span> <span class="nav-text">今日分享</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#今日总结"><span class="nav-number">12.2.</span> <span class="nav-text">今日总结</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IDEA查看所有子类和层级关系"><span class="nav-number">12.3.</span> <span class="nav-text">IDEA查看所有子类和层级关系</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#今日问题-1"><span class="nav-number">12.4.</span> <span class="nav-text">今日问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#星期日（11月03日）"><span class="nav-number">13.</span> <span class="nav-text">星期日（11月03日）</span></a></li></ol></div>
+        
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/images/head.jpeg"
+      alt="王邸">
+  <p class="site-author-name" itemprop="name">王邸</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">34</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">标签</span>
+        
+      </div>
+    
+  </nav>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">王邸</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.3.8</div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.4.0</div>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+
+
+  <script src="/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.4.0"></script><script src="/js/motion.js?v=7.4.0"></script>
+<script src="/js/schemes/pisces.js?v=7.4.0"></script>
+
+<script src="/js/next-boot.js?v=7.4.0"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+
+<script>
+NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(item => {
+    return GUEST.includes(item);
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: false,
+    appId: 'Fn4BuvoixOxjJAhR79TvaD5M-gzGzoHsz',
+    appKey: '1uspTrSwPqkmSBSUr948WqxE',
+    placeholder: 'Just go go',
+    avatar: 'mm',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: true,
+    lang: '' || 'zh-cn',
+    path: location.pathname
+  });
+}, window.Valine);
+</script>
+
+</body>
+</html>
