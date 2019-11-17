@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.3.8">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.4.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.4.0" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.4.0">
+
+<link rel="stylesheet" href="//fonts.proxy.ustclug.org/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.4.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="综述又要起航了，前方是无尽的挑战。加油呀 jdk相关，linux部署相关， SpringCloud, 性能相关，数据库相关，以及最后的面试总结。本周的内容也不是很多，但是jdk相关为什么使用Java NioJava NIO浅析NIO（Non-blocking I/O，在Java领域，也称为New I/O），是一种同步非阻塞的I/O模型，也是I/O多路复用的基础，已经被越来越多地应用到大型应用服务器">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java总结（二十一）">
+<meta property="og:url" content="http://yoursite.com/2019/11/17/Java总结（二十一）/index.html">
+<meta property="og:site_name" content="路要坚持">
+<meta property="og:description" content="综述又要起航了，前方是无尽的挑战。加油呀 jdk相关，linux部署相关， SpringCloud, 性能相关，数据库相关，以及最后的面试总结。本周的内容也不是很多，但是jdk相关为什么使用Java NioJava NIO浅析NIO（Non-blocking I/O，在Java领域，也称为New I/O），是一种同步非阻塞的I/O模型，也是I/O多路复用的基础，已经被越来越多地应用到大型应用服务器">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-11-17T03:51:47.391Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java总结（二十一）">
+<meta name="twitter:description" content="综述又要起航了，前方是无尽的挑战。加油呀 jdk相关，linux部署相关， SpringCloud, 性能相关，数据库相关，以及最后的面试总结。本周的内容也不是很多，但是jdk相关为什么使用Java NioJava NIO浅析NIO（Non-blocking I/O，在Java领域，也称为New I/O），是一种同步非阻塞的I/O模型，也是I/O多路复用的基础，已经被越来越多地应用到大型应用服务器">
+  <link rel="canonical" href="http://yoursite.com/2019/11/17/Java总结（二十一）/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>Java总结（二十一） | 路要坚持</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">路要坚持</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+      <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block post">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/17/Java总结（二十一）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="王邸">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/head.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="路要坚持">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">Java总结（二十一）
+
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-11-17 11:51:12 / 修改时间：11:51:47" itemprop="dateCreated datePublished" datetime="2019-11-17T11:51:12+08:00">2019-11-17</time>
+            </span>
+          
+            
+
+            
+          
+
+          
+            <span id="/2019/11/17/Java总结（二十一）/" class="post-meta-item leancloud_visitors" data-flag-title="Java总结（二十一）" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2019/11/17/Java总结（二十一）/#comments" itemprop="discussionUrl"><span class="post-comments-count valine-comment-count" data-xid="/2019/11/17/Java总结（二十一）/" itemprop="commentCount"></span></a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="综述"><a href="#综述" class="headerlink" title="综述"></a>综述</h2><p>又要起航了，前方是无尽的挑战。加油呀 jdk相关，linux部署相关， SpringCloud, 性能相关，数据库相关，以及最后的面试总结。本周的内容也不是很多，但是</p><h2 id="jdk相关"><a href="#jdk相关" class="headerlink" title="jdk相关"></a>jdk相关</h2><h3 id="为什么使用Java-Nio"><a href="#为什么使用Java-Nio" class="headerlink" title="为什么使用Java Nio"></a>为什么使用Java Nio</h3><p><a href="https://tech.meituan.com/2016/11/04/nio.html" target="_blank" rel="external">Java NIO浅析</a><br>NIO（Non-blocking I/O，在Java领域，也称为New I/O），是一种同步非阻塞的I/O模型，也是I/O多路复用的基础，已经被越来越多地应用到大型应用服务器，成为解决高并发与大量连接、I/O处理问题的有效方式。<br>基于：通道 缓冲区 操作（选择器）<br><a href="https://www.jianshu.com/p/d30893c4d6bb" target="_blank" rel="external">https://www.jianshu.com/p/d30893c4d6bb</a></p><a id="more"></a>
+
+<h2 id="linux相关"><a href="#linux相关" class="headerlink" title="linux相关"></a>linux相关</h2><p><a href="https://www.jianshu.com/p/24035dc4a06e" target="_blank" rel="external">CentOs 安装mysql</a><br><a href="https://blog.csdn.net/testcs_dn/article/details/39233569" target="_blank" rel="external">CentOS6.5下Nginx1.7.4安装记录</a></p>
+<p>项目部署tomcat<br>前端：(npm ERR! missing script: build)[<a href="https://www.jianshu.com/p/6048426282fa" target="_blank" rel="external">https://www.jianshu.com/p/6048426282fa</a>]<br>tomcat部署之后，前后端都放在同一个服务下了。这样请求就请求同一个端口就好了。</p>
+<h2 id="SpringCloud相关"><a href="#SpringCloud相关" class="headerlink" title="SpringCloud相关"></a>SpringCloud相关</h2><p>6.springCloud<br><a href="https://blog.csdn.net/hellozpc/article/details/83692496#63Eureka_862" target="_blank" rel="external">https://blog.csdn.net/hellozpc/article/details/83692496#63Eureka_862</a></p>
+<p>Eureka的客户端启动报错Cannot execute request on any known server，无法注册到eureka<br><a href="https://blog.csdn.net/u012326462/article/details/82355213" target="_blank" rel="external">https://blog.csdn.net/u012326462/article/details/82355213</a></p>
+<p>Springcloud Eureka 服务启动页面不出来显示XML得解决方法<br><a href="https://blog.csdn.net/weixin_44544654/article/details/100314950" target="_blank" rel="external">https://blog.csdn.net/weixin_44544654/article/details/100314950</a><br><a href="https://blog.csdn.net/zyb2017/article/details/80265070" target="_blank" rel="external">https://blog.csdn.net/zyb2017/article/details/80265070</a></p>
+<h3 id="Eureka的高可用-Eureka集群"><a href="#Eureka的高可用-Eureka集群" class="headerlink" title="Eureka的高可用(Eureka集群)"></a>Eureka的高可用(Eureka集群)</h3><p>前面的测试，我们会发现，Eureka服务是一个单点服务，在生产环境就会出现单点故障，为了确保Eureka服务的高可用，我需要搭建Eureka服务的集群。<br>搭建Eureka集群非常简单，只要启动多个Eureka Server服务并且让这些Server端之间彼此进行注册即可实现。<br>注意配置security一定要自己手动配置，不然eureka一直报错</p>
+<pre><code>@Configuration
+@EnableWebSecurity
+public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+  /**
+   * 高版本springcloud的丢弃了配置:
+   *
+   * security:
+   *   basic:
+   *    enabled: true
+   *
+   * 所以应该使用以下方式开启
+   *
+   * @param http
+   * @throws Exception
+   */
+  @Override
+  protected void configure(HttpSecurity http) throws Exception {
+      // Configure HttpSecurity as needed (e.g. enable http basic).
+      http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.NEVER);
+      http.csrf().disable();
+      //注意：为了可以使用 http://${user}:${password}@${host}:${port}/eureka/ 这种方式登录,所以必须是httpBasic,
+      // 如果是form方式,不能使用url格式登录
+      http.authorizeRequests().anyRequest().authenticated().and().httpBasic();
+  }
+}
+</code></pre><h2 id="restTemplate"><a href="#restTemplate" class="headerlink" title="restTemplate"></a>restTemplate</h2><h3 id="1-简述RestTemplate"><a href="#1-简述RestTemplate" class="headerlink" title="1.简述RestTemplate"></a>1.简述RestTemplate</h3><p>是Spring用于同步client端的核心类，简化了与http服务的通信，并满足RestFul原则，程序代码可以给它提供URL，并提取结果。默认情况下，RestTemplate默认依赖jdk的HTTP连接工具。当然你也可以 通过setRequestFactory属性切换到不同的HTTP源，比如Apache HttpComponents、Netty和OkHttp。<br>RestTemplate能大幅简化了提交表单数据的难度，并且附带了自动转换JSON数据的功能，但只有理解了HttpEntity的组成结构（header与body），且理解了与uriVariables之间的差异，才能真正掌握其用法。这一点在Post请求更加突出，下面会介绍到。</p>
+<h3 id="zookeeper-Eureka-的比较"><a href="#zookeeper-Eureka-的比较" class="headerlink" title="zookeeper Eureka 的比较"></a>zookeeper Eureka 的比较</h3><p>ZooKeeper基于CP，不保证高可用，如果zookeeper正在选主，或者Zookeeper集群中半数以上机器不可用，那么将无法获得数据。<br>Eureka基于AP，能保证高可用，即使所有机器都挂了，也能拿到本地缓存的数据。作为注册中心，其实配置是不经常变动的，只有发版和机器出故障时会变。对于不经常变动的配置来说，CP是不合适的，而AP在遇到问题时可以用牺牲一致性来保证可用性，既返回旧数据，缓存数据。</p>
+<p>所以理论上Eureka是更适合作注册中心。而现实环境中大部分项目可能会使用ZooKeeper，那是因为集群不够大，并且基本不会遇到用做注册中心的机器一半以上都挂了的情况。所以实际上也没什么大问题。<br><a href="https://www.cnblogs.com/jieqing/p/8394001.html" target="_blank" rel="external">https://www.cnblogs.com/jieqing/p/8394001.html</a></p>
+<h2 id="性能相关"><a href="#性能相关" class="headerlink" title="性能相关"></a>性能相关</h2><p>如何设计一个高并发接口 = 如何缩短一个接口的相应时间，其实就是在问你如何优化一个接口<br>其实可以从几个方面来考虑 ，不过都要结合具体的业务来说。</p>
+<pre><code>1，从tomcat来说，优化tomcat连接数配置（server.tomcat.max-connections），最大工作线程数配置（server.tomcat.max-threads）优化tomcat的keepalive连接时间配置（keep-alive-time-out），这些参数都可以在springboot项目中的yml配置中配
+2，从缓存来说，如果一个接口的的相应数据不是实时变化的，那么我们可以对接口相应请求加上缓存（redis是业务层实现，nginx 为代理层实现），下次请求过来直接从缓存中取，这个时候如果数据变化了，可以同步删除缓存，下次过来查的时候再生成一次并存到缓存中。
+3，从静态化来说，可以采用PhantomJS等无头浏览器来实行全页面静态化，把接口的相应结果静态化，并且配以CDN等工具实现快速响应。
+4，从sql的角度来说，在实际的开发中，我们有时不得不操作数据库，这个时候我们需要监控慢sql，可以采用Druid（内置StatFilter）等提供的工具来监控,并且采用相应的措施来优化慢sql，例如分库分表，读写分离，切表，优化隔离级别等。
+5，从业务角度来说，对于一些不必要知道返回接口的操作，我们可以优化为异步（发消息，异步线程）去操作，对于低级别的操作，我们可以采用守护线程去执行。
+下面为结合高可用来回答：（高并发其实和高可用很难分开，并发数上去了，自然要保证高可用，不然失去了意义）
+a, 令牌桶限流（google提供了一个高并发包，叫guava）
+b, 验证码防刷技术，请求接口之前先获取一个验证码（不会涉及到数据库操作），然后请求接口的时候验证这个验证码，如果正确再去请求
+c, 服务器集群部署，采用选举策略，一个服务挂了另一个服务要能顶上，并且做好监控
+</code></pre><h2 id="数据库相关"><a href="#数据库相关" class="headerlink" title="数据库相关"></a>数据库相关</h2><h3 id="容灾和备份的区别"><a href="#容灾和备份的区别" class="headerlink" title="容灾和备份的区别"></a>容灾和备份的区别</h3><p>备份：备份是容灾的基础，通常指在数据中心内，将全部或部分数据集合从应用主机的硬盘或阵列复制到其它的存储介质的过程。</p>
+<p>容灾：容灾系统是指在相隔较远的异地，建立两套或多套功能相同的IT系统，互相之间可以进行健康状态监视和功能切换，当一处系统因意外(如火灾、地震等)停止工作时，整个应用系统可以切换到另一处，使得该系统功能可以继续正常工作。</p>
+<p>转自中国存储网，原文链接：<a href="http://www.chinastor.com/baike/dr/091434R92016.html" target="_blank" rel="external">http://www.chinastor.com/baike/dr/091434R92016.html</a></p>
+<p>“容灾”与“备份”不是同一个概念，严重同意楼上说的“容灾”是目的，而“备份”只是实现容灾的其中一种手段，不是唯一；</p>
+<p>“备份”只是将数据COPY一份，在其他介质保存，当数据丢失了，有“备份”可以用于恢复，无论手动还是自动，而有副本就相当于完成“备份”了，至于恢复不恢复，恢复完了没有，与“备份”是没有关系的，那属于“容灾”的范畴了。我们日常将东西考到U盘，光盘，移动硬盘也就是备份了。而“容灾”是为了通过一些技术手段的部署，达到出现“意外”的时候，业务不会中断或者中断后会自动恢复（注意要自动，而且恢复时间很短）。例如服务器、网络、存储哪一点出现问题，都会中断服务，所以这个时候每个点都需通过技术手段做保护，这就是容灾要考虑的事情。与“备份”不同的是，例如你的硬盘挂了，买一个新硬盘，你再将移动硬盘的数据拷过来就OK，但是这个过程中是要停止服务的，恢复过程是需要时间的。而“容灾”是要不中断服务的，例如说你有2台电脑，然后两边数据是实时同步的，忽然一台的硬盘坏了，不要紧，直接到另外一台办公好了，因为实时同步，坏了的那台的数据这边没坏的这台也有，这种就相当于容灾了。接着对上面的词语逐一介绍：按照属于“容灾”与不属于“容灾”来分开。</p>
+<h3 id="数据库版本控制"><a href="#数据库版本控制" class="headerlink" title="数据库版本控制"></a>数据库版本控制</h3><p><a href="https://www.zhihu.com/question/20080857" target="_blank" rel="external">https://www.zhihu.com/question/20080857</a></p>
+<p>继续补充下，开源工具也很多，准备尝试一下：<br><strong>DBV</strong><br>数据库版本管理工具：DBV<br>dbv.php: Database version control, made easy!</p>
+<p><strong>Flyway</strong><br>Flyway • Database<br>Migrations Made Easy.数据库版本管理工具Flyway——基础篇</p>
+<p><strong>dbdeploy</strong><br>dbdeploy.comUnitils结合Dbdeploy管理测试数据库数据库版本控制工具 Dbdeployliquibase：XML(转)在Web项目中使用LiquiBase实现数据库自动更新<br><a href="http://www.liquibase.org/" target="_blank" rel="external">http://www.liquibase.org/</a><br>Liquibase安装及使用</p>
+<h3 id="flyway"><a href="#flyway" class="headerlink" title="flyway"></a>flyway</h3><p><a href="https://flywaydb.org/getstarted/firststeps/commandline#configuring-flyway" target="_blank" rel="external">官网操作</a></p>
+<h2 id="对mysql乐观锁、悲观锁、共享锁、排它锁、行锁、表锁概念的理解"><a href="#对mysql乐观锁、悲观锁、共享锁、排它锁、行锁、表锁概念的理解" class="headerlink" title="对mysql乐观锁、悲观锁、共享锁、排它锁、行锁、表锁概念的理解"></a><a href="https://blog.csdn.net/puhaiyang/article/details/72284702" target="_blank" rel="external">对mysql乐观锁、悲观锁、共享锁、排它锁、行锁、表锁概念的理解</a></h2><h3 id="乐观锁"><a href="#乐观锁" class="headerlink" title="乐观锁"></a>乐观锁</h3><p>通常实现是这样的：在表中的数据进行操作时(更新)，先给数据表加一个版本(version)字段，每操作一次，将那条记录的版本号加1。也就是先查询出那条记录，获取出version字段,如果要对那条记录进行操作(更新),则先判断此刻version的值是否与刚刚查询出来时的version的值相等，如果相等，则说明这段期间，没有其他程序对其进行操作，则可以执行更新，将version字段的值加1；如果更新时发现此刻的version值与刚刚获取出来的version的值不相等，则说明这段期间已经有其他程序对其进行操作了，则不进行更新操作。</p>
+<p>举例：</p>
+<p>下单操作包括3步骤：<br>1.查询出商品信息</p>
+<pre><code>select (status,status,version) from t_goods where id=#{id}
+</code></pre><p>2.根据商品信息生成订单<br>3.修改商品status为2</p>
+<pre><code>update t_goods 
+set status=2,version=version+1
+where id=#{id} and version=#{version};
+</code></pre><h3 id="悲观锁-（-共享锁和排它锁-）"><a href="#悲观锁-（-共享锁和排它锁-）" class="headerlink" title="悲观锁 （ 共享锁和排它锁 ）"></a>悲观锁 （ 共享锁和排它锁 ）</h3><p>与乐观锁相对应的就是悲观锁了。悲观锁就是在操作数据时，认为此操作会出现数据冲突，所以在进行每次操作时都要通过获取锁才能进行对相同数据的操作，这点跟java中的synchronized很相似，所以悲观锁需要耗费较多的时间。 另外与乐观锁相对应的，悲观锁是由数据库自己实现了的，要用的时候，我们直接调用数据库的相关语句就可以了。<br>说到这里，由悲观锁涉及到的另外两个锁概念就出来了，它们就是共享锁与排它锁。<strong>共享锁</strong>和<strong>排它锁</strong>是悲观锁的不同的实现，它俩都属于悲观锁的范畴。</p>
+<h3 id="共享锁-lock-in-share-mode"><a href="#共享锁-lock-in-share-mode" class="headerlink" title="共享锁  lock in share mode"></a>共享锁  lock in share mode</h3><p>共享锁指的就是对于多个不同的事务，对同一个资源共享同一个锁。相当于对于同一把门，它拥有多个钥匙一样。就像这样，你家有一个大门，大门的钥匙有好几把，你有一把，你女朋友有一把，你们都可能通过这把钥匙进入你们家，进去啪啪啪啥的，一下理解了哈，没错，这个就是所谓的共享锁。<br>刚刚说了，对于悲观锁，一般数据库已经实现了，共享锁也属于悲观锁的一种，那么共享锁在mysql中是通过什么命令来调用呢。通过查询资料，了解到通过在执行语句后面加上lock in share mode 就代表对某些资源加上共享锁了。<br>比如，我这里通过 mysql 打开两个查询编辑器，在其中开启一个事务，并不执行commit语句<br>city表DDL如下：</p>
+<pre><code>CREATE TABLE `city` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) DEFAULT NULL,
+  `state` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
+</code></pre><p>一个事务去查找锁：</p>
+<pre><code>begin;
+SELECT * from city where id = &quot;1&quot;  lock in share mode;
+</code></pre><p>然后在另一个查询窗口中，对id为1的数据进行更新</p>
+<pre><code>update  city set name=&quot;666&quot; where id =&quot;1&quot;;
+</code></pre><p>此时，操作界面进入了卡顿状态，过几秒后，也提示错误信息</p>
+<pre><code>[SQL]update  city set name=&quot;666&quot; where id =&quot;1&quot;;
+[Err] 1205 - Lock wait timeout exceeded; try restarting transaction
+</code></pre><p>那么证明，对于id=1的记录加锁成功了，在上一条记录还没有commit之前，这条id=1的记录被锁住了，只有在上一个事务释放掉锁后才能进行操作，或用共享锁才能对此数据进行操作。</p>
+<h3 id="排它锁for-update"><a href="#排它锁for-update" class="headerlink" title="排它锁for update"></a>排它锁for update</h3><p>排它锁与共享锁相对应，就是指对于多个不同的事务，对同一个资源只能有一把锁。<br>与共享锁类型，在需要执行的语句后面加上for update就可以了</p>
+<h3 id="行锁"><a href="#行锁" class="headerlink" title="行锁"></a>行锁</h3><p>行锁，由字面意思理解，就是给某一行加上锁，也就是一条记录加上锁。<br>比如之前演示的共享锁语句</p>
+<pre><code>SELECT * from city where id = &quot;1&quot;  lock in share mode;
+</code></pre><p>由于对于city表中,id字段为主键，就也相当于索引。执行加锁时，会将id这个索引为1的记录加上锁，那么这个锁就是行锁。</p>
+<h3 id="表锁"><a href="#表锁" class="headerlink" title="表锁"></a>表锁</h3><p>表锁，和行锁相对应，给这个表加上锁。</p>
+<h2 id="浅谈Mysql共享锁、排他锁、悲观锁、乐观锁及其使用场景"><a href="#浅谈Mysql共享锁、排他锁、悲观锁、乐观锁及其使用场景" class="headerlink" title="浅谈Mysql共享锁、排他锁、悲观锁、乐观锁及其使用场景"></a><a href="https://blog.csdn.net/localhost01/article/details/78720727" target="_blank" rel="external">浅谈Mysql共享锁、排他锁、悲观锁、乐观锁及其使用场景</a></h2><p>相关名词<br>总结：对于以上，可以看得出来乐观锁和悲观锁的区别：</p>
+<pre><code>悲观锁实际使用了排他锁来实现（select **** for update）。文章开头说到，innodb加行锁的前提是：必须是通过索引条件来检索数据，否则会切换为表锁。
+因此，悲观锁在未通过索引条件检索数据时，会锁定整张表。导致其他程序不允许“加锁的查询操作”，影响吞吐。故如果在查询居多的情况下，推荐使用乐观锁。
+“加锁的查询操作”：加过排他锁的数据行在其他事务中是不能修改的，也不能通过for update或lock in share mode的加锁方式查询，但可以直接通过select ...from...查询数据，因为普通查询没有任何锁机制。
+</code></pre><p>乐观锁更新有可能会失败，甚至是更新几次都失败，这是有风险的。所以如果写入居多，对吞吐要求不高，可使用悲观锁。<br>也就是一句话：读用乐观锁，写用悲观锁。</p>
+<h3 id="自旋锁CAS"><a href="#自旋锁CAS" class="headerlink" title="自旋锁CAS"></a>自旋锁CAS</h3><p>CAS 实现自旋锁<br>既然用锁或 synchronized 关键字可以实现原子操作，那么为什么还要用 CAS 呢，因为加锁或使用 synchronized 关键字带来的性能损耗较大，而用 CAS 可以实现乐观锁，它实际上是直接利用了 CPU 层面的指令，所以性能很高。</p>
+<p>上面也说了，CAS 是实现自旋锁的基础，CAS 利用 CPU 指令保证了操作的原子性，以达到锁的效果，至于自旋呢，看字面意思也很明白，自己旋转，翻译成人话就是循环，一般是用一个无限循环实现。这样一来，一个无限循环中，执行一个 CAS 操作，当操作成功，返回 true 时，循环结束；当返回 false 时，接着执行循环，继续尝试 CAS 操作，直到返回 true。</p>
+<p>其实 JDK 中有好多地方用到了 CAS ,尤其是java.util.concurrent包下，比如 CountDownLatch、Semaphore、ReentrantLock 中，再比如 java.util.concurrent.atomic 包下，相信大家都用到过 Atomic* ，比如 AtomicBoolean、AtomicInteger 等。</p>
+<p>compareAndSet 方法，这就是实现 CAS 的核心方法了，在使用 AtomicBoolean 的这个方法时，只需要传递期望值和待更新的值即可，而它里面调用了 unsafe.compareAndSwapInt(this, valueOffset, e, u) 方法，它是个 native 方法，用 c++ 实现，具体的代码就不贴了，总之是利用了 CPU 的 cmpxchg 指令完成比较并替换，当然根据具体的系统版本不同，实现起来也有所区别，感兴趣的可以自行搜一下相关文章。</p>
+<p>使用场景<br>CAS 适合简单对象的操作，比如布尔值、整型值等；<br>CAS 适合冲突较少的情况，如果太多线程在同时自旋，那么长时间循环会导致 CPU 开销很大 ；</p>
+<h3 id="TCC"><a href="#TCC" class="headerlink" title="TCC"></a>TCC</h3><p>TCC  强一致性TCC  两段式、三段式的提交</p>
+<h3 id="刚性事务"><a href="#刚性事务" class="headerlink" title="刚性事务"></a>刚性事务</h3><pre><code>定义：遵循ACID原则，强一致性。
+代表：二阶段提交（2PC）
+</code></pre><p>二阶段提交协议是协调所有分布式原子事务参与者，并决定提交或取消（回滚）的分布式算法。</p>
+<h3 id="引入了事务管理器"><a href="#引入了事务管理器" class="headerlink" title="引入了事务管理器"></a>引入了事务管理器</h3><p>1、预备阶段</p>
+<pre><code>在请求阶段，协调者将通知事务参与者准备提交或取消事务，然后进入表决过程。
+在表决过程中，参与者将告知协调者自己的决策：同意（事务参与者本地作业执行成功）或取消（本地作业执行故障）。
+</code></pre><p>2、提交阶段</p>
+<pre><code>在该阶段，协调者将基于第一个阶段的投票结果进行决策：提交或取消。
+当且仅当所有的参与者同意提交事务协调者才通知所有的参与者提交事务，否则协调者将通知所有的参与者取消事务。参与者在接收到协调者发来的消息后将执行响应的操作。
+</code></pre><p>存在的问题：</p>
+<pre><code>同步阻塞问题：在执行的过程中，所有参与的节点都是事务型阻塞的，当参与者占有公共资源时，其他第三方节点访问公共资源不得不处于阻塞状态
+不能解决数据不一致的问题
+</code></pre><h3 id="TCC事务"><a href="#TCC事务" class="headerlink" title="TCC事务"></a>TCC事务</h3><p>全称：Try-Confirm-Cancel（可以理解为sql中的Lock、Commit、Rollback）<br>TCC是服务化的二阶段编程模型：<br>其 Try、Confirm、Cancel 3 个方法均由业务编码实现：Try 操作作为一阶段，负责资源的检查和预留。Confirm 操作作为二阶段提交操作，执行真正的业务。Cancel 是预留资源的取消。<br><a href="https://www.cnblogs.com/jajian/p/10014145.html" target="_blank" rel="external">终于有人把“TCC分布式事务”实现原理讲明白了！</a><br>讲清楚了TCC事务<br>但是有个问题：</p>
+<pre><code>他说confirm失败了会一直执行，直到成功为止感觉很蠢。如果cancel也失败了怎么办？
+</code></pre><h3 id="三阶段提交"><a href="#三阶段提交" class="headerlink" title="三阶段提交"></a>三阶段提交</h3><p><a href="https://www.hollischuang.com/archives/681" target="_blank" rel="external">关于分布式事务、两阶段提交协议、三阶提交协议</a><br>他还说了给rocketMq降级的一个策略，使用redis保存KV（key-value）来做。</p>
+<p>最后引出了一个Paxos的算法</p>
+<h3 id="paxos"><a href="#paxos" class="headerlink" title="paxos"></a>paxos</h3><p><a href="https://blog.csdn.net/u013679744/article/details/79222103" target="_blank" rel="external">Zookeeper系列（3）–Paxos算法的原理及过程透彻理解</a></p>
+<h3 id="Paxos算法产生的背景"><a href="#Paxos算法产生的背景" class="headerlink" title="Paxos算法产生的背景"></a>Paxos算法产生的背景</h3><p>Paxos算法是基于消息传递且具有高度容错特性的一致性算法，是目前公认的解决分布式一致性问题最有效的算法之一，其解决的问题就是在分布式系统中如何就<strong>某个值（决议）</strong>达成一致。<br>Paxos算法就是解决这种分布式场景中的一致性问题。对于一般的开发人员来说，只需要知道paxos是一个<strong>分布式选举算法</strong>即可。多个节点之间存在两种通讯模型：共享内存（Shared memory）、消息传递（Messages passing），Paxos是基于消息传递的通讯模型的。</p>
+<h3 id="在Paxos算法中，有三种角色："><a href="#在Paxos算法中，有三种角色：" class="headerlink" title="在Paxos算法中，有三种角色："></a>在Paxos算法中，有三种角色：</h3><pre><code>Proposer
+Acceptor
+Learners
+</code></pre><p>在具体的实现中，一个进程可能同时充当多种角色。 比如一个进程可能既是 Proposer 又是 Acceptor 又是 Learner 。</p>
+<pre><code>Proposer负责提出提案，
+Acceptor负责对提案作出裁决（accept与否），
+learner负责学习提案结果。
+</code></pre><p>还有一个很重要的概念叫<strong>提案（Proposal）</strong>。最终要达成一致的value就在提案里。只要Proposer发的提案被Acceptor接受（半数以上的Acceptor同意才行），Proposer就认为该提案里的value被选定了。Acceptor告诉Learner哪个value被选定，Learner就认为那个value被选定。只要Acceptor接受了某个提案，Acceptor就任务该提案里的value被选定了。</p>
+<p>为了避免单点故障，会有一个Acceptor集合，Proposer想Acceptor集合发送提案，Acceptor集合中的每个成员都有可能同意该提案且每个Acceptor只能批准一个提案，只有当一半以上的成员同意了一个提案，就认为该提案被选定了。</p>
+<h3 id="Paxos算法的解决的问题描述"><a href="#Paxos算法的解决的问题描述" class="headerlink" title="Paxos算法的解决的问题描述"></a>Paxos算法的解决的问题描述</h3><p>假设有一组可以提出（propose）value（value在提案Proposal里）的进程集合。一个一致性算法需要保证提出的这么多value中，只有一个value被选定（chosen）。如果没有value被提出，就不应该有value被选定。如果一个value被选定，那么所有进程都应该能学习（learn）到这个被选定的value。对于一致性算法，安全性（safaty）要求如下：</p>
+<p>只有被提出的value才能被选定。<br>只有一个value被选定，并且<br>如果某个进程认为某个value被选定了，那么这个value必须是真的被选定的那个。<br>Paxos的目标：保证<strong>最终有一个</strong>value会被选定，当value被选定后，进程最终也能获取到被选定的value。<br>paxos保证的是最终一致性</p>
+<h3 id="Paxos算法的过半依据"><a href="#Paxos算法的过半依据" class="headerlink" title="Paxos算法的过半依据"></a>Paxos算法的过半依据</h3><p>在Paxos算法中，采用了“过半”理念，也就是少数服从多数，这使Paxos算法具有很好的容错性。那么为什么采用过半就可以呢？<br>Paxos基于的过半数学原理： 我们称大多数（过半）进程组成的集合为法定集合，两个法定（过半）集合必然存在非空交集，即至少有一个公共进程，称为法定集合性质。 例如A,B,C,D,F进程组成的全集，法定集合Q1包括进程A,B,C，Q2包括进程B,C,D，那么Q1和Q2的交集必然不在空，C就是Q1，Q2的公共进程。如果要说Paxos最根本的原理是什么，那么就是这个简单性质。也就是说：<strong>两个过半的集合必然存在交集，也就是肯定是相等的，也就是肯定达成了一致。</strong></p>
+<h3 id="TX-LCN"><a href="#TX-LCN" class="headerlink" title="TX-LCN"></a>TX-LCN</h3><p><a href="https://www.jianshu.com/p/3e15d20ed308" target="_blank" rel="external">通过LCN实现分布式事务</a></p>
+<h2 id="关于面试"><a href="#关于面试" class="headerlink" title="关于面试"></a>关于面试</h2><p>自我介绍的时候，一定要自信的说出自己的优势<br>面试的时候，自信是第一位的。 我之前也是很不自信，也错过了很多好机会。<br>第二点就是：要对项目为什么使用一种技术要很理解，为什么使用分布式的架构？为什么使用rocketMq? 为什么使用令牌桶等等？ 面试的时候，我就是项目经理给别人介绍我们项目，面试其实就是一个debug的过程。</p>
+<h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><p>这是最后一次Java总结了。以后的总结，都是和情景相关的了。加油吧少年</p>
+
+    </div>
+
+    
+    
+    
+        
+      
+
+      <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2019/11/10/Java总结（二十）/" rel="next" title="Java总结（二十）">
+                  <i class="fa fa-chevron-left"></i> Java总结（二十）
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+    
+    <div class="comments" id="comments"></div>
+  
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#综述"><span class="nav-number">1.</span> <span class="nav-text">综述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#jdk相关"><span class="nav-number">2.</span> <span class="nav-text">jdk相关</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么使用Java-Nio"><span class="nav-number">2.1.</span> <span class="nav-text">为什么使用Java Nio</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#linux相关"><span class="nav-number">3.</span> <span class="nav-text">linux相关</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SpringCloud相关"><span class="nav-number">4.</span> <span class="nav-text">SpringCloud相关</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Eureka的高可用-Eureka集群"><span class="nav-number">4.1.</span> <span class="nav-text">Eureka的高可用(Eureka集群)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#restTemplate"><span class="nav-number">5.</span> <span class="nav-text">restTemplate</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-简述RestTemplate"><span class="nav-number">5.1.</span> <span class="nav-text">1.简述RestTemplate</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#zookeeper-Eureka-的比较"><span class="nav-number">5.2.</span> <span class="nav-text">zookeeper Eureka 的比较</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#性能相关"><span class="nav-number">6.</span> <span class="nav-text">性能相关</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据库相关"><span class="nav-number">7.</span> <span class="nav-text">数据库相关</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#容灾和备份的区别"><span class="nav-number">7.1.</span> <span class="nav-text">容灾和备份的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据库版本控制"><span class="nav-number">7.2.</span> <span class="nav-text">数据库版本控制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#flyway"><span class="nav-number">7.3.</span> <span class="nav-text">flyway</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#对mysql乐观锁、悲观锁、共享锁、排它锁、行锁、表锁概念的理解"><span class="nav-number">8.</span> <span class="nav-text">对mysql乐观锁、悲观锁、共享锁、排它锁、行锁、表锁概念的理解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#乐观锁"><span class="nav-number">8.1.</span> <span class="nav-text">乐观锁</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#悲观锁-（-共享锁和排它锁-）"><span class="nav-number">8.2.</span> <span class="nav-text">悲观锁 （ 共享锁和排它锁 ）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#共享锁-lock-in-share-mode"><span class="nav-number">8.3.</span> <span class="nav-text">共享锁  lock in share mode</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#排它锁for-update"><span class="nav-number">8.4.</span> <span class="nav-text">排它锁for update</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#行锁"><span class="nav-number">8.5.</span> <span class="nav-text">行锁</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#表锁"><span class="nav-number">8.6.</span> <span class="nav-text">表锁</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#浅谈Mysql共享锁、排他锁、悲观锁、乐观锁及其使用场景"><span class="nav-number">9.</span> <span class="nav-text">浅谈Mysql共享锁、排他锁、悲观锁、乐观锁及其使用场景</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#自旋锁CAS"><span class="nav-number">9.1.</span> <span class="nav-text">自旋锁CAS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TCC"><span class="nav-number">9.2.</span> <span class="nav-text">TCC</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#刚性事务"><span class="nav-number">9.3.</span> <span class="nav-text">刚性事务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#引入了事务管理器"><span class="nav-number">9.4.</span> <span class="nav-text">引入了事务管理器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TCC事务"><span class="nav-number">9.5.</span> <span class="nav-text">TCC事务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三阶段提交"><span class="nav-number">9.6.</span> <span class="nav-text">三阶段提交</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#paxos"><span class="nav-number">9.7.</span> <span class="nav-text">paxos</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Paxos算法产生的背景"><span class="nav-number">9.8.</span> <span class="nav-text">Paxos算法产生的背景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#在Paxos算法中，有三种角色："><span class="nav-number">9.9.</span> <span class="nav-text">在Paxos算法中，有三种角色：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Paxos算法的解决的问题描述"><span class="nav-number">9.10.</span> <span class="nav-text">Paxos算法的解决的问题描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Paxos算法的过半依据"><span class="nav-number">9.11.</span> <span class="nav-text">Paxos算法的过半依据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TX-LCN"><span class="nav-number">9.12.</span> <span class="nav-text">TX-LCN</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关于面试"><span class="nav-number">10.</span> <span class="nav-text">关于面试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#最后"><span class="nav-number">11.</span> <span class="nav-text">最后</span></a></li></ol></div>
+        
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/images/head.jpeg"
+      alt="王邸">
+  <p class="site-author-name" itemprop="name">王邸</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">36</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">标签</span>
+        
+      </div>
+    
+  </nav>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">王邸</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.3.8</div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.4.0</div>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+
+
+  <script src="/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.4.0"></script><script src="/js/motion.js?v=7.4.0"></script>
+<script src="/js/schemes/pisces.js?v=7.4.0"></script>
+
+<script src="/js/next-boot.js?v=7.4.0"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+
+<script>
+NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(item => {
+    return GUEST.includes(item);
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: false,
+    appId: 'Fn4BuvoixOxjJAhR79TvaD5M-gzGzoHsz',
+    appKey: '1uspTrSwPqkmSBSUr948WqxE',
+    placeholder: 'Just go go',
+    avatar: 'mm',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: true,
+    lang: '' || 'zh-cn',
+    path: location.pathname
+  });
+}, window.Valine);
+</script>
+
+</body>
+</html>
