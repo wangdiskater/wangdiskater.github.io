@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.3.8">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.4.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.4.0" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.4.0">
+
+<link rel="stylesheet" href="//fonts.proxy.ustclug.org/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.4.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="简介我们本来就知道入职之后人就容易迷失自我。我不能成为这样的人，虽然周围的环境不能改变，因为一直都没改变过。只有看到这样的事实，我们才能引以为鉴。绝对不要成为这样的人。这两周确实因为刚入职会有一点的紧张。但是经过两个礼拜的适应，已经得心应手了。虽然我们技术上可能还没有特别大的提升，但是我们的视野已经不同于在学习了。更多的是实际开发中（因为很多东西都不会用啊）。废话不多说了我们开始这两周的总结。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="周常总结(二十二)">
+<meta property="og:url" content="http://yoursite.com/2019/12/02/日常总结/index.html">
+<meta property="og:site_name" content="路要坚持">
+<meta property="og:description" content="简介我们本来就知道入职之后人就容易迷失自我。我不能成为这样的人，虽然周围的环境不能改变，因为一直都没改变过。只有看到这样的事实，我们才能引以为鉴。绝对不要成为这样的人。这两周确实因为刚入职会有一点的紧张。但是经过两个礼拜的适应，已经得心应手了。虽然我们技术上可能还没有特别大的提升，但是我们的视野已经不同于在学习了。更多的是实际开发中（因为很多东西都不会用啊）。废话不多说了我们开始这两周的总结。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-12-02T14:57:21.233Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="周常总结(二十二)">
+<meta name="twitter:description" content="简介我们本来就知道入职之后人就容易迷失自我。我不能成为这样的人，虽然周围的环境不能改变，因为一直都没改变过。只有看到这样的事实，我们才能引以为鉴。绝对不要成为这样的人。这两周确实因为刚入职会有一点的紧张。但是经过两个礼拜的适应，已经得心应手了。虽然我们技术上可能还没有特别大的提升，但是我们的视野已经不同于在学习了。更多的是实际开发中（因为很多东西都不会用啊）。废话不多说了我们开始这两周的总结。">
+  <link rel="canonical" href="http://yoursite.com/2019/12/02/日常总结/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>周常总结(二十二) | 路要坚持</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">路要坚持</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+      <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block post">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/02/日常总结/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="王邸">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/head.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="路要坚持">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">周常总结(二十二)
+
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-12-02 22:56:31 / 修改时间：22:57:21" itemprop="dateCreated datePublished" datetime="2019-12-02T22:56:31+08:00">2019-12-02</time>
+            </span>
+          
+            
+
+            
+          
+
+          
+            <span id="/2019/12/02/日常总结/" class="post-meta-item leancloud_visitors" data-flag-title="周常总结(二十二)" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2019/12/02/日常总结/#comments" itemprop="discussionUrl"><span class="post-comments-count valine-comment-count" data-xid="/2019/12/02/日常总结/" itemprop="commentCount"></span></a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>我们本来就知道入职之后人就容易迷失自我。我不能成为这样的人，虽然周围的环境不能改变，因为一直都没改变过。只有看到这样的事实，我们才能引以为鉴。绝对不要成为这样的人。这两周确实因为刚入职会有一点的紧张。但是经过两个礼拜的适应，已经得心应手了。虽然我们技术上可能还没有特别大的提升，但是我们的视野已经不同于在学习了。更多的是实际开发中（因为很多东西都不会用啊）。废话不多说了我们开始这两周的总结。</p><a id="more"></a>
+<h2 id="心路历程"><a href="#心路历程" class="headerlink" title="心路历程"></a>心路历程</h2><p>这两周感觉没有什么好写的，那是因为大脑没有充分的思考去想问题。刚入职应该会有更多不会的东西才对。而什么都没有总结只能说明是自己太懒了。确实，这两周的周末在打游戏。也在收拾一些东西。很多时间都浪费了。也可能是刚入职比较累的缘故，所以大脑还没回复到之前的水平。不过现在看来确实不能再打游戏了，因为打游戏确实消耗大量的精力，而且还没有好好休息。</p>
+<h2 id="上上周总结"><a href="#上上周总结" class="headerlink" title="上上周总结"></a>上上周总结</h2><h3 id="遇到问题"><a href="#遇到问题" class="headerlink" title="遇到问题"></a>遇到问题</h3><p>1)客户端向服务端请求拿不到数据问题<br>说明：在网关服务通过Micronaut的内置的HttpClient请求别的服务的时候，发现能请求到服务，发送回来的数据是存在的，但是接收到是一个空的数组。</p>
+<p>解决：经过检查发现之前在服务的Controller对应方法上的@Get()注解出了问题，之前编写demo添加了”produces = MediaType.TEXT_PLAIN”，导致回传数据不是以json的格式，从而接收不到。Micronaut默认是json传输的，所以不写produces默认能返回json数据。</p>
+<p>2)模糊查询问题<br>说明：使用Micronaut Data JDBC，显示的JDBC查询,即使用@Query()注解自定义sql语句时候，直接在语句里面写百分号报错。例如：<br>@Query(“select id,name,price from book b where b.title like %:title% limit 5”)<br>List<book> findBooks(String title);<br>解决：在传入title的时候，把模糊查询使用的符号拼接在title上，再调用Repository的方法传入拼接好的title即可。</book></p>
+<p>3）window查看端口占用问题</p>
+<pre><code>netstat -ano | findstr 8080
+taskkill /pid 8080 /f
+</code></pre><h3 id="技术栈"><a href="#技术栈" class="headerlink" title="技术栈"></a>技术栈</h3><p>就列用到的，先把标题列在这，这周都把这些东西补上！</p>
+<h3 id="Micronaut"><a href="#Micronaut" class="headerlink" title="Micronaut"></a>Micronaut</h3><h3 id="RxJava"><a href="#RxJava" class="headerlink" title="RxJava"></a>RxJava</h3><p>背压back pressure ….</p>
+<h3 id="Gradle"><a href="#Gradle" class="headerlink" title="Gradle"></a>Gradle</h3><p><a href="https://www.jianshu.com/p/001abe1d8e95" target="_blank" rel="external">Gradle 入门–只此一篇</a></p>
+<h3 id="算法质量snoar"><a href="#算法质量snoar" class="headerlink" title="算法质量snoar"></a>算法质量snoar</h3><h3 id="consul"><a href="#consul" class="headerlink" title="consul"></a>consul</h3><h2 id="上周总结"><a href="#上周总结" class="headerlink" title="上周总结"></a>上周总结</h2><h3 id="RabitMq"><a href="#RabitMq" class="headerlink" title="RabitMq"></a>RabitMq</h3><h3 id="关于Sql"><a href="#关于Sql" class="headerlink" title="关于Sql"></a>关于Sql</h3><p>1.关于sql语句，可以子查询先查一条出来然后再进行连接查询：</p>
+<pre><code>&quot;SELECT review.CreatedOn, review.ConsultNumber, review.DoctorName, review.DoctorID, review.PatientName, review.EvaluateContent, review.EvaluateLevel, review.YaeherReply, &quot; +
+  &quot; user.UserImage, doctor.HospitalName, doctor.Department, consultation.ConsultType, consultation.IIInessType\n&quot;+
+  &quot; FROM (SELECT CreatedOn, ConsultID, ConsultNumber, DoctorName, DoctorID, PatientName, EvaluateContent, EvaluateLevel, YaeherReply FROM consultationevaluation WHERE !IsDelete AND IsElite ORDER BY CreatedOn DESC LIMIT :number) as review\n&quot;+
+  &quot; INNER JOIN yaeherdoctor as doctor ON review.DoctorID = doctor.Id\n&quot;+
+  &quot; INNER JOIN yaeheruser as user ON doctor.UserID=user.Id\n&quot;+
+  &quot; INNER JOIN yaeherconsultation as consultation ON review.ConsultID=consultation.Id
+</code></pre><h3 id="遇到问题-1"><a href="#遇到问题-1" class="headerlink" title="遇到问题"></a>遇到问题</h3><p>1）RabbitMQ启动失败问题<br>解决：通过查看RabbnitMQ的官网了解到RabbitMQ和Erlang版本不兼容问题导致启动失败。</p>
+
+    </div>
+
+    
+    
+    
+        
+      
+
+      <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2019/11/17/Java总结（二十一）/" rel="next" title="Java总结（二十一）">
+                  <i class="fa fa-chevron-left"></i> Java总结（二十一）
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+    
+    <div class="comments" id="comments"></div>
+  
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#心路历程"><span class="nav-number">2.</span> <span class="nav-text">心路历程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#上上周总结"><span class="nav-number">3.</span> <span class="nav-text">上上周总结</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#遇到问题"><span class="nav-number">3.1.</span> <span class="nav-text">遇到问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#技术栈"><span class="nav-number">3.2.</span> <span class="nav-text">技术栈</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Micronaut"><span class="nav-number">3.3.</span> <span class="nav-text">Micronaut</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RxJava"><span class="nav-number">3.4.</span> <span class="nav-text">RxJava</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Gradle"><span class="nav-number">3.5.</span> <span class="nav-text">Gradle</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#算法质量snoar"><span class="nav-number">3.6.</span> <span class="nav-text">算法质量snoar</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#consul"><span class="nav-number">3.7.</span> <span class="nav-text">consul</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#上周总结"><span class="nav-number">4.</span> <span class="nav-text">上周总结</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#RabitMq"><span class="nav-number">4.1.</span> <span class="nav-text">RabitMq</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关于Sql"><span class="nav-number">4.2.</span> <span class="nav-text">关于Sql</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#遇到问题-1"><span class="nav-number">4.3.</span> <span class="nav-text">遇到问题</span></a></li></ol></li></ol></div>
+        
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/images/head.jpeg"
+      alt="王邸">
+  <p class="site-author-name" itemprop="name">王邸</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">37</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">标签</span>
+        
+      </div>
+    
+  </nav>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">王邸</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.3.8</div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.4.0</div>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+
+
+  <script src="/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.4.0"></script><script src="/js/motion.js?v=7.4.0"></script>
+<script src="/js/schemes/pisces.js?v=7.4.0"></script>
+
+<script src="/js/next-boot.js?v=7.4.0"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+
+<script>
+NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(item => {
+    return GUEST.includes(item);
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: false,
+    appId: 'Fn4BuvoixOxjJAhR79TvaD5M-gzGzoHsz',
+    appKey: '1uspTrSwPqkmSBSUr948WqxE',
+    placeholder: 'Just go go',
+    avatar: 'mm',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: true,
+    lang: '' || 'zh-cn',
+    path: location.pathname
+  });
+}, window.Valine);
+</script>
+
+</body>
+</html>
