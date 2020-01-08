@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.3.8">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.4.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.4.0" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.4.0">
+
+<link rel="stylesheet" href="//fonts.proxy.ustclug.org/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.4.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="总结这是我补写的日记，他也许会迟到，但是他一定会来的！—2020/01/0812021、List.of();生成一个list,而且list的内容不可变2、List">
+<meta property="og:type" content="article">
+<meta property="og:title" content="日常总结23">
+<meta property="og:url" content="http://yoursite.com/2019/12/06/日常总结23/index.html">
+<meta property="og:site_name" content="路要坚持">
+<meta property="og:description" content="总结这是我补写的日记，他也许会迟到，但是他一定会来的！—2020/01/0812021、List.of();生成一个list,而且list的内容不可变2、List">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-01-08T14:49:13.186Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="日常总结23">
+<meta name="twitter:description" content="总结这是我补写的日记，他也许会迟到，但是他一定会来的！—2020/01/0812021、List.of();生成一个list,而且list的内容不可变2、List">
+  <link rel="canonical" href="http://yoursite.com/2019/12/06/日常总结23/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>日常总结23 | 路要坚持</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">路要坚持</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+      <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block post">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/06/日常总结23/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="王邸">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/head.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="路要坚持">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">日常总结23
+
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-12-06 22:48:29" itemprop="dateCreated datePublished" datetime="2019-12-06T22:48:29+08:00">2019-12-06</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-01-08 22:49:13" itemprop="dateModified" datetime="2020-01-08T22:49:13+08:00">2020-01-08</time>
+              </span>
+            
+          
+
+          
+            <span id="/2019/12/06/日常总结23/" class="post-meta-item leancloud_visitors" data-flag-title="日常总结23" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2019/12/06/日常总结23/#comments" itemprop="discussionUrl"><span class="post-comments-count valine-comment-count" data-xid="/2019/12/06/日常总结23/" itemprop="commentCount"></span></a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>这是我补写的日记，他也许会迟到，但是他一定会来的！—2020/01/08</p><h2 id="1202"><a href="#1202" class="headerlink" title="1202"></a>1202</h2><p>1、List.of();<br>生成一个list,而且list的内容不可变</p><p>2、List<pair<string, string="">&gt;<br><a href="https://www.jianshu.com/p/b246b6a8052a" target="_blank" rel="external">Pair（搭配ArrayList）数据结构的使用实例</a><br>既需要已键值的方式存储数据列表，还需要在输出的时候保持和插入数据的顺序不变。HashMap满足前者，ArrayList则满足后者</pair<string,></p><a id="more"></a>
+
+
+<p>3、adblock过滤广告<br><a href="https://www.cnblogs.com/Mrhuangrui/p/8886435.html" target="_blank" rel="external">https://www.cnblogs.com/Mrhuangrui/p/8886435.html</a><br>直接添加自定义。妈妈再也不用担心百度垃圾推荐影响我阅读了</p>
+<p>4.jackson转换：<br><a href="https://www.jianshu.com/p/b03ca50c7dc1" target="_blank" rel="external">https://www.jianshu.com/p/b03ca50c7dc1</a></p>
+<p>NewRedisCache newRedisCache = new NewRedisCache(redisUrl);<br>Optional<string> serviceOtp = newRedisCache.getString(cacheKey);</string></p>
+<p>List<servicemoneydto> serviceMoneyDTOList = null;<br>//  如果是空的，就直接去数据库拿<br>if(serviceOtp.isEmpty()) {<br>    serviceMoneyDTOList = serviceMoneyDTORepository.findByDoctorId(doctorBasicInfo.getId());<br>    try {<br>        String services = objectMapper.writeValueAsString(serviceMoneyDTOList);<br>        newRedisCache.setString(cacheKey,services);<br>    } catch (JsonProcessingException e) {<br>        e.printStackTrace();<br>    }<br>} else {<br>    try {<br>        serviceMoneyDTOList = objectMapper.readValue(serviceOtp.get(),new TypeReference<list<servicemoneydto>&gt;(){});<br>    } catch (IOException e) {<br>        e.printStackTrace();<br>    }<br>}</list<servicemoneydto></servicemoneydto></p>
+<p><a href="https://www.mkyong.com/java/jackson-2-convert-java-object-to-from-json/" target="_blank" rel="external">Jackson 2 – Convert Java Object to / from JSON</a></p>
+<h3 id="writeValue-…-–-Java-Objects-to-JSON"><a href="#writeValue-…-–-Java-Objects-to-JSON" class="headerlink" title="writeValue(…) – Java Objects to JSON"></a>writeValue(…) – Java Objects to JSON</h3><pre><code>ObjectMapper mapper = new ObjectMapper();
+
+// Java object to JSON file
+mapper.writeValue(new File(&quot;c:\\test\\staff.json&quot;), new Staff());
+
+// Java object to JSON string
+String jsonString = mapper.writeValueAsString(object);
+</code></pre><p>Copy</p>
+<h3 id="readValue-…-–-JSON-to-Java-Objects"><a href="#readValue-…-–-JSON-to-Java-Objects" class="headerlink" title="readValue(…) – JSON to Java Objects"></a>readValue(…) – JSON to Java Objects</h3><pre><code>ObjectMapper mapper = new ObjectMapper();
+
+//JSON file to Java object
+Staff obj = mapper.readValue(new File(&quot;c:\\test\\staff.json&quot;), Staff.class);
+
+//JSON URL to Java object
+Staff obj = mapper.readValue(new URL(&quot;http://some-domains/api/name.json&quot;), Staff.class);
+
+//JSON string to Java Object
+Staff obj = mapper.readValue(&quot;{&apos;name&apos; : &apos;mkyong&apos;}&quot;, Staff.class);
+</code></pre><h2 id="1203"><a href="#1203" class="headerlink" title="1203"></a>1203</h2><h3 id="1-Map的getOrDefault-如果没有key就用默认是的key"><a href="#1-Map的getOrDefault-如果没有key就用默认是的key" class="headerlink" title="1.Map的getOrDefault()  如果没有key就用默认是的key"></a>1.Map的getOrDefault()  如果没有key就用默认是的key</h3><p>default V getOrDefault(Object key, V defaultValue) {<br>    V v;<br>    return (((v = get(key)) != null) || containsKey(key))<br>        ? v<br>        : defaultValue;<br>}</p>
+<h3 id="2-ChronoUnit-日期枚举类-配合LocalDate之类的使用"><a href="#2-ChronoUnit-日期枚举类-配合LocalDate之类的使用" class="headerlink" title="2.ChronoUnit 日期枚举类(配合LocalDate之类的使用)"></a>2.ChronoUnit 日期枚举类(配合LocalDate之类的使用)</h3><p><a href="https://blog.csdn.net/ryo1060732496/article/details/88806191" target="_blank" rel="external">https://blog.csdn.net/ryo1060732496/article/details/88806191</a><br>一组标准的日期时间单位。<br>这组单元提供基于单元的访问来操纵日期，时间或日期时间。 可以通过实现TemporalUnit来扩展标准单元集。<br>这些单元适用于多个日历系统。<br>例如，大多数非ISO日历系统定义年，月和日的单位，只是略有不同的规则。 每个单元的文档说明了它的运作方式。<br>这是一个最终的、不可变的和线程安全的枚举。</p>
+<p>  @Test<br>  public void testChromoUnitsPlus() {<br>      //Get the current date<br>      LocalDate today = LocalDate.now();<br>      System.out.println(“Current date: “ + today);</p>
+<pre><code>//add 1 week to the current date
+LocalDate nextWeek = today.plus(1, ChronoUnit.WEEKS);
+System.out.println(&quot;Next week: &quot; + nextWeek);
+
+//add 1 month to the current date
+LocalDate nextMonth = today.plus(1, ChronoUnit.MONTHS);
+System.out.println(&quot;Next month: &quot; + nextMonth);
+
+//add 1 year to the current date
+LocalDate nextYear = today.plus(1, ChronoUnit.YEARS);
+System.out.println(&quot;Next year: &quot; + nextYear);
+
+//add 10 years to the current date
+LocalDate nextDecade = today.plus(1, ChronoUnit.DECADES);
+System.out.println(&quot;Date after ten year: &quot; + nextDecade);
+</code></pre><p>  }</p>
+<h3 id="3-JsonFormat-不能匹配2020-1-1"><a href="#3-JsonFormat-不能匹配2020-1-1" class="headerlink" title="3.@JsonFormat 不能匹配2020-1-1"></a>3.@JsonFormat 不能匹配2020-1-1</h3><p>  @JsonFormat(pattern = “yyyy-MM-dd HH:mm:ss”)<br>写成</p>
+<p>  @JsonFormat(pattern = “yyyy-M-d HH:mm:ss”)</p>
+<p>可以匹配2020-1-1</p>
+<h3 id="4-micronaut查看SQL语句"><a href="#4-micronaut查看SQL语句" class="headerlink" title="4.micronaut查看SQL语句"></a>4.micronaut查看SQL语句</h3><p>io.micronaut.data.jdbc.operations.DefaultJdbcRepositoryOperations的prepareStatement方法里面打断点就好了<br>其实打开debug的日志也可以看得到。<br>我觉得真的可以研究一下micronaut的源码看看</p>
+<h3 id="5-优化SQL"><a href="#5-优化SQL" class="headerlink" title="5.优化SQL"></a>5.优化SQL</h3><p>索引的顺序会影响，索引按照表单字段的顺序会更快<br><a href="https://www.cnblogs.com/luyucheng/p/6289714.html" target="_blank" rel="external">https://www.cnblogs.com/luyucheng/p/6289714.html</a></p>
+<h3 id="6-在线接口文档编写工具"><a href="#6-在线接口文档编写工具" class="headerlink" title="6.在线接口文档编写工具"></a>6.在线接口文档编写工具</h3><p>showdoc<br>yapi</p>
+<p>sourcetree（这是mac上的类似git的东西）</p>
+<h2 id="1204"><a href="#1204" class="headerlink" title="1204"></a>1204</h2><h3 id="1-Intellij-解决报错：import-sun-misc-BASE64Decoder无法找到"><a href="#1-Intellij-解决报错：import-sun-misc-BASE64Decoder无法找到" class="headerlink" title="1.Intellij-解决报错：import sun.misc.BASE64Decoder无法找到"></a>1.Intellij-解决报错：import sun.misc.BASE64Decoder无法找到</h3><p><a href="https://blog.csdn.net/qq_32534441/article/details/91957908" target="_blank" rel="external">https://blog.csdn.net/qq_32534441/article/details/91957908</a></p>
+<p>原因：<br>参看官网，发现JDK中的lib\tools.jar和JRE中的lib\rt.jar已从Java SE 9中删除。这些JAR中可用的类和资源现在以文件中的内部格式存储在lib目录的命名模块中。 可以使用称为jrt的新方案来从运行时映像检索这些类和资源。 依靠这些JAR位置的应用程序将不再工作。（<a href="http://www.oracle.com/technetwork/java/javase/9-relnote-issues-3704069.html）" target="_blank" rel="external">http://www.oracle.com/technetwork/java/javase/9-relnote-issues-3704069.html）</a></p>
+<p>解决：<br>java.util.Base64.Decoder和java.util.Base64.Encoder的JDK公共API，可代替sun.misc.BASE64Decoder和sun.misc.BASE64Encoder的JDK内部API。</p>
+<h3 id="2-ExceptionInInitializerError"><a href="#2-ExceptionInInitializerError" class="headerlink" title="2.ExceptionInInitializerError"></a>2.ExceptionInInitializerError</h3><p>引入lombok时候需要在plugins里面在设置一下</p>
+<p>  plugins {<br>      id “net.ltgt.apt-eclipse” version “0.21”<br>      id “com.github.johnrengelman.shadow” version “5.0.0”<br>      id “application”<br>      id “io.freefair.lombok” version “4.1.0” //加上这一个</p>
+<p>  }</p>
+<h3 id="3-gradle手动导入jar"><a href="#3-gradle手动导入jar" class="headerlink" title="3.gradle手动导入jar"></a>3.gradle手动导入jar</h3><p>Gradle 引入本地定制 jar 包，而不使用坐标下载 jar 包的方法<br><a href="https://blog.csdn.net/lw_power/article/details/52524610" target="_blank" rel="external">https://blog.csdn.net/lw_power/article/details/52524610</a></p>
+<pre><code>compile fileTree(dir:&apos;libs&apos;,include:[&apos;*.jar&apos;])
+</code></pre><p>可以。使用别人的jar包，只能这样</p>
+<h3 id="4-RxJava教程"><a href="#4-RxJava教程" class="headerlink" title="4.RxJava教程"></a>4.RxJava教程</h3><p><a href="http://gank.io/post/560e15be2dca930e00da1083" target="_blank" rel="external">给 Android 开发者的 RxJava 详解</a>  扔物线大佬的<br>参考：<a href="https://github.com/qingfengmy/RxJava" target="_blank" rel="external">https://github.com/qingfengmy/RxJava</a></p>
+<h2 id="1205"><a href="#1205" class="headerlink" title="1205"></a>1205</h2><p>1.Micronaut访问静态资源问题<br>默认是关闭访问静态资源的，所以需要设置一下</p>
+<p>  Static resource resolution is disabled by default. Micronaut supports resolving resources from the classpath or the file system.<br>Property  |Type |Description<br>-:|:-:|:-<br>micronaut.router.static-resources.*.enabled   | boolean        |  Sets whether this specific mapping is enabled. Default value (true).</p>
+<p>micronaut.router.static-resources.*.paths     |java.util.List  |   A list of paths either starting with classpath: or file:. You can serve files from anywhere on disk or the classpath. For example to serve static resources from src/main/resources/public, you would use classpath:public as the path.</p>
+<p>micronaut.router.static-resources.*.mapping    |java.lang.String| The path resources should be served from. Uses ant path matching. Default value (“/**“).</p>
+<p>例如：</p>
+<p>  micronaut:<br>    router:<br>      static-resources:<br>        swagger:<br>          enabled: true<br>          paths: classpath:META-INF/swagger<br>          mapping: /swagger/**</p>
+<p>2.修改电脑的git账户，git的账号配置<br><a href="https://blog.csdn.net/qq_36602939/article/details/92831517" target="_blank" rel="external">https://blog.csdn.net/qq_36602939/article/details/92831517</a></p>
+<p>但是这样设置还是不行，还要设置全局的git账号相关信息<br><a href="https://blog.csdn.net/lewky_liu/article/details/78708589" target="_blank" rel="external">https://blog.csdn.net/lewky_liu/article/details/78708589</a><br>//查看user.name</p>
+<p>  git config user.name</p>
+<p>//查看user.email</p>
+<p>  git config user.email</p>
+<p>//修改user.name<br>  git config –global –replace-all user.name “your user name”</p>
+<p>//修改user.email</p>
+<p>  git config –global –replace-all user.email”your user email”</p>
+<p>或者全局设置</p>
+<pre><code>C:\Users\lenovo\.gitconfig
+</code></pre><h2 id="1206"><a href="#1206" class="headerlink" title="1206"></a>1206</h2><p>今天最蠢的就是忘记打卡了。同时也是阿信的生日呀，哎就这样了</p>
+
+    </div>
+
+    
+    
+    
+        
+      
+
+      <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2019/12/02/日常总结/" rel="next" title="周常总结(二十二)">
+                  <i class="fa fa-chevron-left"></i> 周常总结(二十二)
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+                <a href="/2019/12/30/2019年总结/" rel="prev" title="2019年总结">
+                  2019年总结 <i class="fa fa-chevron-right"></i>
+                </a>
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+    
+    <div class="comments" id="comments"></div>
+  
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">1.</span> <span class="nav-text">总结</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1202"><span class="nav-number">1.1.</span> <span class="nav-text">1202</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#writeValue-…-–-Java-Objects-to-JSON"><span class="nav-number">1.1.1.</span> <span class="nav-text">writeValue(…) – Java Objects to JSON</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#readValue-…-–-JSON-to-Java-Objects"><span class="nav-number">1.1.2.</span> <span class="nav-text">readValue(…) – JSON to Java Objects</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1203"><span class="nav-number">1.2.</span> <span class="nav-text">1203</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Map的getOrDefault-如果没有key就用默认是的key"><span class="nav-number">1.2.1.</span> <span class="nav-text">1.Map的getOrDefault()  如果没有key就用默认是的key</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-ChronoUnit-日期枚举类-配合LocalDate之类的使用"><span class="nav-number">1.2.2.</span> <span class="nav-text">2.ChronoUnit 日期枚举类(配合LocalDate之类的使用)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-JsonFormat-不能匹配2020-1-1"><span class="nav-number">1.2.3.</span> <span class="nav-text">3.@JsonFormat 不能匹配2020-1-1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-micronaut查看SQL语句"><span class="nav-number">1.2.4.</span> <span class="nav-text">4.micronaut查看SQL语句</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-优化SQL"><span class="nav-number">1.2.5.</span> <span class="nav-text">5.优化SQL</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-在线接口文档编写工具"><span class="nav-number">1.2.6.</span> <span class="nav-text">6.在线接口文档编写工具</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1204"><span class="nav-number">1.3.</span> <span class="nav-text">1204</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Intellij-解决报错：import-sun-misc-BASE64Decoder无法找到"><span class="nav-number">1.3.1.</span> <span class="nav-text">1.Intellij-解决报错：import sun.misc.BASE64Decoder无法找到</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-ExceptionInInitializerError"><span class="nav-number">1.3.2.</span> <span class="nav-text">2.ExceptionInInitializerError</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-gradle手动导入jar"><span class="nav-number">1.3.3.</span> <span class="nav-text">3.gradle手动导入jar</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-RxJava教程"><span class="nav-number">1.3.4.</span> <span class="nav-text">4.RxJava教程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1205"><span class="nav-number">1.4.</span> <span class="nav-text">1205</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1206"><span class="nav-number">1.5.</span> <span class="nav-text">1206</span></a></li></ol></li></ol></div>
+        
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/images/head.jpeg"
+      alt="王邸">
+  <p class="site-author-name" itemprop="name">王邸</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">39</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">标签</span>
+        
+      </div>
+    
+  </nav>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">王邸</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.3.8</div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.4.0</div>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+
+
+  <script src="/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.4.0"></script><script src="/js/motion.js?v=7.4.0"></script>
+<script src="/js/schemes/pisces.js?v=7.4.0"></script>
+
+<script src="/js/next-boot.js?v=7.4.0"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+
+<script>
+NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(item => {
+    return GUEST.includes(item);
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: false,
+    appId: 'Fn4BuvoixOxjJAhR79TvaD5M-gzGzoHsz',
+    appKey: '1uspTrSwPqkmSBSUr948WqxE',
+    placeholder: 'Just go go',
+    avatar: 'mm',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: true,
+    lang: '' || 'zh-cn',
+    path: location.pathname
+  });
+}, window.Valine);
+</script>
+
+</body>
+</html>
