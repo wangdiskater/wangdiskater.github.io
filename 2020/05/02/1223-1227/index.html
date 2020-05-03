@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.3.8">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.4.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.4.0" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.4.0">
+
+<link rel="stylesheet" href="//fonts.proxy.ustclug.org/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.4.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="12.23学习jdk8函数式变成之前一直使用了一个函数，通过Bean的一个属性进行去重，就是下面这个方法。其实也就是使用了一个Map来去重罢了static &amp;lt;T&amp;gt; Predicate&amp;lt;T&amp;gt; distinctByDoctorId(Function&amp;lt;? super T, ?&amp;gt; keyExtractor) {   Map&amp;lt;Object, Boolean&amp;gt;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="1223-1227总结">
+<meta property="og:url" content="http://yoursite.com/2020/05/02/1223-1227/index.html">
+<meta property="og:site_name" content="路要坚持">
+<meta property="og:description" content="12.23学习jdk8函数式变成之前一直使用了一个函数，通过Bean的一个属性进行去重，就是下面这个方法。其实也就是使用了一个Map来去重罢了static &amp;lt;T&amp;gt; Predicate&amp;lt;T&amp;gt; distinctByDoctorId(Function&amp;lt;? super T, ?&amp;gt; keyExtractor) {   Map&amp;lt;Object, Boolean&amp;gt;">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-05-03T07:19:03.516Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="1223-1227总结">
+<meta name="twitter:description" content="12.23学习jdk8函数式变成之前一直使用了一个函数，通过Bean的一个属性进行去重，就是下面这个方法。其实也就是使用了一个Map来去重罢了static &amp;lt;T&amp;gt; Predicate&amp;lt;T&amp;gt; distinctByDoctorId(Function&amp;lt;? super T, ?&amp;gt; keyExtractor) {   Map&amp;lt;Object, Boolean&amp;gt;">
+  <link rel="canonical" href="http://yoursite.com/2020/05/02/1223-1227/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>1223-1227总结 | 路要坚持</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">路要坚持</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+      <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block post">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/02/1223-1227/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="王邸">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/head.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="路要坚持">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">1223-1227总结
+
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2020-05-02 11:08:21" itemprop="dateCreated datePublished" datetime="2020-05-02T11:08:21+08:00">2020-05-02</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-05-03 15:19:03" itemprop="dateModified" datetime="2020-05-03T15:19:03+08:00">2020-05-03</time>
+              </span>
+            
+          
+
+          
+            <span id="/2020/05/02/1223-1227/" class="post-meta-item leancloud_visitors" data-flag-title="1223-1227总结" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/05/02/1223-1227/#comments" itemprop="discussionUrl"><span class="post-comments-count valine-comment-count" data-xid="/2020/05/02/1223-1227/" itemprop="commentCount"></span></a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="12-23"><a href="#12-23" class="headerlink" title="12.23"></a>12.23</h1><h2 id="学习"><a href="#学习" class="headerlink" title="学习"></a>学习</h2><h3 id="jdk8函数式变成"><a href="#jdk8函数式变成" class="headerlink" title="jdk8函数式变成"></a>jdk8函数式变成</h3><p>之前一直使用了一个函数，通过Bean的一个属性进行去重，就是下面这个方法。其实也就是使用了一个Map来去重罢了</p><pre><code>static &lt;T&gt; Predicate&lt;T&gt; distinctByDoctorId(Function&lt;? super T, ?&gt; keyExtractor) {
+  Map&lt;Object, Boolean&gt; seen = new ConcurrentHashMap&lt;&gt;();
+  return t -&gt; seen.putIfAbsent(keyExtractor.apply(t), Boolean.TRUE) == null;
+}
+</code></pre><a id="more"></a>
+<p><strong>Function</strong><br>Function接口 接受一个输入参数T，返回一个结果R。</p>
+<pre><code>public interface Function&lt;T, R&gt; {
+  // 接受输入参数，对输入执行所需操作后  返回一个结果。
+  R apply(T t);
+  .....
+}
+</code></pre><p><strong>apply()</strong></p>
+<pre><code>public class FunctionDemo {
+  static int modifyTheValue(int valueToBeOperated, Function&lt;Integer, Integer&gt; function) {
+    return function.apply(valueToBeOperated);
+  }
+
+  public static void main(String[] args) {
+    int myNumber = 10;
+
+    // 使用lambda表达式实现函数式接口
+    // (x)-&gt;(x)+20 输入一个参数x，进行加法运算，返回一个结果
+    // 所以该lambda表达式可以实现Function接口
+    int res1 = modifyTheValue(myNumber, (x)-&gt; x + 20);
+    System.out.println(res1); // 30
+
+    //  使用匿名内部类实现
+    int res2 = modifyTheValue(myNumber, new Function&lt;Integer, Integer&gt;() {
+      @Override
+      public Integer apply(Integer t) {
+          return t + 20;
+      }
+    });
+    System.out.println(res2); // 30
+  }
+}
+</code></pre><p><strong>Predicate</strong><br>接受一个输入参数，返回一个布尔值结果。<br><strong>test()</strong><br>    public static boolean predicateTest(int value, Predicate<integer> predicate) {<br>      return predicate.test(value);<br>    }</integer></p>
+<pre><code>public static void main(String[] args) {
+  // (x) -&gt; x == 3 输入一个参数x，进行比较操作，返回一个布尔值
+  // 所以该lambda表达式可以实现Predicate接口
+  System.out.println(predicateTest(3, (x) -&gt; x == 3));
+}
+</code></pre><p><strong>Consumer消费型函数式接口</strong><br>接受一个输入参数，返回一个布尔值结果。</p>
+<p><strong>accept()</strong></p>
+<pre><code>public static void modifyTheValue3(int value, Consumer&lt;Integer&gt; consumer) {
+  consumer.accept(value);
+}
+
+public static void main(String[] args) {
+  // (x) -&gt; System.out.println(x * 2)接受一个输入参数x
+  // 直接输出，并没有返回结果
+  // 所以该lambda表达式可以实现Consumer接口
+  modifyTheValue3(3, (x) -&gt; System.out.println(x * 2));
+}
+</code></pre><p><strong>Supplier供给型函数式接口</strong><br>无参数，返回一个结果。</p>
+<p><strong>get()</strong></p>
+<pre><code>public static String supplierTest(Supplier&lt;String&gt; supplier) {
+  return supplier.get();
+}
+
+public static void main(String args[]) {
+    String name = &quot;冷冷&quot;;
+    // () -&gt; name.length() 无参数，返回一个结果（字符串长度）
+    // 所以该lambda表达式可以实现Supplier接口
+    System.out.println(supplierTest(() -&gt; name.length() + &quot;&quot;));
+}
+</code></pre><p><a href="https://blog.csdn.net/z834410038/article/details/77370785" target="_blank" rel="external">JDK8函数式接口Function、Consumer、Predicate、Supplier</a></p>
+<h3 id="2-common包常用类"><a href="#2-common包常用类" class="headerlink" title="2.common包常用类"></a>2.common包常用类</h3><p>在官网查看：有三类包顾名思义</p>
+<pre><code>The Commons Proper - A repository of reusable Java components.
+The Commons Sandbox - A workspace for Java component development.
+The Commons Dormant - A repository of components that are currently inactive.
+</code></pre><p>1、BeanUtils</p>
+<pre><code>提供了对于JavaBean进行各种操作， 比如对象,属性复制等等。
+</code></pre><p>2、Betwixt(太老了现在都不用这个包了)</p>
+<pre><code>XML与Java对象之间相互转换。
+</code></pre><p>3、Codec</p>
+<pre><code>提供了一些公共的编解码实现，比如Base64, Hex, MD5,Phonetic and URLs等等
+</code></pre><p>4、Collections</p>
+<pre><code>对java.util的扩展封装，处理数据还是挺灵活的。
+</code></pre><p>5、Compress</p>
+<pre><code>commons compress中的打包、压缩类库。
+</code></pre><p>6、Configuration(不支持yml)<br>用来帮助处理配置文件的，支持很多种存储方式。</p>
+<pre><code>1. Properties files
+2. XML documents
+3. Property list files (.plist)
+4. JNDI
+5. JDBC Datasource
+6. System properties
+7. Applet parameters
+8. Servlet parameters
+</code></pre><p>举一个Properties的简单例子：<br>usergui.properties</p>
+<pre><code>colors.background = #FFFFFF
+colors.foreground = #000080
+window.width = 500
+window.height = 300
+</code></pre><p>**.Java</p>
+<pre><code>PropertiesConfiguration config = new PropertiesConfiguration(&quot;usergui.properties&quot;);
+config.setProperty(&quot;colors.background&quot;, &quot;#000000);
+config.save();
+
+config.save(&quot;usergui.backup.properties);//save a copy
+Integer integer = config.getInteger(&quot;window.width&quot;);
+</code></pre><p>7.HttpClient</p>
+<pre><code>基于HttpCore实 现的一个HTTP/1.1兼容的HTTP客户端，它提供了一系列可重用的客户端身份验证、HTTP状态保持、HTTP连接管理module。
+</code></pre><p>出处：<br><a href="https://blog.csdn.net/HaHa_Sir/article/details/79583627" target="_blank" rel="external">Apache Commons 工具类 jar包整理总结</a></p>
+<h1 id="12-24"><a href="#12-24" class="headerlink" title="12.24"></a>12.24</h1><h2 id="学习-1"><a href="#学习-1" class="headerlink" title="学习"></a>学习</h2><h3 id="mongodb"><a href="#mongodb" class="headerlink" title="mongodb"></a>mongodb</h3><p>想在本地搭建一个node + MongoDb的一个Yapi的接口服务所以就来回顾</p>
+<p><a href="https://www.jianshu.com/p/30f2a5736589" target="_blank" rel="external">MongoDB入门详解</a><br>入门写的很详细，用起来感觉有点像redis，毕竟是非关系型数据库。</p>
+<pre><code>mongod --dbpath D:\data\db 启动数据库
+mongo 启动客户端
+</code></pre><h3 id="查看某个指定时间段的日志（grep-指令就好了）"><a href="#查看某个指定时间段的日志（grep-指令就好了）" class="headerlink" title="查看某个指定时间段的日志（grep 指令就好了）"></a>查看某个指定时间段的日志（grep 指令就好了）</h3><pre><code>grep ‘2018-11-27 13:2[2-4]’ api-error.log
+</code></pre><h1 id="12-25"><a href="#12-25" class="headerlink" title="12.25"></a>12.25</h1><h2 id="Bug"><a href="#Bug" class="headerlink" title="Bug"></a>Bug</h2><h3 id="用户名报错问题"><a href="#用户名报错问题" class="headerlink" title="用户名报错问题"></a>用户名报错问题</h3><p>背景：放号提醒需要去保存用户的姓名<br>描述：ERROR c.y.c.common.net.BasicController - [cGnjjcAj]/doctor/consultation/inform/user: SQL Error executing INSERT: Incorrect string value: ‘\xF0\x9F\x8C\x88  …’ for column ‘user_nickname’ at row 1<br>原因：数据库使用了utf8的编码格式，不能保存四个字节的emoji表情而报错。<br>解决：需要注意的是表中的每个字段相关的都要改，不只是改数据库和表。</p>
+<p>mysql表的字符集问题:</p>
+<pre><code>字符集改成: utf8m64
+排序规则:   utf8m64_unicode_ci
+</code></pre><p>解释：<br>MySQL在5.5.3版本以后增加了utf8mb4编码，其中mb4是most bytes 4的含义，用来兼容四个字节的Unicode（万国码）。utf8mb4是utf8的一个扩展<br>随着互联网的发展，产生了许多新类型的字符，例如emoji这种类型的符号，也就是我们通常在聊天时发的小黄脸表情，这种字符的出现不在基本多平面的Unicode字符之中，导致无法在MySQL中使用utf8存储，MySQL于是对utf8字符进行了扩展，增加了utf8mb4这个编码。<br>所以，设计数据库时如果想要允许用户使用特殊符号，最好使用utf8mb4编码来存储，使得数据库有更好的兼容性，但是这样设计会导致耗费更多的存储空间。</p>
+<h3 id="重复多条数据问题"><a href="#重复多条数据问题" class="headerlink" title="重复多条数据问题"></a>重复多条数据问题</h3><p>背景：放号提醒需要去保存用户放号信息<br>描述：数据库出现多条时间相近的放号记录，后台有不能重复提交校验却没有生效<br>原因：网络慢，导致用户重复点击的时候有多个请求发送到后台。但是后台因为考虑到一致性，使用了事务，导致第一次没有执行完，第二次请求已经进来了，所以重复提交的判断失效了。<br>解决：前端进行去重判断，后台需要把去重判断放到事务的外面去操作。<br><strong>使用事务一定要小心，需要去注意是否会引起问题，而重复提交应该是比较容易出现的一个问题</strong></p>
+
+    </div>
+
+    
+    
+    
+        
+      
+
+      <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2020/05/02/1216-1220/" rel="next" title="1216-1220总结">
+                  <i class="fa fa-chevron-left"></i> 1216-1220总结
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+                <a href="/2020/05/02/1230-0103/" rel="prev" title="1230-0103总结">
+                  1230-0103总结 <i class="fa fa-chevron-right"></i>
+                </a>
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+    
+    <div class="comments" id="comments"></div>
+  
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#12-23"><span class="nav-number">1.</span> <span class="nav-text">12.23</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#学习"><span class="nav-number">1.1.</span> <span class="nav-text">学习</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#jdk8函数式变成"><span class="nav-number">1.1.1.</span> <span class="nav-text">jdk8函数式变成</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-common包常用类"><span class="nav-number">1.1.2.</span> <span class="nav-text">2.common包常用类</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#12-24"><span class="nav-number">2.</span> <span class="nav-text">12.24</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#学习-1"><span class="nav-number">2.1.</span> <span class="nav-text">学习</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#mongodb"><span class="nav-number">2.1.1.</span> <span class="nav-text">mongodb</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查看某个指定时间段的日志（grep-指令就好了）"><span class="nav-number">2.1.2.</span> <span class="nav-text">查看某个指定时间段的日志（grep 指令就好了）</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#12-25"><span class="nav-number">3.</span> <span class="nav-text">12.25</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Bug"><span class="nav-number">3.1.</span> <span class="nav-text">Bug</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#用户名报错问题"><span class="nav-number">3.1.1.</span> <span class="nav-text">用户名报错问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#重复多条数据问题"><span class="nav-number">3.1.2.</span> <span class="nav-text">重复多条数据问题</span></a></li></ol></li></ol></li></ol></div>
+        
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/images/head.jpeg"
+      alt="王邸">
+  <p class="site-author-name" itemprop="name">王邸</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">55</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">标签</span>
+        
+      </div>
+    
+  </nav>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">王邸</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.3.8</div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.4.0</div>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+
+
+  <script src="/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.4.0"></script><script src="/js/motion.js?v=7.4.0"></script>
+<script src="/js/schemes/pisces.js?v=7.4.0"></script>
+
+<script src="/js/next-boot.js?v=7.4.0"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+
+<script>
+NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(item => {
+    return GUEST.includes(item);
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: false,
+    appId: 'Fn4BuvoixOxjJAhR79TvaD5M-gzGzoHsz',
+    appKey: '1uspTrSwPqkmSBSUr948WqxE',
+    placeholder: 'Just go go',
+    avatar: 'mm',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: true,
+    lang: '' || 'zh-cn',
+    path: location.pathname
+  });
+}, window.Valine);
+</script>
+
+</body>
+</html>

@@ -1,0 +1,987 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.3.8">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.4.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.4.0" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.4.0">
+
+<link rel="stylesheet" href="//fonts.proxy.ustclug.org/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.4.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="0309Redis是如何实现点赞、取消点赞的？https://blog.csdn.net/java_mindmap/article/details/103750417使用到hash的redis的结构。因为我们的需求是需要记录点赞的个数并排序，被点赞的文章，点赞人的信息。所以选择了hash的结构。为什么没有考虑在redis当中使用zset结构对文章排序？其实是可以使用的，但是拼接数据会比较麻烦需要把">
+<meta property="og:type" content="article">
+<meta property="og:title" content="0309-0313总结">
+<meta property="og:url" content="http://yoursite.com/2020/05/03/0309-0313/index.html">
+<meta property="og:site_name" content="路要坚持">
+<meta property="og:description" content="0309Redis是如何实现点赞、取消点赞的？https://blog.csdn.net/java_mindmap/article/details/103750417使用到hash的redis的结构。因为我们的需求是需要记录点赞的个数并排序，被点赞的文章，点赞人的信息。所以选择了hash的结构。为什么没有考虑在redis当中使用zset结构对文章排序？其实是可以使用的，但是拼接数据会比较麻烦需要把">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-05-03T07:20:22.701Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="0309-0313总结">
+<meta name="twitter:description" content="0309Redis是如何实现点赞、取消点赞的？https://blog.csdn.net/java_mindmap/article/details/103750417使用到hash的redis的结构。因为我们的需求是需要记录点赞的个数并排序，被点赞的文章，点赞人的信息。所以选择了hash的结构。为什么没有考虑在redis当中使用zset结构对文章排序？其实是可以使用的，但是拼接数据会比较麻烦需要把">
+  <link rel="canonical" href="http://yoursite.com/2020/05/03/0309-0313/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>0309-0313总结 | 路要坚持</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">路要坚持</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+      <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block post">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/03/0309-0313/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="王邸">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/head.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="路要坚持">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">0309-0313总结
+
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2020-05-03 12:08:21 / 修改时间：15:20:22" itemprop="dateCreated datePublished" datetime="2020-05-03T12:08:21+08:00">2020-05-03</time>
+            </span>
+          
+            
+
+            
+          
+
+          
+            <span id="/2020/05/03/0309-0313/" class="post-meta-item leancloud_visitors" data-flag-title="0309-0313总结" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/05/03/0309-0313/#comments" itemprop="discussionUrl"><span class="post-comments-count valine-comment-count" data-xid="/2020/05/03/0309-0313/" itemprop="commentCount"></span></a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="0309"><a href="#0309" class="headerlink" title="0309"></a>0309</h1><h2 id="Redis是如何实现点赞、取消点赞的？"><a href="#Redis是如何实现点赞、取消点赞的？" class="headerlink" title="Redis是如何实现点赞、取消点赞的？"></a>Redis是如何实现点赞、取消点赞的？</h2><p><a href="https://blog.csdn.net/java_mindmap/article/details/103750417" target="_blank" rel="external">https://blog.csdn.net/java_mindmap/article/details/103750417</a></p><p>使用到hash的redis的结构。因为我们的需求是需要记录点赞的个数并排序，被点赞的文章，点赞人的信息。所以选择了hash的结构。<br>为什么没有考虑在redis当中使用zset结构对文章排序？<br>其实是可以使用的，但是拼接数据会比较麻烦需要把文章，点赞信息，排序需要给前端。<br>主要是需要那些没有点过赞的文章需要都放到redis中，不然还需要去把没人点赞的文章从数据库拿出来。感觉就有点奇怪，这到底是否合适，还需要更多的经验来看</p><a id="more"></a>
+
+<h1 id="0310"><a href="#0310" class="headerlink" title="0310"></a>0310</h1><h2 id="1-枚举类不能被继承可以被实现"><a href="#1-枚举类不能被继承可以被实现" class="headerlink" title="1.枚举类不能被继承可以被实现?"></a>1.枚举类不能被继承可以被实现?</h2><p><em>*</em> 为了弄清这个问题，我们需要从头把枚举学起。<br><a href="https://blog.csdn.net/javazejian/article/details/71333103" target="_blank" rel="external">深入理解Java枚举类型(enum)</a><br>这篇文章写的非常的优秀<br>不能使用继承(因为编译器会自动为我们继承Enum抽象类而Java只支持单继承，因此枚举类是无法手动实现继承的)</p>
+<h3 id="为什么要以-结束？"><a href="#为什么要以-结束？" class="headerlink" title="为什么要以;结束？"></a>为什么要以;结束？</h3><p>在enum类中确实可以像定义常规类一样声明变量或者成员方法。但是我们必须注意到，如果打算在enum类中定义方法，务必在声明完枚举实例后使用分号分开，倘若在枚举实例前定义任何方法，编译器都将会报错，无法编译通过，同时即使自定义了构造函数且enum的定义结束，我们也永远无法手动调用构造函数创建枚举实例，毕竟这事只能由编译器执行。</p>
+<h3 id="学习枚举类"><a href="#学习枚举类" class="headerlink" title="学习枚举类"></a>学习枚举类</h3><p>枚举类反编译就会生成一个类继承了Enum类</p>
+<p>  //定义枚举类型<br>  enum Day {<br>      MONDAY, TUESDAY, WEDNESDAY,<br>      THURSDAY, FRIDAY, SATURDAY, SUNDAY<br>  }<br>反编译：</p>
+<p>  //反编译Day.class<br>  final class Day extends Enum<br>  {<br>      //编译器为我们添加的静态的values()方法<br>      public static Day[] values()<br>      {<br>          return (Day[])$VALUES.clone();<br>      }<br>      //编译器为我们添加的静态的valueOf()方法，注意间接调用了Enum也类的valueOf方法<br>      public static Day valueOf(String s)<br>      {<br>          return (Day)Enum.valueOf(com/zejian/enumdemo/Day, s);<br>      }<br>      //私有构造函数<br>      private Day(String s, int i)<br>      {<br>          super(s, i);<br>      }<br>       //前面定义的7种枚举实例<br>      public static final Day MONDAY;<br>      public static final Day TUESDAY;<br>      public static final Day WEDNESDAY;<br>      public static final Day THURSDAY;<br>      public static final Day FRIDAY;<br>      public static final Day SATURDAY;<br>      public static final Day SUNDAY;<br>      private static final Day $VALUES[];</p>
+<pre><code>static
+{
+    //实例化枚举实例
+    MONDAY = new Day(&quot;MONDAY&quot;, 0);
+    TUESDAY = new Day(&quot;TUESDAY&quot;, 1);
+    WEDNESDAY = new Day(&quot;WEDNESDAY&quot;, 2);
+    THURSDAY = new Day(&quot;THURSDAY&quot;, 3);
+    FRIDAY = new Day(&quot;FRIDAY&quot;, 4);
+    SATURDAY = new Day(&quot;SATURDAY&quot;, 5);
+    SUNDAY = new Day(&quot;SUNDAY&quot;, 6);
+    $VALUES = (new Day[] {
+        MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY
+    });
+}
+</code></pre><p>  }</p>
+<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>这篇文章写的很好，以及最后涉及的EnumSet和EnumMap。他们的用法。包含了很多源码的解释。这周对里面的例子也执行一遍</p>
+<h2 id="2-Micronaut-data关于时间问题"><a href="#2-Micronaut-data关于时间问题" class="headerlink" title="2.Micronaut-data关于时间问题"></a>2.Micronaut-data关于时间问题</h2><p>@GenerateValue 加在时间上，然后对应的mysql字段设置了更新自动更新时就会报错，如果repository.update（） 参数传入时间，就会报错。</p>
+<p>应该在时间上加：<br>@dateCreated<br>@dateUpdated</p>
+<h3 id="GenerateValue"><a href="#GenerateValue" class="headerlink" title="@GenerateValue"></a>@GenerateValue</h3><p>在这个注解的注释中表明，这个注解一般不使用</p>
+<p>  /**</p>
+<ul>
+<li>Designates a property as a generated value. Typically not used</li>
+<li>directly but instead mapped to via annotation such as {@code javax.persistence.GeneratedValue}.<br>*</li>
+<li>@author graemerocher</li>
+<li><p>@since 1.0.0<br>*/<br>@Retention(RetentionPolicy.RUNTIME)<br>@Target({ElementType.METHOD, ElementType.FIELD, ElementType.ANNOTATION_TYPE})<br>@Documented<br>public @interface GeneratedValue {</p>
+<p>}</p>
+</li>
+</ul>
+<h1 id="0311"><a href="#0311" class="headerlink" title="0311"></a>0311</h1><p>1.sudo supervisorctl reload 刷新supervisor管理的服务<br>2.同一个域名需要配置负载均衡请求到不同的端口服务<br>3.Java开发手册</p>
+<p>idea插件详细介绍<br><a href="https://developer.aliyun.com/article/705264?spm=a2c6h.14059151.1371227.5.5a1957380ZgNN9" target="_blank" rel="external">https://developer.aliyun.com/article/705264?spm=a2c6h.14059151.1371227.5.5a1957380ZgNN9</a></p>
+<p>1.Apache BeanUtils.copyProperties 避免使用，使用Spring BeanUtils Cglib BeanCopier代替为何？</p>
+<h3 id="使用Cglib-BeanCopier"><a href="#使用Cglib-BeanCopier" class="headerlink" title="使用Cglib BeanCopier"></a>使用Cglib BeanCopier</h3><p>BeanCopier工具类(性能优化工具类)<br><a href="https://www.lifengdi.com/archives/article/500" target="_blank" rel="external">https://www.lifengdi.com/archives/article/500</a></p>
+<p>  public class BeanCopierUtil {<br>      /**</p>
+<pre><code> * BeanCopier的缓存
+ */
+static final ConcurrentHashMap&lt;String, BeanCopier&gt; BEAN_COPIER_CACHE = new ConcurrentHashMap&lt;&gt;();
+
+/**
+ * BeanCopier的copy
+ * @param source 源文件的
+ * @param target 目标文件
+ */
+public static void copy(Object source, Object target) {
+    String key = genKey(source.getClass(), target.getClass());
+    BeanCopier beanCopier;
+    if (BEAN_COPIER_CACHE.containsKey(key)) {
+        beanCopier = BEAN_COPIER_CACHE.get(key);
+    } else {
+        beanCopier = BeanCopier.create(source.getClass(), target.getClass(), false);
+        BEAN_COPIER_CACHE.put(key, beanCopier);
+    }
+    beanCopier.copy(source, target, null);
+}
+
+/**
+ * 生成key
+ * @param srcClazz 源文件的class
+ * @param tgtClazz 目标文件的class
+ * @return string
+ */
+private static String genKey(Class&lt;?&gt; srcClazz, Class&lt;?&gt; tgtClazz) {
+    return srcClazz.getName() + tgtClazz.getName();
+}
+</code></pre><p>  }</p>
+<h3 id="Cglib原理（周末详解）"><a href="#Cglib原理（周末详解）" class="headerlink" title="Cglib原理（周末详解）"></a>Cglib原理（周末详解）</h3><p>总所周知，这是一种常见的动态代理（AOP面向切面编程）<br>一个简单的例子：</p>
+<p>  <a href="https://blog.csdn.net/danchu/article/details/70238002" target="_blank" rel="external">https://blog.csdn.net/danchu/article/details/70238002</a></p>
+<p>比较硬核的解释（从class文件出发能看到一些线索）：</p>
+<p>  <a href="https://www.cnblogs.com/monkey0307/p/8328821.html" target="_blank" rel="external">https://www.cnblogs.com/monkey0307/p/8328821.html</a></p>
+<h2 id="git-提交模板"><a href="#git-提交模板" class="headerlink" title="git 提交模板"></a>git 提交模板</h2><p><a href="https://blog.csdn.net/ldjhust2008/article/details/45275621" target="_blank" rel="external">https://blog.csdn.net/ldjhust2008/article/details/45275621</a><br>网上都是linux的感觉明天再来看一下</p>
+<h2 id="发布新项目到测试"><a href="#发布新项目到测试" class="headerlink" title="发布新项目到测试"></a>发布新项目到测试</h2><h2 id="打包的名字"><a href="#打包的名字" class="headerlink" title="打包的名字"></a>打包的名字</h2><p>settings.gradle修改rootProject名字</p>
+<p>  rootProject.name=”com.yaeher.vote-event”</p>
+<h2 id="supervisorctl配置文件"><a href="#supervisorctl配置文件" class="headerlink" title="supervisorctl配置文件"></a>supervisorctl配置文件</h2><p>[program:vote-event]<br>directory=/home/wangdi/apps/vote-event<br>command=java -jar com.yaeher.vote-event.jar<br>autostart=true<br>autorestart=true<br>startretries=5<br>redirect_stderr=true<br>stdout_logfile=/home/wangdi/apps/vote-event/stdou.log<br>entironment=</p>
+<h2 id="reload-supervisor"><a href="#reload-supervisor" class="headerlink" title="reload supervisor"></a>reload supervisor</h2><p>sudo supervisorctl reload</p>
+<h1 id="0312"><a href="#0312" class="headerlink" title="0312"></a>0312</h1><h2 id="git提交规范"><a href="#git提交规范" class="headerlink" title="git提交规范"></a>git提交规范</h2><h3 id="文件"><a href="#文件" class="headerlink" title="文件"></a>文件</h3><p>操作：</p>
+<p>  <a href="https://blog.csdn.net/leibosite/article/details/77993491" target="_blank" rel="external">https://blog.csdn.net/leibosite/article/details/77993491</a><br>解释：</p>
+<p>  <a href="http://www.ruanyifeng.com/blog/2016/01/commit_message_change_log.html" target="_blank" rel="external">http://www.ruanyifeng.com/blog/2016/01/commit_message_change_log.html</a></p>
+<h3 id="设置git提交模板"><a href="#设置git提交模板" class="headerlink" title="设置git提交模板"></a>设置git提交模板</h3><h3 id="新建一个名为-my-template-文件（文件类型就是文件）"><a href="#新建一个名为-my-template-文件（文件类型就是文件）" class="headerlink" title="新建一个名为 my_template 文件（文件类型就是文件）"></a>新建一个名为 my_template 文件（文件类型就是文件）</h3><p>  F:\git&gt;type nul&gt;my_template</p>
+<p>  ——以下为内容——-</p>
+<h1 id="Type"><a href="#Type" class="headerlink" title="Type(): "></a>Type(<scope>): <subject></subject></scope></h1><h1 id=""><a href="#" class="headerlink" title=""></a><body></body></h1><h1 id="-1"><a href="#-1" class="headerlink" title=""></a><footer></footer></h1><h1 id="type字段包含"><a href="#type字段包含" class="headerlink" title="type字段包含:"></a>type字段包含:</h1><h1 id="feat：新功能（feature）"><a href="#feat：新功能（feature）" class="headerlink" title="feat：新功能（feature）"></a>feat：新功能（feature）</h1><h1 id="fix：修补bug"><a href="#fix：修补bug" class="headerlink" title="fix：修补bug"></a>fix：修补bug</h1><h1 id="docs：文档（documentation）"><a href="#docs：文档（documentation）" class="headerlink" title="docs：文档（documentation）"></a>docs：文档（documentation）</h1><h1 id="style：-格式（不影响代码运行的变动）"><a href="#style：-格式（不影响代码运行的变动）" class="headerlink" title="style： 格式（不影响代码运行的变动）"></a>style： 格式（不影响代码运行的变动）</h1><h1 id="refactor：重构（即不是新增功能，也不是修改bug的代码变动）"><a href="#refactor：重构（即不是新增功能，也不是修改bug的代码变动）" class="headerlink" title="refactor：重构（即不是新增功能，也不是修改bug的代码变动）"></a>refactor：重构（即不是新增功能，也不是修改bug的代码变动）</h1><h1 id="test：增加测试"><a href="#test：增加测试" class="headerlink" title="test：增加测试"></a>test：增加测试</h1><h1 id="chore：构建过程或辅助工具的变动"><a href="#chore：构建过程或辅助工具的变动" class="headerlink" title="chore：构建过程或辅助工具的变动"></a>chore：构建过程或辅助工具的变动</h1><h1 id="scope用于说明-commit-影响的范围，比如数据层、控制层、视图层等等。"><a href="#scope用于说明-commit-影响的范围，比如数据层、控制层、视图层等等。" class="headerlink" title="scope用于说明 commit 影响的范围，比如数据层、控制层、视图层等等。"></a>scope用于说明 commit 影响的范围，比如数据层、控制层、视图层等等。</h1><h1 id="subject是-commit-目的的简短描述，不超过50个字符"><a href="#subject是-commit-目的的简短描述，不超过50个字符" class="headerlink" title="subject是 commit 目的的简短描述，不超过50个字符"></a>subject是 commit 目的的简短描述，不超过50个字符</h1><h1 id="Body-部分是对本次-commit-的详细描述，可以分成多行"><a href="#Body-部分是对本次-commit-的详细描述，可以分成多行" class="headerlink" title="Body 部分是对本次 commit 的详细描述，可以分成多行"></a>Body 部分是对本次 commit 的详细描述，可以分成多行</h1><h1 id="Footer用来关闭-Issue或以BREAKING-CHANGE开头，后面是对变动的描述、"><a href="#Footer用来关闭-Issue或以BREAKING-CHANGE开头，后面是对变动的描述、" class="headerlink" title="Footer用来关闭 Issue或以BREAKING CHANGE开头，后面是对变动的描述、"></a>Footer用来关闭 Issue或以BREAKING CHANGE开头，后面是对变动的描述、</h1><h1 id="以及变动理由和迁移方法"><a href="#以及变动理由和迁移方法" class="headerlink" title="以及变动理由和迁移方法"></a>以及变动理由和迁移方法</h1><h1 id="英文版详细例子，请看这里"><a href="#英文版详细例子，请看这里" class="headerlink" title="英文版详细例子，请看这里"></a>英文版详细例子，请看这里</h1><h1 id="https-github-com-sparkbox-how-to-tree-master-style-git"><a href="#https-github-com-sparkbox-how-to-tree-master-style-git" class="headerlink" title="https://github.com/sparkbox/how_to/tree/master/style/git"></a><a href="https://github.com/sparkbox/how_to/tree/master/style/git" target="_blank" rel="external">https://github.com/sparkbox/how_to/tree/master/style/git</a></h1><h1 id="中文版介绍，请看这里"><a href="#中文版介绍，请看这里" class="headerlink" title="中文版介绍，请看这里"></a>中文版介绍，请看这里</h1><h1 id="http-www-ruanyifeng-com-blog-2016-01-commit-message-change-log-html"><a href="#http-www-ruanyifeng-com-blog-2016-01-commit-message-change-log-html" class="headerlink" title="http://www.ruanyifeng.com/blog/2016/01/commit_message_change_log.html"></a><a href="http://www.ruanyifeng.com/blog/2016/01/commit_message_change_log.html" target="_blank" rel="external">http://www.ruanyifeng.com/blog/2016/01/commit_message_change_log.html</a></h1><h3 id="配置git"><a href="#配置git" class="headerlink" title="配置git"></a>配置git</h3><p>  git config –global commit.template F:\git\my_template</p>
+<h3 id="使用git-commit提交"><a href="#使用git-commit提交" class="headerlink" title="使用git commit提交"></a>使用git commit提交</h3><h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><p>commitizen/cz-cli<br><a href="https://github.com/commitizen/cz-cli" target="_blank" rel="external">https://github.com/commitizen/cz-cli</a></p>
+<h2 id="Java开发手册-华山新版"><a href="#Java开发手册-华山新版" class="headerlink" title="Java开发手册 华山新版"></a>Java开发手册 华山新版</h2><p>控制语句，记录一些没有重视的规约</p>
+<ol>
+<li><p>【强制】当 switch 括号内的变量类型为 String 并且此变量为外部参数时，必须先进行 null判断。<br>反例：猜猜下面的代码输出是什么？</p>
+<p>   public class SwitchString {</p>
+<pre><code>public static void main(String[] args) {
+    method(null);
+}
+public static void method(String param) {
+    switch (param) {
+        // 肯定不是进入这里
+        case &quot;sth&quot;:
+            System.out.println(&quot;it&apos;s sth&quot;);
+            break;
+        // 也不是进入这里
+        case &quot;null&quot;:
+            System.out.println(&quot;it&apos;s null&quot;);
+            break;
+        // 也不是进入这里
+        default:
+            System.out.println(&quot;default&quot;);
+    }
+}
+</code></pre><p>   }</p>
+</li>
+</ol>
+<p>3.【强制】在 if/else/for/while/do 语句中必须使用大括号。<br>说明：即使只有一行代码，避免采用单行的编码方式：if (condition) statements;</p>
+<p>4.【强制】在高并发场景中，避免使用”等于”判断作为中断或退出的条件。<br>说明：如果并发控制没有处理好，容易产生等值判断被“击穿”的情况，使用大于或小于的区间判断条件来代替。<br>反例：判断剩余奖品数量等于 0 时，终止发放奖品，但因为并发处理错误导致奖品数量瞬间变成了负数，这样的话，活动无法终止</p>
+<p>5.【推荐】表达异常的分支时，少用 if-else 方式，这种方式可以改写成：</p>
+<pre><code>if (condition) {...
+    return obj;
+}
+</code></pre><p>// 接着写 else 的业务逻辑代码;<br>说明：如果非使用 if()…else if()…else…方式表达逻辑，避免后续代码维护困难，【强制】请勿超过 3 层。<br>正例：超过 3 层的 if-else 的逻辑判断代码可以使用<strong>卫语句</strong>、<strong>策略模式</strong>、<strong>状态模式</strong>等来实现，其中卫语句<br>即代码逻辑先考虑失败、异常、中断、退出等直接返回的情况，以方法多个出口的方式，解决代码中判断<br>分支嵌套的问题，这是逆向思维的体现。<br>示例如下：</p>
+<pre><code>public void findBoyfriend(Man man) {
+    if (man.isUgly()) {
+        System.out.println(&quot;本姑娘是外貌协会的资深会员&quot;);
+        return;
+    }
+    if (man.isPoor()) {
+        System.out.println(&quot;贫贱夫妻百事哀&quot;);
+        return;
+    }
+    if (man.isBadTemper()) {
+        System.out.println(&quot;银河有多远，你就给我滚多远&quot;);
+        return;
+    }
+    System.out.println(&quot;可以先交往一段时间看看&quot;);
+}
+</code></pre><p><strong>策略模式</strong>、<strong>状态模式</strong><br>实现一个接口，传入参数的父类，然后进行不同的操作</p>
+<p>11.【参考】下列情形，需要进行参数校验：</p>
+<p>  1） 调用频次低的方法。<br>  2） 执行时间开销很大的方法。此情形中，参数校验时间几乎可以忽略不计，但如果因为参数错误导致中间执行回退，或者错误，那得不偿失。<br>  3） 需要极高稳定性和可用性的方法。<br>  4） 对外提供的开放接口，不管是 RPC/API/HTTP 接口。<br>  5） 敏感权限入口。<br>12.【参考】下列情形，不需要进行参数校验：</p>
+<p>  1） 极有可能被循环调用的方法。但在方法说明里必须注明外部参数检查要求。<br>  2） 底层调用频度比较高的方法。毕竟是像纯净水过滤的最后一道，参数错误不太可能到底层才会暴露问题。一般 DAO 层与 Service 层都在同一个应用中，部署在同一台服务器中，所以 DAO的参数校验，可以省略。<br>  3） 被声明成 private 只会被自己代码所调用的方法，如果能够确定调用方法的代码传入参数已经做过检<br>  查或者肯定不会有问题，此时可以不校验参数。</p>
+<h2 id="关于common-beanUtil的copyProperties-和-CGlibCopier的BeanCopier-create-、copy方法-比较"><a href="#关于common-beanUtil的copyProperties-和-CGlibCopier的BeanCopier-create-、copy方法-比较" class="headerlink" title="关于common beanUtil的copyProperties 和 CGlibCopier的BeanCopier.create()、copy方法 比较"></a>关于common beanUtil的copyProperties 和 CGlibCopier的BeanCopier.create()、copy方法 比较</h2><h2 id="common-beanUtils的-copyProperties"><a href="#common-beanUtils的-copyProperties" class="headerlink" title="#common beanUtils的 copyProperties"></a>#common beanUtils的 copyProperties</h2><pre><code>public static void copyProperties(final Object dest, final Object orig) throws IllegalAccessException, InvocationTargetException {
+    BeanUtilsBean.getInstance().copyProperties(dest, orig);
+}
+</code></pre><p>走一遍看看</p>
+<p>  public void copyProperties(final Object dest, final Object orig) throws IllegalAccessException, InvocationTargetException {</p>
+<pre><code>// Validate existence of the specified beans
+if (dest == null) {
+    throw new IllegalArgumentException
+            (&quot;No destination bean specified&quot;);
+}
+if (orig == null) {
+    throw new IllegalArgumentException(&quot;No origin bean specified&quot;);
+}
+if (log.isDebugEnabled()) {
+    log.debug(&quot;BeanUtils.copyProperties(&quot; + dest + &quot;, &quot; +
+              orig + &quot;)&quot;);
+}
+
+// Copy the properties, converting as necessary
+if (orig instanceof DynaBean) {
+    final DynaProperty[] origDescriptors =
+        ((DynaBean) orig).getDynaClass().getDynaProperties();
+    for (DynaProperty origDescriptor : origDescriptors) {
+        final String name = origDescriptor.getName();
+        // Need to check isReadable() for WrapDynaBean
+        // (see Jira issue# BEANUTILS-61)
+        if (getPropertyUtils().isReadable(orig, name) &amp;&amp;
+            getPropertyUtils().isWriteable(dest, name)) {
+            final Object value = ((DynaBean) orig).get(name);
+            copyProperty(dest, name, value);
+        }
+    }
+} else if (orig instanceof Map) {
+    @SuppressWarnings(&quot;unchecked&quot;)
+    final
+    // Map properties are always of type &lt;String, Object&gt;
+    Map&lt;String, Object&gt; propMap = (Map&lt;String, Object&gt;) orig;
+    for (final Map.Entry&lt;String, Object&gt; entry : propMap.entrySet()) {
+        final String name = entry.getKey();
+        if (getPropertyUtils().isWriteable(dest, name)) {
+            copyProperty(dest, name, entry.getValue());
+        }
+    }
+} else /* if (orig is a standard JavaBean) */ {
+    final PropertyDescriptor[] origDescriptors =getPropertyUtils().getPropertyDescriptors(orig);
+    for (PropertyDescriptor origDescriptor : origDescriptors) {
+        final String name = origDescriptor.getName();
+        if (&quot;class&quot;.equals(name)) {
+            continue; // No point in trying to set an object&apos;s class
+        }
+        if (getPropertyUtils().isReadable(orig, name) &amp;&amp;
+            getPropertyUtils().isWriteable(dest, name)) {
+            try {
+                final Object value =
+                    getPropertyUtils().getSimpleProperty(orig, name);
+                copyProperty(dest, name, value);
+            } catch (final NoSuchMethodException e) {
+                // Should not happen
+            }
+        }
+    }
+}
+</code></pre><p><strong>判断：getPropertyUtils().isReadable(orig, name) &amp;&amp; getPropertyUtils().isWriteable(dest, name) 是否可读可写然后跳入copyProperty(dest, name, value)</strong></p>
+<pre><code>public void copyProperty(final Object bean, String name, Object value) throws IllegalAccessException, InvocationTargetException {
+    // Trace logging (if enabled)
+    if (log.isTraceEnabled()) {
+        final StringBuilder sb = new StringBuilder(&quot;  copyProperty(&quot;);
+        sb.append(bean);
+        sb.append(&quot;, &quot;);
+        sb.append(name);
+        sb.append(&quot;, &quot;);
+        if (value == null) {
+            sb.append(&quot;&lt;NULL&gt;&quot;);
+        } else if (value instanceof String) {
+            sb.append((String) value);
+        } else if (value instanceof String[]) {
+            final String[] values = (String[]) value;
+            sb.append(&apos;[&apos;);
+            for (int i = 0; i &lt; values.length; i++) {
+                if (i &gt; 0) {
+                    sb.append(&apos;,&apos;);
+                }
+                sb.append(values[i]);
+            }
+            sb.append(&apos;]&apos;);
+        } else {
+            sb.append(value.toString());
+        }
+        sb.append(&apos;)&apos;);
+        log.trace(sb.toString());
+    }
+    // Resolve any nested expression to get the actual target bean
+    Object target = bean;
+    final Resolver resolver = getPropertyUtils().getResolver();
+    while (resolver.hasNested(name)) {
+        try {
+            target = getPropertyUtils().getProperty(target, resolver.next(name));
+            name = resolver.remove(name);
+        } catch (final NoSuchMethodException e) {
+            return; // Skip this property setter
+        }
+    }
+    if (log.isTraceEnabled()) {
+        log.trace(&quot;    Target bean = &quot; + target);
+        log.trace(&quot;    Target name = &quot; + name);
+    }
+    // Declare local variables we will require
+    final String propName = resolver.getProperty(name); // Simple name of target property
+    Class&lt;?&gt; type = null;                         // Java type of target property
+    final int index  = resolver.getIndex(name);         // Indexed subscript value (if any)
+    final String key = resolver.getKey(name);           // Mapped key value (if any)
+
+    // Calculate the target property type
+    if (target instanceof DynaBean) {
+        final DynaClass dynaClass = ((DynaBean) target).getDynaClass();
+        final DynaProperty dynaProperty = dynaClass.getDynaProperty(propName);
+        if (dynaProperty == null) {
+            return; // Skip this property setter
+        }
+        type = dynaPropertyType(dynaProperty, value);
+    } else {
+        PropertyDescriptor descriptor = null;
+        try {
+            descriptor =
+                getPropertyUtils().getPropertyDescriptor(target, name);
+            if (descriptor == null) {
+                return; // Skip this property setter
+            }
+        } catch (final NoSuchMethodException e) {
+            return; // Skip this property setter
+        }
+        type = descriptor.getPropertyType();
+        if (type == null) {
+            // Most likely an indexed setter on a POJB only
+            if (log.isTraceEnabled()) {
+                log.trace(&quot;    target type for property &apos;&quot; +
+                          propName + &quot;&apos; is null, so skipping ths setter&quot;);
+            }
+            return;
+        }
+    }
+    if (log.isTraceEnabled()) {
+        log.trace(&quot;    target propName=&quot; + propName + &quot;, type=&quot; +
+                  type + &quot;, index=&quot; + index + &quot;, key=&quot; + key);
+    }
+    // Convert the specified value to the required type and store it
+    if (index &gt;= 0) {                    // Destination must be indexed
+        value = convertForCopy(value, type.getComponentType());
+        try {
+            getPropertyUtils().setIndexedProperty(target, propName,
+                                             index, value);
+        } catch (final NoSuchMethodException e) {
+            throw new InvocationTargetException
+                (e, &quot;Cannot set &quot; + propName);
+        }
+    } else if (key != null) {            // Destination must be mapped
+        // Maps do not know what the preferred data type is,
+        // so perform no conversions at all
+        // FIXME - should we create or support a TypedMap?
+        try {
+            getPropertyUtils().setMappedProperty(target, propName,
+                                            key, value);
+        } catch (final NoSuchMethodException e) {
+            throw new InvocationTargetException
+                (e, &quot;Cannot set &quot; + propName);
+        }
+    } else {                             // Destination must be simple
+        value = convertForCopy(value, type);
+        try {
+            getPropertyUtils().setSimpleProperty(target, propName, value);
+        } catch (final NoSuchMethodException e) {
+            throw new InvocationTargetException
+                (e, &quot;Cannot set &quot; + propName);
+        }
+    }
+}
+</code></pre><p>进入：value = convertForCopy(value, type);</p>
+<pre><code>private Object convertForCopy(final Object value, final Class&lt;?&gt; type) {
+    return (value != null) ? convert(value, type) : value;
+}
+</code></pre><p>然后进入covert</p>
+<p>  /**</p>
+<pre><code> * Convert the input object into an output object of the
+ * specified type.
+ *
+ * @param &lt;T&gt; the target type of the conversion
+ * @param type Data type to which this value should be converted
+ * @param value The input value to be converted
+ * @return The converted value.
+ * @throws ConversionException if conversion cannot be performed
+ * successfully and no default is specified.
+ */
+public &lt;T&gt; T convert(final Class&lt;T&gt; type, Object value) {
+
+    if (type == null) {
+        return convertToDefaultType(type, value);
+    }
+
+    Class&lt;?&gt; sourceType  = value == null ? null : value.getClass();
+    final Class&lt;T&gt; targetType  = ConvertUtils.primitiveToWrapper(type);
+
+    if (log().isDebugEnabled()) {
+        log().debug(&quot;Converting&quot;
+                + (value == null ? &quot;&quot; : &quot; &apos;&quot; + toString(sourceType) + &quot;&apos;&quot;)
+                + &quot; value &apos;&quot; + value + &quot;&apos; to type &apos;&quot; + toString(targetType) + &quot;&apos;&quot;);
+    }
+
+    value = convertArray(value);
+
+    // Missing Value
+    if (value == null) {
+        return handleMissing(targetType);
+    }
+
+    sourceType = value.getClass();
+
+    try {
+        // Convert --&gt; String
+        if (targetType.equals(String.class)) {
+            return targetType.cast(convertToString(value));
+
+        // No conversion necessary
+        } else if (targetType.equals(sourceType)) {
+            if (log().isDebugEnabled()) {
+                log().debug(&quot;    No conversion required, value is already a &quot;
+                                + toString(targetType));
+            }
+            return targetType.cast(value);
+
+        // Convert --&gt; Type
+        } else {
+            final Object result = convertToType(targetType, value);
+            if (log().isDebugEnabled()) {
+                log().debug(&quot;    Converted to &quot; + toString(targetType) +
+                               &quot; value &apos;&quot; + result + &quot;&apos;&quot;);
+            }
+            return targetType.cast(result);
+        }
+    } catch (final Throwable t) {
+        return handleError(targetType, value, t);
+    }
+
+}
+</code></pre><h3 id="setSimpleProperty"><a href="#setSimpleProperty" class="headerlink" title="setSimpleProperty"></a>setSimpleProperty</h3><pre><code>public void setSimpleProperty(final Object bean,
+                                     final String name, final Object value)
+        throws IllegalAccessException, InvocationTargetException,
+        NoSuchMethodException {
+
+    if (bean == null) {
+        throw new IllegalArgumentException(&quot;No bean specified&quot;);
+    }
+    if (name == null) {
+        throw new IllegalArgumentException(&quot;No name specified for bean class &apos;&quot; +
+                bean.getClass() + &quot;&apos;&quot;);
+    }
+
+    // Validate the syntax of the property name
+    if (resolver.hasNested(name)) {
+        throw new IllegalArgumentException
+                (&quot;Nested property names are not allowed: Property &apos;&quot; +
+                name + &quot;&apos; on bean class &apos;&quot; + bean.getClass() + &quot;&apos;&quot;);
+    } else if (resolver.isIndexed(name)) {
+        throw new IllegalArgumentException
+                (&quot;Indexed property names are not allowed: Property &apos;&quot; +
+                name + &quot;&apos; on bean class &apos;&quot; + bean.getClass() + &quot;&apos;&quot;);
+    } else if (resolver.isMapped(name)) {
+        throw new IllegalArgumentException
+                (&quot;Mapped property names are not allowed: Property &apos;&quot; +
+                name + &quot;&apos; on bean class &apos;&quot; + bean.getClass() + &quot;&apos;&quot;);
+    }
+
+    // Handle DynaBean instances specially
+    if (bean instanceof DynaBean) {
+        final DynaProperty descriptor =
+                ((DynaBean) bean).getDynaClass().getDynaProperty(name);
+        if (descriptor == null) {
+            throw new NoSuchMethodException(&quot;Unknown property &apos;&quot; +
+                    name + &quot;&apos; on dynaclass &apos;&quot; +
+                    ((DynaBean) bean).getDynaClass() + &quot;&apos;&quot; );
+        }
+        ((DynaBean) bean).set(name, value);
+        return;
+    }
+
+    // Retrieve the property setter method for the specified property
+    final PropertyDescriptor descriptor =
+            getPropertyDescriptor(bean, name);
+    if (descriptor == null) {
+        throw new NoSuchMethodException(&quot;Unknown property &apos;&quot; +
+                name + &quot;&apos; on class &apos;&quot; + bean.getClass() + &quot;&apos;&quot; );
+    }
+    final Method writeMethod = getWriteMethod(bean.getClass(), descriptor);
+    if (writeMethod == null) {
+        throw new NoSuchMethodException(&quot;Property &apos;&quot; + name +
+                &quot;&apos; has no setter method in class &apos;&quot; + bean.getClass() + &quot;&apos;&quot;);
+    }
+
+    // Call the property setter method
+    final Object[] values = new Object[1];
+    values[0] = value;
+    if (log.isTraceEnabled()) {
+        final String valueClassName =
+            value == null ? &quot;&lt;null&gt;&quot; : value.getClass().getName();
+        log.trace(&quot;setSimpleProperty: Invoking method &quot; + writeMethod
+                  + &quot; with value &quot; + value + &quot; (class &quot; + valueClassName + &quot;)&quot;);
+    }
+    invokeMethod(writeMethod, bean, values);
+
+}
+</code></pre><h3 id="最后原生的反射：invokeMethod-writeMethod-bean-values"><a href="#最后原生的反射：invokeMethod-writeMethod-bean-values" class="headerlink" title="最后原生的反射：invokeMethod(writeMethod, bean, values);"></a>最后原生的反射：invokeMethod(writeMethod, bean, values);</h3><p>writeMethod: setXXXX</p>
+<h3 id="resolver-and-descriptor"><a href="#resolver-and-descriptor" class="headerlink" title="resolver and descriptor"></a>resolver and descriptor</h3><hr>
+<h2 id="CGlibCopier"><a href="#CGlibCopier" class="headerlink" title="CGlibCopier"></a>CGlibCopier</h2><p>  BeanCopier beanCopier = BeanCopier.create(source.getClass(), target.getClass(), false);<br>  beanCopier.copy(source, target, null);</p>
+<p>  abstract public class BeanCopier {<br>      private static final BeanCopierKey KEY_FACTORY =<br>        (BeanCopierKey)KeyFactory.create(BeanCopierKey.class);<br>      private static final Type CONVERTER =<br>        TypeUtils.parseType(“net.sf.cglib.core.Converter”);<br>      private static final Type BEAN_COPIER =<br>        TypeUtils.parseType(“net.sf.cglib.beans.BeanCopier”);<br>      private static final Signature COPY =<br>        new Signature(“copy”, Type.VOID_TYPE, new Type[]{ Constants.TYPE_OBJECT, Constants.TYPE_OBJECT, CONVERTER });<br>      private static final Signature CONVERT =<br>        TypeUtils.parseSignature(“Object convert(Object, Class, Object)”);</p>
+<pre><code>interface BeanCopierKey {
+    public Object newInstance(String source, String target, boolean useConverter);
+}
+</code></pre><p>  …….</p>
+<p>  }</p>
+<h3 id="疑问"><a href="#疑问" class="headerlink" title="疑问"></a>疑问</h3><p>这种写法不知道是什么意思。<br>最后发现cglibCopier很快，beanUtildebug走了很多个判断，性能是非常慢的</p>
+<h2 id="网页ppt-reveal-js"><a href="#网页ppt-reveal-js" class="headerlink" title="网页ppt reveal.js"></a>网页ppt reveal.js</h2><p><a href="https://blog.csdn.net/qq_37954086/article/details/80541224" target="_blank" rel="external">使用reveal.js制作一个酷炫的网页ppt</a></p>
+<h3 id="第一步-github下载"><a href="#第一步-github下载" class="headerlink" title="第一步 github下载"></a>第一步 github下载</h3><p><a href="https://github.com/hakimel/reveal.js/" target="_blank" rel="external">https://github.com/hakimel/reveal.js/</a></p>
+<h3 id="第二步-里面有index-html"><a href="#第二步-里面有index-html" class="headerlink" title="第二步 里面有index.html"></a>第二步 里面有index.html</h3><p>里面介绍了所有功能<br>github上也介绍了很清楚。可以玩一玩</p>
+<h1 id="0313"><a href="#0313" class="headerlink" title="0313"></a>0313</h1><h2 id="grpc-and-protobuf"><a href="#grpc-and-protobuf" class="headerlink" title="grpc and protobuf"></a>grpc and protobuf</h2><p>python语言的</p>
+<h2 id="内部接口"><a href="#内部接口" class="headerlink" title="内部接口"></a>内部接口</h2><p>  abstract public class BeanCopier<br>  {<br>      private static final BeanCopierKey KEY_FACTORY =<br>        (BeanCopierKey)KeyFactory.create(BeanCopierKey.class);<br>      private static final Type CONVERTER =<br>        TypeUtils.parseType(“net.sf.cglib.core.Converter”);<br>      private static final Type BEAN_COPIER =<br>        TypeUtils.parseType(“net.sf.cglib.beans.BeanCopier”);<br>      private static final Signature COPY =<br>        new Signature(“copy”, Type.VOID_TYPE, new Type[]{ Constants.TYPE_OBJECT, Constants.TYPE_OBJECT, CONVERTER });<br>      private static final Signature CONVERT =<br>        TypeUtils.parseSignature(“Object convert(Object, Class, Object)”);</p>
+<pre><code>interface BeanCopierKey {
+    public Object newInstance(String source, String target, boolean useConverter);
+}
+。。。。
+</code></pre><p>   }</p>
+<p><a href="https://blog.csdn.net/mccand1234/article/details/80561421" target="_blank" rel="external">Java内部类及内部接口</a><br>它是逻辑分组仅在一个地方使用的接口的一种方式。<br>因为接口是不能实例化的，内部接口只有当它是静态的才有意义。因此，默认情况下，内部接口是静态的，不管你是否手动加了static关键字。</p>
+<h3 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h3><p>  public class MyOuter4 {<br>      private int size=5;<br>      private int id;<br>       // 内部接口<br>      public interface OnClickListener{<br>          void onClick(int id);<br>      }</p>
+<pre><code>public void onClick(OnClickListener obj){
+    obj.onClick(this.id);
+}
+
+public Object makeInner(int localvar){
+    final int finallocalvar = localvar;
+    return new Object(){
+        public String toString(){
+            return &quot;OuterSize=&quot;+size+&quot;\nfinalLocalvar=&quot;+finallocalvar;
+        }
+    };
+}
+
+public static void main(String args[]){
+    Object obj=new MyOuter4().makeInner(67);
+    System.out.println(obj.toString());
+
+    MyOuter4 m = new MyOuter4();
+    m.onClick(new OnClickListener() {
+
+        @Override
+        public void onClick(int id) {
+            System.out.println(id);
+        }
+    });
+}
+</code></pre><p>  }</p>
+<h3 id="最后-1"><a href="#最后-1" class="headerlink" title="最后"></a>最后</h3><p>但是beanCopier没有实现内部接口，可能动态代理实现的吧</p>
+
+    </div>
+
+    
+    
+    
+        
+      
+
+      <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2020/05/03/0302-0306/" rel="next" title="0302-0306总结">
+                  <i class="fa fa-chevron-left"></i> 0302-0306总结
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+                <a href="/2020/05/03/0316-0320/" rel="prev" title="0316-0320总结">
+                  0316-0320总结 <i class="fa fa-chevron-right"></i>
+                </a>
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+    
+    <div class="comments" id="comments"></div>
+  
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#0309"><span class="nav-number">1.</span> <span class="nav-text">0309</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Redis是如何实现点赞、取消点赞的？"><span class="nav-number">1.1.</span> <span class="nav-text">Redis是如何实现点赞、取消点赞的？</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#0310"><span class="nav-number">2.</span> <span class="nav-text">0310</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-枚举类不能被继承可以被实现"><span class="nav-number">2.1.</span> <span class="nav-text">1.枚举类不能被继承可以被实现?</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么要以-结束？"><span class="nav-number">2.1.1.</span> <span class="nav-text">为什么要以;结束？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#学习枚举类"><span class="nav-number">2.1.2.</span> <span class="nav-text">学习枚举类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#最后"><span class="nav-number">2.1.3.</span> <span class="nav-text">最后</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Micronaut-data关于时间问题"><span class="nav-number">2.2.</span> <span class="nav-text">2.Micronaut-data关于时间问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#GenerateValue"><span class="nav-number">2.2.1.</span> <span class="nav-text">@GenerateValue</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#0311"><span class="nav-number">3.</span> <span class="nav-text">0311</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#使用Cglib-BeanCopier"><span class="nav-number">3.0.1.</span> <span class="nav-text">使用Cglib BeanCopier</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Cglib原理（周末详解）"><span class="nav-number">3.0.2.</span> <span class="nav-text">Cglib原理（周末详解）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git-提交模板"><span class="nav-number">3.1.</span> <span class="nav-text">git 提交模板</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#发布新项目到测试"><span class="nav-number">3.2.</span> <span class="nav-text">发布新项目到测试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#打包的名字"><span class="nav-number">3.3.</span> <span class="nav-text">打包的名字</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#supervisorctl配置文件"><span class="nav-number">3.4.</span> <span class="nav-text">supervisorctl配置文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#reload-supervisor"><span class="nav-number">3.5.</span> <span class="nav-text">reload supervisor</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#0312"><span class="nav-number">4.</span> <span class="nav-text">0312</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#git提交规范"><span class="nav-number">4.1.</span> <span class="nav-text">git提交规范</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#文件"><span class="nav-number">4.1.1.</span> <span class="nav-text">文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设置git提交模板"><span class="nav-number">4.1.2.</span> <span class="nav-text">设置git提交模板</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#新建一个名为-my-template-文件（文件类型就是文件）"><span class="nav-number">4.1.3.</span> <span class="nav-text">新建一个名为 my_template 文件（文件类型就是文件）</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Type"><span class="nav-number">5.</span> <span class="nav-text">Type(): </span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#"><span class="nav-number">6.</span> <span class="nav-text"></span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#-1"><span class="nav-number">7.</span> <span class="nav-text"></span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#type字段包含"><span class="nav-number">8.</span> <span class="nav-text">type字段包含:</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#feat：新功能（feature）"><span class="nav-number">9.</span> <span class="nav-text">feat：新功能（feature）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#fix：修补bug"><span class="nav-number">10.</span> <span class="nav-text">fix：修补bug</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#docs：文档（documentation）"><span class="nav-number">11.</span> <span class="nav-text">docs：文档（documentation）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#style：-格式（不影响代码运行的变动）"><span class="nav-number">12.</span> <span class="nav-text">style： 格式（不影响代码运行的变动）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#refactor：重构（即不是新增功能，也不是修改bug的代码变动）"><span class="nav-number">13.</span> <span class="nav-text">refactor：重构（即不是新增功能，也不是修改bug的代码变动）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#test：增加测试"><span class="nav-number">14.</span> <span class="nav-text">test：增加测试</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#chore：构建过程或辅助工具的变动"><span class="nav-number">15.</span> <span class="nav-text">chore：构建过程或辅助工具的变动</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#scope用于说明-commit-影响的范围，比如数据层、控制层、视图层等等。"><span class="nav-number">16.</span> <span class="nav-text">scope用于说明 commit 影响的范围，比如数据层、控制层、视图层等等。</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#subject是-commit-目的的简短描述，不超过50个字符"><span class="nav-number">17.</span> <span class="nav-text">subject是 commit 目的的简短描述，不超过50个字符</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Body-部分是对本次-commit-的详细描述，可以分成多行"><span class="nav-number">18.</span> <span class="nav-text">Body 部分是对本次 commit 的详细描述，可以分成多行</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Footer用来关闭-Issue或以BREAKING-CHANGE开头，后面是对变动的描述、"><span class="nav-number">19.</span> <span class="nav-text">Footer用来关闭 Issue或以BREAKING CHANGE开头，后面是对变动的描述、</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#以及变动理由和迁移方法"><span class="nav-number">20.</span> <span class="nav-text">以及变动理由和迁移方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#英文版详细例子，请看这里"><span class="nav-number">21.</span> <span class="nav-text">英文版详细例子，请看这里</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#https-github-com-sparkbox-how-to-tree-master-style-git"><span class="nav-number">22.</span> <span class="nav-text">https://github.com/sparkbox/how_to/tree/master/style/git</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#中文版介绍，请看这里"><span class="nav-number">23.</span> <span class="nav-text">中文版介绍，请看这里</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#http-www-ruanyifeng-com-blog-2016-01-commit-message-change-log-html"><span class="nav-number">24.</span> <span class="nav-text">http://www.ruanyifeng.com/blog/2016/01/commit_message_change_log.html</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#配置git"><span class="nav-number">24.0.1.</span> <span class="nav-text">配置git</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用git-commit提交"><span class="nav-number">24.0.2.</span> <span class="nav-text">使用git commit提交</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其他"><span class="nav-number">24.0.3.</span> <span class="nav-text">其他</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Java开发手册-华山新版"><span class="nav-number">24.1.</span> <span class="nav-text">Java开发手册 华山新版</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关于common-beanUtil的copyProperties-和-CGlibCopier的BeanCopier-create-、copy方法-比较"><span class="nav-number">24.2.</span> <span class="nav-text">关于common beanUtil的copyProperties 和 CGlibCopier的BeanCopier.create()、copy方法 比较</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#common-beanUtils的-copyProperties"><span class="nav-number">24.3.</span> <span class="nav-text">#common beanUtils的 copyProperties</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#setSimpleProperty"><span class="nav-number">24.3.1.</span> <span class="nav-text">setSimpleProperty</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#最后原生的反射：invokeMethod-writeMethod-bean-values"><span class="nav-number">24.3.2.</span> <span class="nav-text">最后原生的反射：invokeMethod(writeMethod, bean, values);</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#resolver-and-descriptor"><span class="nav-number">24.3.3.</span> <span class="nav-text">resolver and descriptor</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CGlibCopier"><span class="nav-number">24.4.</span> <span class="nav-text">CGlibCopier</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#疑问"><span class="nav-number">24.4.1.</span> <span class="nav-text">疑问</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#网页ppt-reveal-js"><span class="nav-number">24.5.</span> <span class="nav-text">网页ppt reveal.js</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#第一步-github下载"><span class="nav-number">24.5.1.</span> <span class="nav-text">第一步 github下载</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第二步-里面有index-html"><span class="nav-number">24.5.2.</span> <span class="nav-text">第二步 里面有index.html</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#0313"><span class="nav-number">25.</span> <span class="nav-text">0313</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#grpc-and-protobuf"><span class="nav-number">25.1.</span> <span class="nav-text">grpc and protobuf</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#内部接口"><span class="nav-number">25.2.</span> <span class="nav-text">内部接口</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#例子"><span class="nav-number">25.2.1.</span> <span class="nav-text">例子</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#最后-1"><span class="nav-number">25.2.2.</span> <span class="nav-text">最后</span></a></li></ol></li></ol></li></ol></div>
+        
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/images/head.jpeg"
+      alt="王邸">
+  <p class="site-author-name" itemprop="name">王邸</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">55</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">标签</span>
+        
+      </div>
+    
+  </nav>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">王邸</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.3.8</div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.4.0</div>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+
+
+  <script src="/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.4.0"></script><script src="/js/motion.js?v=7.4.0"></script>
+<script src="/js/schemes/pisces.js?v=7.4.0"></script>
+
+<script src="/js/next-boot.js?v=7.4.0"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+
+<script>
+NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(item => {
+    return GUEST.includes(item);
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: false,
+    appId: 'Fn4BuvoixOxjJAhR79TvaD5M-gzGzoHsz',
+    appKey: '1uspTrSwPqkmSBSUr948WqxE',
+    placeholder: 'Just go go',
+    avatar: 'mm',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: true,
+    lang: '' || 'zh-cn',
+    path: location.pathname
+  });
+}, window.Valine);
+</script>
+
+</body>
+</html>

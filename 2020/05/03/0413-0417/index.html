@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.3.8">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.4.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.4.0" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.4.0">
+
+<link rel="stylesheet" href="//fonts.proxy.ustclug.org/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.4.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="0413学习1.junit5  https://blog.csdn.net/ryo1060732496/article/details/807922462.JDK8的lambda表达式  https://github.com/CarpenterLee/JavaLambdaInternals##（补充）JDK8的lambda表达式 - 只显示用法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="0413-0417总结">
+<meta property="og:url" content="http://yoursite.com/2020/05/03/0413-0417/index.html">
+<meta property="og:site_name" content="路要坚持">
+<meta property="og:description" content="0413学习1.junit5  https://blog.csdn.net/ryo1060732496/article/details/807922462.JDK8的lambda表达式  https://github.com/CarpenterLee/JavaLambdaInternals##（补充）JDK8的lambda表达式 - 只显示用法">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-05-03T07:21:41.556Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="0413-0417总结">
+<meta name="twitter:description" content="0413学习1.junit5  https://blog.csdn.net/ryo1060732496/article/details/807922462.JDK8的lambda表达式  https://github.com/CarpenterLee/JavaLambdaInternals##（补充）JDK8的lambda表达式 - 只显示用法">
+  <link rel="canonical" href="http://yoursite.com/2020/05/03/0413-0417/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>0413-0417总结 | 路要坚持</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">路要坚持</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+      <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block post">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/03/0413-0417/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="王邸">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/head.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="路要坚持">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">0413-0417总结
+
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2020-05-03 12:20:21 / 修改时间：15:21:41" itemprop="dateCreated datePublished" datetime="2020-05-03T12:20:21+08:00">2020-05-03</time>
+            </span>
+          
+            
+
+            
+          
+
+          
+            <span id="/2020/05/03/0413-0417/" class="post-meta-item leancloud_visitors" data-flag-title="0413-0417总结" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/05/03/0413-0417/#comments" itemprop="discussionUrl"><span class="post-comments-count valine-comment-count" data-xid="/2020/05/03/0413-0417/" itemprop="commentCount"></span></a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="0413"><a href="#0413" class="headerlink" title="0413"></a>0413</h1><h2 id="学习"><a href="#学习" class="headerlink" title="学习"></a>学习</h2><p>1.junit5</p><p>  <a href="https://blog.csdn.net/ryo1060732496/article/details/80792246" target="_blank" rel="external">https://blog.csdn.net/ryo1060732496/article/details/80792246</a><br>2.JDK8的lambda表达式</p><p>  <a href="https://github.com/CarpenterLee/JavaLambdaInternals" target="_blank" rel="external">https://github.com/CarpenterLee/JavaLambdaInternals</a></p><p>##（补充）<br>JDK8的lambda表达式 - 只显示用法</p><a id="more"></a>
+
+
+
+<h2 id="lambda和collection-注意以下方法都是用在Collection中的，而不是流"><a href="#lambda和collection-注意以下方法都是用在Collection中的，而不是流" class="headerlink" title="lambda和collection(注意以下方法都是用在Collection中的，而不是流)"></a>lambda和collection(注意以下方法都是用在Collection中的，而不是流)</h2><h3 id="forEach"><a href="#forEach" class="headerlink" title="forEach()"></a>forEach()</h3><h3 id="removeIf"><a href="#removeIf" class="headerlink" title="removeIf()"></a>removeIf()</h3><p>该方法签名为boolean removeIf(Predicate&lt;? super E&gt; filter)，作用是删除容器中所有满足filter指定条件的元素，其中Predicate是一个函数接口，里面只有一个待实现方法boolean test(T t)，同样的这个方法的名字根本不重要，因为用的时候不需要书写这个名字。<br>需求：假设有一个字符串列表，需要删除其中所有长度大于3的字符串。<br>我们知道如果需要在迭代过程冲对容器进行删除操作必须使用迭代器，否则会抛出ConcurrentModificationException，所以上述任务传统的写法是：<br>// 使用迭代器删除列表元素</p>
+<p>  ArrayList<string> list = new ArrayList&lt;&gt;(Arrays.asList(“I”, “love”, “you”, “too”));<br>  Iterator<string> it = list.iterator();<br>  while(it.hasNext()){<br>      if(it.next().length()&gt;3) // 删除长度大于3的元素<br>          it.remove();<br>  }</string></string></p>
+<p>// removeIf方法</p>
+<p>  ArrayList<string> list = new ArrayList&lt;&gt;(Arrays.asList(“I”, “love”, “you”, “too”));<br>  list.removeIf(str -&gt; str.length()&gt;3); // 删除长度大于3的元素</string></p>
+<h3 id="spliterator"><a href="#spliterator" class="headerlink" title="spliterator()"></a>spliterator()</h3><p>方法签名为Spliterator<e> spliterator()，该方法返回容器的可拆分迭代器。从名字来看该方法跟iterator()方法有点像，我们知道Iterator是用来迭代容器的，Spliterator也有类似作用，但二者有如下不同：</e></p>
+<p>  1.Spliterator既可以像Iterator那样逐个迭代，也可以批量迭代。批量迭代可以降低迭代的开销。<br>  2.Spliterator是可拆分的，一个Spliterator可以通过调用Spliterator<t> trySplit()方法来尝试分成两个。一个是this，另一个是新返回的那个，这两个迭代器代表的元素没有重叠。<br>可通过（多次）调用Spliterator.trySplit()方法来分解负载，以便多线程处理。</t></p>
+<p>例子：<br>大多数都是平均分割list。多线程进行操作<br><a href="https://www.cnblogs.com/liuyuhangCastle/p/9704090.html" target="_blank" rel="external">例子1</a><br><a href="https://blog.csdn.net/shenshaoming/article/details/100637484" target="_blank" rel="external">例子2</a></p>
+<h3 id="forEach-方法与forEachRemaining-方法的区别"><a href="#forEach-方法与forEachRemaining-方法的区别" class="headerlink" title="forEach()方法与forEachRemaining()方法的区别"></a>forEach()方法与forEachRemaining()方法的区别</h3><p>  <a href="https://www.pianshen.com/article/412620411/" target="_blank" rel="external">https://www.pianshen.com/article/412620411/</a></p>
+<p>即使你在网络上去询问他俩的差别，也鲜有人会回答，因为实在是没有太多的使用场景需要区别他俩。其实，他俩还是有一定的差别的，对于大多数实现了Iterable接口的集合，您可以多次调用forEach（），并将通过元素进行多次传递。相反，forEachRemaining()使用迭代器Iterator的所有元素，并且第二次调用它将不会做任何事情，因为不再有下一个元素。一个使用场景：获得对应集合的迭代器Iterator，然后您可以开始迭代，next()直到达到某个条件，然后使用forEachRemaining()操作该Iterator上的其余部分。在日常开发中，两者皆可使用。</p>
+<h2 id="Streams-API"><a href="#Streams-API" class="headerlink" title="Streams API"></a>Streams API</h2><p>对<em>stream</em>的操作分为为两类，<strong>中间操作(<em>intermediate operations</em>)和结束操作(<em>terminal operations</em>)</strong>，二者特点是：</p>
+<ol>
+<li><strong>中间操作总是会惰式执行</strong>，调用中间操作只会生成一个标记了该操作的新<em>stream</em>，仅此而已。</li>
+<li><strong>结束操作会触发实际计算</strong>，计算发生时会把所有中间操作积攒的操作以<em>pipeline</em>的方式执行，这样可以减少迭代次数。计算完成之后<em>stream</em>就会失效。</li>
+</ol>
+<p>如果你熟悉Apache Spark RDD，对<em>stream</em>的这个特点应该不陌生。</p>
+<p>下表汇总了<code>Stream</code>接口的部分常见方法：</p>
+<table>
+<thead>
+<tr>
+<th>操作类型</th>
+<th>接口方法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>中间操作</td>
+<td>concat() distinct() filter() flatMap() limit() map() peek() <br> skip() sorted() parallel() sequential() unordered()</td>
+</tr>
+<tr>
+<td>结束操作</td>
+<td>allMatch() anyMatch() collect() count() findAny() findFirst() <br> forEach() forEachOrdered() max() min() noneMatch() reduce() toArray()</td>
+</tr>
+</tbody>
+</table>
+<p>区分中间操作和结束操作最简单的方法，就是看方法的返回值，返回值为<em>stream</em>的大都是中间操作，否则是结束操作。</p>
+<h2 id="多面手reduce"><a href="#多面手reduce" class="headerlink" title="多面手reduce()"></a>多面手reduce()</h2><p><em>reduce</em>操作可以实现从一组元素中生成一个值，<code>sum()</code>、<code>max()</code>、<code>min()</code>、<code>count()</code>等都是<em>reduce</em>操作，将他们单独设为函数只是因为常用。<code>reduce()</code>的方法定义有三种重写形式：</p>
+<ul>
+<li><code>Optional&lt;T&gt; reduce(BinaryOperator&lt;T&gt; accumulator)</code></li>
+<li><code>T reduce(T identity, BinaryOperator&lt;T&gt; accumulator)</code></li>
+<li><code>&lt;U&gt; U reduce(U identity, BiFunction&lt;U,? super T,U&gt; accumulator, BinaryOperator&lt;U&gt; combiner)</code></li>
+</ul>
+<p>虽然函数定义越来越长，但语义不曾改变，多的参数只是为了指明初始值（参数<em>identity</em>），或者是指定并行执行时多个部分结果的合并方式（参数<em>combiner</em>）。<code>reduce()</code>最常用的场景就是从一堆值中生成一个值。用这么复杂的函数去求一个最大或最小值，你是不是觉得设计者有病。其实不然，因为“大”和“小”或者“求和”有时会有不同的语义。</p>
+<p>需求：<em>从一组单词中找出最长的单词</em>。这里“大”的含义就是“长”。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 找出最长的单词</span></div><div class="line">Stream&lt;String&gt; stream = Stream.of(<span class="string">"I"</span>, <span class="string">"love"</span>, <span class="string">"you"</span>, <span class="string">"too"</span>);</div><div class="line">Optional&lt;String&gt; longest = stream.reduce((s1, s2) -&gt; s1.length()&gt;=s2.length() ? s1 : s2);</div><div class="line"><span class="comment">//Optional&lt;String&gt; longest = stream.max((s1, s2) -&gt; s1.length()-s2.length());</span></div><div class="line">System.out.println(longest.get());</div></pre></td></tr></table></figure></p>
+<p>上述代码会选出最长的单词<em>love</em>，其中<em>Optional</em>是（一个）值的容器，使用它可以避免<em>null</em>值的麻烦。当然可以使用<code>Stream.max(Comparator&lt;? super T&gt; comparator)</code>方法来达到同等效果，但<code>reduce()</code>自有其存在的理由。</p>
+<p>需求：<em>求出一组单词的长度之和</em>。这是个“求和”操作，操作对象输入类型是<em>String</em>，而结果类型是<em>Integer</em>。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 求单词长度之和</span></div><div class="line">Stream&lt;String&gt; stream = Stream.of(<span class="string">"I"</span>, <span class="string">"love"</span>, <span class="string">"you"</span>, <span class="string">"too"</span>);</div><div class="line">Integer lengthSum = stream.reduce(<span class="number">0</span>,　<span class="comment">// 初始值　// (1)</span></div><div class="line">        (sum, str) -&gt; sum+str.length(), <span class="comment">// 累加器 // (2)</span></div><div class="line">        (a, b) -&gt; a+b);　<span class="comment">// 部分和拼接器，并行执行时才会用到 // (3)</span></div><div class="line"><span class="comment">// int lengthSum = stream.mapToInt(str -&gt; str.length()).sum();</span></div><div class="line">System.out.println(lengthSum);</div></pre></td></tr></table></figure></p>
+<p>上述代码标号(2)处将i. 字符串映射成长度，ii. 并和当前累加和相加。这显然是两步操作，使用<code>reduce()</code>函数将这两步合二为一，更有助于提升性能。如果想要使用<code>map()</code>和<code>sum()</code>组合来达到上述目的，也是可以的。</p>
+<p><code>reduce()</code>擅长的是生成一个值，如果想要从<em>Stream</em>生成一个集合或者<em>Map</em>等复杂的对象该怎么办呢？终极武器<code>collect()</code>横空出世！</p>
+<h1 id="0414"><a href="#0414" class="headerlink" title="0414"></a>0414</h1><h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>为何TreeMap没有排序？<br>随便引用别人的东西出的问题</p>
+<p>  doctorBasicInfo.setLabels(doctorBasicInfo.getLabels().stream().filter(label -&gt; !label.isDeleted()).collect(Collectors.collectingAndThen(Collectors.toCollection(()-&gt; new TreeSet&lt;&gt;(Comparator.comparing(DoctorLabelDTO::getLabelID))),ArrayList::new)));<br>其实是排序了的：</p>
+<p>  “labels”: [<br>      {<br>          “id”: 332,<br>          “labelName”: “感冒”,<br>          “labelID”: 1<br>      },<br>      {<br>          “id”: 331,<br>          “labelName”: “皮炎”,<br>          “labelID”: 2<br>      },<br>      {<br>          “id”: 31,<br>          “labelName”: “黄疸”,<br>          “labelID”: 11<br>      },<br>      {<br>          “id”: 32,<br>          “labelName”: “早产”,<br>          “labelID”: 12<br>      },<br>      {<br>          “id”: 33,<br>          “labelName”: “溢奶”,<br>          “labelID”: 13<br>      },<br>      {<br>          “id”: 34,<br>          “labelName”: “喂养”,<br>          “labelID”: 14<br>      },<br>      {<br>          “id”: 65,<br>          “labelName”: “室间隔缺损”,<br>          “labelID”: 19<br>      }<br>  ],<br>咋一看并没有ID排序，其实是按照labelId正序排序了，所以才出现了问题。应该按照ID排序即可。</p>
+<h1 id="0415"><a href="#0415" class="headerlink" title="0415"></a>0415</h1><h2 id="教训"><a href="#教训" class="headerlink" title="教训"></a>教训</h2><p>git force checkout 千万不要用。工作区的东西都会白写的。<br>先看看smart checkout 和 force checkout</p>
+<p>  smart checkout就会把冲突的这部分内容带到开发分支（如果你没有点进窗口的那些文件处理冲突的话）<br>  force checkout就不会把冲突的这部分内容带到开发分支</p>
+<p>基础：<br><a href="https://www.cnblogs.com/hutaoer/archive/2013/05/07/git_checkout.html" target="_blank" rel="external">git checkout 命令详解</a></p>
+<p>补充：<br>网上有说找到idea误删的文件可以恢复但是没找到</p>
+<h2 id="问题-1"><a href="#问题-1" class="headerlink" title="问题"></a>问题</h2><p>1.<a href="https://github.com/micronaut-projects/micronaut-sql/issues/137" target="_blank" rel="external">GITHUB提出关于JPA的问题</a><br>解决了之前使用不了JPA specification的问题，没有导入micronaut-spring包导致的。</p>
+<p>2.有没有可以拿到流的下标类似的东西？流有下标吗？<br>如何去操作流中的某一个下标的元素。只能通过流中具体的对象自己的标识来实现吗？</p>
+<p>##（补充）<br>网上说没有，只能自己单独计数来控制</p>
+<h1 id="0416"><a href="#0416" class="headerlink" title="0416"></a>0416</h1><h2 id="问题-2"><a href="#问题-2" class="headerlink" title="问题"></a>问题</h2><p>1.阿里sdk和容联云sdk冲突问题</p>
+<pre><code>DefaultProfile profile = DefaultProfile.getProfile(configs.getRegionId(), configs.getAccessKeyId(), configs.getAccessSecret());
+IAcsClient acsClient = new DefaultAcsClient(profile);
+</code></pre><p>爆出没有发现方法的错误。看样子是gson的错误<br>java.lang.NoSuchMethodError: com.google.gson.JsonObject.keySet()Ljava/util/Set;</p>
+<pre><code>JsonObject regionalEndpoints = obj.get(&quot;regional_endpoints&quot;).getAsJsonObject();
+for (String normalizedProductCode : regionalEndpoints.keySet()) {
+    JsonObject productData = regionalEndpoints.get(normalizedProductCode).getAsJsonObject();
+    for (String regionId : productData.keySet()) {
+        String endpoint = productData.get(regionId).getAsString();
+        putEndpointEntry(makeEndpointKey(normalizedProductCode, regionId), endpoint);
+    }
+}
+</code></pre><p>这里的keySet()方法报错了。<br>原因是包冲突了，容联云里面的SDK包和阿里云SDK包的GSON版本不一致导致没有keySet方法。<br>导入的自定义的包是会覆盖gradle管理的包，不管位置在哪里</p>
+<pre><code>// 自定义jar包
+compile fileTree(dir:&apos;libs&apos;,include:[&apos;*.jar&apos;])
+</code></pre><h1 id="0417"><a href="#0417" class="headerlink" title="0417"></a>0417</h1><h2 id="问题-3"><a href="#问题-3" class="headerlink" title="问题"></a>问题</h2><p>1.不能update(S Entiy)问题<br>使用JPA的写法才能直接更新实体类.<br>只要在repository上加对应的注解@Repository就可以解决</p>
+<p>2.JPA 和 JDBC可以同时使用吗？<br>可以</p>
+<p>3.报错</p>
+<p>  Error starting Micronaut server: Bean definition [org.hibernate.SessionFactory] could not be loaded: Error instantiating bean of type  [org.hibernate.SessionFactory]</p>
+<p>背景：<br>想使用jpa来同步数据库，因为可以直接update(S Entity)把所有的代码都全部复制过来。发现就是找不到实体类。</p>
+<p>原因：<br>实体类的id上的标签注解写的有问题：</p>
+<pre><code>@Id
+@GeneratedValue
+public long id;
+</code></pre><p>解决：<br>改成就可以了</p>
+<p>  @Id<br>    @GeneratedValue(strategy = GenerationType.IDENTITY)<br>    public Long id;</p>
+<p>JPA提供的四种标准用法为TABLE,SEQUENCE,IDENTITY,AUTO.</p>
+<p>  TABLE：使用一个特定的数据库表格来保存主键。<br>  SEQUENCE：根据底层数据库的序列来生成主键，条件是数据库支持序列。<br>  IDENTITY：主键由数据库自动生成（主要是自动增长型）<br>  AUTO：主键由程序控制。<br><a href="https://blog.csdn.net/zsg88/article/details/79366268" target="_blank" rel="external">@GeneratedValue 四种标准用法为TABLE,SEQUENCE,IDENTITY,AUTO</a></p>
+<ol>
+<li><p>Unnecessarily replacing a task that does not exist is not supported. Use create() or register() directly instead<br>原因：</p>
+<p> micronaut会自动更新gradle的版本，导致高级的gradle版本会在IDEA有一些奇怪的bug<br> <a href="https://stackoverflow.com/questions/59452624/spring-boot-unnecessarily-replacing-a-" target="_blank" rel="external">https://stackoverflow.com/questions/59452624/spring-boot-unnecessarily-replacing-a-</a> task-that-does-not-exist-is-not-supported</p>
+</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+        
+      
+
+      <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2020/05/03/0406-0410/" rel="next" title="0406-00410总结">
+                  <i class="fa fa-chevron-left"></i> 0406-00410总结
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+                <a href="/2020/05/03/0420-0426/" rel="prev" title="0420-0426总结">
+                  0420-0426总结 <i class="fa fa-chevron-right"></i>
+                </a>
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+    
+    <div class="comments" id="comments"></div>
+  
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#0413"><span class="nav-number">1.</span> <span class="nav-text">0413</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#学习"><span class="nav-number">1.1.</span> <span class="nav-text">学习</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#lambda和collection-注意以下方法都是用在Collection中的，而不是流"><span class="nav-number">1.2.</span> <span class="nav-text">lambda和collection(注意以下方法都是用在Collection中的，而不是流)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#forEach"><span class="nav-number">1.2.1.</span> <span class="nav-text">forEach()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#removeIf"><span class="nav-number">1.2.2.</span> <span class="nav-text">removeIf()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#spliterator"><span class="nav-number">1.2.3.</span> <span class="nav-text">spliterator()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#forEach-方法与forEachRemaining-方法的区别"><span class="nav-number">1.2.4.</span> <span class="nav-text">forEach()方法与forEachRemaining()方法的区别</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Streams-API"><span class="nav-number">1.3.</span> <span class="nav-text">Streams API</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多面手reduce"><span class="nav-number">1.4.</span> <span class="nav-text">多面手reduce()</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#0414"><span class="nav-number">2.</span> <span class="nav-text">0414</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#问题"><span class="nav-number">2.1.</span> <span class="nav-text">问题</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#0415"><span class="nav-number">3.</span> <span class="nav-text">0415</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#教训"><span class="nav-number">3.1.</span> <span class="nav-text">教训</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#问题-1"><span class="nav-number">3.2.</span> <span class="nav-text">问题</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#0416"><span class="nav-number">4.</span> <span class="nav-text">0416</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#问题-2"><span class="nav-number">4.1.</span> <span class="nav-text">问题</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#0417"><span class="nav-number">5.</span> <span class="nav-text">0417</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#问题-3"><span class="nav-number">5.1.</span> <span class="nav-text">问题</span></a></li></ol></li></ol></div>
+        
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/images/head.jpeg"
+      alt="王邸">
+  <p class="site-author-name" itemprop="name">王邸</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">55</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">标签</span>
+        
+      </div>
+    
+  </nav>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">王邸</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.3.8</div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.4.0</div>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+
+
+  <script src="/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.4.0"></script><script src="/js/motion.js?v=7.4.0"></script>
+<script src="/js/schemes/pisces.js?v=7.4.0"></script>
+
+<script src="/js/next-boot.js?v=7.4.0"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+
+<script>
+NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(item => {
+    return GUEST.includes(item);
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: false,
+    appId: 'Fn4BuvoixOxjJAhR79TvaD5M-gzGzoHsz',
+    appKey: '1uspTrSwPqkmSBSUr948WqxE',
+    placeholder: 'Just go go',
+    avatar: 'mm',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: true,
+    lang: '' || 'zh-cn',
+    path: location.pathname
+  });
+}, window.Valine);
+</script>
+
+</body>
+</html>

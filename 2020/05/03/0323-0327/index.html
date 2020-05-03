@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.3.8">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.4.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.4.0" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.4.0">
+
+<link rel="stylesheet" href="//fonts.proxy.ustclug.org/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.4.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="0323idea命令行下git中sh.exe中文显示乱码问题解决windows下git中sh.exe中文显示乱码问题解决在使用IntelliJ Idea进行开发时，Terminal在当前项目中进行一些命令行操作还是比较方便的，例如git命令之类的，不用切换路径。但是windows操作系统中，Terminal直接使用的是CMD，所以有的时候就会存在上面所说的不方便的地方。那么存不存在两全其美的方法呢">
+<meta property="og:type" content="article">
+<meta property="og:title" content="0323-0327总结">
+<meta property="og:url" content="http://yoursite.com/2020/05/03/0323-0327/index.html">
+<meta property="og:site_name" content="路要坚持">
+<meta property="og:description" content="0323idea命令行下git中sh.exe中文显示乱码问题解决windows下git中sh.exe中文显示乱码问题解决在使用IntelliJ Idea进行开发时，Terminal在当前项目中进行一些命令行操作还是比较方便的，例如git命令之类的，不用切换路径。但是windows操作系统中，Terminal直接使用的是CMD，所以有的时候就会存在上面所说的不方便的地方。那么存不存在两全其美的方法呢">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-05-03T07:20:52.651Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="0323-0327总结">
+<meta name="twitter:description" content="0323idea命令行下git中sh.exe中文显示乱码问题解决windows下git中sh.exe中文显示乱码问题解决在使用IntelliJ Idea进行开发时，Terminal在当前项目中进行一些命令行操作还是比较方便的，例如git命令之类的，不用切换路径。但是windows操作系统中，Terminal直接使用的是CMD，所以有的时候就会存在上面所说的不方便的地方。那么存不存在两全其美的方法呢">
+  <link rel="canonical" href="http://yoursite.com/2020/05/03/0323-0327/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>0323-0327总结 | 路要坚持</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">路要坚持</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+      <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block post">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/03/0323-0327/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="王邸">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/head.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="路要坚持">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">0323-0327总结
+
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2020-05-03 12:10:21 / 修改时间：15:20:52" itemprop="dateCreated datePublished" datetime="2020-05-03T12:10:21+08:00">2020-05-03</time>
+            </span>
+          
+            
+
+            
+          
+
+          
+            <span id="/2020/05/03/0323-0327/" class="post-meta-item leancloud_visitors" data-flag-title="0323-0327总结" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/05/03/0323-0327/#comments" itemprop="discussionUrl"><span class="post-comments-count valine-comment-count" data-xid="/2020/05/03/0323-0327/" itemprop="commentCount"></span></a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="0323"><a href="#0323" class="headerlink" title="0323"></a>0323</h1><h2 id="idea命令行下git中sh-exe中文显示乱码问题解决"><a href="#idea命令行下git中sh-exe中文显示乱码问题解决" class="headerlink" title="idea命令行下git中sh.exe中文显示乱码问题解决"></a>idea命令行下git中sh.exe中文显示乱码问题解决</h2><p><a href="https://blog.csdn.net/wei83523408/article/details/56036332" target="_blank" rel="external">windows下git中sh.exe中文显示乱码问题解决</a></p><p>在使用IntelliJ Idea进行开发时，Terminal在当前项目中进行一些命令行操作还是比较方便的，例如git命令之类的，不用切换路径。但是windows操作系统中，Terminal直接使用的是CMD，所以有的时候就会存在上面所说的不方便的地方。<br>那么存不存在两全其美的方法呢，最终皇天不负有心人，最终试验成功了，用起来特别的爽。<br>我把IntelliJ Idea的Terminal替换成了git中自带的sh.exe命令端程序。这个时候就具备了git-bash.exe中输入命令的优点。但是这个时候存在一个问题，中文显示乱码，一度让我十分纠结。后来各种搜索，终于找到了配置方法。<br>其实很简单，只需要在git安装目录中的etc目录下修改bash.bashrc文件。在该文件头部加入：</p><a id="more"></a>
+
+<pre><code>export LANG=zh_CN.utf-8
+alias ls=&apos;ls --show-control-chars --color=auto&apos;
+</code></pre><p>保存，然后就可以显示中文了。<br>如果中文这时候还是乱码，那么把export LANG=zh_CN.utf-8替换成：</p>
+<pre><code>export LC_ALL=zh_CN.UTF-8
+</code></pre><p>然而还是没有解决在git commit之后终端输入中文，中文消失直接卡死的问题。在git bash里面就可以使用中文。这应该是idea的控制台的问题。</p>
+<h1 id="0324"><a href="#0324" class="headerlink" title="0324"></a>0324</h1><h2 id="1-canal实现数据库同步"><a href="#1-canal实现数据库同步" class="headerlink" title="1.canal实现数据库同步"></a>1.canal实现数据库同步</h2><p>还没有解决</p>
+<h2 id="2-公众号只能配置三个域名"><a href="#2-公众号只能配置三个域名" class="headerlink" title="2.公众号只能配置三个域名"></a>2.公众号只能配置三个域名</h2><p>公众号的一级标签只能配置三个域名</p>
+<h2 id="3-域名请求和使用ip地址加端口号请求数据为什么会不同？"><a href="#3-域名请求和使用ip地址加端口号请求数据为什么会不同？" class="headerlink" title="3.域名请求和使用ip地址加端口号请求数据为什么会不同？"></a>3.域名请求和使用ip地址加端口号请求数据为什么会不同？</h2><p>因为配置了负载均衡使用域名直接请求的数据是对的，但是使用ip地址加端口号的数据是不会的。数据库是同一台。但是为什么不行还是需要去实践一下。</p>
+<h1 id="0325"><a href="#0325" class="headerlink" title="0325"></a>0325</h1><h2 id="学习"><a href="#学习" class="headerlink" title="学习"></a>学习</h2><h3 id="1-关于Repository的abstract-和-interface的问题"><a href="#1-关于Repository的abstract-和-interface的问题" class="headerlink" title="1.关于Repository的abstract 和 interface的问题"></a>1.关于Repository的abstract 和 interface的问题</h3><p>interface是继承CrudRepository 在Jdk8之后interface能实现default的方法同一个包下就能使用</p>
+<pre><code>@Transactional
+default Page&lt;DoctorBasicConsultation&gt; findByDoctor(int docId, int replyState, @NonNull String state, int creater,
+                                             String keyword, Pageable pageable) {
+    return Page.of(new ArrayList&lt;&gt;(), pageable, 1);
+}
+</code></pre><p>abstract类是实现的CrudRepository</p>
+<pre><code>@Transactional
+public Page&lt;DoctorBasicConsultation&gt; findByDoctor(int docId, int replyState, @NonNull String state, int creater,
+    String keyword, Pageable pageable) {
+  return Page.of(consultationList, pageable, total);
+}
+</code></pre><h3 id="2-关于自定sql-需要使用-in（，，，，）"><a href="#2-关于自定sql-需要使用-in（，，，，）" class="headerlink" title="2.关于自定sql 需要使用 in（，，，，）"></a>2.关于自定sql 需要使用 in（，，，，）</h3><p>直接拼接成一个str是不行的，因为会当成只有一个占位符，肯定是有问题的。必须逗号是不在引号里面的<br>错误：</p>
+<p>   in(‘A,B,C,D,E,F’)<br>正确：</p>
+<pre><code>in(&apos;A&apos;,&apos;B&apos;,&apos;C&apos;,&apos;D&apos;,&apos;E&apos;,&apos;F&apos;)
+</code></pre><p>需要分开，可能就需要自动去重写原生的jdbc的sql。</p>
+<p>现在在尝试不重写的写法：</p>
+<h2 id="花里胡哨"><a href="#花里胡哨" class="headerlink" title="花里胡哨"></a>花里胡哨</h2><p>代码：</p>
+<pre><code>String sql = &quot;SELECT result.* FROM t_form_result result INNER JOIN t_form form ON result.form_number = form.form_number WHERE form.service_type not in (%s) AND result.create_time BETWEEN \&quot;%s\&quot;  AND \&quot;%s\&quot;  AND result.deleted = FALSE ORDER BY result.create_time DESC&quot;;
+String format = String.format(sql, &quot;\&quot;心理专区\&quot;,\&quot;推文\&quot;&quot;, pageCondition.startTime.toString(), pageCondition.endTime.plusDays(1).toString());
+formResultList = formResultRepository.selectFormResultPageByIgnoreType(format);
+</code></pre><p>Repository:</p>
+<pre><code>@Query(&quot;:sql&quot;)
+public abstract List&lt;FormResultDTO&gt; selectFormResultPageByIgnoreType(String sql);
+</code></pre><p>但是总是说：</p>
+<p>  SQL Error executing Query: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ‘’SELECT result.* FROM t_form_result result INNER JOIN t_form form ON result.form’ at line 1</p>
+<p>前面多两个’’<br>应该是为了防止就是直接传sql的情况。<br>还是不行只能自己手动拼接</p>
+<pre><code>@Transactional
+public List&lt;FormResultDTO&gt; selectFormResultPageByIgnoreType(LocalDateTime startTime, LocalDateTime endTime, List&lt;String&gt; ignoreServiceType) {
+    String sql = &quot;SELECT result.*\n&quot; +
+            &quot;FROM t_form_result result INNER JOIN t_form form ON result.form_number = form.form_number \n&quot; +
+            &quot;WHERE form.service_type not in ( %s ) AND result.create_time BETWEEN ?  AND  ?  AND result.deleted = FALSE \n&quot; +
+            &quot;ORDER BY result.create_time DESC&quot;;
+    StringBuffer sb = new StringBuffer();
+    for (String s : ignoreServiceType) {
+        sb.append(&quot;&apos;&quot;).append(s).append(&quot;&apos;&quot;).append(&quot;,&quot;);
+    }
+    //sb.substring() 是算开始和结尾的？
+    String formatSql = String.format(sql, sb.substring(0, sb.length()-1));
+    List&lt;FormResultDTO&gt; formResultDTOS = jdbcOperations.prepareStatement(formatSql, statement -&gt; {
+        statement.setString(1, startTime.toString());
+        statement.setString(2, endTime.toString());
+        ResultSet resultSet = statement.executeQuery();
+        return jdbcOperations.entityStream(resultSet, FormResultDTO.class).collect(Collectors.toList());
+    });
+    return formResultDTOS;
+}
+</code></pre><p>//sb.substring() 是算开始和结尾的？<br>// str.subSequence(6,11)<br>事实证明这两个都是不算结尾的</p>
+<pre><code>public class StringTest {
+    public static void main(String[] args) {
+        String str = &quot;hello shabi?&quot;;
+        System.out.println(&quot;str.subSequence:   &quot; + str.subSequence(0,1));
+        System.out.println(&quot;str.substring:  &quot; + str.substring(0,1));
+    }
+}
+
+Connected to the target VM, address: &apos;127.0.0.1:54110&apos;, transport: &apos;socket&apos;
+str.subSequence:   h
+str.substring:  h
+Disconnected from the target VM, address: &apos;127.0.0.1:54110&apos;, transport: &apos;socket&apos;
+</code></pre><h2 id="CharSequence接口"><a href="#CharSequence接口" class="headerlink" title="CharSequence接口"></a>CharSequence接口</h2><p>是Header的的map结构是这个。我一开始以为是一个字符数组。后来发现这个接口大有玄机。<br>一个接口， String | StringBuffer | StringBuider 都继承了</p>
+<h1 id="0326"><a href="#0326" class="headerlink" title="0326"></a>0326</h1><h2 id="在linux上抓包-tcpdump"><a href="#在linux上抓包-tcpdump" class="headerlink" title="在linux上抓包   tcpdump"></a>在linux上抓包   tcpdump</h2><p>（补充）</p>
+<h2 id="大坑"><a href="#大坑" class="headerlink" title="大坑"></a>大坑</h2><h3 id="1-配置文件里面配置的数字要用双引号包裹，因为再使用的时候，就算你用String变量接收他还是会先转成科学计数法，然后再转成String。大坑"><a href="#1-配置文件里面配置的数字要用双引号包裹，因为再使用的时候，就算你用String变量接收他还是会先转成科学计数法，然后再转成String。大坑" class="headerlink" title="1.配置文件里面配置的数字要用双引号包裹，因为再使用的时候，就算你用String变量接收他还是会先转成科学计数法，然后再转成String。大坑"></a>1.配置文件里面配置的数字要用双引号包裹，因为再使用的时候，就算你用String变量接收他还是会先转成科学计数法，然后再转成String。大坑</h3><h3 id="2-Micronaut-使用拼接的url"><a href="#2-Micronaut-使用拼接的url" class="headerlink" title="2.Micronaut 使用拼接的url"></a>2.Micronaut 使用拼接的url</h3><h3 id="3-Content-Type在代码里面是大写，实际netty相应的响应头小写有问题吗？"><a href="#3-Content-Type在代码里面是大写，实际netty相应的响应头小写有问题吗？" class="headerlink" title="3.Content-Type在代码里面是大写，实际netty相应的响应头小写有问题吗？"></a>3.Content-Type在代码里面是大写，实际netty相应的响应头小写有问题吗？</h3><p>content-type对应的value必须要小写！那问题是<strong>content-type 和Content-Type</strong>是否有区别？</p>
+<pre><code>有区别！！！！！
+</code></pre><p>在netty框架的RoutingInBoundHandler 里面的encodeBodyWithCodec方法，强行把Content-Type 改成了 content-type</p>
+<pre><code>private MutableHttpResponse&lt;?&gt; encodeBodyWithCodec(MutableHttpResponse&lt;?&gt; response,
+                                                     Object body,
+                                                     MediaTypeCodec codec,
+                                                     MediaType mediaType,
+                                                     ChannelHandlerContext context,
+                                                     AtomicReference&lt;HttpRequest&lt;?&gt;&gt; requestReference) {
+      ByteBuf byteBuf;
+      try {
+          byteBuf = encodeBodyAsByteBuf(body, codec, context, requestReference);
+          int len = byteBuf.readableBytes();
+          MutableHttpHeaders headers = response.getHeaders();
+          if (!headers.contains(HttpHeaders.CONTENT_TYPE)) {
+              headers.add(HttpHeaderNames.CONTENT_TYPE, mediaType);
+          }
+          headers.remove(HttpHeaders.CONTENT_LENGTH);
+          headers.add(HttpHeaderNames.CONTENT_LENGTH, String.valueOf(len));
+
+          setBodyContent(response, byteBuf);
+          return response;
+      } catch (LinkageError e) {
+          // rxjava swallows linkage errors for some reasons so if one occurs, rethrow as a internal error
+          throw new InternalServerException(&quot;Fatal error encoding bytebuf: &quot; + e.getMessage() , e);
+      }
+</code></pre><p>解决方法在下个礼拜公布，使用Javaagent!</p>
+<h1 id="0327"><a href="#0327" class="headerlink" title="0327"></a>0327</h1><h2 id="1-通过content-length可知。请求头大小写是会影响请求结果的。netty框架自动把Content-Length-替换成了小写的-content-length。导致响应别的服务的时候出现问题。"><a href="#1-通过content-length可知。请求头大小写是会影响请求结果的。netty框架自动把Content-Length-替换成了小写的-content-length。导致响应别的服务的时候出现问题。" class="headerlink" title="1.通过content-length可知。请求头大小写是会影响请求结果的。netty框架自动把Content-Length 替换成了小写的 content-length。导致响应别的服务的时候出现问题。"></a>1.通过content-length可知。请求头大小写是会影响请求结果的。netty框架自动把Content-Length 替换成了小写的 content-length。导致响应别的服务的时候出现问题。</h2><p>这里要接入一个电话服务的鉴权。准备打算使用原生tomcat的servlet来处理鉴权。</p>
+<p>问题：Micronat一直导入不了tomcat对象。<br>现在使用另一种，直接在配置文件里面配置，也同样不行。因为官方发布的声明表示Micronaut的2.0版本才能支持Servlet!!!!!!!</p>
+<p>感觉不太行。想用sb试一试了,sb内置tomcat的服务器，肯定能用啊。现在就想试试在micronaut中使用tomcat服务器来使用。<br>然后使用Springboot的interceptor来打印路径代替我们Micronaut的:<strong>HttpRequestReceivedEvent</strong></p>
+<pre><code>@EventListener
+void logRequest(HttpRequestReceivedEvent event) {
+    if(event.getSource().getPath().startsWith(&quot;/health&quot;)) {
+        return;
+    }
+    log.info(event.toString());
+}
+</code></pre><p><a href="https://www.cnblogs.com/pypua/p/10075259.html" target="_blank" rel="external">springboot拦截器HandlerInterceptor详解</a><br>注：领导说不能使用springboot只能使用其他解决方案咯</p>
+<h2 id="2-Supervisor的配置文件。"><a href="#2-Supervisor的配置文件。" class="headerlink" title="2.Supervisor的配置文件。"></a>2.Supervisor的配置文件。</h2><p>在自己的服务上装superVisor还是容易翻车</p>
+<pre><code>[program:phoneauth]
+directory=/home/auth
+command=java -jar phoneauth.jar
+autostart=true
+autorestart=true
+startretries=5
+redirect_stderr=true
+stdout_logfile=/home/auth/log/stdout.log
+environment=
+</code></pre><p>未解决<br>spawned: ‘phoneauth’ with pid 5715<br>INFO exited: phoneauth (exit status 1; not expected)</p>
+<h1 id="未完成"><a href="#未完成" class="headerlink" title="未完成"></a>未完成</h1><p>canal的数据迁移问题<br>主要在windows服务器上太难了</p>
+
+    </div>
+
+    
+    
+    
+        
+      
+
+      <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2020/05/03/0316-0320/" rel="next" title="0316-0320总结">
+                  <i class="fa fa-chevron-left"></i> 0316-0320总结
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+                <a href="/2020/05/03/0330 - 0403/" rel="prev" title="0330-0403总结">
+                  0330-0403总结 <i class="fa fa-chevron-right"></i>
+                </a>
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+    
+    <div class="comments" id="comments"></div>
+  
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#0323"><span class="nav-number">1.</span> <span class="nav-text">0323</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#idea命令行下git中sh-exe中文显示乱码问题解决"><span class="nav-number">1.1.</span> <span class="nav-text">idea命令行下git中sh.exe中文显示乱码问题解决</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#0324"><span class="nav-number">2.</span> <span class="nav-text">0324</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-canal实现数据库同步"><span class="nav-number">2.1.</span> <span class="nav-text">1.canal实现数据库同步</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-公众号只能配置三个域名"><span class="nav-number">2.2.</span> <span class="nav-text">2.公众号只能配置三个域名</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-域名请求和使用ip地址加端口号请求数据为什么会不同？"><span class="nav-number">2.3.</span> <span class="nav-text">3.域名请求和使用ip地址加端口号请求数据为什么会不同？</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#0325"><span class="nav-number">3.</span> <span class="nav-text">0325</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#学习"><span class="nav-number">3.1.</span> <span class="nav-text">学习</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-关于Repository的abstract-和-interface的问题"><span class="nav-number">3.1.1.</span> <span class="nav-text">1.关于Repository的abstract 和 interface的问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-关于自定sql-需要使用-in（，，，，）"><span class="nav-number">3.1.2.</span> <span class="nav-text">2.关于自定sql 需要使用 in（，，，，）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#花里胡哨"><span class="nav-number">3.2.</span> <span class="nav-text">花里胡哨</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CharSequence接口"><span class="nav-number">3.3.</span> <span class="nav-text">CharSequence接口</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#0326"><span class="nav-number">4.</span> <span class="nav-text">0326</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#在linux上抓包-tcpdump"><span class="nav-number">4.1.</span> <span class="nav-text">在linux上抓包   tcpdump</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#大坑"><span class="nav-number">4.2.</span> <span class="nav-text">大坑</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-配置文件里面配置的数字要用双引号包裹，因为再使用的时候，就算你用String变量接收他还是会先转成科学计数法，然后再转成String。大坑"><span class="nav-number">4.2.1.</span> <span class="nav-text">1.配置文件里面配置的数字要用双引号包裹，因为再使用的时候，就算你用String变量接收他还是会先转成科学计数法，然后再转成String。大坑</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Micronaut-使用拼接的url"><span class="nav-number">4.2.2.</span> <span class="nav-text">2.Micronaut 使用拼接的url</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-Content-Type在代码里面是大写，实际netty相应的响应头小写有问题吗？"><span class="nav-number">4.2.3.</span> <span class="nav-text">3.Content-Type在代码里面是大写，实际netty相应的响应头小写有问题吗？</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#0327"><span class="nav-number">5.</span> <span class="nav-text">0327</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-通过content-length可知。请求头大小写是会影响请求结果的。netty框架自动把Content-Length-替换成了小写的-content-length。导致响应别的服务的时候出现问题。"><span class="nav-number">5.1.</span> <span class="nav-text">1.通过content-length可知。请求头大小写是会影响请求结果的。netty框架自动把Content-Length 替换成了小写的 content-length。导致响应别的服务的时候出现问题。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Supervisor的配置文件。"><span class="nav-number">5.2.</span> <span class="nav-text">2.Supervisor的配置文件。</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#未完成"><span class="nav-number">6.</span> <span class="nav-text">未完成</span></a></li></ol></div>
+        
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/images/head.jpeg"
+      alt="王邸">
+  <p class="site-author-name" itemprop="name">王邸</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">55</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">标签</span>
+        
+      </div>
+    
+  </nav>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">王邸</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.3.8</div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.4.0</div>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+
+
+  <script src="/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.4.0"></script><script src="/js/motion.js?v=7.4.0"></script>
+<script src="/js/schemes/pisces.js?v=7.4.0"></script>
+
+<script src="/js/next-boot.js?v=7.4.0"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+
+<script>
+NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(item => {
+    return GUEST.includes(item);
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: false,
+    appId: 'Fn4BuvoixOxjJAhR79TvaD5M-gzGzoHsz',
+    appKey: '1uspTrSwPqkmSBSUr948WqxE',
+    placeholder: 'Just go go',
+    avatar: 'mm',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: true,
+    lang: '' || 'zh-cn',
+    path: location.pathname
+  });
+}, window.Valine);
+</script>
+
+</body>
+</html>

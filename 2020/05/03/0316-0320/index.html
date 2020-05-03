@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.3.8">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.4.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.4.0" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.4.0">
+
+<link rel="stylesheet" href="//fonts.proxy.ustclug.org/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.4.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="这周的总结还需要补充，很多东西都没做3.16IOPS Input/Output Operations Per Second3.171.micronaut jdbc 不能直接find单个字段？而是需要写自定义sql？使用Micronaut当我们想要find一个字段的时候，我们需要使用一个bean去接收，包含需要查找的答案和查找的参数">
+<meta property="og:type" content="article">
+<meta property="og:title" content="0316-0320总结">
+<meta property="og:url" content="http://yoursite.com/2020/05/03/0316-0320/index.html">
+<meta property="og:site_name" content="路要坚持">
+<meta property="og:description" content="这周的总结还需要补充，很多东西都没做3.16IOPS Input/Output Operations Per Second3.171.micronaut jdbc 不能直接find单个字段？而是需要写自定义sql？使用Micronaut当我们想要find一个字段的时候，我们需要使用一个bean去接收，包含需要查找的答案和查找的参数">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-05-03T07:20:36.964Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="0316-0320总结">
+<meta name="twitter:description" content="这周的总结还需要补充，很多东西都没做3.16IOPS Input/Output Operations Per Second3.171.micronaut jdbc 不能直接find单个字段？而是需要写自定义sql？使用Micronaut当我们想要find一个字段的时候，我们需要使用一个bean去接收，包含需要查找的答案和查找的参数">
+  <link rel="canonical" href="http://yoursite.com/2020/05/03/0316-0320/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>0316-0320总结 | 路要坚持</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">路要坚持</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+      <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block post">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/03/0316-0320/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="王邸">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/head.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="路要坚持">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">0316-0320总结
+
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2020-05-03 12:09:21 / 修改时间：15:20:36" itemprop="dateCreated datePublished" datetime="2020-05-03T12:09:21+08:00">2020-05-03</time>
+            </span>
+          
+            
+
+            
+          
+
+          
+            <span id="/2020/05/03/0316-0320/" class="post-meta-item leancloud_visitors" data-flag-title="0316-0320总结" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/05/03/0316-0320/#comments" itemprop="discussionUrl"><span class="post-comments-count valine-comment-count" data-xid="/2020/05/03/0316-0320/" itemprop="commentCount"></span></a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="这周的总结还需要补充，很多东西都没做"><a href="#这周的总结还需要补充，很多东西都没做" class="headerlink" title="这周的总结还需要补充，很多东西都没做"></a>这周的总结还需要补充，很多东西都没做</h1><hr><h1 id="3-16"><a href="#3-16" class="headerlink" title="3.16"></a>3.16</h1><h2 id="IOPS-Input-Output-Operations-Per-Second"><a href="#IOPS-Input-Output-Operations-Per-Second" class="headerlink" title="IOPS Input/Output Operations Per Second"></a>IOPS Input/Output Operations Per Second</h2><h1 id="3-17"><a href="#3-17" class="headerlink" title="3.17"></a>3.17</h1><h2 id="1-micronaut-jdbc-不能直接find单个字段？而是需要写自定义sql？"><a href="#1-micronaut-jdbc-不能直接find单个字段？而是需要写自定义sql？" class="headerlink" title="1.micronaut jdbc 不能直接find单个字段？而是需要写自定义sql？"></a>1.micronaut jdbc 不能直接find单个字段？而是需要写自定义sql？</h2><p>使用Micronaut当我们想要find一个字段的时候，我们需要使用一个bean去接收，包含需要查找的答案和查找的参数</p><a id="more"></a>
+
+<pre><code>Optional&lt;FormName&gt;formName =  formDTORepository.findByFormNumber(&quot;FORM-TEST&quot;);
+
+@Setter
+@Getter
+@ToString
+@Introspected
+@MappedEntity(value=&quot;t_form&quot;)
+public class FormName {
+    private String formNumber;
+    private String formName;
+}
+</code></pre><p>Sql语句：</p>
+<p>  SELECT form<em>name</em>.<code>form_number</code>,form<em>name</em>.<code>form_name</code> FROM <code>t_form</code> form<em>name</em> WHERE (form<em>name</em>.<code>form_number</code> = ?)</p>
+<h2 id="2-连接查询不自定义sql不能返回同一级吗？"><a href="#2-连接查询不自定义sql不能返回同一级吗？" class="headerlink" title="2.连接查询不自定义sql不能返回同一级吗？"></a>2.连接查询不自定义sql不能返回同一级吗？</h2><p>官网找到：</p>
+<p>  @Query(“SELECT *, m_.name as m<em>name, m</em>.id as m<em>id FROM product p INNER JOIN manufacturer m</em> ON p.manufacturer<em>id = m</em>.id WHERE p.name like :name limit 5”)<br>  ​@Join(value = “manufacturer”, alias = “m_”)<br>  ​List<product> searchProducts(String name)<br>还是需要自定义sql,应该可以的。需要试一下</product></p>
+<h1 id="3-18"><a href="#3-18" class="headerlink" title="3.18"></a>3.18</h1><h2 id="目的：把异常分开处理"><a href="#目的：把异常分开处理" class="headerlink" title="目的：把异常分开处理"></a>目的：把异常分开处理</h2><h2 id="做法：想exceptionHandler处理"><a href="#做法：想exceptionHandler处理" class="headerlink" title="做法：想exceptionHandler处理"></a>做法：想exceptionHandler处理</h2><h2 id="结果"><a href="#结果" class="headerlink" title="结果"></a>结果</h2><p>但是进入Controller层之前手动抛出异常是不会被handler捕获的。<br>经过测试发现，在加载controller时出现异常也会跑到Local Error Handling（也就是@Error上面），是不会跑到Handler的<br>官网：<br><a href="https://docs.micronaut.io/latest/guide/index.html#errorHandling" target="_blank" rel="external">https://docs.micronaut.io/latest/guide/index.html#errorHandling</a><br>注释调localError handling，自定义的异常可以被捕获<br>但是已经有的异常是否可以捕获？<br>使用NPE试一下,也是可以的。但是使用了local error handling就不行，不会被ExceptionHandler捕获了</p>
+<h2 id="postman的用法"><a href="#postman的用法" class="headerlink" title="postman的用法"></a>postman的用法</h2><p>现在也只是模拟发送请求。postman应该还有很多高级的用法必须要掌握。<br>记：更多思考把东西用好。现在做的东西都一定可以做得更好。</p>
+<h2 id="配置负载均衡"><a href="#配置负载均衡" class="headerlink" title="配置负载均衡"></a>配置负载均衡</h2><p>对应的ip + 端口 + 路径<br>可以配到<br>https + 域名 + 路径</p>
+<h1 id="3-19"><a href="#3-19" class="headerlink" title="3.19"></a>3.19</h1><h2 id="2-postMan高效使用"><a href="#2-postMan高效使用" class="headerlink" title="2.postMan高效使用"></a>2.postMan高效使用</h2><p><a href="https://www.jianshu.com/p/549ff9f922d6" target="_blank" rel="external">https://www.jianshu.com/p/549ff9f922d6</a><br>高效用法1：collections<br>高效用法2：配置环境变量。本地、测试、正式<br>使用环境变量<br>注意：postman不要配的变量里面加回车</p>
+<h1 id="3-20"><a href="#3-20" class="headerlink" title="3.20"></a>3.20</h1><h2 id="4-Mysql学习（常见的高阶用法）"><a href="#4-Mysql学习（常见的高阶用法）" class="headerlink" title="4.Mysql学习（常见的高阶用法）"></a>4.Mysql学习（常见的高阶用法）</h2><p>官网表示：group by 和 聚合函数连用可以显示group by 的字段</p>
+<pre><code>SELECT species, COUNT(*) FROM pet GROUP BY species;
+</code></pre><p>官网学习<br><a href="https://dev.mysql.com/doc/refman/8.0/en/group-by-handling.html" target="_blank" rel="external">https://dev.mysql.com/doc/refman/8.0/en/group-by-handling.html</a></p>
+<h3 id="handler（句柄）命令"><a href="#handler（句柄）命令" class="headerlink" title="handler（句柄）命令"></a>handler（句柄）命令</h3><p>这个不用上锁，搜索起来比较快。使用limit可以搜索多条<br>handler与select的比较</p>
+<pre><code>select语句一次返回所有相关行，handler每次返回一行（但也可以返回多行）。
+HANDLER涉及的分析较少，比SELECT更快
+没有优化程序或查询校验开销
+在两个管理程序请求之间，不需要锁定表。
+</code></pre><p>原文链接：</p>
+<p>  <a href="https://blog.csdn.net/JesseYoung/article/details/40785137" target="_blank" rel="external">https://blog.csdn.net/JesseYoung/article/details/40785137</a></p>
+<p>join和union的区别：</p>
+<pre><code>unint相当于两个表的并集。join就是两个表交集。
+</code></pre><p>5.单元测试<br>6.swagger文档的接入<br>7.powerdesigner</p>
+
+    </div>
+
+    
+    
+    
+        
+      
+
+      <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2020/05/03/0309-0313/" rel="next" title="0309-0313总结">
+                  <i class="fa fa-chevron-left"></i> 0309-0313总结
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+                <a href="/2020/05/03/0323-0327/" rel="prev" title="0323-0327总结">
+                  0323-0327总结 <i class="fa fa-chevron-right"></i>
+                </a>
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+    
+    <div class="comments" id="comments"></div>
+  
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#这周的总结还需要补充，很多东西都没做"><span class="nav-number">1.</span> <span class="nav-text">这周的总结还需要补充，很多东西都没做</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-16"><span class="nav-number">2.</span> <span class="nav-text">3.16</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#IOPS-Input-Output-Operations-Per-Second"><span class="nav-number">2.1.</span> <span class="nav-text">IOPS Input/Output Operations Per Second</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-17"><span class="nav-number">3.</span> <span class="nav-text">3.17</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-micronaut-jdbc-不能直接find单个字段？而是需要写自定义sql？"><span class="nav-number">3.1.</span> <span class="nav-text">1.micronaut jdbc 不能直接find单个字段？而是需要写自定义sql？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-连接查询不自定义sql不能返回同一级吗？"><span class="nav-number">3.2.</span> <span class="nav-text">2.连接查询不自定义sql不能返回同一级吗？</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-18"><span class="nav-number">4.</span> <span class="nav-text">3.18</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#目的：把异常分开处理"><span class="nav-number">4.1.</span> <span class="nav-text">目的：把异常分开处理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#做法：想exceptionHandler处理"><span class="nav-number">4.2.</span> <span class="nav-text">做法：想exceptionHandler处理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#结果"><span class="nav-number">4.3.</span> <span class="nav-text">结果</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#postman的用法"><span class="nav-number">4.4.</span> <span class="nav-text">postman的用法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置负载均衡"><span class="nav-number">4.5.</span> <span class="nav-text">配置负载均衡</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-19"><span class="nav-number">5.</span> <span class="nav-text">3.19</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-postMan高效使用"><span class="nav-number">5.1.</span> <span class="nav-text">2.postMan高效使用</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-20"><span class="nav-number">6.</span> <span class="nav-text">3.20</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#4-Mysql学习（常见的高阶用法）"><span class="nav-number">6.1.</span> <span class="nav-text">4.Mysql学习（常见的高阶用法）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#handler（句柄）命令"><span class="nav-number">6.1.1.</span> <span class="nav-text">handler（句柄）命令</span></a></li></ol></li></ol></li></ol></div>
+        
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/images/head.jpeg"
+      alt="王邸">
+  <p class="site-author-name" itemprop="name">王邸</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">55</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">标签</span>
+        
+      </div>
+    
+  </nav>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">王邸</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.3.8</div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.4.0</div>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+
+
+  <script src="/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.4.0"></script><script src="/js/motion.js?v=7.4.0"></script>
+<script src="/js/schemes/pisces.js?v=7.4.0"></script>
+
+<script src="/js/next-boot.js?v=7.4.0"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+
+<script>
+NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(item => {
+    return GUEST.includes(item);
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: false,
+    appId: 'Fn4BuvoixOxjJAhR79TvaD5M-gzGzoHsz',
+    appKey: '1uspTrSwPqkmSBSUr948WqxE',
+    placeholder: 'Just go go',
+    avatar: 'mm',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: true,
+    lang: '' || 'zh-cn',
+    path: location.pathname
+  });
+}, window.Valine);
+</script>
+
+</body>
+</html>

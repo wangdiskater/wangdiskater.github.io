@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.3.8">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.4.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.4.0" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.4.0">
+
+<link rel="stylesheet" href="//fonts.proxy.ustclug.org/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.4.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="12301.commons beanUtil包PropertyUtil 是真的难用,也许是操作不对吧BeanUtil有一个缓存 weakHashMap(弱引用)Java 关于强引用，软引用，弱引用和虚引用的区别与用法：https://blog.csdn.net/junjunba2689/article/details/80601729">
+<meta property="og:type" content="article">
+<meta property="og:title" content="1230-0103总结">
+<meta property="og:url" content="http://yoursite.com/2020/05/02/1230-0103/index.html">
+<meta property="og:site_name" content="路要坚持">
+<meta property="og:description" content="12301.commons beanUtil包PropertyUtil 是真的难用,也许是操作不对吧BeanUtil有一个缓存 weakHashMap(弱引用)Java 关于强引用，软引用，弱引用和虚引用的区别与用法：https://blog.csdn.net/junjunba2689/article/details/80601729">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-05-03T07:19:12.004Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="1230-0103总结">
+<meta name="twitter:description" content="12301.commons beanUtil包PropertyUtil 是真的难用,也许是操作不对吧BeanUtil有一个缓存 weakHashMap(弱引用)Java 关于强引用，软引用，弱引用和虚引用的区别与用法：https://blog.csdn.net/junjunba2689/article/details/80601729">
+  <link rel="canonical" href="http://yoursite.com/2020/05/02/1230-0103/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>1230-0103总结 | 路要坚持</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">路要坚持</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+      <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block post">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/02/1230-0103/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="王邸">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/head.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="路要坚持">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">1230-0103总结
+
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2020-05-02 11:09:21" itemprop="dateCreated datePublished" datetime="2020-05-02T11:09:21+08:00">2020-05-02</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-05-03 15:19:12" itemprop="dateModified" datetime="2020-05-03T15:19:12+08:00">2020-05-03</time>
+              </span>
+            
+          
+
+          
+            <span id="/2020/05/02/1230-0103/" class="post-meta-item leancloud_visitors" data-flag-title="1230-0103总结" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/05/02/1230-0103/#comments" itemprop="discussionUrl"><span class="post-comments-count valine-comment-count" data-xid="/2020/05/02/1230-0103/" itemprop="commentCount"></span></a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="1230"><a href="#1230" class="headerlink" title="1230"></a>1230</h1><h2 id="1-commons-beanUtil包"><a href="#1-commons-beanUtil包" class="headerlink" title="1.commons beanUtil包"></a>1.commons beanUtil包</h2><p>PropertyUtil 是真的难用,也许是操作不对吧<br>BeanUtil</p><p>有一个缓存 weakHashMap(弱引用)<br>Java 关于强引用，软引用，弱引用和虚引用的区别与用法：</p><pre><code>https://blog.csdn.net/junjunba2689/article/details/80601729
+</code></pre><a id="more"></a>
+
+<p>BeanUtil的核心就是 BeanUtil和 Convertor</p>
+<h2 id="2-supervisor"><a href="#2-supervisor" class="headerlink" title="2.supervisor"></a>2.supervisor</h2><p><a href="http://liyangliang.me/posts/2015/06/using-supervisor/" target="_blank" rel="external">使用supervisor管理进程</a></p>
+<p><a href="http://supervisord.org" target="_blank" rel="external">Supervisor</a> 是一个用 Python 写的进程管理工具，可以很方便的用来启动、重启、关闭进程（不仅仅是 Python 进程）。除了对单个进程的控制，还可以同时启动、关闭多个进程，比如很不幸的服务器出问题导致所有应用程序都被杀死，此时可以用 supervisor 同时启动所有应用程序而不是一个一个地敲命令启动。</p>
+<p><a href="http://supervisord.org/index.html" target="_blank" rel="external">官网</a></p>
+<p><a href="http://www.supervisord.org/running.html" target="_blank" rel="external">使用supervisor</a><br>只有用了才能体会到他的特性</p>
+<pre><code>supervisorctl status all
+supervisorctl stop all
+</code></pre><h1 id="1231"><a href="#1231" class="headerlink" title="1231"></a>1231</h1><p>2.Commons Collections包<br>org.apache.commons.collections4                    This package contains the interfaces and utilities shared across all the subpackages of this component.<br>org.apache.commons.collections4.bag                This package contains implementations of the Bag and SortedBag interfaces.<br>org.apache.commons.collections4.bidimap            This package contains implementations of the BidiMap, OrderedBidiMap and SortedBidiMap interfaces.<br>org.apache.commons.collections4.collection        This package contains implementations of the Collection interface.<br>org.apache.commons.collections4.comparators        This package contains implementations of the Comparator interface.<br>org.apache.commons.collections4.functors        This package contains implementations of the Closure, Predicate, Transformer and Factory interfaces.<br>org.apache.commons.collections4.iterators        This package contains implementations of the Iterator interface.<br>org.apache.commons.collections4.keyvalue        This package contains implementations of collection and map related key/value classes.<br>org.apache.commons.collections4.list            This package contains implementations of the List interface.<br>org.apache.commons.collections4.map                This package contains implementations of the Map, IterableMap, OrderedMap and SortedMap interfaces.<br>org.apache.commons.collections4.multimap        This package contains implementations of the MultiValuedMap interfaces.<br>org.apache.commons.collections4.multiset        This package contains implementations of the MultiSet interface.<br>org.apache.commons.collections4.properties        This package contains classes to extend or customize the behavior of Properties.<br>org.apache.commons.collections4.queue            This package contains implementations for the Queue interface.<br>org.apache.commons.collections4.sequence        This package provides classes to compare two sequences of objects.<br>org.apache.commons.collections4.set                This package contains implementations of the Set, SortedSet and NavigableSet interfaces.<br>org.apache.commons.collections4.splitmap        The “split map” concept is that of an object that implements the Put and Get interfaces, with differing generic types.<br>org.apache.commons.collections4.trie            This package contains implementations of the Trie interface.<br>org.apache.commons.collections4.trie.analyzer    This package contains various KeyAnalyzer implementations.</p>
+<h1 id="bag-标准用法treeBag-和-HashBag"><a href="#bag-标准用法treeBag-和-HashBag" class="headerlink" title="bag  标准用法treeBag 和 HashBag"></a>bag  标准用法treeBag 和 HashBag</h1><p>这个包就好用很多，hashBag底层是hashMap，把对象丢进去他会计数。他的key表现的是同一个对象丢进去的次数，value就是丢进去的对象</p>
+<pre><code>HashBag&lt;String&gt; strings = new HashBag&lt;&gt;();
+strings.add(&quot;hello&quot;);
+strings.add(&quot;world&quot;);
+strings.add(&quot;world&quot;);
+strings.add(&quot;world&quot;);
+strings.add(&quot;world&quot;);
+System.out.println(strings);
+int hello = strings.getCount(&quot;hello&quot;);
+System.out.println(hello);
+</code></pre><h1 id="bidimap"><a href="#bidimap" class="headerlink" title="bidimap"></a>bidimap</h1><p>双向map顾名思义就是 key —value 可以转化</p>
+<pre><code>BidiMap&lt;String, String&gt; stringStringBidiMap = new TreeBidiMap&lt;&gt;();
+stringStringBidiMap.put(&quot;hello&quot;,&quot;world&quot;);
+
+String key = stringStringBidiMap.getKey(&quot;world&quot;);
+System.out.println(key);
+// inverseBidiMap
+BidiMap&lt;String, String&gt; stringStringBidiMap1 = stringStringBidiMap.inverseBidiMap();
+String key2 = stringStringBidiMap1.getKey(&quot;hello&quot;);
+System.out.println(key2);
+</code></pre><h1 id="BoundedCollection"><a href="#BoundedCollection" class="headerlink" title="BoundedCollection"></a>BoundedCollection</h1><p>有界的collection</p>
+<pre><code>    ArrayList&lt;Object&gt; objects = new ArrayList&lt;&gt;();
+    objects.add(123);
+    objects.add(123);
+    objects.add(123);
+    objects.add(123);
+
+    FixedSizeList&lt;Object&gt; fixedSizeList = FixedSizeList.fixedSizeList(objects);
+//  fixedSizeList.add(&quot;haikeyi?&quot;);
+    System.out.println(objects);
+    System.out.println(fixedSizeList);
+</code></pre><h1 id="Multimap-—-MultiValuedMap"><a href="#Multimap-—-MultiValuedMap" class="headerlink" title="Multimap  — MultiValuedMap"></a>Multimap  — MultiValuedMap</h1><p>一个key可以对应多个value</p>
+<pre><code>MultiValuedMap&lt;Object, Object&gt; hashMap = new ArrayListValuedHashMap&lt;&gt;();
+hashMap.put(&quot;key&quot;,&quot;快使用双截棍？&quot;);
+hashMap.put(&quot;key&quot;,&quot;就这？&quot;);
+hashMap.put(&quot;key&quot;,&quot;就这？&quot;);
+hashMap.put(&quot;key&quot;,&quot;就这？&quot;);
+hashMap.put(&quot;key&quot;,&quot;就这？&quot;);
+hashMap.put(&quot;key&quot;,&quot;就这？&quot;);
+System.out.println(hashMap);
+</code></pre><h1 id="MultiSet"><a href="#MultiSet" class="headerlink" title="MultiSet"></a>MultiSet</h1><pre><code>HashMultiSet&lt;String&gt; multiSet = new HashMultiSet&lt;&gt;();
+multiSet.add(&quot;就这？&quot;);
+multiSet.add(&quot;就这？&quot;);
+multiSet.add(&quot;就这？&quot;);
+multiSet.add(&quot;就这？&quot;);
+multiSet.add(&quot;就这？&quot;);
+multiSet.add(&quot;就这？&quot;);
+System.out.println(multiSet);  //[就这？:6]
+</code></pre><p>和bag有点像</p>
+<h1 id="splitmap"><a href="#splitmap" class="headerlink" title="splitmap"></a>splitmap</h1><p>The “split map” concept is that of an object that implements the Put and Get interfaces, with differing generic types. This is like a pre-generics Map whose input key/value constraints are different than its output key/value constraints. While it would be possible to declare a “split map” with matching input/output key/value constraints, this would be a Map and would therefore make little sense (any Commons Collections Map implementation will also implement Put and Get with matching generic parameters).<br>都没整明白剩下的一些，这个包就是为了集合有多个相同的元素好处理一些。</p>
+<p>3.docker docs<br><a href="https://docs.docker.com" target="_blank" rel="external">官方文档</a></p>
+<p>docker安装redis</p>
+<pre><code>docker pull redis
+</code></pre><p>查看是否安装成功：</p>
+<pre><code>docker images
+</code></pre><p>启动镜像：</p>
+<pre><code>docker run -p 6379:6379 -d redis:latest redis-server -name redis1
+</code></pre><p>查看容器启动情况：</p>
+<pre><code>docker ps
+</code></pre><p>连接redis</p>
+<pre><code>docker exec -ti redis1 redis-cli
+docker exec -ti redis1 redis-cli -h localhost -p 6379
+docker exec -ti redis1 redis-cli -h 127.0.0.1 -p 6379
+docker exec -ti redis1 redis-cli -h 172.17.0.3 -p 6379
+</code></pre><p>4.k8s and docker<br><a href="https://blog.csdn.net/whdxjbw/article/details/80739529" target="_blank" rel="external">https://blog.csdn.net/whdxjbw/article/details/80739529</a></p>
+<p>如何在Windows 10上运行Docker和Kubernetes？<br><a href="https://www.itcodemonkey.com/article/7834.html" target="_blank" rel="external">https://www.itcodemonkey.com/article/7834.html</a></p>
+<p>5.case when<br>Case具有两种格式。简单Case函数和Case搜索函数。</p>
+<h3 id="简单Case函数"><a href="#简单Case函数" class="headerlink" title="简单Case函数"></a>简单Case函数</h3><p>CASE sex<br>WHEN ‘1’ THEN ‘男’<br>WHEN ‘2’ THEN ‘女’<br>ELSE ‘其他’ END</p>
+<h3 id="Case搜索函数"><a href="#Case搜索函数" class="headerlink" title="Case搜索函数"></a>Case搜索函数</h3><p>CASE WHEN sex = ‘1’ THEN ‘男’<br>WHEN sex = ‘2’ THEN ‘女’<br>ELSE ‘其他’ END</p>
+<h3 id="两个简单例子"><a href="#两个简单例子" class="headerlink" title="两个简单例子"></a>两个简单例子</h3><pre><code>SELECT
+    user_nickname AS &apos;用户姓名&apos;,
+    ( CASE WHEN inform_state = 1 THEN &apos;已放号&apos; WHEN inform_state = 0 THEN &apos;未放号&apos; ELSE &apos;你TM是啥啊&apos; END ) AS &apos;放号&apos;
+FROM
+    t_inform_user
+WHERE
+    create_time &gt; &apos;2020-1-21&apos;
+
+SELECT
+    user_nickname AS &apos;用户姓名&apos;,
+    ( CASE inform_state WHEN 1 THEN &apos;已放号&apos; WHEN  0 THEN &apos;未放号&apos; ELSE &apos;你TM是啥啊&apos; END ) AS &apos;放号&apos;
+FROM
+    t_inform_user
+WHERE
+    create_time &gt; &apos;2020-1-21&apos;
+</code></pre><p><a href="https://blog.csdn.net/changxiangyangy/article/details/86718551" target="_blank" rel="external">case when使用的总结</a><br>6.SQL CHECK 约束</p>
+<p>CHECK 约束用于限制列中的值的范围。<br>如果对单个列定义 CHECK 约束，那么该列只允许特定的值。<br>如果对一个表定义 CHECK 约束，那么此约束会在特定的列中对值进行限制</p>
+<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>1.多线程不能注入bean<br>使用getBean()方式获取bean</p>
+<p>2.使用Python脚本查数据库<br>粗体验！<a href="https://blog.csdn.net/xiaoxiaoniaoer1/article/details/8540434" target="_blank" rel="external">传送门</a></p>
+<h1 id="0102"><a href="#0102" class="headerlink" title="0102"></a>0102</h1><p>1.docker安装用不了<br><a href="https://forums.docker.com/t/docker-starts-but-trying-to-do-anything-results-in-error-during-connect/49007/5" target="_blank" rel="external">https://forums.docker.com/t/docker-starts-but-trying-to-do-anything-results-in-error-during-connect/49007/5</a><br>一模一样的问题<br>toolbox卸载 docker重新安装就好了</p>
+<p>2.关于问卷的表单实现<br>如何更好的复用，这是一个问题</p>
+<h1 id="0103"><a href="#0103" class="headerlink" title="0103"></a>0103</h1><p>1.idea F11 bookmark<br>类似打断点的东西<br><a href="https://blog.csdn.net/qq_36376059/article/details/80277767" target="_blank" rel="external">https://blog.csdn.net/qq_36376059/article/details/80277767</a></p>
+<p>插入一个书签 F11<br>Shift+F11 查看书签附近的代码<br>ctrl + F11 打开面板<br>ctrl + shift + 任意数字</p>
+<p>2.Effective Java 第一条</p>
+<h2 id="考虑使用静态工厂方法替代构造方法"><a href="#考虑使用静态工厂方法替代构造方法" class="headerlink" title="考虑使用静态工厂方法替代构造方法"></a>考虑使用静态工厂方法替代构造方法</h2><p><a href="https://www.jianshu.com/p/ceb5ec8f1174" target="_blank" rel="external">https://www.jianshu.com/p/ceb5ec8f1174</a></p>
+<h2 id="创建单例一般使用静态工厂"><a href="#创建单例一般使用静态工厂" class="headerlink" title="创建单例一般使用静态工厂"></a>创建单例一般使用静态工厂</h2>
+    </div>
+
+    
+    
+    
+        
+      
+
+      <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2020/05/02/1223-1227/" rel="next" title="1223-1227总结">
+                  <i class="fa fa-chevron-left"></i> 1223-1227总结
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+                <a href="/2020/05/02/0106-0110/" rel="prev" title="0106-0110总结">
+                  0106-0110总结 <i class="fa fa-chevron-right"></i>
+                </a>
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+    
+    <div class="comments" id="comments"></div>
+  
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1230"><span class="nav-number">1.</span> <span class="nav-text">1230</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-commons-beanUtil包"><span class="nav-number">1.1.</span> <span class="nav-text">1.commons beanUtil包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-supervisor"><span class="nav-number">1.2.</span> <span class="nav-text">2.supervisor</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1231"><span class="nav-number">2.</span> <span class="nav-text">1231</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#bag-标准用法treeBag-和-HashBag"><span class="nav-number">3.</span> <span class="nav-text">bag  标准用法treeBag 和 HashBag</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#bidimap"><span class="nav-number">4.</span> <span class="nav-text">bidimap</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#BoundedCollection"><span class="nav-number">5.</span> <span class="nav-text">BoundedCollection</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Multimap-—-MultiValuedMap"><span class="nav-number">6.</span> <span class="nav-text">Multimap  — MultiValuedMap</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#MultiSet"><span class="nav-number">7.</span> <span class="nav-text">MultiSet</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#splitmap"><span class="nav-number">8.</span> <span class="nav-text">splitmap</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#简单Case函数"><span class="nav-number">8.0.1.</span> <span class="nav-text">简单Case函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Case搜索函数"><span class="nav-number">8.0.2.</span> <span class="nav-text">Case搜索函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#两个简单例子"><span class="nav-number">8.0.3.</span> <span class="nav-text">两个简单例子</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#问题"><span class="nav-number">8.1.</span> <span class="nav-text">问题</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#0102"><span class="nav-number">9.</span> <span class="nav-text">0102</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#0103"><span class="nav-number">10.</span> <span class="nav-text">0103</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#考虑使用静态工厂方法替代构造方法"><span class="nav-number">10.1.</span> <span class="nav-text">考虑使用静态工厂方法替代构造方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建单例一般使用静态工厂"><span class="nav-number">10.2.</span> <span class="nav-text">创建单例一般使用静态工厂</span></a></li></ol></li></ol></div>
+        
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/images/head.jpeg"
+      alt="王邸">
+  <p class="site-author-name" itemprop="name">王邸</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">55</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">标签</span>
+        
+      </div>
+    
+  </nav>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">王邸</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.3.8</div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.4.0</div>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+
+
+  <script src="/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.4.0"></script><script src="/js/motion.js?v=7.4.0"></script>
+<script src="/js/schemes/pisces.js?v=7.4.0"></script>
+
+<script src="/js/next-boot.js?v=7.4.0"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+
+<script>
+NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(item => {
+    return GUEST.includes(item);
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: false,
+    appId: 'Fn4BuvoixOxjJAhR79TvaD5M-gzGzoHsz',
+    appKey: '1uspTrSwPqkmSBSUr948WqxE',
+    placeholder: 'Just go go',
+    avatar: 'mm',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: true,
+    lang: '' || 'zh-cn',
+    path: location.pathname
+  });
+}, window.Valine);
+</script>
+
+</body>
+</html>

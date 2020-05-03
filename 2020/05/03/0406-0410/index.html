@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.3.8">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.4.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.4.0" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.4.0">
+
+<link rel="stylesheet" href="//fonts.proxy.ustclug.org/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.4.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="0406看了历史记录补充：清明节放假，看了几篇文章为了解决：Could not obtain transaction-synchronized Session for current thread【Spring实战】—-源码解析SessionFactory及Session的管理及getCurrentSession的使用">
+<meta property="og:type" content="article">
+<meta property="og:title" content="0406-00410总结">
+<meta property="og:url" content="http://yoursite.com/2020/05/03/0406-0410/index.html">
+<meta property="og:site_name" content="路要坚持">
+<meta property="og:description" content="0406看了历史记录补充：清明节放假，看了几篇文章为了解决：Could not obtain transaction-synchronized Session for current thread【Spring实战】—-源码解析SessionFactory及Session的管理及getCurrentSession的使用">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-05-03T07:21:26.999Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="0406-00410总结">
+<meta name="twitter:description" content="0406看了历史记录补充：清明节放假，看了几篇文章为了解决：Could not obtain transaction-synchronized Session for current thread【Spring实战】—-源码解析SessionFactory及Session的管理及getCurrentSession的使用">
+  <link rel="canonical" href="http://yoursite.com/2020/05/03/0406-0410/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>0406-00410总结 | 路要坚持</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">路要坚持</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+      <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block post">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/03/0406-0410/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="王邸">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/head.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="路要坚持">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">0406-00410总结
+
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2020-05-03 12:13:21 / 修改时间：15:21:26" itemprop="dateCreated datePublished" datetime="2020-05-03T12:13:21+08:00">2020-05-03</time>
+            </span>
+          
+            
+
+            
+          
+
+          
+            <span id="/2020/05/03/0406-0410/" class="post-meta-item leancloud_visitors" data-flag-title="0406-00410总结" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/05/03/0406-0410/#comments" itemprop="discussionUrl"><span class="post-comments-count valine-comment-count" data-xid="/2020/05/03/0406-0410/" itemprop="commentCount"></span></a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="0406"><a href="#0406" class="headerlink" title="0406"></a>0406</h1><p>看了历史记录补充：<br>清明节放假，看了几篇文章为了解决：Could not obtain transaction-synchronized Session for current thread<br><a href="https://blog.csdn.net/honghailiang888/article/details/53423941" target="_blank" rel="external">【Spring实战】—-源码解析SessionFactory及Session的管理及getCurrentSession的使用</a></p><a id="more"></a>
+<pre><code>essionFactory.getCurrentSession()时会报错Could not obtain transaction-synchronized Session for current thread，本篇就从源码角度解析下sessionFactory.getCurrentSession()。
+</code></pre><p>这篇介绍的很详细</p>
+<h1 id="0407"><a href="#0407" class="headerlink" title="0407"></a>0407</h1><h2 id="反思"><a href="#反思" class="headerlink" title="反思"></a>反思</h2><p>1.很多东西用过之后没有形成自己的东西。用完就要去重复搜索。比如list去重</p>
+<pre><code>/**
+ * 通过属性去重
+ */
+public static &lt;T&gt; Predicate&lt;T&gt; distinctByProperty(Function&lt;? super T, ?&gt; keyExtractor) {
+    Map&lt;Object, Boolean&gt; seen = new ConcurrentHashMap&lt;&gt;();
+    return t -&gt; seen.putIfAbsent(keyExtractor.apply(t), Boolean.TRUE) == null;
+}
+</code></pre><p>JDK8的流式写法必须熟练<br><a href="https://github.com/CarpenterLee/JavaLambdaInternals" target="_blank" rel="external">https://github.com/CarpenterLee/JavaLambdaInternals</a><br>这里介绍的比较详细，还有流的原理。并行流的原理等<br>map()方法，可以把一个stream映射成另一个stream</p>
+<h2 id="学习"><a href="#学习" class="headerlink" title="学习"></a>学习</h2><p>1.jexl评分的写法标准<br>一开始以为不支持switch,不支持if…else if 后来发现是表达式不支持回车只支持if …. else 。但是为了实现加法，我们需要使用三目表达式来得出结果进行相加计算</p>
+<p>  <a href="http://www.docin.com/p-1483639384.html" target="_blank" rel="external">http://www.docin.com/p-1483639384.html</a><br>以这个表单为参考<br>搞定了但是需要注意的是：使用表达式形式</p>
+<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>1.@Join连接查询在不写@Query语句情况下不能自己设置条件吗？<br>比如：</p>
+<pre><code>@Join(value = &quot;userBasicInfo&quot;, type = Join.Type.FETCH)
+@Join(value = &quot;doctorOnlineState&quot;, type = Join.Type.FETCH)
+@Join(value = &quot;labels&quot;, type = Join.Type.FETCH)
+public abstract DoctorDetailInfo findById(int doctorId);
+</code></pre><p>是需要自定义去写sql语句的。上述连接查询在实体类上使用@Where会失效</p>
+<h1 id="0408"><a href="#0408" class="headerlink" title="0408"></a>0408</h1><h2 id="反思-1"><a href="#反思-1" class="headerlink" title="反思"></a>反思</h2><p>很多东西看似是代码问题，更多的应该是自己的问题。别人也不会无缘无故拿出不能用的东西。所以应该静下来专注的思考问题。而不是去浮躁的寻找答案。从而更难寻找到本质</p>
+<h2 id="小技巧"><a href="#小技巧" class="headerlink" title="小技巧"></a>小技巧</h2><h3 id="Idea小技巧"><a href="#Idea小技巧" class="headerlink" title="Idea小技巧"></a>Idea小技巧</h3><p>可以在debug模式断点直接在变量框下面输入参数。就直接看到参数的值</p>
+<h2 id="问题-1"><a href="#问题-1" class="headerlink" title="问题"></a>问题</h2><p>1.jexl 使用function一直报错不知道是不是jexl版本问题</p>
+<p>换了jexl3也不行。var变量都用不了了<br><a href="http://commons.apache.org/proper/commons-jexl/apidocs/org/apache/commons/jexl3/package-summary.html" target="_blank" rel="external">http://commons.apache.org/proper/commons-jexl/apidocs/org/apache/commons/jexl3/package-summary.html</a><br>原因，应该创建脚本而不是创建表达式。</p>
+<pre><code>JexlScript script = jexlEngine.createScript(customExpression);
+</code></pre><p>我们先换回jexl2<br>s(15, 7);var s = function(x, y) {x + y};<br>function不能用，还没找到原因。打算使用三目表达式，在这之前想把jexl搞懂。<br>发现jexl并没有把我们function表达式当成函数可以调用。就很奇怪<br>Debug模式下发现jexlEngine的结构是一个链表</p>
+<p>{var a = 100; var b = 20; result = a+b;var s=function(x,y){return x + y} s(a,b)}<br>经过jexl修改过：<br>{ var a = 100;var b = 20;result = a + b;var s = function(x, y);{ return x + y; }s(a, b); }<br>就是用不了function<br>因为只能写表达式，方法应该有别的地方可以写JexlScript。当我意识到原来创建的是表达式。肯定就可以创建脚本</p>
+<p>  Expression expression = jexlEngine.createExpression(customExpression);<br>例子</p>
+<p>  MapContext mapContext = new MapContext();<br>  mapContext.set(“result”,0);<br>  mapContext.set(“YAEHERTEST7”,2);<br>  String customExpression = “result = (YAEHERTEST7)”;<br>  JexlEngine jexlEngine = new JexlEngine();<br>  Expression expression = jexlEngine.createExpression(customExpression);<br>  Object evaluate = expression.evaluate(mapContext);<br>  System.out.println(“evaluate: “ + evaluate);<br>  System.out.println(“result: “ + mapContext.get(“result”));</p>
+<p>表达式只能写一行。但是脚本可以写多行。就可以操作。但是要操作脚本必须使用<strong>jexl 3.0</strong><br>例子：</p>
+<p>  @Test<br>  void testScript() {<br>      MapContext mapContext = new MapContext();<br>      mapContext.set(“result”,0);<br>      String customExpression = “var fun = function(x, y) { x + y }; result = fun(1,2000)”;<br>      JexlEngine jexlEngine = new JexlBuilder().create();<br>      JexlScript script = jexlEngine.createScript(customExpression);<br>      Object execute = script.execute(mapContext);<br>      System.out.println(“evaluate: “ + execute);<br>      System.out.println(“result: “ + mapContext.get(“result”));<br>  }</p>
+<h1 id="0409"><a href="#0409" class="headerlink" title="0409"></a>0409</h1><h2 id="问题-2"><a href="#问题-2" class="headerlink" title="问题"></a>问题</h2><p>再总结问题的时候，需要把问题描述清楚。不然回头看的时候一脸懵逼<br>这种问题类似于：如何去描述一个BUG。</p>
+<ol>
+<li>对齐背景<br>对于线上bug，先描述影响，从用户角度把bug描述清晰。可以把自己想为测试，测试给我们报bug的时候，从来都不会说你代码哪里错了，只是把现象给出，再加上复现的步骤。<br>同时也说清楚影响范围，多久恢复，让大家放心，知道影响面。</li>
+<li>交代错误原因<br>用直白的语言，说明出错的原理。为什么出错？注意是直白的语言，不是交代代码层面那个函数出错。例如上面的例子，应该说是函数返回值修改导致，而不应该直接说getinfo是一个什么函数，为什么要修改这个函数。</li>
+<li>说明引入错误的始末<br>一般线上bug都是由于变更引起的。究竟是什么变更，为什么会有变更需求，也需要交代清楚。</li>
+<li>如何预防<br>发生bug不可怕，可怕的是重复发生。 吃一堑长一智，不让错误发生第二次，要反思预防的方法，防止再次发生。把预防的方案想好，说出来。<br>按照上面的顺序会比较清晰、快速地描述清楚线上bug。让听众能够快速了解到影响，和处理方式。</li>
+</ol>
+<h2 id="学习-1"><a href="#学习-1" class="headerlink" title="学习"></a>学习</h2><h3 id="读取resource目录下的文件："><a href="#读取resource目录下的文件：" class="headerlink" title="读取resource目录下的文件："></a>读取resource目录下的文件：</h3><p>  <a href="https://www.cnblogs.com/n031/p/12495331.html" target="_blank" rel="external">https://www.cnblogs.com/n031/p/12495331.html</a><br>通过线程可以读取到resource里的文件</p>
+<pre><code>URL resource = Thread.currentThread().getContextClassLoader().getResource(&quot;jexl.js&quot;);
+</code></pre><p>debug走一遍getResource就知道了。他其实就是先回到根节点然后再去寻找文件的url</p>
+<p>  public URL java.lang.ClassLoader#getResource(String name) {<br>      Objects.requireNonNull(name);<br>      URL url;<br>      if (this.parent != null) {<br>          url = this.parent.getResource(name);<br>      } else {<br>          url = BootLoader.findResource(name);<br>      }</p>
+<pre><code>if (url == null) {
+    url = this.findResource(name);
+}
+
+return url;
+</code></pre><p>  }<br>因为是读取文件，肯定会涉及到Java安全模型</p>
+<h3 id="Java-安全模型"><a href="#Java-安全模型" class="headerlink" title="Java 安全模型"></a>Java 安全模型</h3><p>  <a href="https://www.ibm.com/developerworks/cn/java/j-lo-javasecurity/" target="_blank" rel="external">https://www.ibm.com/developerworks/cn/java/j-lo-javasecurity/</a><br>只有简单的例子关于读取文件权限的问题。适合初学者。并没有原理的东西</p>
+<h3 id="AccessController-Java安全模型"><a href="#AccessController-Java安全模型" class="headerlink" title="AccessController Java安全模型"></a>AccessController Java安全模型</h3><p>（待补充）</p>
+<h3 id="URLClassPath"><a href="#URLClassPath" class="headerlink" title="URLClassPath"></a>URLClassPath</h3><pre><code>@Override
+URL findResource(final String name, boolean check) {
+    Resource rsc = getResource(name, check);
+    if (rsc != null) {
+        return rsc.getURL();
+    }
+    return null;
+}
+</code></pre><p>baseUrl:/F:/work/2020/04April/0403/jexl-test/build/classes/java/main/</p>
+<pre><code>@Override
+Resource getResource(final String name, boolean check) {
+    final URL url;
+    try {
+        URL normalizedBase = new URL(getBaseURL(), &quot;.&quot;);
+        url = new URL(getBaseURL(), ParseUtil.encodePath(name, false));
+
+        if (url.getFile().startsWith(normalizedBase.getFile()) == false) {
+            // requested resource had ../..&apos;s in path
+            return null;
+        }
+
+        if (check)
+            URLClassPath.check(url);
+
+        final File file;
+        if (name.indexOf(&quot;..&quot;) != -1) {
+            file = (new File(dir, name.replace(&apos;/&apos;, File.separatorChar)))
+                  .getCanonicalFile();
+            if ( !((file.getPath()).startsWith(dir.getPath())) ) {
+                /* outside of base dir */
+                return null;
+            }
+        } else {
+            file = new File(dir, name.replace(&apos;/&apos;, File.separatorChar));
+        }
+</code></pre><p>// 如果文件存在就返回</p>
+<pre><code>        if (file.exists()) {
+            return new Resource() {
+                public String getName() { return name; };
+                public URL getURL() { return url; };
+                public URL getCodeSourceURL() { return getBaseURL(); };
+                public InputStream getInputStream() throws IOException
+                    { return new FileInputStream(file); };
+                public int getContentLength() throws IOException
+                    { return (int)file.length(); };
+            };
+        }
+    } catch (Exception e) {
+        return null;
+    }
+    return null;
+}
+</code></pre><h3 id="MYSQL"><a href="#MYSQL" class="headerlink" title="MYSQL"></a>MYSQL</h3><p>DATE DAY MONTH..等函数返回日期</p>
+<p>如何在求出分组的数据之后再求出平均值。比如求出每天的单数，如何求这些天平均单数</p>
+<pre><code>select COUNT(DATE(CreatedOn)) from yaeherconsultation where CreatedOn &gt; &apos;2020-03-1&apos; AND ConsultType like  &apos;Volunteer%&apos; GROUP BY DATE(CreatedOn)
+</code></pre><p>使用子查询即可<br>但是子查询有个注意的地方，查出来的数据还要给一个别名，不然会出现如下错误：</p>
+<pre><code>Every derived table must have its own alias
+</code></pre><p>语句：</p>
+<pre><code>select AVG(num) from  (select COUNT(DATE(CreatedOn)) as num from yaeherconsultation where CreatedOn &gt; &apos;2020-03-1&apos; AND ConsultType like  &apos;Volunteer%&apos; GROUP BY DATE(CreatedOn) ) as t_form
+</code></pre><p>怎样在MySQL表中存储树形结构数据？<br>关键：把数据之间的关系处理好是最重要的。<br><a href="https://www.zhihu.com/question/20417447" target="_blank" rel="external">https://www.zhihu.com/question/20417447</a></p>
+<h3 id="JDK8，Stream流捕获异常问题"><a href="#JDK8，Stream流捕获异常问题" class="headerlink" title="JDK8，Stream流捕获异常问题"></a>JDK8，Stream流捕获异常问题</h3><p><a href="https://blog.csdn.net/zl1zl2zl3/article/details/90175115" target="_blank" rel="external">技巧 | Java 8 Stream 中异常处理的4种方式</a><br>这其实也是Java函数式编程的一部分：<br><a href="https://www.ibm.com/developerworks/cn/java/j-understanding-functional-programming-1/index.html" target="_blank" rel="external">第 1 部分: 函数式编程思想概论</a><br>Java函数式编程不能不提的就是VAVR、monad</p>
+<h3 id="阮一峰文章-–-图解Monad"><a href="#阮一峰文章-–-图解Monad" class="headerlink" title="阮一峰文章 – 图解Monad"></a>阮一峰文章 – 图解Monad</h3><p><a href="http://www.ruanyifeng.com/blog/2015/07/monad.html" target="_blank" rel="external">图解 Monad</a><br>Monad就是一种设计模式，表示将一个运算过程，通过函数拆解成互相连接的多个步骤。你只要提供下一步运算所需的函数，整个运算就会自动进行下去。</p>
+<p>这是原文出处：<br><a href="http://adit.io/posts/2013-04-17-functors,_applicatives,_and_monads_in_pictures.html" target="_blank" rel="external">http://adit.io/posts/2013-04-17-functors,_applicatives,_and_monads_in_pictures.html</a><br>今晚回去仔细看看</p>
+<h1 id="0410"><a href="#0410" class="headerlink" title="0410"></a>0410</h1><p>测试同步excel数据</p>
+
+    </div>
+
+    
+    
+    
+        
+      
+
+      <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2020/05/03/0330 - 0403/" rel="next" title="0330-0403总结">
+                  <i class="fa fa-chevron-left"></i> 0330-0403总结
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+                <a href="/2020/05/03/0413-0417/" rel="prev" title="0413-0417总结">
+                  0413-0417总结 <i class="fa fa-chevron-right"></i>
+                </a>
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+    
+    <div class="comments" id="comments"></div>
+  
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#0406"><span class="nav-number">1.</span> <span class="nav-text">0406</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#0407"><span class="nav-number">2.</span> <span class="nav-text">0407</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#反思"><span class="nav-number">2.1.</span> <span class="nav-text">反思</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#学习"><span class="nav-number">2.2.</span> <span class="nav-text">学习</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#问题"><span class="nav-number">2.3.</span> <span class="nav-text">问题</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#0408"><span class="nav-number">3.</span> <span class="nav-text">0408</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#反思-1"><span class="nav-number">3.1.</span> <span class="nav-text">反思</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#小技巧"><span class="nav-number">3.2.</span> <span class="nav-text">小技巧</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Idea小技巧"><span class="nav-number">3.2.1.</span> <span class="nav-text">Idea小技巧</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#问题-1"><span class="nav-number">3.3.</span> <span class="nav-text">问题</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#0409"><span class="nav-number">4.</span> <span class="nav-text">0409</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#问题-2"><span class="nav-number">4.1.</span> <span class="nav-text">问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#学习-1"><span class="nav-number">4.2.</span> <span class="nav-text">学习</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#读取resource目录下的文件："><span class="nav-number">4.2.1.</span> <span class="nav-text">读取resource目录下的文件：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Java-安全模型"><span class="nav-number">4.2.2.</span> <span class="nav-text">Java 安全模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AccessController-Java安全模型"><span class="nav-number">4.2.3.</span> <span class="nav-text">AccessController Java安全模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#URLClassPath"><span class="nav-number">4.2.4.</span> <span class="nav-text">URLClassPath</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MYSQL"><span class="nav-number">4.2.5.</span> <span class="nav-text">MYSQL</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JDK8，Stream流捕获异常问题"><span class="nav-number">4.2.6.</span> <span class="nav-text">JDK8，Stream流捕获异常问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#阮一峰文章-–-图解Monad"><span class="nav-number">4.2.7.</span> <span class="nav-text">阮一峰文章 – 图解Monad</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#0410"><span class="nav-number">5.</span> <span class="nav-text">0410</span></a></li></ol></div>
+        
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/images/head.jpeg"
+      alt="王邸">
+  <p class="site-author-name" itemprop="name">王邸</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">55</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">标签</span>
+        
+      </div>
+    
+  </nav>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">王邸</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.3.8</div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.4.0</div>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+
+
+  <script src="/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.4.0"></script><script src="/js/motion.js?v=7.4.0"></script>
+<script src="/js/schemes/pisces.js?v=7.4.0"></script>
+
+<script src="/js/next-boot.js?v=7.4.0"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+
+<script>
+NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(item => {
+    return GUEST.includes(item);
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: false,
+    appId: 'Fn4BuvoixOxjJAhR79TvaD5M-gzGzoHsz',
+    appKey: '1uspTrSwPqkmSBSUr948WqxE',
+    placeholder: 'Just go go',
+    avatar: 'mm',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: true,
+    lang: '' || 'zh-cn',
+    path: location.pathname
+  });
+}, window.Valine);
+</script>
+
+</body>
+</html>
